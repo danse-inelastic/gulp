@@ -200,7 +200,7 @@ public class XYZFit extends JPanel implements Serializable {
 			}*/
 
 			Thread t = new Thread(new Runnable() {
-				@Override
+
 				public void run() {
 					ArrayList<PPP> ppps = new ArrayList<PPP>();
 

@@ -179,7 +179,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 	
 	private class SerialListener implements ActionListener, Serializable {
 		private static final long serialVersionUID = 932410562178213543L;
-		@Override
+
 		public void actionPerformed(ActionEvent e) {
 			if (chkEsff.isSelected()) {
 				esff.setVisible(true);

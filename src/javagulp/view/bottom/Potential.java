@@ -420,7 +420,6 @@ public class Potential extends JPanel implements Serializable {
 		ListSelectionListener, Serializable {
 		private static final long serialVersionUID = -2720144256318780471L;
 
-		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			int index = potentialList.getSelectedIndex();
 			if (potentialListModel.getSize() > 0 && index != -1) {

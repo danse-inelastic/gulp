@@ -56,7 +56,6 @@ public class FitPanel extends TitledPanel implements Serializable {
 		
 		private static final long serialVersionUID = -6840590771901821697L;
 
-		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			int index = fitList.getSelectedIndex();
 			if (fitListModel.getSize() > 0 && index != -1) {

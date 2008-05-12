@@ -131,7 +131,7 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	private class TopListener implements ChangeListener, Serializable {
 		private static final long serialVersionUID = -7619847591444570775L;
-		@Override
+		
 		public void stateChanged(ChangeEvent e) {
 			int index = topPane.getSelectedIndex();
 			topPane.setComponentAt(index, getTopPanel(index));
@@ -158,7 +158,7 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	private class BottomListener implements ChangeListener, Serializable {
 		private static final long serialVersionUID = -7847271919463899366L;
-		@Override
+	
 		public void stateChanged(ChangeEvent e) {
 			int index = bottomPane.getSelectedIndex();
 			bottomPane.setComponentAt(index, getBottomPanel(index));

@@ -7,7 +7,7 @@ import java.util.Collections;
 public class Stats {
 	
 	public class Something implements Comparable<Something> {
-		@Override
+
 		public int compareTo(Something o) {
 			if (compareValues) {
 				Double a = new Double(this.value);

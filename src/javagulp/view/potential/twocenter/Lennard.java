@@ -132,7 +132,7 @@ public class Lennard extends PotentialPanel implements Serializable {
 	
 	private class SerialChangeListener implements Serializable, ChangeListener {
 		private static final long serialVersionUID = -3908551382276176335L;
-		@Override
+
 		public void stateChanged(ChangeEvent e) {
 			getParams();
 		}

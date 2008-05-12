@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="deployable/j2ssh.jar"/>
 	<classpathentry kind="lib" path="deployable/commons-logging.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Utility"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

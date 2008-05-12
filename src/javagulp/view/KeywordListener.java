@@ -18,7 +18,6 @@ public class KeywordListener implements ActionListener, Serializable {
 		this.keyword = keyword;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		Back.getKeys().putOrRemoveKeyword(box.isSelected(), keyword);
 	}

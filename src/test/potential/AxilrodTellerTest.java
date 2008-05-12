@@ -13,7 +13,8 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class AxilrodTellerTest extends TestCase {
+public class AxilrodTellerTest extends 
+ {
 	
 	private AxilrodTeller a = new AxilrodTeller();
 	private PPP k;
@@ -22,7 +23,7 @@ public class AxilrodTellerTest extends TestCase {
 	
 	private boolean[] result = {false, false, true, true};
 
-	@Override
+
 	protected void setUp() throws Exception {
 		Potential pot = Back.getPanel().getPotential();
 		pot.potentialNumber = 3;
