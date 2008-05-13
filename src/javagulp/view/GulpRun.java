@@ -44,10 +44,16 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
-	private String[] topNames = { "MD", "MDRestartInit", "MonteCarlo",
+//	private String[] topNames = { "MD", "MDRestartInit", "MonteCarlo",
+//			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
+//			"XYZFit", "Phonons", "FreeEnergy", "TransitionState",
+//			"StructurePrediction", "GeneticAlgorithm", "Defect", "Surface",
+//			"ExternalForce" };
+
+	private String[] topNames = { "MD", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
 			"XYZFit", "Phonons", "FreeEnergy", "TransitionState",
-			"StructurePrediction", "GeneticAlgorithm", "Defect", "Surface",
+			"StructurePrediction", "GeneticAlgorithm", "Surface",
 			"ExternalForce" };
 	
 	private String[] bottomNames = { "Structures", "Potential",
@@ -79,39 +85,39 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.addChangeListener(keyTop);
 		topPane.add(null, "molecular dynamics");
-		topPane.add(null, "molecular dynamics restart");
-		// topPane.add(null, "monte carlo");
-		topPane.add(null, "");
-		topPane.setEnabledAt(2, false);
+		//topPane.add(null, "molecular dynamics restart");
+		topPane.add(null, "monte carlo");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(2, false);
 		topPane.add(null, "energetics and material properties");
 		topPane.add(null, "optimization");
 		topPane.add(null, "constraints");
 		topPane.add(null, "fit");
 		topPane.add(null, "XYZ fit");
-		// topPane.add(null, "phonons");
-		topPane.add(null, "");
-		topPane.setEnabledAt(8, false);
-		// topPane.add(null, "free energy");
-		topPane.add(null, "");
-		topPane.setEnabledAt(9, false);
-		// topPane.add(null, "transition state");
-		topPane.add(null, "");
-		topPane.setEnabledAt(10, false);
-		// topPane.add(null, "structure prediction");
-		topPane.add(null, "");
-		topPane.setEnabledAt(11, false);
+		topPane.add(null, "phonons");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(8, false);
+		topPane.add(null, "free energy");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(9, false);
+		topPane.add(null, "transition state");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(10, false);
+		topPane.add(null, "structure prediction");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(11, false);
 		topPane.add(null,"genetic algorithm");
 		//topPane.add(null, "");
 		//topPane.setEnabledAt(12, false);
 		// topPane.add(null, "defects");
-		topPane.add(null, "");
-		topPane.setEnabledAt(13, false);
-		// topPane.add(null, "surface");
-		topPane.add(null, "");
-		topPane.setEnabledAt(14, false);
-		// topPane.add(null, "external force");
-		topPane.add(null, "");
-		topPane.setEnabledAt(15, false);
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(13, false);
+		topPane.add(null, "surface");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(14, false);
+		topPane.add(null, "external force");
+		//topPane.add(null, "");
+		//topPane.setEnabledAt(15, false);
 		
 		bottomPane.addChangeListener(keyBottom);
 		bottomPane.addKeyListener(keyDelete);

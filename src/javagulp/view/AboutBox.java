@@ -18,7 +18,7 @@ public class AboutBox extends JFrame implements Serializable {
 	private JLabel lblComments = new JLabel("Designed for GULP binary 3.1");
 	private JLabel lblCopyright = new JLabel("Copyright (c) 2007");
 	private JLabel lblIcon = new JLabel(icon);
-	private JLabel lblProduct = new JLabel("GULPUI");
+	private JLabel lblProduct = new JLabel("GulpUI");
 	private JLabel lblVersion = new JLabel("1.0");
 
 	public AboutBox() {
