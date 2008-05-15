@@ -1,6 +1,7 @@
 package javagulp.view.bottom;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
@@ -236,6 +237,18 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		cellParameters.txtAlpha.setText(params[4]);
 		cellParameters.txtBeta.setText(params[5]);
 		cellParameters.txtGamma.setText(params[6]);
+	}
+	
+	public void setVectors(String[] vecs) {
+		cellVectors.txtAx.setText(vecs[1]);
+		cellVectors.txtAy.setText(vecs[2]);
+		cellVectors.txtAz.setText(vecs[3]);
+		cellVectors.txtBx.setText(vecs[4]);
+		cellVectors.txtBy.setText(vecs[5]);
+		cellVectors.txtBz.setText(vecs[6]);
+		cellVectors.txtCx.setText(vecs[7]);
+		cellVectors.txtCy.setText(vecs[8]);
+		cellVectors.txtCz.setText(vecs[9]);
 	}
 	
 	/**
