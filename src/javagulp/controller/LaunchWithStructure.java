@@ -22,6 +22,7 @@ public class LaunchWithStructure {
 		// assume the lattice and the atoms are
 		// located in
 		// three separate files
+		
 		String [] lattice=getFileContents("lattice.txt");
 
 		String[] fileAndLattice = new String[] {};
@@ -51,19 +52,48 @@ public class LaunchWithStructure {
 	// return contents;
 	// }
 
-	public String[] getFileContents(String fileName) {
-		String[] contents = new String(){};
-		URL url = new URL(fileName);
-		BufferedReader input = new BufferedReader(new InputStreamReader(url
-				.openConnection().getInputStream()));
-		String[] coords;
-		for (int i = 0; i < 3; i++) {
-			String line = input.readLine();
-			coords = line.split(" ");
+	public String[] getFileContents(String fileName, String[] args) throws IOException {
+		URL url = null;
+		try {
+			url = new URL(fileName);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
 		}
-		contents.append(coords);
+		BufferedReader input = null;
+		try {
+			input = new BufferedReader(new InputStreamReader(url
+					.openConnection().getInputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String line = null;
+		try {
+			line = input.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] coords = line.split(" ");
+		args[1]=coords[0];
+		args[2]=coords[1];
+		args[3]=coords[2];
+		line = input.readLine();
+		coords = line.split(" ");		
+		args[4]=coords[0];
+		args[5]=coords[1];
+		args[6]=coords[2];
+		line = input.readLine();
+		coords = line.split(" ");		
+		args[7]=coords[0];
+		args[8]=coords[1];
+		args[9]=coords[2];
+//		for (int i = 0; i < 3; i++) {
+//			String line = input.readLine();
+//			coords = line.split(" ");
+//			args[0]
+//		}
+//		contents.append(coords);
 		input.close();
-		return contents;
+		return args;
 	}
 
 	public static void main(String[] args) {
