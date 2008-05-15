@@ -22,14 +22,9 @@ public class LaunchWithStructure {
 		// assume the lattice and the atoms are
 		// located in
 		// three separate files
-		
-		String [] lattice=getFileContents("lattice.txt");
-
-		String[] fileAndLattice = new String[] {};
-		fileAndLattice[0]="atoms.txt";
-		fileAndLattice[]
-
-		JavaGULP.main(fileAndLattice);
+		String[] args = new String[10];
+		args=getFileContents("lattice.txt",args);
+		JavaGULP.main(args);
 	}
 
 	// public ArrayList<double[]> getFileContents(String fileName) {
@@ -52,7 +47,7 @@ public class LaunchWithStructure {
 	// return contents;
 	// }
 
-	public String[] getFileContents(String fileName, String[] args) throws IOException {
+	public String[] getFileContents(String fileName, String[] args){
 		URL url = null;
 		try {
 			url = new URL(fileName);
@@ -76,12 +71,20 @@ public class LaunchWithStructure {
 		args[1]=coords[0];
 		args[2]=coords[1];
 		args[3]=coords[2];
-		line = input.readLine();
+		try {
+			line = input.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		coords = line.split(" ");		
 		args[4]=coords[0];
 		args[5]=coords[1];
 		args[6]=coords[2];
-		line = input.readLine();
+		try {
+			line = input.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		coords = line.split(" ");		
 		args[7]=coords[0];
 		args[8]=coords[1];
@@ -92,12 +95,16 @@ public class LaunchWithStructure {
 //			args[0]
 //		}
 //		contents.append(coords);
-		input.close();
+		try {
+			input.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return args;
 	}
 
 	public static void main(String[] args) {
-		new PlainWebStartLaunch(args[1]);
+		new LaunchWithStructure();
 	}
 
 	// String db = "vnf";
