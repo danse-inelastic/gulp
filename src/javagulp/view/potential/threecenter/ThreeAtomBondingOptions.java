@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.ButtonGroupTransitional;
 import javagulp.view.Back;
 import javagulp.view.bottom.Potential;
 import javagulp.view.potential.PotentialPanel;
@@ -23,7 +24,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 1187901338934861410L;
 
-	private ButtonGroup btnGroupInterIntra = new ButtonGroup();
+	private ButtonGroupTransitional btnGroupInterIntra = new ButtonGroupTransitional();
 
 	private JRadioButton radInter;
 	private JRadioButton radIntra;
