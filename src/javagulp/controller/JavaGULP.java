@@ -11,7 +11,7 @@ public class JavaGULP {
 	
 	public static void main(final String[] args) {
 		if (b == null)
-			b = new Back(null);
+			b = new Back();
 		else
 			b.addTab();
 		System.out.println("args.length " + args.length);
@@ -39,7 +39,7 @@ public class JavaGULP {
 	
 	public static void main(final ArrayList<ArrayList<String>> species, final ArrayList<ArrayList<double[]>> coordinates, final ArrayList<String[]> args, final ArrayList<String> names) {
 		if (b == null)
-			b = new Back(null);
+			b = new Back();
 		else
 			b.addTab();
 		System.out.println("args.size " + args.size());

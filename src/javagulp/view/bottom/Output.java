@@ -39,10 +39,10 @@ import com.sshtools.j2ssh.connection.ChannelState;
 import com.sshtools.j2ssh.io.IOStreamConnector;
 import com.sshtools.j2ssh.session.SessionChannelClient;
 
-import cseo.RB.RBSubmit;
-import cseo.RB.RBSubmitReturn;
-import cseo.jodaf.client.FilePackage;
-import cseo.jodaf.client.JODAFException;
+//import cseo.RB.RBSubmit;
+//import cseo.RB.RBSubmitReturn;
+//import cseo.jodaf.client.FilePackage;
+//import cseo.jodaf.client.JODAFException;
 
 public class Output extends JPanel implements Serializable {
 
@@ -57,7 +57,7 @@ public class Output extends JPanel implements Serializable {
 	public JCheckBox chkSeparate = new JCheckBox("Put each structure in a separate input file");
 
 	private String caller_TaskID;
-	private transient RBSubmitReturn submit;//inherit from this class to serialize?
+//	private transient RBSubmitReturn submit;//inherit from this class to serialize?
 
 	private OutputFormats pnlOutputFormats = new OutputFormats();
 	private Terse pnlTerse = new Terse();
@@ -130,15 +130,15 @@ public class Output extends JPanel implements Serializable {
 						executeLocal(false);
 				} else if (Back.getPanel().getExecution().radRemote.isSelected()) {
 					executeRemote();
-				} else {
-					if (lastViewed == Long.MAX_VALUE) {
-						JOptionPane.showMessageDialog(null,
-								"Please view your input file first.");
-						return;
-					}
-					//TODO test this
-					runRequestBroker(contents);
-				}
+				} //else {
+//					if (lastViewed == Long.MAX_VALUE) {
+//						JOptionPane.showMessageDialog(null,
+//								"Please view your input file first.");
+//						return;
+//					}
+//					//TODO test this
+//					runRequestBroker(contents);
+//				}
 			}
 		}
 	};
@@ -181,7 +181,6 @@ public class Output extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.reqboxLocal == null) {
 				String contents = Back.writer.consoleOutput();
 				if (!Back.writer.incomplete) {
 					Back.writer.writeAll(contents, txtInputFile.getText());
@@ -190,15 +189,6 @@ public class Output extends JPanel implements Serializable {
 					Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + "/" + txtInputFile.getText()));
 					nut.setVisible(true);
 				}
-			} else {
-				String contents = Back.writer.consoleOutput();
-				if (!Back.writer.incomplete) {
-					Date d = new Date();
-					lastViewed = d.getTime();
-					Nutpad nut = new Nutpad(contents);
-					nut.setVisible(true);
-				}
-			}
 		}
 	};
 
@@ -489,28 +479,28 @@ public class Output extends JPanel implements Serializable {
 		}
 	}
 
-	public void runRequestBroker(String contents) {
-		try {
-			RBSubmit gis = new RBSubmit();
-			FilePackage fp = new FilePackage(null, txtInputFile.getText(),
-					contents.getBytes());
-			gis.AddInput(fp);
-			// add other files..
-
-			// This needs to match the app name set in RB
-			gis.Configuration = "GULP";
-			caller_TaskID = gis.returnCaller_TaskID();
-			String RB_id = Back.reqboxLocal.loadApplication("Resource Broker");
-			submit = (RBSubmitReturn) Back.reqboxLocal.sendRequest(RB_id,
-					"DirectSubmit", gis, null);
-			// System.out.println(submit.err_msg);
-			// System.out.println(submit.job_id);
-		} catch (JODAFException e) {
-			e.displayErrorAsPopup();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-		}
-	}
+//	public void runRequestBroker(String contents) {
+//		try {
+//			RBSubmit gis = new RBSubmit();
+//			FilePackage fp = new FilePackage(null, txtInputFile.getText(),
+//					contents.getBytes());
+//			gis.AddInput(fp);
+//			// add other files..
+//
+//			// This needs to match the app name set in RB
+//			gis.Configuration = "GULP";
+//			caller_TaskID = gis.returnCaller_TaskID();
+//			String RB_id = Back.reqboxLocal.loadApplication("Resource Broker");
+//			submit = (RBSubmitReturn) Back.reqboxLocal.sendRequest(RB_id,
+//					"DirectSubmit", gis, null);
+//			// System.out.println(submit.err_msg);
+//			// System.out.println(submit.job_id);
+//		} catch (JODAFException e) {
+//			e.displayErrorAsPopup();
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(null, e.getMessage());
+//		}
+//	}
 
 	private String writeDump() {
 		String lines = "";

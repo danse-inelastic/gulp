@@ -54,7 +54,6 @@ public class Execution extends JPanel implements Serializable {
 	
 	public JRadioButton radLocal = new JRadioButton("Local Machine");
 	public JRadioButton radRemote = new JRadioButton("Remote Machine(s)");
-	public JRadioButton radRB = new JRadioButton("CSEO Resource Broker");
 	private ButtonGroup grpExecute = new ButtonGroup();
 	
 	public JRadioButton radPBS = new JRadioButton("Use PBS");
@@ -128,10 +127,8 @@ public class Execution extends JPanel implements Serializable {
 
 		radLocal.addActionListener(keyRemote);
 		radRemote.addActionListener(keyRemote);
-		radRB.addActionListener(keyRemote);
 		add(radLocal);
 		add(radRemote);
-		add(radRB);
 		add(radDirect);
 		add(radPBS);
 		add(lblExecute);
@@ -149,14 +146,12 @@ public class Execution extends JPanel implements Serializable {
 		
 		grpExecute.add(radLocal);
 		grpExecute.add(radRemote);
-		grpExecute.add(radRB);
 		grpMethod.add(radDirect);
 		grpMethod.add(radPBS);
 		
 		lblExecute.setBounds(28, 0, 105, 28);
 		radLocal.setBounds(7, 21, 161, 21);
 		radRemote.setBounds(7, 42, 161, 21);
-		radRB.setBounds(7, 63, 175, 21);
 		scrollHosts.setBounds(7, 112, 154, 203);
 		lblUsername.setBounds(168, 112, 105, 21);
 		txtUsername.setBounds(168, 133, 154, 21);
@@ -187,9 +182,6 @@ public class Execution extends JPanel implements Serializable {
 		txtGulpBinary.setEnabled(false);
 		radDirect.setSelected(true);
 		radLocal.setSelected(true);
-		if (Back.reqboxLocal == null) {
-			radRB.setEnabled(false);
-		}
 		
 		hostsList.addMouseListener(keyMouse);
 		hostsList.addKeyListener(keyHosts);

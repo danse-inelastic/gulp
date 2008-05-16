@@ -30,7 +30,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import utility.misc.SerialListener;
-import cseo.jodaf.client.FilePackage;
+//import cseo.jodaf.client.FilePackage;
 
 public class AtomicCoordinates extends JPanel implements Serializable {
 
@@ -153,7 +153,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		private static final long serialVersionUID = -8627501403384935426L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.reqboxLocal == null) {
 				JFileChooser fileDialog = new JFileChooser();
 				fileDialog.setMultiSelectionEnabled(true);
 				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
@@ -161,27 +160,12 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 					File[] files = fileDialog.getSelectedFiles();
 					Back.getPanel().getStructures().importStructures(files);
 				}
-			} else {
-				FilePackage file_package = new FilePackage(Back.frame, "*.*");
-				FilePackage[] file_package_array = Back.reqboxLocal.fileOpenDialog(file_package);
-				if ((file_package_array == null)
-						|| (file_package_array.length == 0))
-					return;
-				
-				if (file_package_array.length == 1) {
-					getTableModel().importCoordinates(file_package_array[0].getFileAsString());
-					txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
-				} else {
-					Back.getPanel().getStructures().importStructures(file_package_array);
-				}
-			}
 		}
 	};
 	private SerialListener keySaveCoordinates = new SerialListener() {
 		private static final long serialVersionUID = -2238532372348902025L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.reqboxLocal == null) {
 				JFileChooser fileDialog = new JFileChooser();
 				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
 				if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
@@ -194,13 +178,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 						ioe.printStackTrace();
 					}
 				}
-			} else {
-				FilePackage file_package = new FilePackage(Back.frame, "*.*");
-				String data = getTable().getData();
-				file_package.setByteArray(data.getBytes());
-				String file_id = Back.reqboxLocal.fileSaveAsDialog(file_package).getFileID();
-				file_package.setFileID(file_id);
-			}
 		}
 	};
 	

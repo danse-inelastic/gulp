@@ -19,7 +19,7 @@ import utility.function.Value;
 import utility.misc.SerialKeyAdapter;
 import utility.misc.SerialMouseAdapter;
 import utility.parsers.WorkspaceParser;
-import cseo.jodaf.client.FilePackage;
+//import cseo.jodaf.client.FilePackage;
 
 public class Structures extends JPanel implements Serializable {
 	private static final long serialVersionUID = 7137698348577497607L;
@@ -108,16 +108,16 @@ public class Structures extends JPanel implements Serializable {
 		}
 	}
 
-	public void importStructures(final FilePackage[] files) {
-		//tabs.removeAll();
-		for (int i=0; i < files.length; i++) {
-			Structure s = new Structure();
-			s.atomicCoordinates.setTable("cartesian");
-			s.atomicCoordinates.getTableModel().importCoordinates(files[i].getFileAsString());
-			s.atomicCoordinates.txtName.setText(files[i].getFileName());
-			addTab(s);
-		}
-	}
+//	public void importStructures(final FilePackage[] files) {
+//		//tabs.removeAll();
+//		for (int i=0; i < files.length; i++) {
+//			Structure s = new Structure();
+//			s.atomicCoordinates.setTable("cartesian");
+//			s.atomicCoordinates.getTableModel().importCoordinates(files[i].getFileAsString());
+//			s.atomicCoordinates.txtName.setText(files[i].getFileName());
+//			addTab(s);
+//		}
+//	}
 
 	public void importStructures(final File[] files) {
 		//tabs.removeAll();

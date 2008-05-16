@@ -13,7 +13,6 @@ import java.util.Scanner;
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Keywords;
-import javagulp.model.LocalRequestBox;
 import javagulp.view.bottom.Structures.Structure;
 import javagulp.view.potential.PPP;
 
@@ -27,7 +26,6 @@ import javax.swing.WindowConstants;
 public class Back {
 
 	public static final JFrame frame = new JFrame("GULPUI 1.0");
-	public static LocalRequestBox reqboxLocal;
 	public static final GulpFileWriter writer = new GulpFileWriter();
 	//No access modifier (default access), so access is limited to the same package.
 	static JTabbedPane tabs = new JTabbedPane();
@@ -35,8 +33,7 @@ public class Back {
 	public static final Color grey = new Color(229, 229, 229);
 	public static final String newLine = System.getProperty("line.separator");
 
-	public Back(LocalRequestBox reqboxLocal) {
-		Back.reqboxLocal = reqboxLocal;
+	public Back() {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(pcmenu);
 
