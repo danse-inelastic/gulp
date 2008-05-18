@@ -1,6 +1,7 @@
 package javagulp.view.bottom;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -46,10 +47,11 @@ import com.sshtools.j2ssh.session.SessionChannelClient;
 
 public class Output extends JPanel implements Serializable {
 
+	private JButton runAtVnfButton;
 	private static final long serialVersionUID = -4891514818536259508L;
 
 	private JButton btnClear = new JButton("clear");
-	private JButton btnRun = new JButton("run");
+	private JButton btnRun = new JButton("run on external server");
 	private JButton btnViewInput = new JButton("view");
 	private JButton btnViewOutput = new JButton("view");
 
@@ -200,12 +202,12 @@ public class Output extends JPanel implements Serializable {
 		this.setPreferredSize(new java.awt.Dimension(1113, 287));
 
 		btnRun.addActionListener(keyRun);
-		btnRun.setBounds(18, 241, 180, 30);
+		btnRun.setBounds(151, 241, 173, 30);
 		add(btnRun);
 		lblStatus.setBounds(18, 275, 300, 20);
 		add(lblStatus);
 		btnClear.addActionListener(keyClear);
-		btnClear.setBounds(200, 241, 180, 30);
+		btnClear.setBounds(328, 241, 63, 30);
 		add(btnClear);
 		btnViewOutput.addActionListener(keyViewOutput);
 		btnViewOutput.setBounds(321, 32, 70, 20);
@@ -259,6 +261,7 @@ public class Output extends JPanel implements Serializable {
 		add(chkSeparate);
 		chkSeparate.setBounds(9, 84, 378, 21);
 		chkSeparate.setSelected(true);
+		add(getRunAtVnfButton());
 	}
 
 	/*public void runLocally(final String output) {
@@ -606,5 +609,20 @@ public class Output extends JPanel implements Serializable {
 			ioe.printStackTrace();
 		}
 		return(result);
+	}
+	/**
+	 * @return
+	 */
+	protected JButton getRunAtVnfButton() {
+		if (runAtVnfButton == null) {
+			runAtVnfButton = new JButton();
+			runAtVnfButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+				}
+			});
+			runAtVnfButton.setText("export to vnf");
+			runAtVnfButton.setBounds(9, 242, 136, 28);
+		}
+		return runAtVnfButton;
 	}
 }
