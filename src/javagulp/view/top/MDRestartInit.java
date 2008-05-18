@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.Nutpad;
 import utility.misc.SerialListener;
 

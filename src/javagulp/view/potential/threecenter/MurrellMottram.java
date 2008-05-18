@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class MurrellMottram extends PotentialPanel implements Serializable {
 

@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.SerialListener;
 
 public class Spline extends PotentialPanel implements Serializable {

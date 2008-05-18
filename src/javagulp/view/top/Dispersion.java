@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.SerialKeyAdapter;
 import utility.misc.SerialListener;
 

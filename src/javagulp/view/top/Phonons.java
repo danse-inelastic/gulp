@@ -16,7 +16,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Phonons extends TitledPanel implements Serializable {
 

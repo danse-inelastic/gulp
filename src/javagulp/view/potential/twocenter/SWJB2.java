@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class SWJB2 extends PotentialPanel implements Serializable {
 

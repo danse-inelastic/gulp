@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class EAMDensity extends PotentialPanel implements Serializable {
 

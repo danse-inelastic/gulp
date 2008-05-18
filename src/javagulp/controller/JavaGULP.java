@@ -14,7 +14,6 @@ public class JavaGULP {
 			b = new Back();
 		else
 			b.addTab();
-		System.out.println("args.length " + args.length);
 		// this only works for java
 		if (args.length == 1) {
 			String contents = Back.getFileContents(new File(args[0]));

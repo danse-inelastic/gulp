@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Surface extends JPanel implements Serializable {
 

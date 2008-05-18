@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.SerialListener;
 
 public class Electrostatics extends JPanel implements Serializable {

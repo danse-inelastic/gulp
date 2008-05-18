@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Radii extends JPanel implements Serializable {
 	private static final long serialVersionUID = 1L;

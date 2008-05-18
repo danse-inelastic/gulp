@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class MonteCarlo extends JPanel implements Serializable {
 

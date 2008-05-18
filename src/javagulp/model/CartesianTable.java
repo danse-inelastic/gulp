@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class CartesianTable extends CoordinateTable {
 

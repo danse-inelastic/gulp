@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Tsuneyuki extends PotentialPanel implements Serializable {
 	private static final long serialVersionUID = 5942765183989223713L;

@@ -12,7 +12,7 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Rydberg extends PotentialPanel implements Serializable {
 

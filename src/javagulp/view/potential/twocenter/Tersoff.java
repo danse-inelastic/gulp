@@ -11,7 +11,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Tersoff extends PotentialPanel implements Serializable {
 

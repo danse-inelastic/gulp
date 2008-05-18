@@ -11,7 +11,7 @@ import javagulp.view.Back;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class BSM extends PotentialPanel implements Serializable {
 

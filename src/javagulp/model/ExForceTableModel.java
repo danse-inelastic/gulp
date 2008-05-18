@@ -8,7 +8,7 @@ import javagulp.view.Back;
 
 import javax.swing.table.AbstractTableModel;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class ExForceTableModel extends AbstractTableModel implements
 		Serializable {

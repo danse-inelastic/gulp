@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.SerialKeyAdapter;
 import utility.misc.SerialListener;
 import utility.misc.SerialMouseAdapter;

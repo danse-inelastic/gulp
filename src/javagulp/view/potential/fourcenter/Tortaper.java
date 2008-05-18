@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Tortaper extends PotentialPanel implements Serializable {
 

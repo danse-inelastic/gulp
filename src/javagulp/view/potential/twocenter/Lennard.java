@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.SerialListener;
 
 public class Lennard extends PotentialPanel implements Serializable {

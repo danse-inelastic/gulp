@@ -19,8 +19,8 @@ import javax.swing.event.DocumentListener;
 import utility.function.AbstractFunction;
 import utility.function.Value;
 import utility.function.twocenter.BuckinghamFunction;
-import utility.misc.G;
-import utility.misc.Graph;
+import javagulp.model.G;
+import javagulp.model.Graph;
 
 public class Buckingham extends PotentialPanel implements Serializable {
 

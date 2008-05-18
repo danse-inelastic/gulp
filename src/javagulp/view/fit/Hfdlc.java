@@ -8,7 +8,7 @@ import javagulp.view.Back;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class Hfdlc extends AbstractFit implements Serializable {
 

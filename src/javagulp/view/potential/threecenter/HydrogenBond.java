@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import utility.misc.G;
+import javagulp.model.G;
 
 public class HydrogenBond extends PotentialPanel implements Serializable {
 	private static final long serialVersionUID = 7011842152178311038L;

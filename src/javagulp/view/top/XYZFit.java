@@ -31,7 +31,7 @@ import javax.swing.JTextField;
 
 import utility.function.Atom;
 import utility.function.Value;
-import utility.misc.G;
+import javagulp.model.G;
 import utility.misc.SerialListener;
 import utility.parsers.WorkspaceParser;
 
