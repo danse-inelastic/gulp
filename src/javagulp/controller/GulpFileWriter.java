@@ -21,15 +21,15 @@ public class GulpFileWriter {
 			GulpRun gr = Back.getPanel();
 			o.append(Back.getKeys().writeKeywords());
 			o.append(gr.getOutput().writeTitleAndTimeLimit());
-			String energy = gr.getXyzfit().writeEnergy();
-			if (!energy.equals(""))
-				o.append(energy);
-			else {
-				if (Back.getPanel().getOutput().chkSeparate.isSelected())
-					o.append(Back.getStructure().writeStructure());
-				else
-					o.append(Back.getPanel().getStructures().writeStructures());
-			}
+//			String energy = gr.getXyzfit().writeEnergy();
+//			if (!energy.equals(""))
+//				o.append(energy);
+//			else {
+//				if (Back.getPanel().getOutput().chkSeparate.isSelected())
+//					o.append(Back.getStructure().writeStructure());
+//				else
+//					o.append(Back.getPanel().getStructures().writeStructures());
+//			}
 			o.append(gr.getSurface().writeSurface());
 			o.append(gr.getPotential().writeLibrary());
 			o.append(gr.getPotential().writePotentials());
@@ -43,7 +43,7 @@ public class GulpFileWriter {
 			o.append(gr.getStructurePrediction().writeStructurePrediction());
 			o.append(gr.getPhonon().writePhonon());
 			o.append(gr.getFreeEnergy().writeFreeEnergy());
-			o.append(gr.getDefect().writeDefect());
+//			o.append(gr.getDefect().writeDefect());
 			o.append(gr.getFit().writeFit());
 			o.append(gr.getFit().fitPanel.writeFitPanels());
 			o.append(gr.getMonteCarlo().writeMonteCarlo());

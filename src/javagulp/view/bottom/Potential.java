@@ -176,60 +176,60 @@ public class Potential extends JPanel implements Serializable {
 			}
 		}
 	};
-	private SerialListener keyCombinations = new SerialListener() {
-		private static final long serialVersionUID = 222500108052711638L;
-		
-		public void actionPerformed(ActionEvent e) {
-			PotentialPanel p = getCurrentPotential();
-			TreeSet<String> temp = Back.getStructure().atomicCoordinates.getTableModel().getAtoms();
-			Object[] atoms = temp.toArray();
-			ArrayList<ArrayList<Integer>> test = combinations(atoms.length, p.potentialNumber);
-			for (int j=0; j < test.size(); j++) {
-				PotentialPanel q = p.clone();
-				for (int i=0; i < test.get(j).size(); i++) {
-					q.atom[i] = (String) atoms[test.get(j).get(i)];
-				}
-				Random r = new Random();
-				for (PPP ppp: q.params) {
-					if (Back.getPanel().getXyzfit().chkInitialize.isSelected())
-						ppp.txt.setText("" + (r.nextFloat() * (ppp.max - ppp.min) + ppp.min));
-					//TODO if using lennard-jones, initialize values using geometric combination rules
-				}
-				String temp2 = potentialAbbreviations[q.potentialNumber - 1][getIndex()];
-				potentialListModel.addElement(temp2);
-				potentialPanels.add(q);
-			}
-		}
-		
-		/**
-		 * This method will find all combinations of symbols and digits. For example,
-		 * if 3 and 2 are used a parameters, the method will return the values
-		 * [[0,0], [0,1], [0,2]]
-		 * [[1,0], [1,1], [1,2]]
-		 * [[2,0], [2,1], [2,2]]
-		 * 
-		 * @param symbols
-		 * @param digits
-		 * @return a list of the symbols^digits different combinations
-		 */
-		private ArrayList<ArrayList<Integer>> combinations(int symbols, int digits) {
-			return combinations(symbols, new ArrayList<Integer>(), digits);
-		}
-		
-		private ArrayList<ArrayList<Integer>> combinations(int symbols, ArrayList<Integer> number, int digits) {
-			ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
-			if (number.size() == digits) {
-					temp.add(number);
-			} else {
-				for (int j=0; j < symbols; j++) {
-					ArrayList<Integer> temp2 = new ArrayList<Integer>(number);
-					temp2.add(j);
-					temp.addAll(combinations(symbols, temp2, digits));
-				}
-			}
-			return temp;
-		}
-	};
+//	private SerialListener keyCombinations = new SerialListener() {
+//		private static final long serialVersionUID = 222500108052711638L;
+//		
+//		public void actionPerformed(ActionEvent e) {
+//			PotentialPanel p = getCurrentPotential();
+//			TreeSet<String> temp = Back.getStructure().atomicCoordinates.getTableModel().getAtoms();
+//			Object[] atoms = temp.toArray();
+//			ArrayList<ArrayList<Integer>> test = combinations(atoms.length, p.potentialNumber);
+//			for (int j=0; j < test.size(); j++) {
+//				PotentialPanel q = p.clone();
+//				for (int i=0; i < test.get(j).size(); i++) {
+//					q.atom[i] = (String) atoms[test.get(j).get(i)];
+//				}
+//				Random r = new Random();
+//				for (PPP ppp: q.params) {
+//					if (Back.getPanel().getXyzfit().chkInitialize.isSelected())
+//						ppp.txt.setText("" + (r.nextFloat() * (ppp.max - ppp.min) + ppp.min));
+//					//TODO if using lennard-jones, initialize values using geometric combination rules
+//				}
+//				String temp2 = potentialAbbreviations[q.potentialNumber - 1][getIndex()];
+//				potentialListModel.addElement(temp2);
+//				potentialPanels.add(q);
+//			}
+//		}
+//		
+//		/**
+//		 * This method will find all combinations of symbols and digits. For example,
+//		 * if 3 and 2 are used a parameters, the method will return the values
+//		 * [[0,0], [0,1], [0,2]]
+//		 * [[1,0], [1,1], [1,2]]
+//		 * [[2,0], [2,1], [2,2]]
+//		 * 
+//		 * @param symbols
+//		 * @param digits
+//		 * @return a list of the symbols^digits different combinations
+//		 */
+//		private ArrayList<ArrayList<Integer>> combinations(int symbols, int digits) {
+//			return combinations(symbols, new ArrayList<Integer>(), digits);
+//		}
+//		
+//		private ArrayList<ArrayList<Integer>> combinations(int symbols, ArrayList<Integer> number, int digits) {
+//			ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
+//			if (number.size() == digits) {
+//					temp.add(number);
+//			} else {
+//				for (int j=0; j < symbols; j++) {
+//					ArrayList<Integer> temp2 = new ArrayList<Integer>(number);
+//					temp2.add(j);
+//					temp.addAll(combinations(symbols, temp2, digits));
+//				}
+//			}
+//			return temp;
+//		}
+//	};
 	private SerialListener keySavePotentials = new SerialListener() {
 		private static final long serialVersionUID = 222500108052711638L;
 		public void actionPerformed(ActionEvent e) {
@@ -459,7 +459,8 @@ public class Potential extends JPanel implements Serializable {
 		btnAddPotential.setBounds(17, 56, 154, 28);
 		add(btnCombinations);
 		btnCombinations.setBounds(784, 7, 126, 42);
-		btnCombinations.addActionListener(keyCombinations);
+		btnCombinations.setEnabled(false);
+//		btnCombinations.addActionListener(keyCombinations);
 		add(btnSavePotentials);
 		btnSavePotentials.setBounds(915, 7, 90, 42);
 		btnSavePotentials.addActionListener(keySavePotentials);

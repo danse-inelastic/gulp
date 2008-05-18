@@ -144,6 +144,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	}
 
 	public void importCoordinates(String fileContents) {
+		// this method expects coordinates to be in xyz format!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		Scanner in = new Scanner(fileContents);
 		int numOfLines = in.nextInt();
 		in.nextLine();

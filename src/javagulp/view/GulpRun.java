@@ -53,7 +53,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private String[] topNames = { "MD", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
-			"XYZFit", "Phonons", "FreeEnergy", "TransitionState",
+			"Phonons", "FreeEnergy", "TransitionState",
 			"StructurePrediction", "GeneticAlgorithm", "Surface",
 			"ExternalForce" };
 	
@@ -225,62 +225,62 @@ public class GulpRun extends JPanel implements Serializable {
 		return (MD) getTopPanel(0);
 	}
 
-	public MDRestartInit getMdRestartInit() {
-		return (MDRestartInit) getTopPanel(1);
-	}
+//	public MDRestartInit getMdRestartInit() {
+//		return (MDRestartInit) getTopPanel(1);
+//	}
 
 	public MonteCarlo getMonteCarlo() {
-		return (MonteCarlo) getTopPanel(2);
+		return (MonteCarlo) getTopPanel(1);
 	}
 
 	private EnergeticsMatProp getEnergeticsMatProp() {
-		return (EnergeticsMatProp) getTopPanel(3);
+		return (EnergeticsMatProp) getTopPanel(2);
 	}
 
 	public Optimization getOptimization() {
-		return (Optimization) getTopPanel(4);
+		return (Optimization) getTopPanel(3);
 	}
 	
 	public Constraints getConstraints() {
-		return (Constraints) getTopPanel(5);
+		return (Constraints) getTopPanel(4);
 	}
 	public Fit getFit() {
-		return (Fit) getTopPanel(6);
+		return (Fit) getTopPanel(5);
 	}
 
-	public XYZFit getXyzfit() {
-		return (XYZFit) getTopPanel(7);
-	}
+//	public XYZFit getXyzfit() {
+//		return (XYZFit) getTopPanel(7);
+//	}
 
 	public Phonons getPhonon() {
-		return (Phonons) getTopPanel(8);
+		return (Phonons) getTopPanel(6);
 	}
 	
 	public FreeEnergy getFreeEnergy() {
-		return (FreeEnergy) getTopPanel(9);
+		return (FreeEnergy) getTopPanel(7);
 	}
 
 	public TransitionState getTransitionState() {
-		return (TransitionState) getTopPanel(10);
+		return (TransitionState) getTopPanel(8);
 	}
 	public StructurePrediction getStructurePrediction() {
-		return (StructurePrediction) getTopPanel(11);
+		return (StructurePrediction) getTopPanel(9);
 	}
 
 	public GeneticAlgorithm getGeneticAlgorithm() {
-		return (GeneticAlgorithm) getTopPanel(12);
+		return (GeneticAlgorithm) getTopPanel(10);
 	}
 
-	public Defect getDefect() {
-		return (Defect) getTopPanel(13);
-	}
+//	public Defect getDefect() {
+//		return (Defect) getTopPanel(13);
+//	}
 
 	public Surface getSurface() {
-		return (Surface) getTopPanel(14);
+		return (Surface) getTopPanel(11);
 	}
 
 	public ExternalForce getExternalForce() {
-		return (ExternalForce) getTopPanel(15);
+		return (ExternalForce) getTopPanel(12);
 	}
 	
 	//Bottom

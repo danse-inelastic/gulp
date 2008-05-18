@@ -533,8 +533,8 @@ public class MD extends JPanel implements Serializable {
 
 	public String writeMD() throws IncompleteOptionException,
 			InvalidOptionException {
-		MDRestartInit m;
-		m = Back.getPanel().getMdRestartInit();
+		//MDRestartInit m;
+		//m = Back.getPanel().getMdRestartInit();
 		return pnlTimeLengths.writeTime()
 				+ pnlOutputFormats.writeMDWriteFrequency()
 				+ pnlMDmass.writeShellMassRatio()
@@ -546,6 +546,7 @@ public class MD extends JPanel implements Serializable {
 				+ pnlIntegrator.writeIntegrator()
 				+ pnlVectorTable.writeExtracutoff()
 				+ pnlThermodynamicEnsembles.writeEnsemble()
-				+ m.writeMDRestart() + pnlTemperature.writeTemperature();
+				//+ m.writeMDRestart() + pnlTemperature.writeTemperature();
+				+ pnlTemperature.writeTemperature();
 	}
 }
