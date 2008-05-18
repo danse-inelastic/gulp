@@ -25,7 +25,7 @@ import javax.swing.WindowConstants;
 
 public class Back {
 
-	public static final JFrame frame = new JFrame("GULPUI 1.0");
+	public static final JFrame frame = new JFrame("GulpUI 0.5");
 	public static final GulpFileWriter writer = new GulpFileWriter();
 	//No access modifier (default access), so access is limited to the same package.
 	static JTabbedPane tabs = new JTabbedPane();
@@ -71,7 +71,6 @@ public class Back {
 				}
 			}
 		});
-
 		frame.setVisible(true);
 	}
 
@@ -81,6 +80,22 @@ public class Back {
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 	}
 
+//	public static String getFileContents(File file) {
+//		StringBuffer contents = new StringBuffer();
+//		Scanner in = null;
+//		try {
+//			in = new Scanner(file);
+//			while (in.hasNext()) {
+//				contents.append(in.nextLine());
+//				contents.append(newLine);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		in.close();
+//		return contents.toString();
+//	}
+	
 	public static String getFileContents(File file) {
 		StringBuffer contents = new StringBuffer();
 		Scanner in = null;

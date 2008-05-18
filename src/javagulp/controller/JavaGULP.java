@@ -30,10 +30,14 @@ public class JavaGULP {
 			Back.getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setParameters(args);
 		}
 		if (args.length == 10) {
-			String contents = Back.getFileContents(new File(args[0]));
-			Back.getStructure().atomicCoordinates.getTableModel().importCoordinates(contents);
+			Back.getStructure().atomicCoordinates.getTableModel().importCoordinates(args[0]);
 			Back.getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(args);
 		}
+//		if (args.length == 10) {
+//			String contents = Back.getFileContents(new File(args[0]));
+//			Back.getStructure().atomicCoordinates.getTableModel().importCoordinates(contents);
+//			Back.getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(args);
+//		}
 	}
 	
 	public static void main(final ArrayList<ArrayList<String>> species, final ArrayList<ArrayList<double[]>> coordinates, final ArrayList<String[]> args, final ArrayList<String> names) {
