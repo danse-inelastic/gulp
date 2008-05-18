@@ -22,7 +22,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class PCMenu extends JMenuBar implements Serializable {
 	private static final long serialVersionUID = -4653899304957946949L;

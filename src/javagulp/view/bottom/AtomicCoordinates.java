@@ -29,7 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 //import cseo.jodaf.client.FilePackage;
 
 public class AtomicCoordinates extends JPanel implements Serializable {
@@ -149,19 +149,19 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
 		}
 	};
-	private SerialListener keyImportCoordinates = new SerialListener() {
-		private static final long serialVersionUID = -8627501403384935426L;
-		@Override
-		public void actionPerformed(ActionEvent e) {
-				JFileChooser fileDialog = new JFileChooser();
-				fileDialog.setMultiSelectionEnabled(true);
-				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
-				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-					File[] files = fileDialog.getSelectedFiles();
-					Back.getPanel().getStructures().importStructures(files);
-				}
-		}
-	};
+//	private SerialListener keyImportCoordinates = new SerialListener() {
+//		private static final long serialVersionUID = -8627501403384935426L;
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//				JFileChooser fileDialog = new JFileChooser();
+//				fileDialog.setMultiSelectionEnabled(true);
+//				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+//				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+//					File[] files = fileDialog.getSelectedFiles();
+//					Back.getPanel().getStructures().importStructures(files);
+//				}
+//		}
+//	};
 	private SerialListener keySaveCoordinates = new SerialListener() {
 		private static final long serialVersionUID = -2238532372348902025L;
 		@Override
@@ -242,8 +242,9 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		cboCoordinateType.addActionListener(keyCoordinateType);
 		btnImportCoordinates.setBounds(498, 6, 125, 25);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
+		btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
-		btnImportCoordinates.addActionListener(keyImportCoordinates);
+		//btnImportCoordinates.addActionListener(keyImportCoordinates);
 		btnSaveCoordinates.setBounds(629, 6, 115, 25);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);

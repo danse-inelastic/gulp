@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Polynomial extends PotentialPanel implements Serializable {
 

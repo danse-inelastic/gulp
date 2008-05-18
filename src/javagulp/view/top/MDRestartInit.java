@@ -20,8 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
-import utility.misc.Nutpad;
-import utility.misc.SerialListener;
+import javagulp.model.Nutpad;
+import javagulp.model.SerialListener;
 
 public class MDRestartInit extends JPanel implements Serializable {
 

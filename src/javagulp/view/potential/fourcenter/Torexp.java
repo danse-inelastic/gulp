@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Torexp extends PotentialPanel implements Serializable {
 

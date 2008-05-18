@@ -7,7 +7,7 @@ import javagulp.view.Back;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-import utility.misc.SerialMouseAdapter;
+import javagulp.model.SerialMouseAdapter;
 
 public abstract class CoordinateTable extends JTable {
 

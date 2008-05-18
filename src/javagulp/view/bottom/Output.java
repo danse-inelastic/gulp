@@ -26,8 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.Nutpad;
-import utility.misc.SerialListener;
+import javagulp.model.Nutpad;
+import javagulp.model.SerialListener;
 
 import com.sshtools.common.hosts.DialogKnownHostsKeyVerification;
 import com.sshtools.j2ssh.SftpClient;

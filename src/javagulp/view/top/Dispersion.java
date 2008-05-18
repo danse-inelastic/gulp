@@ -18,8 +18,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
-import utility.misc.SerialKeyAdapter;
-import utility.misc.SerialListener;
+import javagulp.model.SerialKeyAdapter;
+import javagulp.model.SerialListener;
 
 public class Dispersion extends TitledPanel implements Serializable {
 

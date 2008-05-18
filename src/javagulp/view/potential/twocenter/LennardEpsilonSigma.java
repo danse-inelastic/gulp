@@ -16,7 +16,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class LennardEpsilonSigma extends PotentialPanel implements Serializable {
 

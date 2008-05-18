@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class ExternalForce extends JPanel implements Serializable {
 

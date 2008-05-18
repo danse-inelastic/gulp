@@ -22,7 +22,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Lennard extends PotentialPanel implements Serializable {
 

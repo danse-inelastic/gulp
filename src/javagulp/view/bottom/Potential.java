@@ -42,8 +42,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import utility.misc.JCopy;
-import utility.misc.SerialListener;
+import javagulp.model.JCopy;
+import javagulp.model.SerialListener;
 
 public class Potential extends JPanel implements Serializable {
 

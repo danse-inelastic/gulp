@@ -18,7 +18,7 @@ import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 

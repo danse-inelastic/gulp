@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class SpaceGroup extends JPanel implements Serializable {
 

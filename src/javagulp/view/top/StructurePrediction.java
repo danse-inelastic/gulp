@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class StructurePrediction extends JPanel implements Serializable {
 

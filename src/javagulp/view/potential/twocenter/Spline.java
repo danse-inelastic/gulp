@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Spline extends PotentialPanel implements Serializable {
 

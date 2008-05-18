@@ -26,9 +26,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import utility.misc.SerialKeyAdapter;
-import utility.misc.SerialListener;
-import utility.misc.SerialMouseAdapter;
+import javagulp.model.SerialKeyAdapter;
+import javagulp.model.SerialListener;
+import javagulp.model.SerialMouseAdapter;
 
 public class Execution extends JPanel implements Serializable {
 	private static final long serialVersionUID = -907728808045994280L;

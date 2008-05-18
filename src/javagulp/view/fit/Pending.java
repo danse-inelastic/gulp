@@ -18,7 +18,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Pending extends JPanel implements Serializable {
 	// TODO figure out why this is never used

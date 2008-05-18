@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Optimization extends JPanel implements Serializable {
 

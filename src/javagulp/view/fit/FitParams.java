@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class FitParams extends JFrame implements Serializable {
 	private static final long serialVersionUID = 6614798981469880622L;

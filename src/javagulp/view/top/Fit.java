@@ -19,9 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
-import utility.misc.SerialKeyAdapter;
-import utility.misc.SerialListener;
-import utility.misc.SerialMouseAdapter;
+import javagulp.model.SerialKeyAdapter;
+import javagulp.model.SerialListener;
+import javagulp.model.SerialMouseAdapter;
 
 public class Fit extends AbstractFit implements Serializable {
 

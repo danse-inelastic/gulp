@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class AtomCombos extends JPanel implements Serializable {
 

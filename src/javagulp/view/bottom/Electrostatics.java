@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class Electrostatics extends JPanel implements Serializable {
 

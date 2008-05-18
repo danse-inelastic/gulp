@@ -23,10 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import utility.function.Atom;
-import utility.function.Value;
-import utility.misc.SerialListener;
-import utility.parsers.WorkspaceParser;
+//import utility.function.Atom;
+//import utility.function.Value;
+import javagulp.model.SerialListener;
+//import utility.parsers.WorkspaceParser;
 
 public class ChargesElementsBonding extends JPanel implements Serializable {
 
@@ -134,37 +134,37 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 
 	private JButton btnImportCharges = new JButton("Import Charges");
 	
-	private SerialListener keyImportCharges = new SerialListener() {
-		private static final long serialVersionUID = -2724023630471511865L;
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JFileChooser fileDialog = new JFileChooser();
-			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
-			
-			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-				WorkspaceParser wp = new WorkspaceParser(fileDialog.getSelectedFile().getParentFile());
-				ArrayList<Value> netCharges = wp.parseNetCharges();
-				ArrayList<Atom> atoms = wp.readPositions().get(0);
-				
-				//average charges over all timesteps and atom types
-				for (int i=0; i < speciesTableModel.getRowCount(); i++) {
-					double charge = 0, numAtoms = 0;
-					String element = (String) speciesTableModel.getValueAt(i, 0);
-					for (int j=0; j < netCharges.size(); j++) {
-						Value v = netCharges.get(j);
-						for (int k=0; k < v.y.length; k++) {
-							if (atoms.get(k).symbol.equals(element)) {
-								charge += v.y[k];
-								numAtoms++;
-							}
-						}
-					}
-					speciesTableModel.setValueAt((charge/numAtoms)+"", i, 1);
-				}
-			}
-		}
-	};
+//	private SerialListener keyImportCharges = new SerialListener() {
+//		private static final long serialVersionUID = -2724023630471511865L;
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			JFileChooser fileDialog = new JFileChooser();
+//			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+//			
+//			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+//				WorkspaceParser wp = new WorkspaceParser(fileDialog.getSelectedFile().getParentFile());
+//				ArrayList<Value> netCharges = wp.parseNetCharges();
+//				ArrayList<Atom> atoms = wp.readPositions().get(0);
+//				
+//				//average charges over all timesteps and atom types
+//				for (int i=0; i < speciesTableModel.getRowCount(); i++) {
+//					double charge = 0, numAtoms = 0;
+//					String element = (String) speciesTableModel.getValueAt(i, 0);
+//					for (int j=0; j < netCharges.size(); j++) {
+//						Value v = netCharges.get(j);
+//						for (int k=0; k < v.y.length; k++) {
+//							if (atoms.get(k).symbol.equals(element)) {
+//								charge += v.y[k];
+//								numAtoms++;
+//							}
+//						}
+//					}
+//					speciesTableModel.setValueAt((charge/numAtoms)+"", i, 1);
+//				}
+//			}
+//		}
+//	};
 	
 	public ChargesElementsBonding() {
 		super();
@@ -191,7 +191,8 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 				+ "Charges should sum to approximately zero.</html>");
 		btnImportCharges.setBounds(457, 130, 169, 25);
 		add(btnImportCharges);
-		btnImportCharges.addActionListener(keyImportCharges);
+		btnImportCharges.setEnabled(false);
+		//btnImportCharges.addActionListener(keyImportCharges);
 		speciesScrollpane.setBounds(457, 34, 169, 95);
 		add(speciesScrollpane);
 		speciesTableModel.uneditableColumns = new int[] { 0 };

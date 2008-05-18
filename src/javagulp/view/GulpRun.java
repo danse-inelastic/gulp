@@ -28,7 +28,6 @@ import javagulp.view.top.Phonons;
 import javagulp.view.top.StructurePrediction;
 import javagulp.view.top.Surface;
 import javagulp.view.top.TransitionState;
-import javagulp.view.top.XYZFit;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,7 +37,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import utility.misc.SerialKeyAdapter;
+import test.potential.XYZFit;
+
+import javagulp.model.SerialKeyAdapter;
 
 public class GulpRun extends JPanel implements Serializable {
 
@@ -93,7 +94,7 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "optimization");
 		topPane.add(null, "constraints");
 		topPane.add(null, "fit");
-		topPane.add(null, "XYZ fit");
+		//topPane.add(null, "XYZ fit");
 		topPane.add(null, "phonons");
 		//topPane.add(null, "");
 		//topPane.setEnabledAt(8, false);

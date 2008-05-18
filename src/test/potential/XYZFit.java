@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package test.potential;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -32,7 +32,7 @@ import javax.swing.JTextField;
 import utility.function.Atom;
 import utility.function.Value;
 import javagulp.model.G;
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 import utility.parsers.WorkspaceParser;
 
 public class XYZFit extends JPanel implements Serializable {

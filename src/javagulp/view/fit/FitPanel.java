@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import utility.misc.SerialListener;
+import javagulp.model.SerialListener;
 
 public class FitPanel extends TitledPanel implements Serializable {
 	private static final long serialVersionUID = 1259654196602548550L;
