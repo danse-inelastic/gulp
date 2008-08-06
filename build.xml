@@ -43,7 +43,7 @@
 	<property name="lib" value="lib" />
 	<property name="app-name" value="GULP" />
 	<property name="username" value="jbk" />
-	<property name="password" value="INhbb0g2"/>
+	<property name="password" value="vnfvnf"/>
 
 	<path id="classpath" path="${classpath}">
 		<fileset dir="${lib}">
@@ -69,9 +69,9 @@
 			</fileset>
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk/danse" alias="javagulp" storepass="INhbb0g2" keypass="INhbb0g2"/>
-		<signjar jar="deployable/commons-logging.jar" keystore="/home/jbk/danse" alias="javagulp" storepass="INhbb0g2" keypass="INhbb0g2"/>
-		<signjar jar="deployable/j2ssh.jar" keystore="/home/jbk/danse" alias="javagulp" storepass="INhbb0g2" keypass="INhbb0g2"/>
+		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf"/>
+		<signjar jar="deployable/commons-logging.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf"/>
+		<signjar jar="deployable/j2ssh.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf"/>
 		<copy todir="/var/www/java">
 			<fileset dir="deployable">
 				<exclude name="**/*.java"/>

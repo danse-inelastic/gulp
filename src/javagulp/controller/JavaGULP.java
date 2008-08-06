@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javagulp.view.Back;
 
+//TODO: this class needs to be refactored badly; what follows below is just a bunch of special cases for importing coordinates
+
 public class JavaGULP {
 
 	private static Back b = null;
@@ -14,6 +16,10 @@ public class JavaGULP {
 			b = new Back();
 		else
 			b.addTab();
+//		if (args.length == null) {
+//			String contents = Back.getFileContents(new File(args[0]));
+//			Back.getStructure().atomicCoordinates.getTableModel().importCoordinates(contents);
+//		}
 		// this only works for java
 		if (args.length == 1) {
 			String contents = Back.getFileContents(new File(args[0]));
