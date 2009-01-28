@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.bottom.Potential;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.twocenter.GeneralPotential;
+import javagulp.view.top.Potential;
 
 import javax.swing.JTextField;
 

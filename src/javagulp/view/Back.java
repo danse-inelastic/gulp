@@ -13,8 +13,8 @@ import java.util.Scanner;
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Keywords;
-import javagulp.view.bottom.Structures.Structure;
 import javagulp.view.potential.PPP;
+import javagulp.view.top.Structures.Structure;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
-import javagulp.view.bottom.Potential;
+import javagulp.view.top.Potential;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;

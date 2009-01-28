@@ -1,4 +1,4 @@
-package javagulp.view.bottom;
+package javagulp.view.top;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

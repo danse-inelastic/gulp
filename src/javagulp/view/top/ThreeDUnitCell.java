@@ -1,4 +1,4 @@
-package javagulp.view.bottom;
+package javagulp.view.top;
 
 import java.io.Serializable;
 import java.util.ArrayList;

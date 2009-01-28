@@ -5,17 +5,13 @@ import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import javagulp.model.Keywords;
-import javagulp.view.bottom.ChargesElementsBonding;
-import javagulp.view.bottom.Electrostatics;
-import javagulp.view.bottom.EwaldOptions;
-import javagulp.view.bottom.Execution;
-import javagulp.view.bottom.Output;
-import javagulp.view.bottom.Potential;
-import javagulp.view.bottom.PotentialOptions;
-import javagulp.view.bottom.Structures;
+import javagulp.view.top.ChargesElementsBonding;
 import javagulp.view.top.Constraints;
 import javagulp.view.top.Defect;
+import javagulp.view.top.Electrostatics;
 import javagulp.view.top.EnergeticsMatProp;
+import javagulp.view.top.EwaldOptions;
+import javagulp.view.top.Execution;
 import javagulp.view.top.ExternalForce;
 import javagulp.view.top.Fit;
 import javagulp.view.top.FreeEnergy;
@@ -24,8 +20,12 @@ import javagulp.view.top.MD;
 import javagulp.view.top.MDRestartInit;
 import javagulp.view.top.MonteCarlo;
 import javagulp.view.top.Optimization;
+import javagulp.view.top.Output;
 import javagulp.view.top.Phonons;
+import javagulp.view.top.Potential;
+import javagulp.view.top.PotentialOptions;
 import javagulp.view.top.StructurePrediction;
+import javagulp.view.top.Structures;
 import javagulp.view.top.Surface;
 import javagulp.view.top.TransitionState;
 
@@ -51,10 +51,10 @@ public class GulpRun extends JPanel implements Serializable {
 //			"StructurePrediction", "GeneticAlgorithm", "Defect", "Surface",
 //			"ExternalForce" };
 
-	private String[] topNames = { "MD", "MonteCarlo",
+	private String[] topNames = { "MolecularDynamics", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
 			"Phonons", "FreeEnergy", "TransitionState",
-			"StructurePrediction", "GeneticAlgorithm", "Surface",
+			"StructurePrediction", "Surface",
 			"ExternalForce","Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
 			"EwaldOptions", "Output", "Execution" };

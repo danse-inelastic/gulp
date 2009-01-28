@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
-import javagulp.view.bottom.Potential;
 import javagulp.view.potential.PotentialPanel;
+import javagulp.view.top.Potential;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
