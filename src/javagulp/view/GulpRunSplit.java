@@ -41,7 +41,7 @@ import test.potential.XYZFit;
 
 import javagulp.model.SerialKeyAdapter;
 
-public class GulpRun extends JPanel implements Serializable {
+public class GulpRunSplit extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
@@ -55,36 +55,34 @@ public class GulpRun extends JPanel implements Serializable {
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
 			"Phonons", "FreeEnergy", "TransitionState",
 			"StructurePrediction", "GeneticAlgorithm", "Surface",
-			"ExternalForce","Structures", "Potential",
+			"ExternalForce" };
+	
+	private String[] bottomNames = { "Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
 			"EwaldOptions", "Output", "Execution" };
-	
-	//private String[] bottomNames = {};
 
 	private JPanel[] top = new JPanel[topNames.length];
-//	private JPanel[] bottom = new JPanel[bottomNames.length];
+	private JPanel[] bottom = new JPanel[bottomNames.length];
 
 	public JTabbedPane topPane = new JTabbedPane();
 	public JScrollPane topScroll = new JScrollPane(topPane);
 
-//	public JTabbedPane bottomPane = new JTabbedPane();
-//	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
+	public JTabbedPane bottomPane = new JTabbedPane();
+	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
 
-//	private JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-//			topScroll, bottomScroll);
+	private JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+			topScroll, bottomScroll);
 
 	private Keywords keywords = null;
 
-	public GulpRun() {
+	public GulpRunSplit() {
 		super();
 		setLayout(new BorderLayout());
 
-//		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
-//		splitPane.setDividerSize(4);
-//		splitPane.setResizeWeight(0.5);
-//		add(splitPane, BorderLayout.CENTER);
-		
-		add(topPane, BorderLayout.CENTER);
+		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
+		splitPane.setDividerSize(4);
+		splitPane.setResizeWeight(0.5);
+		add(splitPane, BorderLayout.CENTER);
 
 		topPane.addChangeListener(keyTop);
 		topPane.add(null, "molecular dynamics");
@@ -122,20 +120,20 @@ public class GulpRun extends JPanel implements Serializable {
 		//topPane.add(null, "");
 		//topPane.setEnabledAt(15, false);
 		
-//		topPane.addChangeListener(keyBottom);
-//		topPane.addKeyListener(keyDelete);
-		topPane.add(null, "structures");
-		topPane.add(null, "potentials");
-		topPane.add(null, "potential options");
-		topPane.add(null, "charges, elements and bonding");
-		topPane.add(null, "electrostatics");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(4, false);
-		topPane.add(null, "ewald options");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(5, false);
-		topPane.add(null, "output");
-		topPane.add(null, "execution");
+		bottomPane.addChangeListener(keyBottom);
+		bottomPane.addKeyListener(keyDelete);
+		bottomPane.add(null, "structures");
+		bottomPane.add(null, "potentials");
+		bottomPane.add(null, "potential options");
+		bottomPane.add(null, "charges, elements and bonding");
+		bottomPane.add(null, "electrostatics");
+		//bottomPane.add(null, "");
+		//bottomPane.setEnabledAt(4, false);
+		bottomPane.add(null, "ewald options");
+		//bottomPane.add(null, "");
+		//bottomPane.setEnabledAt(5, false);
+		bottomPane.add(null, "output");
+		bottomPane.add(null, "execution");
 	}
 	
 	private class TopListener implements ChangeListener, Serializable {
@@ -165,47 +163,47 @@ public class GulpRun extends JPanel implements Serializable {
 		return top[index];
 	}
 	
-//	private class BottomListener implements ChangeListener, Serializable {
-//		private static final long serialVersionUID = -7847271919463899366L;
-//	
-//		public void stateChanged(ChangeEvent e) {
-//			int index = bottomPane.getSelectedIndex();
-//			bottomPane.setComponentAt(index, getBottomPanel(index));
-//		}
-//	};
-//	private BottomListener keyBottom = new BottomListener();
-//	private SerialKeyAdapter keyDelete = new SerialKeyAdapter() {
-//		private static final long serialVersionUID = -3244021879612727287L;
-//		@Override
-//		public void keyReleased(KeyEvent e) {
-//			int index = bottomPane.getSelectedIndex();
-//			if (index == 0 && e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-//				if (JOptionPane.showConfirmDialog(null,
-//						"Are you sure you want to delete all structures?") == JOptionPane.YES_OPTION) {
-//					Structures s = Back.getPanel().getStructures();
-//					s.tabs.removeAll();
-//					s.tabs.addTab("" + (s.tabs.getTabCount() + 1), s.new Structure());
-//				}
-//			}
-//		}
-//	};
+	private class BottomListener implements ChangeListener, Serializable {
+		private static final long serialVersionUID = -7847271919463899366L;
 	
-//	private JPanel getBottomPanel(int index) {
-//		if (bottom[index] == null) {
-//			String pkg = "javagulp.view.bottom.";
-//			try {
-//				Class c = Class.forName(pkg + bottomNames[index]);
-//				bottom[index] = (JPanel) c.newInstance();
-//			} catch (ClassNotFoundException e) {
-//				e.printStackTrace();
-//			} catch (InstantiationException e) {
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return bottom[index];
-//	}
+		public void stateChanged(ChangeEvent e) {
+			int index = bottomPane.getSelectedIndex();
+			bottomPane.setComponentAt(index, getBottomPanel(index));
+		}
+	};
+	private BottomListener keyBottom = new BottomListener();
+	private SerialKeyAdapter keyDelete = new SerialKeyAdapter() {
+		private static final long serialVersionUID = -3244021879612727287L;
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int index = bottomPane.getSelectedIndex();
+			if (index == 0 && e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+				if (JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to delete all structures?") == JOptionPane.YES_OPTION) {
+					Structures s = Back.getPanel().getStructures();
+					s.tabs.removeAll();
+					s.tabs.addTab("" + (s.tabs.getTabCount() + 1), s.new Structure());
+				}
+			}
+		}
+	};
+	
+	private JPanel getBottomPanel(int index) {
+		if (bottom[index] == null) {
+			String pkg = "javagulp.view.bottom.";
+			try {
+				Class c = Class.forName(pkg + bottomNames[index]);
+				bottom[index] = (JPanel) c.newInstance();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return bottom[index];
+	}
 	
 	public String getWD() {
 		return getExecution().txtWorkingDirectory.getText();
@@ -286,36 +284,36 @@ public class GulpRun extends JPanel implements Serializable {
 	}
 	
 	//Bottom
-	
+		
 	public Structures getStructures() {
-		return (Structures) getTopPanel(13);
+		return (Structures) getBottomPanel(0);
 	}
 
 	public Potential getPotential() {
-		return (Potential) getTopPanel(14);
+		return (Potential) getBottomPanel(1);
 	}
 
 	public PotentialOptions getPotentialOptions() {
-		return (PotentialOptions) getTopPanel(15);
+		return (PotentialOptions) getBottomPanel(2);
 	}
 
 	public ChargesElementsBonding getChargesElementsBonding() {
-		return (ChargesElementsBonding) getTopPanel(16);
+		return (ChargesElementsBonding) getBottomPanel(3);
 	}
 
 	public Electrostatics getElectrostatics() {
-		return (Electrostatics) getTopPanel(17);
+		return (Electrostatics) getBottomPanel(4);
 	}
 
 	public EwaldOptions getEwaldOptions() {
-		return (EwaldOptions) getTopPanel(18);
+		return (EwaldOptions) getBottomPanel(5);
 	}
 
 	public Output getOutput() {
-		return (Output) getTopPanel(19);
+		return (Output) getBottomPanel(6);
 	}
 
 	public Execution getExecution() {
-		return (Execution) getTopPanel(20);
+		return (Execution) getBottomPanel(7);
 	}
 }
