@@ -1,6 +1,7 @@
 package javagulp.view;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
@@ -64,8 +65,10 @@ public class GulpRun extends JPanel implements Serializable {
 	private JPanel[] top = new JPanel[topNames.length];
 //	private JPanel[] bottom = new JPanel[bottomNames.length];
 
-	public JTabbedPane topPane = new JTabbedPane();
-	public JScrollPane topScroll = new JScrollPane(topPane);
+	//public JTabbedPane topPane = new JTabbedPane();
+	//public JScrollPane topScroll = new JScrollPane(topPane);
+
+
 
 //	public JTabbedPane bottomPane = new JTabbedPane();
 //	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
@@ -77,76 +80,50 @@ public class GulpRun extends JPanel implements Serializable {
 
 	public GulpRun() {
 		super();
-		setLayout(new BorderLayout());
+		setLayout(new CardLayout());
 
 //		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
 //		splitPane.setDividerSize(4);
 //		splitPane.setResizeWeight(0.5);
 //		add(splitPane, BorderLayout.CENTER);
 		
-		add(topPane, BorderLayout.CENTER);
+//		add(topPane, BorderLayout.CENTER);
 
-		topPane.addChangeListener(keyTop);
-		topPane.add(null, "molecular dynamics");
-		//topPane.add(null, "molecular dynamics restart");
-		topPane.add(null, "monte carlo");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(2, false);
-		topPane.add(null, "energetics and material properties");
-		topPane.add(null, "optimization");
-		topPane.add(null, "constraints");
-		topPane.add(null, "fit");
-		//topPane.add(null, "XYZ fit");
-		topPane.add(null, "phonons");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(8, false);
-		topPane.add(null, "free energy");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(9, false);
-		topPane.add(null, "transition state");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(10, false);
-		topPane.add(null, "structure prediction");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(11, false);
-		topPane.add(null,"genetic algorithm");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(12, false);
-		// topPane.add(null, "defects");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(13, false);
-		topPane.add(null, "surface");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(14, false);
-		topPane.add(null, "external force");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(15, false);
-		
-//		topPane.addChangeListener(keyBottom);
-//		topPane.addKeyListener(keyDelete);
-		topPane.add(null, "structures");
-		topPane.add(null, "potentials");
-		topPane.add(null, "potential options");
-		topPane.add(null, "charges, elements and bonding");
-		topPane.add(null, "electrostatics");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(4, false);
-		topPane.add(null, "ewald options");
-		//topPane.add(null, "");
-		//topPane.setEnabledAt(5, false);
-		topPane.add(null, "output");
-		topPane.add(null, "execution");
+		//topPane.addChangeListener(keyTop);
+		add(null, "molecular dynamics");
+		add(null, "monte carlo");
+		add(null, "energetics and material properties");
+		add(null, "optimization");
+		add(null, "constraints");
+		add(null, "fit");
+		add(null, "phonons");
+		add(null, "free energy");
+		add(null, "transition state");
+		add(null, "structure prediction");
+		add(null,"genetic algorithm");
+		add(null, "surface");
+		add(null, "external force");
+
+		add(null, "structures");
+		add(null, "potentials");
+		add(null, "potential options");
+		add(null, "charges, elements and bonding");
+		add(null, "electrostatics");
+		add(null, "ewald options");
+
+		add(null, "output");
+		add(null, "execution");
 	}
 	
-	private class TopListener implements ChangeListener, Serializable {
-		private static final long serialVersionUID = -7619847591444570775L;
-		
-		public void stateChanged(ChangeEvent e) {
-			int index = topPane.getSelectedIndex();
-			topPane.setComponentAt(index, getTopPanel(index));
-		}
-	};
-	private TopListener keyTop = new TopListener();
+//	private class TopListener implements ChangeListener, Serializable {
+//		private static final long serialVersionUID = -7619847591444570775L;
+//		
+//		public void stateChanged(ChangeEvent e) {
+//			int index = topPane.getSelectedIndex();
+//			topPane.setComponentAt(index, getTopPanel(index));
+//		}
+//	};
+//	private TopListener keyTop = new TopListener();
 	
 	private JPanel getTopPanel(int index) {
 		if (top[index] == null) {
