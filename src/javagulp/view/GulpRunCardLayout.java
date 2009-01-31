@@ -46,7 +46,13 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
-	private String[] tabNames = { "MolecularDynamics", "MonteCarlo",
+//	private String[] topNames = { "MD", "MDRestartInit", "MonteCarlo",
+//			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
+//			"XYZFit", "Phonons", "FreeEnergy", "TransitionState",
+//			"StructurePrediction", "GeneticAlgorithm", "Defect", "Surface",
+//			"ExternalForce" };
+
+	private String[] topNames = { "MolecularDynamics", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
 			"Phonons", "FreeEnergy", "TransitionState", "StructurePrediction", "Surface",
 			"ExternalForce","Structures", "Potential",
@@ -55,11 +61,11 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	//private String[] bottomNames = {};
 
-	private JPanel[] top = new JPanel[tabNames.length];
+	private JPanel[] top = new JPanel[topNames.length];
 //	private JPanel[] bottom = new JPanel[bottomNames.length];
 
-	public JTabbedPane topPane = new JTabbedPane();
-	public JScrollPane topScroll = new JScrollPane(topPane);
+	//public JTabbedPane topPane = new JTabbedPane();
+	//public JScrollPane topScroll = new JScrollPane(topPane);
 
 
 
@@ -80,48 +86,49 @@ public class GulpRun extends JPanel implements Serializable {
 //		splitPane.setResizeWeight(0.5);
 //		add(splitPane, BorderLayout.CENTER);
 		
-		add(topPane, BorderLayout.CENTER);
+//		add(topPane, BorderLayout.CENTER);
 
-		topPane.addChangeListener(keyTop);
-		topPane.add(null, "molecular dynamics");
-		topPane.add(null, "monte carlo");
-		topPane.add(null, "energetics and material properties");
-		topPane.add(null, "optimization");
-		topPane.add(null, "constraints");
-		topPane.add(null, "fit");
-		topPane.add(null, "phonons");
-		topPane.add(null, "free energy");
-		topPane.add(null, "transition state");
-		topPane.add(null, "structure prediction");
-		topPane.add(null, "surface");
-		topPane.add(null, "external force");
+		//topPane.addChangeListener(keyTop);
+		add(null, "molecular dynamics");
+		add(null, "monte carlo");
+		add(null, "energetics and material properties");
+		add(null, "optimization");
+		add(null, "constraints");
+		add(null, "fit");
+		add(null, "phonons");
+		add(null, "free energy");
+		add(null, "transition state");
+		add(null, "structure prediction");
+		add(null,"genetic algorithm");
+		add(null, "surface");
+		add(null, "external force");
 
-		topPane.add(null, "structures");
-		topPane.add(null, "potentials");
-		topPane.add(null, "potential options");
-		topPane.add(null, "charges, elements and bonding");
-		topPane.add(null, "electrostatics");
-		topPane.add(null, "ewald options");
+		add(null, "structures");
+		add(null, "potentials");
+		add(null, "potential options");
+		add(null, "charges, elements and bonding");
+		add(null, "electrostatics");
+		add(null, "ewald options");
 
 		add(null, "output");
 		add(null, "execution");
 	}
 	
-	private class TopListener implements ChangeListener, Serializable {
-		private static final long serialVersionUID = -7619847591444570775L;
-		
-		public void stateChanged(ChangeEvent e) {
-			int index = topPane.getSelectedIndex();
-			topPane.setComponentAt(index, getTopPanel(index));
-		}
-	};
-	private TopListener keyTop = new TopListener();
+//	private class TopListener implements ChangeListener, Serializable {
+//		private static final long serialVersionUID = -7619847591444570775L;
+//		
+//		public void stateChanged(ChangeEvent e) {
+//			int index = topPane.getSelectedIndex();
+//			topPane.setComponentAt(index, getTopPanel(index));
+//		}
+//	};
+//	private TopListener keyTop = new TopListener();
 	
 	private JPanel getTopPanel(int index) {
 		if (top[index] == null) {
 			String pkg = "javagulp.view.top.";
 			try {
-				Class c = Class.forName(pkg + tabNames[index]);
+				Class c = Class.forName(pkg + topNames[index]);
 				top[index] = (JPanel) c.newInstance();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
