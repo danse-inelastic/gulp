@@ -48,8 +48,8 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private String[] tabNames = { "MolecularDynamics", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
-			"Phonons", "FreeEnergy", "TransitionState", "StructurePrediction", "Surface",
-			"ExternalForce","Structures", "Potential",
+			"Phonons", "FreeEnergy", "TransitionState", "StructurePrediction", 
+			"Surface", "ExternalForce","Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
 			"EwaldOptions", "Output", "Execution" };
 	
@@ -73,7 +73,8 @@ public class GulpRun extends JPanel implements Serializable {
 
 	public GulpRun() {
 		super();
-		setLayout(new CardLayout());
+		//setLayout(new CardLayout());
+		setLayout(new BorderLayout());
 
 //		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
 //		splitPane.setDividerSize(4);
