@@ -2,37 +2,34 @@
 
 	<macrodef name="unsignjar">
 
-		<attribute name="jar"/>
+		<attribute name="jar" />
 
 		<sequential>
 			<!-- Remove any existing signatures from a JAR file. -->
-			<tempfile prefix="usignjar-" destdir="${java.io.tmpdir}" property="temp.file"/>
-			<echo message="Removing signatures from JAR: @{jar}"/>
-			<mkdir dir="${temp.file}"/>
+			<tempfile prefix="usignjar-" destdir="${java.io.tmpdir}" property="temp.file" />
+			<echo message="Removing signatures from JAR: @{jar}" />
+			<mkdir dir="${temp.file}" />
 
 			<unjar src="@{jar}" dest="${temp.file}">
 				<patternset>
-					<include name="**"/>
-					<exclude name="META-INF/*.SF"/>
-					<exclude name="META-INF/*.DSA"/>
-					<exclude name="META-INF/*.RSA"/>
+					<include name="**" />
+					<exclude name="META-INF/*.SF" />
+					<exclude name="META-INF/*.DSA" />
+					<exclude name="META-INF/*.RSA" />
 				</patternset>
 			</unjar>
 
-			<delete file="@{jar}" failonerror="true"/>
+			<delete file="@{jar}" failonerror="true" />
 
 			<!-- Touch it in case the file didn't have a manifest.
 	             Otherwise the JAR task below will fail if the manifest 
 		     file doesn't exist. -->
-			<mkdir dir="${temp.file}/META-INF"/>
-			<touch file="${temp.file}/META-INF/MANIFEST.MF"/>
+			<mkdir dir="${temp.file}/META-INF" />
+			<touch file="${temp.file}/META-INF/MANIFEST.MF" />
 
-			<jar destfile="@{jar}" 
-	            basedir="${temp.file}" 
-	            includes="**" 
-	            manifest="${temp.file}/META-INF/MANIFEST.MF"/>
+			<jar destfile="@{jar}" basedir="${temp.file}" includes="**" manifest="${temp.file}/META-INF/MANIFEST.MF" />
 
-			<delete dir="${temp.file}" failonerror="true"/>
+			<delete dir="${temp.file}" failonerror="true" />
 		</sequential>
 	</macrodef>
 
@@ -43,7 +40,7 @@
 	<property name="lib" value="lib" />
 	<property name="app-name" value="GULP" />
 	<property name="username" value="jbk" />
-	<property name="password" value="vnfvnf"/>
+	<property name="password" value="vnfvnf" />
 
 	<path id="classpath" path="${classpath}">
 		<fileset dir="${lib}">
@@ -61,26 +58,53 @@
 
 	<target name="package-trueblue" description="build jars for vnf" depends="init">
 		<!-- first unsign external jars -->
-		<unsignjar jar="deployable/commons-logging.jar"/>
-		<unsignjar jar="deployable/j2ssh.jar"/>
-		<jar jarfile="deployable/${app-name}.jar" >
+		<unsignjar jar="deployable/commons-logging.jar" />
+		<unsignjar jar="deployable/j2ssh.jar" />
+		<jar jarfile="deployable/${app-name}.jar">
 			<fileset dir="${build}">
 				<include name="javagulp/**" />
 			</fileset>
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf"/>
-		<signjar jar="deployable/commons-logging.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf"/>
-		<signjar jar="deployable/j2ssh.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf"/>
+		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf" />
+		<signjar jar="deployable/commons-logging.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf" />
+		<signjar jar="deployable/j2ssh.jar" keystore="/home/jbk" alias="javagulp" storepass="vnfvnf" keypass="vnfvnf" />
 		<copy todir="/var/www/java">
 			<fileset dir="deployable">
-				<exclude name="**/*.java"/>
+				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
 	</target>
 
+	<!--<project name="Deploy From Eclipse to Tomcat" basedir=".">
+	<property name="warfile" value="sanfran"/>-->
+	<target name="unpack">
+		<unwar src="${warfile}.war" dest="${warfile}" />
+	</target>
+	<target name="create">
+		<war destfile="${warfile}.war" webxml="WebContent/WEB-INF/web.xml" update="true">
+			<classes dir="build\classes" />
+			<fileset dir="WebContent">
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+		</war>
+	</target>
+	<target name="copy">
+		<copy todir="c:\tomcat5517\webapps" overwrite="true">
+			<fileset dir=".">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="deploy">
+		<antcall target="create" />
+		<antcall target="copy" />
+	</target>
+
+
+
 	<target name="clean">
-		<delete dir="bin"/>
+		<delete dir="bin" />
 	</target>
 
 </project>
