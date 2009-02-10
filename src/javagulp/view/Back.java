@@ -37,7 +37,7 @@ public class Back {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(pcmenu);
 
-		frame.setSize(1280, 1024);
+		frame.setSize(1280, 700);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = frame.getSize();
 		if (frameSize.height > screenSize.height) {

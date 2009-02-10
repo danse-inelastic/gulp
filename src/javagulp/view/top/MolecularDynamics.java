@@ -19,7 +19,7 @@ import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
 
-public class MD extends JPanel implements Serializable {
+public class MolecularDynamics extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -9015449918647439906L;
 
@@ -43,7 +43,7 @@ public class MD extends JPanel implements Serializable {
 
 	private String uriJPad = "http://cseobb.hec.utah.edu:18080/JPad/OPENARCH-INF/JPad.xml";
 
-	public MD() {
+	public MolecularDynamics() {
 		super();
 		setLayout(null);
 

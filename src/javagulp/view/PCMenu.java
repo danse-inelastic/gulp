@@ -32,29 +32,29 @@ public class PCMenu extends JMenuBar implements Serializable {
 	private JMenuItem openGUI = new JMenuItem("Open saved GUI");
 	private JMenuItem saveGUI = new JMenuItem("Save GUI");
 	
-	private JMenu TypeOfRun = new JMenu("Type of Run");
-	private JMenuItem MolecularDynamics = new JMenuItem("MolecularDynamics");
-	private JMenuItem MonteCarlo = new JMenuItem("Monte Carlo");
-	private JMenuItem EnergeticsMatProp = new JMenuItem("Energetics and Material Properties");
-	private JMenuItem Optimization = new JMenuItem("Optimization");
-	private JMenuItem Constraints = new JMenuItem("Constraints");
-	private JMenuItem Fit = new JMenuItem("Fit");
-	private JMenuItem Phonons = new JMenuItem("Phonons");
-	private JMenuItem FreeEnergy = new JMenuItem("Free Energy");
-	private JMenuItem TransitionState = new JMenuItem("Transition State");
-	private JMenuItem StructurePrediction = new JMenuItem("Structure Prediction");
-	private JMenuItem Surface = new JMenuItem("Surface");
-	private JMenuItem ExternalForce = new JMenuItem("External Force");
-	
-	private JMenu RunInformation = new JMenu("Run Information");
-	private JMenuItem Structure = new JMenuItem("Structure");
-	private JMenuItem Potential = new JMenuItem("Potential");	
-	private JMenuItem PotentialOptions = new JMenuItem("Potential Options");	
-	private JMenuItem ChargesElementsBonding = new JMenuItem("Charges, Elements, and Bonding");	
-	private JMenuItem Electrostatics = new JMenuItem("Electrostatics");	
-	private JMenuItem EwaldOptions = new JMenuItem("Ewald Options");	
-	private JMenuItem Output = new JMenuItem("Output");	
-	private JMenuItem Execution = new JMenuItem("Execution");	
+//	private JMenu TypeOfRun = new JMenu("Type of Run");
+//	private JMenuItem MolecularDynamics = new JMenuItem("MolecularDynamics");
+//	private JMenuItem MonteCarlo = new JMenuItem("Monte Carlo");
+//	private JMenuItem EnergeticsMatProp = new JMenuItem("Energetics and Material Properties");
+//	private JMenuItem Optimization = new JMenuItem("Optimization");
+//	private JMenuItem Constraints = new JMenuItem("Constraints");
+//	private JMenuItem Fit = new JMenuItem("Fit");
+//	private JMenuItem Phonons = new JMenuItem("Phonons");
+//	private JMenuItem FreeEnergy = new JMenuItem("Free Energy");
+//	private JMenuItem TransitionState = new JMenuItem("Transition State");
+//	private JMenuItem StructurePrediction = new JMenuItem("Structure Prediction");
+//	private JMenuItem Surface = new JMenuItem("Surface");
+//	private JMenuItem ExternalForce = new JMenuItem("External Force");
+//	
+//	private JMenu RunInformation = new JMenu("Run Information");
+//	private JMenuItem Structure = new JMenuItem("Structure");
+//	private JMenuItem Potential = new JMenuItem("Potential");	
+//	private JMenuItem PotentialOptions = new JMenuItem("Potential Options");	
+//	private JMenuItem ChargesElementsBonding = new JMenuItem("Charges, Elements, and Bonding");	
+//	private JMenuItem Electrostatics = new JMenuItem("Electrostatics");	
+//	private JMenuItem EwaldOptions = new JMenuItem("Ewald Options");	
+//	private JMenuItem Output = new JMenuItem("Output");	
+//	private JMenuItem Execution = new JMenuItem("Execution");	
 	
 	private JMenu HelpMenu = new JMenu("Help");
 	private JMenuItem QuickGuide = new JMenuItem("Quick Guide");

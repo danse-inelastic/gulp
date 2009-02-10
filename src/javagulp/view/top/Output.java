@@ -85,7 +85,32 @@ public class Output extends JPanel implements Serializable {
 
 	private long lastViewed = Long.MAX_VALUE;
 	public String contents = "";
+	Process gulpProcess;
 
+	protected JButton getRunAtVnfButton() {
+		if (runAtVnfButton == null) {
+			runAtVnfButton = new JButton();
+			runAtVnfButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					//write file
+					String gulpInputFile = txtInputFile.getText();
+					
+					//copy file over
+					//sendFiles();
+					
+					//throw gulp into background
+					//executeRemote();
+					
+					//shut down gulp
+					
+				}
+			});
+			runAtVnfButton.setText("export to vnf");
+			runAtVnfButton.setBounds(9, 242, 136, 28);
+		}
+		return runAtVnfButton;
+	}	
+	
 	public SerialListener keyRun = new SerialListener() {
 		private static final long serialVersionUID = 5864600160182158595L;
 		@Override
@@ -112,7 +137,7 @@ public class Output extends JPanel implements Serializable {
 							"Please locate the gulp executable under the file menu.");
 						return;
 					}
-					/*File f = new File(Back.getPanel().getWD() + "/"
+					File f = new File(Back.getPanel().getWD() + "/"
 							+ txtInputFile.getText());
 					if (!f.exists() || lastViewed == Long.MAX_VALUE) {
 						JOptionPane.showMessageDialog(null,
@@ -124,7 +149,7 @@ public class Output extends JPanel implements Serializable {
 						contents = Back.getFileContents(f);
 					} else {
 						contents = Back.writer.consoleOutput();
-					}*/
+					}
 					//TODO Modify executeLocal to allow user modified input file
 					if (e == null)
 						executeLocal(true);
@@ -207,20 +232,20 @@ public class Output extends JPanel implements Serializable {
 		lblStatus.setBounds(18, 275, 300, 20);
 		add(lblStatus);
 		btnClear.addActionListener(keyClear);
-		btnClear.setBounds(328, 241, 63, 30);
+		btnClear.setBounds(328, 241, 81, 30);
 		add(btnClear);
 		btnViewOutput.addActionListener(keyViewOutput);
-		btnViewOutput.setBounds(321, 32, 70, 20);
+		btnViewOutput.setBounds(321, 32, 88, 20);
 		add(btnViewOutput);
-		cboTimeUnits.setBounds(316, 60, 80, 20);
+		cboTimeUnits.setBounds(316, 60, 93, 20);
 		add(cboTimeUnits);
-		lblOutputFile.setBounds(9, 35, 100, 15);
+		lblOutputFile.setBounds(9, 35, 136, 15);
 		add(lblOutputFile);
 		pnlCalculationTitle.setLayout(null);
 		pnlCalculationTitle.setBorder(new TitledBorder(null,
 				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlCalculationTitle.setBounds(9, 187, 382, 48);
+		pnlCalculationTitle.setBounds(9, 187, 400, 48);
 		add(pnlCalculationTitle);
 		txtCalculationTitle.setBounds(9, 20, 363, 19);
 		pnlCalculationTitle.add(txtCalculationTitle);
@@ -228,28 +253,28 @@ public class Output extends JPanel implements Serializable {
 		add(txtInfinity);
 		lblTimeLimit.setBounds(9, 62, 165, 15);
 		add(lblTimeLimit);
-		lblInputFile.setBounds(9, 8, 90, 15);
+		lblInputFile.setBounds(9, 8, 136, 15);
 		add(lblInputFile);
 		txtOutputFile.setBounds(196, 33, 119, 20);
 		add(txtOutputFile);
 		btnViewInput.addActionListener(keyViewInput);
-		btnViewInput.setBounds(321, 5, 70, 20);
+		btnViewInput.setBounds(321, 5, 88, 20);
 		add(btnViewInput);
 
-		chkProduceRestartFile.setBounds(9, 108, 265, 25);
+		chkProduceRestartFile.setBounds(9, 108, 300, 25);
 		add(chkProduceRestartFile);
-		chkAfterEvery.setBounds(50, 130, 95, 30);
+		chkAfterEvery.setBounds(50, 130, 109, 30);
 		add(chkAfterEvery);
-		lblCycles.setBounds(205, 133, 53, 25);
+		lblCycles.setBounds(219, 133, 53, 25);
 		add(lblCycles);
 		txtDumpEvery.setBackground(Back.grey);
-		txtDumpEvery.setBounds(151, 136, 48, 20);
+		txtDumpEvery.setBounds(165, 136, 48, 20);
 		add(txtDumpEvery);
 		chkOutputConstraints.addActionListener(keyOutputConstraints);
-		chkOutputConstraints.setBounds(50, 156, 145, 25);
+		chkOutputConstraints.setBounds(50, 156, 173, 25);
 		add(chkOutputConstraints);
 		txtFort12.setBackground(Back.grey);
-		txtFort12.setBounds(280, 111, 84, 20);
+		txtFort12.setBounds(314, 111, 84, 20);
 		add(txtFort12);
 
 		pnlOutputFormats.setBounds(415, 4, 300, 278);
@@ -264,7 +289,7 @@ public class Output extends JPanel implements Serializable {
 		add(getRunAtVnfButton());
 	}
 
-	/*public void runLocally(final String output) {
+	public void runLocally(final String output) {
 		Thread t = new Thread(new Runnable() {
 			public void run() {
 				if (btnRun.getText().equals("Abort")) {
@@ -316,7 +341,7 @@ public class Output extends JPanel implements Serializable {
 		});
 		t.setPriority(Thread.MIN_PRIORITY);
 		t.start();
-	}*/
+	}
 	
 	public File qsubScript = null;
 	
@@ -609,20 +634,5 @@ public class Output extends JPanel implements Serializable {
 			ioe.printStackTrace();
 		}
 		return(result);
-	}
-	/**
-	 * @return
-	 */
-	protected JButton getRunAtVnfButton() {
-		if (runAtVnfButton == null) {
-			runAtVnfButton = new JButton();
-			runAtVnfButton.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent e) {
-				}
-			});
-			runAtVnfButton.setText("export to vnf");
-			runAtVnfButton.setBounds(9, 242, 136, 28);
-		}
-		return runAtVnfButton;
 	}
 }

@@ -17,7 +17,7 @@ import javagulp.view.top.ExternalForce;
 import javagulp.view.top.Fit;
 import javagulp.view.top.FreeEnergy;
 import javagulp.view.top.GeneticAlgorithm;
-import javagulp.view.top.MD;
+import javagulp.view.top.MolecularDynamics;
 import javagulp.view.top.MDRestartInit;
 import javagulp.view.top.MonteCarlo;
 import javagulp.view.top.Optimization;
@@ -42,7 +42,7 @@ import test.potential.XYZFit;
 
 import javagulp.model.SerialKeyAdapter;
 
-public class GulpRun extends JPanel implements Serializable {
+public class GulpRunCardLayout extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
@@ -77,7 +77,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private Keywords keywords = null;
 
-	public GulpRun() {
+	public GulpRunCardLayout() {
 		super();
 		setLayout(new CardLayout());
 
@@ -199,8 +199,8 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	//Top
 
-	public MD getMd() {
-		return (MD) getTopPanel(0);
+	public MolecularDynamics getMd() {
+		return (MolecularDynamics) getTopPanel(0);
 	}
 
 //	public MDRestartInit getMdRestartInit() {
