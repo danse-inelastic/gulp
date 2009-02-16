@@ -8,8 +8,8 @@ public class Material {
 	public double[][] fractionalCoordinates;
 	public String[] atomSymbols;
 	
-	public Material(){
-	}
+//	public Material(){
+//	}
 
 	public static void main(String[] args) {
 		Material mat = new Material();
@@ -20,8 +20,6 @@ public class Material {
 			System.out.print(vec[2]+" ");
 			System.out.println();
 		}
-
-		
 	}
 	
 }
