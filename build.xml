@@ -41,7 +41,6 @@
 	<property name="lib" value="lib" />
 	<property name="app-name" value="GULP" />
 	<property name="username" value="jbk" />
-	<property name="password" value="vnfvnf" />
 	<property name="keystore" location="../vnf/html/java/vnfKeys" />
 	
 	<path id="classpath" path="${classpath}">

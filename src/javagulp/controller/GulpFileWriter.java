@@ -37,7 +37,6 @@ public class GulpFileWriter {
 			o.append(gr.getEwaldOptions().writeEwald());
 			o.append(gr.getPotentialOptions().writePotentialOptions());
 			o.append(gr.getElectrostatics().writeElectrostatics());
-			o.append(gr.getGeneticAlgorithm().writeGeneticAlgorithm());
 			o.append(gr.getOptimization().writeOptimization());
 			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
 			o.append(gr.getStructurePrediction().writeStructurePrediction());

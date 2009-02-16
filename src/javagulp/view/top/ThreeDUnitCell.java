@@ -1,7 +1,6 @@
 package javagulp.view.top;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
@@ -13,6 +12,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
+import javagulp.model.Material;
 
 public class ThreeDUnitCell extends JPanel implements Serializable {
 
@@ -249,6 +249,18 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		cellVectors.txtCx.setText(vecs[7]);
 		cellVectors.txtCy.setText(vecs[8]);
 		cellVectors.txtCz.setText(vecs[9]);
+	}
+	
+	public void setVectors(Material mat) {
+		cellVectors.txtAx.setText(""+mat.latticeVec[0]);
+		cellVectors.txtAy.setText(""+mat.latticeVec[1]);
+		cellVectors.txtAz.setText(""+mat.latticeVec[2]);
+		cellVectors.txtBx.setText(""+mat.latticeVec[3]);
+		cellVectors.txtBy.setText(""+mat.latticeVec[4]);
+		cellVectors.txtBz.setText(""+mat.latticeVec[5]);
+		cellVectors.txtCx.setText(""+mat.latticeVec[6]);
+		cellVectors.txtCy.setText(""+mat.latticeVec[7]);
+		cellVectors.txtCz.setText(""+mat.latticeVec[8]);
 	}
 	
 	/**
