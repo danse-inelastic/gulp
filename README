@@ -1,0 +1,9 @@
+Guide to altering the gui:
+--------------------------------------
+
+* please use the Window Builder plugin for eclipse as
+much as possible.
+
+* when adjusting layout, it works best if you change the
+layout to null, move the elements around, and then change
+it back to grid bag layout or whatever it was before
