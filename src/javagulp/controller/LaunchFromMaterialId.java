@@ -91,13 +91,13 @@ public class LaunchFromMaterialId {
 	public static void main(String[] args){//String id) {
 		//System.out.print(args[0]);
 		//if (args.length==1){
-		new LaunchFromMaterialId("794VFC");
 		
-//		if (args==null){
-//			
-//		} else{
-//			new LaunchFromMaterialId(args[0]);			
-//		}
+		
+		if (args.length==0){
+			new LaunchFromMaterialId("794VFC");
+		} else{
+			new LaunchFromMaterialId(args[0]);			
+		}
 	}
 
 }

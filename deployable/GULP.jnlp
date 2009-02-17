@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp spec="1.0+"
-      codebase="http://fireball.phys.wvu.edu/java">
+      codebase="http://trueblue.caltech.edu/java">
     <information>
         <title>GULP</title>
         <vendor>Danse</vendor>
-        <homepage href="http://fireball.phys.wvu.edu" />
+        <homepage href="http://trueblue.caltech.edu" />
         <description>GULP</description>
     </information>
     <offline-allowed/>
