@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.CoordinatesTableModel;
 import javagulp.view.Back;
+import javagulp.view.UnitCellAndSymmetry;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

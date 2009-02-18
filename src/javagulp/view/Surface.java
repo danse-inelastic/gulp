@@ -1,9 +1,8 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.io.Serializable;
 
 import javagulp.model.ListModelAddMore;
-import javagulp.view.Back;
 
 import javax.swing.JLabel;
 import javax.swing.JList;

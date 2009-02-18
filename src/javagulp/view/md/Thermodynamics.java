@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-	class Thermodynamics extends TitledPanel {
+	public class Thermodynamics extends TitledPanel {
 		
 		private G g = new G();
 
@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 		private JRadioButton radEnsembleNVT = new JRadioButton(g.html("NVT ensemble, q<sub>nose</sub>"));
 		private ButtonGroup ensemble = new ButtonGroup();
 
-		Thermodynamics() {
+		public Thermodynamics() {
 			setTitle("thermodynamic ensembles");
 			ensemble.add(radNone);
 			ensemble.add(radEnsembleNVE);
@@ -39,25 +39,25 @@ import javax.swing.JTextField;
 			radNone.setBounds(5, 15, 17, 17);
 			add(radNone);
 			radNone.setSelected(true);
-			radEnsembleNVE.setBounds(5, 30, 120, 30);
+			radEnsembleNVE.setBounds(5, 30, 165, 30);
 			add(radEnsembleNVE);
-			radEnsembleNVT.setBounds(5, 60, 165, 25);
+			radEnsembleNVT.setBounds(5, 60, 187, 25);
 			add(radEnsembleNVT);
-			radEnsembleNPT.setBounds(5, 84, 165, 25);
+			radEnsembleNPT.setBounds(5, 84, 187, 25);
 			add(radEnsembleNPT);
-			chkConserved.setBounds(5, 132, 256, 25);
+			chkConserved.setBounds(5, 132, 294, 25);
 			add(chkConserved);
-			txtQnose.setBounds(174, 60, 63, 20);
+			txtQnose.setBounds(198, 60, 63, 20);
 			add(txtQnose);
-			txtQnose2.setBounds(174, 84, 63, 20);
+			txtQnose2.setBounds(198, 84, 63, 20);
 			add(txtQnose2);
-			txtQpress.setBounds(174, 110, 63, 20);
+			txtQpress.setBounds(198, 110, 63, 20);
 			add(txtQpress);
-			lblPress.setBounds(122, 110, 40, 20);
+			lblPress.setBounds(133, 112, 40, 20);
 			add(lblPress);
 		}
 
-		String writeEnsemble() throws IncompleteOptionException {
+		public String writeEnsemble() throws IncompleteOptionException {
 			String lines = "";
 			if (radEnsembleNVE.isSelected())
 				lines = "ensemble nve" + Back.newLine;

@@ -1,11 +1,9 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.Back;
-import javagulp.view.TitledPanel;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-	class TimeLengths extends JPanel {
+	public class TimeLengths extends JPanel {
 
 		private static final long serialVersionUID = 7793603346713580397L;
 		private JTextField txtTimestep = new JTextField();
@@ -20,34 +20,34 @@ import javax.swing.border.TitledBorder;
 		private JLabel lblProductionTime = new JLabel("production time (ps)");
 		private JLabel lblSampleFrequency = new JLabel("sample frequency (ps)");
 
-		TimeLengths() {
+		public TimeLengths() {
 			setBorder(new TitledBorder(null, "time lengths",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
 			setLayout(null);
-			txtTimestep.setBounds(156, 19, 63, 19);
+			txtTimestep.setBounds(189, 19, 63, 19);
 			add(txtTimestep);
-			lblTimestep.setBounds(10, 21, 130, 15);
+			lblTimestep.setBounds(10, 21, 173, 15);
 			add(lblTimestep);
-			lblEquilibrationTime.setBounds(10, 42, 140, 15);
+			lblEquilibrationTime.setBounds(10, 42, 173, 15);
 			add(lblEquilibrationTime);
 			lblEquilibrationTime.setToolTipText("Specifies the simulation time to be spent equilibrating the kinetic and potential energy distributions prior to the production phase of the molecular dynamics run.");
-			lblProductionTime.setBounds(10, 63, 130, 15);
+			lblProductionTime.setBounds(10, 63, 173, 15);
 			add(lblProductionTime);
 			lblProductionTime.setToolTipText("Specifies the simulation time to be spent collecting production data for subsequent analysis.");
-			lblSampleFrequency.setBounds(10, 84, 140, 15);
+			lblSampleFrequency.setBounds(10, 84, 173, 15);
 			add(lblSampleFrequency);
 			lblSampleFrequency.setToolTipText("Controls how often the properties of the molecular dynamics run are to be sampled and output to the standard output channel. Averaged properties are also based on these samples.");
-			txtSample.setBounds(156, 82, 63, 19);
+			txtSample.setBounds(189, 82, 63, 19);
 			add(txtSample);
-			txtProduction.setBounds(156, 61, 63, 19);
+			txtProduction.setBounds(189, 61, 63, 19);
 			add(txtProduction);
-			txtEquilibration.setBounds(156, 40, 63, 19);
+			txtEquilibration.setBounds(189, 40, 63, 19);
 			add(txtEquilibration);
 			txtEquilibration.setToolTipText("Specifies the simulation time to be spent equilibrating the kinetic and potential energy distributions prior to the production phase of the molecular dynamics run.");
 		}
 
-		String writeTime() {
+		public String writeTime() {
 			// can be integer or float; see documentation
 			// TODO add unit combo boxes like in OutputFormats
 			String lines = "";

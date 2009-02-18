@@ -1,8 +1,7 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.io.Serializable;
 
-import javagulp.view.Back;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;

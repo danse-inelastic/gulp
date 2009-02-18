@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;

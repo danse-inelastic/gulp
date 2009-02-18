@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -7,7 +7,6 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ExForceTableModel;
 import javagulp.model.TdExForceTableModel;
-import javagulp.view.Back;
 import javagulp.view.potential.IconHeaderRenderer;
 
 import javax.swing.ButtonGroup;

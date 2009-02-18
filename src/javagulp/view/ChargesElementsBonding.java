@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -9,9 +9,6 @@ import java.util.TreeSet;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.GenericTableModel;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

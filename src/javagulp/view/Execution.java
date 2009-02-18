@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javagulp.view.Back;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;

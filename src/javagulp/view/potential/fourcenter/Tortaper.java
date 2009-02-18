@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
+import javagulp.view.Potential;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
-import javagulp.view.top.Potential;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

@@ -1,11 +1,9 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;

@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -7,9 +7,6 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.GenericTableModel;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

@@ -1,11 +1,10 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;

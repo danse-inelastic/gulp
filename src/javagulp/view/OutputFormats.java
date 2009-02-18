@@ -1,10 +1,9 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.Font;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;

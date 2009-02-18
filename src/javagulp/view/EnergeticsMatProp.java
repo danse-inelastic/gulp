@@ -1,8 +1,7 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.io.Serializable;
 
-import javagulp.view.KeywordListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;

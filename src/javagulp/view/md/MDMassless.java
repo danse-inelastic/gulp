@@ -7,7 +7,7 @@ import javagulp.view.TitledPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-	class MDMassless extends TitledPanel {
+	public class MDMassless extends TitledPanel {
 
 		private static final long serialVersionUID = -7716838461323185087L;
 
@@ -23,27 +23,27 @@ import javax.swing.JTextField;
 		private final String TXT_EXTRAPOLATION = "8";
 		private JTextField txtExtrapolation = new JTextField(TXT_EXTRAPOLATION);
 
-		MDMassless() {
+		public MDMassless() {
 			setTitle("MD with massless shells");
-			lblOptimizeShells.setBounds(10, 22, 230, 15);
+			lblOptimizeShells.setBounds(10, 22, 285, 15);
 			add(lblOptimizeShells);
-			txtN.setBounds(246, 20, 55, 20);
+			txtN.setBounds(301, 20, 55, 20);
 			add(txtN);
-			lblGradientNorm.setBounds(10, 45, 206, 15);
+			lblGradientNorm.setBounds(10, 45, 246, 15);
 			add(lblGradientNorm);
 			txtGradientNorm.setBackground(Back.grey);
-			txtGradientNorm.setBounds(222, 43, 63, 20);
+			txtGradientNorm.setBounds(262, 43, 63, 20);
 			add(txtGradientNorm);
-			lblShellExtrapolation.setBounds(10, 66, 285, 15);
+			lblShellExtrapolation.setBounds(10, 66, 346, 15);
 			add(lblShellExtrapolation);
 			txtExtrapolation.setBackground(Back.grey);
-			txtExtrapolation.setBounds(301, 64, 55, 20);
+			txtExtrapolation.setBounds(354, 64, 55, 20);
 			add(txtExtrapolation);
-			lblIterationsReached.setBounds(291, 46, 65, 15);
+			lblIterationsReached.setBounds(331, 46, 91, 15);
 			add(lblIterationsReached);
 		}
 
-		String writeIterations() throws InvalidOptionException {
+		public String writeIterations() throws InvalidOptionException {
 			String lines = "";
 			if (!txtN.getText().equals("") && !txtN.getText().equals(TXTN)) {
 				Integer.parseInt(txtN.getText());

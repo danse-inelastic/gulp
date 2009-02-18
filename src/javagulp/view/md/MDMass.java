@@ -22,19 +22,19 @@ import javax.swing.JTextField;
 
 		public JComboBox cboShellmassSpecies = new JComboBox();
 
-		MDMass() {
+		public MDMass() {
 			setTitle("MD with shells with mass");
-			lblAssignShells.setBounds(10, 49, 135, 15);
+			lblAssignShells.setBounds(10, 49, 184, 15);
 			add(lblAssignShells);
-			txtShellmassRatio.setBounds(151, 47, 88, 20);
+			txtShellmassRatio.setBounds(180, 47, 108, 20);
 			add(txtShellmassRatio);
-			cboShellmassSpecies.setBounds(151, 18, 88, 25);
+			cboShellmassSpecies.setBounds(180, 18, 108, 25);
 			add(cboShellmassSpecies);
 			lblSpecies.setBounds(10, 23, 55, 15);
 			add(lblSpecies);
 		}
 
-		String writeShellMassRatio() throws InvalidOptionException,
+		public String writeShellMassRatio() throws InvalidOptionException,
 				IncompleteOptionException {
 			String lines = "";
 			// TODO check for incomplete options

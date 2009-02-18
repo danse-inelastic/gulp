@@ -8,7 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-	class VectorTable extends TitledPanel {
+	public class VectorTable extends TitledPanel {
 
 		private static final long serialVersionUID = -5890258072124019041L;
 
@@ -24,23 +24,23 @@ import javax.swing.JTextField;
 		private final String TXT_EXTRA_CUTOFF = "0.0";
 		private JTextField txtExtraCutoff = new JTextField(TXT_EXTRA_CUTOFF);
 
-		VectorTable() {
+		public VectorTable() {
 			setTitle("vector table");
-			chkStoreVectors.setBounds(8, 18, 395, 25);
+			chkStoreVectors.setBounds(8, 18, 458, 25);
 			add(chkStoreVectors);
 			chkStoreVectors.addActionListener(keyStoreVectors);
-			lblUpdateFrequency.setBounds(10, 46, 305, 15);
+			lblUpdateFrequency.setBounds(10, 46, 371, 15);
 			add(lblUpdateFrequency);
-			txtResetVectors.setBounds(321, 44, 79, 20);
+			txtResetVectors.setBounds(387, 44, 79, 20);
 			add(txtResetVectors);
 			lblExtraAmount.setToolTipText("This allows for atoms to move across the boundary between updates.");
-			lblExtraAmount.setBounds(10, 65, 254, 35);
+			lblExtraAmount.setBounds(10, 65, 371, 35);
 			add(lblExtraAmount);
-			txtExtraCutoff.setBounds(321, 72, 79, 20);
+			txtExtraCutoff.setBounds(387, 70, 79, 20);
 			add(txtExtraCutoff);
 		}
 
-		String writeResetvectors() {
+		public String writeResetvectors() {
 			String lines = "";
 			if (!txtResetVectors.getText().equals("")
 					&& !txtResetVectors.getText().equals(TXT_RESET_VECTORS)) {
@@ -54,7 +54,7 @@ import javax.swing.JTextField;
 			return lines;
 		}
 
-		String writeExtracutoff() {
+		public String writeExtracutoff() {
 			String lines = "";
 			// units: angstroms
 			if (!txtExtraCutoff.getText().equals("")

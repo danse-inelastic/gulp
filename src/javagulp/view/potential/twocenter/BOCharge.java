@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
+import javagulp.view.Potential;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
-import javagulp.view.top.Potential;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;

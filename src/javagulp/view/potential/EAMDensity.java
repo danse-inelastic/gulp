@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.top.Potential;
+import javagulp.view.Potential;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;

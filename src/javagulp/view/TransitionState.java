@@ -1,12 +1,10 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
-import javagulp.view.TitledPanel;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;

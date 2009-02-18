@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-	class OutputFormats extends JPanel {
+	public class OutputFormats extends JPanel {
 
 		private static final long serialVersionUID = -8425306576850279775L;
 
@@ -21,7 +21,7 @@ import javax.swing.border.TitledBorder;
 		private JComboBox cboUnits = new JComboBox(new String[] { "ps", "ns",
 				"fs", "s", "timesteps" });
 
-		OutputFormats() {
+		public OutputFormats() {
 			setBorder(new TitledBorder(null, "output formats",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
@@ -39,7 +39,7 @@ import javax.swing.border.TitledBorder;
 			add(cboUnits);
 		}
 
-		String writeMDWriteFrequency() {
+		public String writeMDWriteFrequency() {
 			String lines = "";
 			if (!txtWrite.getText().equals("")) {
 				if (cboUnits.getSelectedItem().equals("timesteps")) {
@@ -62,7 +62,7 @@ import javax.swing.border.TitledBorder;
 			return lines;
 		}
 
-		String writeMDarchive() {
+		public String writeMDarchive() {
 			String lines = "";
 			if (!txtMdarchive.getText().equals("")) {
 				lines = "mdarchive " + txtMdarchive.getText() + Back.newLine;

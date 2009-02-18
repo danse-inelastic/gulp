@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view.phonons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;

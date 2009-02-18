@@ -7,8 +7,8 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ButtonGroupTransitional;
 import javagulp.view.Back;
+import javagulp.view.Potential;
 import javagulp.view.potential.PotentialPanel;
-import javagulp.view.top.Potential;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;

@@ -1,14 +1,13 @@
-package javagulp.view.phonons;
+package javagulp.view;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
-import javagulp.view.top.BrillouinIntegration;
-import javagulp.view.top.Dispersion;
+import javagulp.view.phonons.BrillouinIntegration;
+import javagulp.view.phonons.Dispersion;
+import javagulp.view.phonons.GammaPointCorrection;
+import javagulp.view.phonons.GammaPointOptions;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

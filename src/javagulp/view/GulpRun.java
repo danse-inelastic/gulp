@@ -7,28 +7,7 @@ import java.io.Serializable;
 
 import javagulp.model.Keywords;
 import javagulp.view.md.MDRestartInit;
-import javagulp.view.md.MolecularDynamics;
-import javagulp.view.phonons.Phonons;
 import javagulp.view.structures.Structures;
-import javagulp.view.top.ChargesElementsBonding;
-import javagulp.view.top.Constraints;
-import javagulp.view.top.Defect;
-import javagulp.view.top.Electrostatics;
-import javagulp.view.top.EnergeticsMatProp;
-import javagulp.view.top.EwaldOptions;
-import javagulp.view.top.Execution;
-import javagulp.view.top.ExternalForce;
-import javagulp.view.top.Fit;
-import javagulp.view.top.FreeEnergy;
-import javagulp.view.top.GeneticAlgorithm;
-import javagulp.view.top.MonteCarlo;
-import javagulp.view.top.Optimization;
-import javagulp.view.top.Output;
-import javagulp.view.top.Potential;
-import javagulp.view.top.PotentialOptions;
-import javagulp.view.top.StructurePrediction;
-import javagulp.view.top.Surface;
-import javagulp.view.top.TransitionState;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -120,7 +99,7 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	private JPanel getTopPanel(int index) {
 		if (top[index] == null) {
-			String pkg = "javagulp.view.top.";
+			String pkg = "javagulp.view.";
 			try {
 				Class c = Class.forName(pkg + tabNames[index]);
 				top[index] = (JPanel) c.newInstance();

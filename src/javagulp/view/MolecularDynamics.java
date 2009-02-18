@@ -1,12 +1,19 @@
-package javagulp.view.md;
+package javagulp.view;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
+import javagulp.view.md.Integrator;
+import javagulp.view.md.Interpolation;
+import javagulp.view.md.MDMass;
+import javagulp.view.md.MDMassless;
+import javagulp.view.md.OutputFormats;
+import javagulp.view.md.Pressure;
+import javagulp.view.md.Temperature;
+import javagulp.view.md.Thermodynamics;
+import javagulp.view.md.TimeLengths;
+import javagulp.view.md.VectorTable;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
@@ -47,21 +54,21 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		pnlTemperature.setBounds(317, 6, 311, 106);
+		pnlTemperature.setBounds(317, 6, 367, 106);
 		add(pnlTemperature);
 		pnlTemperature.txtFirstStep.setEnabled(true);
-		pnlMDmass.setBounds(667, 106, 363, 131);
+		pnlMDmass.setBounds(749, 118, 363, 118);
 		add(pnlMDmass);
-		pnlVectorTable.setBounds(317, 243, 406, 103);
+		pnlVectorTable.setBounds(317, 243, 503, 103);
 		add(pnlVectorTable);
-		pnlPressure.setBounds(317, 119, 344, 44);
+		pnlPressure.setBounds(317, 119, 426, 44);
 		add(pnlPressure);
-		pnlPotentialInterpolation.setBounds(318, 169, 343, 71);
+		pnlPotentialInterpolation.setBounds(318, 169, 425, 71);
 		add(pnlPotentialInterpolation);
 		chkMD.addActionListener(keyMD);
 		chkMD.setBounds(4, 6, 307, 25);
 		add(chkMD);
-		pnlMDmassless.setBounds(667, 7, 363, 93);
+		pnlMDmassless.setBounds(690, 6, 422, 106);
 		add(pnlMDmassless);
 		pnlThermodynamicEnsembles.setBounds(2, 32, 309, 157);
 		add(pnlThermodynamicEnsembles);
@@ -69,7 +76,7 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		add(pnlIntegrator);
 		pnlTimeLengths.setBounds(4, 243, 309, 105);
 		add(pnlTimeLengths);
-		pnlOutputFormats.setBounds(762, 241, 268, 103);
+		pnlOutputFormats.setBounds(826, 242, 286, 103);
 		add(pnlOutputFormats);
 	}
 

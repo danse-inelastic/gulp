@@ -1,13 +1,10 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
 import javagulp.view.fit.AbstractFit;
 import javagulp.view.fit.FitPanel;
 

@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -20,7 +20,6 @@ import java.util.TreeSet;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.Back;
 import javagulp.view.potential.AtomCombos;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;

@@ -11,14 +11,14 @@ import java.util.Scanner;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
+import javagulp.view.Execution;
+import javagulp.view.Potential;
 import javagulp.view.fit.FitParams;
 import javagulp.view.fit.StatReport;
 import javagulp.view.fit.Stats;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.structures.ThreeDUnitCell;
-import javagulp.view.top.Execution;
-import javagulp.view.top.Potential;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
