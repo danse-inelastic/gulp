@@ -16,9 +16,9 @@ import javagulp.view.fit.StatReport;
 import javagulp.view.fit.Stats;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
+import javagulp.view.structures.ThreeDUnitCell;
 import javagulp.view.top.Execution;
 import javagulp.view.top.Potential;
-import javagulp.view.top.ThreeDUnitCell;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

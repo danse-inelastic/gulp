@@ -31,24 +31,24 @@ public class EnergeticsMatProp extends JPanel implements Serializable {
 		setLayout(null);
 
 		chkUseCostFunction.addActionListener(keyUseCostFunction);
-		chkUseCostFunction.setBounds(6, 74, 445, 38);
+		chkUseCostFunction.setBounds(6, 74, 766, 50);
 		add(chkUseCostFunction);
 		chkCalculateGradients.addActionListener(keyCalculateGradients);
-		chkCalculateGradients.setBounds(6, 43, 275, 25);
+		chkCalculateGradients.setBounds(6, 43, 766, 25);
 		add(chkCalculateGradients);
 		chkPerformSingle.setToolTipText("Calculate the Bulk Lattice properties");
-		chkPerformSingle.setBounds(7, 12, 245, 25);
+		chkPerformSingle.setBounds(7, 12, 765, 25);
 		add(chkPerformSingle);
 		chkUseSpatialDecomposition.addActionListener(keyUseSpatialDecomposition);
-		chkUseSpatialDecomposition.setBounds(6, 149, 261, 30);
+		chkUseSpatialDecomposition.setBounds(6, 149, 766, 30);
 		add(chkUseSpatialDecomposition);
 		chkDoNotCalculate.addActionListener(keyDoNotCalculate);
-		chkDoNotCalculate.setBounds(6, 118, 195, 25);
+		chkDoNotCalculate.setBounds(6, 118, 766, 25);
 		add(chkDoNotCalculate);
 		chkUseTheMinimum.addActionListener(keyUseTheMinimum);
-		chkUseTheMinimum.setBounds(6, 185, 422, 36);
+		chkUseTheMinimum.setBounds(6, 185, 766, 47);
 		add(chkUseTheMinimum);
-		chkCalculateMaterial.setBounds(6, 238, 225, 25);
+		chkCalculateMaterial.setBounds(6, 238, 766, 25);
 		add(chkCalculateMaterial);
 		chkCalculateMaterial.addActionListener(keyCalculateMaterial);
 	}

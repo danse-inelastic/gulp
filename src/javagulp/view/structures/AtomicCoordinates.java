@@ -1,5 +1,6 @@
-package javagulp.view.top;
+package javagulp.view.structures;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
@@ -36,58 +37,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7252161274170437579L;
 
-	private class Translation extends TitledPanel implements Serializable {
-		private static final long serialVersionUID = 3789836754963176945L;
-		
-		private JLabel lblTranslateMarkedAtoms = new JLabel("translate marked atoms to");
-		private JLabel lblFractionalCoordinates = new JLabel("Use fractional coordinates.");
 
-		private JTextField txtX = new JTextField();
-		private JTextField txtY = new JTextField();
-		private JTextField txtZ = new JTextField();
-		private JTextField txtPoints = new JTextField();
-		
-		private JCheckBox chkDoNotInclude = new JCheckBox("do not include the first point, or structure");
-
-		private KeywordListener keyDoNotInclude = new KeywordListener(chkDoNotInclude, "nofirst_point");
-		
-		private Translation() {
-			super();
-			
-			setTitle("translation vector");
-			lblTranslateMarkedAtoms.setBounds(10, 23, 170, 15);
-			add(lblTranslateMarkedAtoms);
-			txtY.setBounds(242, 21, 50, 20);
-			add(txtY);
-			txtZ.setBounds(298, 21, 50, 20);
-			add(txtZ);
-			txtX.setBounds(186, 21, 50, 20);
-			add(txtX);
-			lblSampleAt.setBounds(354, 21, 95, 19);
-			add(lblSampleAt);
-			txtPoints.setBounds(455, 21, 34, 20);
-			add(txtPoints);
-			lblTranslationPoints.setBounds(495, 23, 286, 15);
-			add(lblTranslationPoints);
-			chkDoNotInclude.setBounds(450, 44, 286, 25);
-			chkDoNotInclude.addActionListener(keyDoNotInclude);
-			add(chkDoNotInclude);
-			lblFractionalCoordinates.setBounds(185, 44, 200, 25);
-			add(lblFractionalCoordinates);
-		}
-		
-		private String writeTranslate() throws IncompleteOptionException {
-			String lines = "";
-			JTextField[] fields = {txtX, txtY, txtZ, txtPoints};
-			if (Back.checkAnyNonEmpty(fields)) {
-				String[] descriptions = {"translate x", "translate y", "translate y", "translate number"};
-				Back.checkAllNonEmpty(fields, descriptions);
-				Back.parseFieldsD(fields, descriptions);
-				lines = "translate " + Back.concatFields(fields) + Back.newLine;
-			}
-			return lines;
-		}
-	}
 	
 	private String coordinateTypes[] =
 		{"3d fractional", "cartesian", "contents", "2d fractional", "1d fractional"};
@@ -101,8 +51,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 
 	private JLabel lblNumberOfAtoms = new JLabel("number of atoms");
 	private JLabel lblCoordinateType = new JLabel("coordinate type");
-	private JLabel lblTranslationPoints = new JLabel("additional equidistant intermediate points");
-	private JLabel lblSampleAt = new JLabel("and sample at");
 
 	private JButton btnSet = new JButton("set");
 	private JButton btnImportCoordinates = new JButton("import coordinates");
@@ -111,13 +59,13 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private JScrollPane scrollPane = new JScrollPane();
 
 	public JTextField txtName = new JTextField();
-	private JLabel lblName = new JLabel("Name");
+	private JLabel lblName = new JLabel("structure name");
 	private JButton btnSetValue = new JButton("Set selected cells to current value");
 	private JButton btnSelectValue = new JButton("Select cells with current value");
 	private JButton btnInvertSelection = new JButton("Invert Selection");
 	private JButton btnClearSelection = new JButton("Clear Selection");
 	private JTextField txtValue = new JTextField();
-	private JLabel lblValue = new JLabel("Current Value");
+	private JLabel lblValue = new JLabel("quick fill");
 	private JPanel pnlMassSelect = new JPanel();
 	
 	private Translation pnlTranslation = new Translation();
@@ -222,61 +170,61 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	public AtomicCoordinates() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(1140, 413));
+		this.setPreferredSize(new java.awt.Dimension(1230, 500));
 
-		scrollPane.setBounds(0, 34, 920, 291);
+		scrollPane.setBounds(0, 65, 920, 291);
 		add(scrollPane);
 		scrollPane.setViewportView(fractional3dTable);
 
-		lblNumberOfAtoms.setBounds(249, 11, 110, 15);
+		lblNumberOfAtoms.setBounds(0, 37, 177, 15);
 		add(lblNumberOfAtoms);
-		txtNumberOfAtoms.setBounds(365, 9, 60, 19);
+		txtNumberOfAtoms.setBounds(185, 35, 60, 19);
 		add(txtNumberOfAtoms);
-		btnSet.setBounds(434, 7, 56, 21);
+		btnSet.setBounds(251, 34, 98, 21);
 		btnSet.addActionListener(keySet);
 		add(btnSet);
-		lblCoordinateType.setBounds(0, 11, 107, 15);
+		lblCoordinateType.setBounds(0, 11, 136, 15);
 		add(lblCoordinateType);
-		cboCoordinateType.setBounds(108, 9, 111, 19);
+		cboCoordinateType.setBounds(140, 10, 209, 19);
 		add(cboCoordinateType);
 		cboCoordinateType.addActionListener(keyCoordinateType);
-		btnImportCoordinates.setBounds(498, 6, 125, 25);
+		btnImportCoordinates.setBounds(499, 32, 178, 25);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
 		//btnImportCoordinates.addActionListener(keyImportCoordinates);
-		btnSaveCoordinates.setBounds(629, 6, 115, 25);
+		btnSaveCoordinates.setBounds(683, 32, 186, 25);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
 
-		pnlTranslation.setBounds(0, 331, 910, 82);
+		pnlTranslation.setBounds(0, 362, 920, 82);
 		// removed for paper
 		add(pnlTranslation);
 		
-		add(pnlMassSelect);
+		//add(pnlMassSelect);
 		pnlMassSelect.setLayout(null);
-		pnlMassSelect.setBounds(924, 35, 300, 154);
+		pnlMassSelect.setBounds(10, 452, 970, 89);
 		add(lblName);
-		lblName.setBounds(749, 7, 49, 28);
+		lblName.setBounds(499, 4, 193, 28);
 		add(txtName);
-		txtName.setBounds(798, 7, 119, 28);
+		txtName.setBounds(628, 9, 239, 19);
 		pnlMassSelect.add(lblValue);
-		lblValue.setBounds(0, 7, 105, 28);
+		lblValue.setBounds(10, 12, 105, 28);
 		pnlMassSelect.add(txtValue);
-		txtValue.setBounds(105, 7, 105, 28);
+		txtValue.setBounds(10, 46, 105, 19);
 		pnlMassSelect.add(btnSetValue);
-		btnSetValue.setBounds(0, 42, 250, 28);
+		btnSetValue.setBounds(120, 41, 276, 28);
 		btnSetValue.addActionListener(keySelect);
 		pnlMassSelect.add(btnSelectValue);
-		btnSelectValue.setBounds(0, 77, 250, 28);
+		btnSelectValue.setBounds(402, 41, 276, 28);
 		btnSelectValue.addActionListener(keySelectRows);
 		pnlMassSelect.add(btnInvertSelection);
-		btnInvertSelection.setBounds(0, 112, 122, 28);
+		btnInvertSelection.setBounds(684, 41, 137, 28);
 		btnInvertSelection.setMargin(new Insets(0, 0, 0, 0));
 		btnInvertSelection.addActionListener(keyInvertSelection);
 		pnlMassSelect.add(btnClearSelection);
-		btnClearSelection.setBounds(128, 112, 122, 28);
+		btnClearSelection.setBounds(827, 42, 133, 28);
 		btnClearSelection.setMargin(new Insets(0, 0, 0, 0));
 		btnClearSelection.addActionListener(keyClearSelection);
 	}

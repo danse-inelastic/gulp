@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view.structures;
 
 import java.io.Serializable;
 
@@ -145,8 +145,9 @@ public class TwoDUnitCell extends JPanel implements Serializable {
 
 		tabbedPane.setBounds(0, 0, 182, 126);
 		add(tabbedPane);
-		tabbedPane.add(twoDCellParameters, "parameters");
 		tabbedPane.add(twoDCellVectors, "vectors");
+		tabbedPane.add(twoDCellParameters, "parameters");
+		
 	}
 
 	public String write2DUnitCell() throws IncompleteOptionException {

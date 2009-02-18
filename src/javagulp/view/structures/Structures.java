@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view.structures;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;

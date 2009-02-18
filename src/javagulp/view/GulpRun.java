@@ -6,6 +6,9 @@ import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import javagulp.model.Keywords;
+import javagulp.view.md.MDRestartInit;
+import javagulp.view.md.MolecularDynamics;
+import javagulp.view.structures.Structures;
 import javagulp.view.top.ChargesElementsBonding;
 import javagulp.view.top.Constraints;
 import javagulp.view.top.Defect;
@@ -17,8 +20,6 @@ import javagulp.view.top.ExternalForce;
 import javagulp.view.top.Fit;
 import javagulp.view.top.FreeEnergy;
 import javagulp.view.top.GeneticAlgorithm;
-import javagulp.view.top.MolecularDynamics;
-import javagulp.view.top.MDRestartInit;
 import javagulp.view.top.MonteCarlo;
 import javagulp.view.top.Optimization;
 import javagulp.view.top.Output;
@@ -26,7 +27,6 @@ import javagulp.view.top.Phonons;
 import javagulp.view.top.Potential;
 import javagulp.view.top.PotentialOptions;
 import javagulp.view.top.StructurePrediction;
-import javagulp.view.top.Structures;
 import javagulp.view.top.Surface;
 import javagulp.view.top.TransitionState;
 
