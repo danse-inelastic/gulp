@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 
 		public JComboBox cboShellmassSpecies = new JComboBox();
 
-		private MDMass() {
+		MDMass() {
 			setTitle("MD with shells with mass");
 			lblAssignShells.setBounds(10, 49, 135, 15);
 			add(lblAssignShells);
@@ -34,7 +34,7 @@ import javax.swing.JTextField;
 			add(lblSpecies);
 		}
 
-		private String writeShellMassRatio() throws InvalidOptionException,
+		String writeShellMassRatio() throws InvalidOptionException,
 				IncompleteOptionException {
 			String lines = "";
 			// TODO check for incomplete options

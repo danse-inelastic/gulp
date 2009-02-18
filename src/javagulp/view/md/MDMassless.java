@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 		private final String TXT_EXTRAPOLATION = "8";
 		private JTextField txtExtrapolation = new JTextField(TXT_EXTRAPOLATION);
 
-		private MDMassless() {
+		MDMassless() {
 			setTitle("MD with massless shells");
 			lblOptimizeShells.setBounds(10, 22, 230, 15);
 			add(lblOptimizeShells);
@@ -43,7 +43,7 @@ import javax.swing.JTextField;
 			add(lblIterationsReached);
 		}
 
-		private String writeIterations() throws InvalidOptionException {
+		String writeIterations() throws InvalidOptionException {
 			String lines = "";
 			if (!txtN.getText().equals("") && !txtN.getText().equals(TXTN)) {
 				Integer.parseInt(txtN.getText());

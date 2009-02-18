@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view.phonons;
 
 import java.awt.Color;
 import java.io.Serializable;

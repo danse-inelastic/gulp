@@ -7,7 +7,6 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
-import javagulp.view.top.Temperature;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
@@ -48,29 +47,29 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		pnlTemperature.setBounds(275, 7, 311, 106);
+		pnlTemperature.setBounds(317, 6, 311, 106);
 		add(pnlTemperature);
 		pnlTemperature.txtFirstStep.setEnabled(true);
-		pnlMDmass.setBounds(592, 106, 363, 131);
+		pnlMDmass.setBounds(667, 106, 363, 131);
 		add(pnlMDmass);
-		pnlVectorTable.setBounds(275, 241, 406, 103);
+		pnlVectorTable.setBounds(317, 243, 406, 103);
 		add(pnlVectorTable);
-		pnlPressure.setBounds(275, 119, 311, 44);
+		pnlPressure.setBounds(317, 119, 344, 44);
 		add(pnlPressure);
-		pnlPotentialInterpolation.setBounds(275, 166, 311, 71);
+		pnlPotentialInterpolation.setBounds(318, 169, 343, 71);
 		add(pnlPotentialInterpolation);
 		chkMD.addActionListener(keyMD);
-		chkMD.setBounds(4, 6, 185, 25);
+		chkMD.setBounds(4, 6, 307, 25);
 		add(chkMD);
-		pnlMDmassless.setBounds(592, 7, 363, 93);
+		pnlMDmassless.setBounds(667, 7, 363, 93);
 		add(pnlMDmassless);
-		pnlThermodynamicEnsembles.setBounds(2, 32, 267, 157);
+		pnlThermodynamicEnsembles.setBounds(2, 32, 309, 157);
 		add(pnlThermodynamicEnsembles);
-		pnlIntegrator.setBounds(2, 189, 267, 51);
+		pnlIntegrator.setBounds(2, 189, 310, 51);
 		add(pnlIntegrator);
-		pnlTimeLengths.setBounds(2, 241, 267, 105);
+		pnlTimeLengths.setBounds(4, 243, 309, 105);
 		add(pnlTimeLengths);
-		pnlOutputFormats.setBounds(687, 241, 268, 103);
+		pnlOutputFormats.setBounds(762, 241, 268, 103);
 		add(pnlOutputFormats);
 	}
 

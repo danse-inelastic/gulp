@@ -7,6 +7,7 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
+import javagulp.view.md.Temperature;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;

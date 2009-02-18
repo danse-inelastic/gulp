@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view.phonons;
 
 import java.io.Serializable;
 
@@ -7,6 +7,8 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
+import javagulp.view.top.BrillouinIntegration;
+import javagulp.view.top.Dispersion;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

@@ -107,7 +107,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		setLayout(null);
 
 		pnlChemicalPotential.setTitle("chemical potential");
-		pnlChemicalPotential.setBounds(588, 10, 185, 51);
+		pnlChemicalPotential.setBounds(624, 10, 203, 51);
 		add(pnlChemicalPotential);
 
 		txtmcchemicalpotential.setBounds(10, 20, 126, 21);
@@ -117,7 +117,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlChemicalPotential.add(lblEv);
 
 		pnlMaximumDisplacement.setTitle("maximum displacement");
-		pnlMaximumDisplacement.setBounds(-7, 133, 294, 84);
+		pnlMaximumDisplacement.setBounds(-7, 133, 311, 84);
 		add(pnlMaximumDisplacement);
 
 		txtMcMaxDisplaceLength.setBounds(9, 19, 79, 21);
@@ -127,7 +127,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlMaximumDisplacement.add(lblAevery);
 
 		txtMcMaxDisplaceFrequency.setBackground(Back.grey);
-		txtMcMaxDisplaceFrequency.setBounds(203, 49, 49, 21);
+		txtMcMaxDisplaceFrequency.setBounds(252, 51, 49, 21);
 		pnlMaximumDisplacement.add(txtMcMaxDisplaceFrequency);
 
 		txtMcMaxDisplaceTargetRatio.setBackground(Back.grey);
@@ -137,11 +137,11 @@ public class MonteCarlo extends JPanel implements Serializable {
 		lblMaxDisplacementMoves.setBounds(220, 20, 50, 19);
 		pnlMaximumDisplacement.add(lblMaxDisplacementMoves);
 
-		lblMaxDisplacementRatio.setBounds(8, 46, 188, 30);
+		lblMaxDisplacementRatio.setBounds(8, 46, 238, 30);
 		pnlMaximumDisplacement.add(lblMaxDisplacementRatio);
 
 		pnlVolume.setTitle("volume");
-		pnlVolume.setBounds(792, 10, 178, 50);
+		pnlVolume.setBounds(833, 10, 205, 50);
 		add(pnlVolume);
 
 		// txtmcvolume = new JTextField();//"<unit cell volume>");
@@ -152,21 +152,21 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlVolume.add(lblA3);
 
 		pnlAtomCreation.setTitle("atom creation probability");
-		pnlAtomCreation.setBounds(181, 28, 192, 44);
+		pnlAtomCreation.setBounds(181, 28, 204, 44);
 		add(pnlAtomCreation);
 
 		txtmccreate.setBounds(8, 16, 79, 21);
 		pnlAtomCreation.add(txtmccreate);
 
 		pnlAtomDestruction.setTitle("atom destruction probability");
-		pnlAtomDestruction.setBounds(379, 28, 203, 44);
+		pnlAtomDestruction.setBounds(391, 28, 227, 44);
 		add(pnlAtomDestruction);
 
 		txtmcdestroy.setBounds(8, 16, 79, 21);
 		pnlAtomDestruction.add(txtmcdestroy);
 
 		pnlAtomDisplacement.setTitle("atom displacment probability");
-		pnlAtomDisplacement.setBounds(0, 78, 291, 44);
+		pnlAtomDisplacement.setBounds(0, 78, 304, 44);
 		add(pnlAtomDisplacement);
 
 		txtmcmove.setBounds(8, 16, 79, 21);
@@ -180,7 +180,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlTrialMoves.add(txtmctrial);
 
 		pnlInsertedMolecules.setTitle("molecules to be inserted");
-		pnlInsertedMolecules.setBounds(0, 216, 291, 79);
+		pnlInsertedMolecules.setBounds(0, 216, 304, 79);
 		add(pnlInsertedMolecules);
 
 		txtMoleculeFile.setBounds(136, 20, 116, 19);
@@ -189,7 +189,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		btnCreate.setBounds(10, 43, 120, 18);
 		pnlInsertedMolecules.add(btnCreate);
 
-		button.setBounds(258, 20, 23, 19);
+		button.setBounds(258, 20, 36, 19);
 		pnlInsertedMolecules.add(button);
 
 		txtareaMoleculeFile.setFont(new Font("Sans", Font.BOLD, 12));
@@ -200,11 +200,11 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlInsertedMolecules.add(txtareaMoleculeFile);
 
 		chkMonteCarlo.addActionListener(keyMonteCarlo);
-		chkMonteCarlo.setBounds(0, 0, 235, 25);
+		chkMonteCarlo.setBounds(0, 0, 618, 25);
 		add(chkMonteCarlo);
 
 		pnlRestart.setTitle("restart");
-		pnlRestart.setBounds(588, 191, 382, 104);
+		pnlRestart.setBounds(624, 191, 414, 104);
 		add(pnlRestart);
 
 		txtMcFirststep.setBounds(223, 17, 79, 20);
@@ -232,7 +232,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlRestart.add(txtMcmeansNumAtoms);
 
 		pnlOutputFrequency.setTitle("frequency of binary configuration output");
-		pnlOutputFrequency.setBounds(588, 117, 382, 68);
+		pnlOutputFrequency.setBounds(624, 118, 414, 68);
 		add(pnlOutputFrequency);
 
 		txtMcsampleFrequency.setBounds(336, 20, 43, 19);
@@ -248,48 +248,48 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlOutputFrequency.add(lblFilename);
 
 		pnlMolecularRotation.setTitle("molecular rotation probability");
-		pnlMolecularRotation.setBounds(297, 78, 285, 44);
+		pnlMolecularRotation.setBounds(310, 78, 308, 44);
 		add(pnlMolecularRotation);
 
 		txtmcrotate.setBounds(8, 16, 79, 21);
 		pnlMolecularRotation.add(txtmcrotate);
 
 		pnlSamplingFrequency.setTitle("sampling frequency of running averages");
-		pnlSamplingFrequency.setBounds(588, 70, 385, 42);
+		pnlSamplingFrequency.setBounds(624, 67, 414, 42);
 		add(pnlSamplingFrequency);
 
-		txtmcoutfreq.setBounds(215, 17, 73, 21);
+		txtmcoutfreq.setBounds(331, 17, 73, 21);
 		pnlSamplingFrequency.add(txtmcoutfreq);
 
-		lblTrialOperationsBetween.setBounds(9, 20, 200, 15);
+		lblTrialOperationsBetween.setBounds(9, 20, 316, 15);
 		pnlSamplingFrequency.add(lblTrialOperationsBetween);
 
 		pnlMaximumRotation.setTitle("maximum rotation");
-		pnlMaximumRotation.setBounds(297, 128, 285, 82);
+		pnlMaximumRotation.setBounds(310, 133, 308, 82);
 		add(pnlMaximumRotation);
 
 		txtMcmaxrotationMax.setBounds(9, 19, 79, 21);
 		pnlMaximumRotation.add(txtMcmaxrotationMax);
 
-		lblDegEvery.setBounds(94, 19, 66, 21);
+		lblDegEvery.setBounds(94, 19, 86, 21);
 		pnlMaximumRotation.add(lblDegEvery);
 
 		txtMcmaxrotationRatio.setBackground(Back.grey);
-		txtMcmaxrotationRatio.setBounds(202, 52, 48, 20);
+		txtMcmaxrotationRatio.setBounds(250, 52, 48, 20);
 		pnlMaximumRotation.add(txtMcmaxrotationRatio);
 
 		txtMcmaxrotationPermoves.setBackground(Back.grey);
-		txtMcmaxrotationPermoves.setBounds(164, 19, 64, 19);
+		txtMcmaxrotationPermoves.setBounds(186, 20, 64, 19);
 		pnlMaximumRotation.add(txtMcmaxrotationPermoves);
 
-		lblMaxRotationMoves.setBounds(234, 20, 50, 19);
+		lblMaxRotationMoves.setBounds(258, 20, 50, 19);
 		pnlMaximumRotation.add(lblMaxRotationMoves);
 
-		lblMaxRotationRatio.setBounds(8, 46, 188, 30);
+		lblMaxRotationRatio.setBounds(8, 46, 236, 30);
 		pnlMaximumRotation.add(lblMaxRotationRatio);
 
 		pnlAtomInsertion.setTitle("atoms to be inserted");
-		pnlAtomInsertion.setBounds(297, 216, 285, 78);
+		pnlAtomInsertion.setBounds(310, 216, 308, 78);
 		add(pnlAtomInsertion);
 
 		txtAtomSymbol.setBounds(72, 19, 53, 19);

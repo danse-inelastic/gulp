@@ -21,7 +21,7 @@ import javax.swing.border.TitledBorder;
 		private JComboBox cboUnits = new JComboBox(new String[] { "ps", "ns",
 				"fs", "s", "timesteps" });
 
-		private OutputFormats() {
+		OutputFormats() {
 			setBorder(new TitledBorder(null, "output formats",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
@@ -39,7 +39,7 @@ import javax.swing.border.TitledBorder;
 			add(cboUnits);
 		}
 
-		private String writeMDWriteFrequency() {
+		String writeMDWriteFrequency() {
 			String lines = "";
 			if (!txtWrite.getText().equals("")) {
 				if (cboUnits.getSelectedItem().equals("timesteps")) {
@@ -62,7 +62,7 @@ import javax.swing.border.TitledBorder;
 			return lines;
 		}
 
-		private String writeMDarchive() {
+		String writeMDarchive() {
 			String lines = "";
 			if (!txtMdarchive.getText().equals("")) {
 				lines = "mdarchive " + txtMdarchive.getText() + Back.newLine;

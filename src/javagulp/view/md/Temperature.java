@@ -1,4 +1,4 @@
-package javagulp.view.top;
+package javagulp.view.md;
 
 import java.io.Serializable;
 
@@ -30,28 +30,28 @@ public class Temperature extends TitledPanel implements Serializable {
 		this.defaultTemp = defaultTemp;
 		txtTemp.setText("" + defaultTemp);
 		
-		lblTemperature.setBounds(10, 19, 104, 20);
+		lblTemperature.setBounds(10, 19, 136, 20);
 		add(lblTemperature);
-		txtTemp.setBounds(120, 21, 63, 19);
+		txtTemp.setBounds(152, 20, 63, 19);
 		add(txtTemp);
 		lblIncrement.setBounds(10, 45, 72, 15);
 		add(lblIncrement);
 		txtIncrement.setBackground(Back.grey);
-		txtIncrement.setBounds(120, 43, 63, 19);
+		txtIncrement.setBounds(152, 43, 63, 19);
 		add(txtIncrement);
 		txtNumSteps.setBackground(Back.grey);
-		txtNumSteps.setBounds(120, 65, 63, 19);
+		txtNumSteps.setBounds(152, 68, 63, 19);
 		add(txtNumSteps);
-		lblNumSteps.setBounds(10, 67, 111, 15);
+		lblNumSteps.setBounds(10, 67, 136, 15);
 		add(lblNumSteps);
 		txtTempScaling.setBackground(Back.grey);
-		txtTempScaling.setBounds(200, 13, 109, 59);
+		txtTempScaling.setBounds(240, 15, 236, 43);
 		add(txtTempScaling);
 		txtFirstStep.setBackground(Back.grey);
-		txtFirstStep.setBounds(221, 77, 46, 19);
+		txtFirstStep.setBounds(272, 65, 46, 19);
 		add(txtFirstStep);
 		txtFirstStep.setEnabled(false);
-		lblTimeStep.setBounds(200, 79, 15, 15);
+		lblTimeStep.setBounds(240, 67, 26, 15);
 		add(lblTimeStep);
 	}
 
