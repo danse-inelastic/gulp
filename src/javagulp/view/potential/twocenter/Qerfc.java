@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -62,7 +62,7 @@ public class Qerfc extends PotentialPanel implements Serializable {
 
 		Back.checkAndParseD(params);
 
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		String line = "qerfc " + pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			line += cboUnits.getSelectedItem() + " ";

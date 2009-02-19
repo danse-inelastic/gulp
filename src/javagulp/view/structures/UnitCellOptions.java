@@ -5,7 +5,7 @@ import javagulp.view.TitledPanel;
 
 import javax.swing.JCheckBox;
 
-	 class UnitCellOptions extends TitledPanel {
+	 public class UnitCellOptions extends TitledPanel {
 		
 		private static final long serialVersionUID = 206634642308276667L;
 		

@@ -197,23 +197,23 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 		refreshRows(gr.getChargesElementsBonding().speciesTableModel, getAtoms());
 		Vector<String> v = new Vector<String>(getAtomsAndSpace());
 		gr.getPotentialOptions().cboSpecies.setModel(new DefaultComboBoxModel(v));
-		for (int i=0; i < gr.getPotential().pnlAtom.cboAtom.length; i++)
-			gr.getPotential().pnlAtom.cboAtom[i].setModel(new DefaultComboBoxModel(v));
+		for (int i=0; i < gr.getPotential().createLibrary.pnlAtom.cboAtom.length; i++)
+			gr.getPotential().createLibrary.pnlAtom.cboAtom[i].setModel(new DefaultComboBoxModel(v));
 		gr.getMd().pnlMDmass.cboShellmassSpecies.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlMortiers.cboeematom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlqeq.cboatom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().snm.cbosmatom.setModel(new DefaultComboBoxModel(v));
 
 		// fire the selection changed
-		int number = gr.getPotential().getCurrentPotential().potentialNumber;
+		int number = gr.getPotential().createLibrary.getCurrentPotential().potentialNumber;
 		if (number == 1) {
-			gr.getPotential().cboCoreShellSpring.setSelectedIndex(gr.getPotential().cboCoreShellSpring.getSelectedIndex());
+			gr.getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(gr.getPotential().createLibrary.cboCoreShellSpring.getSelectedIndex());
 		} else if (number == 2) {
-			gr.getPotential().cboGeneralPotential.setSelectedIndex(gr.getPotential().cboGeneralPotential.getSelectedIndex());
+			gr.getPotential().createLibrary.cboGeneralPotential.setSelectedIndex(gr.getPotential().createLibrary.cboGeneralPotential.getSelectedIndex());
 		} else if (number == 3) {
-			gr.getPotential().cboThreeBody.setSelectedIndex(gr.getPotential().cboThreeBody.getSelectedIndex());
+			gr.getPotential().createLibrary.cboThreeBody.setSelectedIndex(gr.getPotential().createLibrary.cboThreeBody.getSelectedIndex());
 		} else if (number == 4) {
-			gr.getPotential().cboTorsion.setSelectedIndex(gr.getPotential().cboTorsion.getSelectedIndex());
+			gr.getPotential().createLibrary.cboTorsion.setSelectedIndex(gr.getPotential().createLibrary.cboTorsion.getSelectedIndex());
 		} else
 			;// error
 	}

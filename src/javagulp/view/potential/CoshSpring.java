@@ -51,7 +51,7 @@ public class CoshSpring extends PotentialPanel implements Serializable {
 		String lines = "cosh-spring";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += " " + cboUnits.getSelectedItem();
-		lines += Back.newLine + Back.getPanel().getPotential().getAtomCombos() + Back.fieldsAndFits(params);
+		lines += Back.newLine + Back.getPanel().getPotential().createLibrary.getAtomCombos() + Back.fieldsAndFits(params);
 		return lines + Back.newLine;
 	}
 }

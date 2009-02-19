@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
 
@@ -68,7 +68,7 @@ public class Tsuneyuki extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		JTextField[] fields = { txtQ1, txtQ2, txtZeta };
 		String[] descriptions = { "Q1", "Q2", "zeta" };
 		Back.checkAllNonEmpty(fields, descriptions);

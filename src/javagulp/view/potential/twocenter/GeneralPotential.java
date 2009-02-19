@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -100,7 +100,7 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 			lines += "grad ";
 		//TODO The gulp documentation has abbreviated bonding options for this
 		// potential, but it is surely a typo. test to make sure.
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " "; 

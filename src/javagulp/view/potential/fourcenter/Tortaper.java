@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 import javagulp.view.images.CreateIcon;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
 
@@ -84,7 +84,7 @@ public class Tortaper extends PotentialPanel implements Serializable {
 		String[] descriptions = { "k", "n", "rtaper"};
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		
 		String lines = "tortaper " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)

@@ -12,10 +12,10 @@ import java.util.Scanner;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 import javagulp.view.Execution;
-import javagulp.view.Potential;
 import javagulp.view.fit.FitParams;
 import javagulp.view.fit.StatReport;
 import javagulp.view.fit.Stats;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.structures.ThreeDUnitCell;
@@ -163,7 +163,7 @@ public class XYZFit extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			ArrayList<PPP> current = new ArrayList<PPP>();
-			Potential pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getPanel().getPotential();
 			for (PotentialPanel p: pot.potentialPanels) {
 				for (PPP ppp: p.params) {
 					if (ppp.chk.isSelected())
@@ -206,7 +206,7 @@ public class XYZFit extends JPanel implements Serializable {
 
 					//get desired PotentialPanels/PPPs
 					int[] indices1 = null;
-					Potential pot = Back.getPanel().getPotential();
+					CreateLibrary pot = Back.getPanel().getPotential();
 					if (chkPotentials.isSelected() && pot.potentialList.getSelectedIndex() != -1)
 						indices1 = pot.potentialList.getSelectedIndices();
 					else {

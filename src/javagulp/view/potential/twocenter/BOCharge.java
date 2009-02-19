@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
 
@@ -58,7 +58,7 @@ public class BOCharge extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		JTextField[] fields = { txtDelta };
 		String[] descriptions = { "delta" };
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 

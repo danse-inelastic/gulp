@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 import javagulp.view.images.CreateIcon;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -93,7 +93,7 @@ public class Ryckaert extends PotentialPanel implements Serializable {
 		Back.checkAndParseD(c0);
 		Back.checkAndParseD(coefs);
 		
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		String lines = "ryckaert " + (index + 1) + Back.newLine
 				+ pot.getAtomCombos() + Back.concatFields(c0) + " "
 				+ radii.writeRadii() + Back.writeFits(c0)

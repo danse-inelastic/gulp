@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -55,7 +55,7 @@ public class SW2 extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		Back.checkAndParseD(params);
 		
 		String lines = "sw2 " + pot.twoAtomBondingOptions.getInterIntraBond();

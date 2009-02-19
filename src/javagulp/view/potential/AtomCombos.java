@@ -52,7 +52,7 @@ public class AtomCombos extends JPanel implements Serializable {
 		}
 	};
 	private void doit(int number) {
-		PotentialPanel p = Back.getPanel().getPotential().getVisiblePotential();
+		PotentialPanel p = Back.getPanel().getPotential().createLibrary.getVisiblePotential();
 		//PotentialPanel p = Back.getPanel().getPotential().getCurrentPotential();
 		if (p != null)
 			p.atom[number] = (String) cboAtom[number].getSelectedItem();
@@ -61,7 +61,7 @@ public class AtomCombos extends JPanel implements Serializable {
 	public AtomCombos() {
 		super();
 		setLayout(null);
-		setBorder(new TitledBorder(null, "atoms",
+		setBorder(new TitledBorder(null, "select interacting atoms",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -121,7 +120,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "eam_functional ";
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		// TODO Documentation allows for multiple atoms / values where we only
 		// allow for one. As a workaround, the user may simply enter this
 		// potential any number of times.

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -182,7 +182,7 @@ public class Lennard extends PotentialPanel implements Serializable {
 			throw new IncompleteOptionException("Please enter a value for m");
 		if (txtN.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a value for n");
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		Boolean all = false;
 		
 		String lines = "lennard ", values = "", fits = "";

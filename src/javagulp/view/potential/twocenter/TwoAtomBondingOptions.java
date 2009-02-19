@@ -37,7 +37,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		private static final long serialVersionUID = 2388442277166262098L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[0])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[0])
 				btnGroupInterIntra.clearSelection();
 			updateBooleans();
 		}
@@ -46,7 +46,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		private static final long serialVersionUID = -1911843871257516353L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[1])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[1])
 				btnGroupInterIntra.clearSelection();
 			updateBooleans();
 		}
@@ -55,11 +55,11 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		private static final long serialVersionUID = 8520737063642238323L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[2])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[2])
 				btnGroupBonds.clearSelection();
-			Back.getPanel().getPotential().getVisiblePotential().setRadiiEnabled(!radBond.isSelected());
+			Back.getPanel().getPotential().createLibrary.getVisiblePotential().setRadiiEnabled(!radBond.isSelected());
 			txtScale14.setEnabled(false);			
-			Back.getPanel().getPotential().getVisiblePotential().enableScale14 = false;
+			Back.getPanel().getPotential().createLibrary.getVisiblePotential().enableScale14 = false;
 			updateBooleans();
 		}
 	};
@@ -67,10 +67,10 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		private static final long serialVersionUID = 6737883603876339735L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[3])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[3])
 				btnGroupBonds.clearSelection();
 			txtScale14.setEnabled(false);
-			Back.getPanel().getPotential().getVisiblePotential().enableScale14 = false;
+			Back.getPanel().getPotential().createLibrary.getVisiblePotential().enableScale14 = false;
 			updateBooleans();
 		}
 	};
@@ -78,10 +78,10 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		private static final long serialVersionUID = -7675603117130093609L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[4])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[4])
 				btnGroupBonds.clearSelection();
 			txtScale14.setEnabled(false);
-			Back.getPanel().getPotential().getVisiblePotential().enableScale14 = false;
+			Back.getPanel().getPotential().createLibrary.getVisiblePotential().enableScale14 = false;
 			updateBooleans();
 		}
 	};
@@ -89,11 +89,11 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		private static final long serialVersionUID = 8049855880264970278L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[5])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[5])
 				btnGroupBonds.clearSelection();
 			updateBooleans();
 			txtScale14.setEnabled(radThreeBonds.isSelected());
-			Back.getPanel().getPotential().getVisiblePotential().enableScale14 = radThreeBonds.isSelected();
+			Back.getPanel().getPotential().createLibrary.getVisiblePotential().enableScale14 = radThreeBonds.isSelected();
 		}
 	};
 
@@ -208,8 +208,8 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 
 	private void updateBooleans() {
 
-		Back.getPanel().getPotential().getVisiblePotential().scale14 = txtScale14.getText();
-		Back.getPanel().getPotential().getVisiblePotential().selected = getSelections();
+		Back.getPanel().getPotential().createLibrary.getVisiblePotential().scale14 = txtScale14.getText();
+		Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected = getSelections();
 	}
 
 	public String getInterIntra() {

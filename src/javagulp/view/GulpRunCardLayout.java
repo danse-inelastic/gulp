@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import javagulp.model.Keywords;
 import javagulp.view.md.MDRestartInit;
-import javagulp.view.structures.Structures;
+import javagulp.view.potential.CreateLibrary;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -246,8 +246,8 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 		return (Structures) getTopPanel(13);
 	}
 
-	public Potential getPotential() {
-		return (Potential) getTopPanel(14);
+	public CreateLibrary getPotential() {
+		return (CreateLibrary) getTopPanel(14);
 	}
 
 	public PotentialOptions getPotentialOptions() {

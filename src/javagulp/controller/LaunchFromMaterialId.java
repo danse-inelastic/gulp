@@ -42,9 +42,12 @@ public class LaunchFromMaterialId {
 		try {
 			Properties props = new Properties();
 			props.setProperty("user","linjiao");
-			props.setProperty("password","4OdACm#");
+//			props.setProperty("password","4OdACm#");
+//			String url = "jdbc:postgresql://localhost:54321/vnf";
+			props.setProperty("user","vnf");
+			props.setProperty("password","A4*gl8D");
+			String url = "jdbc:postgresql://vnf.caltech.edu:5432/vnf";
 			Class.forName("org.postgresql.Driver");
-			String url = "jdbc:postgresql://localhost:54321/vnf";
 			Connection con = DriverManager.getConnection(url,props);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);

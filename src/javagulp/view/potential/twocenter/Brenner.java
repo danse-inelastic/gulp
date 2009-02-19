@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JCheckBox;
@@ -36,7 +36,7 @@ public class Brenner extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws InvalidOptionException {
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		String one = (String) pot.pnlAtom.cboAtom[0].getSelectedItem();
 		String two = (String) pot.pnlAtom.cboAtom[1].getSelectedItem();
 		if (one.endsWith(" core"))

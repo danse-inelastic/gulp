@@ -1,4 +1,4 @@
-package javagulp.view.structures;
+package javagulp.view;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.CoordinatesTableModel;
-import javagulp.view.Back;
-import javagulp.view.UnitCellAndSymmetry;
+import javagulp.view.structures.AtomicCoordinates;
+import javagulp.view.structures.UnitCellAndSymmetry;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

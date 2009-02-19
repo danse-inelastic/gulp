@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.twocenter.GeneralPotential;
@@ -33,7 +33,7 @@ public class GeneralTest extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential();
 		pot.potentialNumber = 2;
 		pot.pnlAtom.cboAtom[0].addItem("H");
 		pot.pnlAtom.cboAtom[1].addItem("N");

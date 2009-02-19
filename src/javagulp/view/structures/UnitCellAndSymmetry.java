@@ -1,12 +1,13 @@
-package javagulp.view;
+package javagulp.view.structures;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.RotationOperatorTableModel;
 import javagulp.model.TranslationOperatorTableModel;
-import javagulp.view.structures.UnitCellOptions;
-import javagulp.view.structures.UnitCellPanel;
+import javagulp.view.Back;
+import javagulp.view.SpaceGroup;
+import javagulp.view.TitledPanel;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

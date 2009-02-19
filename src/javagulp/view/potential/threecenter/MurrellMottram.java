@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 import javagulp.view.images.CreateIcon;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -119,7 +119,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 		Back.checkAndParseD(p);
 		Back.checkAndParseD(c);
 		
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		
 		String lines = "murrell-mottram " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)

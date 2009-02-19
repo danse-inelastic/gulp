@@ -32,7 +32,7 @@ public class GulpFileWriter {
 //			}
 			o.append(gr.getSurface().writeSurface());
 			o.append(gr.getPotential().writeLibrary());
-			o.append(gr.getPotential().writePotentials());
+			o.append(gr.getPotential().createLibrary.writePotentials());
 			o.append(gr.getConstraints().writeUnfreeze());
 			o.append(gr.getEwaldOptions().writeEwald());
 			o.append(gr.getPotentialOptions().writePotentialOptions());

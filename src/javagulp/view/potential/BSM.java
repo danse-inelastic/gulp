@@ -89,7 +89,7 @@ public class BSM extends PotentialPanel implements Serializable {
 			lines += cboExponential.getSelectedItem() + " ";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += Back.getPanel().getPotential().getAtomCombos() + " " 
+		lines += Back.getPanel().getPotential().createLibrary.getAtomCombos() + " " 
 				+ cboCoreShell.getSelectedItem() + " " + Back.fieldsAndFits(params);
 		return lines + Back.newLine;
 	}

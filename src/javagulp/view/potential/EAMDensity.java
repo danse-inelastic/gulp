@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -62,7 +61,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, B, R0 };
 			Back.checkAndParseD(boxes);
-			Potential pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 			String lines = "eam_density gaussian ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";
@@ -108,7 +107,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, Beta };
 			Back.checkAndParseD(boxes);
-			Potential pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 			String lines = "eam_density voter ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem();
@@ -156,7 +155,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 			String lines = "eam_density power ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";
-			Potential pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 			if (!N.txt.getText().equals(""))
 				lines += N.txt.getText();
 			lines += Back.newLine + pot.getAtomCombos() + Back.fieldsAndFits(boxes) + Back.newLine;
@@ -206,7 +205,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, R0 };
 			Back.checkAndParseD(boxes);
-			Potential pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 			String pow = "";
 			if (power == 2)
 				pow = "quadratic";
@@ -263,7 +262,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, B, R0 };
 			Back.checkAndParseD(boxes);
-			Potential pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 			String lines = "eam_density exponential ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";

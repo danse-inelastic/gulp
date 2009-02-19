@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 import javagulp.view.images.CreateIcon;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -81,7 +81,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 				Double.parseDouble(txtPhi0.getText());
 				lines += txtPhi0.getText() + " ";
 			}
-			if (!Back.getPanel().getPotential().threeAtomBondingOptions.Bond()) {
+			if (!Back.getPanel().getPotential().createLibrary.threeAtomBondingOptions.Bond()) {
 				lines += radii.writeRadii();
 				if (cbormax41.getSelectedIndex() != 1)
 					lines += cbormax41.getSelectedItem();
@@ -143,7 +143,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 			if (cboISign.getSelectedItem().equals("-"))
 				lines += "- ";
 			lines += txtN.getText() + " ";
-			if (!Back.getPanel().getPotential().threeAtomBondingOptions.Bond()) {
+			if (!Back.getPanel().getPotential().createLibrary.threeAtomBondingOptions.Bond()) {
 				lines += radii.writeRadii();
 				if (cbormax41.getSelectedIndex() != 1)
 					lines += cbormax41.getSelectedItem();
@@ -227,7 +227,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "";
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			if (cbormax41.getSelectedItem() == null
 					|| cbormax41.getSelectedItem().equals(""))

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JCheckBox;
@@ -116,7 +116,7 @@ public class TersoffCombine extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		JTextField[] fields = { txtChir, txtChia };
 		String[] descriptions = { "Chir", "Chia" };
 		Back.checkAllNonEmpty(fields, descriptions);

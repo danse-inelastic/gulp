@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
-import javagulp.view.Potential;
 import javagulp.view.TitledPanel;
 
 import javax.swing.DefaultComboBoxModel;
@@ -67,7 +66,7 @@ public class Spring extends PotentialPanel implements Serializable {
 			throw new IncompleteOptionException("Please enter a value for k2");
 		Double.parseDouble(k2.txt.getText());
 
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		String lines = "spring ";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();

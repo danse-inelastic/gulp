@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.GenericTableModel;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 import javagulp.view.potential.Radii;
@@ -100,7 +100,7 @@ public class Spline extends PotentialPanel implements Serializable {
 		String lines = "spline ";
 		if (cboSplineType.getSelectedIndex() == 1)
 			lines += "cubic ";
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";

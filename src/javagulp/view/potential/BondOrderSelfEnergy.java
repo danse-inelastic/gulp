@@ -58,7 +58,7 @@ public class BondOrderSelfEnergy extends PotentialPanel implements Serializable 
 		Back.parseFieldsD(fields, descriptions);
 
 		String lines = "boselfenergy" + Back.newLine
-				+ Back.getPanel().getPotential().getAtomCombos() + txtK.getText() + " ";
+				+ Back.getPanel().getPotential().createLibrary.getAtomCombos() + txtK.getText() + " ";
 		if (!txtRho.getText().equals("") && !txtRho.getText().equals("1.0")) {
 			Double.parseDouble(txtRho.getText());
 			lines += txtRho.getText() + " ";

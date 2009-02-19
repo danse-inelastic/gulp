@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import javagulp.model.Keywords;
 import javagulp.view.md.MDRestartInit;
-import javagulp.view.structures.Structures;
+import javagulp.view.potential.CreateLibrary;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

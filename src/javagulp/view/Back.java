@@ -13,8 +13,8 @@ import java.util.Scanner;
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Keywords;
+import javagulp.view.Structures.Structure;
 import javagulp.view.potential.PPP;
-import javagulp.view.structures.Structures.Structure;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -76,7 +76,7 @@ public class Back {
 
 	public void addTab() {
 		tabs.add("" + (tabs.getTabCount() + 1), new GulpRun());
-		getPanel().getPotential().cboCoreShellSpring.setSelectedIndex(0);
+		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 	}
 
@@ -139,7 +139,7 @@ public class Back {
 	 */
 	public static void clearTab() {
 		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
-		getPanel().getPotential().cboCoreShellSpring.setSelectedIndex(0);
+		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 	}
 	
 	/**

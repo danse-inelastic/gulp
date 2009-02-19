@@ -7,7 +7,7 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ButtonGroupTransitional;
 import javagulp.view.Back;
-import javagulp.view.Potential;
+import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.AbstractButton;
@@ -37,9 +37,9 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (btnGroupInterIntra.getButtonCount() == 3
-					&& Back.getPanel().getPotential().getVisiblePotential().selected[2])
+					&& Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[2])
 				btnGroupInterIntra.clearSelection();
-			Back.getPanel().getPotential().getVisiblePotential().setRadiiEnabled(!chkBond.isSelected());
+			Back.getPanel().getPotential().createLibrary.getVisiblePotential().setRadiiEnabled(!chkBond.isSelected());
 			updateBooleans();
 		}
 	};
@@ -48,7 +48,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[0])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[0])
 				btnGroupInterIntra.clearSelection();
 			updateBooleans();
 		}
@@ -58,7 +58,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().getVisiblePotential().selected[1])
+			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[1])
 				btnGroupInterIntra.clearSelection();
 			updateBooleans();
 		}
@@ -117,7 +117,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 		// to the button group
 		// The only other solution is to make a FourAtomBondingOptions panel,
 		// but this is easier.
-		Potential pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		PotentialPanel pnl = pot.getVisiblePotential();
 		
 		boolean torexp = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.Torexp");
@@ -153,7 +153,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 	}
 
 	private void updateBooleans() {
-		Back.getPanel().getPotential().getVisiblePotential().selected = getSelections();
+		Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected = getSelections();
 	}
 
 	private String getInterIntra() {
