@@ -8,7 +8,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
@@ -66,6 +69,17 @@ public class Potential extends JPanel {
 		importButton.addActionListener(keyLibrary);
 		
 		libraryList = new JList();
+		String libraryPath = "view/potentialLibraries";
+		//java.net.URL libURL = getClass().getResource(path);
+		
+	    File dir = new File(libraryPath);
+	    
+	    String[] children = dir.list();
+	    for (int i=0; i<children.length; i++) {
+	    	// Get filename of file or directory
+	    	potentialListModel.addElement(children[i]);
+	    }
+	    libraryList.setModel(potentialListModel);
 		
 		panel.add(libraryList);
 	}
@@ -79,10 +93,33 @@ public class Potential extends JPanel {
 		//display the contents of the selected library
         // Open the file that is the first 
         // command line parameter
-		String libraryContents = getContents(new File("potentialLibraries/"+librarySelected));
+		String path = "potentialLibraries/"+librarySelected;
+		java.net.URL libURL = getClass().getResource(path);
+
+		String libraryContents = getURLContentAsString(libURL);
 		libraryDisplay.setText(libraryContents);
 	}
 };
+
+public String getURLContentAsString(URL url) {
+	String content = "";
+    try {
+        // Create a URL for the desired page
+//        URL url = new URL(urlString);
+        // Read all the text returned by the server
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+        String str;
+        while ((str = in.readLine()) != null) {
+            // str is one line of text; readLine() strips the newline character(s)
+        	content+=str;
+        	content+=System.getProperty("line.separator");
+        }
+        in.close();
+    } catch (MalformedURLException e) {
+    } catch (IOException e) {
+    }
+	return content;
+}
 
 	public String getContents(File aFile) {
     //...checks on aFile are elided
