@@ -69,10 +69,11 @@ public class Potential extends JPanel {
 		importButton.addActionListener(keyLibrary);
 		
 		libraryList = new JList();
-		String libraryPath = "view/potentialLibraries";
+		String libraryPath = "src/javagulp/view/potentialLibraries";
 		//java.net.URL libURL = getClass().getResource(path);
 		
 	    File dir = new File(libraryPath);
+	    //File dir = new File(".");
 	    
 	    String[] children = dir.list();
 	    for (int i=0; i<children.length; i++) {
