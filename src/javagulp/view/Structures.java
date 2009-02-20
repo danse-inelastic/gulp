@@ -3,12 +3,10 @@ package javagulp.view;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.model.CoordinatesTableModel;
 import javagulp.view.structures.AtomicCoordinates;
 import javagulp.view.structures.UnitCellAndSymmetry;
 
@@ -16,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import javagulp.model.Value;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialMouseAdapter;
 //import javagulp.model.WorkspaceParser;

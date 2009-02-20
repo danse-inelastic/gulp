@@ -1,7 +1,5 @@
 package javagulp.view;
 
-import javagulp.controller.IncompleteOptionException;
-
 import javax.swing.JCheckBox;
 
 	class ConstraintsOptions extends TitledPanel {

@@ -131,6 +131,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 				+ Back.writeFits(c) + Back.newLine;
 	}
 
+	@Override
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 	}

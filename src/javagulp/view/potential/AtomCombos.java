@@ -1,16 +1,11 @@
 package javagulp.view.potential;
 
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
-
-import javagulp.view.Back;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
-import javagulp.model.SerialListener;
 
 public class AtomCombos extends JPanel implements Serializable {
 

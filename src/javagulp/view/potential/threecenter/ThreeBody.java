@@ -114,6 +114,7 @@ public class ThreeBody extends PotentialPanel implements Serializable {
 		}
 	}
 
+	@Override
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 	}

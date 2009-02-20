@@ -49,36 +49,36 @@ public class SnM extends JPanel implements Serializable {
 		setLayout(null);
 
 		chkStreitzAndMintmire.addActionListener(keyStreitzAndMintmire);
-		chkStreitzAndMintmire.setBounds(5, 1, 478, 25);
+		chkStreitzAndMintmire.setBounds(5, 1, 562, 25);
 		add(chkStreitzAndMintmire);
 		
 		cbosmatom.setBounds(56, 49, 66, 26);
 		add(cbosmatom);
-		lblzeta.setBounds(114, 85, 60, 15);
+		lblzeta.setBounds(5, 126, 60, 15);
 		add(lblzeta);
-		lblznuc.setBounds(303, 85, 55, 20);
+		lblznuc.setBounds(246, 126, 78, 20);
 		add(lblznuc);
-		txtchi.setBounds(180, 53, 61, 20);
+		txtchi.setBounds(90, 91, 78, 20);
 		add(txtchi);
-		txtmu.setBounds(364, 53, 61, 20);
+		txtmu.setBounds(330, 91, 78, 20);
 		add(txtmu);
-		txtzeta.setBounds(180, 73, 61, 20);
+		txtzeta.setBounds(90, 124, 78, 20);
 		add(txtzeta);
-		txtZnuc.setBounds(364, 73, 61, 20);
+		txtZnuc.setBounds(330, 124, 78, 20);
 		add(txtZnuc);
-		lblXev.setBounds(139, 55, 35, 15);
+		lblXev.setBounds(10, 93, 60, 15);
 		add(lblXev);
-		lblmuev.setBounds(323, 55, 35, 15);
+		lblmuev.setBounds(246, 93, 78, 15);
 		add(lblmuev);
-		chkchi.setBounds(247, 50, 40, 25);
+		chkchi.setBounds(174, 88, 40, 25);
 		add(chkchi);
-		chkzeta.setBounds(247, 80, 40, 25);
+		chkzeta.setBounds(174, 121, 40, 25);
 		add(chkzeta);
-		chkmu.setBounds(431, 50, 40, 25);
+		chkmu.setBounds(414, 88, 40, 25);
 		add(chkmu);
-		chkZnuc.setBounds(431, 80, 40, 25);
+		chkZnuc.setBounds(414, 121, 40, 25);
 		add(chkZnuc);
-		lblAtom.setBounds(15, 55, 35, 15);
+		lblAtom.setBounds(5, 55, 45, 15);
 		add(lblAtom);
 	}
 

@@ -1,6 +1,5 @@
 package javagulp.view.potential;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,9 +15,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.TreeSet;
-
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
@@ -28,7 +24,6 @@ import javagulp.view.potential.twocenter.TwoAtomBondingOptions;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -40,7 +35,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import javagulp.model.JCopy;
 import javagulp.model.SerialListener;
 
 public class CreateLibrary extends JPanel implements Serializable {

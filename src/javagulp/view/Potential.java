@@ -2,7 +2,6 @@ package javagulp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -171,6 +170,7 @@ private LibraryListener listMouseListener = new LibraryListener();
 	private SerialListener keyLibrary = new SerialListener() {
 		private static final long serialVersionUID = 8698926269816312994L;
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 				JFileChooser findLibrary = new JFileChooser();
 				findLibrary.setCurrentDirectory(new File(Back.getPanel().getWD()));

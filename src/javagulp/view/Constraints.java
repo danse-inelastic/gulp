@@ -6,14 +6,10 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
 import javagulp.model.SerialListener;
 
 public class Constraints extends JPanel implements Serializable {

@@ -5,18 +5,13 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.md.Temperature;
 import javagulp.view.structPredict.GeneticAlgorithm;
 import javagulp.view.structPredict.SimulatedAnnealing;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
-import javagulp.model.G;
 import javagulp.model.SerialListener;
 
 public class StructurePrediction extends JPanel implements Serializable {

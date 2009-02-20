@@ -15,15 +15,8 @@ import javagulp.view.md.Thermodynamics;
 import javagulp.view.md.TimeLengths;
 import javagulp.view.md.VectorTable;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-
 import javagulp.model.G;
 
 public class MolecularDynamics extends JPanel implements Serializable {

@@ -52,6 +52,7 @@ public class Coordinate implements Serializable {
 		return x*x+y*y+z*z;
 	}
 	
+	@Override
 	public String toString() {
 		return x + " " + y + " " + z;
 	}

@@ -1,6 +1,5 @@
 package javagulp.view.structures;
 
-import java.awt.BorderLayout;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
@@ -9,7 +8,6 @@ import javagulp.model.TranslationOperatorTableModel;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
 
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

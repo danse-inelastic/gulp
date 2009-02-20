@@ -73,6 +73,7 @@ public class Bcross extends PotentialPanel implements Serializable {
 		return lines + Back.writeFits(params) + Back.newLine;
 	}
 
+	@Override
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 	}

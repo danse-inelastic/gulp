@@ -1,26 +1,13 @@
 package javagulp.view;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import javagulp.model.Keywords;
-import javagulp.view.md.MDRestartInit;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.structPredict.GeneticAlgorithm;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import test.potential.XYZFit;
-
-import javagulp.model.SerialKeyAdapter;
 
 public class GulpRunCardLayout extends JPanel implements Serializable {
 

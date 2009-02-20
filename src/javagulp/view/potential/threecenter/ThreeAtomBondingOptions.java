@@ -11,7 +11,6 @@ import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;

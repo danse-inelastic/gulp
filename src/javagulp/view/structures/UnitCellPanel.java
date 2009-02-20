@@ -4,16 +4,9 @@ import java.awt.BorderLayout;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
 import javagulp.view.TitledPanel;
 
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-
-import javagulp.model.G;
 
 public class UnitCellPanel extends TitledPanel implements Serializable {
 

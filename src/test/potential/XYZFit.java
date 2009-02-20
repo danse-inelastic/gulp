@@ -29,11 +29,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
-import utility.function.Atom;
-import utility.function.Value;
 import javagulp.model.G;
 import javagulp.model.SerialListener;
-import utility.parsers.WorkspaceParser;
 
 public class XYZFit extends JPanel implements Serializable {
 	private static final long serialVersionUID = 936292957400705240L;
@@ -351,6 +348,7 @@ public class XYZFit extends JPanel implements Serializable {
 	public void addPercentage() {
 		//update percentage done in a new thread
 		Thread t = new Thread() {
+			@Override
 			public synchronized void run() {
 				while (!(lblIterNber.getText()).equals("Done")) {
 					lblPercentage.setText(String.valueOf(progress.getValue()*100/progress.getMaximum()) + "%");
@@ -370,6 +368,7 @@ public class XYZFit extends JPanel implements Serializable {
 		final long start = System.currentTimeMillis();
 		//update elapsed time in a new thread
 		Thread t = new Thread() {
+			@Override
 			public synchronized void run() {
 				while (!(lblIterNber.getText()).equals("Done")) {
 					String elapsed = execution.formatTimeHMS((int)((System.currentTimeMillis()-start)/1000));

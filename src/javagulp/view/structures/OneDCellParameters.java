@@ -1,7 +1,5 @@
 package javagulp.view.structures;
 
-import java.awt.BorderLayout;
-
 import javagulp.model.G;
 import javagulp.view.Back;
 

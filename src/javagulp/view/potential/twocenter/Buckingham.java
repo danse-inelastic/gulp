@@ -11,8 +11,6 @@ import javagulp.view.potential.PotentialPanel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
-
 //import utility.function.AbstractFunction;
 //import utility.function.Value;
 //import utility.function.twocenter.BuckinghamFunction;
@@ -186,6 +184,7 @@ public class Buckingham extends PotentialPanel implements Serializable {
 //		graph.repaint();
 //	}
 
+	@Override
 	public void setRadiiEnabled(boolean b) {
 		txtrmin.setEnabled(b);
 		txtrmax.setEnabled(b);

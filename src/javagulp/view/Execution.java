@@ -96,6 +96,7 @@ public class Execution extends JPanel implements Serializable {
 		final int index = modelStatus.getRowCount()-1;
 		//update elapsed time in a new thread
 		Thread t = new Thread() {
+			@Override
 			public synchronized void run() {
 				while (!modelStatus.getValueAt(index, 4).equals("done")) {
 					String elapsed = formatTimeHMS((int)((System.currentTimeMillis()-start)/1000));

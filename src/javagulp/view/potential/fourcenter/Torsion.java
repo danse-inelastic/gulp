@@ -258,6 +258,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 		return lines + Back.newLine;
 	}
 
+	@Override
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 		cbormax41.setEnabled(flag);

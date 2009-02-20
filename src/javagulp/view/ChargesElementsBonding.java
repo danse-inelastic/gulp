@@ -2,9 +2,7 @@ package javagulp.view;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 import javagulp.controller.IncompleteOptionException;
@@ -13,7 +11,6 @@ import javagulp.model.GenericTableModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

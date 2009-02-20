@@ -1,6 +1,5 @@
 package javagulp.view.structures;
 
-import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
@@ -16,11 +15,7 @@ import javagulp.model.CoordinateTable;
 import javagulp.model.CoordinatesTableModel;
 import javagulp.model.Fractional3dTable;
 import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
-
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -91,7 +86,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			pnlTranslation.lblFractionalCoordinates.setText("Use fractional coordinates.");
 			CoordinateTable t = getTable();
-			scrollPane.setViewportView((JTable) t);
+			scrollPane.setViewportView(t);
 			if (t == cartesianTable)
 				pnlTranslation.lblFractionalCoordinates.setText("Use cartesian coordinates.");
 			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
@@ -143,6 +138,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	};
 	private SerialListener keySelectRows = new SerialListener() {
 		private static final long serialVersionUID = 7531889272969288457L;
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			getTable().clear();
 			for (int i = 0; i < ((JTable) getTable()).getRowCount(); i ++) {
@@ -156,12 +152,14 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	};
 	private SerialListener keyInvertSelection = new SerialListener() {
 		private static final long serialVersionUID = 7531889272969288457L;
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			getTable().invertSelection();
 		}
 	};
 	private SerialListener keyClearSelection = new SerialListener() {
 		private static final long serialVersionUID = 7531889272969288457L;
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			getTable().clear();
 		}

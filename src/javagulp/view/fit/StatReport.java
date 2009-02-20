@@ -35,6 +35,7 @@ private static final long serialVersionUID = 6614798981469880622L;
 			c.put(row, color);
 		}
 
+		@Override
 		public Component getTableCellRendererComponent(JTable table,
 				Object value, boolean isSelected, boolean hasFocus, int row,
 				int column) {

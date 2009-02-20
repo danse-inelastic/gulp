@@ -1,6 +1,5 @@
 package javagulp.view.output;
 
-import java.awt.Dimension;
 import java.io.Serializable;
 
 
@@ -9,9 +8,7 @@ import javagulp.view.TitledPanel;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.border.TitledBorder;
 
 public class Terse extends TitledPanel implements Serializable {
 
