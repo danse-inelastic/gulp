@@ -140,32 +140,32 @@ public class Phonons extends TitledPanel implements Serializable {
 		setLayout(null);
 
 		chkExcludeZeroPoint.addActionListener(keyExcludeZeroPoint);
-		chkExcludeZeroPoint.setBounds(0, 75, 239, 25);
+		chkExcludeZeroPoint.setBounds(0, 75, 359, 25);
 		add(chkExcludeZeroPoint);
 		chkNoReciprocalSpace.addActionListener(keyNoReciprocalSpace);
-		chkNoReciprocalSpace.setBounds(0, 135, 319, 42);
+		chkNoReciprocalSpace.setBounds(0, 135, 359, 42);
 		add(chkNoReciprocalSpace);
 		chkNoRealSpace.addActionListener(keyNoRealSpace);
-		chkNoRealSpace.setBounds(0, 94, 323, 50);
+		chkNoRealSpace.setBounds(0, 94, 359, 50);
 		add(chkNoRealSpace);
 		chkDoNotPrint.addActionListener(keyDoNotPrint);
-		chkDoNotPrint.setBounds(0, 28, 257, 25);
+		chkDoNotPrint.setBounds(0, 28, 359, 25);
 		add(chkDoNotPrint);
 		chkPrintEigenvectors.addActionListener(keyPrintEigenvectors);
-		chkPrintEigenvectors.setBounds(0, 52, 323, 25);
+		chkPrintEigenvectors.setBounds(0, 52, 359, 25);
 		add(chkPrintEigenvectors);
 
 		pnlDispersionOptions.setBounds(0, 226, 330, 109);
 		add(pnlDispersionOptions);
 
 		chkCalculateFrequencies.addActionListener(keyCalculateFrequencies);
-		chkCalculateFrequencies.setBounds(0, 1, 223, 30);
+		chkCalculateFrequencies.setBounds(0, 1, 359, 30);
 		add(chkCalculateFrequencies);
 		chkDoNotOutput.addActionListener(keyDoNotOutput);
-		chkDoNotOutput.setBounds(0, 175, 324, 51);
+		chkDoNotOutput.setBounds(0, 175, 359, 51);
 		add(chkDoNotOutput);
 
-		paneSpecifyKpoints.setBounds(332, 5, 728, 391);
+		paneSpecifyKpoints.setBounds(365, 5, 728, 391);
 		add(paneSpecifyKpoints);
 		paneSpecifyKpoints.addTab("Brillouin Zone Integration",
 				pnlBrillouinIntegration);

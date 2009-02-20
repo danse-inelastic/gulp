@@ -22,6 +22,9 @@ import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
 import javagulp.model.SerialListener;
+import javagulp.view.potentialOptions.Mortiers;
+import javagulp.view.potentialOptions.Qeq;
+import javagulp.view.potentialOptions.SnM;
 
 public class Electrostatics extends JPanel implements Serializable {
 

@@ -6,6 +6,8 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.md.Temperature;
+import javagulp.view.structPredict.GeneticAlgorithm;
+import javagulp.view.structPredict.SimulatedAnnealing;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

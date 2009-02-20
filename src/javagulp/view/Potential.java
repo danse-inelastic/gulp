@@ -42,7 +42,7 @@ public class Potential extends JPanel {
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
-	private String library="";
+	private String librarySelected = "";
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
@@ -77,6 +77,7 @@ public class Potential extends JPanel {
 
 		final JButton importButton = new JButton();
 		importButton.setText("import");
+		importButton.setEnabled(false);
 		panel.add(importButton, BorderLayout.SOUTH);
 		importButton.addActionListener(keyLibrary);
 		
@@ -103,12 +104,7 @@ public class Potential extends JPanel {
 	private static final long serialVersionUID = -2720144256318780471L;
 
 	public void valueChanged(ListSelectionEvent e) {
-		String librarySelected = (String) libraryList.getSelectedValue();
-		//display the contents of the selected library
-        // Open the file that is the first 
-        // command line parameter
-		//String path = "potentialLibraries/"+librarySelected;
-		//java.net.URL libURL = getClass().getResource(path);
+		librarySelected = (String) libraryList.getSelectedValue();
 
 		//String libraryContents = getURLContentAsString(libURL);
 		String libraryContents = getFileContents(libraryPath+'/'+librarySelected);
@@ -186,13 +182,10 @@ private LibraryListener listMouseListener = new LibraryListener();
 					} catch (final Exception e1) {
 						e1.printStackTrace();
 					}
-					library = removeDotSomething(newLocation.getName());
+					librarySelected = removeDotSomething(newLocation.getName());
 			}
 		}
 	};
-
-	
-	
 
 	private String removeDotSomething(final String name) {
 		final String[] newName = name.split("\\.");
@@ -201,8 +194,8 @@ private LibraryListener listMouseListener = new LibraryListener();
 
 	public String writeLibrary() throws IncompleteOptionException {
 		String lines = "";
-		if (library!="")
-			lines = "library " + library;
+		if (librarySelected!="")
+			lines = "library " + librarySelected;
 		if (Back.getPanel().getPotentialOptions().chkDoNotInclude.isSelected())
 			lines += " nodump";
 		if (lines!="")

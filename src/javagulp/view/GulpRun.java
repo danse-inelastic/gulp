@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javagulp.model.Keywords;
 import javagulp.view.md.MDRestartInit;
 import javagulp.view.potential.CreateLibrary;
+import javagulp.view.potentialOptions.EwaldOptions;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

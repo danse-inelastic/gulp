@@ -59,14 +59,14 @@ public class TransitionState extends JPanel implements Serializable {
 		pnlRFOOptions.setBounds(0, 196, 476, 84);
 		add(pnlRFOOptions);
 		btnGroupRFOOptions.add(radFindTransitionState);
-		radFindTransitionState.setBounds(7, 35, 280, 21);
+		radFindTransitionState.setBounds(7, 35, 390, 21);
 		pnlRFOOptions.add(radFindTransitionState);
-		txtModeNumber.setBounds(294, 35, 63, 21);
+		txtModeNumber.setBounds(403, 35, 63, 21);
 		pnlRFOOptions.add(txtModeNumber);
 		btnGroupRFOOptions.add(radTransitionStateOfOrder);
-		radTransitionStateOfOrder.setBounds(7, 56, 224, 21);
+		radTransitionStateOfOrder.setBounds(7, 56, 390, 21);
 		pnlRFOOptions.add(radTransitionStateOfOrder);
-		txtOrderOfTransitionState.setBounds(294, 56, 63, 21);
+		txtOrderOfTransitionState.setBounds(403, 56, 63, 21);
 		pnlRFOOptions.add(txtOrderOfTransitionState);
 		pnlRFOOptions.add(radNone2);
 		radNone2.setBounds(7, 14, 21, 21);

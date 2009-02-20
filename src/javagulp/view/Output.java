@@ -28,6 +28,8 @@ import javax.swing.border.TitledBorder;
 
 import javagulp.model.Nutpad;
 import javagulp.model.SerialListener;
+import javagulp.view.output.OutputFormats;
+import javagulp.view.output.Terse;
 
 import com.sshtools.common.hosts.DialogKnownHostsKeyVerification;
 import com.sshtools.j2ssh.SftpClient;

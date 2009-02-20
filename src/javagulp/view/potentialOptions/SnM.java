@@ -1,4 +1,4 @@
-package javagulp.view;
+package javagulp.view.potentialOptions;
 
 import java.io.Serializable;
 
@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
 
 public class SnM extends JPanel implements Serializable {
 	// Who can take ___...

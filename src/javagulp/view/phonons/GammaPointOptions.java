@@ -40,17 +40,17 @@ public class GammaPointOptions extends JPanel implements Serializable {
 
 			setTitle("Calculate frequency");
 
-			lblInitialFrequency.setBounds(10, 39, 111, 14);
-			lblfrequencystep.setBounds(10, 59, 103, 14);
-			lblNumSteps.setBounds(10, 79, 89, 14);
-			lblFinalFrequency.setBounds(10, 99, 104, 14);
+			lblInitialFrequency.setBounds(10, 39, 168, 14);
+			lblfrequencystep.setBounds(10, 59, 168, 14);
+			lblNumSteps.setBounds(10, 79, 168, 14);
+			lblFinalFrequency.setBounds(10, 99, 168, 14);
 			lblFinalFreq.setBorder(new LineBorder(Color.black, 1, false));
-			lblFinalFreq.setBounds(119, 99, 59, 15);
-			lblRelatedProperties.setBounds(10, 18, 264, 15);
+			lblFinalFreq.setBounds(195, 99, 59, 15);
+			lblRelatedProperties.setBounds(10, 18, 355, 15);
 
-			txtomegafrequency.setBounds(119, 37, 59, 18);
-			txtomegafrequency_step.setBounds(119, 57, 59, 18);
-			txtomegano_of_steps.setBounds(119, 77, 59, 18);
+			txtomegafrequency.setBounds(195, 37, 59, 18);
+			txtomegafrequency_step.setBounds(195, 57, 59, 18);
+			txtomegano_of_steps.setBounds(195, 77, 59, 18);
 
 			add(lblInitialFrequency);
 			add(lblfrequencystep);

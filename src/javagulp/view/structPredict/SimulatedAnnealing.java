@@ -1,8 +1,11 @@
-package javagulp.view;
+package javagulp.view.structPredict;
 
 import java.io.Serializable;
 
 import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
+import javagulp.view.TitledPanel;
 import javagulp.view.md.Temperature;
 
 import javax.swing.JCheckBox;
