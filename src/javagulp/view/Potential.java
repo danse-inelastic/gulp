@@ -42,7 +42,7 @@ public class Potential extends JPanel {
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
-	private String library;
+	private String library="";
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
@@ -201,10 +201,12 @@ private LibraryListener listMouseListener = new LibraryListener();
 
 	public String writeLibrary() throws IncompleteOptionException {
 		String lines = "";
-		lines = "library " + library;
+		if (library!="")
+			lines = "library " + library;
 		if (Back.getPanel().getPotentialOptions().chkDoNotInclude.isSelected())
 			lines += " nodump";
-		lines += Back.newLine;
+		if (lines!="")
+			lines += Back.newLine;
 		return lines;
 	}
 	

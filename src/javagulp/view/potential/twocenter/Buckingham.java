@@ -40,7 +40,7 @@ public class Buckingham extends PotentialPanel implements Serializable {
 	private JLabel lblBuckinghamEq = new JLabel("<html>E = A exp(-r/&#961;) - C r<sup>-6</sup></html>");
 
 	//private Graph graph = new Graph();
-	JTabbedPane pane = new JTabbedPane();
+	//JTabbedPane pane = new JTabbedPane();
 
 	public Buckingham() {
 		super(2);
@@ -77,8 +77,8 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		cboEnerGra.setBounds(10, 145, 85, 21);
 		add(cboEnerGra);
 
-		pane.setBounds(460, 10, 240, 250);
-		add(pane);
+		//pane.setBounds(460, 10, 240, 250);
+		//add(pane);
 		//pane.addTab("" + (pane.getTabCount()+1), graph);
 		//graph.addFunction(new BuckinghamFunction());
 		//graph.setWindow(0.5, 4, 0, 10);

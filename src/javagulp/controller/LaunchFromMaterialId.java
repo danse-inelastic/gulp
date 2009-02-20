@@ -95,9 +95,13 @@ public class LaunchFromMaterialId {
 		//System.out.print(args[0]);
 		//if (args.length==1){
 		
+		//try simple iron as 9TAL9D
 		
 		if (args.length==0){
-			new LaunchFromMaterialId("794VFC");
+			if (b == null)
+				b = new Back();
+			else
+				b.addTab();
 		} else{
 			new LaunchFromMaterialId(args[0]);			
 		}

@@ -76,7 +76,7 @@ public class ExternalForce extends JPanel implements Serializable {
 	public ExternalForce() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(658, 287));
+		//this.setPreferredSize(new java.awt.Dimension(658, 287));
 
 		backdrop.setLayout(new CardLayout());
 		backdrop.setBounds(0, 59, 667, 228);
@@ -102,19 +102,19 @@ public class ExternalForce extends JPanel implements Serializable {
 		radexforce.setSelected(true);
 		buttonGroup.add(radexforce);
 		radexforce.addActionListener(keyexforce);
-		radexforce.setBounds(6, 0, 120, 30);
+		radexforce.setBounds(6, 0, 320, 30);
 		add(radexforce);
 		buttonGroup.add(radtdexforce);
 		radtdexforce.addActionListener(keytdexforce);
-		radtdexforce.setBounds(6, 28, 220, 25);
+		radtdexforce.setBounds(6, 28, 320, 25);
 		add(radtdexforce);
-		lblRemoveExternalForce.setBounds(256, 8, 180, 15);
+		lblRemoveExternalForce.setBounds(337, 8, 244, 15);
 		add(lblRemoveExternalForce);
-		txtendforce.setBounds(446, 6, 80, 20);
+		txtendforce.setBounds(587, 6, 80, 20);
 		add(txtendforce);
-		lblDelayExternalForce.setBounds(251, 33, 185, 15);
+		lblDelayExternalForce.setBounds(332, 33, 249, 15);
 		add(lblDelayExternalForce);
-		txtDelayExternalForce.setBounds(447, 31, 79, 19);
+		txtDelayExternalForce.setBounds(588, 31, 79, 19);
 		add(txtDelayExternalForce);
 	}
 

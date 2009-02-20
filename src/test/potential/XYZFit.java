@@ -442,10 +442,10 @@ public class XYZFit extends JPanel implements Serializable {
 	public XYZFit() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(804, 360));
+		//this.setPreferredSize(new java.awt.Dimension(804, 360));
 
 		add(lblMessage);
-		lblMessage.setBounds(7, 7, 301, 70);
+		lblMessage.setBounds(7, 7, 839, 70);
 
 		add(btnXYZ);
 		btnXYZ.setBounds(7, 77, 91, 28);
@@ -462,22 +462,22 @@ public class XYZFit extends JPanel implements Serializable {
 		btnFireball.setBounds(7, 180, 91, 28);
 		btnFireball.addActionListener(keyFireball);
 		add(txtXYZ);
-		txtXYZ.setBounds(105, 77, 301, 28);
+		txtXYZ.setBounds(105, 77, 339, 28);
 		add(txtEnergy);
-		txtEnergy.setBounds(105, 112, 301, 28);
+		txtEnergy.setBounds(105, 112, 339, 28);
 		add(txtCharge);
-		txtCharge.setBounds(105, 147, 301, 28);
+		txtCharge.setBounds(105, 147, 339, 28);
 		add(lblFireball);
 		lblFireball.setBounds(105, 180, 301, 28);
-		lblStart.setBounds(7, 215, 112, 28);
+		lblStart.setBounds(7, 215, 122, 28);
 		add(lblStart);
-		txtStart.setBounds(119, 215, 42, 28);
+		txtStart.setBounds(147, 216, 42, 28);
 		add(txtStart);
-		lblEvery.setBounds(168, 215, 119, 28);
+		lblEvery.setBounds(195, 215, 140, 28);
 		add(lblEvery);
-		txtEvery.setBounds(287, 215, 42, 28);
+		txtEvery.setBounds(341, 216, 42, 28);
 		add(txtEvery);
-		lblTimesteps.setBounds(336, 215, 70, 28);
+		lblTimesteps.setBounds(388, 215, 83, 28);
 		add(lblTimesteps);
 		add(txtMaxSteps);
 		txtMaxSteps.setBounds(7, 250, 91, 28);
@@ -489,18 +489,18 @@ public class XYZFit extends JPanel implements Serializable {
 		add(lblGULP);
 		lblGULP.setBounds(105, 285, 301, 28);
 		add(chkFractional);
-		chkFractional.setBounds(413, 77, 210, 28);
+		chkFractional.setBounds(495, 77, 351, 28);
 		add(chkRandom);
 		chkRandom.setSelected(true);
 		chkRandom.setMargin(new Insets(0, 0, 0, 0));
-		chkRandom.setBounds(413, 180, 217, 28);
+		chkRandom.setBounds(495, 180, 351, 28);
 		add(lblIterations);
 		lblIterations.setBounds(413, 250, 168, 28);
 		add(txtIterations);
 		txtIterations.setBounds(581, 250, 49, 28);
 		add(chkInitialize);
 		chkInitialize.setSelected(true);
-		chkInitialize.setBounds(413, 215, 217, 28);
+		chkInitialize.setBounds(495, 215, 351, 28);
 		add(progress);
 		progress.setBounds(7, 318, 650, 25);
 		progress.setMinimum(0);
@@ -514,9 +514,9 @@ public class XYZFit extends JPanel implements Serializable {
 		add(lblTimeElapsed);
 		lblTimeElapsed.setBounds(601, 285, 200, 28);
 		add(chkPotentials);
-		chkPotentials.setBounds(413, 112, 217, 28);
+		chkPotentials.setBounds(495, 112, 351, 28);
 		add(chkParameters);
-		chkParameters.setBounds(413, 147, 217, 28);
+		chkParameters.setBounds(495, 147, 351, 28);
 
 	}
 

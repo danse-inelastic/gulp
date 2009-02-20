@@ -30,6 +30,7 @@ public class GulpFileWriter {
 //				else
 //					o.append(Back.getPanel().getStructures().writeStructures());
 //			}
+			o.append(Back.getStructure().writeStructure());
 			o.append(gr.getSurface().writeSurface());
 			o.append(gr.getPotential().writeLibrary());
 			o.append(gr.getPotential().createLibrary.writePotentials());

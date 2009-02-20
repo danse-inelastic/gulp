@@ -51,8 +51,8 @@ public class OutputFormats extends JPanel implements Serializable {
 			if (i == 3 || i == 13) {
 				box.setBounds(x + 40, y, width - 40, height);
 				box.setFont(new Font("Dialog", Font.PLAIN, 10));
-				if (i == 13)
-					box.setSelected(true);
+//				if (i == 13)
+//					box.setSelected(true);
 			} else
 				box.setBounds(x, y, width, height);
 			add(box);

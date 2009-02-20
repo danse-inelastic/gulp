@@ -321,10 +321,10 @@ public class CreateLibrary extends JPanel implements Serializable {
 	};
 	private void performSwitch(PotentialPanel p) {
 		potentialBackdrop.setViewportView(p);
-		for (int i=0; i < 4; i++)
-			pnlAtom.cboAtom[i].setEnabled(false);
+//		for (int i=0; i < 4; i++)
+//			pnlAtom.cboAtom[i].setEnabled(false);
 		for (int i=0; i < p.potentialNumber; i++) {
-			pnlAtom.cboAtom[i].setEnabled(true);
+//			pnlAtom.cboAtom[i].setEnabled(true);
 			pnlAtom.cboAtom[i].setSelectedItem(p.atom[i]);
 		}
 		if (p.potentialNumber == 1) {
