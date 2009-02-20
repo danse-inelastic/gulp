@@ -120,7 +120,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		txtMcMaxDisplaceLength.setBounds(9, 19, 79, 21);
 		pnlMaximumDisplacement.add(txtMcMaxDisplaceLength);
 
-		lblAevery.setBounds(94, 22, 50, 15);
+		lblAevery.setBounds(94, 22, 81, 15);
 		pnlMaximumDisplacement.add(lblAevery);
 
 		txtMcMaxDisplaceFrequency.setBackground(Back.grey);
@@ -128,10 +128,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlMaximumDisplacement.add(txtMcMaxDisplaceFrequency);
 
 		txtMcMaxDisplaceTargetRatio.setBackground(Back.grey);
-		txtMcMaxDisplaceTargetRatio.setBounds(150, 20, 64, 19);
+		txtMcMaxDisplaceTargetRatio.setBounds(181, 20, 64, 19);
 		pnlMaximumDisplacement.add(txtMcMaxDisplaceTargetRatio);
 
-		lblMaxDisplacementMoves.setBounds(220, 20, 50, 19);
+		lblMaxDisplacementMoves.setBounds(251, 20, 50, 19);
 		pnlMaximumDisplacement.add(lblMaxDisplacementMoves);
 
 		lblMaxDisplacementRatio.setBounds(8, 46, 238, 30);

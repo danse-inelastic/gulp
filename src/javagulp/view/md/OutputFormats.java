@@ -27,15 +27,15 @@ import javax.swing.border.TitledBorder;
 					TitledBorder.DEFAULT_POSITION, null, null));
 			setLayout(null);
 
-			lblWriteFrequencyps.setBounds(7, 21, 175, 14);
+			lblWriteFrequencyps.setBounds(7, 21, 230, 14);
 			add(lblWriteFrequencyps);
-			txtWrite.setBounds(182, 14, 70, 21);
+			txtWrite.setBounds(228, 18, 85, 21);
 			add(txtWrite);
-			lblMdarchive.setBounds(10, 69, 180, 15);
+			lblMdarchive.setBounds(7, 49, 230, 15);
 			add(lblMdarchive);
-			txtMdarchive.setBounds(182, 70, 70, 21);
+			txtMdarchive.setBounds(228, 45, 189, 21);
 			add(txtMdarchive);
-			cboUnits.setBounds(154, 42, 98, 21);
+			cboUnits.setBounds(319, 18, 98, 21);
 			add(cboUnits);
 		}
 

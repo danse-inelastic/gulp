@@ -119,135 +119,135 @@ public class Optimization extends JPanel implements Serializable {
 		// jTextArea4.setBackground(new Color(204, 204, 204));
 
 		pnlParameterTolerance.setTitle("parameter tolerance");
-		pnlParameterTolerance.setBounds(584, 57, 181, 48);
+		pnlParameterTolerance.setBounds(660, 57, 236, 48);
 		add(pnlParameterTolerance);
 		txtxtolopt.setBounds(9, 18, 80, 21);
 		pnlParameterTolerance.add(txtxtolopt);
 
 		pnlMaxStepSize.setTitle("maximum step size");
-		pnlMaxStepSize.setBounds(840, 1, 157, 50);
+		pnlMaxStepSize.setBounds(961, 1, 167, 50);
 		add(pnlMaxStepSize);
 		txtstepmxopt.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtstepmxopt);
 
 		pnleigenvector.setTitle("imaginary eigenvector following");
-		pnleigenvector.setBounds(584, 162, 413, 83);
+		pnleigenvector.setBounds(660, 162, 468, 83);
 		add(pnleigenvector);
 		chkuseImaginaryPhonon.addActionListener(keyuseImaginaryPhonon);
-		chkuseImaginaryPhonon.setBounds(10, 23, 400, 25);
+		chkuseImaginaryPhonon.setBounds(10, 23, 448, 25);
 		pnleigenvector.add(chkuseImaginaryPhonon);
-		lblScaleImaginaryMode.setBounds(10, 54, 240, 15);
+		lblScaleImaginaryMode.setBounds(10, 54, 311, 15);
 		pnleigenvector.add(lblScaleImaginaryMode);
-		txtslower.setBounds(259, 52, 87, 20);
+		txtslower.setBounds(327, 52, 87, 20);
 		pnleigenvector.add(txtslower);
 
 		pnlotheroptions.setTitle("other options");
-		pnlotheroptions.setBounds(584, 251, 413, 78);
+		pnlotheroptions.setBounds(660, 251, 468, 78);
 		add(pnlotheroptions);
-		lblStopIfCell.setBounds(10, 23, 315, 15);
+		lblStopIfCell.setBounds(10, 23, 378, 15);
 		pnlotheroptions.add(lblStopIfCell);
-		txtmincell.setBounds(331, 21, 64, 20);
+		txtmincell.setBounds(394, 21, 64, 20);
 		pnlotheroptions.add(txtmincell);
 		chkAllowOnlyIsotropicRadioButton.addActionListener(keyAllowOnlyIsotropicRadioButton);
-		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 295, 25);
+		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 385, 25);
 		pnlotheroptions.add(chkAllowOnlyIsotropicRadioButton);
 
 		pnlmaximumcycles.setTitle("maximum number of cycles");
-		pnlmaximumcycles.setBounds(584, 335, 195, 51);
+		pnlmaximumcycles.setBounds(660, 335, 215, 51);
 		add(pnlmaximumcycles);
 		txtmaxcycopt.setBounds(10, 22, 90, 20);
 		pnlmaximumcycles.add(txtmaxcycopt);
 
 		pnlBFGS.setTitle("order of limited-memory BFGS");
-		pnlBFGS.setBounds(785, 335, 212, 51);
+		pnlBFGS.setBounds(881, 335, 247, 51);
 		add(pnlBFGS);
 		txtlbfgs_order.setBounds(10, 22, 90, 20);
 		pnlBFGS.add(txtlbfgs_order);
 
 		pnlgradienttolerance.setTitle("gradient tolerance");
-		pnlgradienttolerance.setBounds(801, 111, 196, 45);
+		pnlgradienttolerance.setBounds(932, 111, 196, 45);
 		add(pnlgradienttolerance);
 		txtgtol.setBounds(6, 17, 80, 21);
 		pnlgradienttolerance.add(txtgtol);
 
 		pnlMaxIndividualGradient.setTitle("maximum individual gradient");
-		pnlMaxIndividualGradient.setBounds(584, 111, 213, 45);
+		pnlMaxIndividualGradient.setBounds(660, 111, 266, 45);
 		add(pnlMaxIndividualGradient);
 		txtgmax.setBounds(7, 17, 80, 21);
 		pnlMaxIndividualGradient.add(txtgmax);
 
 		pnlfunctiontolerance.setTitle("function tolerance");
-		pnlfunctiontolerance.setBounds(771, 57, 226, 48);
+		pnlfunctiontolerance.setBounds(902, 57, 226, 48);
 		add(pnlfunctiontolerance);
 		txtftol.setBounds(9, 19, 80, 21);
 		pnlfunctiontolerance.add(txtftol);
 
 		pnlprimaryoptimizer.setTitle("primary optimizer");
-		pnlprimaryoptimizer.setBounds(0, 32, 238, 69);
+		pnlprimaryoptimizer.setBounds(0, 32, 268, 69);
 		add(pnlprimaryoptimizer);
 		cboOptimization.setBounds(10, 22, 197, 20);
 		pnlprimaryoptimizer.add(cboOptimization);
 		cboOptimization.addActionListener(keyOptimization);
 
 		pnlswitchoptimizer.setTitle("switch optimizer to");
-		pnlswitchoptimizer.setBounds(244, 32, 334, 70);
+		pnlswitchoptimizer.setBounds(274, 32, 380, 70);
 		add(pnlswitchoptimizer);
 		cboSwitchOptimization.setBounds(10, 18, 285, 20);
 		pnlswitchoptimizer.add(cboSwitchOptimization);
-		lblAfter.setBounds(10, 44, 34, 20);
+		lblAfter.setBounds(10, 44, 81, 20);
 		pnlswitchoptimizer.add(lblAfter);
-		txtSwitch_minimiserStoppingCriterionNum.setBounds(50, 44, 54, 21);
+		txtSwitch_minimiserStoppingCriterionNum.setBounds(97, 44, 72, 21);
 		pnlswitchoptimizer.add(txtSwitch_minimiserStoppingCriterionNum);
-		cboSwitch_minimiserStoppingCriterion.setBounds(110, 44, 120, 20);
+		cboSwitch_minimiserStoppingCriterion.setBounds(175, 44, 120, 20);
 		pnlswitchoptimizer.add(cboSwitch_minimiserStoppingCriterion);
 
 		pnlHessianOptions.setBorder(new TitledBorder(null, "Hessian options",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		pnlHessianOptions.setLayout(null);
-		pnlHessianOptions.setBounds(0, 107, 581, 243);
+		pnlHessianOptions.setBounds(0, 107, 654, 243);
 		add(pnlHessianOptions);
-		chkUseNumerical.setBounds(10, 23, 555, 25);
+		chkUseNumerical.setBounds(10, 23, 634, 25);
 		pnlHessianOptions.add(chkUseNumerical);
 		chkUseNumerical.addActionListener(keyUseNumerical);
-		chkUseUnit.setBounds(10, 54, 360, 25);
+		chkUseUnit.setBounds(10, 54, 634, 25);
 		pnlHessianOptions.add(chkUseUnit);
 		chkUseUnit.addActionListener(keyUseUnit);
-		chkoutputDetailsOf.setBounds(10, 80, 255, 25);
+		chkoutputDetailsOf.setBounds(10, 80, 634, 25);
 		pnlHessianOptions.add(chkoutputDetailsOf);
 		chkoutputDetailsOf.addActionListener(keyoutputDetailsOf);
-		chkpositive.setBounds(10, 105, 565, 38);
+		chkpositive.setBounds(10, 105, 634, 38);
 		pnlHessianOptions.add(chkpositive);
 		chkpositive.addActionListener(keypositive);
-		lblMaximumNumberOf.setBounds(10, 150, 436, 33);
+		lblMaximumNumberOf.setBounds(10, 150, 548, 33);
 		pnlHessianOptions.add(lblMaximumNumberOf);
-		txtupdate.setBounds(452, 149, 80, 20);
+		txtupdate.setBounds(564, 149, 80, 20);
 		pnlHessianOptions.add(txtupdate);
-		lblMaximumFunctionalChange.setBounds(10, 188, 451, 42);
+		lblMaximumFunctionalChange.setBounds(10, 188, 548, 42);
 		pnlHessianOptions.add(lblMaximumFunctionalChange);
-		txtdelf.setBounds(467, 191, 80, 21);
+		txtdelf.setBounds(564, 191, 80, 21);
 		pnlHessianOptions.add(txtdelf);
 
 		chkopti.setName("optOrNot");
-		chkopti.setBounds(0, 1, 375, 25);
+		chkopti.setBounds(0, 1, 654, 25);
 		add(chkopti);
 		chkopti.addActionListener(keyopti);
 		chkopti.setActionCommand("CALTYP_OPT");
 		chkopti.setToolTipText("Minimize the energy with respect to geometrical variables");
 
 		pnlLineMinimisationOptions.setTitle("line minimisation options");
-		pnlLineMinimisationOptions.setBounds(584, 1, 250, 51);
+		pnlLineMinimisationOptions.setBounds(660, 1, 295, 51);
 		add(pnlLineMinimisationOptions);
-		txtline.setBounds(191, 24, 50, 20);
+		txtline.setBounds(235, 24, 50, 20);
 		pnlLineMinimisationOptions.add(txtline);
-		lblmaximumNumberOf.setBounds(10, 26, 175, 15);
+		lblmaximumNumberOf.setBounds(10, 26, 219, 15);
 		pnlLineMinimisationOptions.add(lblmaximumNumberOf);
 
 		chklinmin.addActionListener(keylinmin);
-		chklinmin.setBounds(0, 356, 247, 25);
+		chklinmin.setBounds(0, 356, 320, 25);
 		add(chklinmin);
 		chkoptimisefitShells.addActionListener(keyoptimisefitShells);
-		chkoptimisefitShells.setBounds(250, 356, 285, 25);
+		chkoptimisefitShells.setBounds(326, 356, 328, 25);
 		add(chkoptimisefitShells);
 	}
 

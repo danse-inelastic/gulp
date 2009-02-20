@@ -24,9 +24,11 @@ import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -36,11 +38,15 @@ public class Potential extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 4991943378742898078L;
+	private String libraryPath = "src/javagulp/view/potentialLibraries";
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
+	ListSelectionModel listSelectionModel;
 	private String library;
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
+	final JScrollPane scrollPane = new JScrollPane();
+	
 	private JTextPane libraryDisplay = new JTextPane();
 	public Potential() {
 		super();
@@ -56,7 +62,13 @@ public class Potential extends JPanel {
 		final JSplitPane splitPane = new JSplitPane();
 		useLibrary.add(splitPane);
 
-		splitPane.setRightComponent(libraryDisplay);
+		//add(scrollPane, BorderLayout.NORTH);
+
+		//final JPanel panel_1 = new JPanel();
+		
+		
+		splitPane.setRightComponent(scrollPane);
+		scrollPane.setViewportView(libraryDisplay);
 
 		final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -69,10 +81,7 @@ public class Potential extends JPanel {
 		importButton.addActionListener(keyLibrary);
 		
 		libraryList = new JList();
-		String libraryPath = "src/javagulp/view/potentialLibraries";
-		//java.net.URL libURL = getClass().getResource(path);
-		
-	    File dir = new File(libraryPath);
+		File dir = new File(libraryPath);
 	    //File dir = new File(".");
 	    
 	    String[] children = dir.list();
@@ -81,8 +90,12 @@ public class Potential extends JPanel {
 	    	potentialListModel.addElement(children[i]);
 	    }
 	    libraryList.setModel(potentialListModel);
-		
+	    listSelectionModel = libraryList.getSelectionModel();
+        listSelectionModel.addListSelectionListener(
+                new LibraryListener());
 		panel.add(libraryList);
+
+
 	}
 	
 	private class LibraryListener implements
@@ -94,10 +107,11 @@ public class Potential extends JPanel {
 		//display the contents of the selected library
         // Open the file that is the first 
         // command line parameter
-		String path = "potentialLibraries/"+librarySelected;
-		java.net.URL libURL = getClass().getResource(path);
+		//String path = "potentialLibraries/"+librarySelected;
+		//java.net.URL libURL = getClass().getResource(path);
 
-		String libraryContents = getURLContentAsString(libURL);
+		//String libraryContents = getURLContentAsString(libURL);
+		String libraryContents = getFileContents(libraryPath+'/'+librarySelected);
 		libraryDisplay.setText(libraryContents);
 	}
 };
@@ -122,8 +136,9 @@ public String getURLContentAsString(URL url) {
 	return content;
 }
 
-	public String getContents(File aFile) {
+	public String getFileContents(String filePath) {
     //...checks on aFile are elided
+	File aFile = new File(filePath);
     StringBuilder contents = new StringBuilder();
     
     try {
@@ -175,6 +190,7 @@ private LibraryListener listMouseListener = new LibraryListener();
 			}
 		}
 	};
+
 	
 	
 

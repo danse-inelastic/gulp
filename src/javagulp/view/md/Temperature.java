@@ -15,7 +15,7 @@ public class Temperature extends TitledPanel implements Serializable {
 	private JLabel lblIncrement = new JLabel("increment");
 	private JLabel lblNumSteps = new JLabel("number of steps");
 	private JLabel lblTimeStep = new JLabel("m");
-	private JLabel txtTempScaling = new JLabel("<html>do not begin temperature scaling until the mth time step</html>");
+	private JLabel txtTempScaling = new JLabel("<html>do not begin temperature <br>scaling until the mth time step</html>");
 
 	private JTextField txtTemp = new JTextField();
 	private JTextField txtIncrement = new JTextField();

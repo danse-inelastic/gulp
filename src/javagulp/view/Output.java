@@ -1,5 +1,6 @@
 package javagulp.view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -222,7 +223,7 @@ public class Output extends JPanel implements Serializable {
 	public Output() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(1113, 287));
+		this.setPreferredSize(new java.awt.Dimension(1255, 287));
 
 		btnRun.addActionListener(keyRun);
 		btnRun.setBounds(151, 241, 173, 30);
@@ -275,9 +276,9 @@ public class Output extends JPanel implements Serializable {
 		txtFort12.setBounds(314, 111, 84, 20);
 		add(txtFort12);
 
-		pnlOutputFormats.setBounds(415, 4, 300, 278);
+		pnlOutputFormats.setBounds(415, 4, 330, 278);
 		add(pnlOutputFormats);
-		pnlTerse.setBounds(720, 11, 392, 161);
+		pnlTerse.setBounds(751, 8, 470, 266);
 		add(pnlTerse);
 		txtInputFile.setBounds(196, 6, 119, 20);
 		add(txtInputFile);

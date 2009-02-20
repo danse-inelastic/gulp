@@ -1,5 +1,6 @@
 package javagulp.view;
 
+import java.awt.Dimension;
 import java.io.Serializable;
 
 
@@ -35,19 +36,19 @@ public class Terse extends JPanel implements Serializable {
 		setBorder(new TitledBorder(null, "",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		this.setPreferredSize(new java.awt.Dimension(392, 161));
+		this.setPreferredSize(new java.awt.Dimension(470, 250));
 
 		add(lblTerse);
 		lblTerse.setBounds(7, 7, 126, 21);
 		radNone1.setSelected(true);
 		add(radNone1);
-		radNone1.setBounds(7, 28, 140, 21);
+		radNone1.setBounds(7, 34, 140, 21);
 		add(radInput);
-		radInput.setBounds(7, 49, 140, 21);
+		radInput.setBounds(7, 61, 140, 21);
 		add(radOutput);
-		radOutput.setBounds(7, 70, 140, 21);
+		radOutput.setBounds(7, 88, 140, 21);
 		add(radInputOutput);
-		radInputOutput.setBounds(7, 91, 140, 21);
+		radInputOutput.setBounds(7, 115, 170, 21);
 
 		group1.add(radNone1);
 		group1.add(radInput);
@@ -55,20 +56,20 @@ public class Terse extends JPanel implements Serializable {
 		group1.add(radInputOutput);
 
 		add(lblDoNotOutput);
-		lblDoNotOutput.setBounds(147, 7, 238, 21);
+		lblDoNotOutput.setBounds(183, 7, 238, 21);
 		radNone2.setSelected(true);
 		add(radNone2);
-		radNone2.setBounds(147, 28, 238, 21);
+		radNone2.setBounds(183, 34, 238, 21);
 		add(radCell);
-		radCell.setBounds(147, 49, 238, 21);
+		radCell.setBounds(183, 61, 277, 21);
 		add(radCoordinates);
-		radCoordinates.setBounds(147, 70, 238, 21);
+		radCoordinates.setBounds(183, 88, 238, 21);
 		add(radStructure);
-		radStructure.setBounds(147, 91, 238, 21);
+		radStructure.setBounds(183, 115, 238, 21);
 		add(radPotentials);
-		radPotentials.setBounds(147, 112, 238, 21);
+		radPotentials.setBounds(183, 142, 238, 21);
 		add(radDerivatives);
-		radDerivatives.setBounds(147, 133, 238, 21);
+		radDerivatives.setBounds(183, 169, 238, 21);
 
 		group2.add(radNone2);
 		group2.add(radCell);

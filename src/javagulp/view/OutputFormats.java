@@ -41,7 +41,7 @@ public class OutputFormats extends JPanel implements Serializable {
 		setLayout(null);
 
 		JCheckBox box;
-		int x = 10, y = 50, width = 140, height = 20, hSpacing = 0, vSpacing = 5;
+		int x = 10, y = 50, width = 150, height = 20, hSpacing = 0, vSpacing = 5;
 		for (int i = 0; i < labels.length; i++) {
 			if (i == 9) {
 				x += width + hSpacing;

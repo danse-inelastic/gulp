@@ -44,26 +44,31 @@ public class FreeEnergy extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		final TitledPanel panel = new TitledPanel();
-		panel.setBounds(0, 0, 1070, 425);
-		add(panel);
+		//final TitledPanel panel = new TitledPanel();
+		//panel.setBounds(0, 0, 1070, 425);
+		//add(panel);
 
 		chkFreeEnergy.setBounds(6, 10, 452, 47);
-		panel.add(chkFreeEnergy);
+		//panel.add(chkFreeEnergy);
+		add(chkFreeEnergy);
 		chkFreeEnergy.addActionListener(keyFreeEnergy);
-		chkUseTheZero.setBounds(39, 50, 342, 30);
-		panel.add(chkUseTheZero);
+		chkUseTheZero.setBounds(39, 59, 419, 30);
+		//panel.add(chkUseTheZero);
+		add(chkUseTheZero);
 		chkUseTheZero.addActionListener(keyUseTheZero);
-		chkRunStaticOptimisation.setBounds(7, 78, 370, 25);
-		panel.add(chkRunStaticOptimisation);
+		chkRunStaticOptimisation.setBounds(6, 95, 451, 25);
+		add(chkRunStaticOptimisation);
+		//panel.add(chkRunStaticOptimisation);
 		chkRunStaticOptimisation.addActionListener(keyRunStaticOptimisation);
 
-		pnlTemperature.setBounds(464, 158, 311, 106);
-		panel.add(pnlTemperature);
+		pnlTemperature.setBounds(464, 158, 398, 123);
+		//panel.add(pnlTemperature);
+		add(pnlTemperature);
 
-		panel.add(pnlMaxRange);
+		//panel.add(pnlMaxRange);
+		add(pnlMaxRange);
 		pnlMaxRange.setTitle("maximum search range");
-		pnlMaxRange.setBounds(10, 147, 348, 134);
+		pnlMaxRange.setBounds(10, 147, 448, 134);
 		pnlMaxRange.setToolTipText("<html>For free energy minimisation, parameter sets the maximum<br>"
 						+ "search range for pairs of atoms interacting via the same many<br>"
 						+ "body term that gives a contribution to the third derivatives.<br>"
@@ -76,24 +81,25 @@ public class FreeEnergy extends JPanel implements Serializable {
 						+ "are needed then a value of 3.0 should be used to check<br>"
 						+ "the influence. Negative values and values greater than 3.0 are<br>"
 						+ "disallowed as being stupid!</html>");
-		txtscmaxsearch.setBounds(187, 106, 87, 20);
+		txtscmaxsearch.setBounds(225, 107, 87, 20);
 		pnlMaxRange.add(txtscmaxsearch);
 		lblMaximumSearchRange.setBounds(10, 10, 328, 77);
 		pnlMaxRange.add(lblMaximumSearchRange);
-		lblDensityCutoff.setBounds(10, 109, 170, 15);
+		lblDensityCutoff.setBounds(10, 109, 209, 15);
 		pnlMaxRange.add(lblDensityCutoff);
 
-		panel.add(pnlFreeEnergy);
+		//panel.add(pnlFreeEnergy);
+		add(pnlFreeEnergy);
 		pnlFreeEnergy.setTitle("free energy from band of frequencies");
-		pnlFreeEnergy.setBounds(464, 10, 348, 134);
-		lblLowestBand.setBounds(10, 22, 180, 15);
+		pnlFreeEnergy.setBounds(464, 10, 398, 134);
+		lblLowestBand.setBounds(10, 22, 244, 15);
 		pnlFreeEnergy.add(lblLowestBand);
-		lblHighestBand.setBounds(10, 43, 185, 15);
+		lblHighestBand.setBounds(10, 43, 244, 15);
 		pnlFreeEnergy.add(lblHighestBand);
-		txtlowest_modelow.setBounds(201, 20, 63, 19);
+		txtlowest_modelow.setBounds(260, 20, 63, 19);
 		pnlFreeEnergy.add(txtlowest_modelow);
 		txtlowest_modehigh.setBackground(Back.grey);
-		txtlowest_modehigh.setBounds(201, 41, 63, 19);
+		txtlowest_modehigh.setBounds(260, 41, 63, 19);
 		pnlFreeEnergy.add(txtlowest_modehigh);
 	}
 
