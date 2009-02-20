@@ -1,4 +1,4 @@
-package javagulp.view.potentialOptions;
+package javagulp.view;
 
 import java.io.Serializable;
 
@@ -11,9 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import javagulp.model.G;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-import javagulp.view.TitledPanel;
 
 public class EwaldOptions extends JPanel implements Serializable {
 

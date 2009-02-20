@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 
 import javagulp.view.Back;
+import javagulp.view.TitledPanel;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -12,18 +13,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
-public class Terse extends JPanel implements Serializable {
+public class Terse extends TitledPanel implements Serializable {
 
 	private static final long serialVersionUID = -8004045257003429159L;
 
-	private JLabel lblTerse = new JLabel("Make terse");
-	private JRadioButton radNone1 = new JRadioButton("None");
-	private JRadioButton radInput = new JRadioButton("Input");
-	private JRadioButton radOutput = new JRadioButton("Output");
-	private JRadioButton radInputOutput = new JRadioButton("Input and Output");
+	private JLabel lblTerse = new JLabel("make terse");
+	private JRadioButton radNone1 = new JRadioButton("none");
+	private JRadioButton radInput = new JRadioButton("input");
+	private JRadioButton radOutput = new JRadioButton("output");
+	private JRadioButton radInputOutput = new JRadioButton("input and output");
 	private ButtonGroup group1 = new ButtonGroup();
 
-	private JLabel lblDoNotOutput = new JLabel("Do not output");
+	private JLabel lblDoNotOutput = new JLabel("do not output");
 	private JRadioButton radNone2 = new JRadioButton("show full output");
 	private JRadioButton radCell = new JRadioButton("unit cell parameters for vectors");
 	private JRadioButton radCoordinates = new JRadioButton("the coordinates of the atoms");
@@ -34,23 +35,20 @@ public class Terse extends JPanel implements Serializable {
 
 	public Terse() {
 		super();
-		setLayout(null);
-		setBorder(new TitledBorder(null, "",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
+		setTitle("level of output details");
 		this.setPreferredSize(new java.awt.Dimension(470, 250));
 
 		add(lblTerse);
-		lblTerse.setBounds(7, 7, 126, 21);
+		lblTerse.setBounds(7, 34, 126, 21);
 		radNone1.setSelected(true);
 		add(radNone1);
-		radNone1.setBounds(7, 34, 140, 21);
+		radNone1.setBounds(7, 61, 140, 21);
 		add(radInput);
-		radInput.setBounds(7, 61, 140, 21);
+		radInput.setBounds(7, 88, 140, 21);
 		add(radOutput);
-		radOutput.setBounds(7, 88, 140, 21);
+		radOutput.setBounds(7, 115, 140, 21);
 		add(radInputOutput);
-		radInputOutput.setBounds(7, 115, 170, 21);
+		radInputOutput.setBounds(7, 142, 170, 21);
 
 		group1.add(radNone1);
 		group1.add(radInput);
@@ -58,20 +56,20 @@ public class Terse extends JPanel implements Serializable {
 		group1.add(radInputOutput);
 
 		add(lblDoNotOutput);
-		lblDoNotOutput.setBounds(183, 7, 238, 21);
+		lblDoNotOutput.setBounds(183, 34, 238, 21);
 		radNone2.setSelected(true);
 		add(radNone2);
-		radNone2.setBounds(183, 34, 238, 21);
+		radNone2.setBounds(183, 61, 238, 21);
 		add(radCell);
-		radCell.setBounds(183, 61, 277, 21);
+		radCell.setBounds(183, 88, 277, 21);
 		add(radCoordinates);
-		radCoordinates.setBounds(183, 88, 238, 21);
+		radCoordinates.setBounds(183, 115, 238, 21);
 		add(radStructure);
-		radStructure.setBounds(183, 115, 238, 21);
+		radStructure.setBounds(183, 142, 238, 21);
 		add(radPotentials);
-		radPotentials.setBounds(183, 142, 238, 21);
+		radPotentials.setBounds(183, 169, 238, 21);
 		add(radDerivatives);
-		radDerivatives.setBounds(183, 169, 238, 21);
+		radDerivatives.setBounds(183, 196, 238, 21);
 
 		group2.add(radNone2);
 		group2.add(radCell);

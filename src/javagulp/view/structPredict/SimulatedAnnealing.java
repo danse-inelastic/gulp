@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-	class SimulatedAnnealing extends JPanel implements Serializable {
+	public class SimulatedAnnealing extends JPanel implements Serializable {
 		private static final long serialVersionUID = 2993595893032807688L;
 		
 		private G g = new G();
@@ -29,7 +29,7 @@ import javax.swing.JTextField;
 
 		private Temperature pnlTemperature = new Temperature(100);
 		
-		SimulatedAnnealing() {
+		public SimulatedAnnealing() {
 			super();
 			setLayout(null);
 			
@@ -74,7 +74,7 @@ import javax.swing.JTextField;
 			return lines;
 		}
 
-		String writeSimulatedAnnealing() {
+		public String writeSimulatedAnnealing() {
 			return pnlTemperature.writeTemperature() + writeFactor() + writeTempTolerance();
 		}
 	}

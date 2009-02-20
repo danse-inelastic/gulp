@@ -228,17 +228,17 @@ public class Output extends JPanel implements Serializable {
 		this.setPreferredSize(new java.awt.Dimension(1255, 287));
 
 		btnRun.addActionListener(keyRun);
-		btnRun.setBounds(151, 241, 173, 30);
+		btnRun.setBounds(151, 241, 195, 30);
 		add(btnRun);
 		lblStatus.setBounds(18, 275, 300, 20);
 		add(lblStatus);
 		btnClear.addActionListener(keyClear);
-		btnClear.setBounds(328, 241, 81, 30);
+		btnClear.setBounds(352, 241, 81, 30);
 		add(btnClear);
 		btnViewOutput.addActionListener(keyViewOutput);
-		btnViewOutput.setBounds(321, 32, 88, 20);
+		btnViewOutput.setBounds(340, 34, 93, 20);
 		add(btnViewOutput);
-		cboTimeUnits.setBounds(316, 60, 93, 20);
+		cboTimeUnits.setBounds(340, 60, 93, 20);
 		add(cboTimeUnits);
 		lblOutputFile.setBounds(9, 35, 136, 15);
 		add(lblOutputFile);
@@ -246,20 +246,20 @@ public class Output extends JPanel implements Serializable {
 		pnlCalculationTitle.setBorder(new TitledBorder(null,
 				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlCalculationTitle.setBounds(9, 187, 400, 48);
+		pnlCalculationTitle.setBounds(9, 187, 424, 48);
 		add(pnlCalculationTitle);
 		txtCalculationTitle.setBounds(9, 20, 363, 19);
 		pnlCalculationTitle.add(txtCalculationTitle);
-		txtInfinity.setBounds(196, 60, 119, 20);
+		txtInfinity.setBounds(196, 60, 136, 20);
 		add(txtInfinity);
 		lblTimeLimit.setBounds(9, 62, 165, 15);
 		add(lblTimeLimit);
 		lblInputFile.setBounds(9, 8, 136, 15);
 		add(lblInputFile);
-		txtOutputFile.setBounds(196, 33, 119, 20);
+		txtOutputFile.setBounds(196, 33, 136, 20);
 		add(txtOutputFile);
 		btnViewInput.addActionListener(keyViewInput);
-		btnViewInput.setBounds(321, 5, 88, 20);
+		btnViewInput.setBounds(340, 6, 93, 20);
 		add(btnViewInput);
 
 		chkProduceRestartFile.setBounds(9, 108, 300, 25);
@@ -278,11 +278,11 @@ public class Output extends JPanel implements Serializable {
 		txtFort12.setBounds(314, 111, 84, 20);
 		add(txtFort12);
 
-		pnlOutputFormats.setBounds(415, 4, 330, 278);
+		pnlOutputFormats.setBounds(439, 5, 330, 278);
 		add(pnlOutputFormats);
-		pnlTerse.setBounds(751, 8, 470, 266);
+		pnlTerse.setBounds(775, 5, 470, 277);
 		add(pnlTerse);
-		txtInputFile.setBounds(196, 6, 119, 20);
+		txtInputFile.setBounds(196, 6, 136, 20);
 		add(txtInputFile);
 		add(chkSeparate);
 		chkSeparate.setBounds(9, 84, 378, 21);
