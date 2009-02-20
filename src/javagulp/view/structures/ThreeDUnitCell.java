@@ -1,5 +1,6 @@
 package javagulp.view.structures;
 
+import java.awt.BorderLayout;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
@@ -27,10 +28,9 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 
 	public ThreeDUnitCell() {
 		super();
-		setLayout(null);
+		setLayout(new BorderLayout());
 
 		add(tabbedPane);
-		tabbedPane.setBounds(0, 0, 294, 228);
 		tabbedPane.add(cellVectors, "vectors");
 		tabbedPane.add(cellParameters, "parameters");
 		
@@ -38,9 +38,9 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 
 	public String write3DUnitCell() throws IncompleteOptionException {
 		if (tabbedPane.getSelectedIndex() == 0)
-			return cellParameters.writeCellParameters();
-		else
 			return cellVectors.writeCellVectors();
+		else
+			return cellParameters.writeCellParameters();
 	}
 	
 	public void setParameters(String[] params) {

@@ -1,4 +1,4 @@
-package javagulp.view;
+package javagulp.view.structures;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import javagulp.model.SerialListener;
+import javagulp.view.Back;
 
 public class SpaceGroup extends JPanel implements Serializable {
 
@@ -136,16 +137,16 @@ public class SpaceGroup extends JPanel implements Serializable {
 		final JComboBox cboNumber = new JComboBox();
 		cboNumber.setActionCommand("comboBox_SpaceGroupChanged");
 		cboNumber.setModel(new DefaultComboBoxModel(new String[] { "number", "symbol" }));
-		cboNumber.setBounds(10, 25, 77, 24);
+		cboNumber.setBounds(10, 25, 104, 24);
 		add(cboNumber);
-		txtSpaceGroup.setBounds(92, 27, 75, 20);
+		txtSpaceGroup.setBounds(120, 28, 75, 20);
 		add(txtSpaceGroup);
 		JLabel lblOrigin = new JLabel("origin");
-		lblOrigin.setBounds(12, 67, 39, 15);
+		lblOrigin.setBounds(12, 67, 52, 15);
 		add(lblOrigin);
 
 		panel.setLayout(new CardLayout());
-		panel.setBounds(226, 61, 201, 30);
+		panel.setBounds(251, 64, 201, 30);
 		add(panel);
 
 		panel.add(number, number.getName());
@@ -154,7 +155,7 @@ public class SpaceGroup extends JPanel implements Serializable {
 
 		cboOriginNumber.addActionListener(keyPanel);
 		cboOriginNumber.setSelectedIndex(0);
-		cboOriginNumber.setBounds(57, 66, 164, 20);
+		cboOriginNumber.setBounds(70, 64, 164, 20);
 		add(cboOriginNumber);
 	}
 

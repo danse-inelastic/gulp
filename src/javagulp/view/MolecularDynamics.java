@@ -54,12 +54,13 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		pnlTemperature.setBounds(317, 6, 444, 106);
+		pnlTemperature.setBounds(317, 6, 498, 106);
 		add(pnlTemperature);
 		pnlTemperature.txtFirstStep.setEnabled(true);
-		pnlMDmass.setBounds(790, 119, 399, 118);
+		pnlMDmass.setBounds(790, 119, 453, 118);
+		pnlMDmass.cboShellmassSpecies.setBounds(180, 18, 116, 25);
 		add(pnlMDmass);
-		pnlVectorTable.setBounds(317, 243, 503, 103);
+		pnlVectorTable.setBounds(317, 243, 503, 122);
 		add(pnlVectorTable);
 		pnlPressure.setBounds(317, 119, 467, 44);
 		add(pnlPressure);
@@ -68,15 +69,15 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		chkMD.addActionListener(keyMD);
 		chkMD.setBounds(4, 6, 307, 25);
 		add(chkMD);
-		pnlMDmassless.setBounds(767, 6, 422, 106);
+		pnlMDmassless.setBounds(821, 6, 422, 106);
 		add(pnlMDmassless);
-		pnlThermodynamicEnsembles.setBounds(2, 32, 309, 157);
+		pnlThermodynamicEnsembles.setBounds(2, 32, 309, 165);
 		add(pnlThermodynamicEnsembles);
-		pnlIntegrator.setBounds(2, 189, 310, 51);
+		pnlIntegrator.setBounds(4, 203, 310, 51);
 		add(pnlIntegrator);
-		pnlTimeLengths.setBounds(4, 243, 309, 105);
+		pnlTimeLengths.setBounds(2, 260, 309, 105);
 		add(pnlTimeLengths);
-		pnlOutputFormats.setBounds(826, 243, 363, 103);
+		pnlOutputFormats.setBounds(826, 243, 417, 122);
 		add(pnlOutputFormats);
 	}
 

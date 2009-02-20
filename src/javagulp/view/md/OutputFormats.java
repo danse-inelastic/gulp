@@ -15,7 +15,7 @@ import javax.swing.border.TitledBorder;
 		private JLabel lblWriteFrequencyps = new JLabel("write to md dumpfile every");
 		private JLabel lblMdarchive = new JLabel("create Insight II archive file");
 
-		private JTextField txtWrite = new JTextField("1");
+		private JTextField txtWrite = new JTextField();
 		private JTextField txtMdarchive = new JTextField();
 
 		private JComboBox cboUnits = new JComboBox(new String[] { "ps", "ns",
@@ -33,9 +33,9 @@ import javax.swing.border.TitledBorder;
 			add(txtWrite);
 			lblMdarchive.setBounds(7, 49, 230, 15);
 			add(lblMdarchive);
-			txtMdarchive.setBounds(228, 45, 189, 21);
+			txtMdarchive.setBounds(228, 45, 183, 21);
 			add(txtMdarchive);
-			cboUnits.setBounds(319, 18, 98, 21);
+			cboUnits.setBounds(319, 18, 92, 21);
 			add(cboUnits);
 		}
 

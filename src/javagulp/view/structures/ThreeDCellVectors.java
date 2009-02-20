@@ -80,6 +80,15 @@ import javax.swing.JTextField;
 			setLayout(null);
 
 		}
+		
+		public static String stackFields(JTextField[] fields) {
+			String lines = "";
+			String sep = System.getProperty ( "line.separator" );
+			lines += fields[0].getText() + " " + fields[1].getText() + " " + fields[2].getText() + sep;
+			lines += fields[3].getText() + " " + fields[4].getText() + " " + fields[5].getText() + sep;
+			lines += fields[6].getText() + " " + fields[7].getText() + " " + fields[8].getText() + sep;
+			return lines.trim();
+		}
 
 		public String writeCellVectors() throws IncompleteOptionException {
 			JTextField[] fields = { txtAx, txtAy, txtAz, txtBx, txtBy, txtBz,
@@ -92,7 +101,7 @@ import javax.swing.JTextField;
 			if (Back.checkAnyNonEmpty(fields)) {
 				Back.checkAllNonEmpty(fields, descriptions);
 				Back.parseFieldsD(fields, descriptions);
-				lines = Back.concatFields(fields) + " ";
+				lines = stackFields(fields) + " ";
 			}
 			JCheckBox[] boxes = { chkXX, chkXY, chkXZ, chkYY, chkYZ, chkZZ };
 			lines += Back.writeFits(boxes);

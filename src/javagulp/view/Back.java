@@ -298,6 +298,8 @@ public class Back {
 		return lines.trim();
 	}
 	
+	
+	
 	/**
 	 * This method concatenates the contents of an array of JTextFields.
 	 * The contents are separated by spaces.
