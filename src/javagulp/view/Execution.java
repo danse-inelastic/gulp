@@ -123,7 +123,7 @@ public class Execution extends JPanel implements Serializable {
 	public Execution() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(686, 385));
+		//this.setPreferredSize(new java.awt.Dimension(686, 385));
 
 		radLocal.addActionListener(keyRemote);
 		radRemote.addActionListener(keyRemote);
@@ -152,30 +152,30 @@ public class Execution extends JPanel implements Serializable {
 		lblExecute.setBounds(28, 0, 105, 28);
 		radLocal.setBounds(7, 21, 161, 21);
 		radRemote.setBounds(7, 42, 161, 21);
-		scrollHosts.setBounds(7, 112, 154, 203);
+		scrollHosts.setBounds(7, 103, 154, 212);
 		lblUsername.setBounds(168, 112, 105, 21);
 		txtUsername.setBounds(168, 133, 154, 21);
 		lblPassword.setBounds(168, 154, 105, 21);
 		pwdPassword.setBounds(168, 175, 154, 21);
-		chkCredentials.setBounds(168, 63, 154, 49);
-		lblHosts.setBounds(35, 84, 105, 28);
+		chkCredentials.setBounds(168, 63, 315, 49);
+		lblHosts.setBounds(7, 69, 105, 28);
 		radDirect.setBounds(168, 21, 161, 21);
 		radPBS.setBounds(168, 42, 161, 21);
-		scrollStatus.setBounds(329, 7, 357, 308);
-		lblParallel.setBounds(168, 203, 98, 42);
-		txtParallel.setBounds(287, 210, 35, 21);
-		btnPause.setBounds(168, 240, 80, 21);
+		scrollStatus.setBounds(489, 4, 453, 308);
+		lblParallel.setBounds(168, 203, 241, 28);
+		txtParallel.setBounds(415, 207, 35, 21);
+		btnPause.setBounds(168, 253, 80, 21);
 		add(chkCustom);
 		chkCustom.setBounds(168, 280, 161, 42);
 		add(txtWorkingDirectory);
-		txtWorkingDirectory.setBounds(168, 322, 518, 28);
+		txtWorkingDirectory.setBounds(264, 321, 518, 28);
 		add(txtGulpBinary);
-		txtGulpBinary.setBounds(168, 357, 518, 28);
+		txtGulpBinary.setBounds(264, 358, 518, 28);
 		add(btnWorkingDirectory);
-		btnWorkingDirectory.setBounds(7, 322, 154, 28);
+		btnWorkingDirectory.setBounds(7, 322, 241, 28);
 		btnWorkingDirectory.addActionListener(keyWorkingDirectory);
 		add(btnGulpBinary);
-		btnGulpBinary.setBounds(7, 357, 154, 28);
+		btnGulpBinary.setBounds(7, 357, 241, 28);
 		btnGulpBinary.addActionListener(keyGulpExecutable);
 
 		txtWorkingDirectory.setEnabled(false);

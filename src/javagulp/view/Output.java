@@ -51,7 +51,7 @@ public class Output extends JPanel implements Serializable {
 	private static final long serialVersionUID = -4891514818536259508L;
 
 	private JButton btnClear = new JButton("clear");
-	private JButton btnRun = new JButton("run on external server");
+	private JButton btnRun = new JButton("run");
 	private JButton btnViewInput = new JButton("view");
 	private JButton btnViewOutput = new JButton("view");
 
@@ -96,7 +96,11 @@ public class Output extends JPanel implements Serializable {
 					String gulpInputFile = txtInputFile.getText();
 					
 					//copy file over
-					//sendFiles();
+					try {
+						sendFiles("vnf.caltech.edu", gulpInputFile, null, gulpInputFile, null);
+					} catch (ConnectException e1) {
+						e1.printStackTrace();
+					}
 					
 					//throw gulp into background
 					//executeRemote();
@@ -106,7 +110,7 @@ public class Output extends JPanel implements Serializable {
 				}
 			});
 			runAtVnfButton.setText("export to vnf");
-			runAtVnfButton.setBounds(9, 242, 136, 28);
+			runAtVnfButton.setBounds(9, 242, 148, 28);
 		}
 		return runAtVnfButton;
 	}	
@@ -227,12 +231,12 @@ public class Output extends JPanel implements Serializable {
 		this.setPreferredSize(new java.awt.Dimension(1255, 287));
 
 		btnRun.addActionListener(keyRun);
-		btnRun.setBounds(151, 241, 195, 30);
+		btnRun.setBounds(163, 241, 136, 30);
 		add(btnRun);
 		lblStatus.setBounds(18, 275, 300, 20);
 		add(lblStatus);
 		btnClear.addActionListener(keyClear);
-		btnClear.setBounds(352, 241, 81, 30);
+		btnClear.setBounds(305, 241, 128, 30);
 		add(btnClear);
 		btnViewOutput.addActionListener(keyViewOutput);
 		btnViewOutput.setBounds(340, 34, 93, 20);
