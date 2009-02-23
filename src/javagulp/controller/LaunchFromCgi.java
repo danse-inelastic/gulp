@@ -9,7 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javagulp.model.Material;
 import javagulp.view.Back;
@@ -17,9 +21,15 @@ import javagulp.view.Back;
 public class LaunchFromCgi {
 
 	private static Back b = null;
+	public static final Map<String,String> KEY_VALS = new HashMap<String,String>();
 	
-	public LaunchFromCgi(String id) {
-		Material mat = getMaterial(id);
+	public LaunchFromCgi(String[] simulationParams) {
+		for(String param: simulationParams){
+			String[] keyVal = param.split("=");
+			KEY_VALS.put(keyVal[0],keyVal[1]);
+		}
+		//retrieve matter and load it
+		Material mat = getMaterial(KEY_VALS.get("materialId"));
 		if (b == null)
 			b = new Back();
 		else
@@ -40,7 +50,7 @@ public class LaunchFromCgi {
 		// get the material parameters from the db (eventually use ORM tool)
 		try {
 			Properties props = new Properties();
-	//		props.setProperty("user","linjiao");
+//			props.setProperty("user","linjiao");
 //			props.setProperty("password","4OdACm#");
 //			String url = "jdbc:postgresql://localhost:54321/vnf";
 			props.setProperty("user","vnf");
@@ -102,7 +112,7 @@ public class LaunchFromCgi {
 			else
 				b.addTab();
 		} else{
-			new LaunchFromCgi(args[0]);			
+			new LaunchFromCgi(args);			
 		}
 	}
 
