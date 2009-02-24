@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.CgiCommunicate;
@@ -104,7 +105,8 @@ public class Output extends JPanel implements Serializable {
 //					}
 					//pass file as cgi key value along with other original parameters
 					CgiCommunicate cgiCom = new CgiCommunicate();
-					
+					Map<String,String> cgiMap = Back.getPanel().keyVals;
+					cgiMap.put("gulpInputFile", gulpInputFile);
 					cgiCom.setCgiParams(cgiMap);
 					cgiCom.post();
 					

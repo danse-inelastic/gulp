@@ -99,9 +99,9 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 		//retrieve matter and load it
 		Material mat = getMaterial(keyVals.get("materialId"));
-		Back.getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
-		Back.getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
-		getStructures()
+		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
+		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+		//keep the rest of the parameters and pass them to the job submission post
 	}
 	
 	Material getMaterial(String id){
@@ -173,48 +173,6 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 		return top[index];
 	}
-	
-//	private class BottomListener implements ChangeListener, Serializable {
-//		private static final long serialVersionUID = -7847271919463899366L;
-//	
-//		public void stateChanged(ChangeEvent e) {
-//			int index = bottomPane.getSelectedIndex();
-//			bottomPane.setComponentAt(index, getBottomPanel(index));
-//		}
-//	};
-//	private BottomListener keyBottom = new BottomListener();
-//	private SerialKeyAdapter keyDelete = new SerialKeyAdapter() {
-//		private static final long serialVersionUID = -3244021879612727287L;
-//		@Override
-//		public void keyReleased(KeyEvent e) {
-//			int index = bottomPane.getSelectedIndex();
-//			if (index == 0 && e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-//				if (JOptionPane.showConfirmDialog(null,
-//						"Are you sure you want to delete all structures?") == JOptionPane.YES_OPTION) {
-//					Structures s = Back.getPanel().getStructures();
-//					s.tabs.removeAll();
-//					s.tabs.addTab("" + (s.tabs.getTabCount() + 1), s.new Structure());
-//				}
-//			}
-//		}
-//	};
-	
-//	private JPanel getBottomPanel(int index) {
-//		if (bottom[index] == null) {
-//			String pkg = "javagulp.view.bottom.";
-//			try {
-//				Class c = Class.forName(pkg + bottomNames[index]);
-//				bottom[index] = (JPanel) c.newInstance();
-//			} catch (ClassNotFoundException e) {
-//				e.printStackTrace();
-//			} catch (InstantiationException e) {
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return bottom[index];
-//	}
 	
 	public String getWD() {
 		return getExecution().txtWorkingDirectory.getText();
