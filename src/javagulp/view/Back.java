@@ -34,6 +34,14 @@ public class Back {
 	public static final String newLine = System.getProperty("line.separator");
 
 	public Back() {
+		initializeFrame(null);
+	}
+	
+	public Back(String[] simulationParams) {
+		initializeFrame(simulationParams);
+	}
+	
+	private void initializeFrame(String[] simulationParams){
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(pcmenu);
 
@@ -50,7 +58,7 @@ public class Back {
 				(screenSize.height - frameSize.height) / 2);
 
 		frame.add(tabs);
-		addTab();
+		addTab(simulationParams);
 
 		tabs.addKeyListener(new KeyAdapter() {
 			@Override
@@ -67,34 +75,19 @@ public class Back {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					addTab();
+					addTab(null);
 				}
 			}
 		});
 		frame.setVisible(true);
 	}
 
-	public void addTab() {
-		tabs.add("" + (tabs.getTabCount() + 1), new GulpRun());
+	public void addTab(String[] simulationParams) {
+		tabs.add("" + (tabs.getTabCount() + 1), new GulpRun(simulationParams));
 		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 	}
 
-//	public static String getFileContents(File file) {
-//		StringBuffer contents = new StringBuffer();
-//		Scanner in = null;
-//		try {
-//			in = new Scanner(file);
-//			while (in.hasNext()) {
-//				contents.append(in.nextLine());
-//				contents.append(newLine);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		in.close();
-//		return contents.toString();
-//	}
 	
 	public static String getFileContents(File file) {
 		StringBuffer contents = new StringBuffer();
@@ -138,7 +131,7 @@ public class Back {
 	 * This method replaces the current tab and Keywords with new instances.
 	 */
 	public static void clearTab() {
-		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
+		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun(null));
 		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 	}
 	

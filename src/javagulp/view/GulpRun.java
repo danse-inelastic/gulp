@@ -2,8 +2,18 @@ package javagulp.view;
 
 import java.awt.BorderLayout;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import javagulp.model.Keywords;
+import javagulp.model.Material;
+import javagulp.view.Structures.Structure;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -28,6 +38,9 @@ public class GulpRun extends JPanel implements Serializable {
 
 	public JTabbedPane topPane = new JTabbedPane();
 	public JScrollPane topScroll = new JScrollPane(topPane);
+	private TopListener keyTop = new TopListener();
+
+	public Map<String,String> keyVals;
 
 
 
@@ -39,7 +52,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private Keywords keywords = null;
 
-	public GulpRun() {
+	public GulpRun(String[] simulationParams) {
 		super();
 		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
@@ -74,8 +87,66 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
+		
+		processArguments(simulationParams);
 	}
 	
+	private void processArguments(String[] simulationParams) {
+		keyVals = new HashMap<String,String>();
+		for(String param: simulationParams){
+			String[] keyVal = param.split("=");
+			keyVals.put(keyVal[0],keyVal[1]);
+		}
+		//retrieve matter and load it
+		Material mat = getMaterial(keyVals.get("materialId"));
+		Back.getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
+		Back.getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+		getStructures()
+	}
+	
+	Material getMaterial(String id){
+		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
+		"SELECT * FROM singlecrystals WHERE id = '"+id+"' UNION "+
+		"SELECT * FROM disordered WHERE id = '"+id+"'";
+		//Array latticeArray = null;
+		double[] latticeVec = null;
+		//Array fractionalCoordinatesArray = null;
+		double[] fractionalCoordinatesVec = null;
+		String[] atomSymbols = null;
+		// get the material parameters from the db (eventually use ORM tool)
+		try {
+			Properties props = new Properties();
+//			props.setProperty("user","linjiao");
+//			props.setProperty("password","4OdACm#");
+//			String url = "jdbc:postgresql://localhost:54321/vnf";
+			props.setProperty("user","vnf");
+			props.setProperty("password","A4*gl8D");
+			String url = "jdbc:postgresql://vnf.caltech.edu:5432/vnf";
+			Class.forName("org.postgresql.Driver");
+			Connection con = DriverManager.getConnection(url,props);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			rs.next();
+			///latticeArray = rs.getArray("cartesian_lattice");
+			latticeVec = (double[])rs.getArray("cartesian_lattice").getArray();
+			fractionalCoordinatesVec = (double[])rs.getArray("fractional_coordinates").getArray();
+			atomSymbols = (String[])rs.getArray("atom_symbols").getArray();
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			System.out.println(ex.toString());
+			ex.printStackTrace();
+		}
+		Material mat = new Material();
+		mat.latticeVec = latticeVec;
+		mat.fractionalCoordinatesVec = fractionalCoordinatesVec;
+		mat.atomSymbols = atomSymbols;
+		return mat;
+	}
+
+
 	private class TopListener implements ChangeListener, Serializable {
 		private static final long serialVersionUID = -7619847591444570775L;
 		
@@ -84,7 +155,7 @@ public class GulpRun extends JPanel implements Serializable {
 			topPane.setComponentAt(index, getTopPanel(index));
 		}
 	};
-	private TopListener keyTop = new TopListener();
+
 	
 	private JPanel getTopPanel(int index) {
 		if (top[index] == null) {
@@ -151,6 +222,10 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	public String getBinary() {
 		return getExecution().txtGulpBinary.getText();
+	}
+	
+	public Structure getStructure() {
+		return (Structure)getStructures().tabs.getSelectedComponent();
 	}
 	
 	public Keywords getKeywords() {

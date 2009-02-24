@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.controller.CgiCommunicate;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -92,18 +93,23 @@ public class Output extends JPanel implements Serializable {
 			runAtVnfButton = new JButton();
 			runAtVnfButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					//write file
+					//get file as string
 					String gulpInputFile = txtInputFile.getText();
 					
 					//copy file over
-					try {
-						sendFiles("vnf.caltech.edu", gulpInputFile, null, gulpInputFile, null);
-					} catch (ConnectException e1) {
-						e1.printStackTrace();
-					}
+//					try {
+//						sendFiles("vnf.caltech.edu", gulpInputFile, null, gulpInputFile, null);
+//					} catch (ConnectException e1) {
+//						e1.printStackTrace();
+//					}
+					//pass file as cgi key value along with other original parameters
+					CgiCommunicate cgiCom = new CgiCommunicate();
 					
-					//throw gulp into background
-					//executeRemote();
+					cgiCom.setCgiParams(cgiMap);
+					cgiCom.post();
+					
+					//close gulp
+					System.exit(0);
 					
 					//shut down gulp
 					
