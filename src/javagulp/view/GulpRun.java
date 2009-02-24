@@ -52,7 +52,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private Keywords keywords = null;
 
-	public GulpRun(String[] simulationParams) {
+	public GulpRun() {
 		super();
 		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
@@ -88,17 +88,20 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
 		
-		processArguments(simulationParams);
 	}
 	
-	private void processArguments(String[] simulationParams) {
+	void processArguments(String[] simulationParams) {
 		keyVals = new HashMap<String,String>();
+		if (simulationParams.length==0){
+			simulationParams=new String[]{"username=demo","ticket=5X",
+					"simulationId=1","matterId=9TAL9D"};
+		}
 		for(String param: simulationParams){
 			String[] keyVal = param.split("=");
 			keyVals.put(keyVal[0],keyVal[1]);
 		}
 		//retrieve matter and load it
-		Material mat = getMaterial(keyVals.get("materialId"));
+		Material mat = getMaterial(keyVals.get("matterId"));
 		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
 		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
 		//keep the rest of the parameters and pass them to the job submission post

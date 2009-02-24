@@ -63,12 +63,25 @@
 		<unsignjar jar="deployable/commons-logging.jar" />
 		<unsignjar jar="deployable/j2ssh.jar" />
 		<unsignjar jar="deployable/pg74.216.jdbc3.jar" />
-		<!-- jar up the source -->
+		<!-- jar up the source 
 		<jar jarfile="deployable/${app-name}.jar">
+			<manifest file="jee/MANIFEST.MF" />
 			<fileset dir="${build}">
 				<include name="javagulp/**" />
 			</fileset>
-		</jar>
+		</jar>-->
+	    <delete file="deployable/${app-name}.jar"/>
+	    <delete file="MANIFEST.MF"/>
+	    <manifest file="MANIFEST.MF">
+	        <attribute name="Built-By" value="${user.name}"/>
+	        <attribute name="Main-Class" value="javagulp.controller.LaunchGulpUi"/>
+	    </manifest>
+	  
+	      <jar destfile="deployable/${app-name}.jar"
+	           includes="**/*.class"
+	           manifest="MANIFEST.MF"
+	           />
+
 		<!-- sign all jars -->
 		<signjar jar="deployable/${app-name}.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
 		<signjar jar="deployable/commons-logging.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
