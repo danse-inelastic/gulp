@@ -58,9 +58,7 @@ public class Back {
 				(screenSize.height - frameSize.height) / 2);
 
 		frame.add(tabs);
-		// one has to add the tab *and then* process the arguments because the processing refers to a completed panel arrangement
-		addTab();
-		getPanel().processArguments(simulationParams);
+		addTab(simulationParams);
 
 		tabs.addKeyListener(new KeyAdapter() {
 			@Override
@@ -77,19 +75,17 @@ public class Back {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					addTab();
+					addTab(null);
 				}
 			}
 		});
 		frame.setVisible(true);
 	}
 
-	public void addTab() {
-		//tabs.add(new GulpRun());
-		tabs.add("" + (tabs.getTabCount() + 1), new GulpRun());
-		//getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
-		//tabs.setSelectedIndex(tabs.getTabCount() - 1);
-		tabs.setSelectedIndex(tabs.getTabCount()-1);
+	public void addTab(String[] simulationParams) {
+		tabs.add("" + (tabs.getTabCount() + 1), new GulpRun(simulationParams));
+		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
+		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 	}
 
 	
@@ -115,8 +111,6 @@ public class Back {
 	 * @return the current instance of GulpRun
 	 */
 	public static GulpRun getPanel() {
-		if (tabs.getSelectedIndex()==-1)
-			tabs.setSelectedIndex(0);
 		return (GulpRun) tabs.getComponent(tabs.getSelectedIndex());
 	}
 	
@@ -137,7 +131,7 @@ public class Back {
 	 * This method replaces the current tab and Keywords with new instances.
 	 */
 	public static void clearTab() {
-		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
+		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun(null));
 		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 	}
 	

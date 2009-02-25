@@ -12,7 +12,7 @@ public class LaunchGulpUi {
 		if (b == null)
 			b = new Back(simulationParams);
 		else
-			b.addTab();
+			b.addTab(simulationParams);
 
 	}
 	
