@@ -14,8 +14,8 @@ public class JavaGULP {
 	public static void main(final String[] args) {
 		if (b == null)
 			b = new Back();
-		else
-			b.addTab();
+//		else
+//			b.addTab();
 		// this only works for java
 		if (args.length == 1) {
 			String contents = Back.getFileContents(new File(args[0]));
@@ -42,8 +42,8 @@ public class JavaGULP {
 			final ArrayList<String[]> args, final ArrayList<String> names) {
 		if (b == null)
 			b = new Back();
-		else
-			b.addTab();
+//		else
+//			b.addTab();
 		System.out.println("args.size " + args.size());
 		Back.getPanel().getStructures().importStructures(species, coordinates, args, names);
 	}

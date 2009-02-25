@@ -33,11 +33,9 @@ import javax.swing.event.ListSelectionListener;
 
 public class Potential extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4991943378742898078L;
-	private String libraryPath = "src/javagulp/view/potentialLibraries";
+	//private String libraryPath = "src/javagulp/view/potentialLibraries";
+	private String libraryPath = "";
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
@@ -94,8 +92,6 @@ public class Potential extends JPanel {
         listSelectionModel.addListSelectionListener(
                 new LibraryListener());
 		panel.add(libraryList);
-
-
 	}
 	
 	private class LibraryListener implements

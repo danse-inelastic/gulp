@@ -1,4 +1,4 @@
-<project name="Javagulp" default="package-trueblue" basedir=".">
+<project name="Javagulp" default="jar-for-danse" basedir=".">
 
 	<macrodef name="unsignjar">
 
@@ -54,7 +54,18 @@
 		<mkdir dir="bin" />
 	</target>
 
-	<target name="package-trueblue" description="build jars for vnf" depends="init">
+	<target name="jar-potentials" description="puts potentials in a jar" depends="init">
+		<jar destfile="lib/potentials.jar" >
+			<fileset dir="resources/potentials">
+				<include name="**" />
+			</fileset>
+		</jar>
+		<!-- sign jar -->
+		<signjar jar="lib/potentials.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />	
+		<copy file="lib/potentials.jar" todir="deployable"/>
+	</target>
+	
+	<target name="jar-for-danse" description="build jars for vnf" depends="jar-potentials">
 		<!-- first unsign external jars -->
 		<unsignjar jar="deployable/commons-logging.jar" />
 		<unsignjar jar="deployable/j2ssh.jar" />
