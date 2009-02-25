@@ -14,6 +14,8 @@ import javagulp.model.Keywords;
 import javagulp.model.Material;
 import javagulp.view.Structures.Structure;
 
+//import org.postgresql.util.PSQLException
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -87,12 +89,15 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
-		
 		processArguments(simulationParams);
 	}
 	
 	private void processArguments(String[] simulationParams) {
 		keyVals = new HashMap<String,String>();
+		if (simulationParams.length==0){
+			return;
+			//simulationParams=new String[]{"username=demo","ticket=5X","simulationId=1","matterId=9TAL9D"};
+		} else{
 		for(String param: simulationParams){
 			String[] keyVal = param.split("=");
 			keyVals.put(keyVal[0],keyVal[1]);
@@ -101,6 +106,7 @@ public class GulpRun extends JPanel implements Serializable {
 		Material mat = getMaterial(keyVals.get("materialId"));
 		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
 		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+		}
 		//keep the rest of the parameters and pass them to the job submission post
 	}
 	
@@ -135,10 +141,13 @@ public class GulpRun extends JPanel implements Serializable {
 			stmt.close();
 			con.close();
 		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
-			System.out.println(ex.toString());
+			//System.out.println(ex.getMessage());
+			//System.out.println(ex.toString());
 			ex.printStackTrace();
 		}
+//		} catch (Exception e){
+//			
+//		}
 		Material mat = new Material();
 		mat.latticeVec = latticeVec;
 		mat.fractionalCoordinatesVec = fractionalCoordinatesVec;
