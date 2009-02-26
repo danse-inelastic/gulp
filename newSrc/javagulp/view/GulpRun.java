@@ -54,7 +54,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private Keywords keywords = null;
 
-	public GulpRun(String[] simulationParams) {
+	public GulpRun() {
 		super();
 		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
@@ -91,7 +91,7 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "execution");
 	}
 	
-	private void processArguments(String[] simulationParams) {
+	public void processArguments(String[] simulationParams) {
 		keyVals = new HashMap<String,String>();
 		if (simulationParams.length==0){
 			return;
@@ -102,7 +102,7 @@ public class GulpRun extends JPanel implements Serializable {
 			keyVals.put(keyVal[0],keyVal[1]);
 		}
 		//retrieve matter and load it
-		Material mat = getMaterial(keyVals.get("materialId"));
+		Material mat = getMaterial(keyVals.get("matterId"));
 		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
 		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
 		}

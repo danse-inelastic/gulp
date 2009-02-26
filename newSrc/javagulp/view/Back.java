@@ -83,9 +83,11 @@ public class Back {
 	}
 
 	public void addTab(String[] simulationParams) {
-		tabs.add("" + (tabs.getTabCount() + 1), new GulpRun(simulationParams));
+		GulpRun gulpRun = new GulpRun();
+		tabs.add("" + (tabs.getTabCount() + 1), gulpRun);
 		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
+		gulpRun.processArguments(simulationParams);
 	}
 
 	
@@ -131,7 +133,7 @@ public class Back {
 	 * This method replaces the current tab and Keywords with new instances.
 	 */
 	public static void clearTab() {
-		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun(null));
+		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
 		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
 	}
 	
