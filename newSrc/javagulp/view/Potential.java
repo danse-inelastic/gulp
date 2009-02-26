@@ -18,7 +18,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
 import javagulp.model.SerialListener;
 import javagulp.view.potential.CreateLibrary;
-import javagulp.view.potential.PotentialLibs;
+import javagulp.view.potential.libs.PotentialLibs;
 
 import javax.swing.JButton;
 
@@ -39,7 +39,7 @@ public class Potential extends JPanel {
 
 	private static final long serialVersionUID = 4991943378742898078L;
 	//private String libraryPath = "src/javagulp/view/potentialLibraries";
-	private String libraryPath = "";
+//	private String libraryPath = "";
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
@@ -83,16 +83,6 @@ public class Potential extends JPanel {
 		importButton.addActionListener(keyLibrary);
 		
 		libraryList = new JList();
-		File dir = new File(libraryPath);
-	    //File dir = new File(".");
-
-//		System.out.println(potentialsDir.toString());
-//	    URI pUri = null;
-//		try {
-//			pUri = potentialsDir.toURI();
-//		} catch (URISyntaxException e1) {
-//			e1.printStackTrace();
-//		}
 
 	    String[] potentials = new PotentialLibs().getPotentials();
 	    
@@ -114,7 +104,7 @@ public class Potential extends JPanel {
 		librarySelected = (String) libraryList.getSelectedValue();
 
 		//String libraryContents = getURLContentAsString(libURL);
-		String libraryContents = new PotentialLibs().getFileContents(libraryPath+'/'+librarySelected);
+		String libraryContents = new PotentialLibs().getFileContents(librarySelected);
 		libraryDisplay.setText(libraryContents);
 	}
 };
