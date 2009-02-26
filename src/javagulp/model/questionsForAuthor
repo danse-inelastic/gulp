@@ -1,0 +1,40 @@
+* Which variables are the six flags of borepuslive/attractive for?  (there are 8 in these settings)
+
+* In example 35 there is the option "eam_functional numeric Ag core ag.dbout" which does not have a 'numeric' part in the help file.
+
+* All the rmin and rmax potential options use ang's as units, correct?
+
+* Does the option 'vary' have the same meaning as specifying the 'variable' keyword? 'vary' is not in gulp.html.
+
+* 'two' and 'exponential' in the genetic algorithm section do not have a format listed.  What is it?
+
+* I don't understand the totalenergy and sbulkenergy options from the documentation description.  Could you explain more?
+
+* One of the options is given as Topic:	gdcrit
+Type:	Option
+Default:	4.0
+Use:	Optimisation of defects involves a force balance method, rather than direct minimisation of the energy. 
+The method is implemented in GULP such that initially the energy is minimised until the gradient norm is sufficiently 
+small, at which point the step length is based on -(H-1).g and no line search is used (where H = second derivative 
+matrix and g = gradient vector). gdcrit sets the criterion for switching between these minimisation methods.
+
+but there is no description of how to alter it to achieve its purpose.  Could this description be enlarged?
+
+* I somewhat understand dminimum and dmaximum but would like a clearer explanation.  What exactly are 
+we setting to minimum or maximum?  Is the default zero for x, y, and z?  
+
+* Could you give me an example of how cvec is meant to be used?
+
+* What does sum_cons and sum_cst mean in
+aver sum_velocity_squared sum_energy sum_virial sum_temperature sum_cons sum_cst no_of_averaging_points
+(I'm guessing constraints and constants but it would be nice to know which)?
+
+* in the four body potentials you typically have bond and inter/intra as two separate options, but in torexp it is:
+torexp <<bond/intra/inter>gt; 
+as one option.  Is it really one option or is this just a typo?
+
+* what do you mean by "atom number in the unit cell" in monopoleq?  Is this a line number in the coordinate list?
+
+* what is the <n> for all the observable options?
+
+* what are the units for "charge" in cartesian, species, etc.?
