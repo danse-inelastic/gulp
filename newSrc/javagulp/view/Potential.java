@@ -81,6 +81,8 @@ public class Potential extends JPanel {
 		libraryList = new JList();
 		File dir = new File(libraryPath);
 	    //File dir = new File(".");
+		URL imageURL = getClass().getResource("images/myImage.gif");
+
 	    
 	    String[] children = dir.list();
 	    for (int i=0; i<children.length; i++) {

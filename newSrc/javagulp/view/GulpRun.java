@@ -89,7 +89,6 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
-		processArguments(simulationParams);
 	}
 	
 	private void processArguments(String[] simulationParams) {
