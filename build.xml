@@ -55,10 +55,8 @@
 	</target>
 
 	<target name="jar-potentials" description="puts potentials in a jar" depends="init">
-		<jar destfile="lib/potentials.jar" >
-			<fileset dir="resources/potentials">
-				<include name="**" />
-			</fileset>
+		<jar destfile="lib/potentials.jar">
+			<fileset dir="resources"/>
 		</jar>
 		<!-- sign jar -->
 		<signjar jar="lib/potentials.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />	

@@ -10,12 +10,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
 import javagulp.model.SerialListener;
 import javagulp.view.potential.CreateLibrary;
+import javagulp.view.potential.PotentialLibs;
+
 import javax.swing.JButton;
 
 import javax.swing.JList;
@@ -43,8 +47,8 @@ public class Potential extends JPanel {
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
-	
 	private JTextPane libraryDisplay = new JTextPane();
+	
 	public Potential() {
 		super();
 		setLayout(new BorderLayout());
@@ -81,18 +85,24 @@ public class Potential extends JPanel {
 		libraryList = new JList();
 		File dir = new File(libraryPath);
 	    //File dir = new File(".");
-		URL imageURL = getClass().getResource("images/myImage.gif");
+//		URL potentialsDir = getClass().getResource("/potentials");
+//		System.out.println(potentialsDir.toString());
+//	    URI pUri = null;
+//		try {
+//			pUri = potentialsDir.toURI();
+//		} catch (URISyntaxException e1) {
+//			e1.printStackTrace();
+//		}
 
+	    String[] potentials = new PotentialLibs().getPotentials();
 	    
-	    String[] children = dir.list();
-	    for (int i=0; i<children.length; i++) {
+	    for (int i=0; i<potentials.length; i++) {
 	    	// Get filename of file or directory
-	    	potentialListModel.addElement(children[i]);
+	    	potentialListModel.addElement(potentials[i]);
 	    }
 	    libraryList.setModel(potentialListModel);
 	    listSelectionModel = libraryList.getSelectionModel();
-        listSelectionModel.addListSelectionListener(
-                new LibraryListener());
+        listSelectionModel.addListSelectionListener(new LibraryListener());
 		panel.add(libraryList);
 	}
 	
@@ -104,63 +114,30 @@ public class Potential extends JPanel {
 		librarySelected = (String) libraryList.getSelectedValue();
 
 		//String libraryContents = getURLContentAsString(libURL);
-		String libraryContents = getFileContents(libraryPath+'/'+librarySelected);
+		String libraryContents = new PotentialLibs().getFileContents(libraryPath+'/'+librarySelected);
 		libraryDisplay.setText(libraryContents);
 	}
 };
 
-public String getURLContentAsString(URL url) {
-	String content = "";
-    try {
-        // Create a URL for the desired page
-//        URL url = new URL(urlString);
-        // Read all the text returned by the server
-        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-        String str;
-        while ((str = in.readLine()) != null) {
-            // str is one line of text; readLine() strips the newline character(s)
-        	content+=str;
-        	content+=System.getProperty("line.separator");
-        }
-        in.close();
-    } catch (MalformedURLException e) {
-    } catch (IOException e) {
-    }
-	return content;
-}
-
-	public String getFileContents(String filePath) {
-    //...checks on aFile are elided
-	File aFile = new File(filePath);
-    StringBuilder contents = new StringBuilder();
-    
-    try {
-      //use buffering, reading one line at a time
-      //FileReader always assumes default encoding is OK!
-      BufferedReader input =  new BufferedReader(new FileReader(aFile));
-      try {
-        String line = null; //not declared within while loop
-        /*
-        * readLine is a bit quirky :
-        * it returns the content of a line MINUS the newline.
-        * it returns null only for the END of the stream.
-        * it returns an empty String if two newlines appear in a row.
-        */
-        while (( line = input.readLine()) != null){
-          contents.append(line);
-          contents.append(System.getProperty("line.separator"));
-        }
-      }
-      finally {
-        input.close();
-      }
-    }
-    catch (IOException ex){
-      ex.printStackTrace();
-    }
-    
-    return contents.toString();
-  }
+//public String getURLContentAsString(URL url) {
+//	String content = "";
+//    try {
+//        // Create a URL for the desired page
+////        URL url = new URL(urlString);
+//        // Read all the text returned by the server
+//        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+//        String str;
+//        while ((str = in.readLine()) != null) {
+//            // str is one line of text; readLine() strips the newline character(s)
+//        	content+=str;
+//        	content+=System.getProperty("line.separator");
+//        }
+//        in.close();
+//    } catch (MalformedURLException e) {
+//    } catch (IOException e) {
+//    }
+//	return content;
+//}
 
 
 private LibraryListener listMouseListener = new LibraryListener();
