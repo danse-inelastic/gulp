@@ -63,7 +63,7 @@
 		<copy file="lib/potentials.jar" todir="deployable"/>
 	</target>
 	
-	<target name="jar-for-danse" description="build jars for vnf" depends="jar-potentials">
+	<target name="jar-for-danse" description="build jars for vnf" depends="init">
 		<!-- first unsign external jars -->
 		<unsignjar jar="deployable/commons-logging.jar" />
 		<unsignjar jar="deployable/j2ssh.jar" />
@@ -94,14 +94,10 @@
 		<signjar jar="deployable/j2ssh.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
 		<signjar jar="deployable/pg74.216.jdbc3.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
 		<copy todir="${vnfDeploy}">
-			<fileset dir="deployable">
-				<exclude name="**/*.java" />
-			</fileset>
+			<fileset dir="deployable"/>
 		</copy>
 		<copy todir="${trueblueDeploy}">
-			<fileset dir="deployable">
-				<exclude name="**/*.java" />
-			</fileset>
+			<fileset dir="deployable"/>
 		</copy>
 	</target>
 

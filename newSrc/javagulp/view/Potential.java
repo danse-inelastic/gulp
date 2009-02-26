@@ -85,7 +85,7 @@ public class Potential extends JPanel {
 		libraryList = new JList();
 		File dir = new File(libraryPath);
 	    //File dir = new File(".");
-//		URL potentialsDir = getClass().getResource("/potentials");
+
 //		System.out.println(potentialsDir.toString());
 //	    URI pUri = null;
 //		try {

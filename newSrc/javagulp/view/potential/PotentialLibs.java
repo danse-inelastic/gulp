@@ -11,29 +11,42 @@ import java.net.URL;
 public class PotentialLibs {
 	
 	public String[] getPotentials(){
-		URL potentialsDir = this.getClass().getResource("potentials");
+//		URL potentialsDir = this.getClass().getResource("libs");
+//		//File dir = new File("potentials");
+//		//alternate approach is to grab it from a jar like so:
+//		//URL potentialsDir = getClass().getResource("/potentials");
+//		URI pUri = null;
+//		try {
+//			pUri = potentialsDir.toURI();
+//		} catch (URISyntaxException e1) {
+//			e1.printStackTrace();
+//		}
+////	    String p = pUri.getPath();
+////	    String rp = pUri.getRawPath();
+//		String[] potentials = new File(pUri).list();
+		String[] potentials = new String[]{"bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
+				"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
+				"catlow.lib","finnissinclair.lib","suttonchen.lib",
+				"clerirosato.lib","garofalini.lib","tersoff.lib"};
+		return potentials;
+	}
+	
+	public String getFileContents(String potentialName) {
+		URL potentialsDir = this.getClass().getResource("libs/"+potentialName);
 		URI pUri = null;
 		try {
 			pUri = potentialsDir.toURI();
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
 		}
-	    String p = pUri.getPath();
-	    String rp = pUri.getRawPath();
-		String[] potentials = new File(pUri).list();
-		File dir = new File("potentials");
-		return potentials;
-	}
-	
-	public String getFileContents(String potential) {
-	    //...checks on aFile are elided
-		File aFile = new File("potentials/"+potential);
+		File potential = new File(pUri);
+		//File aFile = new File("libs/"+potential);
 	    StringBuilder contents = new StringBuilder();
 	    
 	    try {
 	      //use buffering, reading one line at a time
 	      //FileReader always assumes default encoding is OK!
-	      BufferedReader input =  new BufferedReader(new FileReader(aFile));
+	      BufferedReader input =  new BufferedReader(new FileReader(potential));
 	      try {
 	        String line = null; //not declared within while loop
 	        /*
