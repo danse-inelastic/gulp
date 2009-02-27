@@ -43,7 +43,8 @@ public class Potential extends JPanel {
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
-	private String librarySelected = "";
+	public String librarySelected = "";
+	public String libraryContents = "";
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
@@ -104,30 +105,10 @@ public class Potential extends JPanel {
 		librarySelected = (String) libraryList.getSelectedValue();
 
 		//String libraryContents = getURLContentAsString(libURL);
-		String libraryContents = new PotentialLibs().getFileContents(librarySelected);
+		libraryContents = new PotentialLibs().getFileContents(librarySelected);
 		libraryDisplay.setText(libraryContents);
 	}
 };
-
-//public String getURLContentAsString(URL url) {
-//	String content = "";
-//    try {
-//        // Create a URL for the desired page
-////        URL url = new URL(urlString);
-//        // Read all the text returned by the server
-//        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-//        String str;
-//        while ((str = in.readLine()) != null) {
-//            // str is one line of text; readLine() strips the newline character(s)
-//        	content+=str;
-//        	content+=System.getProperty("line.separator");
-//        }
-//        in.close();
-//    } catch (MalformedURLException e) {
-//    } catch (IOException e) {
-//    }
-//	return content;
-//}
 
 
 private LibraryListener listMouseListener = new LibraryListener();

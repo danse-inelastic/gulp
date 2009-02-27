@@ -96,6 +96,7 @@ public class Output extends JPanel implements Serializable {
 				public void actionPerformed(final ActionEvent e) {
 					//get file as string
 					String gulpInputFile = txtInputFile.getText();
+					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
 					
 					//copy file over
 //					try {
@@ -107,6 +108,7 @@ public class Output extends JPanel implements Serializable {
 					CgiCommunicate cgiCom = new CgiCommunicate();
 					Map<String,String> cgiMap = Back.getPanel().keyVals;
 					cgiMap.put("gulpInputFile", gulpInputFile);
+					cgiMap.put("gulpLibrary", gulpLibrary);
 					cgiCom.setCgiParams(cgiMap);
 					cgiCom.post();
 					
@@ -125,6 +127,7 @@ public class Output extends JPanel implements Serializable {
 	
 	public SerialListener keyRun = new SerialListener() {
 		private static final long serialVersionUID = 5864600160182158595L;
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!Back.writer.incomplete) {
@@ -142,7 +145,7 @@ public class Output extends JPanel implements Serializable {
 					jobs.add(new String[]{"", Back.writer.consoleOutput()});
 				}
 				
-				
+				// run locally or run remotely
 				if (Back.getPanel().getExecution().radLocal.isSelected()) {
 					if (Back.getPanel().getBinary().equals("")) {
 						JOptionPane.showMessageDialog(Back.frame,
@@ -169,17 +172,13 @@ public class Output extends JPanel implements Serializable {
 						executeLocal(false);
 				} else if (Back.getPanel().getExecution().radRemote.isSelected()) {
 					executeRemote();
-				} //else {
-//					if (lastViewed == Long.MAX_VALUE) {
-//						JOptionPane.showMessageDialog(null,
-//								"Please view your input file first.");
-//						return;
-//					}
-//					//TODO test this
-//					runRequestBroker(contents);
-//				}
+				} 
 			}
 		}
+		
+		// private void
+		
+		
 	};
 	private SerialListener keyClear = new SerialListener() {
 		
