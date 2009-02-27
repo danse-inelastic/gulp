@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import javagulp.model.SerialListener;
 
@@ -31,6 +32,7 @@ public class PCMenu extends JMenuBar implements Serializable {
 	private JMenu FileMenu = new JMenu("File");
 	private JMenuItem openGUI = new JMenuItem("Open saved GUI");
 	private JMenuItem saveGUI = new JMenuItem("Save GUI");
+	private JMenuItem clearGUI = new JMenuItem("Clear GUI");
 	
 //	private JMenu TypeOfRun = new JMenu("Type of Run");
 //	private JMenuItem MolecularDynamics = new JMenuItem("MolecularDynamics");
@@ -137,6 +139,19 @@ public class PCMenu extends JMenuBar implements Serializable {
 			dlg.setVisible(true);
 		}
 	};
+	private SerialListener keyClearGUI = new SerialListener() {
+		
+		private static final long serialVersionUID = -7231887101581949066L;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to clear the GUI?")) {
+				Back.clearTab();
+			}
+		}
+	};
+	
 	
 	public PCMenu(JFrame frame) {
 		super();
@@ -146,6 +161,8 @@ public class PCMenu extends JMenuBar implements Serializable {
 		FileMenu.add(openGUI);
 		saveGUI.addActionListener(keySaveGUI);
 		FileMenu.add(saveGUI);
+		clearGUI.addActionListener(keyClearGUI);
+		FileMenu.add(clearGUI);
 		add(FileMenu);
 
 		QuickGuide.addActionListener(keyGulpWebsite);

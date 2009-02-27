@@ -110,7 +110,6 @@ public class Potential extends JPanel {
 	}
 };
 
-
 private LibraryListener listMouseListener = new LibraryListener();
 	
 	private SerialListener keyLibrary = new SerialListener() {

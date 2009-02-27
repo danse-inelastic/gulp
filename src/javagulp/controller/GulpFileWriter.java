@@ -14,7 +14,7 @@ public class GulpFileWriter {
 
 	public boolean incomplete = false;
 
-	public String consoleOutput() {
+	public String gulpInputToString() {
 		StringBuffer o = new StringBuffer();
 		incomplete = false;
 		try {
