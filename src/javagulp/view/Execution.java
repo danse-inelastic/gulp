@@ -33,6 +33,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -53,15 +54,20 @@ import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
 
+//TODO: fix copying of the library files for local/remote execution, do two working directories for both remote and local execution
+
 public class Execution extends JPanel implements Serializable {
+	private JScrollPane scrollPane;
+	private JLabel statusLabel;
+	private JTextArea txtVnfStatus;
 	private JLabel nLabel;
 	private JLabel jobStatusLabel;
-	private JPanel pnlVnfExecution;
+	private TitledPanel pnlVnfExecution;
 	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
 	private JRadioButton radVnf;
-	private JPanel pnlRemoteExecution;
-	private JPanel pnlLocalExecution;
+	private TitledPanel pnlRemoteExecution;
+	private TitledPanel pnlLocalExecution;
 	private TitledPanel placeOfExecution;
 	private JPanel pnlExecutionBackdrop;
 	private static final long serialVersionUID = -907728808045994280L;
@@ -101,8 +107,7 @@ public class Execution extends JPanel implements Serializable {
 	private JTable tableStatus = new JTable(modelStatus);
 	private JScrollPane scrollStatus = new JScrollPane(tableStatus);
 
-	private JButton runAtVnfButton;
-	private JButton btnRun = new JButton("submit job");
+	private JButton btnSubmit = new JButton("submit job");
 	private JLabel lblStatus = new JLabel();
 	public String contents = "";
 	Process gulpProcess;
@@ -113,78 +118,38 @@ public class Execution extends JPanel implements Serializable {
 	public ArrayList<Thread> threads = new ArrayList<Thread>();
 	private ArrayList<String[]> jobs = new ArrayList<String[]>();
 
-	protected JButton getRunAtVnfButton() {
-		if (runAtVnfButton == null) {
-			runAtVnfButton = new JButton();
-			runAtVnfButton.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent e) {
-					//get file as string
-					String gulpInputFile = Back.writer.gulpInputFileToString();
-					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
 
-					//copy file over
-					//					try {
-					//						sendFiles("vnf.caltech.edu", gulpInputFile, null, gulpInputFile, null);
-					//					} catch (ConnectException e1) {
-					//						e1.printStackTrace();
-					//					}
-					//pass file as cgi key value along with other original parameters
-					CgiCommunicate cgiCom = new CgiCommunicate();
-					Map<String,String> cgiMap = Back.getPanel().keyVals;
-					cgiMap.put("gulpInputFile", gulpInputFile);
-					cgiMap.put("gulpLibrary", gulpLibrary);
-					cgiCom.setCgiParams(cgiMap);
-					cgiCom.post();
-
-					//close gulp
-					System.exit(0);
-
-				}
-			});
-			runAtVnfButton.setText("export to vnf");
-			runAtVnfButton.setBounds(573, 345, 148, 28);
-		}
-		return runAtVnfButton;
-	}
-
-	public SerialListener keyRun = new SerialListener() {
+	public SerialListener keySubmit = new SerialListener() {
 		private static final long serialVersionUID = 5864600160182158595L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!Back.writer.incomplete) {
-				//queue jobs
-				jobs.clear();
-				if (chkSeparate.isSelected()) {
-					int temp = Back.getPanel().getStructures().tabs.getSelectedIndex();
-					for (int i=0; i < Back.getPanel().getStructures().tabs.getTabCount(); i++) {
-						Back.getPanel().getStructures().tabs.setSelectedIndex(i);
-						String[] contents = {Back.getStructure().atomicCoordinates.txtName.getText(), Back.writer.gulpInputFileToString()};
-						jobs.add(contents);
-					}
-					Back.getPanel().getStructures().tabs.setSelectedIndex(temp);
-				} else {
-					jobs.add(new String[]{"", Back.writer.gulpInputFileToString()});
-				}
-
+				
 				// run on vnf or locally or remotely 
 				if (radVnf.isSelected()) {
-					//get file as string
+					//get files as strings
 					String gulpInputFile = Back.writer.gulpInputFileToString();
 					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
-
+					//post the files
 					CgiCommunicate cgiCom = new CgiCommunicate();
 					Map<String,String> cgiMap = Back.getPanel().keyVals;
+					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
 					cgiMap.put("gulpInputFile", gulpInputFile);
 					cgiMap.put("gulpLibrary", gulpLibrary);
 					cgiCom.setCgiParams(cgiMap);
-					cgiCom.post();
-					//display message
-					JOptionPane.showMessageDialog(Back.frame,
-					"The computation has been submitted to vnf");
+					String response = cgiCom.post();
+					if (response=="success"){
+						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
+							"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
+					}else{
+						getTxtVnfStatus().setText("There was a problem with the submission.  The server returned the following message:\n"+
+								response);
+					}
 					//close gulp
 					//System.exit(0);
 				} else if (radLocal.isSelected()) {
+					logJob();
 					if (Back.getPanel().getBinary().equals("")) {
 						JOptionPane.showMessageDialog(Back.frame,
 						"Please locate the gulp executable under the file menu.");
@@ -208,13 +173,29 @@ public class Execution extends JPanel implements Serializable {
 					else
 						executeLocal(false);
 				} else if (radRemote.isSelected()) {
+					logJob();
 					executeRemote();
 				} 
 			}
+			
+			
 		}
 
-		// private void
-
+		void logJob(){
+			//queue jobs
+			jobs.clear();
+			if (chkSeparate.isSelected()) {
+				int temp = Back.getPanel().getStructures().tabs.getSelectedIndex();
+				for (int i=0; i < Back.getPanel().getStructures().tabs.getTabCount(); i++) {
+					Back.getPanel().getStructures().tabs.setSelectedIndex(i);
+					String[] contents = {Back.getStructure().atomicCoordinates.txtName.getText(), Back.writer.gulpInputFileToString()};
+					jobs.add(contents);
+				}
+				Back.getPanel().getStructures().tabs.setSelectedIndex(temp);
+			} else {
+				jobs.add(new String[]{"", Back.writer.gulpInputFileToString()});
+			}
+		}
 
 	};
 
@@ -564,9 +545,9 @@ public class Execution extends JPanel implements Serializable {
 		lblStatus.setBounds(245, 349, 209, 20);
 		lblStatus.setBorder(new LineBorder(Color.black, 1, false));
 		add(lblStatus);
-		btnRun.addActionListener(keyRun);
-		btnRun.setBounds(7, 347, 136, 25);
-		add(btnRun);
+		btnSubmit.addActionListener(keySubmit);
+		btnSubmit.setBounds(7, 347, 136, 25);
+		add(btnSubmit);
 		scrollStatus.setBounds(489, 4, 579, 134);
 		btnPause.setBounds(460, 347, 80, 25);
 		btnPause.addActionListener(keyPause);
@@ -574,7 +555,6 @@ public class Execution extends JPanel implements Serializable {
 		add(getPlaceOfExecution());
 		add(getHowExecute());
 		add(getPnlHighThroughput());
-		add(getRunAtVnfButton());
 		add(getJobStatusLabel());
 	}
 	private SerialMouseAdapter keyMouse = new SerialMouseAdapter() {
@@ -602,13 +582,13 @@ public class Execution extends JPanel implements Serializable {
 		private static final long serialVersionUID = -6558056553136490457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			CardLayout cl=(CardLayout) getPnlExecutionBackdrop().getLayout();
 			if (radVnf.isSelected()) {
-				((CardLayout) pnlExecutionBackdrop.getLayout()).show(pnlExecutionBackdrop, pnlVnfExecution.getName());
+				cl.show(getPnlExecutionBackdrop(), getPnlVnfExecution().getName());
 			} else if(radLocal.isSelected()) {
-				((CardLayout) pnlExecutionBackdrop.getLayout()).show(pnlExecutionBackdrop, pnlLocalExecution.getName());
-			} else if(radLocal.isSelected()) {
-				((CardLayout) pnlExecutionBackdrop.getLayout()).show(pnlExecutionBackdrop, pnlRemoteExecution.getName());
+				cl.show(getPnlExecutionBackdrop(), getPnlLocalExecution().getName());
+			} else if(radRemote.isSelected()) {
+				cl.show(getPnlExecutionBackdrop(), getPnlRemoteExecution().getName());
 			}
 
 			if (radLocal.isSelected()) {
@@ -724,13 +704,9 @@ public class Execution extends JPanel implements Serializable {
 			pnlExecutionBackdrop.setLayout(new CardLayout());
 			pnlExecutionBackdrop.setBounds(7, 144, 723, 192);
 			add(pnlExecutionBackdrop);
+			pnlExecutionBackdrop.add(getPnlVnfExecution(), getPnlVnfExecution().getName());
 			pnlExecutionBackdrop.add(getPnlLocalExecution(), getPnlLocalExecution().getName());
 			pnlExecutionBackdrop.add(getPnlRemoteExecution(), getPnlRemoteExecution().getName());
-			pnlExecutionBackdrop.add(getPnlVnfExecution(), getPnlVnfExecution().getName());
-
-			//panel.add(number, number.getName());
-			//panel.add(fracFloat, fracFloat.getName());
-			//panel.add(fracInt, fracInt.getName());
 		}
 		return pnlExecutionBackdrop;
 	}
@@ -760,14 +736,27 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return placeOfExecution;
 	}
+	
+	protected TitledPanel getPnlVnfExecution() {
+		if (pnlVnfExecution == null) {
+			pnlVnfExecution = new TitledPanel();
+			pnlVnfExecution.setName("vnfExecution");
+			pnlVnfExecution.setTitle("vnf submission");
+			pnlVnfExecution.add(getStatusLabel());
+			pnlVnfExecution.add(getScrollPane());
+		}
+		return pnlVnfExecution;
+	}
+	
 	/**
 	 * @return
 	 */
-	protected JPanel getPnlLocalExecution() {
+	protected TitledPanel getPnlLocalExecution() {
 		if (pnlLocalExecution == null) {
-			pnlLocalExecution = new JPanel();
+			pnlLocalExecution = new TitledPanel();
 			pnlLocalExecution.setLayout(null);
 			pnlLocalExecution.setName("localExecution");
+			pnlLocalExecution.setTitle("local submission");
 			btnWorkingDirectory.setBounds(10, 10, 175, 19);
 			pnlLocalExecution.add(btnWorkingDirectory);
 			btnWorkingDirectory.addActionListener(keyWorkingDirectory);
@@ -787,11 +776,12 @@ public class Execution extends JPanel implements Serializable {
 	/**
 	 * @return
 	 */
-	protected JPanel getPnlRemoteExecution() {
+	protected TitledPanel getPnlRemoteExecution() {
 		if (pnlRemoteExecution == null) {
-			pnlRemoteExecution = new JPanel();
+			pnlRemoteExecution = new TitledPanel();
 			pnlRemoteExecution.setLayout(null);
 			pnlRemoteExecution.setName("remoteExecution");
+			pnlRemoteExecution.setTitle("remote submission");
 			lblHosts.setBounds(10, 10, 154, 28);
 			pnlRemoteExecution.add(lblHosts);
 			scrollHosts.setBounds(10, 44, 154, 138);
@@ -866,16 +856,8 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return pnlHighThroughput;
 	}
-	/**
-	 * @return
-	 */
-	protected JPanel getPnlVnfExecution() {
-		if (pnlVnfExecution == null) {
-			pnlVnfExecution = new JPanel();
-			pnlVnfExecution.setName("vnfExecution");
-		}
-		return pnlVnfExecution;
-	}
+
+
 	/**
 	 * @return
 	 */
@@ -897,6 +879,37 @@ public class Execution extends JPanel implements Serializable {
 			nLabel.setBounds(10, 105, 25, 21);
 		}
 		return nLabel;
+	}
+	/**
+	 * @return
+	 */
+	protected JTextArea getTxtVnfStatus() {
+		if (txtVnfStatus == null) {
+			txtVnfStatus = new JTextArea();
+		}
+		return txtVnfStatus;
+	}
+	/**
+	 * @return
+	 */
+	protected JLabel getStatusLabel() {
+		if (statusLabel == null) {
+			statusLabel = new JLabel();
+			statusLabel.setText("status");
+			statusLabel.setBounds(10, 26, 228, 15);
+		}
+		return statusLabel;
+	}
+	/**
+	 * @return
+	 */
+	protected JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 47, 703, 135);
+			scrollPane.setViewportView(getTxtVnfStatus());
+		}
+		return scrollPane;
 	}
 	/**
 	 * @return

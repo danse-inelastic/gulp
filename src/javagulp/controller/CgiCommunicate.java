@@ -1,6 +1,8 @@
 package javagulp.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -45,7 +47,8 @@ public class CgiCommunicate {
         }
 	}
 
-	public void post(){
+	public String post(){
+		String response = "";
 		try {
 			OutputStreamWriter wr;
 
@@ -55,17 +58,18 @@ public class CgiCommunicate {
 			wr.flush();
 			wr.close();
 
-//			// Get the response
-//			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//			String line;
-//			while ((line = rd.readLine()) != null) {
-//				System.out.println (line);// Process line...
-//			}
-//			rd.close();
+			// Get the response
+
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = rd.readLine()) != null) {
+				response+=line+"\n";
+			}
+			rd.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return response;
 	}
 
 	public static void main(String[] args){
