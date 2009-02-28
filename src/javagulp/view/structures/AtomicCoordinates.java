@@ -54,7 +54,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private JScrollPane scrollPane = new JScrollPane();
 
 	public JTextField txtName = new JTextField();
-	private JLabel lblName = new JLabel("structure name");
+	private JLabel lblName = new JLabel("structure name (if high-throughput)");
 	private JButton btnSetValue = new JButton("Set selected cells to current value");
 	private JButton btnSelectValue = new JButton("Select cells with current value");
 	private JButton btnInvertSelection = new JButton("Invert Selection");
@@ -186,12 +186,12 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		cboCoordinateType.setBounds(140, 10, 209, 19);
 		add(cboCoordinateType);
 		cboCoordinateType.addActionListener(keyCoordinateType);
-		btnImportCoordinates.setBounds(499, 32, 178, 25);
+		btnImportCoordinates.setBounds(550, 32, 178, 25);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
 		//btnImportCoordinates.addActionListener(keyImportCoordinates);
-		btnSaveCoordinates.setBounds(683, 32, 186, 25);
+		btnSaveCoordinates.setBounds(734, 32, 186, 25);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
@@ -204,9 +204,9 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		pnlMassSelect.setLayout(null);
 		pnlMassSelect.setBounds(10, 452, 970, 89);
 		add(lblName);
-		lblName.setBounds(499, 4, 193, 28);
+		lblName.setBounds(416, 4, 259, 28);
 		add(txtName);
-		txtName.setBounds(628, 9, 239, 19);
+		txtName.setBounds(681, 9, 239, 19);
 		pnlMassSelect.add(lblValue);
 		lblValue.setBounds(10, 12, 105, 28);
 		pnlMassSelect.add(txtValue);

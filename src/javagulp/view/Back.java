@@ -25,7 +25,8 @@ import javax.swing.WindowConstants;
 
 public class Back {
 
-	public static final JFrame frame = new JFrame("GulpUI 0.5");
+	public static final String version = "GulpUi 0.3";
+	public static final JFrame frame = new JFrame(version);
 	public static final GulpFileWriter writer = new GulpFileWriter();
 	//No access modifier (default access), so access is limited to the same package.
 	static JTabbedPane tabs = new JTabbedPane();

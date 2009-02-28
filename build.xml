@@ -51,7 +51,6 @@
 			<format property="now" pattern="MMMM d, yyyy hh:mm aa" />
 			<format property="webappnow" pattern="h:mm a EEE, MMM d, ''yy" />
 		</tstamp>
-		<mkdir dir="bin" />
 	</target>
 
 	<target name="jar-potentials" description="puts potentials in a jar" depends="init">
@@ -78,14 +77,11 @@
 		<delete file="deployable/${app-name}.jar"/>
 		<delete file="MANIFEST.MF"/>
 		<manifest file="MANIFEST.MF">
-			<attribute name="Built-By" value="${user.name}"/>
 			<attribute name="Main-Class" value="javagulp.controller.LaunchGulpUi"/>
 		</manifest>
 
 		<jar destfile="deployable/${app-name}.jar" manifest="MANIFEST.MF">
-			<fileset dir="${build}">
-				<include name="javagulp/**" />
-			</fileset>
+			<fileset dir="${build}"/>
 		</jar>
 
 		<!-- sign all jars -->

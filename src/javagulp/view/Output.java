@@ -103,7 +103,7 @@ public class Output extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-				String contents = Back.writer.gulpInputToString();
+				String contents = Back.writer.gulpInputFileToString();
 				if (!Back.writer.incomplete) {
 					Back.writer.writeAll(contents, txtInputFile.getText());
 					Date d = new Date();

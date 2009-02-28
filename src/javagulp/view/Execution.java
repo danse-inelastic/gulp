@@ -1,6 +1,7 @@
 package javagulp.view;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -33,6 +34,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.sshtools.common.hosts.DialogKnownHostsKeyVerification;
@@ -51,6 +54,8 @@ import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
 
 public class Execution extends JPanel implements Serializable {
+	private JLabel nLabel;
+	private JLabel jobStatusLabel;
 	private JPanel pnlVnfExecution;
 	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
@@ -64,15 +69,15 @@ public class Execution extends JPanel implements Serializable {
 	private JLabel lblHosts = new JLabel("<html>remote hosts<br>(double click to add)</html>");
 	private JLabel lblUsername = new JLabel("Username");
 	private JLabel lblPassword = new JLabel("Password");
-	private JLabel lblParallel = new JLabel("<html>Run n jobs per host in parallel</html>");
-	public JCheckBox chkSeparate = new JCheckBox("Put each structure in a separate input file");
+	private JLabel lblParallel = new JLabel("<html>when running multiple jobs sequentially, run n<br>jobs simultaneously</html>");
+	public JCheckBox chkSeparate = new JCheckBox("put each structure in a separate input file");
 	
 	public JTextField txtUsername = new JTextField();
-	public JTextField txtParallel = new JTextField("1");
+	public JTextField txtMultiple = new JTextField(Integer.toString(Runtime.getRuntime().availableProcessors()));
 	public JTextField txtGulpBinary = new JTextField();
 	public JTextField txtWorkingDirectory = new JTextField(System.getProperty("user.home"));
 	
-	private JButton btnPause = new JButton("Pause");
+	private JButton btnPause = new JButton("pause");
 	private JButton btnGulpBinary = new JButton("gulp binary");
 	private JButton btnWorkingDirectory = new JButton("working directory");
 	
@@ -105,13 +110,16 @@ public class Execution extends JPanel implements Serializable {
 	public ArrayList<String> usernames = new ArrayList<String>();
 	public ArrayList<String> passwords = new ArrayList<String>();
 	
+	public ArrayList<Thread> threads = new ArrayList<Thread>();
+	private ArrayList<String[]> jobs = new ArrayList<String[]>();
+	
 	protected JButton getRunAtVnfButton() {
 		if (runAtVnfButton == null) {
 			runAtVnfButton = new JButton();
 			runAtVnfButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
 					//get file as string
-					String gulpInputFile = Back.writer.gulpInputToString();
+					String gulpInputFile = Back.writer.gulpInputFileToString();
 					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
 					
 					//copy file over
@@ -131,12 +139,10 @@ public class Execution extends JPanel implements Serializable {
 					//close gulp
 					System.exit(0);
 					
-					//shut down gulp
-					
 				}
 			});
 			runAtVnfButton.setText("export to vnf");
-			runAtVnfButton.setBounds(9, 242, 148, 28);
+			runAtVnfButton.setBounds(573, 345, 148, 28);
 		}
 		return runAtVnfButton;
 	}
@@ -153,12 +159,12 @@ public class Execution extends JPanel implements Serializable {
 					int temp = Back.getPanel().getStructures().tabs.getSelectedIndex();
 					for (int i=0; i < Back.getPanel().getStructures().tabs.getTabCount(); i++) {
 						Back.getPanel().getStructures().tabs.setSelectedIndex(i);
-						String[] contents = {Back.getStructure().atomicCoordinates.txtName.getText(), Back.writer.gulpInputToString()};
+						String[] contents = {Back.getStructure().atomicCoordinates.txtName.getText(), Back.writer.gulpInputFileToString()};
 						jobs.add(contents);
 					}
 					Back.getPanel().getStructures().tabs.setSelectedIndex(temp);
 				} else {
-					jobs.add(new String[]{"", Back.writer.gulpInputToString()});
+					jobs.add(new String[]{"", Back.writer.gulpInputFileToString()});
 				}
 				
 				// run locally or run remotely
@@ -175,13 +181,12 @@ public class Execution extends JPanel implements Serializable {
 								"Please view your input file first.");
 						return;
 					}
-					// if the user has edited their input file
-					if (f.lastModified() > Back.getPanel().getOutput().lastViewed) {
+					// if the user has viewed/edited their input file sooner than the last time it was written, use the viewed file
+					if (Back.getPanel().getOutput().lastViewed < f.lastModified()) {
 						contents = Back.getFileContents(f);
 					} else {
-						contents = Back.writer.gulpInputToString();
+						contents = Back.writer.gulpInputFileToString();
 					}
-					//TODO Modify executeLocal to allow user modified input file
 					if (e == null)
 						executeLocal(true);
 					else
@@ -256,7 +261,7 @@ public class Execution extends JPanel implements Serializable {
 	private void executeRemote() {
 		int parallel = 1;
 		try {
-			parallel = Integer.parseInt(Back.getPanel().getExecution().txtParallel.getText());
+			parallel = Integer.parseInt(Back.getPanel().getExecution().txtMultiple.getText());
 		} catch (NumberFormatException nfe) {
 			
 		}
@@ -345,9 +350,7 @@ public class Execution extends JPanel implements Serializable {
 			}
 		}
 	}
-	
-	public ArrayList<Thread> threads = new ArrayList<Thread>();
-	private ArrayList<String[]> jobs = new ArrayList<String[]>();
+
 	
 	public synchronized String[] getJob() {
 		if (jobs.size() == 0)
@@ -359,7 +362,7 @@ public class Execution extends JPanel implements Serializable {
 	private void executeLocal(boolean synchronous) {
 		int parallel = 1;
 		try {
-			parallel = Integer.parseInt(Back.getPanel().getExecution().txtParallel.getText());
+			parallel = Integer.parseInt(Back.getPanel().getExecution().txtMultiple.getText());
 		} catch (NumberFormatException nfe) {
 			
 		}
@@ -539,26 +542,26 @@ public class Execution extends JPanel implements Serializable {
 	
 	public Execution() {
 		super();
+		setBorder(new LineBorder(Color.black, 1, false));
 		setLayout(null);
 		add(scrollStatus);
 		add(btnPause);
 		
-		lblStatus.setBounds(10, 257, 300, 20);
+		lblStatus.setBounds(245, 349, 209, 20);
+		lblStatus.setBorder(new LineBorder(Color.black, 1, false));
 		add(lblStatus);
 		btnRun.addActionListener(keyRun);
-		btnRun.setBounds(163, 241, 136, 30);
+		btnRun.setBounds(7, 347, 136, 25);
 		add(btnRun);
-		scrollStatus.setBounds(489, 4, 549, 134);
-		btnPause.setBounds(753, 315, 80, 21);
+		scrollStatus.setBounds(489, 4, 579, 134);
+		btnPause.setBounds(460, 347, 80, 25);
 		btnPause.addActionListener(keyPause);
 		add(getPnlExecutionBackdrop());
 		add(getPlaceOfExecution());
 		add(getHowExecute());
 		add(getPnlHighThroughput());
-		add(chkSeparate);
-		chkSeparate.setBounds(9, 84, 378, 21);
-		chkSeparate.setSelected(true);
 		add(getRunAtVnfButton());
+		add(getJobStatusLabel());
 	}
 	private SerialMouseAdapter keyMouse = new SerialMouseAdapter() {
 		private static final long serialVersionUID = -3862775803812225199L;
@@ -587,7 +590,7 @@ public class Execution extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			
 			if (radVnf.isSelected()) {
-				//((CardLayout) pnlExecutionBackdrop.getLayout()).show(pnlExecutionBackdrop, pnlVnfExecution.getName());
+				((CardLayout) pnlExecutionBackdrop.getLayout()).show(pnlExecutionBackdrop, pnlVnfExecution.getName());
 			} else if(radLocal.isSelected()) {
 				((CardLayout) pnlExecutionBackdrop.getLayout()).show(pnlExecutionBackdrop, pnlLocalExecution.getName());
 			} else if(radLocal.isSelected()) {
@@ -603,8 +606,6 @@ public class Execution extends JPanel implements Serializable {
 			}
 		}
 	};
-	
-	
 	
 	private SerialListener keyWorkingDirectory = new SerialListener() {
 		private static final long serialVersionUID = -6558056553136490457L;
@@ -705,9 +706,9 @@ public class Execution extends JPanel implements Serializable {
 	protected JPanel getPnlExecutionBackdrop() {
 		if (pnlExecutionBackdrop == null) {
 			pnlExecutionBackdrop = new JPanel();
-			pnlExecutionBackdrop.setBounds(7, 144, 724, 192);
+			//pnlExecutionBackdrop.setBounds(7, 144, 724, 192);
 			pnlExecutionBackdrop.setLayout(new CardLayout());
-			pnlExecutionBackdrop.setBounds(251, 64, 201, 30);
+			pnlExecutionBackdrop.setBounds(7, 144, 723, 192);
 			add(pnlExecutionBackdrop);
 			pnlExecutionBackdrop.add(getPnlLocalExecution(), getPnlLocalExecution().getName());
 			pnlExecutionBackdrop.add(getPnlRemoteExecution(), getPnlRemoteExecution().getName());
@@ -725,9 +726,8 @@ public class Execution extends JPanel implements Serializable {
 	protected TitledPanel getPlaceOfExecution() {
 		if (placeOfExecution == null) {
 			placeOfExecution = new TitledPanel();
-			placeOfExecution.setBounds(7, 4, 196, 128);
+			placeOfExecution.setBounds(7, 4, 196, 134);
 			placeOfExecution.setTitle("where to execute");
-		//this.setPreferredSize(new java.awt.Dimension(686, 385));
 
 			radLocal.addActionListener(keyRemote);
 			radLocal.setBounds(10, 53, 161, 21);
@@ -752,18 +752,18 @@ public class Execution extends JPanel implements Serializable {
 		if (pnlLocalExecution == null) {
 			pnlLocalExecution = new JPanel();
 			pnlLocalExecution.setLayout(null);
-			pnlLocalExecution.setName("panel");
-			btnWorkingDirectory.setBounds(10, 10, 203, 28);
+			pnlLocalExecution.setName("localExecution");
+			btnWorkingDirectory.setBounds(10, 10, 175, 19);
 			pnlLocalExecution.add(btnWorkingDirectory);
 			btnWorkingDirectory.addActionListener(keyWorkingDirectory);
-			btnGulpBinary.setBounds(10, 44, 203, 28);
+			btnGulpBinary.setBounds(10, 44, 175, 19);
 			pnlLocalExecution.add(btnGulpBinary);
 			btnGulpBinary.addActionListener(keyGulpExecutable);
-			txtWorkingDirectory.setBounds(219, 11, 495, 28);
+			txtWorkingDirectory.setBounds(191, 10, 495, 19);
 			pnlLocalExecution.add(txtWorkingDirectory);
 
 			txtWorkingDirectory.setEnabled(false);
-			txtGulpBinary.setBounds(219, 45, 495, 28);
+			txtGulpBinary.setBounds(191, 44, 495, 19);
 			pnlLocalExecution.add(txtGulpBinary);
 			txtGulpBinary.setEnabled(false);
 		}
@@ -776,25 +776,25 @@ public class Execution extends JPanel implements Serializable {
 		if (pnlRemoteExecution == null) {
 			pnlRemoteExecution = new JPanel();
 			pnlRemoteExecution.setLayout(null);
-			pnlRemoteExecution.setName("panel1");
+			pnlRemoteExecution.setName("remoteExecution");
 			lblHosts.setBounds(10, 10, 154, 28);
 			pnlRemoteExecution.add(lblHosts);
-			scrollHosts.setBounds(10, 44, 154, 125);
+			scrollHosts.setBounds(10, 44, 154, 138);
 			pnlRemoteExecution.add(scrollHosts);
 		
 			hostsList.addMouseListener(keyMouse);
 			hostsList.addKeyListener(keyHosts);
-			lblUsername.setBounds(170, 6, 105, 21);
+			lblUsername.setBounds(180, 6, 105, 21);
 			pnlRemoteExecution.add(lblUsername);
-			txtUsername.setBounds(281, 6, 154, 21);
+			txtUsername.setBounds(302, 6, 154, 21);
 			pnlRemoteExecution.add(txtUsername);
 			txtUsername.addKeyListener(keyUsername);
-			lblPassword.setBounds(170, 33, 105, 21);
+			lblPassword.setBounds(180, 33, 105, 21);
 			pnlRemoteExecution.add(lblPassword);
-			pwdPassword.setBounds(281, 33, 154, 21);
+			pwdPassword.setBounds(302, 33, 154, 21);
 			pnlRemoteExecution.add(pwdPassword);
 			pwdPassword.addKeyListener(keyPassword);
-			chkCredentials.setBounds(170, 60, 315, 28);
+			chkCredentials.setBounds(180, 61, 315, 28);
 			pnlRemoteExecution.add(chkCredentials);
 		}
 		return pnlRemoteExecution;
@@ -817,7 +817,7 @@ public class Execution extends JPanel implements Serializable {
 	protected TitledPanel getHowExecute() {
 		if (howExecute == null) {
 			howExecute = new TitledPanel();
-			howExecute.setBounds(209, 4, 274, 128);
+			howExecute.setBounds(209, 4, 274, 134);
 			howExecute.setTitle("how to execute");
 			radDirect.setBounds(10, 26, 161, 21);
 			howExecute.add(radDirect);
@@ -838,12 +838,16 @@ public class Execution extends JPanel implements Serializable {
 	protected TitledPanel getPnlHighThroughput() {
 		if (pnlHighThroughput == null) {
 			pnlHighThroughput = new TitledPanel();
-			pnlHighThroughput.setBounds(737, 144, 301, 140);
+			pnlHighThroughput.setBounds(736, 144, 332, 192);
 			pnlHighThroughput.setTitle("high throughput execution");
-			lblParallel.setBounds(10, 23, 233, 28);
+			lblParallel.setBounds(10, 62, 312, 37);
 			pnlHighThroughput.add(lblParallel);
-			txtParallel.setBounds(235, 27, 49, 21);
-			pnlHighThroughput.add(txtParallel);
+			txtMultiple.setBounds(41, 105, 49, 21);
+			pnlHighThroughput.add(txtMultiple);
+			chkSeparate.setBounds(10, 26, 314, 30);
+			pnlHighThroughput.add(chkSeparate);
+			chkSeparate.setSelected(true);
+			pnlHighThroughput.add(getNLabel());
 		}
 		return pnlHighThroughput;
 	}
@@ -853,9 +857,31 @@ public class Execution extends JPanel implements Serializable {
 	protected JPanel getPnlVnfExecution() {
 		if (pnlVnfExecution == null) {
 			pnlVnfExecution = new JPanel();
-			pnlVnfExecution.setName("panel1");
+			pnlVnfExecution.setName("vnfExecution");
 		}
 		return pnlVnfExecution;
+	}
+	/**
+	 * @return
+	 */
+	protected JLabel getJobStatusLabel() {
+		if (jobStatusLabel == null) {
+			jobStatusLabel = new JLabel();
+			jobStatusLabel.setText("job status:");
+			jobStatusLabel.setBounds(149, 347, 90, 25);
+		}
+		return jobStatusLabel;
+	}
+	/**
+	 * @return
+	 */
+	protected JLabel getNLabel() {
+		if (nLabel == null) {
+			nLabel = new JLabel();
+			nLabel.setText("n");
+			nLabel.setBounds(10, 105, 25, 21);
+		}
+		return nLabel;
 	}
 	/**
 	 * @return
