@@ -136,16 +136,11 @@ public class Execution extends JPanel implements Serializable {
 
 					String cgihome = cgiMap.get("cgihome");
 					CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-					String formactor_action_prefix = cgiMap.get("formactor_action_prefix");
 
 					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-					cgiMap.put(formactor_action_prefix+".configurations", gulpInputFile);
-					cgiMap.put(formactor_action_prefix+".librarycontent", gulpLibrary);
-					cgiMap.put(formactor_action_prefix+".libraryname", librarySelected);
-					
-					cgiMap.put("actor", "gulpsimulationwizard");
-					cgiMap.put("routine", "storeConfiguration");
-					cgiMap.put("actor.form-received",  "gulp");
+					cgiMap.put("actor.configurations", gulpInputFile);
+					cgiMap.put("actor.librarycontent", gulpLibrary);
+					cgiMap.put("actor.libraryname", librarySelected);
 					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.post();
