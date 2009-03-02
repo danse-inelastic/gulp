@@ -144,7 +144,7 @@ public class Execution extends JPanel implements Serializable {
 					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.post();
-					if (response.trim()=="success"){
+					if (response.trim().compareTo("success")==0){
 						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
 							"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
 					}else{
