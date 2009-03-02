@@ -26,7 +26,7 @@ public class PotentialLibs {
 		////	    String p = pUri.getPath();
 		////	    String rp = pUri.getRawPath();
 		//		String[] potentials = new File(pUri).list();
-		String[] potentials = new String[]{"bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
+		String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
 				"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
 				"catlow.lib","finnissinclair.lib","suttonchen.lib",
 				"clerirosato.lib","garofalini.lib","tersoff.lib"};
@@ -34,8 +34,12 @@ public class PotentialLibs {
 	}
 
 	public String getFileContents(String potentialName) {
-		InputStream potentialStream = this.getClass().getResourceAsStream(potentialName);
-		return convertStreamToString(potentialStream);
+		if (potentialName=="none"){
+			return "";
+		} else {
+			InputStream potentialStream = this.getClass().getResourceAsStream(potentialName);
+			return convertStreamToString(potentialStream);
+		}
 	}
 
 	public String convertStreamToString(InputStream is) {

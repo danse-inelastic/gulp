@@ -137,6 +137,8 @@ public class Execution extends JPanel implements Serializable {
 					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
 					cgiMap.put("gulpInputFile", gulpInputFile);
 					cgiMap.put("gulpLibrary", gulpLibrary);
+					cgiMap.put("actor", "gulpsimulationwizard");
+					cgiMap.put("routine", "verifySimulation");
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.post();
 					if (response=="success"){
@@ -177,7 +179,6 @@ public class Execution extends JPanel implements Serializable {
 					executeRemote();
 				} 
 			}
-			
 			
 		}
 

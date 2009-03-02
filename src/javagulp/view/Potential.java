@@ -84,6 +84,7 @@ public class Potential extends JPanel {
 		importButton.addActionListener(keyLibrary);
 		
 		libraryList = new JList();
+		libraryList.setSelectedIndex(1);
 
 	    String[] potentials = new PotentialLibs().getPotentials();
 	    
@@ -139,7 +140,7 @@ private LibraryListener listMouseListener = new LibraryListener();
 
 	public String writeLibrary() throws IncompleteOptionException {
 		String lines = "";
-		if (librarySelected!="")
+		if (librarySelected!="none")
 			lines = "library " + librarySelected;
 		if (Back.getPanel().getPotentialOptions().chkDoNotInclude.isSelected())
 			lines += " nodump";

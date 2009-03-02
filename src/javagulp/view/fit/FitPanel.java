@@ -113,19 +113,19 @@ public class FitPanel extends TitledPanel implements Serializable {
 		setTitle("fit variables associated with different species");
 
 		add(btnAddFit);
-		btnAddFit.setBounds(300, 20, 154, 28);
+		btnAddFit.setBounds(321, 25, 154, 25);
 		btnAddFit.addActionListener(keyAddFit);
 
-		scrollFit.setBounds(10, 53, 483, 160);
+		scrollFit.setBounds(10, 64, 557, 172);
 		add(scrollFit);
 		
 		fitList.addListSelectionListener(fitMouseListener);
 
 		JLabel experimentalDataLabel = new JLabel("fit to");
-		experimentalDataLabel.setBounds(10, 27, 32, 20);
+		experimentalDataLabel.setBounds(10, 27, 56, 20);
 		add(experimentalDataLabel);
 
-		comboBox.setBounds(48, 27, 243, 25);
+		comboBox.setBounds(72, 25, 243, 25);
 		comboBox.setMaximumRowCount(100000);
 		add(comboBox);
 		scrollFit.setViewportView(getPanel(0));

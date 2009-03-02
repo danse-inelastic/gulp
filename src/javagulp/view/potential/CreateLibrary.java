@@ -39,6 +39,7 @@ import javagulp.model.SerialListener;
 
 public class CreateLibrary extends JPanel implements Serializable {
 
+	private JPanel panel;
 	private static final long serialVersionUID = 7048421934237887044L;
 
 	private String[] oneAtomPotentialList = { "", "spring",
@@ -65,18 +66,18 @@ public class CreateLibrary extends JPanel implements Serializable {
 			"ESFF torsional potential with cutoff tapering", "Inversion" };
 
 	private String[][] potentialAbbreviations = {
-			{ "spring", "eam_functional", "eam_density", "BOSelfEnergy", "bsm", "cosh-spring" },
-			{ "general", "buckingham", "lennard", "morse", "harmonic",
+			{ "", "spring", "eam_functional", "eam_density", "BOSelfEnergy", "bsm", "cosh-spring" },
+			{ "", "general", "buckingham", "lennard", "morse", "harmonic",
 					"rydberg", "tsuneyuki", "squaredHarmonic", "tersoff",
 					"tersoffCombine", "sw2", "manybody", "eamShift", "brenner",
 					"spline", "qtaper", "qerfc", "BOCharge", "polynomial",
 					"swjb2", "coulomb", "igauss", "covexp", "fermi-dirac",
 					"ljbuffered", "qoverr2", "damped_dispersion" },
-			{ "threebody", "threebodyExponentialHarmonic", "vessal", "cosine",
+			{ "", "threebody", "threebodyExponentialHarmonic", "vessal", "cosine",
 					"ureybradley", "murrellMottram", "lin3", "axilrodTeller",
 					"exponential", "sw3", "sw3jb", "bcoscross", "bcross",
 					"bacross", "hydrogen-bond", "equatorial" },
-			{ "torsion", "outofPlane", "ryckaert", "torangle",
+			{ "", "torsion", "outofPlane", "ryckaert", "torangle",
 					"torharm", "torexp", "tortaper",
 					"tortaperEsff", "inversion" } };
 
@@ -420,6 +421,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		pnlPotential.setBounds(10, 55, 1235, 66);
 		add(pnlPotential);
 		add(potentialBackdrop);
+		potentialBackdrop.setViewportView(getPanel());
 		add(listScroll);
 		listScroll.setBounds(7, 158, 182, 191);
 		add(btnAddPotential);
@@ -502,13 +504,13 @@ public class CreateLibrary extends JPanel implements Serializable {
 	private int getIndex() {
 		int index = 0;
 		if (potentialNumber == 1) {
-			index = cboCoreShellSpring.getSelectedIndex()-1;
+			index = cboCoreShellSpring.getSelectedIndex();
 		} else if (potentialNumber == 2) {
-			index = cboGeneralPotential.getSelectedIndex()-1;
+			index = cboGeneralPotential.getSelectedIndex();
 		} else if (potentialNumber == 3) {
-			index = cboThreeBody.getSelectedIndex()-1;
+			index = cboThreeBody.getSelectedIndex();
 		} else if (potentialNumber == 4) {
-			index = cboTorsion.getSelectedIndex()-1;
+			index = cboTorsion.getSelectedIndex();
 		} else
 			;// error
 		return index;
@@ -532,7 +534,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		if (potentials[potentialNumber - 1][getIndex()] == null) {
 			try {
 				Class c = Class.forName(pkg + classNames[potentialNumber - 1][getIndex()]);
-				potentials[potentialNumber - 1][getIndex()] = (PotentialPanel) c.newInstance();
+               				potentials[potentialNumber - 1][getIndex()] = (PotentialPanel) c.newInstance();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
@@ -545,19 +547,28 @@ public class CreateLibrary extends JPanel implements Serializable {
 	}
 	
 	private String[][] classNames = {
-			{ "Spring", "EAMFunctional", "EAMDensity", "BondOrderSelfEnergy",
+			{ "PotentialPanel", "Spring", "EAMFunctional", "EAMDensity", "BondOrderSelfEnergy",
 					"BSM", "CoshSpring" },
-			{ "GeneralPotential", "Buckingham", "Lennard", "Morse", "Harmonic",
+			{ "PotentialPanel", "GeneralPotential", "Buckingham", "Lennard", "Morse", "Harmonic",
 					"Rydberg", "Tsuneyuki", "SquaredHarmonic", "Tersoff",
 					"TersoffCombine", "SW2", "Manybody", "EAMPotentialShift",
 					"Brenner", "Spline", "Qtaper", "Qerfc", "BOCharge",
 					"Polynomial", "SWJB2", "Coulomb", "Igauss", "CovExp",
 					"FermiDirac", "LJBuffered", "QOVerr2", "DampedDispersion", },
-			{ "ThreeBody", "ThreeBodyExponentialHarmonic", "Vessal",
+			{ "PotentialPanel", "ThreeBody", "ThreeBodyExponentialHarmonic", "Vessal",
 					"CosineHarmonic", "UreyBradley", "MurrellMottram",
 					"Linear3", "AxilrodTeller", "Exponential", "Sw3", "Sw3jb",
 					"Bcoscross", "Bcross", "Bacross", "HydrogenBond",
 					"Equatorial", },
-			{ "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
+			{ "PotentialPanel", "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
 					"Torexp", "Tortaper", "TortaperEsff", "Inversion" } };
+	/**
+	 * @return
+	 */
+	protected JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+		}
+		return panel;
+	}
 }

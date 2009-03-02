@@ -41,7 +41,7 @@ public class Fit extends AbstractFit implements Serializable {
 	private JCheckBox chkFit = new JCheckBox("do fitting run using unit matrix with BFGS method");
 	private JCheckBox chkDoFittingRun = new JCheckBox("do fitting run using full BFGS method");
 	private JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
-	private JCheckBox chkUseGA = new JCheckBox("Use Genetic Algorithms");
+	private JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
 	
 	public FitPanel fitPanel = new FitPanel();
 	private JList fitList = new JList(fitPanel.fitListModel);
@@ -84,10 +84,10 @@ public class Fit extends AbstractFit implements Serializable {
 	public Fit() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(742, 350));
+		//this.setPreferredSize(new java.awt.Dimension(742, 350));
 
 		add(listScroll);
-		listScroll.setBounds(525, 5, 203, 289);
+		listScroll.setBounds(555, 4, 203, 329);
 		fitList.addKeyListener(listListener);
 		fitList.addMouseListener(keyList);
 
@@ -102,7 +102,7 @@ public class Fit extends AbstractFit implements Serializable {
 			+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
 			+ "It is also an order of magnitude more expensive in cputime!</html>");
 		chkRelax.addActionListener(keyRelax);
-		chkRelax.setBounds(3, 31, 498, 25);
+		chkRelax.setBounds(3, 85, 498, 25);
 		add(chkRelax);
 
 		final TitledPanel pnlParameterTolerance = new TitledPanel();
@@ -119,7 +119,8 @@ public class Fit extends AbstractFit implements Serializable {
 		txtStepmxFit.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtStepmxFit);
 
-		fitPanel.setBounds(0, 77, 497, 217);
+		fitPanel.setBounds(3, 116, 546, 244);
+		fitPanel.scrollFit.setBounds(10, 64, 526, 172);
 		add(fitPanel);
 
 		final TitledPanel pnlMaxNumOfCycles = new TitledPanel();
@@ -150,24 +151,24 @@ public class Fit extends AbstractFit implements Serializable {
 		txtFtol.setBounds(22, 19, 80, 21);
 		pnlFuncTolerance.add(txtFtol);
 
-		chkFit.setBounds(3, 5, 312, 25);
+		chkFit.setBounds(3, 5, 483, 25);
 		chkFit.addActionListener(keyFit);
 		add(chkFit);
 		add(chkUseGA);
-		chkUseGA.setBounds(320, 8, 182, 19);
+		chkUseGA.setBounds(3, 58, 182, 25);
 		chkUseGA.addActionListener(keyGA);
 		
 
 		chkDoFittingRun.addActionListener(keyDoFittingRun);
 		chkDoFittingRun.setToolTipText("involves the calculation of the full numerical hessian instead of just the diagonal elements.");
-		chkDoFittingRun.setBounds(3, 54, 307, 25);
+		chkDoFittingRun.setBounds(3, 30, 404, 25);
 		add(chkDoFittingRun);
 
 		final TitledPanel pnlNumericalDifferencing = new TitledPanel();
 		pnlNumericalDifferencing.setTitle("numerical differencing");
-		pnlNumericalDifferencing.setBounds(764, 146, 210, 78);
+		pnlNumericalDifferencing.setBounds(764, 146, 210, 52);
 		add(pnlNumericalDifferencing);
-		txtFxDelta.setBounds(60, 52, 92, 20);
+		txtFxDelta.setBounds(9, 23, 92, 20);
 		pnlNumericalDifferencing.add(txtFxDelta);
 		JLabel lblFxDeltaFormula = new JLabel(g.html(("df(x)/dx = (f(x + "
 				+ g.delta + ") - f(x))/" + g.delta)));
@@ -183,7 +184,7 @@ public class Fit extends AbstractFit implements Serializable {
 
 		final TitledPanel pnlOutputFittingParam = new TitledPanel();
 		pnlOutputFittingParam.setTitle("output fitting parameters");
-		pnlOutputFittingParam.setBounds(764, 230, 210, 51);
+		pnlOutputFittingParam.setBounds(764, 214, 210, 51);
 		add(pnlOutputFittingParam);
 		JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
 		lblOutputFittingParameters.setBounds(10, 26, 85, 15);
