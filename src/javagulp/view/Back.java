@@ -86,7 +86,7 @@ public class Back {
 	public void addTab(String[] simulationParams) {
 		GulpRun gulpRun = new GulpRun();
 		tabs.add("" + (tabs.getTabCount() + 1), gulpRun);
-		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
+		getPanel().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 		gulpRun.processArguments(simulationParams);
 	}
@@ -135,7 +135,7 @@ public class Back {
 	 */
 	public static void clearTab() {
 		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
-		getPanel().getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(0);
+		getPanel().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 	}
 	
 	/**

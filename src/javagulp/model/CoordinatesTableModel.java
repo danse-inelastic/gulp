@@ -207,13 +207,13 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 		// fire the selection changed
 		int number = gr.getPotential().createLibrary.getCurrentPotential().potentialNumber;
 		if (number == 1) {
-			gr.getPotential().createLibrary.cboCoreShellSpring.setSelectedIndex(gr.getPotential().createLibrary.cboCoreShellSpring.getSelectedIndex());
+			gr.getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboOneBodyPotential.getSelectedIndex());
 		} else if (number == 2) {
-			gr.getPotential().createLibrary.cboGeneralPotential.setSelectedIndex(gr.getPotential().createLibrary.cboGeneralPotential.getSelectedIndex());
+			gr.getPotential().createLibrary.cboTwoBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboTwoBodyPotential.getSelectedIndex());
 		} else if (number == 3) {
-			gr.getPotential().createLibrary.cboThreeBody.setSelectedIndex(gr.getPotential().createLibrary.cboThreeBody.getSelectedIndex());
+			gr.getPotential().createLibrary.cboThreeBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboThreeBodyPotential.getSelectedIndex());
 		} else if (number == 4) {
-			gr.getPotential().createLibrary.cboTorsion.setSelectedIndex(gr.getPotential().createLibrary.cboTorsion.getSelectedIndex());
+			gr.getPotential().createLibrary.cboFourBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboFourBodyPotential.getSelectedIndex());
 		} else
 			;// error
 	}

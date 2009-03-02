@@ -85,10 +85,10 @@ public class CreateLibrary extends JPanel implements Serializable {
 	private JLabel lbl3 = new JLabel("3");
 	private JLabel lbl4 = new JLabel("4");
 
-	public JComboBox cboCoreShellSpring = new JComboBox(oneAtomPotentialList);
-	public JComboBox cboGeneralPotential = new JComboBox(twoAtomPotentialList);
-	public JComboBox cboThreeBody = new JComboBox(threeAtomPotentialList);
-	public JComboBox cboTorsion = new JComboBox(fourAtomPotentialList);
+	public JComboBox cboOneBodyPotential = new JComboBox(oneAtomPotentialList);
+	public JComboBox cboTwoBodyPotential = new JComboBox(twoAtomPotentialList);
+	public JComboBox cboThreeBodyPotential = new JComboBox(threeAtomPotentialList);
+	public JComboBox cboFourBodyPotential = new JComboBox(fourAtomPotentialList);
 
 	private JButton btnCombinations = new JButton("generate combinations");
 	private JButton btnSavePotentials = new JButton("export potentials");
@@ -120,7 +120,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 					null, null, null, null, null },
 			{ null, null, null, null, null, null, null, null, null } };
 
-	public int potentialNumber = 1;
+	public int potentialNumber;
 
 
 	private SerialListener keyCreateLibrary = new SerialListener() {
@@ -434,22 +434,22 @@ public class CreateLibrary extends JPanel implements Serializable {
 		btnAddPotential.addActionListener(keyAddPotential);
 		potentialList.addKeyListener(listKeyListener);
 		potentialList.addListSelectionListener(listMouseListener);
-		cboCoreShellSpring.addActionListener(keyOne);
-		cboGeneralPotential.addActionListener(keyTwo);
-		cboThreeBody.addActionListener(keyThree);
-		cboTorsion.addActionListener(keyFour);
-		cboCoreShellSpring.setBounds(30, 24, 168, 28);
-		cboCoreShellSpring.setMaximumRowCount(30);
-		pnlPotential.add(cboCoreShellSpring);
-		cboGeneralPotential.setBounds(240, 24, 196, 28);
-		cboGeneralPotential.setMaximumRowCount(30);
-		pnlPotential.add(cboGeneralPotential);
-		cboThreeBody.setBounds(481, 24, 259, 28);
-		cboThreeBody.setMaximumRowCount(30);
-		pnlPotential.add(cboThreeBody);
-		cboTorsion.setBounds(787, 24, 322, 28);
-		cboTorsion.setMaximumRowCount(30);
-		pnlPotential.add(cboTorsion);
+		cboOneBodyPotential.addActionListener(keyOne);
+		cboTwoBodyPotential.addActionListener(keyTwo);
+		cboThreeBodyPotential.addActionListener(keyThree);
+		cboFourBodyPotential.addActionListener(keyFour);
+		cboOneBodyPotential.setBounds(30, 24, 168, 28);
+		cboOneBodyPotential.setMaximumRowCount(30);
+		pnlPotential.add(cboOneBodyPotential);
+		cboTwoBodyPotential.setBounds(240, 24, 196, 28);
+		cboTwoBodyPotential.setMaximumRowCount(30);
+		pnlPotential.add(cboTwoBodyPotential);
+		cboThreeBodyPotential.setBounds(481, 24, 259, 28);
+		cboThreeBodyPotential.setMaximumRowCount(30);
+		pnlPotential.add(cboThreeBodyPotential);
+		cboFourBodyPotential.setBounds(787, 24, 322, 28);
+		cboFourBodyPotential.setMaximumRowCount(30);
+		pnlPotential.add(cboFourBodyPotential);
 		lbl1.setBounds(10, 28, 14, 21);
 		pnlPotential.add(lbl1);
 		lbl2.setBounds(220, 28, 14, 21);
@@ -499,13 +499,13 @@ public class CreateLibrary extends JPanel implements Serializable {
 	private int getIndex() {
 		int index = 0;
 		if (potentialNumber == 1) {
-			index = cboCoreShellSpring.getSelectedIndex();
+			index = cboOneBodyPotential.getSelectedIndex();
 		} else if (potentialNumber == 2) {
-			index = cboGeneralPotential.getSelectedIndex();
+			index = cboTwoBodyPotential.getSelectedIndex();
 		} else if (potentialNumber == 3) {
-			index = cboThreeBody.getSelectedIndex();
+			index = cboThreeBodyPotential.getSelectedIndex();
 		} else if (potentialNumber == 4) {
-			index = cboTorsion.getSelectedIndex();
+			index = cboFourBodyPotential.getSelectedIndex();
 		} else
 			;// error
 		return index;
