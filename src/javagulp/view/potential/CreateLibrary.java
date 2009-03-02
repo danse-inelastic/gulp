@@ -39,7 +39,6 @@ import javagulp.model.SerialListener;
 
 public class CreateLibrary extends JPanel implements Serializable {
 
-	private JPanel panel;
 	private static final long serialVersionUID = 7048421934237887044L;
 
 	private String[] oneAtomPotentialList = { "", "spring",
@@ -134,7 +133,6 @@ public class CreateLibrary extends JPanel implements Serializable {
 				return;
 			}
 			JFileChooser findLibrary = new JFileChooser();
-			findLibrary.setCurrentDirectory(new File(Back.getPanel().getWD()));
 			if (JFileChooser.APPROVE_OPTION == findLibrary.showSaveDialog(getParent())) {
 				try {
 					FileWriter f = new FileWriter(findLibrary.getSelectedFile());
@@ -205,7 +203,6 @@ public class CreateLibrary extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
 				try {
 					ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(fileDialog.getSelectedFile()));
@@ -229,7 +226,6 @@ public class CreateLibrary extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 				try {
 					ObjectInput oi = new ObjectInputStream(new FileInputStream(fileDialog.getSelectedFile()));
@@ -421,7 +417,6 @@ public class CreateLibrary extends JPanel implements Serializable {
 		pnlPotential.setBounds(10, 55, 1235, 66);
 		add(pnlPotential);
 		add(potentialBackdrop);
-		potentialBackdrop.setViewportView(getPanel());
 		add(listScroll);
 		listScroll.setBounds(7, 158, 182, 191);
 		add(btnAddPotential);
@@ -562,13 +557,4 @@ public class CreateLibrary extends JPanel implements Serializable {
 					"Equatorial", },
 			{ "NoPotential", "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
 					"Torexp", "Tortaper", "TortaperEsff", "Inversion" } };
-	/**
-	 * @return
-	 */
-	protected JPanel getPanel() {
-		if (panel == null) {
-			panel = new JPanel();
-		}
-		return panel;
-	}
 }

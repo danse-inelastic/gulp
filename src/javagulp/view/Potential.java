@@ -43,7 +43,7 @@ public class Potential extends JPanel {
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
-	public String librarySelected = "";
+	public String librarySelected = "none";
 	public String libraryContents = "";
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
@@ -84,7 +84,7 @@ public class Potential extends JPanel {
 		importButton.addActionListener(keyLibrary);
 		
 		libraryList = new JList();
-		libraryList.setSelectedIndex(1);
+		
 
 	    String[] potentials = new PotentialLibs().getPotentials();
 	    
@@ -95,6 +95,7 @@ public class Potential extends JPanel {
 	    libraryList.setModel(potentialListModel);
 	    listSelectionModel = libraryList.getSelectionModel();
         listSelectionModel.addListSelectionListener(new LibraryListener());
+        libraryList.setSelectedValue("none", true);
 		panel.add(libraryList);
 	}
 	

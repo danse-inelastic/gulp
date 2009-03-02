@@ -36,7 +36,7 @@ public class Fit extends AbstractFit implements Serializable {
 	private JTextField txtFtol = new JTextField("0.00001");
 	private JTextField txtOutputFittingParam = new JTextField();
 
-	private JCheckBox chkSimultaneous = new JCheckBox(g.html("do simultaneous relaxation of shells <br>during fitting, including both position <br>and radius"));
+	private JCheckBox chkSimultaneous = new JCheckBox(g.html("do simultaneous relaxation of shells during fitting, including both position and radius"));
 	private JCheckBox chkRelax = new JCheckBox("fit to structural displacements on relaxation rather than to the derivatives");
 	private JCheckBox chkFit = new JCheckBox("do fitting run using unit matrix with BFGS method");
 	private JCheckBox chkDoFittingRun = new JCheckBox("do fitting run using full BFGS method");
@@ -92,7 +92,7 @@ public class Fit extends AbstractFit implements Serializable {
 		fitList.addMouseListener(keyList);
 
 		chkSimultaneous.addActionListener(keySimultaneous);
-		chkSimultaneous.setBounds(764, 31, 265, 52);
+		chkSimultaneous.setBounds(13, 136, 500, 52);
 		add(chkSimultaneous);
 
 		chkRelax.setToolTipText("<html>	Invokes fitting to structural displacements on relaxation rather <br>"
@@ -102,7 +102,7 @@ public class Fit extends AbstractFit implements Serializable {
 			+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
 			+ "It is also an order of magnitude more expensive in cputime!</html>");
 		chkRelax.addActionListener(keyRelax);
-		chkRelax.setBounds(3, 85, 498, 25);
+		chkRelax.setBounds(3, 85, 540, 25);
 		add(chkRelax);
 
 		final TitledPanel pnlParameterTolerance = new TitledPanel();
@@ -119,7 +119,7 @@ public class Fit extends AbstractFit implements Serializable {
 		txtStepmxFit.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtStepmxFit);
 
-		fitPanel.setBounds(3, 116, 546, 244);
+		fitPanel.setBounds(3, 194, 546, 244);
 		fitPanel.scrollFit.setBounds(10, 64, 526, 172);
 		add(fitPanel);
 
@@ -178,7 +178,7 @@ public class Fit extends AbstractFit implements Serializable {
 		lblFxDelta.setBounds(9, 54, 35, 15);
 		pnlNumericalDifferencing.add(lblFxDelta);
 
-		chkOptimisefitShellsBut.setBounds(764, 5, 265, 25);
+		chkOptimisefitShellsBut.setBounds(3, 116, 265, 25);
 		add(chkOptimisefitShellsBut);
 		chkOptimisefitShellsBut.addActionListener(keyOptimisefitShellsBut);
 
@@ -189,7 +189,7 @@ public class Fit extends AbstractFit implements Serializable {
 		JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
 		lblOutputFittingParameters.setBounds(10, 26, 85, 15);
 		pnlOutputFittingParam.add(lblOutputFittingParameters);
-		txtOutputFittingParam.setBounds(101, 23, 57, 21);
+		txtOutputFittingParam.setBounds(101, 23, 78, 21);
 		pnlOutputFittingParam.add(txtOutputFittingParam);
 	}
 

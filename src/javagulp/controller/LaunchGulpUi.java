@@ -20,7 +20,7 @@ public class LaunchGulpUi {
 	public static void main(String[] args){
 		//try simple iron as 9TAL9D
 		if (args.length==0){
-			//args=new String[]{"username=demo","ticket=5X","simulationId=1","matterId=9TAL9D"};
+			//args=new String[]{"sentry.username=demo","sentry.ticket=5X","simulationId=1","matterId=9TAL9D"};
 		}
 		new LaunchGulpUi(args);
 	}
