@@ -17,9 +17,9 @@ public class CgiCommunicate {
 
 	String data = "";
 	private URLConnection conn;
-	public CgiCommunicate(){
+	public CgiCommunicate(String cgihome){
 		try {
-			URL url = new URL("http://trueblue.caltech.edu/cgi-bin/vnf/main.cgi");
+			URL url = new URL(cgihome);
 			conn = url.openConnection();
 			conn.setDoOutput(true);
 		} catch (MalformedURLException e) {

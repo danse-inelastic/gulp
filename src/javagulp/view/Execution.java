@@ -131,17 +131,25 @@ public class Execution extends JPanel implements Serializable {
 					//get files as strings
 					String gulpInputFile = Back.writer.gulpInputFileToString();
 					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
-					//post the files
-					CgiCommunicate cgiCom = new CgiCommunicate();
+					String librarySelected = Back.getPanel().getPotential().librarySelected;//post the files
 					Map<String,String> cgiMap = Back.getPanel().keyVals;
+
+					String cgihome = cgiMap.get("cgihome");
+					CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+					String formactor_action_prefix = cgiMap.get("formactor_action_prefix");
+
 					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-					cgiMap.put("gulpInputFile", gulpInputFile);
-					cgiMap.put("gulpLibrary", gulpLibrary);
+					cgiMap.put(formactor_action_prefix+".configurations", gulpInputFile);
+					cgiMap.put(formactor_action_prefix+".librarycontent", gulpLibrary);
+					cgiMap.put(formactor_action_prefix+".libraryname", librarySelected);
+					
 					cgiMap.put("actor", "gulpsimulationwizard");
-					cgiMap.put("routine", "verifySimulation");
+					cgiMap.put("routine", "storeConfiguration");
+					cgiMap.put("actor.form-received",  "gulp");
+					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.post();
-					if (response=="success"){
+					if (response.trim()=="success"){
 						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
 							"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
 					}else{
