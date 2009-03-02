@@ -174,7 +174,7 @@ public class Electrostatics extends JPanel implements Serializable {
 	public Electrostatics() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(973, 336));
+		//this.setPreferredSize(new java.awt.Dimension(973, 336));
 
 		// set up tabbed pane and three sub panes
 		eeChoice.setBounds(0, 2, 487, 209);

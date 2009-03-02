@@ -166,7 +166,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		this.setPreferredSize(new java.awt.Dimension(1008, 392));
 
 		JLabel lblChangeSymbolMass = new JLabel("change elemental information:");
-		lblChangeSymbolMass.setBounds(632, 8, 210, 20);
+		lblChangeSymbolMass.setBounds(632, 8, 366, 20);
 		add(lblChangeSymbolMass);
 		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(630, 35, 371, 350);
@@ -177,7 +177,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scrollPane.setViewportView(table);
 		JLabel lblAtomicCharges = new JLabel("set atomic charges:");
-		lblAtomicCharges.setBounds(457, 8, 139, 20);
+		lblAtomicCharges.setBounds(457, 8, 169, 20);
 		add(lblAtomicCharges);
 		lblAtomicCharges.setToolTipText(
 				"<html>This table will set atomic charges for each type of atom.<br>"
@@ -194,20 +194,20 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		speciesTable.setModel(speciesTableModel);
 		speciesScrollpane.setViewportView(speciesTable);
 		chkPrintDistanceAnalysis.addActionListener(keyPrintDistanceAnalysis);
-		chkPrintDistanceAnalysis.setBounds(5, 68, 380, 25);
+		chkPrintDistanceAnalysis.setBounds(5, 68, 446, 25);
 		add(chkPrintDistanceAnalysis);
 		chkApplyUniformNeutralizing.addActionListener(keyApplyUniformNeutralizing);
-		chkApplyUniformNeutralizing.setBounds(5, 99, 322, 30);
+		chkApplyUniformNeutralizing.setBounds(5, 99, 446, 25);
 		add(chkApplyUniformNeutralizing);
 
 		final TitledPanel pnlbondLengthTolerance = new TitledPanel();
 		pnlbondLengthTolerance.setTitle("bond length tolerance when deciding if two atoms are bonded");
 		pnlbondLengthTolerance.setBounds(4, 9, 447, 53);
 		add(pnlbondLengthTolerance);
-		txtBondLengthTolerance.setBounds(301, 23, 75, 18);
+		txtBondLengthTolerance.setBounds(362, 23, 75, 18);
 		pnlbondLengthTolerance.add(txtBondLengthTolerance);
 		JLabel lblBondLengthTolerance = new JLabel("scale factor multiplying sum of covalent radii");
-		lblBondLengthTolerance.setBounds(10, 25, 285, 15);
+		lblBondLengthTolerance.setBounds(10, 25, 346, 16);
 		pnlbondLengthTolerance.add(lblBondLengthTolerance);
 		lblBondLengthTolerance.setToolTipText("Bond length tolerance when deciding if two atoms are bonded. Number multiplies the sum of the covalent radii.");
 		pnlBondLengthAnalysis.setBounds(5, 135, 621, 107);
