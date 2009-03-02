@@ -547,20 +547,20 @@ public class CreateLibrary extends JPanel implements Serializable {
 	}
 	
 	private String[][] classNames = {
-			{ "PotentialPanel", "Spring", "EAMFunctional", "EAMDensity", "BondOrderSelfEnergy",
+			{ "NoPotential", "Spring", "EAMFunctional", "EAMDensity", "BondOrderSelfEnergy",
 					"BSM", "CoshSpring" },
-			{ "PotentialPanel", "GeneralPotential", "Buckingham", "Lennard", "Morse", "Harmonic",
+			{ "NoPotential", "GeneralPotential", "Buckingham", "Lennard", "Morse", "Harmonic",
 					"Rydberg", "Tsuneyuki", "SquaredHarmonic", "Tersoff",
 					"TersoffCombine", "SW2", "Manybody", "EAMPotentialShift",
 					"Brenner", "Spline", "Qtaper", "Qerfc", "BOCharge",
 					"Polynomial", "SWJB2", "Coulomb", "Igauss", "CovExp",
 					"FermiDirac", "LJBuffered", "QOVerr2", "DampedDispersion", },
-			{ "PotentialPanel", "ThreeBody", "ThreeBodyExponentialHarmonic", "Vessal",
+			{ "NoPotential", "ThreeBody", "ThreeBodyExponentialHarmonic", "Vessal",
 					"CosineHarmonic", "UreyBradley", "MurrellMottram",
 					"Linear3", "AxilrodTeller", "Exponential", "Sw3", "Sw3jb",
 					"Bcoscross", "Bcross", "Bacross", "HydrogenBond",
 					"Equatorial", },
-			{ "PotentialPanel", "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
+			{ "NoPotential", "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
 					"Torexp", "Tortaper", "TortaperEsff", "Inversion" } };
 	/**
 	 * @return
