@@ -41,23 +41,23 @@ public class CreateLibrary extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7048421934237887044L;
 
-	private String[] oneAtomPotentialList = { "spring",
+	private String[] oneAtomPotentialList = { "", "spring",
 			"EAM functional", "EAM density", "bond order self energy", "bsm", "cosh-spring" };
-	private String[] twoAtomPotentialList = { "general potential",
+	private String[] twoAtomPotentialList = { "", "general potential",
 			"buckingham", "lennard-jones", "morse", "harmonic", "rydberg",
 			"tsuneyuki", "squared harmonic", "tersoff", "tersoff combined",
 			"stillinger-weber two body", "many body", "EAM potential shift",
 			"brenner", "spline", "qtaper", "qerfc", "Bond Order Charge",
 			"Polynomial", "swjb2", "coulomb", "igauss", "covexp", "fermi-dirac",
 			"ljbuffered", "qoverr2", "damped_dispersion" };
-	private String[] threeAtomPotentialList = { "three body",
+	private String[] threeAtomPotentialList = { "", "three body",
 			"three body exponential harmonic", "vessal", "cosine harmonic",
 			"urey-bradley", "murrell-mottram", "linear three body",
 			"axilrod-teller", "exponential", "stillinger-weber three body",
 			"stillinger-weber three body (JB)",
 			"bond-bond-cosine(angle) cross term", "bond-bond cross term",
 			"bond-bond-angle cross term", "hydrogen-bond", "equatorial" };
-	private String[] fourAtomPotentialList = { "torsion", "out of plane",
+	private String[] fourAtomPotentialList = { "", "torsion", "out of plane",
 			"ryckaert", "torsion-angle cross potential",
 			"harmonic torsional potential",
 			"exponentially decaying torsional potential",
@@ -502,13 +502,13 @@ public class CreateLibrary extends JPanel implements Serializable {
 	private int getIndex() {
 		int index = 0;
 		if (potentialNumber == 1) {
-			index = cboCoreShellSpring.getSelectedIndex();
+			index = cboCoreShellSpring.getSelectedIndex()-1;
 		} else if (potentialNumber == 2) {
-			index = cboGeneralPotential.getSelectedIndex();
+			index = cboGeneralPotential.getSelectedIndex()-1;
 		} else if (potentialNumber == 3) {
-			index = cboThreeBody.getSelectedIndex();
+			index = cboThreeBody.getSelectedIndex()-1;
 		} else if (potentialNumber == 4) {
-			index = cboTorsion.getSelectedIndex();
+			index = cboTorsion.getSelectedIndex()-1;
 		} else
 			;// error
 		return index;
