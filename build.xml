@@ -58,10 +58,10 @@
 			<fileset dir="resources"/>
 		</jar>
 		<!-- sign jar -->
-		<signjar jar="lib/potentials.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />	
+		<signjar jar="lib/potentials.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
 		<copy file="lib/potentials.jar" todir="deployable"/>
 	</target>
-	
+
 	<target name="jar-for-danse" description="build jars for vnf" depends="init">
 		<!-- first unsign external jars -->
 		<unsignjar jar="deployable/commons-logging.jar" />
@@ -92,6 +92,10 @@
 		<copy todir="${vnfDeploy}">
 			<fileset dir="deployable"/>
 		</copy>
+	</target>
+
+
+	<target name="copyToTrueblue" depends="jar-for-danse">
 		<copy todir="${trueblueDeploy}">
 			<fileset dir="deployable"/>
 		</copy>
