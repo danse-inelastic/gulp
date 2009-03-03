@@ -66,10 +66,10 @@ public class Mortiers extends JPanel implements Serializable {
 	public String writeElectronegativity() throws IncompleteOptionException {
 		String lines = "";
 		if (chkMortiers.isSelected()) {
-			if (cboeematom.getSelectedItem() == null || cboeematom.getSelectedItem() == "")
-				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
-			if (txtchi.getText().equals(""))
-				throw new IncompleteOptionException("Please enter a value for chi in mortiers electrostatics.");
+//			if (cboeematom.getSelectedItem() == null || cboeematom.getSelectedItem() == "")
+//				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
+//			if (txtchi.getText().equals(""))
+//				throw new IncompleteOptionException("Please enter a value for chi in mortiers electrostatics.");
 			Double.parseDouble(txtchi.getText());
 			lines = "electronegativity " + cboeematom.getSelectedItem() + " " + txtchi.getText();
 			if (!txtmu.getText().equals("")) {
