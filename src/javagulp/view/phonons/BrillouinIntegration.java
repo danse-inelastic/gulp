@@ -7,19 +7,11 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
 import javax.swing.ButtonGroup;
 
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-
-import javagulp.model.G;
 
 public class BrillouinIntegration extends TitledPanel implements Serializable {
 
@@ -54,7 +46,7 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 		if (pnlBackdrop == null) {
 			pnlBackdrop = new JPanel();
 			pnlBackdrop.setLayout(new CardLayout());
-			pnlBackdrop.setBounds(10, 139, 487, 212);
+			pnlBackdrop.setBounds(10, 139, 487, 182);
 			pnlBackdrop.add(getPnlNone(), getPnlNone().getName());
 			pnlKpointsMesh.setName("pnlKpointsMesh");
 			pnlBackdrop.add(pnlKpointsMesh, pnlKpointsMesh.getName());

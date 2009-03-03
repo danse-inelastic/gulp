@@ -6,10 +6,6 @@ import java.io.Serializable;
 import javagulp.model.G;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.view.Back;
-import javagulp.view.Phonons;
-//import javagulp.view.phonons.Dispersion.BoundsPanel;
-//import javagulp.view.phonons.Dispersion.BoundsPanel.listPanel;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,34 +13,6 @@ import javax.swing.JTextField;
 	class BoundsPanel extends JPanel {
 
 		private static final long serialVersionUID = 179956006650728973L;
-
-		
-		public class listPanel extends JPanel implements Serializable {
-
-			private static final long serialVersionUID = -4857283959710322431L;
-
-			public JTextField txtBoundX = new JTextField("0.0");
-			public JTextField txtBoundY = new JTextField("0.0");
-			public JTextField txtBoundZ = new JTextField("0.0");
-
-			private JLabel lblTo = new JLabel("to:");
-			
-			public listPanel() {
-				setLayout(null);
-
-				txtBoundX.setBounds(0, 0, 25, 20);
-				add(txtBoundX);
-				txtBoundY.setBounds(30, 0, 25, 20);
-				add(txtBoundY);
-				txtBoundZ.setBounds(60, 0, 25, 20);
-				add(txtBoundZ);
-
-				lblTo.setBounds(90, 0, 30, 20);
-				add(lblTo);
-			}
-		}
-		
-		
 
 		private G g = new G();
 		private JLabel lblPoints = new JLabel(g.html("number of high symmetry kpoints"));
@@ -67,7 +35,7 @@ import javax.swing.JTextField;
 
 			lblPoints.setBounds(0, 0, 120, 40);
 			add(lblPoints);
-			txtPoints.setBounds(125, 0, 25, 20);
+			txtPoints.setBounds(130, 10, 39, 20);
 			add(txtPoints);
 			txtPoints.addKeyListener(pointsKeyListener);
 			updateBounds();
@@ -82,7 +50,7 @@ import javax.swing.JTextField;
 			}
 			if (newSize > number) {
 				for (int i = 0; i < newSize - number; i++) {
-					listPanel l = new listPanel();
+					DispersionKpoint l = new DispersionKpoint();
 					l.setBounds(5, (number + i) * 25 + 40, 150, 20);
 					add(l);
 				}
@@ -96,19 +64,19 @@ import javax.swing.JTextField;
 			repaint();
 		}
 
-		private String writeDispersion() {
+		String writeDispersion() {
 			String output = "";
 			Dispersion disp = Back.getPanel().getPhonon().pnlDispersion;
 			try {
 				if (disp.dispersionModified) {
 					output += "dispersion " + disp.txtLines.getText() + " "
-							+ phonons.txtFrequency.getText();
-					for (int i = 0; i < paneDispersion.getTabCount(); i++) {
-						BoundsPanel b = (BoundsPanel) paneDispersion.getComponent(i);
+							+ disp.txtFrequency.getText();
+					for (int i = 0; i < disp.paneDispersion.getTabCount(); i++) {
+						BoundsPanel b = (BoundsPanel) disp.paneDispersion.getComponent(i);
 
 						// start at index 2 because of lblPoints and txtPoints
 						for (int j = 2; j < b.getComponentCount(); j++) {
-							listPanel l = (listPanel) b.getComponent(j);
+							DispersionKpoint l = (DispersionKpoint) b.getComponent(j);
 							output += " " + l.txtBoundX.getText() + " "
 									+ l.txtBoundY.getText() + " "
 									+ l.txtBoundZ.getText() + " to";

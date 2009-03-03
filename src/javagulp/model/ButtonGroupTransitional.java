@@ -13,6 +13,7 @@ public class ButtonGroupTransitional extends ButtonGroup {
 	}
 
     //@Override
+	@Override
 	public void clearSelection() {
         if (selection != null) {
             ButtonModel oldSelection = selection;

@@ -1,22 +1,21 @@
 package javagulp.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.phonons.BrillouinIntegration;
 import javagulp.view.phonons.Dispersion;
-import javagulp.view.phonons.DispersionOptions;
 import javagulp.view.phonons.GammaPointCorrection;
 import javagulp.view.phonons.GammaPointOptions;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
 
@@ -32,8 +31,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	private JComboBox cboNumBoxes = new JComboBox(new String[] {
 			"number of boxes", "box size (1/cm)" });
 
-	private JLabel lblChangeThe = new JLabel("change the DOS");
-	private JLabel lblFor = new JLabel("for");
+	private JLabel lblChangeThe = new JLabel("set the DOS");
 
 	private G g = new G();
 
@@ -80,12 +78,6 @@ public class Phonons extends TitledPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		add(txtBroadenPeaks);
-		txtBroadenPeaks.setBackground(Back.grey);
-		txtBroadenPeaks.setBounds(211, 23, 63, 20);
-		lblBroadenPeaks.setBounds(3, 20, 202, 25);
-		add(lblBroadenPeaks);
-
 		//pnlDispersionOptions.setBounds(5, 42, 482, 109);
 		//add(pnlDispersionOptions);
 
@@ -95,7 +87,7 @@ public class Phonons extends TitledPanel implements Serializable {
 
 
 
-		paneSpecifyKpoints.setBounds(493, 9, 572, 395);
+		paneSpecifyKpoints.setBounds(493, 9, 611, 395);
 		add(paneSpecifyKpoints);
 		paneSpecifyKpoints.addTab("Brillouin Zone Integration",
 				pnlBrillouinIntegration);
@@ -103,14 +95,6 @@ public class Phonons extends TitledPanel implements Serializable {
 		paneSpecifyKpoints.addTab("Gamma Point Options", pnlGammaPoints);
 		paneSpecifyKpoints.addTab("Gamma Point Correction", pnlGammaCorrection);
 		add(getPanel());
-		txtboxvalue.setBounds(232, 78, 77, 19);
-		add(txtboxvalue);
-		lblChangeThe.setBounds(11, 80, 70, 15);
-		add(lblChangeThe);
-		cboNumBoxes.setBounds(87, 77, 139, 21);
-		add(cboNumBoxes);
-		lblFor.setBounds(9, 50, 20, 20);
-		add(lblFor);
 	}
 
 	private String writeDosBox() throws IncompleteOptionException {
@@ -166,7 +150,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	protected TitledPanel getPanel() {
 		if (pnlOptions == null) {
 			pnlOptions = new TitledPanel();
-			pnlOptions.setBounds(5, 157, 482, 247);
+			pnlOptions.setBounds(5, 41, 482, 363);
 			pnlOptions.setTitle("options");
 			chkDoNotPrint.addActionListener(keyDoNotPrint);
 			chkDoNotPrint.setBounds(10, 49, 425, 25);
@@ -186,10 +170,32 @@ public class Phonons extends TitledPanel implements Serializable {
 			chkNoReciprocalSpace.addActionListener(keyNoReciprocalSpace);
 			chkNoReciprocalSpace.setBounds(10, 173, 452, 25);
 			pnlOptions.add(chkNoReciprocalSpace);
-
+			
 			chkExcludeZeroPoint.addActionListener(keyExcludeZeroPoint);
 			chkExcludeZeroPoint.setBounds(10, 204, 359, 25);
 			pnlOptions.add(chkExcludeZeroPoint);
+			lblBroadenPeaks.setBounds(10, 235, 202, 25);
+			pnlOptions.add(lblBroadenPeaks);
+			lblChangeThe.setBounds(10, 266, 101, 25);
+			pnlOptions.add(lblChangeThe);
+
+			cboNumBoxes.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					if (txtboxvalue.getText().equals("number of boxes"))
+						txtboxvalue.setText("64");
+					else
+						txtboxvalue.setText("");
+				}
+			});
+			cboNumBoxes.setBounds(117, 268, 164, 21);
+			pnlOptions.add(cboNumBoxes);
+
+			txtBroadenPeaks.setBackground(Back.grey);
+			txtboxvalue.setBounds(292, 269, 92, 19);
+			pnlOptions.add(txtboxvalue);
+			txtBroadenPeaks.setBounds(218, 238, 63, 20);
+			pnlOptions.add(txtBroadenPeaks);
+			
 		}
 		return pnlOptions;
 	}

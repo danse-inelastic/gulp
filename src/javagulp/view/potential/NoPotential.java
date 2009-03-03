@@ -3,14 +3,6 @@ package javagulp.view.potential;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
-import javagulp.view.TitledPanel;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class NoPotential extends PotentialPanel implements Serializable {
 	public NoPotential() {

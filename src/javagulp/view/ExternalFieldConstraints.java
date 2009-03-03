@@ -3,7 +3,6 @@ package javagulp.view;
 import java.io.Serializable;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 

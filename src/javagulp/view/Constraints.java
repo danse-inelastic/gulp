@@ -5,11 +5,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.border.TitledBorder;
-
 import javagulp.model.SerialListener;
 
 public class Constraints extends JPanel implements Serializable {
