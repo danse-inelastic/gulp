@@ -24,6 +24,7 @@ import javagulp.model.SerialListener;
 
 public class ChargesElementsBonding extends JPanel implements Serializable {
 
+	private JCheckBox chkPrintBondLengthAnalysis;
 	private static final long serialVersionUID = -8200954639125886210L;
 
 	private class BondLengthAnalysis extends JPanel {
@@ -124,6 +125,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 	private JCheckBox chkApplyUniformNeutralizing = new JCheckBox("apply uniform neutralizing background charge");
 
 	private KeywordListener keyPrintDistanceAnalysis = new KeywordListener(chkPrintDistanceAnalysis, "distance");
+	private KeywordListener keyPrintBondLengthAnalysis = new KeywordListener(chkPrintBondLengthAnalysis, "bond");
 	private KeywordListener keyApplyUniformNeutralizing = new KeywordListener(chkApplyUniformNeutralizing, "qok");
 
 	private JButton btnImportCharges = new JButton("Import Charges");
@@ -197,7 +199,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		chkPrintDistanceAnalysis.setBounds(5, 68, 446, 25);
 		add(chkPrintDistanceAnalysis);
 		chkApplyUniformNeutralizing.addActionListener(keyApplyUniformNeutralizing);
-		chkApplyUniformNeutralizing.setBounds(5, 99, 446, 25);
+		chkApplyUniformNeutralizing.setBounds(5, 130, 446, 25);
 		add(chkApplyUniformNeutralizing);
 
 		final TitledPanel pnlbondLengthTolerance = new TitledPanel();
@@ -210,6 +212,12 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		lblBondLengthTolerance.setBounds(10, 25, 346, 16);
 		pnlbondLengthTolerance.add(lblBondLengthTolerance);
 		lblBondLengthTolerance.setToolTipText("Bond length tolerance when deciding if two atoms are bonded. Number multiplies the sum of the covalent radii.");
+
+		chkPrintBondLengthAnalysis = new JCheckBox();
+		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);
+		chkPrintBondLengthAnalysis.setText("print bond length analysis at the beginning and end of a run");
+		chkPrintBondLengthAnalysis.setBounds(5, 99, 446, 25);
+		add(chkPrintBondLengthAnalysis);
 		pnlBondLengthAnalysis.setBounds(5, 135, 621, 107);
 		// TODO fix this and reinstate
 		// add(pnlBondLengthAnalysis);
