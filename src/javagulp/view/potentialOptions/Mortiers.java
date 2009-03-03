@@ -34,7 +34,7 @@ public class Mortiers extends JPanel implements Serializable {
 	public JComboBox cboeematom = new JComboBox();
 
 	private KeywordListener keyMortiers = new KeywordListener(chkMortiers, "eem");
-	
+
 	public Mortiers() {
 		super();
 		setLayout(null);
@@ -70,14 +70,17 @@ public class Mortiers extends JPanel implements Serializable {
 //				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
 //			if (txtchi.getText().equals(""))
 //				throw new IncompleteOptionException("Please enter a value for chi in mortiers electrostatics.");
-			Double.parseDouble(txtchi.getText());
-			lines = "electronegativity " + cboeematom.getSelectedItem() + " " + txtchi.getText();
-			if (!txtmu.getText().equals("")) {
-				lines += " " + txtmu.getText();
-				Double.parseDouble(txtmu.getText());
+			
+			if (!txtchi.getText().equals("")) {
+				Double.parseDouble(txtchi.getText());
+				lines = "electronegativity " + cboeematom.getSelectedItem() + " " + txtchi.getText();
+				if (!txtmu.getText().equals("")) {
+					lines += " " + txtmu.getText();
+					Double.parseDouble(txtmu.getText());
+				}
+				JCheckBox[] boxes = {chkchi, chkmu};
+				lines += Back.writeFits(boxes) + Back.newLine;
 			}
-			JCheckBox[] boxes = {chkchi, chkmu};
-			lines += Back.writeFits(boxes) + Back.newLine;
 		}
 		return lines;
 	}

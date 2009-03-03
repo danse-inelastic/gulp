@@ -87,12 +87,12 @@ public class Fit extends AbstractFit implements Serializable {
 		//this.setPreferredSize(new java.awt.Dimension(742, 350));
 
 		add(listScroll);
-		listScroll.setBounds(555, 4, 203, 329);
+		listScroll.setBounds(567, 4, 163, 399);
 		fitList.addKeyListener(listListener);
 		fitList.addMouseListener(keyList);
 
 		chkSimultaneous.addActionListener(keySimultaneous);
-		chkSimultaneous.setBounds(13, 136, 500, 52);
+		chkSimultaneous.setBounds(3, 136, 558, 52);
 		add(chkSimultaneous);
 
 		chkRelax.setToolTipText("<html>	Invokes fitting to structural displacements on relaxation rather <br>"
@@ -102,7 +102,7 @@ public class Fit extends AbstractFit implements Serializable {
 			+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
 			+ "It is also an order of magnitude more expensive in cputime!</html>");
 		chkRelax.addActionListener(keyRelax);
-		chkRelax.setBounds(3, 85, 540, 25);
+		chkRelax.setBounds(3, 85, 558, 25);
 		add(chkRelax);
 
 		final TitledPanel pnlParameterTolerance = new TitledPanel();
@@ -119,15 +119,15 @@ public class Fit extends AbstractFit implements Serializable {
 		txtStepmxFit.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtStepmxFit);
 
-		fitPanel.setBounds(3, 194, 546, 244);
+		fitPanel.setBounds(3, 194, 558, 244);
 		fitPanel.scrollFit.setBounds(10, 64, 526, 172);
 		add(fitPanel);
 
 		final TitledPanel pnlMaxNumOfCycles = new TitledPanel();
 		pnlMaxNumOfCycles.setTitle("maximum number of cycles");
-		pnlMaxNumOfCycles.setBounds(764, 89, 265, 51);
+		pnlMaxNumOfCycles.setBounds(736, 194, 246, 51);
 		add(pnlMaxNumOfCycles);
-		txtMaxCycfit.setBounds(10, 22, 190, 20);
+		txtMaxCycfit.setBounds(10, 22, 228, 20);
 		pnlMaxNumOfCycles.add(txtMaxCycfit);
 
 		final TitledPanel pnlGradientTolerance = new TitledPanel();
@@ -166,7 +166,7 @@ public class Fit extends AbstractFit implements Serializable {
 
 		final TitledPanel pnlNumericalDifferencing = new TitledPanel();
 		pnlNumericalDifferencing.setTitle("numerical differencing");
-		pnlNumericalDifferencing.setBounds(764, 146, 265, 52);
+		pnlNumericalDifferencing.setBounds(736, 252, 246, 52);
 		add(pnlNumericalDifferencing);
 		txtFxDelta.setBounds(9, 23, 92, 20);
 		pnlNumericalDifferencing.add(txtFxDelta);
@@ -184,12 +184,12 @@ public class Fit extends AbstractFit implements Serializable {
 
 		final TitledPanel pnlOutputFittingParam = new TitledPanel();
 		pnlOutputFittingParam.setTitle("output fitting parameters");
-		pnlOutputFittingParam.setBounds(764, 214, 265, 51);
+		pnlOutputFittingParam.setBounds(736, 310, 246, 51);
 		add(pnlOutputFittingParam);
 		JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
-		lblOutputFittingParameters.setBounds(10, 26, 85, 15);
+		lblOutputFittingParameters.setBounds(10, 26, 161, 18);
 		pnlOutputFittingParam.add(lblOutputFittingParameters);
-		txtOutputFittingParam.setBounds(101, 23, 78, 21);
+		txtOutputFittingParam.setBounds(161, 25, 78, 21);
 		pnlOutputFittingParam.add(txtOutputFittingParam);
 	}
 

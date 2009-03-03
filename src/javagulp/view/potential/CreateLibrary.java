@@ -1,5 +1,6 @@
 package javagulp.view.potential;
 
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -93,7 +94,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 	private JButton btnCombinations = new JButton("generate combinations");
 	private JButton btnSavePotentials = new JButton("export potentials");
 	private JButton btnRestorePotentials = new JButton("import potentials");
-	private JButton btnAddPotential = new JButton("add potential");
+	private JButton btnAddPotential = new JButton("add potential to gulp run");
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	public JList potentialList = new JList(potentialListModel);
 	private JScrollPane listScroll = new JScrollPane(potentialList);
@@ -420,6 +421,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		add(listScroll);
 		listScroll.setBounds(7, 158, 182, 191);
 		add(btnAddPotential);
+		btnAddPotential.setMargin(new Insets(2, 2, 2, 2));
 		btnAddPotential.setBounds(7, 127, 182, 25);
 		add(btnCombinations);
 		btnCombinations.setBounds(1010, 7, 235, 42);

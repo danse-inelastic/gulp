@@ -23,10 +23,10 @@ public class Spring extends PotentialPanel implements Serializable {
 
 	private TitledPanel pnlCoreShell = new TitledPanel();
 	
-	private JComboBox cboUnits = new JComboBox(new DefaultComboBoxModel(
-			new String[] {"kjmol", "kcal"}));
+//	private JComboBox cboUnits = new JComboBox(new DefaultComboBoxModel(
+//			new String[] {"kjmol", "kcal"}));
 
-	private JLabel lblUnits = new JLabel("units");
+//	private JLabel lblUnits = new JLabel("units");
 	private JLabel lblCutoffDistnce = new JLabel("<html>(&Aring;)</html>");
 	private JLabel lblSpringEq = new JLabel("<html>E = 1/2 k<sub>2</sub>r<sup>2</sup> + 1/24 k<sub>4</sub>r<sup>4</sup></html>");
 
@@ -44,10 +44,10 @@ public class Spring extends PotentialPanel implements Serializable {
 		k4.txt.setBackground(Back.grey);
 		k4.setBounds(10, 100, 250, 25);
 		add(k4);
-		lblUnits.setBounds(10, 200, 70, 21);
-		add(lblUnits);
-		cboUnits.setBounds(100, 200, 85, 21);
-		add(cboUnits);
+//		lblUnits.setBounds(10, 200, 70, 21);
+//		add(lblUnits);
+		//cboUnits.setBounds(100, 200, 85, 21);
+		//add(cboUnits);
 		
 		pnlCoreShell.setTitle("core-shell interaction cutoff distance");
 		pnlCoreShell.setBounds(7, 140, 251, 52);
@@ -68,8 +68,8 @@ public class Spring extends PotentialPanel implements Serializable {
 
 		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
 		String lines = "spring ";
-		if (cboUnits.getSelectedIndex() != 0)
-			lines += cboUnits.getSelectedItem();
+//		if (cboUnits.getSelectedIndex() != 0)
+//			lines += cboUnits.getSelectedItem();
 		lines += Back.newLine + pot.getAtomCombos() + k2.txt.getText();
 		if (!k4.txt.getText().equals("") && !k4.txt.getText().equals("0.0")) {
 			Double.parseDouble(k4.txt.getText());

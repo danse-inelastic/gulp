@@ -15,11 +15,9 @@ import javagulp.model.SerialListener;
 public class Constraints extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 6713823649209001153L;
+	private ExternalFieldConstraints pnlExternalField = new ExternalFieldConstraints();
 
 
-	private JRadioButton radConstantPressure = new JRadioButton("constant pressure");
-	private JRadioButton radConstantVolume = new JRadioButton("constant volume");
-	private JRadioButton radNone = new JRadioButton("none");
 
 	SerialListener a = new SerialListener() {
 		
@@ -27,15 +25,20 @@ public class Constraints extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Back.getKeys().putOrRemoveKeyword(radConstantPressure.isSelected(),
+			Back.getKeys().putOrRemoveKeyword(pnlExternalField.radConstantPressure.isSelected(),
 					"conp");
-			Back.getKeys().putOrRemoveKeyword(radConstantVolume.isSelected(),
+			Back.getKeys().putOrRemoveKeyword(pnlExternalField.radConstantVolume.isSelected(),
 					"conv");
-			pnlUnfreeze.setVisible(radNone.isSelected());
+			pnlUnfreeze.setVisible(pnlExternalField.radNone.isSelected());
 		}
 	};
 
-	private Unfreeze pnlUnfreeze = new Unfreeze(radNone);
+	private Unfreeze pnlUnfreeze = new Unfreeze(pnlExternalField.radNone);
+
+
+
+
+	
 
 	public Constraints() {
 		super();
@@ -43,31 +46,12 @@ public class Constraints extends JPanel implements Serializable {
 
 		pnlUnfreeze.setBounds(266, 0, 412, 147);
 		add(pnlUnfreeze);
-
-		JPanel pnlExternalField = new JPanel();
-		pnlExternalField.setLayout(null);
-		pnlExternalField.setBorder(new TitledBorder(null,
-				"external field constraints",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
+		pnlExternalField.radConstantPressure.addActionListener(a);
+		pnlExternalField.radConstantVolume.addActionListener(a);
+		pnlExternalField.radNone.addActionListener(a);
 		pnlExternalField.setBounds(0, 0, 260, 148);
 		add(pnlExternalField);
-		radConstantPressure.setBounds(21, 26, 221, 23);
-		pnlExternalField.add(radConstantPressure);
-		radConstantPressure.addActionListener(a);
-		radConstantPressure.setToolTipText("Perform Constant Pressure Calculation - cell to vary");
-		radConstantVolume.setBounds(21, 55, 221, 23);
-		pnlExternalField.add(radConstantVolume);
-		radConstantVolume.addActionListener(a);
-		radConstantVolume.setToolTipText("Perform Constant Volume Calculation - cell to vary");
-		pnlExternalField.add(radNone);
-		radNone.setBounds(21, 84, 221, 23);
-		radNone.setSelected(true);
-		radNone.addActionListener(a);
-		ButtonGroup group = new ButtonGroup();
-		group.add(radConstantPressure);
-		group.add(radConstantVolume);
-		group.add(radNone);
+		
 
 		ConstraintsOptions pnlOptions = new ConstraintsOptions();
 		//JPanel pnlOptions = new JPanel();
