@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
+import javagulp.controller.IncompleteOptionException;
 import javagulp.model.BareBonesBrowserLaunch;
 import javagulp.view.Back;
 import javagulp.view.KeywordListener;
@@ -12,6 +13,7 @@ import javagulp.view.TitledPanel;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -25,114 +27,10 @@ public class Dispersion extends TitledPanel implements Serializable {
 
 	private static final long serialVersionUID = -4898054157855983814L;
 
-	private class BoundsPanel extends JPanel {
-
-		private static final long serialVersionUID = 179956006650728973L;
-
-		public class listPanel extends JPanel implements Serializable {
-
-			private static final long serialVersionUID = -4857283959710322431L;
-
-			public JTextField txtBoundX = new JTextField("0.0");
-			public JTextField txtBoundY = new JTextField("0.0");
-			public JTextField txtBoundZ = new JTextField("0.0");
-
-			private JLabel lblTo = new JLabel("to:");
-			
-			public listPanel() {
-				setLayout(null);
-
-				txtBoundX.setBounds(0, 0, 25, 20);
-				add(txtBoundX);
-				txtBoundY.setBounds(30, 0, 25, 20);
-				add(txtBoundY);
-				txtBoundZ.setBounds(60, 0, 25, 20);
-				add(txtBoundZ);
-
-				lblTo.setBounds(90, 0, 30, 20);
-				add(lblTo);
-			}
-		}
-
-		private G g = new G();
-		private JLabel lblPoints = new JLabel(g.html("number of high symmetry kpoints"));
-		private int number = 0;
-
-		private JTextField txtPoints = new JTextField("2");
-
-		private SerialKeyAdapter pointsKeyListener = new SerialKeyAdapter() {
-			private static final long serialVersionUID = 1268594961778847795L;
-			@Override
-			public void keyReleased(KeyEvent e) {
-				updateBounds();
-				dispersionModified = true;
-			}
-		};
-
-		private BoundsPanel() {
-			super();
-			setLayout(null);
-
-			lblPoints.setBounds(0, 0, 120, 40);
-			add(lblPoints);
-			txtPoints.setBounds(125, 0, 25, 20);
-			add(txtPoints);
-			txtPoints.addKeyListener(pointsKeyListener);
-			updateBounds();
-		}
-
-		private void updateBounds() {
-			int newSize;
-			try {
-				newSize = Integer.parseInt(txtPoints.getText());
-			} catch (NumberFormatException e) {
-				return;
-			}
-			if (newSize > number) {
-				for (int i = 0; i < newSize - number; i++) {
-					listPanel l = new listPanel();
-					l.setBounds(5, (number + i) * 25 + 40, 150, 20);
-					add(l);
-				}
-				number = newSize;
-			} else if (number > newSize) {
-				for (int i = 0; i < number - newSize; i++) {
-					remove(getComponentCount() - 1);
-				}
-				number = newSize;
-			}
-			repaint();
-		}
-
-		private String writeDispersion() {
-			String output = "";
-			try {
-				if (dispersionModified) {
-					output += "dispersion " + txtLines.getText() + " "
-							+ txtFrequency.getText();
-					for (int i = 0; i < paneDispersion.getTabCount(); i++) {
-						BoundsPanel b = (BoundsPanel) paneDispersion.getComponent(i);
-
-						// start at index 2 because of lblPoints and txtPoints
-						for (int j = 2; j < b.getComponentCount(); j++) {
-							listPanel l = (listPanel) b.getComponent(j);
-							output += " " + l.txtBoundX.getText() + " "
-									+ l.txtBoundY.getText() + " "
-									+ l.txtBoundZ.getText() + " to";
-						}
-						output = output.substring(0, output.length() - 3);
-					}
-					output += Back.newLine;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return output;
-		}
-	}
 
 	private JTabbedPane paneDispersion = new JTabbedPane();
-
+	public boolean dispersionModified = false;
+	
 	private G g = new G();
 	private JButton btnVisualizeBrillouinZone = new JButton(g.html("visualize<br> Brillouin zone"));
 
@@ -155,8 +53,14 @@ public class Dispersion extends TitledPanel implements Serializable {
 	private JTextField txtLines = new JTextField(TXT_LINES);
 	private final String TXT_FREQUENCY = "20";
 	private JTextField txtFrequency = new JTextField(TXT_FREQUENCY);
+	private JTextField txtboxvalue = new JTextField();
+	private JComboBox cboNumBoxes = new JComboBox(new String[] {
+			"number of boxes", "box size (1/cm)" });
 
-	private boolean dispersionModified = false;
+	private JLabel lblChangeThe = new JLabel("change the");
+	private JLabel lblFor = new JLabel("for");
+
+
 
 	private class LinesKeyListener extends KeyAdapter implements Serializable {
 		private static final long serialVersionUID = 83298433634021501L;
@@ -206,8 +110,32 @@ public class Dispersion extends TitledPanel implements Serializable {
 		for (int i = 0; i < Integer.parseInt(txtLines.getText()); i++)
 			paneDispersion.add("" + (paneDispersion.getComponentCount() + 1), new BoundsPanel());
 		txtLines.addKeyListener(linesKeyListener);
+		
+		txtboxvalue.setBounds(232, 78, 77, 19);
+		add(txtboxvalue);
+		lblChangeThe.setBounds(11, 80, 70, 15);
+		add(lblChangeThe);
+		cboNumBoxes.setBounds(87, 77, 139, 21);
+		add(cboNumBoxes);
+		lblFor.setBounds(9, 50, 20, 20);
+		add(lblFor);
 	}
 
+	private String writeDispersionBox() throws IncompleteOptionException {
+		String lines = "";
+		if (!txtboxvalue.getText().equals("")) {
+			try {
+				Integer.parseInt(txtboxvalue.getText());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Please enter an integer for the number of boxes in Phonons");
+			}
+			lines = "box " + cboBoxType.getSelectedItem() + " "
+			+ cboNumBoxes.getSelectedItem() + " "
+			+ txtboxvalue.getText() + Back.newLine;
+		}
+		return lines;
+	}
+	
 	public String writeDispersion() {
 		BoundsPanel b = (BoundsPanel) paneDispersion.getComponent(0);
 		//TODO remove 0 and use all
