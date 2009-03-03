@@ -33,10 +33,11 @@ import javax.swing.JTextField;
 		public Thermodynamics() {
 			setTitle("thermodynamic ensembles");
 			ensemble.add(radNone);
+			radNone.setText("none");
 			ensemble.add(radEnsembleNVE);
 			ensemble.add(radEnsembleNVT);
 			ensemble.add(radEnsembleNPT);
-			radNone.setBounds(5, 15, 17, 17);
+			radNone.setBounds(5, 15, 121, 17);
 			add(radNone);
 			radNone.setSelected(true);
 			radEnsembleNVE.setBounds(5, 30, 165, 30);
@@ -45,7 +46,7 @@ import javax.swing.JTextField;
 			add(radEnsembleNVT);
 			radEnsembleNPT.setBounds(5, 84, 187, 25);
 			add(radEnsembleNPT);
-			chkConserved.setBounds(5, 132, 294, 25);
+			chkConserved.setBounds(5, 135, 294, 25);
 			add(chkConserved);
 			txtQnose.setBounds(198, 60, 63, 20);
 			add(txtQnose);
@@ -53,7 +54,7 @@ import javax.swing.JTextField;
 			add(txtQnose2);
 			txtQpress.setBounds(198, 110, 63, 20);
 			add(txtQpress);
-			lblPress.setBounds(133, 112, 40, 20);
+			lblPress.setBounds(121, 112, 71, 20);
 			add(lblPress);
 		}
 
