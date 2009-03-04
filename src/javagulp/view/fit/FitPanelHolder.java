@@ -20,13 +20,13 @@ import javax.swing.event.ListSelectionListener;
 
 import javagulp.model.SerialListener;
 
-public class FitPanel extends TitledPanel implements Serializable {
+public class FitPanelHolder extends TitledPanel implements Serializable {
 	private static final long serialVersionUID = 1259654196602548550L;
 
 	public DefaultListModel fitListModel = new DefaultListModel();
-	public JList fitList = new JList(fitListModel);
+	public JList listOfDataToFit = new JList(fitListModel);
 	private JButton btnAddFit = new JButton("Add Fit");
-	public ArrayList<AbstractFit> fits = new ArrayList<AbstractFit>();
+	public ArrayList<AbstractFit> fitPanelsForGulpInputFile = new ArrayList<AbstractFit>();
 
 	public JScrollPane scrollFit = new JScrollPane();
 	
@@ -48,16 +48,16 @@ public class FitPanel extends TitledPanel implements Serializable {
 			"SRefractiveIndex", "HfRefractiveIndex", "Piezoelectric",
 			"Monopole", "Born", "FitFrequency", "FitEntropy", "FitCv" };
 	
-	private AbstractFit[] panels = new AbstractFit[classNames.length];
+	private AbstractFit[] listOfFitPanels = new AbstractFit[classNames.length];
 
-	final JComboBox comboBox = new JComboBox(expDataTypes);
+	final JComboBox cmboBoxOfDataTypes = new JComboBox(expDataTypes);
 	
 	private class FitListener implements ListSelectionListener, Serializable {
 		
 		private static final long serialVersionUID = -6840590771901821697L;
 
 		public void valueChanged(ListSelectionEvent e) {
-			int index = fitList.getSelectedIndex();
+			int index = listOfDataToFit.getSelectedIndex();
 			if (fitListModel.getSize() > 0 && index != -1) {
 				AbstractFit p = getPanel(index);
 				scrollFit.setViewportView(p);
@@ -71,9 +71,9 @@ public class FitPanel extends TitledPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int index = comboBox.getSelectedIndex();
+			int index = cmboBoxOfDataTypes.getSelectedIndex();
 			scrollFit.setViewportView(getPanel(index));
-			String item = (String) comboBox.getSelectedItem();
+			String item = (String) cmboBoxOfDataTypes.getSelectedItem();
 
 			// TODO check logic here
 			Back.getKeys().putOrRemoveKeyword(item.equals("bulk modulus (Hill def.)"), "hill");
@@ -87,28 +87,33 @@ public class FitPanel extends TitledPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int index = comboBox.getSelectedIndex();
+			int selectedIndex = cmboBoxOfDataTypes.getSelectedIndex();
 			try {
-				AbstractFit panel = getPanel(index);
-				panel.writeFit();
+				AbstractFit panel = getPanel(selectedIndex);
+				panel.writeFitPanel();// I think this is done not to actually write something, but to catch any errors
 				
-				fitListModel.addElement(expDataTypes[index]);
-				fits.add(panel);
-				panels[index] = null;
-				getPanel(index);
+				fitListModel.addElement(expDataTypes[selectedIndex]);//add a description of data to the visual list
+				fitPanelsForGulpInputFile.add(panel); //add the panel (with its data) to the file writing list
+				// "zero out" the fit panel list
+				listOfFitPanels[selectedIndex] = null;
+				// reset it with the panel corresponding to the selected index
+				scrollFit.setViewportView(getPanel(selectedIndex));
+				//scrollFit.getViewport().repaint();
+				//scrollFit.setViewportView(getPanel(0));
+				//getPanel(selectedIndex);
+				//repaint();
 			} catch (IncompleteOptionException ioe) {
 				ioe.displayErrorAsPopup();
 			} catch (NumberFormatException nfe) {
 				if (nfe.getMessage().startsWith("Please enter a numeric value for "))
 					JOptionPane.showMessageDialog(null, nfe.getMessage());
 				else
-					JOptionPane.showMessageDialog(null,
-							"Please enter numeric values");
+					JOptionPane.showMessageDialog(null, "Please enter numeric values");
 			}
 		}
 	};
 
-	public FitPanel() {
+	public FitPanelHolder() {
 		super();
 		setTitle("fit variables associated with different species");
 
@@ -119,33 +124,33 @@ public class FitPanel extends TitledPanel implements Serializable {
 		scrollFit.setBounds(10, 64, 557, 172);
 		add(scrollFit);
 		
-		fitList.addListSelectionListener(fitMouseListener);
+		listOfDataToFit.addListSelectionListener(fitMouseListener);
 
 		JLabel experimentalDataLabel = new JLabel("fit to");
 		experimentalDataLabel.setBounds(10, 27, 56, 20);
 		add(experimentalDataLabel);
 
-		comboBox.setBounds(72, 25, 243, 25);
-		comboBox.setMaximumRowCount(100000);
-		add(comboBox);
+		cmboBoxOfDataTypes.setBounds(72, 25, 243, 25);
+		cmboBoxOfDataTypes.setMaximumRowCount(100000);
+		add(cmboBoxOfDataTypes);
 		scrollFit.setViewportView(getPanel(0));
-		comboBox.addActionListener(keyCombo);
+		cmboBoxOfDataTypes.addActionListener(keyCombo);
 	}
 
 	public String writeFitPanels() {
 		String lines = "";
-		for (int i = 0; i < fits.size(); i++)
-			lines += fits.get(i);
+		for (int i = 0; i < fitPanelsForGulpInputFile.size(); i++)
+			lines += fitPanelsForGulpInputFile.get(i);
 		return lines;
 	}
 	
 	private AbstractFit getPanel(int index) {
 		String pkg = "javagulp.view.fit.";
 			
-		if (panels[index] == null) {
+		if (listOfFitPanels[index] == null) {
 			try {
 				Class c = Class.forName(pkg + classNames[index]);
-				panels[index] = (AbstractFit) c.newInstance();
+				listOfFitPanels[index] = (AbstractFit) c.newInstance();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
@@ -154,6 +159,6 @@ public class FitPanel extends TitledPanel implements Serializable {
 				e.printStackTrace();
 			}
 		}
-		return panels[index];
+		return listOfFitPanels[index];
 	}
 }

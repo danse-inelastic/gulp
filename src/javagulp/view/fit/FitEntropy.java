@@ -22,6 +22,8 @@ public class FitEntropy extends AbstractFit implements Serializable {
 	private JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
 			"J/(Kmol)" });
 
+	public String gulpFileLines = "entropy " + txtConstant.getText();
+
 	public FitEntropy() {
 		super();
 
@@ -39,7 +41,7 @@ public class FitEntropy extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		// From the documentation: Remember that it is important to set the
 		// temperature for the structure otherwise the entropy will be zero.
 		// Also you should ensure that sufficient K points are sampled to give
@@ -49,14 +51,13 @@ public class FitEntropy extends AbstractFit implements Serializable {
 			throw new IncompleteOptionException("Please enter a value for entropy");
 		Double.parseDouble(txtConstant.getText());
 
-		String lines = "entropy " + txtConstant.getText();
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
 		if (cboUnits.getSelectedIndex() != 0)
-			lines += " j/kmol";
-		return lines + Back.newLine;
+			gulpFileLines += " j/kmol";
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

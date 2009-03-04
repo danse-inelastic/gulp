@@ -14,6 +14,8 @@ public class BulkModulus extends AbstractFit implements Serializable {
 	private JTextField txtWeight = new JTextField();
 	private JLabel lblWeight = new JLabel("weight (GPa)");
 
+	public String gulpFileLines = "bulk_modulus";
+
 	public BulkModulus() {
 		super();
 
@@ -25,13 +27,12 @@ public class BulkModulus extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() {
-		String lines = "bulk_modulus";
+	public String writeFitPanel() {
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
-		return lines + Back.newLine;
+		return gulpFileLines + Back.newLine;
 	}
 
 }

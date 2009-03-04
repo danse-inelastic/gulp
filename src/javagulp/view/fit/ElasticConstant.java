@@ -22,39 +22,41 @@ public class ElasticConstant extends AbstractFit implements Serializable {
 	private JTextField txtI = new JTextField();
 	private JTextField txtWeight = new JTextField();
 
+	public String gulpFileLines;
+
 	public ElasticConstant() {
 		super();
 
-		txtI.setBounds(28, 21, 28, 21);
+		txtI.setBounds(27, 21, 58, 21);
 		add(txtI);
-		lblElastici.setBounds(14, 21, 7, 21);
+		lblElastici.setBounds(10, 21, 15, 21);
 		add(lblElastici);
-		txtJ.setBounds(105, 21, 28, 21);
+		txtJ.setBounds(112, 21, 58, 21);
 		add(txtJ);
-		txtConstant.setBounds(245, 21, 70, 21);
+		txtConstant.setBounds(257, 21, 70, 21);
 		add(txtConstant);
-		lblWeight.setBounds(350, 21, 49, 21);
+		lblWeight.setBounds(356, 21, 58, 21);
 		add(lblWeight);
 		add(lblElasticj);
-		lblElasticj.setBounds(91, 14, 7, 28);
+		lblElasticj.setBounds(91, 17, 15, 28);
 		add(lblConstant);
-		lblConstant.setBounds(175, 14, 63, 28);
+		lblConstant.setBounds(188, 17, 63, 28);
 		txtWeight.setBackground(Back.grey);
-		txtWeight.setBounds(406, 21, 70, 21);
+		txtWeight.setBounds(420, 21, 70, 21);
 		add(txtWeight);
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		JTextField[] fields = { txtI, txtJ, txtConstant };
 		String[] descriptions = { "i", "j", "the elastic constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
-		String lines = "elastic " + Back.concatFields(fields);
+		gulpFileLines = "elastic " + Back.concatFields(fields);
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
-		return lines + Back.newLine;
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

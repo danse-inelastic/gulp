@@ -27,6 +27,8 @@ public class Hfdlc extends AbstractFit implements Serializable {
 	private JTextField txtJ = new JTextField();
 	private JTextField txtWeight = new JTextField();
 
+	public String gulpFileLines;
+
 	public Hfdlc() {
 		super();
 
@@ -50,18 +52,18 @@ public class Hfdlc extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		JTextField[] fields = { txtJ, txtI, txtConstant };
 		String[] descriptions = { "i", "j", "the dielectric constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
-		String lines = "hfdlc " + Back.concatFields(fields);
+		gulpFileLines = "hfdlc " + Back.concatFields(fields);
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
-		return lines + Back.newLine;
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

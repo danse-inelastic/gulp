@@ -11,5 +11,5 @@ public abstract class AbstractFit extends JPanel {
 		setLayout(null);
 	}
 
-	public abstract String writeFit() throws IncompleteOptionException;
+	public abstract String writeFitPanel() throws IncompleteOptionException;
 }

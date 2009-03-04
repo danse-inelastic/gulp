@@ -19,6 +19,8 @@ public class FitEnergy extends AbstractFit implements Serializable {
 	private JComboBox cboUnits = new JComboBox(new String[] { "eV", "kcal",
 			"au", "kjmol-1" });
 
+	public String gulpFileLines = "energy_of_configuration";
+
 	public FitEnergy() {
 		super();
 
@@ -32,16 +34,15 @@ public class FitEnergy extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() {
-		String lines = "energy_of_configuration";
+	public String writeFitPanel() {
 		if (cboUnits.getSelectedIndex() != 0)
-			lines += " " + cboUnits.getSelectedItem();
+			gulpFileLines += " " + cboUnits.getSelectedItem();
 		if (!txtWeight.getText().equals("")
 				&& !txtWeight.getText().equals("1.0")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
-		return lines + Back.newLine;
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

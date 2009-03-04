@@ -26,6 +26,8 @@ public class FitCv extends AbstractFit implements Serializable {
 	private JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
 			"J/(Kmol)" });
 
+	public String gulpFileLines = "Cv " + txtConstant.getText();
+
 	public FitCv() {
 		super();
 
@@ -43,7 +45,7 @@ public class FitCv extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		// From the documentation: Remember that it is important to set the
 		// temperature for the structure otherwise the heat capacity will be
 		// zero. Also you should ensure that sufficient K points are sampled to
@@ -53,14 +55,13 @@ public class FitCv extends AbstractFit implements Serializable {
 			throw new IncompleteOptionException("Please enter the heat capacity constant");
 		Double.parseDouble(txtConstant.getText());
 
-		String lines = "Cv " + txtConstant.getText();
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
 		if (cboUnits.getSelectedIndex() != 0)
-			lines += " j/kmol";
-		return lines + Back.newLine;
+			gulpFileLines += " j/kmol";
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

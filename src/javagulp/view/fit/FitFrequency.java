@@ -26,6 +26,8 @@ public class FitFrequency extends AbstractFit implements Serializable {
 	private JLabel lblCstFrequency = new JLabel(g.html("frequency (cm<sup>-1</sup>)"));
 	private JLabel lblKPoint = new JLabel("k point number");
 
+	public String gulpFileLines = "";
+
 	public FitFrequency() {
 		super();
 
@@ -48,23 +50,20 @@ public class FitFrequency extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
-		// TODO documentation is VERY ambiguous. This is most likely not
-		// correct.
-		String lines = "";
+	public String writeFitPanel() throws IncompleteOptionException {
 		if (txtCstFrequency.getText().equals(""))
 			throw new IncompleteOptionException("Please enter the frequency");
-		lines += "frequency";
+		gulpFileLines += "frequency";
 		if (!txtConstant.getText().equals(""))
-			lines += " " + txtConstant.getText();
-		lines += " " + txtCstFrequency.getText();
+			gulpFileLines += " " + txtConstant.getText();
+		gulpFileLines += " " + txtCstFrequency.getText();
 		if (!txtKPoint.getText().equals(""))
-			lines += " " + txtKPoint.getText();
+			gulpFileLines += " " + txtKPoint.getText();
 		if (!txtWeight.getText().equals("")
 				&& !txtWeight.getText().equals("1.0"))
-			lines += " " + txtWeight.getText();
-		lines += Back.newLine;
-		return lines;
+			gulpFileLines += " " + txtWeight.getText();
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

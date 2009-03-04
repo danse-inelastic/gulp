@@ -32,6 +32,8 @@ public class Born extends AbstractFit implements Serializable {
 			+ g.part + g.mu + "<sub>" + g.alpha + "</sub>/" + g.part + g.beta
 			+ " &nbsp&nbsp " + g.alpha + ", " + g.beta + g.in + " x, y, z"));
 
+	public String gulpFileLines = "bornq " + txtAtomNum.getText();
+
 	public Born() {
 		super();
 
@@ -57,7 +59,7 @@ public class Born extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		// From the documentation: Note: Born effective charges cannot
 		// currently be calculated with electronegativity equalization.
 		if (txtAtomNum.getText().equals(""))
@@ -67,15 +69,14 @@ public class Born extends AbstractFit implements Serializable {
 		Double.parseDouble(txtAtomNum.getText());
 		Double.parseDouble(txtConstant.getText());
 
-		String lines = "bornq " + txtAtomNum.getText();
 		if (cboTensorComponent.getSelectedIndex() != 0)
-			lines += " " + cboTensorComponent.getSelectedItem();
-		lines += " " + txtConstant.getText();
+			gulpFileLines += " " + cboTensorComponent.getSelectedItem();
+		gulpFileLines += " " + txtConstant.getText();
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
-			lines += " " + txtWeight.getText();
+			gulpFileLines += " " + txtWeight.getText();
 		}
-		return lines + Back.newLine;
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

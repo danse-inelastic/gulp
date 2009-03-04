@@ -6,12 +6,13 @@ import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
 import javagulp.view.fit.AbstractFit;
-import javagulp.view.fit.FitPanel;
+import javagulp.view.fit.FitPanelHolder;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -20,7 +21,7 @@ import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
 
-public class Fit extends AbstractFit implements Serializable {
+public class Fit extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4430341489632365418L;
 
@@ -43,7 +44,7 @@ public class Fit extends AbstractFit implements Serializable {
 	private JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
 	private JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
 	
-	public FitPanel fitPanel = new FitPanel();
+	public FitPanelHolder fitPanel = new FitPanelHolder();
 	private JList fitList = new JList(fitPanel.fitListModel);
 	private JScrollPane listScroll = new JScrollPane(fitList);
 
@@ -64,7 +65,7 @@ public class Fit extends AbstractFit implements Serializable {
 					if (fitPanel.fitListModel.getSize() > 0) {
 						int index = fitList.getSelectedIndex();
 						fitPanel.fitListModel.remove(index);
-						fitPanel.fits.remove(index);
+						fitPanel.fitPanelsForGulpInputFile.remove(index);
 					}
 				}
 			}
@@ -76,7 +77,7 @@ public class Fit extends AbstractFit implements Serializable {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (fitPanel.fitListModel.getSize() > 0) {
-				fitPanel.scrollFit.setViewportView(fitPanel.fits.get(fitList.getSelectedIndex()));
+				fitPanel.scrollFit.setViewportView(fitPanel.fitPanelsForGulpInputFile.get(fitList.getSelectedIndex()));
 			}
 		}
 	};
@@ -193,8 +194,7 @@ public class Fit extends AbstractFit implements Serializable {
 		pnlOutputFittingParam.add(txtOutputFittingParam);
 	}
 
-	@Override
-	public String writeFit() {
+	public String writeFitOptions() {
 		String lines = "";
 		String max = txtMaxCycfit.getText();
 		if (max.equals("") && max.equals(TXTMAXCYCFIT)) {

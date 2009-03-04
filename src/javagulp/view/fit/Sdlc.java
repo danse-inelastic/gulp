@@ -26,6 +26,8 @@ public class Sdlc extends AbstractFit implements Serializable {
 	private JTextField txtSdlci = new JTextField();
 	private JTextField txtSdlcWeight = new JTextField();
 
+	public String gulpFileLines;
+
 	public Sdlc() {
 		super();
 		setLayout(null);
@@ -57,14 +59,14 @@ public class Sdlc extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		JTextField[] fields = { txtSdlci, txtSdlcj, txtConstant };
 		String[] descriptions = { "i", "j", "the dielectric constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
-		String lines = "sdlc " + Back.concatFields(fields);
+		gulpFileLines = "sdlc " + Back.concatFields(fields);
 		if (!txtSdlcWeight.getText().equals(""))
-			lines += " " + txtSdlcWeight.getText();
-		return lines+ Back.newLine;
+			gulpFileLines += " " + txtSdlcWeight.getText();
+		return gulpFileLines+ Back.newLine;
 	}
 	
 }

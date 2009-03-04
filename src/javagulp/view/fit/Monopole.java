@@ -20,6 +20,8 @@ public class Monopole extends AbstractFit implements Serializable {
 	private JLabel lblAtomNumber = new JLabel("atom number");
 	private JLabel lblWeight = new JLabel("weight");
 
+	public String gulpFileLines;
+
 	public Monopole() {
 		super();
 
@@ -39,14 +41,14 @@ public class Monopole extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		JTextField[] fields = { txtAtomNumber, txtConstant };
 		String[] descriptions = { "the atom number", "the monopole charge" };
 		Back.checkAllNonEmpty(fields, descriptions);
-		String lines = "monopoleq " + Back.concatFields(fields);
+		gulpFileLines = "monopoleq " + Back.concatFields(fields);
 		if (!txtWeight.getText().equals(""))
-			lines += " " + txtWeight.getText();
-		return lines + Back.newLine;
+			gulpFileLines += " " + txtWeight.getText();
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

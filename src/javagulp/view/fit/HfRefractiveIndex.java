@@ -20,6 +20,8 @@ public class HfRefractiveIndex extends AbstractFit implements Serializable {
 	private JLabel lbli = new JLabel("i");
 	private JLabel lblWeight = new JLabel("weight");
 
+	public String gulpFileLines;
+
 	public HfRefractiveIndex() {
 		super();
 		setLayout(null);
@@ -46,14 +48,14 @@ public class HfRefractiveIndex extends AbstractFit implements Serializable {
 
 	// TODO check format
 	@Override
-	public String writeFit() throws IncompleteOptionException {
+	public String writeFitPanel() throws IncompleteOptionException {
 		JTextField[] fields = { txtiValue, txtConstant };
 		String[] descriptions = { "i", "the refractive index" };
 		Back.checkAllNonEmpty(fields, descriptions);
-		String lines = Back.concatFields(fields);
+		gulpFileLines = Back.concatFields(fields);
 		if (!txtWeight.getText().equals(""))
-			lines += " " + txtWeight.getText();
-		return lines + Back.newLine;
+			gulpFileLines += " " + txtWeight.getText();
+		return gulpFileLines + Back.newLine;
 	}
 	
 }

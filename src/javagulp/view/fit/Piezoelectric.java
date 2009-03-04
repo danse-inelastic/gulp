@@ -64,6 +64,8 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 		}
 	};
 
+	public String gulpFileLines = "";
+
 	public Piezoelectric() {
 		super();
 		setLayout(null);
@@ -121,24 +123,23 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 	}
 
 	@Override
-	public String writeFit() throws IncompleteOptionException {
-		String lines = "";
+	public String writeFitPanel() throws IncompleteOptionException {
 		if (txtdValue.getText().equals(""))
 			if (cboStressStrain.getSelectedIndex() == 1)
 				throw new IncompleteOptionException("Please enter the value for e");
 			else
 				throw new IncompleteOptionException("Please enter the value for d");
-		lines += "piezoelectric";
+		gulpFileLines += "piezoelectric";
 		if (cboStressStrain.getSelectedIndex() == 1)
-			lines += " strain";
-		lines += " " + cboiValue.getSelectedItem();
+			gulpFileLines += " strain";
+		gulpFileLines += " " + cboiValue.getSelectedItem();
 		if (cboXyz.getSelectedIndex() != 0)
-			lines += " " + cboXyz.getSelectedItem();
-		lines += " " + txtdValue.getText();
+			gulpFileLines += " " + cboXyz.getSelectedItem();
+		gulpFileLines += " " + txtdValue.getText();
 		if (!txtWeight.getText().equals(""))
-			lines += " " + txtWeight.getText();
-		lines += Back.newLine;
-		return lines;
+			gulpFileLines += " " + txtWeight.getText();
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }
