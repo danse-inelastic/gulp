@@ -92,7 +92,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 	private JRadioButton radRetainColoumbic = new JRadioButton("retain the coloumbic interaction between its atoms");
 	private JRadioButton radRemoveColoumbic = new JRadioButton("remove the coloumbic interaction between its atoms");
 
-	private JCheckBox chkUseEwaldlikeMethod = new JCheckBox("use ewald-like method on dispersion terms");
+	
 	private JCheckBox chkSetAveragePotential = new JCheckBox("<html>set average potential across lattice sites to 0 (for surface/bulk comparisons)</html>");
 	private JCheckBox chkDoNotUseCutoff = new JCheckBox("<html>do not use a cutoff for exponential repulsive terms when they become less than the accuracy factor (default=10<sup>-8</sup>) to save computer time but use cutoff given in the input file</html>");
 	private JCheckBox chkRemoveColoumbic = new JCheckBox("remove the coloumbic interaction between bonded atoms and atoms with a bonded atom in common");
@@ -102,7 +102,6 @@ public class PotentialOptions extends JPanel implements Serializable {
 	public JCheckBox chkDoNotInclude = new JCheckBox("do not include library potentials in gulp output");
 	final JCheckBox chkFit = new JCheckBox("fit");
 
-	private KeywordListener keyUseEwaldlikeMethod = new KeywordListener(chkUseEwaldlikeMethod, "c6");
 	private KeywordListener keySetAveragePotential = new KeywordListener(chkSetAveragePotential, "zero_potential");
 	private KeywordListener keyDoNotUseCutoff = new KeywordListener(chkDoNotUseCutoff, "norepulsive_cutoff");
 	private KeywordListener keyChkRemoveColoumbic = new KeywordListener(chkRemoveColoumbic, "molmec");
@@ -133,7 +132,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 	public PotentialOptions() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(1050, 399));
+		//this.setPreferredSize(new java.awt.Dimension(1050, 399));
 
 		final TitledPanel pnlCutoffBondLength = new TitledPanel();
 		pnlCutoffBondLength.setTitle("cutoff bondlength search at");
@@ -146,10 +145,6 @@ public class PotentialOptions extends JPanel implements Serializable {
 		pnlCutoffBondLength.add(angLabel);
 
 		add(pnlResetInteratomic);
-
-		chkUseEwaldlikeMethod.setBounds(0, 339, 305, 25);
-		add(chkUseEwaldlikeMethod);
-		chkUseEwaldlikeMethod.addActionListener(keyUseEwaldlikeMethod);
 		chkSetAveragePotential.addActionListener(keySetAveragePotential);
 		chkSetAveragePotential.setBounds(381, 31, 520, 27);
 		add(chkSetAveragePotential);
@@ -173,21 +168,21 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		final TitledPanel pnlIdentifyMolecules = new TitledPanel();
 		pnlIdentifyMolecules.setTitle("identify molecules based on covalent radii but");
-		pnlIdentifyMolecules.setBounds(378, 238, 672, 126);
+		pnlIdentifyMolecules.setBounds(378, 238, 709, 151);
 		add(pnlIdentifyMolecules);
 		buttonGroup.add(radRetainColoumbic);
 		radRetainColoumbic.addActionListener(keyRetainColoumbic);
-		radRetainColoumbic.setBounds(4, 20, 345, 25);
+		radRetainColoumbic.setBounds(10, 51, 345, 25);
 		pnlIdentifyMolecules.add(radRetainColoumbic);
 		radRemoveColoumbic.addActionListener(keyRadRemoveColoumbic);
 		buttonGroup.add(radRemoveColoumbic);
-		radRemoveColoumbic.setBounds(4, 44, 355, 25);
+		radRemoveColoumbic.setBounds(10, 20, 355, 25);
 		pnlIdentifyMolecules.add(radRemoveColoumbic);
 		chkRemoveColoumbic.addActionListener(keyChkRemoveColoumbic);
-		chkRemoveColoumbic.setBounds(4, 68, 660, 25);
+		chkRemoveColoumbic.setBounds(10, 82, 660, 25);
 		pnlIdentifyMolecules.add(chkRemoveColoumbic);
 		chkDoNotStop.addActionListener(keyDoNotStop);
-		chkDoNotStop.setBounds(4, 91, 364, 28);
+		chkDoNotStop.setBounds(10, 113, 364, 28);
 		pnlIdentifyMolecules.add(chkDoNotStop);
 
 		final TitledPanel pnlScalingTransformation = new TitledPanel();

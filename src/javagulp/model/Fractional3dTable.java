@@ -21,7 +21,7 @@ public class Fractional3dTable extends CoordinateTable {
 			g.html("y (" + g.ang + ")"), g.html("z (" + g.ang + ")"), "charge",
 			g.html("occupation<br>probability"),
 			g.html("shell-core<br>radius"),
-			"fit x", "fit y", "fit z",
+			"fit/opt x", "fit/opt y", "fit/opt z",
 			g.html("translate/<br>growth slice"), "fix positions" };
 	static int[] indices = { 0, 1, 2, 3, 4 };
 	

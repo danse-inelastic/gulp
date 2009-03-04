@@ -1,16 +1,26 @@
 package javagulp.view.structures;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 	class ThreeDCellParameters extends JPanel {
 
+		private JComboBox cboGamma;
+		private JComboBox cboBeta;
+		private JComboBox cboAlpha;
+		private JComboBox cboC;
+		private JComboBox cboB;
+		private JComboBox cboA;
+		private String[] options = new String[]{"","no reference","fit reference","optimise","fix"};
 		private static final long serialVersionUID = -3031539266310166383L;
 
 		JTextField txtA = new JTextField();
@@ -29,53 +39,41 @@ import javax.swing.JTextField;
 		JLabel lblBeta = new JLabel(g.html(g.beta + " (deg)"));
 		JLabel lblGamma = new JLabel(g.html(g.gamma + " (deg)"));
 
-		JCheckBox chkA = new JCheckBox("fit");
-		JCheckBox chkB = new JCheckBox("fit");
-		JCheckBox chkC = new JCheckBox("fit");
-		JCheckBox chkAlpha = new JCheckBox("fit");
-		JCheckBox chkBeta = new JCheckBox("fit");
-		JCheckBox chkGamma = new JCheckBox("fit");
 
 		public ThreeDCellParameters() {
 			super();
 			setLayout(null);
 
-			lblA.setBounds(10, 13, 45, 15);
+			lblA.setBounds(20, 10, 45, 20);
 			add(lblA);
-			lblB.setBounds(10, 34, 45, 15);
+			lblB.setBounds(20, 36, 45, 20);
 			add(lblB);
-			lblC.setBounds(10, 55, 45, 15);
+			lblC.setBounds(20, 62, 45, 20);
 			add(lblC);
-			lblAlpha.setBounds(10, 76, 70, 15);
+			lblAlpha.setBounds(20, 88, 45, 20);
 			add(lblAlpha);
-			lblBeta.setBounds(10, 97, 65, 15);
+			lblBeta.setBounds(20, 114, 45, 20);
 			add(lblBeta);
-			lblGamma.setBounds(10, 118, 85, 15);
+			lblGamma.setBounds(20, 140, 45, 20);
 			add(lblGamma);
-			txtA.setBounds(61, 11, 68, 20);
+			txtA.setBounds(75, 11, 68, 20);
 			add(txtA);
-			txtB.setBounds(61, 32, 68, 20);
+			txtB.setBounds(75, 36, 68, 20);
 			add(txtB);
-			txtC.setBounds(61, 53, 68, 20);
+			txtC.setBounds(75, 63, 68, 20);
 			add(txtC);
-			txtAlpha.setBounds(61, 74, 68, 20);
+			txtAlpha.setBounds(75, 89, 68, 20);
 			add(txtAlpha);
-			txtBeta.setBounds(61, 95, 68, 20);
+			txtBeta.setBounds(75, 115, 68, 20);
 			add(txtBeta);
-			txtGamma.setBounds(61, 116, 68, 20);
+			txtGamma.setBounds(75, 141, 68, 20);
 			add(txtGamma);
-			chkA.setBounds(135, 8, 40, 25);
-			add(chkA);
-			chkB.setBounds(135, 29, 40, 25);
-			add(chkB);
-			chkC.setBounds(135, 50, 40, 25);
-			add(chkC);
-			chkAlpha.setBounds(135, 71, 40, 25);
-			add(chkAlpha);
-			chkBeta.setBounds(135, 92, 40, 25);
-			add(chkBeta);
-			chkGamma.setBounds(135, 113, 40, 25);
-			add(chkGamma);
+			add(getCboA());
+			add(getCboB());
+			add(getCboC());
+			add(getCboAlpha());
+			add(getCboBeta());
+			add(getCboGamma());
 		}
 
 		public String writeCellParameters() throws IncompleteOptionException {
@@ -95,11 +93,72 @@ import javax.swing.JTextField;
 				Back.parseFieldsD(fields, descriptions);
 				lines = Back.concatFields(fields) + " ";
 			}
-			JCheckBox[] boxes = { chkA, chkB, chkC, chkAlpha, chkBeta, chkGamma };
+			//JCheckBox[] boxes = { chkA, chkB, chkC, chkAlpha, chkBeta, chkGamma };
+			JComboBox[] boxes = { getCboA(), getCboB(), getCboC(), getCboAlpha(), getCboBeta(), getCboGamma() };
 			if (lines.equals(""))
 				return "";
 			else
-				return "cell" + Back.newLine + lines + Back.writeFits(boxes) + Back.newLine;
+				return "cell" + Back.newLine + lines + Back.writeFlags(boxes) + Back.newLine;
+		}
+		/**
+		 * @return
+		 */
+		protected JComboBox getCboA() {
+			if (cboA == null) {
+				cboA = new JComboBox(options);
+				cboA.setBounds(150, 8, 117, 24);
+			}
+			return cboA;
+		}
+		/**
+		 * @return
+		 */
+		protected JComboBox getCboB() {
+			if (cboB == null) {
+				cboB = new JComboBox(options);
+				cboB.setBounds(150, 34, 117, 24);
+			}
+			return cboB;
+		}
+		/**
+		 * @return
+		 */
+		protected JComboBox getCboC() {
+			if (cboC == null) {
+				cboC = new JComboBox(options);
+				cboC.setBounds(150, 60, 117, 24);
+			}
+			return cboC;
+		}
+		/**
+		 * @return
+		 */
+		protected JComboBox getCboAlpha() {
+			if (cboAlpha == null) {
+				cboAlpha = new JComboBox(options);
+				cboAlpha.setBounds(150, 86, 117, 24);
+			}
+			return cboAlpha;
+		}
+		/**
+		 * @return
+		 */
+		protected JComboBox getCboBeta() {
+			if (cboBeta == null) {
+				cboBeta = new JComboBox(options);
+				cboBeta.setBounds(150, 112, 117, 24);
+			}
+			return cboBeta;
+		}
+		/**
+		 * @return
+		 */
+		protected JComboBox getCboGamma() {
+			if (cboGamma == null) {
+				cboGamma = new JComboBox(options);
+				cboGamma.setBounds(150, 138, 117, 24);
+			}
+			return cboGamma;
 		}
 
 		// TODO From the documentation: For optimizations or fitting, flags must

@@ -24,7 +24,8 @@ public class EwaldOptions extends JPanel implements Serializable {
 	private JCheckBox chkDipoleCorrection = new JCheckBox("add surface dependent dipole correction");
 	private JCheckBox chkNoElectrostatics = new JCheckBox("<html>turn off Ewald summation/Coulomb interaction even when charges are present in the input</html>");
 	private JCheckBox chkUseTheWolf = new JCheckBox("use the Wolf approximation to the Ewald sum (J.Chem.Phys. 110, 8254, '99)");
-
+	private JCheckBox chkUseEwaldlikeMethod = new JCheckBox("use ewald-like method on dispersion terms");
+	
 	private JLabel lblCellSize = new JLabel("cell size (determined by short potentials)");
 	private JLabel lblDipoleUnitCell = new JLabel("<html>2/3 " + g.pi
 			+ " D<sup>2</sup> V  where D is dipole/unit cell</html>");
@@ -49,15 +50,21 @@ public class EwaldOptions extends JPanel implements Serializable {
 	private JTextField txtrspeed = new JTextField("1.0");
 	private JTextField txtewaldrealradius = new JTextField();
 
+	private KeywordListener keyUseEwaldlikeMethod = new KeywordListener(chkUseEwaldlikeMethod, "c6");	
 	private KeywordListener keyDipoleCorrection = new KeywordListener(chkDipoleCorrection, "dipole");
 	private KeywordListener keyNoElectrostatics = new KeywordListener(chkNoElectrostatics, "noelectrostatics");
 
 	public EwaldOptions() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(700, 315));
+		//this.setPreferredSize(new java.awt.Dimension(700, 315));
 
-		pnlConvergenceSpeed.setBounds(314, 31, 382, 50);
+
+		chkUseEwaldlikeMethod.setBounds(0, 31, 435, 25);
+		add(chkUseEwaldlikeMethod);
+		chkUseEwaldlikeMethod.addActionListener(keyUseEwaldlikeMethod);
+		
+		pnlConvergenceSpeed.setBounds(314, 66, 407, 50);
 		pnlConvergenceSpeed.setTitle("real/reciprocal space relative convergence speed");
 		pnlConvergenceSpeed.setToolTipText("<html>Relative speed for reciprocal and real space terms<br>"
 						+ " to be calculated. Formulae for determining optimum eta value <br>"
@@ -69,13 +76,13 @@ public class EwaldOptions extends JPanel implements Serializable {
 		pnlConvergenceSpeed.add(txtrspeed);
 
 		pnlSpaceCutoff.setTitle("real space cutoff of Ewald sum");
-		pnlSpaceCutoff.setBounds(0, 31, 308, 51);
+		pnlSpaceCutoff.setBounds(0, 66, 308, 51);
 		add(pnlSpaceCutoff);
 		txtewaldrealradius.setBounds(12, 22, 127, 23);
 		pnlSpaceCutoff.add(txtewaldrealradius);
 
 		pnlDipoleCorrection.setTitle("dipole correction");
-		pnlDipoleCorrection.setBounds(0, 88, 309, 103);
+		pnlDipoleCorrection.setBounds(0, 123, 309, 103);
 		add(pnlDipoleCorrection);
 		chkDipoleCorrection.addActionListener(keyDipoleCorrection);
 		chkDipoleCorrection.setBounds(12, 46, 280, 25);
@@ -84,18 +91,18 @@ public class EwaldOptions extends JPanel implements Serializable {
 		pnlDipoleCorrection.add(lblDipoleUnitCell);
 
 		pnlCellMultipole.setTitle("cell multipole method (only clusters)");
-		pnlCellMultipole.setBounds(314, 87, 382, 103);
+		pnlCellMultipole.setBounds(314, 122, 407, 103);
 		add(pnlCellMultipole);
 		cboMultipole.setSelectedIndex(2);
-		cboMultipole.setBounds(126, 50, 105, 22);
+		cboMultipole.setBounds(143, 50, 105, 22);
 		pnlCellMultipole.add(cboMultipole);
-		lblMultipole.setBounds(5, 54, 115, 15);
+		lblMultipole.setBounds(5, 54, 132, 15);
 		pnlCellMultipole.add(lblMultipole);
 		lblCellSize.setBounds(5, 75, 280, 20);
 		pnlCellMultipole.add(lblCellSize);
 		txtCellSize.setBounds(290, 75, 50, 20);
 		pnlCellMultipole.add(txtCellSize);
-		chkCellMultipole.setBounds(10, 20, 365, 25);
+		chkCellMultipole.setBounds(10, 20, 387, 25);
 		pnlCellMultipole.add(chkCellMultipole);
 
 		chkNoElectrostatics.addActionListener(keyNoElectrostatics);
@@ -104,7 +111,7 @@ public class EwaldOptions extends JPanel implements Serializable {
 
 		pnlqWolf.setToolTipText("Calculates the electrostatic energy using the approximation to the Ewald sum due to Wolf et al (J. Chem. Phys., 110, 8254, 1999). At present the Wolf sum cannot be used with a defect calculation.");
 		pnlqWolf.setTitle("Wolf approximation");
-		pnlqWolf.setBounds(0, 197, 517, 110);
+		pnlqWolf.setBounds(0, 232, 721, 110);
 		add(pnlqWolf);
 		lblHtml.setBounds(13, 50, 335, 53);
 		pnlqWolf.add(lblHtml);

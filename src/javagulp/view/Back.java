@@ -8,7 +8,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
@@ -17,6 +19,7 @@ import javagulp.view.Structures.Structure;
 import javagulp.view.potential.PPP;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -342,6 +345,47 @@ public class Back {
 				}
 			}
 		}
+		return lines;
+	}
+
+	/**
+	 * This method produces a string of 1s and 0s (separated by spaces)
+	 * corresponding the state of a JCheckBox, with a leading space. The string
+	 * is only returned if the "fit" keyword is selected.
+	 * 
+	 * @param boxes an array of JCheckBoxes
+	 * @return a string of 1s and 0s representing the state of JCheckBoxes
+	 * @throws IncompleteOptionException 
+	 */
+	@Deprecated
+	public static String writeFlags(JComboBox[] boxes) throws IncompleteOptionException {
+		//error checking
+		boolean noneSelected = true;
+		boolean atLeastOneUnselected = true;
+		boolean someSelectedSomeUnselected = false;
+		for (JComboBox box: boxes){
+			if(!box.getSelectedItem().equals(""))
+				noneSelected = false;
+		}
+		for (JComboBox box: boxes){
+			if(box.getSelectedItem().equals(""))
+				atLeastOneUnselected = true;break;
+		}
+		if (noneSelected==false && atLeastOneUnselected==true) someSelectedSomeUnselected = true;
+		if(someSelectedSomeUnselected)
+			throw new IncompleteOptionException("Must indicate fitting/optimization status of either all cell parameters / atomic positions or none of them.");
+		//write out flags
+		String lines = "";
+		for (JComboBox box: boxes){
+			if (box.isVisible()) {
+			if(box.getSelectedItem().equals("fit reference") || box.getSelectedItem().equals("optimise"))
+				lines += " 1";
+			else
+				lines += " 0";
+			}
+		}		
+		//if (Back.getKeys().containsKeyword("fit")) {
+		//}
 		return lines;
 	}
 	

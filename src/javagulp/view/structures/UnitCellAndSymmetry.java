@@ -40,12 +40,12 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 		setLayout(null);
 		//this.setPreferredSize(new java.awt.Dimension(889, 364));
 
-		unitCellPanel.setBounds(0, 0, 267, 247);
+		unitCellPanel.setBounds(0, 0, 316, 277);
 		//unitCellPanel.setLayout(new BorderLayout());
 		add(unitCellPanel);
 
 		TitledPanel pnlSuperCell = new TitledPanel();
-		pnlSuperCell.setBounds(0, 308, 267, 48);
+		pnlSuperCell.setBounds(0, 338, 316, 48);
 		add(pnlSuperCell);
 		pnlSuperCell.setTitle("extend unit cell to supercell");
 		txtSuperCellX.setBounds(7, 19, 26, 20);
@@ -57,14 +57,15 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 
 		final TitledPanel pnlInputSymmetry = new TitledPanel();
 		pnlInputSymmetry.setTitle("input symmetry by space group or symmetry operators");
-		pnlInputSymmetry.setBounds(273, 0, 682, 155);
+		pnlInputSymmetry.setBounds(322, 0, 682, 185);
 		add(pnlInputSymmetry);
 		final JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.setBounds(3, 20, 669, 130);
+		tabbedPane.setBounds(3, 20, 669, 155);
 		pnlInputSymmetry.add(tabbedPane);
 		tabbedPane.addTab("space group", spaceGroup);
 
 		final JPanel pnlSymmetryOper = new JPanel();
+		pnlSymmetryOper.setLayout(null);
 		tabbedPane.addTab("symmetry operators", pnlSymmetryOper);
 		final String[][] data = { { "", "", "" }, { "", "", "" },
 				{ "", "", "" } };
@@ -72,27 +73,27 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 				"", "" });
 		pnlSymmetryOper.add(tableRotationOper);
 		tableRotationOper.setModel(rModel);
-		tableRotationOper.setBounds(11, 47, 225, 48);
+		tableRotationOper.setBounds(50, 20, 225, 80);
 		final JTable tableTranslationOper = new JTable(new String[][] { { "" },
 				{ "" }, { "" } }, new String[] { "" });
 		pnlSymmetryOper.add(tableTranslationOper);
 		tableTranslationOper.setModel(tModel);
-		tableTranslationOper.setBounds(280, 47, 79, 48);
+		tableTranslationOper.setBounds(285, 20, 225, 80);
 		JLabel lblRotationOper = new JLabel("rotation operator");
 		pnlSymmetryOper.add(lblRotationOper);
-		lblRotationOper.setBounds(15, 26, 110, 15);
+		lblRotationOper.setBounds(102, 103, 107, 15);
 		JLabel lblTranslationOper = new JLabel("translation operator");
 		pnlSymmetryOper.add(lblTranslationOper);
-		lblTranslationOper.setBounds(280, 26, 125, 15);
+		lblTranslationOper.setBounds(327, 103, 125, 15);
 
 		final TitledPanel pnlSetSymmetry = new TitledPanel();
 		pnlSetSymmetry.setTitle("set symmetry cell type");
-		pnlSetSymmetry.setBounds(0, 253, 267, 49);
+		pnlSetSymmetry.setBounds(0, 283, 316, 49);
 		add(pnlSetSymmetry);
 		cboSetSymmetry.setBounds(7, 19, 130, 25);
 		pnlSetSymmetry.add(cboSetSymmetry);
 		UnitCellOptions pnlOptions = new UnitCellOptions();
-		pnlOptions.setBounds(273, 161, 682, 195);
+		pnlOptions.setBounds(322, 191, 682, 195);
 		add(pnlOptions);
 	}
 

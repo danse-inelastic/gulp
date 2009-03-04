@@ -138,10 +138,11 @@ public class FitPanelHolder extends TitledPanel implements Serializable {
 	}
 
 	public String writeFitPanels() {
-		String lines = "observables"+Back.newLine;
+		String lines = "";
 		for (int i = 0; i < fitPanelsForGulpInputFile.size(); i++)
 			lines += fitPanelsForGulpInputFile.get(i).gulpFileLines;
-		lines += "end" + Back.newLine;
+		if (!lines.equals(""))
+			lines = "observables" + Back.newLine + lines + "end" + Back.newLine;
 		return lines;
 	}
 	
