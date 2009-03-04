@@ -1,14 +1,18 @@
 package javagulp.view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import javagulp.controller.IncompleteOptionException;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,6 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import javagulp.model.Nutpad;
 import javagulp.model.SerialListener;
+import javagulp.model.SerialMouseAdapter;
 import javagulp.view.output.OutputFormats;
 import javagulp.view.output.Terse;
 
@@ -29,6 +34,9 @@ import javagulp.view.output.Terse;
 public class Output extends JPanel implements Serializable {
 
 
+	private JLabel savedInputFilesLabel;
+	private JList inputFileList;
+	private TitledPanel pnlDump;
 	private static final long serialVersionUID = -4891514818536259508L;
 
 
@@ -106,59 +114,44 @@ public class Output extends JPanel implements Serializable {
 	public Output() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(1255, 287));
-
-
+		//this.setPreferredSize(new java.awt.Dimension(1255, 287));
 
 		btnViewOutput.addActionListener(keyViewOutput);
-		btnViewOutput.setBounds(340, 34, 93, 20);
+		btnViewOutput.setBounds(285, 344, 93, 20);
 		add(btnViewOutput);
-		cboTimeUnits.setBounds(340, 60, 93, 20);
+		cboTimeUnits.setBounds(285, 370, 93, 20);
 		add(cboTimeUnits);
-		lblOutputFile.setBounds(9, 35, 136, 15);
+		lblOutputFile.setBounds(9, 346, 136, 15);
 		add(lblOutputFile);
 		pnlCalculationTitle.setLayout(null);
 		pnlCalculationTitle.setBorder(new TitledBorder(null,
 				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlCalculationTitle.setBounds(9, 187, 424, 48);
+		pnlCalculationTitle.setBounds(384, 316, 330, 48);
 		add(pnlCalculationTitle);
-		txtCalculationTitle.setBounds(9, 20, 363, 19);
+		txtCalculationTitle.setBounds(9, 20, 311, 19);
 		pnlCalculationTitle.add(txtCalculationTitle);
-		txtInfinity.setBounds(180, 60, 152, 20);
+		txtInfinity.setBounds(143, 371, 136, 20);
 		add(txtInfinity);
-		lblTimeLimit.setBounds(9, 62, 165, 15);
+		lblTimeLimit.setBounds(9, 373, 165, 15);
 		add(lblTimeLimit);
 		lblInputFile.setBounds(9, 8, 136, 15);
 		add(lblInputFile);
-		txtOutputFile.setBounds(180, 33, 152, 20);
+		txtOutputFile.setBounds(143, 344, 136, 20);
 		add(txtOutputFile);
 		btnViewInput.addActionListener(keyViewInput);
-		btnViewInput.setBounds(340, 6, 93, 20);
+		btnViewInput.setBounds(9, 54, 93, 20);
 		add(btnViewInput);
 
-		chkProduceRestartFile.setBounds(9, 86, 300, 25);
-		add(chkProduceRestartFile);
-		chkAfterEvery.setBounds(50, 117, 109, 30);
-		add(chkAfterEvery);
-		lblCycles.setBounds(223, 120, 53, 25);
-		add(lblCycles);
-		txtDumpEvery.setBackground(Back.grey);
-		txtDumpEvery.setBounds(165, 123, 48, 20);
-		add(txtDumpEvery);
-		chkOutputConstraints.addActionListener(keyOutputConstraints);
-		chkOutputConstraints.setBounds(50, 153, 173, 25);
-		add(chkOutputConstraints);
-		txtFort12.setBackground(Back.grey);
-		txtFort12.setBounds(315, 89, 118, 20);
-		add(txtFort12);
-
-		pnlOutputFormats.setBounds(439, 5, 330, 278);
+		pnlOutputFormats.setBounds(383, 7, 330, 300);
 		add(pnlOutputFormats);
-		pnlTerse.setBounds(775, 5, 470, 277);
+		pnlTerse.setBounds(720, 134, 443, 230);
 		add(pnlTerse);
 		txtInputFile.setBounds(180, 6, 152, 20);
 		add(txtInputFile);
+		add(getInputFileList());
+		add(getSavedInputFilesLabel());
+		add(getPanel());
 
 	}
 
@@ -193,13 +186,19 @@ public class Output extends JPanel implements Serializable {
 			if (chkAfterEvery.isSelected()
 					&& !txtDumpEvery.getText().equals("1")) {
 				Integer.parseInt(txtDumpEvery.getText());
+				txtDumpEvery.setBounds(182, 58, 48, 20);
+				getPanel().add(txtDumpEvery);
 				lines += " every " + txtDumpEvery.getText();
 			}
+			chkAfterEvery.setBounds(67, 52, 109, 30);
+			getPanel().add(chkAfterEvery);
 			if (!txtFort12.getText().equals("fort.12")) {
 				lines += " " + txtFort12.getText();
 			}
 			lines += Back.newLine;
 		}
+		chkProduceRestartFile.setBounds(10, 21, 288, 25);
+		getPanel().add(chkProduceRestartFile);
 		return lines;
 	}
 
@@ -219,6 +218,61 @@ public class Output extends JPanel implements Serializable {
 					+ cboTimeUnits.getSelectedItem() + Back.newLine;
 		}
 		return lines;
+	}
+	/**
+	 * @return
+	 */
+	protected TitledPanel getPanel() {
+		if (pnlDump == null) {
+			pnlDump = new TitledPanel();
+			pnlDump.setBounds(719, 7, 443, 121);
+			pnlDump.setTitle("dump file");
+			txtFort12.setBackground(Back.grey);
+			txtFort12.setBounds(304, 24, 118, 20);
+			pnlDump.add(txtFort12);
+			txtDumpEvery.setBackground(Back.grey);
+			lblCycles.setBounds(236, 55, 53, 25);
+			pnlDump.add(lblCycles);
+			chkOutputConstraints.addActionListener(keyOutputConstraints);
+			chkOutputConstraints.setBounds(67, 88, 173, 25);
+			pnlDump.add(chkOutputConstraints);
+
+		}
+		return pnlDump;
+	}
+	/**
+	 * @return
+	 */
+	public DefaultListModel inputFileModel = new DefaultListModel();
+	protected JList getInputFileList() {
+		if (inputFileList == null) {
+			inputFileList = new JList(inputFileModel);
+			inputFileList.setBounds(143, 32, 235, 121);
+			inputFileList.addMouseListener(keyList);
+		}
+		return inputFileList;
+	}
+	
+	private String selectedInputFile;
+	private SerialMouseAdapter keyList = new SerialMouseAdapter() {
+		private static final long serialVersionUID = 5923969703181724344L;
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (inputFileModel.getSize() > 0) {
+				selectedInputFile = (String)inputFileList.getSelectedValue();
+			}
+		}
+	};
+	/**
+	 * @return
+	 */
+	protected JLabel getSavedInputFilesLabel() {
+		if (savedInputFilesLabel == null) {
+			savedInputFilesLabel = new JLabel();
+			savedInputFilesLabel.setText("input files");
+			savedInputFilesLabel.setBounds(9, 33, 121, 15);
+		}
+		return savedInputFilesLabel;
 	}
 	
 }

@@ -6,20 +6,19 @@ import java.io.Serializable;
 
 import javax.swing.JCheckBox;
 
-public class KeywordListener implements ActionListener, Serializable {
+public class TaskKeywordListener implements ActionListener, Serializable {
 
 	private static final long serialVersionUID = 8674881359650941422L;
 
 	JCheckBox box;
 	String keyword;
 
-	public KeywordListener(JCheckBox box, String keyword) {
+	public TaskKeywordListener(JCheckBox box, String keyword) {
 		this.box = box;
 		this.keyword = keyword;
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		//if
 		Back.getKeys().putOrRemoveKeyword(box.isSelected(), keyword);
 	}
 }

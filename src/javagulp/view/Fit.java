@@ -44,8 +44,8 @@ public class Fit extends JPanel implements Serializable {
 	private JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
 	private JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
 	
-	public FitPanelHolder fitPanel = new FitPanelHolder();
-	private JList fitList = new JList(fitPanel.fitListModel);
+	public FitPanelHolder fitPanelHolder = new FitPanelHolder();
+	private JList fitList = new JList(fitPanelHolder.fitListModel);
 	private JScrollPane listScroll = new JScrollPane(fitList);
 
 	private KeywordListener keySimultaneous = new KeywordListener(chkSimultaneous, "simultaneous");
@@ -62,10 +62,10 @@ public class Fit extends JPanel implements Serializable {
 			if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 				if (JOptionPane.showConfirmDialog(null,
 						"Are you sure you want to remove this fit?") == JOptionPane.YES_OPTION) {
-					if (fitPanel.fitListModel.getSize() > 0) {
+					if (fitPanelHolder.fitListModel.getSize() > 0) {
 						int index = fitList.getSelectedIndex();
-						fitPanel.fitListModel.remove(index);
-						fitPanel.fitPanelsForGulpInputFile.remove(index);
+						fitPanelHolder.fitListModel.remove(index);
+						fitPanelHolder.fitPanelsForGulpInputFile.remove(index);
 					}
 				}
 			}
@@ -76,8 +76,8 @@ public class Fit extends JPanel implements Serializable {
 		private static final long serialVersionUID = 5923969703181724344L;
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (fitPanel.fitListModel.getSize() > 0) {
-				fitPanel.scrollFit.setViewportView(fitPanel.fitPanelsForGulpInputFile.get(fitList.getSelectedIndex()));
+			if (fitPanelHolder.fitListModel.getSize() > 0) {
+				fitPanelHolder.scrollFit.setViewportView(fitPanelHolder.fitPanelsForGulpInputFile.get(fitList.getSelectedIndex()));
 			}
 		}
 	};
@@ -120,9 +120,9 @@ public class Fit extends JPanel implements Serializable {
 		txtStepmxFit.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtStepmxFit);
 
-		fitPanel.setBounds(3, 194, 558, 244);
-		fitPanel.scrollFit.setBounds(10, 64, 526, 172);
-		add(fitPanel);
+		fitPanelHolder.setBounds(3, 194, 558, 244);
+		fitPanelHolder.scrollFit.setBounds(10, 64, 526, 172);
+		add(fitPanelHolder);
 
 		final TitledPanel pnlMaxNumOfCycles = new TitledPanel();
 		pnlMaxNumOfCycles.setTitle("maximum number of cycles");

@@ -45,7 +45,7 @@ public class GulpFileWriter {
 			o.append(gr.getFreeEnergy().writeFreeEnergy());
 //			o.append(gr.getDefect().writeDefect());
 			o.append(gr.getFit().writeFitOptions());
-			o.append(gr.getFit().fitPanel.writeFitPanels());
+			o.append(gr.getFit().fitPanelHolder.writeFitPanels());
 			o.append(gr.getMonteCarlo().writeMonteCarlo());
 			o.append(gr.getMd().writeMD());
 			o.append(gr.getExternalForce().writeExternalForce());

@@ -360,20 +360,20 @@ public class Back {
 	@Deprecated
 	public static String writeFlags(JComboBox[] boxes) throws IncompleteOptionException {
 		//error checking
-		boolean noneSelected = true;
-		boolean atLeastOneUnselected = true;
-		boolean someSelectedSomeUnselected = false;
-		for (JComboBox box: boxes){
-			if(!box.getSelectedItem().equals(""))
-				noneSelected = false;
-		}
-		for (JComboBox box: boxes){
-			if(box.getSelectedItem().equals(""))
-				atLeastOneUnselected = true;break;
-		}
-		if (noneSelected==false && atLeastOneUnselected==true) someSelectedSomeUnselected = true;
-		if(someSelectedSomeUnselected)
-			throw new IncompleteOptionException("Must indicate fitting/optimization status of either all cell parameters / atomic positions or none of them.");
+//		boolean noneSelected = true;
+//		boolean atLeastOneUnselected = true;
+//		boolean someSelectedSomeUnselected = false;
+//		for (JComboBox box: boxes){
+//			if(!box.getSelectedItem().equals(""))
+//				noneSelected = false;
+//		}
+//		for (JComboBox box: boxes){
+//			if(box.getSelectedItem().equals(""))
+//				atLeastOneUnselected = true;break;
+//		}
+//		if (noneSelected==false && atLeastOneUnselected==true) someSelectedSomeUnselected = true;
+//		if(someSelectedSomeUnselected)
+//			throw new IncompleteOptionException("Must indicate fitting/optimization status of either all cell parameters / atomic positions or none of them.");
 		//write out flags
 		String lines = "";
 		for (JComboBox box: boxes){
