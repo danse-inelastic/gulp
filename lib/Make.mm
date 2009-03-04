@@ -29,20 +29,13 @@ distclean::
 
 
 
-EXPORT_JAVA_JARS_PATH = $(EXPORT_ROOT)/java/jars
-
-
 EXPORT_JAVA_JARS = \
 	jython.jar \
 	postgresql-8.3-604.jdbc3.jar \
 	potentials.jar \
 
 
-export-java-jars::
-	mkdir -p $(EXPORT_JAVA_JARS_PATH); \
-	for jar in $(EXPORT_JAVA_JARS); do \
-	  $(CP) $$jar $(EXPORT_JAVA_JARS_PATH) ;\
-	done
+include std-java.def
 
 
 # version

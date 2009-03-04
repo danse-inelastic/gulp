@@ -29,9 +29,6 @@ distclean::
 
 
 
-EXPORT_JAVA_JARS_PATH = $(EXPORT_ROOT)/java/jars
-
-
 EXPORT_JAVA_JARS = \
 	commons-logging.jar \
 	j2ssh.jar \
@@ -39,11 +36,7 @@ EXPORT_JAVA_JARS = \
 	potentials.jar \
 
 
-export-java-jars::
-	mkdir -p $(EXPORT_JAVA_JARS_PATH); \
-	for jar in $(EXPORT_JAVA_JARS); do \
-	  $(CP) $$jar $(EXPORT_JAVA_JARS_PATH) ;\
-	done
+include std-java.def
 
 
 # version
