@@ -33,12 +33,12 @@
 
 	<property environment="env" />
 	<property name="src" location="src" />
-	<property name="build" location="${env.EXPORT_ROOT}/java" />
-	<property name="vnfDeploy" location="${env.EXPORT_ROOT}/vnf/html/java"/>
 	<property name="trueblueDeploy" location="/var/www/java"/>
 	<property name="lib" value="lib" />
 	<property name="app-name" value="GULP" />
 	<property name="username" value="jbk" />
+	<property name="build" location="${env.EXPORT_ROOT}/java/javagulp/" />
+	<property name="vnfDeploy" location="${env.EXPORT_ROOT}/vnf/html/java"/>
 	<property name="keystore" location="${env.EXPORT_ROOT}/vnf/html/java/vnfKeys" />
 
 	<path id="classpath" path="${classpath}">
@@ -62,13 +62,18 @@
 		<signjar jar="lib/potentials.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
 		<copy file="lib/potentials.jar" todir="deployable"/>
 	</target>
-
-	<target name="jar-for-danse" description="build jars for vnf" depends="init">
-		<!-- first unsign external jars -->
+	
+	<target name="sign-libraries" description="sign all the libraries gulp is dependent on" depends="init">
 		<unsignjar jar="deployable/commons-logging.jar" />
 		<unsignjar jar="deployable/j2ssh.jar" />
 		<unsignjar jar="deployable/pg74.216.jdbc3.jar" />
-		<!-- jar up the source 
+		<signjar jar="deployable/commons-logging.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
+		<signjar jar="deployable/j2ssh.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
+		<signjar jar="deployable/pg74.216.jdbc3.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
+	</target>
+
+	<target name="jar-for-danse" description="build jars for vnf" depends="init">
+		<!-- jar up the source and create the manifest
 		<jar jarfile="deployable/${app-name}.jar">
 			<manifest file="jee/MANIFEST.MF" />
 			<fileset dir="${build}">
@@ -80,16 +85,15 @@
 		<manifest file="MANIFEST.MF">
 			<attribute name="Main-Class" value="javagulp.controller.LaunchGulpUi"/>
 		</manifest>
-
 		<jar destfile="deployable/${app-name}.jar" manifest="MANIFEST.MF">
 			<fileset dir="${build}"/>
 		</jar>
-
 		<!-- sign all jars -->
 		<signjar jar="deployable/${app-name}.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
-		<signjar jar="deployable/commons-logging.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
-		<signjar jar="deployable/j2ssh.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
-		<signjar jar="deployable/pg74.216.jdbc3.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3" />
+		<!-- copy the libraries to deployable -->
+		<copy file="lib/commons-logging.jar" todir="deployable"/>
+		<copy file="lib/j2ssh.jar" todir="deployable"/>
+		<copy file="lib/pg74.216.jdbc3.jar" todir="deployable"/>
 		<copy todir="${vnfDeploy}">
 			<fileset dir="deployable"/>
 		</copy>

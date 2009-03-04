@@ -33,7 +33,6 @@ EXPORT_JAVA_JARS = \
 	commons-logging.jar \
 	j2ssh.jar \
 	pg74.216.jdbc3.jar \
-	potentials.jar \
 
 
 include std-java.def
