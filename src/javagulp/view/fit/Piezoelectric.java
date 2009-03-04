@@ -70,22 +70,22 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 		super();
 		setLayout(null);
 
-		lbliValue.setBounds(84, 63, 14, 21);
+		lbliValue.setBounds(113, 69, 14, 21);
 		add(lbliValue);
-		txtdValue.setBounds(196, 58, 69, 20);
+		txtdValue.setBounds(245, 70, 69, 20);
 		add(txtdValue);
 		lblConstant.setBounds(104, 20, 64, 20);
 		add(lblConstant);
-		lblWeight.setBounds(271, 58, 43, 20);
+		lblWeight.setBounds(320, 69, 55, 20);
 		add(lblWeight);
 		txtWeight.setBackground(Back.grey);
-		txtWeight.setBounds(322, 56, 70, 21);
+		txtWeight.setBounds(381, 69, 70, 21);
 		add(txtWeight);
-		cboiValue.setBounds(93, 58, 44, 21);
+		cboiValue.setBounds(133, 69, 44, 21);
 		add(cboiValue);
-		lblAlpha.setBounds(7, 63, 21, 21);
+		lblAlpha.setBounds(17, 69, 42, 21);
 		add(lblAlpha);
-		cboXyz.setBounds(35, 56, 42, 21);
+		cboXyz.setBounds(65, 69, 42, 21);
 		add(cboXyz);
 
 		pnlEquationBackdrop.setLayout(new CardLayout());
@@ -100,7 +100,7 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 		pnlStrainType.add(lbleEquation);
 
 		pnlLabelBackdrop.setLayout(new CardLayout());
-		pnlLabelBackdrop.setBounds(154, 56, 36, 33);
+		pnlLabelBackdrop.setBounds(202, 65, 35, 33);
 		add(pnlLabelBackdrop);
 
 		pnlStrainTypeLabel.setName("pnlStrainTypeLabel");
@@ -114,7 +114,7 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 		pnlStrainTypeLabel.add(lbleValue);
 
 		add(lbldEquation);
-		lbldEquation.setBounds(259, 21, 308, 21);
+		lbldEquation.setBounds(259, 21, 231, 21);
 
 		add(cboStressStrain);
 		cboStressStrain.addActionListener(keyCombo);

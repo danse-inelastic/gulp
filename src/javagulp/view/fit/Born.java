@@ -32,7 +32,7 @@ public class Born extends AbstractFit implements Serializable {
 			+ g.part + g.mu + "<sub>" + g.alpha + "</sub>/" + g.part + g.beta
 			+ " &nbsp&nbsp " + g.alpha + ", " + g.beta + g.in + " x, y, z"));
 
-	public String gulpFileLines = "bornq " + txtAtomNum.getText();
+	public String gulpFileLines = "";
 
 	public Born() {
 		super();
@@ -68,7 +68,7 @@ public class Born extends AbstractFit implements Serializable {
 			throw new IncompleteOptionException("Please enter a value for Z effective");
 		Double.parseDouble(txtAtomNum.getText());
 		Double.parseDouble(txtConstant.getText());
-
+		gulpFileLines += "bornq " + txtAtomNum.getText();
 		if (cboTensorComponent.getSelectedIndex() != 0)
 			gulpFileLines += " " + cboTensorComponent.getSelectedItem();
 		gulpFileLines += " " + txtConstant.getText();
@@ -76,7 +76,8 @@ public class Born extends AbstractFit implements Serializable {
 			Double.parseDouble(txtWeight.getText());
 			gulpFileLines += " " + txtWeight.getText();
 		}
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

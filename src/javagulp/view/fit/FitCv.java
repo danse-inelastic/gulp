@@ -40,7 +40,7 @@ public class FitCv extends AbstractFit implements Serializable {
 		txtWeight.setBackground(Back.grey);
 		txtWeight.setBounds(76, 87, 72, 20);
 		add(txtWeight);
-		cboUnits.setBounds(200, 40, 90, 20);
+		cboUnits.setBounds(217, 39, 90, 20);
 		add(cboUnits);
 	}
 
@@ -61,7 +61,8 @@ public class FitCv extends AbstractFit implements Serializable {
 		}
 		if (cboUnits.getSelectedIndex() != 0)
 			gulpFileLines += " j/kmol";
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

@@ -48,7 +48,8 @@ public class Monopole extends AbstractFit implements Serializable {
 		gulpFileLines = "monopoleq " + Back.concatFields(fields);
 		if (!txtWeight.getText().equals(""))
 			gulpFileLines += " " + txtWeight.getText();
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

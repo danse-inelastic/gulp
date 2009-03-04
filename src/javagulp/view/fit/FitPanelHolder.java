@@ -25,7 +25,7 @@ public class FitPanelHolder extends TitledPanel implements Serializable {
 
 	public DefaultListModel fitListModel = new DefaultListModel();
 	public JList listOfDataToFit = new JList(fitListModel);
-	private JButton btnAddFit = new JButton("Add Fit");
+	private JButton btnAddFit = new JButton("add fit");
 	public ArrayList<AbstractFit> fitPanelsForGulpInputFile = new ArrayList<AbstractFit>();
 
 	public JScrollPane scrollFit = new JScrollPane();
@@ -138,9 +138,10 @@ public class FitPanelHolder extends TitledPanel implements Serializable {
 	}
 
 	public String writeFitPanels() {
-		String lines = "";
+		String lines = "observables"+Back.newLine;
 		for (int i = 0; i < fitPanelsForGulpInputFile.size(); i++)
-			lines += fitPanelsForGulpInputFile.get(i);
+			lines += fitPanelsForGulpInputFile.get(i).gulpFileLines;
+		lines += "end" + Back.newLine;
 		return lines;
 	}
 	

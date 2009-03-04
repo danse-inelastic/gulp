@@ -27,7 +27,7 @@ public class Hfdlc extends AbstractFit implements Serializable {
 	private JTextField txtJ = new JTextField();
 	private JTextField txtWeight = new JTextField();
 
-	public String gulpFileLines;
+	//public String gulpFileLines;
 
 	public Hfdlc() {
 		super();
@@ -58,12 +58,13 @@ public class Hfdlc extends AbstractFit implements Serializable {
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
-		gulpFileLines = "hfdlc " + Back.concatFields(fields);
+		gulpFileLines = "hfdlc " + Back.newLine + Back.concatFields(fields);
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
 			gulpFileLines += " " + txtWeight.getText();
 		}
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

@@ -70,12 +70,13 @@ public class BSM extends PotentialPanel implements Serializable {
 	
 	@Override
 	public PotentialPanel clone() {
-		BSM bs = new BSM();
-		getParams();
-		bs.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
-		bs.cboExponential.setSelectedIndex(this.cboExponential.getSelectedIndex());
-		bs.cboCoreShell.setSelectedIndex(this.cboCoreShell.getSelectedIndex());
-		return super.clone(bs);
+//		BSM bs = new BSM();
+//		getParams();
+//		bs.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
+//		bs.cboExponential.setSelectedIndex(this.cboExponential.getSelectedIndex());
+//		bs.cboCoreShell.setSelectedIndex(this.cboCoreShell.getSelectedIndex());
+//		return super.clone(bs);
+		return new BSM();
 	}
 
 	@Override

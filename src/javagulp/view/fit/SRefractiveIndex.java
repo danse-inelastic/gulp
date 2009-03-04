@@ -55,7 +55,8 @@ public class SRefractiveIndex extends AbstractFit implements Serializable {
 		gulpFileLines = Back.concatFields(fields);
 		if (!txtWeight.getText().equals(""))
 			gulpFileLines += " " + txtWeight.getText();
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

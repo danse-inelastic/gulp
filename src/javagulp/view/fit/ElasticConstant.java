@@ -22,7 +22,7 @@ public class ElasticConstant extends AbstractFit implements Serializable {
 	private JTextField txtI = new JTextField();
 	private JTextField txtWeight = new JTextField();
 
-	public String gulpFileLines;
+	//public String gulpFileLines;
 
 	public ElasticConstant() {
 		super();
@@ -51,12 +51,13 @@ public class ElasticConstant extends AbstractFit implements Serializable {
 		JTextField[] fields = { txtI, txtJ, txtConstant };
 		String[] descriptions = { "i", "j", "the elastic constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
-		gulpFileLines = "elastic " + Back.concatFields(fields);
+		gulpFileLines = "elastic " + Back.newLine + Back.concatFields(fields);
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
 			gulpFileLines += " " + txtWeight.getText();
 		}
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }

@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 public abstract class AbstractFit extends JPanel {
 
+	public String gulpFileLines = "";
+
 	public AbstractFit() {
 		super();
 		setLayout(null);

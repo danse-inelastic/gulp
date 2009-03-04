@@ -66,17 +66,17 @@ public class StructurePrediction extends JPanel implements Serializable {
 
 		chkPredictCrystal.addActionListener(keyPredictCrystal);
 		chkPredictCrystal.setToolTipText("Performs structure prediction calculations");
-		chkPredictCrystal.setBounds(3, 3, 300, 30);
+		chkPredictCrystal.setBounds(10, 11, 255, 30);
 		add(chkPredictCrystal);
 
-		scrollPane.setBounds(5, 35, 1024, 385);
+		scrollPane.setBounds(10, 47, 987, 350);
 		add(scrollPane);
 		scrollPane.add(pnlGeneticAlgorithm);
 		scrollPane.add(pnlSimulatedAnnealing);
 		scrollPane.setViewportView(pnlGeneticAlgorithm);
 
 		cboCrystalStructure.addActionListener(keyCrystalStructure);
-		cboCrystalStructure.setBounds(309, 6, 169, 24);
+		cboCrystalStructure.setBounds(271, 14, 169, 24);
 		add(cboCrystalStructure);
 	}
 	

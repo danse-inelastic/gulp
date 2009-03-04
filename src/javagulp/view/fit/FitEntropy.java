@@ -22,7 +22,7 @@ public class FitEntropy extends AbstractFit implements Serializable {
 	private JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
 			"J/(Kmol)" });
 
-	public String gulpFileLines = "entropy " + txtConstant.getText();
+	public String gulpFileLines = "";
 
 	public FitEntropy() {
 		super();
@@ -50,14 +50,15 @@ public class FitEntropy extends AbstractFit implements Serializable {
 		if (txtConstant.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a value for entropy");
 		Double.parseDouble(txtConstant.getText());
-
+		gulpFileLines = "entropy " + txtConstant.getText();
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
 			gulpFileLines += " " + txtWeight.getText();
 		}
 		if (cboUnits.getSelectedIndex() != 0)
 			gulpFileLines += " j/kmol";
-		return gulpFileLines + Back.newLine;
+		gulpFileLines += Back.newLine;
+		return gulpFileLines;
 	}
 	
 }
