@@ -8,12 +8,10 @@ public class LaunchGulpUi {
 	
 	
 	public LaunchGulpUi(String[] simulationParams) {
-
 		if (b == null)
 			b = new Back(simulationParams);
 		else
 			b.addTab(simulationParams);
-
 	}
 	
 

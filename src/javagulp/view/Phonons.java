@@ -114,8 +114,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	private String writeBroaden() throws IncompleteOptionException,
 	InvalidOptionException {
 		String line = "";
-		if (!txtBroadenPeaks.getText().equals("")
-				&& !txtBroadenPeaks.getText().equals(TXT_BROADEN_PEAKS)) {
+		if (!txtBroadenPeaks.getText().equals(TXT_BROADEN_PEAKS)) {
 			try {
 				double broaden = Double.parseDouble(txtBroadenPeaks.getText());
 				// and > 1?
@@ -125,9 +124,9 @@ public class Phonons extends TitledPanel implements Serializable {
 				throw new NumberFormatException("Please enter a number for Phonon broadening.");
 			}
 			line = "broaden_dos " + txtBroadenPeaks.getText() + Back.newLine;
-		} else {
-			throw new IncompleteOptionException("Please enter something for Phonon broadening.");
-		}
+		} //else {
+//			throw new IncompleteOptionException("Please enter something for Phonon broadening.");
+//		}
 		return line;
 	}
 
