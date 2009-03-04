@@ -16,11 +16,11 @@ import javax.swing.JTextField;
 
 		private G g = new G();
 		private JLabel lblPoints = new JLabel(g.html("number of high symmetry kpoints"));
-		private int number = 0;
+		private int numHighSymPoints = 0;
 
 		private JTextField txtPoints = new JTextField("2");
 
-		private SerialKeyAdapter pointsKeyListener = new SerialKeyAdapter() {
+		private SerialKeyAdapter numPointsKeyListener = new SerialKeyAdapter() {
 			private static final long serialVersionUID = 1268594961778847795L;
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 				Back.getPanel().getPhonon().pnlDispersion.dispersionModified = true;
 			}
 		};
+
 
 		BoundsPanel() {
 			super();
@@ -37,29 +38,29 @@ import javax.swing.JTextField;
 			add(lblPoints);
 			txtPoints.setBounds(130, 10, 39, 20);
 			add(txtPoints);
-			txtPoints.addKeyListener(pointsKeyListener);
+			txtPoints.addKeyListener(numPointsKeyListener);
 			updateBounds();
 		}
 
 		private void updateBounds() {
-			int newSize;
+			int newNum;
 			try {
-				newSize = Integer.parseInt(txtPoints.getText());
+				newNum = Integer.parseInt(txtPoints.getText());
 			} catch (NumberFormatException e) {
 				return;
 			}
-			if (newSize > number) {
-				for (int i = 0; i < newSize - number; i++) {
+			if (newNum > numHighSymPoints) {
+				for (int i = 0; i < newNum - numHighSymPoints; i++) {
 					DispersionKpoint l = new DispersionKpoint();
-					l.setBounds(5, (number + i) * 25 + 40, 150, 20);
+					l.setBounds(5, (numHighSymPoints + i) * 25 + 40, 150, 20);
 					add(l);
 				}
-				number = newSize;
-			} else if (number > newSize) {
-				for (int i = 0; i < number - newSize; i++) {
+				numHighSymPoints = newNum;
+			} else if (numHighSymPoints > newNum) {
+				for (int i = 0; i < numHighSymPoints - newNum; i++) {
 					remove(getComponentCount() - 1);
 				}
-				number = newSize;
+				numHighSymPoints = newNum;
 			}
 			repaint();
 		}
