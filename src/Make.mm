@@ -29,16 +29,22 @@ distclean::
 
 
 
-#EXPORT_JAVA_PATH = $(EXPORT_ROOT)/java
-EXPORT_JAVA_PATH = ../bin
+EXPORT_JAVA_PATH = $(EXPORT_ROOT)/java
+EXPORT_JAVA_PROJECT_PATH = $(EXPORT_JAVA_PATH)/$(PROJECT)
+
 
 RSYNC_A = rsync -a
 JAVAC = javac  # -Xlint:unchecked
 
+
+JARS_DIR=../jars
+JAVACLASSPATH=$(JARS_DIR)/jython.jar:$(JARS_DIR)/potentials.jar:$(JARS_DIR)/postgresql-8.3-604.jdbc3.jar:$(JARS_DIR)/j2ssh.jar
+
+
 export-java:: 
-	mkdir -p $(EXPORT_JAVA_PATH); \
-	$(RSYNC_A) ./ $(EXPORT_JAVA_PATH); \
-	cd  $(EXPORT_JAVA_PATH) && $(JAVAC) `find . -name *.java`
+	mkdir -p $(EXPORT_JAVA_PROJECT_PATH); \
+	$(RSYNC_A) ./ $(EXPORT_JAVA_PROJECT_PATH); \
+	cd  $(EXPORT_JAVA_PROJECT_PATH) && $(JAVAC) -classpath $(JAVACLASSPATH) `find . -name *.java` ;\
 
 
 # version

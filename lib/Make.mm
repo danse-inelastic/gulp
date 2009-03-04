@@ -15,7 +15,8 @@ PROJECT = javagulp
 #--------------------------------------------------------------------------
 #
 
-all: export-lib export-deployable compile-src create-jar
+all: export-java-jars
+	BLD_ACTION="all" $(MM) recurse
 
 tidy::
 	BLD_ACTION="tidy" $(MM) recurse
@@ -28,20 +29,20 @@ distclean::
 
 
 
-export-lib:
-	cd lib && $(MM)
+EXPORT_JAVA_JARS_PATH = $(EXPORT_ROOT)/java/jars
 
 
-export-deployable:
-	cd deployable && $(MM)
+EXPORT_JAVA_JARS = \
+	jython.jar \
+	postgresql-8.3-604.jdbc3.jar \
+	potentials.jar \
 
 
-compile-src::
-	cd src && $(MM)
-
-
-create-jar::
-	ant -f build.xml.mm
+export-java-jars::
+	mkdir -p $(EXPORT_JAVA_JARS_PATH); \
+	for jar in $(EXPORT_JAVA_JARS); do \
+	  $(CP) $$jar $(EXPORT_JAVA_JARS_PATH) ;\
+	done
 
 
 # version
