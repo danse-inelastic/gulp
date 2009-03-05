@@ -19,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -157,43 +158,18 @@ public class Nutpad extends JFrame {
 		};
 		
 		mSaveVnfAction = new AbstractAction("Save to vnf") {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = -3294324834199401502L;
-
 			public void actionPerformed(ActionEvent e) {
-				Back.getPanel().getOutput().inputFiles.add(mEditArea.getText());
-				if (file == null) {
-					int retval = mFileChooser.showSaveDialog(Nutpad.this);
-					if (retval == JFileChooser.APPROVE_OPTION) {
-						File f = mFileChooser.getSelectedFile();
-						try {
-							BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-							mEditArea.write(writer);  // Use TextComponent write
-						} catch (IOException ioex) {
-							System.out.println(e);
-							//System.exit(1);
-						}
-					}
-				} else {
-					try {
-						BufferedWriter fw = new BufferedWriter(new FileWriter(file));
-						fw.write(mEditArea.getText());
-						fw.close();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
+                String name = (String)JOptionPane.showInputDialog(
+                        Back.frame, "Input the name of the input file", "",
+                        JOptionPane.PLAIN_MESSAGE, null, null, "");
+				Back.getPanel().getOutput().inputFileMap.put(name, mEditArea.getText());
+				Back.getPanel().getOutput().inputFileModel.addElement(name);
 			}
 		};
 		
 		mExitAction = new AbstractAction("Exit") {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = -6823728690923785461L;
-
 			public void actionPerformed(ActionEvent e) {
 		    	cancel();
 			}	

@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javagulp.controller.IncompleteOptionException;
 
@@ -38,7 +40,7 @@ public class Output extends JPanel implements Serializable {
 
 
 	private JLabel savedInputFilesLabel;
-	private JList inputFileList;
+	private JList inputFileDisplayList;
 	private TitledPanel pnlDump;
 	private static final long serialVersionUID = -4891514818536259508L;
 
@@ -95,7 +97,7 @@ public class Output extends JPanel implements Serializable {
 			}
 		}
 	};
-	public List<String> inputFiles = new ArrayList<String>();
+	public Map<String,String> inputFileMap = new HashMap<String,String>();
 	private SerialListener keyViewInput = new SerialListener() {
 		
 		private static final long serialVersionUID = 7165880120019172111L;
@@ -105,13 +107,13 @@ public class Output extends JPanel implements Serializable {
 			if(selectedInputFile.equals("input.gin")){
 				String contents = Back.writer.gulpInputFileToString();
 				if (!Back.writer.incomplete) {
-					inputFiles.add(contents);
+					inputFileMap.put("input.gin",contents);
 					Back.writer.writeAll(contents, txtInputFile.getText());
 					Date d = new Date();
 					lastViewed = d.getTime();
 				}
 			} 
-			Nutpad nut = new Nutpad(inputFiles.get(inputFiles.indexOf(selectedInputFile)));
+			Nutpad nut = new Nutpad(inputFileMap.get(selectedInputFile));
 			//Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + "/" + txtInputFile.getText()));
 			nut.setVisible(true);
 			
@@ -260,12 +262,12 @@ public class Output extends JPanel implements Serializable {
 	public DefaultListModel inputFileModel = new DefaultListModel();
 	
 	protected JList getInputFileList() {
-		if (inputFileList == null) {
-			inputFileList = new JList(inputFileModel);
-			inputFileList.setBounds(143, 32, 235, 121);
-			inputFileList.addMouseListener(keyList);
+		if (inputFileDisplayList == null) {
+			inputFileDisplayList = new JList(inputFileModel);
+			inputFileDisplayList.setBounds(143, 32, 235, 121);
+			inputFileDisplayList.addMouseListener(keyList);
 		}
-		return inputFileList;
+		return inputFileDisplayList;
 	}
 	
 	private String selectedInputFile;
@@ -274,7 +276,7 @@ public class Output extends JPanel implements Serializable {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (inputFileModel.getSize() > 0) {
-				selectedInputFile = (String)inputFileList.getSelectedValue();
+				selectedInputFile = (String)inputFileDisplayList.getSelectedValue();
 			}
 		}
 	};
