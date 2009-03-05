@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javagulp.view.Back;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -31,6 +33,7 @@ public class Nutpad extends JFrame {
 	
 	private Action mOpenAction;
 	private Action mSaveAction;
+	private Action mSaveVnfAction;
 	private Action mExitAction;
 	
 	private File file = null;
@@ -93,6 +96,7 @@ public class Nutpad extends JFrame {
 		JMenu fileMenu = menuBar.add(new JMenu("File"));
 		fileMenu.add(mOpenAction);  // Note use of actions, not text.
 		fileMenu.add(mSaveAction);
+		fileMenu.add(mSaveVnfAction);
 		fileMenu.addSeparator(); 
 		fileMenu.add(mExitAction);
 		return menuBar;
@@ -128,6 +132,38 @@ public class Nutpad extends JFrame {
 			private static final long serialVersionUID = -3294324834199401502L;
 
 			public void actionPerformed(ActionEvent e) {
+				if (file == null) {
+					int retval = mFileChooser.showSaveDialog(Nutpad.this);
+					if (retval == JFileChooser.APPROVE_OPTION) {
+						File f = mFileChooser.getSelectedFile();
+						try {
+							BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+							mEditArea.write(writer);  // Use TextComponent write
+						} catch (IOException ioex) {
+							System.out.println(e);
+							//System.exit(1);
+						}
+					}
+				} else {
+					try {
+						BufferedWriter fw = new BufferedWriter(new FileWriter(file));
+						fw.write(mEditArea.getText());
+						fw.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		};
+		
+		mSaveVnfAction = new AbstractAction("Save to vnf") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -3294324834199401502L;
+
+			public void actionPerformed(ActionEvent e) {
+				Back.getPanel().getOutput().inputFiles.add(mEditArea.getText());
 				if (file == null) {
 					int retval = mFileChooser.showSaveDialog(Nutpad.this);
 					if (retval == JFileChooser.APPROVE_OPTION) {

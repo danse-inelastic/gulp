@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javagulp.controller.IncompleteOptionException;
 
 import javax.swing.DefaultListModel;
@@ -92,20 +95,30 @@ public class Output extends JPanel implements Serializable {
 			}
 		}
 	};
+	public List<String> inputFiles = new ArrayList<String>();
 	private SerialListener keyViewInput = new SerialListener() {
 		
 		private static final long serialVersionUID = 7165880120019172111L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(selectedInputFile.equals("input.gin")){
 				String contents = Back.writer.gulpInputFileToString();
 				if (!Back.writer.incomplete) {
+					inputFiles.add(contents);
 					Back.writer.writeAll(contents, txtInputFile.getText());
 					Date d = new Date();
 					lastViewed = d.getTime();
-					Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + "/" + txtInputFile.getText()));
-					nut.setVisible(true);
 				}
+			} 
+			Nutpad nut = new Nutpad(inputFiles.get(inputFiles.indexOf(selectedInputFile)));
+			//Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + "/" + txtInputFile.getText()));
+			nut.setVisible(true);
+			
+//			else {
+//				Nutpad editor = new Nutpad(inputFiles.get(inputFiles.indexOf(selectedInputFile)));
+//				editor.setVisible(true);
+//			}
 		}
 	};
 
@@ -150,6 +163,7 @@ public class Output extends JPanel implements Serializable {
 		txtInputFile.setBounds(180, 6, 152, 20);
 		add(txtInputFile);
 		add(getInputFileList());
+		inputFileModel.addElement("input.gin");
 		add(getSavedInputFilesLabel());
 		add(getPanel());
 
@@ -244,6 +258,7 @@ public class Output extends JPanel implements Serializable {
 	 * @return
 	 */
 	public DefaultListModel inputFileModel = new DefaultListModel();
+	
 	protected JList getInputFileList() {
 		if (inputFileList == null) {
 			inputFileList = new JList(inputFileModel);
