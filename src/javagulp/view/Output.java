@@ -61,7 +61,6 @@ public class Output extends JPanel implements Serializable {
 	private JCheckBox chkProduceRestartFile = new JCheckBox("produce fitting/optimization dumpfile");
 
 	private JLabel lblCycles = new JLabel("cycle(s)");
-	private JLabel lblInputFile = new JLabel("gulp input file");
 	private JLabel lblOutputFile = new JLabel("gulp stdout file");
 	private JLabel lblTimeLimit = new JLabel("calculation time limit");
 
@@ -71,7 +70,7 @@ public class Output extends JPanel implements Serializable {
 	private JTextField txtDumpEvery = new JTextField("1");
 	private JTextField txtFort12 = new JTextField("fort.12");
 	private JTextField txtInfinity = new JTextField("infinity");
-	public JTextField txtInputFile = new JTextField("input.gin");
+	//public JTextField txtInputFile = new JTextField("input.gin");
 	public JTextField txtOutputFile = new JTextField("output.gout");
 
 	public long lastViewed = Long.MAX_VALUE;
@@ -108,7 +107,7 @@ public class Output extends JPanel implements Serializable {
 				String contents = Back.writer.gulpInputFileToString();
 				if (!Back.writer.incomplete) {
 					inputFileMap.put("input.gin",contents);
-					Back.writer.writeAll(contents, txtInputFile.getText());
+					Back.writer.writeAll(contents, "input.gin");
 					Date d = new Date();
 					lastViewed = d.getTime();
 				}
@@ -132,38 +131,36 @@ public class Output extends JPanel implements Serializable {
 		//this.setPreferredSize(new java.awt.Dimension(1255, 287));
 
 		btnViewOutput.addActionListener(keyViewOutput);
-		btnViewOutput.setBounds(285, 344, 93, 20);
+		btnViewOutput.setBounds(151, 157, 93, 20);
 		add(btnViewOutput);
-		cboTimeUnits.setBounds(285, 370, 93, 20);
+		cboTimeUnits.setBounds(151, 226, 93, 20);
 		add(cboTimeUnits);
-		lblOutputFile.setBounds(9, 346, 136, 15);
+		lblOutputFile.setBounds(9, 160, 136, 15);
 		add(lblOutputFile);
 		pnlCalculationTitle.setLayout(null);
 		pnlCalculationTitle.setBorder(new TitledBorder(null,
 				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlCalculationTitle.setBounds(384, 316, 330, 48);
+		pnlCalculationTitle.setBounds(250, 316, 330, 48);
 		add(pnlCalculationTitle);
 		txtCalculationTitle.setBounds(9, 20, 311, 19);
 		pnlCalculationTitle.add(txtCalculationTitle);
-		txtInfinity.setBounds(143, 371, 136, 20);
+		txtInfinity.setBounds(9, 227, 136, 20);
 		add(txtInfinity);
-		lblTimeLimit.setBounds(9, 373, 165, 15);
+		lblTimeLimit.setBounds(9, 206, 165, 15);
 		add(lblTimeLimit);
-		lblInputFile.setBounds(9, 8, 136, 15);
-		add(lblInputFile);
-		txtOutputFile.setBounds(143, 344, 136, 20);
+		txtOutputFile.setBounds(9, 180, 136, 20);
 		add(txtOutputFile);
 		btnViewInput.addActionListener(keyViewInput);
-		btnViewInput.setBounds(9, 54, 93, 20);
+		btnViewInput.setBounds(151, 5, 93, 20);
 		add(btnViewInput);
 
-		pnlOutputFormats.setBounds(383, 7, 330, 300);
+		pnlOutputFormats.setBounds(250, 7, 330, 300);
 		add(pnlOutputFormats);
-		pnlTerse.setBounds(720, 134, 443, 230);
+		pnlTerse.setBounds(586, 134, 443, 230);
 		add(pnlTerse);
-		txtInputFile.setBounds(180, 6, 152, 20);
-		add(txtInputFile);
+		//txtInputFile.setBounds(180, 6, 152, 20);
+		//add(txtInputFile);
 		add(getInputFileList());
 		inputFileModel.addElement("input.gin");
 		add(getSavedInputFilesLabel());
@@ -241,7 +238,7 @@ public class Output extends JPanel implements Serializable {
 	protected TitledPanel getPanel() {
 		if (pnlDump == null) {
 			pnlDump = new TitledPanel();
-			pnlDump.setBounds(719, 7, 443, 121);
+			pnlDump.setBounds(586, 7, 443, 121);
 			pnlDump.setTitle("dump file");
 			txtFort12.setBackground(Back.grey);
 			txtFort12.setBounds(304, 24, 118, 20);
@@ -264,13 +261,13 @@ public class Output extends JPanel implements Serializable {
 	protected JList getInputFileList() {
 		if (inputFileDisplayList == null) {
 			inputFileDisplayList = new JList(inputFileModel);
-			inputFileDisplayList.setBounds(143, 32, 235, 121);
+			inputFileDisplayList.setBounds(9, 32, 235, 121);
 			inputFileDisplayList.addMouseListener(keyList);
 		}
 		return inputFileDisplayList;
 	}
 	
-	private String selectedInputFile;
+	String selectedInputFile;
 	private SerialMouseAdapter keyList = new SerialMouseAdapter() {
 		private static final long serialVersionUID = 5923969703181724344L;
 		@Override
@@ -286,8 +283,8 @@ public class Output extends JPanel implements Serializable {
 	protected JLabel getSavedInputFilesLabel() {
 		if (savedInputFilesLabel == null) {
 			savedInputFilesLabel = new JLabel();
-			savedInputFilesLabel.setText("input files");
-			savedInputFilesLabel.setBounds(9, 33, 121, 15);
+			savedInputFilesLabel.setText("gulp input files");
+			savedInputFilesLabel.setBounds(9, 8, 121, 15);
 		}
 		return savedInputFilesLabel;
 	}

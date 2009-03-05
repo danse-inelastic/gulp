@@ -112,22 +112,16 @@ public class PotentialOptions extends JPanel implements Serializable {
 			"torsion");
 	private KeywordListener keyNoListBased = new KeywordListener(chkNoListBased, "nolist_md");
 
-	private SerialListener keyRetainColoumbic = new SerialListener() {
+	private SerialListener keyCoulombGroup = new SerialListener() {
 		private static final long serialVersionUID = -1256050152081117096L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			Back.getKeys().putOrRemoveKeyword(radRemoveColoumbic.isSelected(), "molecule");
 			Back.getKeys().putOrRemoveKeyword(radRetainColoumbic.isSelected(), "molq");
 		}
 	};
-	private SerialListener keyRadRemoveColoumbic = new SerialListener() {
-		private static final long serialVersionUID = 7344911476454012304L;
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Back.getKeys().putOrRemoveKeyword(radRemoveColoumbic.isSelected(), "molecule");
-		}
-	};
 	
 	public PotentialOptions() {
 		super();
@@ -171,10 +165,10 @@ public class PotentialOptions extends JPanel implements Serializable {
 		pnlIdentifyMolecules.setBounds(378, 238, 709, 151);
 		add(pnlIdentifyMolecules);
 		buttonGroup.add(radRetainColoumbic);
-		radRetainColoumbic.addActionListener(keyRetainColoumbic);
+		radRetainColoumbic.addActionListener(keyCoulombGroup);
 		radRetainColoumbic.setBounds(10, 51, 345, 25);
 		pnlIdentifyMolecules.add(radRetainColoumbic);
-		radRemoveColoumbic.addActionListener(keyRadRemoveColoumbic);
+		radRemoveColoumbic.addActionListener(keyCoulombGroup);
 		buttonGroup.add(radRemoveColoumbic);
 		radRemoveColoumbic.setBounds(10, 20, 355, 25);
 		pnlIdentifyMolecules.add(radRemoveColoumbic);
@@ -219,7 +213,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 		chkOutputList.setBounds(381, 0, 430, 25);
 		add(chkOutputList);
 		chkNoListBased.addActionListener(keyNoListBased);
-		chkNoListBased.setBounds(0, 370, 375, 25);
+		chkNoListBased.setBounds(0, 339, 375, 25);
 		add(chkNoListBased);
 	}
 

@@ -159,18 +159,19 @@ public class Execution extends JPanel implements Serializable {
 						return;
 					}
 					File f = new File(Back.getPanel().getWD() + "/"
-							+ Back.getPanel().getOutput().txtInputFile.getText());
+							+ Back.getPanel().getOutput().selectedInputFile);
 					if (!f.exists() || Back.getPanel().getOutput().lastViewed == Long.MAX_VALUE) {
 						JOptionPane.showMessageDialog(null,
 						"Please view your input file first.");
 						return;
 					}
-					// if the user has viewed/edited their input file sooner than the last time it was written, use the viewed file
-					if (Back.getPanel().getOutput().lastViewed < f.lastModified()) {
-						contents = Back.getFileContents(f);
-					} else {
-						contents = Back.writer.gulpInputFileToString();
-					}
+//					// if the user has viewed/edited their input file sooner than the last time it was written, use the viewed file
+//					if (Back.getPanel().getOutput().lastViewed < f.lastModified()) {
+//						contents = Back.getFileContents(f);
+//					} else {
+//						contents = Back.writer.gulpInputFileToString();
+//					}
+					contents = Back.getPanel().getOutput().inputFileMap.get(Back.getPanel().getOutput().selectedInputFile);
 					if (e == null)
 						executeLocal(true);
 					else
@@ -279,24 +280,24 @@ public class Execution extends JPanel implements Serializable {
 				Thread t = new Thread(new Runnable() {
 					public void run() {
 						String[] job = null;
-						String localDir = System.getProperty("user.home") + "/" + System.nanoTime();//random directory
+						String localDir = System.getProperty("user.home") + Back.newLine + System.nanoTime();//random directory
 						while ((job = getJob()) != null) {
-							String path = Back.getPanel().getWD() + "/" + job[0];
+							String path = Back.getPanel().getWD() + Back.newLine + job[0];
 							//create intermediate directories
 							new File(localDir).mkdir();
-							String jobDir = localDir + "/" + job[0];
+							String jobDir = localDir + Back.newLine + job[0];
 							File directory = new File(jobDir);
 							directory.mkdir();
 							System.out.println(executeRemoteCommand(hostname, "mkdir " + path, pwd));
 
 							//write out the files
 							try {
-								FileWriter fw = new FileWriter(jobDir + "/" + Back.getPanel().getOutput().txtInputFile.getText());
+								FileWriter fw = new FileWriter(jobDir + Back.newLine + Back.getPanel().getOutput().selectedInputFile);
 								fw.write(job[1]);
 								fw.close();
-								sendFiles(hostname, path + "/", new String[]{Back.getPanel().getOutput().txtInputFile.getText()}, jobDir + "/", pwd);
+								sendFiles(hostname, path + Back.newLine, new String[]{Back.getPanel().getOutput().selectedInputFile}, jobDir + "/", pwd);
 
-								String gulpCommand = Back.getPanel().getBinary() + " < " + Back.getPanel().getOutput().txtInputFile.getText() + " > " + Back.getPanel().getOutput().txtOutputFile.getText();
+								String gulpCommand = Back.getPanel().getBinary() + " < " + Back.getPanel().getOutput().selectedInputFile + " > " + Back.getPanel().getOutput().txtOutputFile.getText();
 
 								if (ex.radPBS.isSelected()) {
 									String str = null;
@@ -370,7 +371,7 @@ public class Execution extends JPanel implements Serializable {
 					String[] job = null;
 					while ((job = getJob()) != null) {
 						//create directory
-						String path = Back.getPanel().getWD() + "/" + job[0];
+						String path = Back.getPanel().getWD() + Back.newLine + job[0];
 						File directory = new File(path);
 						directory.mkdir();
 
@@ -378,7 +379,7 @@ public class Execution extends JPanel implements Serializable {
 							Back.getPanel().getExecution().addStatus(job[0], "localhost");
 							Back.getPanel().getExecution().updateStatus(job[0], "running");
 							String[] commands = new String[] {
-									Back.getPanel().getBinary(), Back.getPanel().getOutput().txtInputFile.getText(),
+									Back.getPanel().getBinary(), Back.getPanel().getOutput().selectedInputFile,
 									Back.getPanel().getOutput().txtOutputFile.getText() };
 							Process p = Runtime.getRuntime().exec(commands, null, directory);
 							BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
@@ -387,7 +388,7 @@ public class Execution extends JPanel implements Serializable {
 
 							BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 							BufferedWriter writer = new BufferedWriter(
-									new FileWriter(path + "/" + Back.getPanel().getOutput().txtOutputFile.getText()));
+									new FileWriter(path + Back.newLine + Back.getPanel().getOutput().txtOutputFile.getText()));
 							String line = "";
 							while ((line = br.readLine()) != null) {
 								writer.write(line + System.getProperty("line.separator"));
