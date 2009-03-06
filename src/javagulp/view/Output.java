@@ -41,7 +41,7 @@ public class Output extends JPanel implements Serializable {
 
 	private JLabel savedInputFilesLabel;
 	private JList inputFileDisplayList;
-	private TitledPanel pnlDump;
+	private TitledPanel pnlDump = new TitledPanel();
 	private static final long serialVersionUID = -4891514818536259508L;
 
 
@@ -103,26 +103,24 @@ public class Output extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(selectedInputFile.equals("input.gin")){
-				String contents = Back.writer.gulpInputFileToString();
-				if (!Back.writer.incomplete) {
-					inputFileMap.put("input.gin",contents);
-					Back.writer.writeAll(contents, "input.gin");
-					Date d = new Date();
-					lastViewed = d.getTime();
-				}
-			} 
+			if(selectedInputFile.equals("input.gin"))
+				updateInputGin();
 			Nutpad nut = new Nutpad(inputFileMap.get(selectedInputFile));
 			//Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + "/" + txtInputFile.getText()));
 			nut.setVisible(true);
-			
-//			else {
-//				Nutpad editor = new Nutpad(inputFiles.get(inputFiles.indexOf(selectedInputFile)));
-//				editor.setVisible(true);
-//			}
 		}
 	};
 
+	public void updateInputGin(){
+		String contents = Back.writer.gulpInputFileToString();
+		if (!Back.writer.incomplete) {
+			inputFileMap.put("input.gin",contents);
+			//Back.writer.writeAll(contents, "input.gin");
+			Date d = new Date();
+			lastViewed = d.getTime();
+		} 
+	}
+	
 	private KeywordListener keyOutputConstraints = new KeywordListener(chkOutputConstraints, "outcon");
 
 	public Output() {
@@ -164,7 +162,26 @@ public class Output extends JPanel implements Serializable {
 		add(getInputFileList());
 		inputFileModel.addElement("input.gin");
 		add(getSavedInputFilesLabel());
-		add(getPanel());
+		
+		pnlDump.setBounds(586, 7, 443, 121);
+		pnlDump.setTitle("dump file");
+		txtFort12.setBackground(Back.grey);
+		txtFort12.setBounds(304, 24, 118, 20);
+		pnlDump.add(txtFort12);
+		txtDumpEvery.setBackground(Back.grey);
+		lblCycles.setBounds(236, 55, 53, 25);
+		pnlDump.add(lblCycles);
+		chkOutputConstraints.addActionListener(keyOutputConstraints);
+		chkOutputConstraints.setBounds(67, 88, 173, 25);
+		pnlDump.add(chkOutputConstraints);
+		chkProduceRestartFile.setBounds(10, 21, 288, 25);
+		pnlDump.add(chkProduceRestartFile);
+		txtDumpEvery.setBounds(182, 58, 48, 20);
+		pnlDump.add(txtDumpEvery);
+		chkAfterEvery.setBounds(67, 52, 109, 30);
+		pnlDump.add(chkAfterEvery);
+		add(pnlDump);
+
 
 	}
 
@@ -199,19 +216,14 @@ public class Output extends JPanel implements Serializable {
 			if (chkAfterEvery.isSelected()
 					&& !txtDumpEvery.getText().equals("1")) {
 				Integer.parseInt(txtDumpEvery.getText());
-				txtDumpEvery.setBounds(182, 58, 48, 20);
-				getPanel().add(txtDumpEvery);
+
 				lines += " every " + txtDumpEvery.getText();
 			}
-			chkAfterEvery.setBounds(67, 52, 109, 30);
-			getPanel().add(chkAfterEvery);
 			if (!txtFort12.getText().equals("fort.12")) {
 				lines += " " + txtFort12.getText();
 			}
 			lines += Back.newLine;
 		}
-		chkProduceRestartFile.setBounds(10, 21, 288, 25);
-		getPanel().add(chkProduceRestartFile);
 		return lines;
 	}
 
@@ -232,30 +244,7 @@ public class Output extends JPanel implements Serializable {
 		}
 		return lines;
 	}
-	/**
-	 * @return
-	 */
-	protected TitledPanel getPanel() {
-		if (pnlDump == null) {
-			pnlDump = new TitledPanel();
-			pnlDump.setBounds(586, 7, 443, 121);
-			pnlDump.setTitle("dump file");
-			txtFort12.setBackground(Back.grey);
-			txtFort12.setBounds(304, 24, 118, 20);
-			pnlDump.add(txtFort12);
-			txtDumpEvery.setBackground(Back.grey);
-			lblCycles.setBounds(236, 55, 53, 25);
-			pnlDump.add(lblCycles);
-			chkOutputConstraints.addActionListener(keyOutputConstraints);
-			chkOutputConstraints.setBounds(67, 88, 173, 25);
-			pnlDump.add(chkOutputConstraints);
 
-		}
-		return pnlDump;
-	}
-	/**
-	 * @return
-	 */
 	public DefaultListModel inputFileModel = new DefaultListModel();
 	
 	protected JList getInputFileList() {
@@ -267,7 +256,7 @@ public class Output extends JPanel implements Serializable {
 		return inputFileDisplayList;
 	}
 	
-	String selectedInputFile;
+	public String selectedInputFile;
 	private SerialMouseAdapter keyList = new SerialMouseAdapter() {
 		private static final long serialVersionUID = 5923969703181724344L;
 		@Override

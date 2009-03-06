@@ -14,8 +14,8 @@ public class InvalidOptionException extends Exception implements Serializable {
 	public InvalidOptionException(final String message) {
 		super(message);
 		this.message = message;
-		this.message += Back.newLine + Back.getPanel().getOutput().txtInputFile.getText()
-				+ " was not written.";
+		this.message += Back.newLine + Back.getPanel().getOutput().selectedInputFile
+		+ " was not written.";
 	}
 
 	public void displayErrorAsPopup() {

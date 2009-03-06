@@ -291,6 +291,10 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 					} else if (row[j].equals("no")) {
 						if (fit)
 							value = "0 ";
+					} else if (row[j].equals("reference")||row[j].equals("optimise")) {
+						value = "1 ";
+					} else if (row[j].equals("no reference")||row[j].equals("fix")) {
+						value = "0 ";
 					} else {
 						value = row[j] + " ";
 					}

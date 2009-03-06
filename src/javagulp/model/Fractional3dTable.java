@@ -29,9 +29,9 @@ public class Fractional3dTable extends CoordinateTable {
 		super(new CoordinatesTableModel(cols, "fractional", indices));
 		
 		TableColumnModel tcm = this.getColumnModel();
-		String[] noyes = {"", "no", "yes"};
-		setUpComboBoxColumn(tcm.getColumn(1),
-				new String[] { "", "core", "shell" });
+		//String[] noyes = {"", "no", "yes"};
+		String[] noyes = {"", "no reference", "fit reference", "optimise", "fix"};
+		setUpComboBoxColumn(tcm.getColumn(1), new String[] { "", "core", "shell" });
 		setUpComboBoxColumn(tcm.getColumn(8), noyes);
 		setUpComboBoxColumn(tcm.getColumn(9), noyes);
 		setUpComboBoxColumn(tcm.getColumn(10), noyes);

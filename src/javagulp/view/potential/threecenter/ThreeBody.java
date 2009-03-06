@@ -56,9 +56,9 @@ public class ThreeBody extends PotentialPanel implements Serializable {
 		Theta.setBounds(10, 145, 225, 25);
 		add(Theta);
 		lblUnits.setBounds(10, 170, 40, 21);
-		add(lblUnits);
+		//add(lblUnits);
 		cboUnits.setBounds(90, 170, 70, 21);
-		add(cboUnits);
+		//add(cboUnits);
 		lblImage.setBounds(419, 11, 122, 80);
 		add(lblImage);
 		radii = new Radii(true, new String[] {"12", "13", "23"});
@@ -123,7 +123,7 @@ public class ThreeBody extends PotentialPanel implements Serializable {
 	public PotentialPanel clone() {
 		getParams();
 		ThreeBody t = new ThreeBody();
-		t.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
+//		t.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(t);
 	}
 }

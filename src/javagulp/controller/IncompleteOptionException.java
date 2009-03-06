@@ -15,7 +15,7 @@ public class IncompleteOptionException extends Exception implements
 	public IncompleteOptionException(final String message) {
 		super(message);
 		this.message = message;
-		this.message += Back.newLine + Back.getPanel().getOutput().txtInputFile.getText()
+		this.message += Back.newLine + Back.getPanel().getOutput().selectedInputFile
 				+ " was not written.";
 	}
 

@@ -82,7 +82,7 @@ public class GulpFileWriter {
 	public void writeAll(String output, String outputFileName) {
 		try {
 			if (!incomplete) {
-				BufferedWriter out = new BufferedWriter(new FileWriter(Back.getPanel().getWD() + "/" + outputFileName));
+				BufferedWriter out = new BufferedWriter(new FileWriter(Back.getPanel().getWD() + Back.newLine + outputFileName));
 				out.write(output);
 				out.close();
 			}

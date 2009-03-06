@@ -31,7 +31,7 @@ public class Morse extends PotentialPanel implements Serializable {
 	private PPP A = new PPP(g.html("a (&Aring;<sup>-1</sup>)"));
 	private PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
 	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private JComboBox cboUnits = new JComboBox(new String[] {"ev", "kjmol", "kcal"});
 	private JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
 	
 	public Morse() {
@@ -54,9 +54,9 @@ public class Morse extends PotentialPanel implements Serializable {
 		add(txtC);
 		txtC.setBackground(Back.grey);
 		lblUnits.setBounds(10, 160, 50, 21);
-		add(lblUnits);
+		//add(lblUnits);
 		cboUnits.setBounds(90, 160, 85, 21);
-		add(cboUnits);
+		//add(cboUnits); //remove this for now since all other unit labels would be off...
 		cboEnerGra.setBounds(10, 185, 85, 21);
 		add(cboEnerGra);
 		radii = new Radii(true);
@@ -93,9 +93,9 @@ public class Morse extends PotentialPanel implements Serializable {
 	@Override
 	public PotentialPanel clone() {
 		Morse m = new Morse();
-		m.txtC.setText(this.txtC.getText());
-		m.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
-		m.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
+		//m.txtC.setText(this.txtC.getText());
+		//m.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
+		//m.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(m);
 	}
 }

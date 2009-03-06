@@ -109,9 +109,9 @@ public class Radii extends JPanel implements Serializable {
 	}
 	
 	public void clone(Radii b) {
-		for (int i=0; i < this.txtrmin.length; i++)
-			b.txtrmin[i].setText(this.txtrmin[i].getText());
-		for (int i=0; i < this.txtrmax.length; i++)
-			b.txtrmax[i].setText(this.txtrmax[i].getText());
+//		for (int i=0; i < this.txtrmin.length; i++)
+//			b.txtrmin[i].setText(this.txtrmin[i].getText());
+//		for (int i=0; i < this.txtrmax.length; i++)
+//			b.txtrmax[i].setText(this.txtrmax[i].getText());
 	}
 }

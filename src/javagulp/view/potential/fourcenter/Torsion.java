@@ -56,14 +56,14 @@ public class Torsion extends PotentialPanel implements Serializable {
 			txtPhi0.setBackground(Back.grey);
 			txtPhi0.setBounds(80, 50, 100, 20);
 			add(txtPhi0);
-			lblISign.setBounds(0, 75, 80, 20);
-			add(lblISign);
-			lblUnits.setBounds(0, 100, 40, 21);
-			add(lblUnits);
-			cboISign.setBounds(80, 75, 100, 20);
-			add(cboISign);
-			cboUnits.setBounds(80, 100, 70, 21);
-			add(cboUnits);
+//			lblISign.setBounds(0, 75, 80, 20);
+//			add(lblISign);
+//			lblUnits.setBounds(0, 100, 40, 21);
+//			add(lblUnits);
+//			cboISign.setBounds(80, 75, 100, 20);
+//			add(cboISign);
+//			cboUnits.setBounds(80, 100, 70, 21);
+//			add(cboUnits);
 		}
 		
 		private String writeRegular() throws IncompleteOptionException {
@@ -267,18 +267,18 @@ public class Torsion extends PotentialPanel implements Serializable {
 	@Override
 	public PotentialPanel clone() {
 		Torsion t = new Torsion();
-		t.cbormax41.setSelectedIndex(this.cbormax41.getSelectedIndex());
-		t.chkDreiding.setSelected(this.chkDreiding.isSelected());
-		t.chkEsff.setSelected(this.chkEsff.isSelected());
-		
-		t.esff.txtN.setText(this.esff.txtN.getText());
-		t.esff.cboISign.setSelectedIndex(this.esff.cboISign.getSelectedIndex());
-		t.esff.cboUnits.setSelectedIndex(this.esff.cboUnits.getSelectedIndex());
-		
-		t.r.txtPhi0.setText(this.r.txtPhi0.getText());
-		t.r.txtN.setText(this.r.txtN.getText());
-		t.r.cboISign.setSelectedIndex(this.r.cboISign.getSelectedIndex());
-		t.r.cboUnits.setSelectedIndex(this.r.cboUnits.getSelectedIndex());
+//		t.cbormax41.setSelectedIndex(this.cbormax41.getSelectedIndex());
+//		t.chkDreiding.setSelected(this.chkDreiding.isSelected());
+//		t.chkEsff.setSelected(this.chkEsff.isSelected());
+//		
+//		t.esff.txtN.setText(this.esff.txtN.getText());
+//		t.esff.cboISign.setSelectedIndex(this.esff.cboISign.getSelectedIndex());
+//		t.esff.cboUnits.setSelectedIndex(this.esff.cboUnits.getSelectedIndex());
+//		
+//		t.r.txtPhi0.setText(this.r.txtPhi0.getText());
+//		t.r.txtN.setText(this.r.txtN.getText());
+//		t.r.cboISign.setSelectedIndex(this.r.cboISign.getSelectedIndex());
+//		t.r.cboUnits.setSelectedIndex(this.r.cboUnits.getSelectedIndex());
 		return super.clone(t);
 	}
 	

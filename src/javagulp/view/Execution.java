@@ -59,7 +59,6 @@ public class Execution extends JPanel implements Serializable {
 	private JLabel statusLabel;
 	private JTextArea txtVnfStatus;
 	private JLabel nLabel;
-	private JLabel jobStatusLabel;
 	private TitledPanel pnlVnfExecution;
 	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
@@ -106,7 +105,7 @@ public class Execution extends JPanel implements Serializable {
 	private JScrollPane scrollStatus = new JScrollPane(tableStatus);
 
 	private JButton btnSubmit = new JButton("submit job");
-	private JLabel lblStatus = new JLabel();
+	//private JLabel lblStatus = new JLabel();
 	public String contents = "";
 	Process gulpProcess;
 
@@ -127,7 +126,10 @@ public class Execution extends JPanel implements Serializable {
 				// run on vnf or locally or remotely 
 				if (radVnf.isSelected()) {
 					//get files as strings
-					String gulpInputFile = Back.writer.gulpInputFileToString();
+					String currentInputFile = Back.getPanel().getOutput().selectedInputFile;
+					if(currentInputFile.equals("input.gin"))
+						Back.getPanel().getOutput().updateInputGin();
+					String gulpInputFile = Back.getPanel().getOutput().inputFileMap.get(currentInputFile);
 					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
 					String librarySelected = Back.getPanel().getPotential().librarySelected;//post the files
 					Map<String,String> cgiMap = Back.getPanel().keyVals;
@@ -142,7 +144,7 @@ public class Execution extends JPanel implements Serializable {
 					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.post();
-					if (response.trim().compareTo("success")==0){
+					if (response.trim().equals("success")){
 						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
 							"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
 					}else{
@@ -545,20 +547,16 @@ public class Execution extends JPanel implements Serializable {
 		add(scrollStatus);
 		add(btnPause);
 
-		lblStatus.setBounds(245, 349, 209, 20);
-		lblStatus.setBorder(new LineBorder(Color.black, 1, false));
-		add(lblStatus);
 		btnSubmit.addActionListener(keySubmit);
 		btnSubmit.setBounds(7, 347, 136, 25);
 		add(btnSubmit);
 		scrollStatus.setBounds(489, 4, 579, 134);
-		btnPause.setBounds(460, 347, 80, 25);
+		btnPause.setBounds(149, 347, 80, 25);
 		btnPause.addActionListener(keyPause);
 		add(getPnlExecutionBackdrop());
 		add(getPlaceOfExecution());
 		add(getHowExecute());
 		add(getPnlHighThroughput());
-		add(getJobStatusLabel());
 	}
 	private SerialMouseAdapter keyMouse = new SerialMouseAdapter() {
 		private static final long serialVersionUID = -3862775803812225199L;
@@ -861,17 +859,6 @@ public class Execution extends JPanel implements Serializable {
 	}
 
 
-	/**
-	 * @return
-	 */
-	protected JLabel getJobStatusLabel() {
-		if (jobStatusLabel == null) {
-			jobStatusLabel = new JLabel();
-			jobStatusLabel.setText("job status:");
-			jobStatusLabel.setBounds(149, 347, 90, 25);
-		}
-		return jobStatusLabel;
-	}
 	/**
 	 * @return
 	 */

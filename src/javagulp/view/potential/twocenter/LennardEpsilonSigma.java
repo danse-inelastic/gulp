@@ -146,9 +146,9 @@ public class LennardEpsilonSigma extends PotentialPanel implements Serializable 
 	@Override
 	public LennardEpsilonSigma clone() {
 		LennardEpsilonSigma l = new LennardEpsilonSigma();
-		l.cboEpsSigParameters.setSelectedIndex(this.cboEpsSigParameters.getSelectedIndex());
-		l.zero.setSelected(this.zero.isSelected());
-		l.minimum.setSelected(this.minimum.isSelected());
+//		l.cboEpsSigParameters.setSelectedIndex(this.cboEpsSigParameters.getSelectedIndex());
+//		l.zero.setSelected(this.zero.isSelected());
+//		l.minimum.setSelected(this.minimum.isSelected());
 		return l;
 	}
 }
