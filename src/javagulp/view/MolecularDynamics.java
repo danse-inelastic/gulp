@@ -41,7 +41,7 @@ public class MolecularDynamics extends JPanel implements Serializable {
 	private TimeLengths pnlTimeLengths = new TimeLengths();
 	private OutputFormats pnlOutputFormats = new OutputFormats();
 
-	private String uriJPad = "http://cseobb.hec.utah.edu:18080/JPad/OPENARCH-INF/JPad.xml";
+	//private String uriJPad = "http://cseobb.hec.utah.edu:18080/JPad/OPENARCH-INF/JPad.xml";
 
 	public MolecularDynamics() {
 		super();

@@ -11,6 +11,8 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 
 
 public class CgiCommunicate {
@@ -24,8 +26,12 @@ public class CgiCommunicate {
 			conn.setDoOutput(true);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "GulpUi is unable to connect to the vnf database.");
 		} catch (IOException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "GulpUi is unable to connect to the vnf database.");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "GulpUi is unable to connect to the vnf database.");
 		}
 	}
 

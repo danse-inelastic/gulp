@@ -10,10 +10,10 @@ import javax.swing.border.TitledBorder;
 	public class TimeLengths extends JPanel {
 
 		private static final long serialVersionUID = 7793603346713580397L;
-		private JTextField txtTimestep = new JTextField();
-		private JTextField txtSample = new JTextField();
-		private JTextField txtProduction = new JTextField();
-		private JTextField txtEquilibration = new JTextField();
+		private JTextField txtTimestep = new JTextField("0.001");
+		private JTextField txtSample = new JTextField("0.01");
+		private JTextField txtProduction = new JTextField("100");
+		private JTextField txtEquilibration = new JTextField("0");
 
 		private JLabel lblTimestep = new JLabel("timestep length (ps)");
 		private JLabel lblEquilibrationTime = new JLabel("equilibration time (ps)");
