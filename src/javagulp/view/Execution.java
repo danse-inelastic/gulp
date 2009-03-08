@@ -548,10 +548,10 @@ public class Execution extends JPanel implements Serializable {
 		add(btnPause);
 
 		btnSubmit.addActionListener(keySubmit);
-		btnSubmit.setBounds(7, 347, 136, 25);
+		btnSubmit.setBounds(7, 365, 136, 25);
 		add(btnSubmit);
 		scrollStatus.setBounds(489, 4, 579, 134);
-		btnPause.setBounds(149, 347, 80, 25);
+		btnPause.setBounds(149, 365, 80, 25);
 		btnPause.addActionListener(keyPause);
 		add(getPnlExecutionBackdrop());
 		add(getPlaceOfExecution());
@@ -703,7 +703,7 @@ public class Execution extends JPanel implements Serializable {
 			pnlExecutionBackdrop = new JPanel();
 			//pnlExecutionBackdrop.setBounds(7, 144, 724, 192);
 			pnlExecutionBackdrop.setLayout(new CardLayout());
-			pnlExecutionBackdrop.setBounds(7, 144, 723, 192);
+			pnlExecutionBackdrop.setBounds(7, 144, 723, 215);
 			add(pnlExecutionBackdrop);
 			pnlExecutionBackdrop.add(getPnlVnfExecution(), getPnlVnfExecution().getName());
 			pnlExecutionBackdrop.add(getPnlLocalExecution(), getPnlLocalExecution().getName());
@@ -758,17 +758,17 @@ public class Execution extends JPanel implements Serializable {
 			pnlLocalExecution.setLayout(null);
 			pnlLocalExecution.setName("localExecution");
 			pnlLocalExecution.setTitle("local submission");
-			btnWorkingDirectory.setBounds(10, 10, 175, 19);
+			btnWorkingDirectory.setBounds(10, 27, 175, 19);
 			pnlLocalExecution.add(btnWorkingDirectory);
 			btnWorkingDirectory.addActionListener(keyWorkingDirectory);
-			btnGulpBinary.setBounds(10, 44, 175, 19);
+			btnGulpBinary.setBounds(10, 69, 175, 19);
 			pnlLocalExecution.add(btnGulpBinary);
 			btnGulpBinary.addActionListener(keyGulpExecutable);
-			txtWorkingDirectory.setBounds(191, 10, 495, 19);
+			txtWorkingDirectory.setBounds(191, 27, 495, 19);
 			pnlLocalExecution.add(txtWorkingDirectory);
 
 			txtWorkingDirectory.setEnabled(false);
-			txtGulpBinary.setBounds(191, 44, 495, 19);
+			txtGulpBinary.setBounds(191, 69, 495, 19);
 			pnlLocalExecution.add(txtGulpBinary);
 			txtGulpBinary.setEnabled(false);
 		}
@@ -783,24 +783,24 @@ public class Execution extends JPanel implements Serializable {
 			pnlRemoteExecution.setLayout(null);
 			pnlRemoteExecution.setName("remoteExecution");
 			pnlRemoteExecution.setTitle("remote submission");
-			lblHosts.setBounds(10, 10, 154, 28);
+			lblHosts.setBounds(10, 25, 154, 28);
 			pnlRemoteExecution.add(lblHosts);
-			scrollHosts.setBounds(10, 44, 154, 138);
+			scrollHosts.setBounds(10, 66, 154, 138);
 			pnlRemoteExecution.add(scrollHosts);
 
 			hostsList.addMouseListener(keyMouse);
 			hostsList.addKeyListener(keyHosts);
-			lblUsername.setBounds(180, 6, 105, 21);
+			lblUsername.setBounds(180, 65, 105, 21);
 			pnlRemoteExecution.add(lblUsername);
-			txtUsername.setBounds(302, 6, 154, 21);
+			txtUsername.setBounds(302, 65, 154, 21);
 			pnlRemoteExecution.add(txtUsername);
 			txtUsername.addKeyListener(keyUsername);
-			lblPassword.setBounds(180, 33, 105, 21);
+			lblPassword.setBounds(180, 91, 105, 21);
 			pnlRemoteExecution.add(lblPassword);
-			pwdPassword.setBounds(302, 33, 154, 21);
+			pwdPassword.setBounds(302, 91, 154, 21);
 			pnlRemoteExecution.add(pwdPassword);
 			pwdPassword.addKeyListener(keyPassword);
-			chkCredentials.setBounds(180, 61, 315, 28);
+			chkCredentials.setBounds(190, 118, 315, 28);
 			pnlRemoteExecution.add(chkCredentials);
 		}
 		return pnlRemoteExecution;
@@ -844,11 +844,11 @@ public class Execution extends JPanel implements Serializable {
 	protected TitledPanel getPnlHighThroughput() {
 		if (pnlHighThroughput == null) {
 			pnlHighThroughput = new TitledPanel();
-			pnlHighThroughput.setBounds(736, 144, 332, 192);
+			pnlHighThroughput.setBounds(736, 144, 332, 215);
 			pnlHighThroughput.setTitle("high throughput execution");
 			lblParallel.setBounds(10, 62, 312, 37);
 			pnlHighThroughput.add(lblParallel);
-			txtMultiple.setBounds(41, 105, 49, 21);
+			txtMultiple.setBounds(54, 105, 49, 21);
 			pnlHighThroughput.add(txtMultiple);
 			chkSeparate.setBounds(10, 26, 314, 30);
 			pnlHighThroughput.add(chkSeparate);
@@ -866,7 +866,7 @@ public class Execution extends JPanel implements Serializable {
 		if (nLabel == null) {
 			nLabel = new JLabel();
 			nLabel.setText("n");
-			nLabel.setBounds(10, 105, 25, 21);
+			nLabel.setBounds(20, 105, 25, 21);
 		}
 		return nLabel;
 	}
@@ -896,7 +896,7 @@ public class Execution extends JPanel implements Serializable {
 	protected JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 47, 703, 135);
+			scrollPane.setBounds(10, 47, 703, 158);
 			scrollPane.setViewportView(getTxtVnfStatus());
 		}
 		return scrollPane;

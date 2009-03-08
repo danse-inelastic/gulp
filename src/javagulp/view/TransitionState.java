@@ -69,7 +69,8 @@ public class TransitionState extends JPanel implements Serializable {
 		txtOrderOfTransitionState.setBounds(403, 56, 63, 21);
 		pnlRFOOptions.add(txtOrderOfTransitionState);
 		pnlRFOOptions.add(radNone2);
-		radNone2.setBounds(7, 14, 21, 21);
+		radNone2.setText("none");
+		radNone2.setBounds(7, 14, 120, 21);
 		btnGroupRFOOptions.add(radNone2);
 		radNone2.setSelected(true);
 
@@ -87,9 +88,7 @@ public class TransitionState extends JPanel implements Serializable {
 		btnGroupTransitionState.add(radInvokeRational);
 		radInvokeRational.addActionListener(keyInvokeRational);
 
-		final JTextArea txtareaInvokeTheRational = new JTextArea("Invoke Rational Function Optimisation (RFO) to search for stationary points of any order. "
-						+ "By default the optimizer searches for the minimum and may prove advantageous "
-						+ "over the standard optimizer if the hessian is ill-conditioned.");
+		final JTextArea txtareaInvokeTheRational = new JTextArea("invoke Rational Function Optimisation (RFO) to search for stationary points of any order. By default the optimizer searches for the minimum and may prove advantageous over the standard optimizer if the hessian is ill-conditioned.");
 		txtareaInvokeTheRational.setBounds(35, 42, 427, 63);
 		pnlTransitionState.add(txtareaInvokeTheRational);
 		txtareaInvokeTheRational.setFont(new Font("Sans", Font.BOLD, 12));
@@ -97,9 +96,7 @@ public class TransitionState extends JPanel implements Serializable {
 		txtareaInvokeTheRational.setWrapStyleWord(true);
 		txtareaInvokeTheRational.setLineWrap(true);
 
-		final JTextArea txtareaInvokeRFO = new JTextArea("Invoke RFO to find the nearest stationary point with one negative "
-				+ "hessian eigenvalue (first order transition state). A transition state optimization will only lead to one negative phonon frequency "
-				+ "if the calculation is run without any crystal symmetry.");
+		final JTextArea txtareaInvokeRFO = new JTextArea("invoke RFO to find the nearest stationary point with one negative hessian eigenvalue (first order transition state). A transition state optimization will only lead to one negative phonon frequency if the calculation is run without any crystal symmetry.");
 		txtareaInvokeRFO.setBounds(35, 105, 427, 77);
 		pnlTransitionState.add(txtareaInvokeRFO);
 		txtareaInvokeRFO.setFont(new Font("Sans", Font.BOLD, 12));
@@ -111,7 +108,8 @@ public class TransitionState extends JPanel implements Serializable {
 		pnlTransitionState.add(radInvokeRFO);
 		btnGroupTransitionState.add(radInvokeRFO);
 		pnlTransitionState.add(radNone1);
-		radNone1.setBounds(14, 21, 21, 21);
+		radNone1.setText("none");
+		radNone1.setBounds(14, 21, 93, 21);
 		radInvokeRFO.addActionListener(keyInvokeRFO);
 		btnGroupTransitionState.add(radNone1);
 		radNone1.setSelected(true);
