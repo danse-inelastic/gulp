@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 		private G g = new G();
 
 		private static final long serialVersionUID = 1579392356755048884L;
-		private JTextField txtQnose = new JTextField("0.05");
-		private JTextField txtQnose2 = new JTextField("0.05");
-		private JTextField txtQpress = new JTextField("0.05");
+		private JTextField txtQnose = new JTextField();//"0.05");
+		private JTextField txtQnose2 = new JTextField();//"0.05");
+		private JTextField txtQpress = new JTextField();//"0.05");
 
 		private JLabel lblPress = new JLabel(g.html("q<sub>press</sub>"));
 
