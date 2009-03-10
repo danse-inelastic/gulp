@@ -50,7 +50,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	private KeywordListener keyDoNotPrint = new KeywordListener(chkDoNotPrint, "nodensity_out");
 	private KeywordListener keyDoNotPrintFreqs = new KeywordListener(chkDoNotPrintFreqs, "nofrequency");
 	private KeywordListener keyPrintEigenvectors = new KeywordListener(chkPrintEigenvectors, "eigenvectors");
-	private KeywordListener keyCalculateFrequencies = new KeywordListener(chkCalculateFrequencies, "phonon");
+	private TaskKeywordListener keyCalculateFrequencies = new TaskKeywordListener(chkCalculateFrequencies, "phonon");
 	private KeywordListener keyDoNotOutput = new KeywordListener(chkDoNotOutput, "nokpoints");
 
 	public JTabbedPane paneSpecifyKpoints = new JTabbedPane();

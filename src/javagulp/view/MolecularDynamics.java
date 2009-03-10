@@ -27,7 +27,7 @@ public class MolecularDynamics extends JPanel implements Serializable {
 
 	private JCheckBox chkMD = new JCheckBox("perform a MD simulation");
 
-	private KeywordListener keyMD = new KeywordListener(chkMD, "md");
+	private TaskKeywordListener keyMD = new TaskKeywordListener(chkMD, "md");
 
 	private Temperature pnlTemperature = new Temperature(0);
 	public MDMass pnlMDmass = new MDMass();

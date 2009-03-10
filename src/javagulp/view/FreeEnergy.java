@@ -24,7 +24,7 @@ public class FreeEnergy extends JPanel implements Serializable {
 	private JCheckBox chkRunStaticOptimisation = new JCheckBox("run static optimization before free energy optimization");
 
 	private KeywordListener keyUseTheZero = new KeywordListener(chkUseTheZero, "zsisa");
-	private KeywordListener keyFreeEnergy = new KeywordListener(chkFreeEnergy, "free_energy");
+	private TaskKeywordListener keyFreeEnergy = new TaskKeywordListener(chkFreeEnergy, "free_energy");
 	private KeywordListener keyRunStaticOptimisation = new KeywordListener(chkRunStaticOptimisation, "static_first");
 
 	private JLabel lblDensityCutoff = new JLabel("(multiple of density cutoff)");

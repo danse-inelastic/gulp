@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import javagulp.model.Keywords;
 import javagulp.model.Material;
+import javagulp.model.TaskKeywords;
 import javagulp.view.Structures.Structure;
 
 //import org.postgresql.util.PSQLException
@@ -53,6 +54,8 @@ public class GulpRun extends JPanel implements Serializable {
 //			topScroll, bottomScroll);
 
 	private Keywords keywords = null;
+	
+	private TaskKeywords taskKeywords = null;
 
 	public GulpRun() {
 		super();
@@ -198,6 +201,12 @@ public class GulpRun extends JPanel implements Serializable {
 		if (keywords == null)
 			keywords = new Keywords();
 		return keywords;
+	}
+	
+	public TaskKeywords getTaskKeywords() {
+		if (taskKeywords == null)
+			taskKeywords = new TaskKeywords();
+		return taskKeywords;
 	}
 	
 	//Top

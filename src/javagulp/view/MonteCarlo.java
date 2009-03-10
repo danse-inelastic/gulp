@@ -29,7 +29,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 
 	private JCheckBox chkMonteCarlo = new JCheckBox("perform a monte carlo calculation");
 
-	private KeywordListener keyMonteCarlo = new KeywordListener(chkMonteCarlo,
+	private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
 			"montecarlo");
 
 	private TitledPanel pnlChemicalPotential = new TitledPanel();

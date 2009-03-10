@@ -65,7 +65,7 @@ public class Optimization extends JPanel implements Serializable {
 	private KeywordListener keyoutputDetailsOf = new KeywordListener(chkoutputDetailsOf, "hessian");
 	private KeywordListener keypositive = new KeywordListener(chkpositive,
 			"positive");
-	private KeywordListener keyopti = new KeywordListener(chkopti, "optimise");
+	private TaskKeywordListener keyopti = new TaskKeywordListener(chkopti, "optimise");
 	private KeywordListener keylinmin = new KeywordListener(chklinmin, "linmin");
 	private KeywordListener keyoptimisefitShells = new KeywordListener(chkoptimisefitShells, "shell");
 

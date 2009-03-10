@@ -11,14 +11,14 @@ public class TaskKeywordListener implements ActionListener, Serializable {
 	private static final long serialVersionUID = 8674881359650941422L;
 
 	JCheckBox box;
-	String keyword;
+	String taskKeyword;
 
-	public TaskKeywordListener(JCheckBox box, String keyword) {
+	public TaskKeywordListener(JCheckBox box, String taskKeyword) {
 		this.box = box;
-		this.keyword = keyword;
+		this.taskKeyword = taskKeyword;
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Back.getKeys().putOrRemoveKeyword(box.isSelected(), keyword);
+		Back.getTaskKeys().putOrRemoveTaskKeyword(box.isSelected(), taskKeyword);
 	}
 }

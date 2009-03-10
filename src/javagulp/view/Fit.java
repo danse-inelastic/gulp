@@ -50,8 +50,8 @@ public class Fit extends JPanel implements Serializable {
 
 	private KeywordListener keySimultaneous = new KeywordListener(chkSimultaneous, "simultaneous");
 	private KeywordListener keyRelax = new KeywordListener(chkRelax, "relax");
-	private KeywordListener keyFit = new KeywordListener(chkFit, "fit");
-	private KeywordListener keyDoFittingRun = new KeywordListener(chkDoFittingRun, "fbfgs");
+	private TaskKeywordListener keyFit = new TaskKeywordListener(chkFit, "fit");
+	private TaskKeywordListener keyDoFittingRun = new TaskKeywordListener(chkDoFittingRun, "fbfgs");
 	private KeywordListener keyOptimisefitShellsBut = new KeywordListener(chkOptimisefitShellsBut, "shell");
 
 	SerialKeyAdapter listListener = new SerialKeyAdapter() {

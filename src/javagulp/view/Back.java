@@ -15,6 +15,7 @@ import java.util.Set;
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Keywords;
+import javagulp.model.TaskKeywords;
 import javagulp.view.Structures.Structure;
 import javagulp.view.potential.PPP;
 
@@ -131,6 +132,10 @@ public class Back {
 	 */
 	public static Keywords getKeys() {
 		return getPanel().getKeywords();
+	}
+	
+	public static TaskKeywords getTaskKeys() {
+		return getPanel().getTaskKeywords();
 	}
 	
 	/**

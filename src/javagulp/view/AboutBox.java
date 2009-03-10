@@ -1,5 +1,8 @@
 package javagulp.view;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.Serializable;
 
 import javagulp.view.images.CreateIcon;
@@ -36,17 +39,38 @@ public class AboutBox extends JFrame implements Serializable {
 	protected JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setLayout(null);
+			panel.setLayout(new GridBagLayout());
 
-			panel.add(lblProduct);
+			final GridBagConstraints gridBagConstraints_1 = new GridBagConstraints();
+			gridBagConstraints_1.gridx = 1;
+			gridBagConstraints_1.gridy = 0;
+			gridBagConstraints_1.ipadx = 55;
+			gridBagConstraints_1.ipady = 5;
+			gridBagConstraints_1.insets = new Insets(13, 12, 0, 98);
+			panel.add(lblProduct, gridBagConstraints_1);
 
-			lblProduct.setBounds(72, 13, 120, 20);
-			panel.add(lblComments);
-			lblComments.setBounds(72, 39, 208, 20);
-			panel.add(lblIcon);
-			lblIcon.setBounds(10, 13, 56, 88);
-			panel.add(lblCopyright);
-			lblCopyright.setBounds(73, 71, 150, 20);
+			final GridBagConstraints gridBagConstraints_2 = new GridBagConstraints();
+			gridBagConstraints_2.gridx = 1;
+			gridBagConstraints_2.gridy = 1;
+			gridBagConstraints_2.ipadx = 25;
+			gridBagConstraints_2.ipady = 5;
+			gridBagConstraints_2.insets = new Insets(6, 12, 0, 10);
+			panel.add(lblComments, gridBagConstraints_2);
+			final GridBagConstraints gridBagConstraints = new GridBagConstraints();
+			gridBagConstraints.gridx = 0;
+			gridBagConstraints.gridy = 0;
+			gridBagConstraints.gridheight = 3;
+			gridBagConstraints.ipadx = -6;
+			gridBagConstraints.ipady = 16;
+			gridBagConstraints.insets = new Insets(28, 10, 22, 0);
+			panel.add(lblIcon, gridBagConstraints);
+			final GridBagConstraints gridBagConstraints_3 = new GridBagConstraints();
+			gridBagConstraints_3.gridx = 1;
+			gridBagConstraints_3.gridy = 2;
+			gridBagConstraints_3.ipadx = 34;
+			gridBagConstraints_3.ipady = 5;
+			gridBagConstraints_3.insets = new Insets(12, 13, 10, 67);
+			panel.add(lblCopyright, gridBagConstraints_3);
 		}
 		return panel;
 	}

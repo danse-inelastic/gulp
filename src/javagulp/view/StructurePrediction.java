@@ -47,7 +47,7 @@ public class StructurePrediction extends JPanel implements Serializable {
 	};
 	
 	private void updateKeywords() {
-		Back.getKeys().putOrRemoveKeyword(chkPredictCrystal.isSelected(), "predict");
+		Back.getTaskKeys().putOrRemoveTaskKeyword(chkPredictCrystal.isSelected(), "predict");
 		Back.getKeys().putOrRemoveKeyword(false, "genetic");
 		Back.getKeys().putOrRemoveKeyword(false, "anneal");
 		if (chkPredictCrystal.isSelected()) {
