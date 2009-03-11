@@ -52,7 +52,7 @@ public class TransitionState extends JPanel implements Serializable {
 	public TransitionState() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(483, 287));
+		//this.setPreferredSize(new java.awt.Dimension(483, 287));
 
 		final TitledPanel pnlRFOOptions = new TitledPanel();
 		pnlRFOOptions.setTitle("RFO options");

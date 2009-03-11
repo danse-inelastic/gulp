@@ -21,7 +21,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 
 	private G g = new G();
 
-	private JButton button = new JButton("New JButton");
+	//private JButton button = new JButton("New JButton");
 	private JButton btnCreate = new JButton("create");
 
 	private JTextArea txtareaMoleculeFile = new JTextArea("molecule atom file");
@@ -184,10 +184,11 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlInsertedMolecules.add(txtMoleculeFile);
 
 		btnCreate.setBounds(10, 43, 120, 18);
+		btnCreate.setEnabled(false);
 		pnlInsertedMolecules.add(btnCreate);
 
-		button.setBounds(258, 20, 36, 19);
-		pnlInsertedMolecules.add(button);
+		//button.setBounds(258, 20, 36, 19);
+		//pnlInsertedMolecules.add(button);
 
 		txtareaMoleculeFile.setFont(new Font("Sans", Font.BOLD, 12));
 		txtareaMoleculeFile.setOpaque(false);
