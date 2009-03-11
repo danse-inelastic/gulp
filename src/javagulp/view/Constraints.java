@@ -7,6 +7,9 @@ import javagulp.controller.IncompleteOptionException;
 
 import javax.swing.JPanel;
 import javagulp.model.SerialListener;
+import javagulp.view.constraints.ConstraintsOptions;
+import javagulp.view.constraints.ExternalFieldConstraints;
+import javagulp.view.constraints.Unfreeze;
 
 public class Constraints extends JPanel implements Serializable {
 
@@ -51,7 +54,7 @@ public class Constraints extends JPanel implements Serializable {
 
 		ConstraintsOptions pnlOptions = new ConstraintsOptions();
 		//JPanel pnlOptions = new JPanel();
-		pnlOptions.setBounds(0, 154, 957, 137);
+		pnlOptions.setBounds(0, 154, 957, 188);
 		add(pnlOptions);
 	}
 

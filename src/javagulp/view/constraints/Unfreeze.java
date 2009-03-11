@@ -1,14 +1,16 @@
-package javagulp.view;
+package javagulp.view.constraints;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.TitledPanel;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-	class Unfreeze extends TitledPanel {
+	public class Unfreeze extends TitledPanel {
 
 		private static final long serialVersionUID = -3107856008613176983L;
 
@@ -57,7 +59,7 @@ import javax.swing.JTextField;
 			radXYZ.setSelected(true);
 		}
 
-		String writeUnfreeze() throws IncompleteOptionException {
+		public String writeUnfreeze() throws IncompleteOptionException {
 			// From the documentation:
 			// This option cannot be used with conp or conv for obvious reasons!
 			String lines = "";
