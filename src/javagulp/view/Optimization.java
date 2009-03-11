@@ -25,10 +25,13 @@ public class Optimization extends JPanel implements Serializable {
 			"limited memory bfgs", "Davidon-Fletcher-Powell",
 			"conjugate gradient" };
 	private String[] stoppingCriterion = { "cycles", "gradient norm" };
+	private String[] stoppingCriterionChoices = { "cycle", "gnorm" };
 	private String[] optimizationChoices = { "bfgs (broyden)",
 			"rational function optimization", "bfgs start w/unit Hessian",
 			"bfgs start w/numerical diagonal Hessian", "conjugate gradient" };
-
+	private String[] optimizationChoiceValues = { "bfgs", "rfo", "unit",
+			"nume", "conj" };
+	
 	private JComboBox cboOptimization = new JComboBox(optimizationChoicesDefault);
 	private JComboBox cboSwitch_minimiserStoppingCriterion = new JComboBox(stoppingCriterion);
 	private JComboBox cboSwitchOptimization = new JComboBox(optimizationChoices);
@@ -348,8 +351,8 @@ public class Optimization extends JPanel implements Serializable {
 		if (!s.equals("")) {
 			Double.parseDouble(s);
 			lines = "switch_minimiser "
-					+ cboSwitchOptimization.getSelectedItem()
-					+ cboSwitch_minimiserStoppingCriterion.getSelectedItem()
+					+ optimizationChoiceValues[cboSwitchOptimization.getSelectedIndex()] + " "
+					+ stoppingCriterionChoices[cboSwitch_minimiserStoppingCriterion.getSelectedIndex()] + " "
 					+ s + Back.newLine;
 		}
 		return lines;
