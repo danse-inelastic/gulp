@@ -26,12 +26,11 @@ public class Phonons extends TitledPanel implements Serializable {
 	private static final long serialVersionUID = 820917949787670204L;
 	private final String TXT_BROADEN_PEAKS = "2.0";
 	private JTextField txtBroadenPeaks = new JTextField(TXT_BROADEN_PEAKS);
-	private JLabel lblBroadenPeaks = new JLabel("broaden DOS peaks by factor");
+	private JLabel lblBroadenPeaks = new JLabel("DOS peak-broadening factor");
 	private JTextField txtboxvalue = new JTextField();
-	private JComboBox cboNumBoxes = new JComboBox(new String[] {
-			"number of boxes", "box size (1/cm)" });
+	private String[] cboNumBoxesOptions = new String[]{"number", "size"};
+	private JComboBox cboNumBoxes = new JComboBox(new String[] {"DOS number of boxes", "DOS bin size (units: 1/cm)"});
 
-	private JLabel lblChangeThe = new JLabel("set the DOS");
 
 	private G g = new G();
 
@@ -105,7 +104,7 @@ public class Phonons extends TitledPanel implements Serializable {
 			} catch (NumberFormatException e) {
 				throw new NumberFormatException("Please enter an integer for the number of boxes in Phonons");
 			}
-			lines = "box density " + cboNumBoxes.getSelectedItem() + " "
+			lines = "box density " + cboNumBoxesOptions[cboNumBoxes.getSelectedIndex()] + " "
 			+ txtboxvalue.getText() + Back.newLine;
 		}
 		return lines;
@@ -152,31 +151,29 @@ public class Phonons extends TitledPanel implements Serializable {
 			pnlOptions.setBounds(5, 41, 482, 363);
 			pnlOptions.setTitle("options");
 			chkDoNotPrint.addActionListener(keyDoNotPrint);
-			chkDoNotPrint.setBounds(10, 49, 425, 25);
+			chkDoNotPrint.setBounds(10, 49, 462, 25);
 			pnlOptions.add(chkDoNotPrint);
-			chkDoNotPrintFreqs.setBounds(10, 18, 425, 25);
+			chkDoNotPrintFreqs.setBounds(10, 18, 462, 25);
 			chkDoNotPrintFreqs.addActionListener(keyDoNotPrintFreqs);
 			pnlOptions.add(chkDoNotPrintFreqs);
 			chkPrintEigenvectors.addActionListener(keyPrintEigenvectors);
-			chkPrintEigenvectors.setBounds(10, 80, 359, 25);
+			chkPrintEigenvectors.setBounds(10, 80, 462, 25);
 			pnlOptions.add(chkPrintEigenvectors);
 			chkDoNotOutput.addActionListener(keyDoNotOutput);
-			chkDoNotOutput.setBounds(10, 111, 359, 25);
+			chkDoNotOutput.setBounds(10, 111, 462, 25);
 			pnlOptions.add(chkDoNotOutput);
 			chkNoRealSpace.addActionListener(keyNoRealSpace);
-			chkNoRealSpace.setBounds(10, 142, 469, 25);
+			chkNoRealSpace.setBounds(10, 142, 462, 25);
 			pnlOptions.add(chkNoRealSpace);
 			chkNoReciprocalSpace.addActionListener(keyNoReciprocalSpace);
-			chkNoReciprocalSpace.setBounds(10, 173, 452, 25);
+			chkNoReciprocalSpace.setBounds(10, 173, 462, 25);
 			pnlOptions.add(chkNoReciprocalSpace);
 			
 			chkExcludeZeroPoint.addActionListener(keyExcludeZeroPoint);
 			chkExcludeZeroPoint.setBounds(10, 204, 359, 25);
 			pnlOptions.add(chkExcludeZeroPoint);
-			lblBroadenPeaks.setBounds(10, 235, 202, 25);
+			lblBroadenPeaks.setBounds(79, 232, 291, 25);
 			pnlOptions.add(lblBroadenPeaks);
-			lblChangeThe.setBounds(10, 266, 101, 25);
-			pnlOptions.add(lblChangeThe);
 
 			cboNumBoxes.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
@@ -186,13 +183,13 @@ public class Phonons extends TitledPanel implements Serializable {
 						txtboxvalue.setText("");
 				}
 			});
-			cboNumBoxes.setBounds(117, 268, 164, 21);
+			cboNumBoxes.setBounds(117, 268, 252, 21);
 			pnlOptions.add(cboNumBoxes);
 
 			txtBroadenPeaks.setBackground(Back.grey);
-			txtboxvalue.setBounds(292, 269, 92, 19);
+			txtboxvalue.setBounds(10, 269, 92, 19);
 			pnlOptions.add(txtboxvalue);
-			txtBroadenPeaks.setBounds(218, 238, 63, 20);
+			txtBroadenPeaks.setBounds(10, 235, 63, 20);
 			pnlOptions.add(txtBroadenPeaks);
 			
 		}
