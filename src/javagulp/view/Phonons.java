@@ -25,11 +25,12 @@ public class Phonons extends TitledPanel implements Serializable {
 	private TitledPanel pnlOptions;
 	private static final long serialVersionUID = 820917949787670204L;
 	private final String TXT_BROADEN_PEAKS = "2.0";
+	private final String txt_num_bins = "64";
 	private JTextField txtBroadenPeaks = new JTextField(TXT_BROADEN_PEAKS);
 	private JLabel lblBroadenPeaks = new JLabel("DOS peak-broadening factor");
-	private JTextField txtboxvalue = new JTextField();
+	private JTextField txtBinValue = new JTextField(txt_num_bins);
 	private String[] cboNumBoxesOptions = new String[]{"number", "size"};
-	private JComboBox cboNumBoxes = new JComboBox(new String[] {"DOS number of boxes", "DOS bin size (units: 1/cm)"});
+	private JComboBox cboNumBins = new JComboBox(new String[] {"DOS number of bins", "DOS bin size (units: 1/cm)"});
 
 
 	private G g = new G();
@@ -98,14 +99,26 @@ public class Phonons extends TitledPanel implements Serializable {
 
 	private String writeDosBox() throws IncompleteOptionException {
 		String lines = "";
-		if (!txtboxvalue.getText().equals("")) {
-			try {
-				Integer.parseInt(txtboxvalue.getText());
-			} catch (NumberFormatException e) {
-				throw new NumberFormatException("Please enter an integer for the number of boxes in Phonons");
+		if (cboNumBins.getSelectedIndex()==0){
+			if (!txtBinValue.getText().equals(txt_num_bins)) {
+				try {
+					Integer.parseInt(txtBinValue.getText());
+				} catch (NumberFormatException e) {
+					throw new NumberFormatException("Please enter an integer for the number of bins in Phonons");
+				}
+				lines = "box density " + cboNumBoxesOptions[0] + " "
+				+ txtBinValue.getText() + Back.newLine;
 			}
-			lines = "box density " + cboNumBoxesOptions[cboNumBoxes.getSelectedIndex()] + " "
-			+ txtboxvalue.getText() + Back.newLine;
+		} else {
+			if (!txtBinValue.getText().equals("")) {
+				try {
+					Integer.parseInt(txtBinValue.getText());
+				} catch (NumberFormatException e) {
+					throw new NumberFormatException("Please enter an integer for the bin size in Phonons");
+				}
+				lines = "box density " + cboNumBoxesOptions[1] + " "
+				+ txtBinValue.getText() + Back.newLine;
+			}
 		}
 		return lines;
 	}
@@ -124,8 +137,8 @@ public class Phonons extends TitledPanel implements Serializable {
 			}
 			line = "broaden_dos " + txtBroadenPeaks.getText() + Back.newLine;
 		} //else {
-//			throw new IncompleteOptionException("Please enter something for Phonon broadening.");
-//		}
+		//			throw new IncompleteOptionException("Please enter something for Phonon broadening.");
+		//		}
 		return line;
 	}
 
@@ -168,30 +181,31 @@ public class Phonons extends TitledPanel implements Serializable {
 			chkNoReciprocalSpace.addActionListener(keyNoReciprocalSpace);
 			chkNoReciprocalSpace.setBounds(10, 173, 462, 25);
 			pnlOptions.add(chkNoReciprocalSpace);
-			
+
 			chkExcludeZeroPoint.addActionListener(keyExcludeZeroPoint);
 			chkExcludeZeroPoint.setBounds(10, 204, 359, 25);
 			pnlOptions.add(chkExcludeZeroPoint);
 			lblBroadenPeaks.setBounds(79, 232, 291, 25);
 			pnlOptions.add(lblBroadenPeaks);
 
-			cboNumBoxes.addActionListener(new ActionListener() {
+			cboNumBins.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					if (txtboxvalue.getText().equals("number of boxes"))
-						txtboxvalue.setText("64");
+					if (cboNumBins.getSelectedIndex()==0)
+						txtBinValue.setText(txt_num_bins);
 					else
-						txtboxvalue.setText("");
+						txtBinValue.setText("");
 				}
 			});
-			cboNumBoxes.setBounds(117, 268, 252, 21);
-			pnlOptions.add(cboNumBoxes);
+			cboNumBins.setBounds(117, 268, 252, 21);
+			pnlOptions.add(cboNumBins);
 
 			txtBroadenPeaks.setBackground(Back.grey);
-			txtboxvalue.setBounds(10, 269, 92, 19);
-			pnlOptions.add(txtboxvalue);
+			txtBinValue.setBackground(Back.grey);
+			txtBinValue.setBounds(10, 269, 92, 20);
+			pnlOptions.add(txtBinValue);
 			txtBroadenPeaks.setBounds(10, 235, 63, 20);
 			pnlOptions.add(txtBroadenPeaks);
-			
+
 		}
 		return pnlOptions;
 	}
