@@ -129,7 +129,7 @@ public class GulpRun extends JPanel implements Serializable {
 //			String url = "jdbc:postgresql://localhost:54321/vnf";
 			props.setProperty("user","vnf");
 			props.setProperty("password","A4*gl8D");
-			String url = "jdbc:postgresql://vnf.caltech.edu:5432/vnf";
+			String url = "jdbc:postgresql://vnf-dev.caltech.edu:5432/vnf";
 			Class.forName("org.postgresql.Driver");
 			Connection con = DriverManager.getConnection(url,props);
 			Statement stmt = con.createStatement();
