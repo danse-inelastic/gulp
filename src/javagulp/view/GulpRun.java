@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javagulp.controller.CgiCommunicate;
 import javagulp.model.Keywords;
 import javagulp.model.Material;
 import javagulp.model.TaskKeywords;
@@ -22,6 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import org.json.JSONObject;
 
 public class GulpRun extends JPanel implements Serializable {
 
@@ -105,14 +108,85 @@ public class GulpRun extends JPanel implements Serializable {
 			keyVals.put(keyVal[0],keyVal[1]);
 		}
 		//retrieve matter and load it
-		Material mat = getMaterial(keyVals.get("matterId"));
+		Material mat = getMaterialFromHttp(keyVals.get("matterId"));
 		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
 		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
 		}
 		//keep the rest of the parameters and pass them to the job submission post
 	}
 	
-	Material getMaterial(String id){
+	Material getMaterialFromHttp(String id){
+
+		Map<String,String> cgiMap = Back.getPanel().keyVals;
+		String cgihome = cgiMap.get("cgihome");
+		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+		
+		JSONObject getMatter(String table){
+			HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
+			keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
+			keyValsForMatter.put("sentry.ticket", cgiMap.get("sentry.ticket"));
+			keyValsForMatter.put("content", "raw");
+			keyValsForMatter.put("actor", "directdb");
+			keyValsForMatter.put("routine", "get");
+			keyValsForMatter.put("table", "get");
+			
+			cgiCom.setCgiParams(keyValsForMatter);
+			JSONObject response = cgiCom.post();
+			return response
+		}
+
+		
+
+		response.trim().equals("success");
+
+		
+		
+		
+		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
+		"SELECT * FROM singlecrystals WHERE id = '"+id+"' UNION "+
+		"SELECT * FROM disordered WHERE id = '"+id+"'";
+		//Array latticeArray = null;
+		double[] latticeVec = null;
+		//Array fractionalCoordinatesArray = null;
+		double[] fractionalCoordinatesVec = null;
+		String[] atomSymbols = null;
+		// get the material parameters from the db (eventually use ORM tool)
+		try {
+			Properties props = new Properties();
+//			props.setProperty("user","linjiao");
+//			props.setProperty("password","4OdACm#");
+//			String url = "jdbc:postgresql://localhost:54321/vnf";
+			props.setProperty("user","vnf");
+			props.setProperty("password","A4*gl8D");
+			String url = "jdbc:postgresql://vnf-dev.caltech.edu:5432/vnf";
+			Class.forName("org.postgresql.Driver");
+			Connection con = DriverManager.getConnection(url,props);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			rs.next();
+			///latticeArray = rs.getArray("cartesian_lattice");
+			latticeVec = (double[])rs.getArray("cartesian_lattice").getArray();
+			fractionalCoordinatesVec = (double[])rs.getArray("fractional_coordinates").getArray();
+			atomSymbols = (String[])rs.getArray("atom_symbols").getArray();
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (Exception ex) {
+			//System.out.println(ex.getMessage());
+			//System.out.println(ex.toString());
+			ex.printStackTrace();
+		}
+//		} catch (Exception e){
+//			
+//		}
+		Material mat = new Material();
+		mat.latticeVec = latticeVec;
+		mat.fractionalCoordinatesVec = fractionalCoordinatesVec;
+		mat.atomSymbols = atomSymbols;
+		return mat;
+	}
+	
+	Material getMaterialFromDb(String id){
 		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
 		"SELECT * FROM singlecrystals WHERE id = '"+id+"' UNION "+
 		"SELECT * FROM disordered WHERE id = '"+id+"'";

@@ -13,6 +13,8 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import org.json.JSONObject;
+
 
 
 public class CgiCommunicate {
@@ -52,8 +54,8 @@ public class CgiCommunicate {
 			}
         }
 	}
-
-	public String post(){
+	
+	public String postForString(){
 		String response = "";
 		try {
 			OutputStreamWriter wr;
@@ -75,6 +77,33 @@ public class CgiCommunicate {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return response;
+	}
+
+	public JSONObject postForJSON(){
+		String response = "";
+		try {
+			OutputStreamWriter wr;
+
+			wr = new OutputStreamWriter(conn.getOutputStream());
+
+			wr.write(data);
+			wr.flush();
+			wr.close();
+
+			// Get the response
+
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = rd.readLine()) != null) {
+				response+=line+"\n";
+			}
+			rd.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Object obj = JSONObject(response);
+
 		return response;
 	}
 
