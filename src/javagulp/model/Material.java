@@ -1,5 +1,7 @@
 package javagulp.model;
 
+import org.json.JSONArray;
+
 public class Material {
 	
 	public double[] latticeVec;
@@ -11,15 +13,15 @@ public class Material {
 //	public Material(){
 //	}
 
-	public static void main(String[] args) {
-		Material mat = new Material();
-
-		for (double[] vec : mat.lattice) {
-			System.out.print(vec[0]+" ");
-			System.out.print(vec[1]+" ");
-			System.out.print(vec[2]+" ");
-			System.out.println();
-		}
-	}
+//	public static void main(String[] args) {
+//		Material mat = new Material();
+//
+//		for (double[] vec : mat.lattice) {
+//			System.out.print(vec[0]+" ");
+//			System.out.print(vec[1]+" ");
+//			System.out.print(vec[2]+" ");
+//			System.out.println();
+//		}
+//	}
 	
 }

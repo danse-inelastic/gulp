@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -24,6 +25,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GulpRun extends JPanel implements Serializable {
@@ -115,76 +118,36 @@ public class GulpRun extends JPanel implements Serializable {
 		//keep the rest of the parameters and pass them to the job submission post
 	}
 	
-	Material getMaterialFromHttp(String id){
+	Material getMaterialFromHttp(String matterId){
 
 		Map<String,String> cgiMap = Back.getPanel().keyVals;
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 		
-		JSONObject getMatter(String table){
-			HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
-			keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
-			keyValsForMatter.put("sentry.ticket", cgiMap.get("sentry.ticket"));
-			keyValsForMatter.put("content", "raw");
-			keyValsForMatter.put("actor", "directdb");
-			keyValsForMatter.put("routine", "get");
-			keyValsForMatter.put("table", "get");
-			
-			cgiCom.setCgiParams(keyValsForMatter);
-			JSONObject response = cgiCom.post();
-			return response
-		}
+		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
+		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
+		//keyValsForMatter.put("sentry.ticket", cgiMap.get("sentry.ticket"));
+		keyValsForMatter.put("sentry.passwd", cgiMap.get("sentry.passwd"));
+//		keyValsForMatter.put("content", "raw");
+		keyValsForMatter.put("actor", "directdb");
+		keyValsForMatter.put("routine", "get");
+		keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
+		keyValsForMatter.put("directdb.id", matterId);
+		cgiCom.setCgiParams(keyValsForMatter);
+		JSONObject matterAsJSON = cgiCom.postAndGetJSON();	
 
-		
-
-		response.trim().equals("success");
-
-		
-		
-		
-		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
-		"SELECT * FROM singlecrystals WHERE id = '"+id+"' UNION "+
-		"SELECT * FROM disordered WHERE id = '"+id+"'";
-		//Array latticeArray = null;
-		double[] latticeVec = null;
-		//Array fractionalCoordinatesArray = null;
-		double[] fractionalCoordinatesVec = null;
-		String[] atomSymbols = null;
-		// get the material parameters from the db (eventually use ORM tool)
-		try {
-			Properties props = new Properties();
-//			props.setProperty("user","linjiao");
-//			props.setProperty("password","4OdACm#");
-//			String url = "jdbc:postgresql://localhost:54321/vnf";
-			props.setProperty("user","vnf");
-			props.setProperty("password","A4*gl8D");
-			String url = "jdbc:postgresql://vnf-dev.caltech.edu:5432/vnf";
-			Class.forName("org.postgresql.Driver");
-			Connection con = DriverManager.getConnection(url,props);
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			rs.next();
-			///latticeArray = rs.getArray("cartesian_lattice");
-			latticeVec = (double[])rs.getArray("cartesian_lattice").getArray();
-			fractionalCoordinatesVec = (double[])rs.getArray("fractional_coordinates").getArray();
-			atomSymbols = (String[])rs.getArray("atom_symbols").getArray();
-			rs.close();
-			stmt.close();
-			con.close();
-		} catch (Exception ex) {
-			//System.out.println(ex.getMessage());
-			//System.out.println(ex.toString());
-			ex.printStackTrace();
-		}
-//		} catch (Exception e){
-//			
-//		}
 		Material mat = new Material();
-		mat.latticeVec = latticeVec;
-		mat.fractionalCoordinatesVec = fractionalCoordinatesVec;
-		mat.atomSymbols = atomSymbols;
+		try {
+			mat.latticeVec = (double[]) matterAsJSON.get("cartesian_lattice");
+			mat.fractionalCoordinatesVec = (double[]) matterAsJSON.get("fractional_coordinates");
+			mat.atomSymbols = (String[]) matterAsJSON.get("atom_symbols");//.getArrayList().toArray();
+		} catch (JSONException e) {
+			
+			e.printStackTrace();
+		}
 		return mat;
 	}
+
 	
 	Material getMaterialFromDb(String id){
 		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+

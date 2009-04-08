@@ -367,6 +367,11 @@ public class JSONArray {
     public String getString(int index) throws JSONException {
         return get(index).toString();
     }
+    
+    
+    public ArrayList getArrayList() {
+        return (ArrayList)myArrayList.clone();
+    }
 
 
     /**
