@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -126,8 +127,13 @@ public class GulpRun extends JPanel implements Serializable {
 		
 		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
 		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
-		//keyValsForMatter.put("sentry.ticket", cgiMap.get("sentry.ticket"));
-		keyValsForMatter.put("sentry.passwd", cgiMap.get("sentry.passwd"));
+		try{
+			String val = cgiMap.get("sentry.ticket");
+			keyValsForMatter.put("sentry.ticket", val);
+		} catch(Exception e){
+			String val = cgiMap.get("sentry.passwd");
+			keyValsForMatter.put("sentry.passwd", val);
+		}
 //		keyValsForMatter.put("content", "raw");
 		keyValsForMatter.put("actor", "directdb");
 		keyValsForMatter.put("routine", "get");
@@ -135,12 +141,11 @@ public class GulpRun extends JPanel implements Serializable {
 		keyValsForMatter.put("directdb.id", matterId);
 		cgiCom.setCgiParams(keyValsForMatter);
 		JSONObject matterAsJSON = cgiCom.postAndGetJSON();	
-
 		Material mat = new Material();
 		try {
-			mat.latticeVec = (double[]) matterAsJSON.get("cartesian_lattice");
-			mat.fractionalCoordinatesVec = (double[]) matterAsJSON.get("fractional_coordinates");
-			mat.atomSymbols = (String[]) matterAsJSON.get("atom_symbols");//.getArrayList().toArray();
+			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
+			mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
 		} catch (JSONException e) {
 			
 			e.printStackTrace();
@@ -153,12 +158,8 @@ public class GulpRun extends JPanel implements Serializable {
 		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
 		"SELECT * FROM singlecrystals WHERE id = '"+id+"' UNION "+
 		"SELECT * FROM disordered WHERE id = '"+id+"'";
-		//Array latticeArray = null;
-		double[] latticeVec = null;
-		//Array fractionalCoordinatesArray = null;
-		double[] fractionalCoordinatesVec = null;
-		String[] atomSymbols = null;
 		// get the material parameters from the db (eventually use ORM tool)
+		Material mat = new Material();
 		try {
 			Properties props = new Properties();
 //			props.setProperty("user","linjiao");
@@ -173,24 +174,15 @@ public class GulpRun extends JPanel implements Serializable {
 			ResultSet rs = stmt.executeQuery(query);
 			rs.next();
 			///latticeArray = rs.getArray("cartesian_lattice");
-			latticeVec = (double[])rs.getArray("cartesian_lattice").getArray();
-			fractionalCoordinatesVec = (double[])rs.getArray("fractional_coordinates").getArray();
-			atomSymbols = (String[])rs.getArray("atom_symbols").getArray();
+			mat.latticeVec = (Object[])rs.getArray("cartesian_lattice").getArray();
+			mat.fractionalCoordinatesVec = (Object[])rs.getArray("fractional_coordinates").getArray();
+			mat.atomSymbols = (Object[])rs.getArray("atom_symbols").getArray();
 			rs.close();
 			stmt.close();
 			con.close();
 		} catch (Exception ex) {
-			//System.out.println(ex.getMessage());
-			//System.out.println(ex.toString());
 			ex.printStackTrace();
 		}
-//		} catch (Exception e){
-//			
-//		}
-		Material mat = new Material();
-		mat.latticeVec = latticeVec;
-		mat.fractionalCoordinatesVec = fractionalCoordinatesVec;
-		mat.atomSymbols = atomSymbols;
 		return mat;
 	}
 

@@ -369,8 +369,8 @@ public class JSONArray {
     }
     
     
-    public ArrayList getArrayList() {
-        return (ArrayList)myArrayList.clone();
+    public Object[] getArrayList() {
+        return myArrayList.toArray();
     }
 
 

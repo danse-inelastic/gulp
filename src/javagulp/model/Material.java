@@ -1,14 +1,16 @@
 package javagulp.model;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 
 public class Material {
 	
-	public double[] latticeVec;
-	public double[] fractionalCoordinatesVec;
+	public Object[] latticeVec;
+	public Object[] fractionalCoordinatesVec;
 	public double[][] lattice = new double[][]{{1.0, 0.0, 0.0},{0.0, 1.0, 0.0},{0.0, 0.0, 1.0}};
 	public double[][] fractionalCoordinates;
-	public String[] atomSymbols;
+	public Object[] atomSymbols;
 	
 //	public Material(){
 //	}
