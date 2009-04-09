@@ -23,6 +23,7 @@ import org.json.JSONObject;
 public class CgiCommunicate {
 
 	String data = "";
+	String appName = "GulpUi";
 	private URLConnection conn;
 	public CgiCommunicate(String cgihome){
 		try {
@@ -31,12 +32,12 @@ public class CgiCommunicate {
 			conn.setDoOutput(true);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "GulpUi is unable to connect to the vnf database.");
+			JOptionPane.showMessageDialog(null, appName+" is unable to connect to the vnf database.");
 		} catch (IOException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "GulpUi is unable to connect to the vnf database.");
+			JOptionPane.showMessageDialog(null, appName+" is unable to connect to the vnf database.");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "GulpUi is unable to connect to the vnf database.");
+			JOptionPane.showMessageDialog(null, appName+" is unable to connect to the vnf database.");
 		}
 	}
 
@@ -111,7 +112,7 @@ public class CgiCommunicate {
 		try {
 			obj = new JSONObject(response.toString());
 		} catch (JSONException e) {
-			JOptionPane.showMessageDialog(null, "GulpUi is unable to read the material selected.");
+			JOptionPane.showMessageDialog(null, appName+" is unable to read the material selected.");
 			e.printStackTrace();
 		}
 		return obj;

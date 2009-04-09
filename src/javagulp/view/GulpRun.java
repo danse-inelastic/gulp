@@ -50,9 +50,7 @@ public class GulpRun extends JPanel implements Serializable {
 	public JScrollPane topScroll = new JScrollPane(topPane);
 	private TopListener keyTop = new TopListener();
 
-	public Map<String,String> keyVals;
-
-
+	public Map<String,String> cgiMap;
 
 //	public JTabbedPane bottomPane = new JTabbedPane();
 //	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
@@ -102,26 +100,26 @@ public class GulpRun extends JPanel implements Serializable {
 	}
 	
 	public void processArguments(String[] simulationParams) {
-		keyVals = new HashMap<String,String>();
+		cgiMap = new HashMap<String,String>();
 		if (simulationParams.length==0){
 			return;
 			//simulationParams=new String[]{"username=demo","ticket=5X","simulationId=1","matterId=9TAL9D"};
 		} else{
 		for(String param: simulationParams){
 			String[] keyVal = param.split("=");
-			keyVals.put(keyVal[0],keyVal[1]);
+			cgiMap.put(keyVal[0],keyVal[1]);
 		}
 		//retrieve matter and load it
-		Material mat = getMaterialFromHttp(keyVals.get("matterId"));
+		//Material mat = getMaterialFromHttp(keyVals.get("matterId"));
+		Material mat = getMaterialFromHttp();//keyVals);
 		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
 		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
 		}
 		//keep the rest of the parameters and pass them to the job submission post
 	}
 	
-	Material getMaterialFromHttp(String matterId){
-
-		Map<String,String> cgiMap = Back.getPanel().keyVals;
+	Material getMaterialFromHttp(){//Map<String,String> cgiMap){//String matterId){
+		//Map<String,String> cgiMap = Back.getPanel().keyVals;
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 		
@@ -138,7 +136,7 @@ public class GulpRun extends JPanel implements Serializable {
 		keyValsForMatter.put("actor", "directdb");
 		keyValsForMatter.put("routine", "get");
 		keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
-		keyValsForMatter.put("directdb.id", matterId);
+		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
 		cgiCom.setCgiParams(keyValsForMatter);
 		JSONObject matterAsJSON = cgiCom.postAndGetJSON();	
 		Material mat = new Material();
