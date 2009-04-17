@@ -132,7 +132,7 @@ public class Execution extends JPanel implements Serializable {
 					String gulpInputFile = Back.getPanel().getOutput().inputFileMap.get(currentInputFile);
 					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
 					String librarySelected = Back.getPanel().getPotential().librarySelected;//post the files
-					Map<String,String> cgiMap = Back.getPanel().keyVals;
+					Map<String,String> cgiMap = Back.getPanel().cgiMap;
 
 					String cgihome = cgiMap.get("cgihome");
 					CgiCommunicate cgiCom = new CgiCommunicate(cgihome);

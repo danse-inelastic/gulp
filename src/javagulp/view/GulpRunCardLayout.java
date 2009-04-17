@@ -208,8 +208,8 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 	public TransitionState getTransitionState() {
 		return (TransitionState) getTopPanel(8);
 	}
-	public StructurePrediction getStructurePrediction() {
-		return (StructurePrediction) getTopPanel(9);
+	public Temp getStructurePrediction() {
+		return (Temp) getTopPanel(9);
 	}
 
 	public GeneticAlgorithm getGeneticAlgorithm() {

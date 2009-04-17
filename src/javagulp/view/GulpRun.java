@@ -34,7 +34,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
-	private String[] tabNames = { "MolecularDynamics", "MonteCarlo",
+	private String[] tabNames = { "RunType", "MolecularDynamics", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
 			"Phonons", "FreeEnergy", "TransitionState", "StructurePrediction", 
 			"Surface", "ExternalForce","Structures", "Potential",
@@ -75,6 +75,7 @@ public class GulpRun extends JPanel implements Serializable {
 		add(topPane, BorderLayout.CENTER);
 
 		topPane.addChangeListener(keyTop);
+		topPane.add(null, "run type");
 		topPane.add(null, "molecular dynamics");
 		topPane.add(null, "monte carlo");
 		topPane.add(null, "energetics and material properties");
@@ -282,7 +283,7 @@ public class GulpRun extends JPanel implements Serializable {
 	}
 	
 	public StructurePrediction getStructurePrediction() {
-		return (StructurePrediction) getTopPanel(9);
+		return (StructurePrediction ) getTopPanel(9);
 	}
 
 //	public GeneticAlgorithm getGeneticAlgorithm() {
