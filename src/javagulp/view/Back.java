@@ -23,6 +23,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -119,6 +120,10 @@ public class Back {
 	 */
 	public static GulpRun getPanel() {
 		return (GulpRun) tabs.getComponent(tabs.getSelectedIndex());
+	}
+	
+	public static JPanel getRunType(String type) {
+		return getPanel().getRunType().runTypes[index];
 	}
 	
 	public static Structure getStructure() {

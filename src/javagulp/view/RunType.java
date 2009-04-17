@@ -2,6 +2,8 @@ package javagulp.view;
 
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
@@ -21,24 +23,52 @@ public class RunType extends JPanel implements Serializable {
 
 	private JLabel lblRunType = new JLabel("set run type:");
 
-	
-//	private SerialListener keyPredictCrystal = new SerialListener() {
-//		private static final long serialVersionUID = 6109026665099623842L;
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			updateKeywords();
-//		}
-//	};
-	private String[] runTypeLabels = {
-			"molecular dynamics", "monte carlo", "energetics and material properties",
-			"optimization", "fit", "phonons", "free energy", "transition state", 
+	private String[] runTypeLabels = {"molecular dynamics", "monte carlo", 
+			"energetics and material properties", "optimization", "fit", "phonons", 
+			"free energy", "transition state", 
 			"structure prediction", "surface"};
 	
-	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
-			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy", 
-			"TransitionState", "StructurePrediction", "Surface"};
+//	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
+//			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy", 
+//			"TransitionState", "StructurePrediction", "Surface"};
+
+	public Map<String, String> labelsAndClasses =
+		new HashMap<String, String>()   
+		{  
+		//Anonymous Inner class  
+		{  
+			put("molecular dynamics", "MolecularDynamics");  
+			put("monte carlo", "MonteCarlo");  
+			put("energetics and material properties", "EnergeticsMatProp");  
+			put("optimization", "Optimization");  
+			put("fit", "Fit"); 
+			put("phonons", "Phonons"); 
+			put("free energy", "FreeEnergy"); 
+			put("transition state", "TransitionState"); 
+			put("structure prediction", "StructurePrediction"); 
+			put("surface", "Surface"); 
+		}  
+		};
 	
-	public JPanel[] runTypes = new JPanel[runTypeClassNames.length];
+	public Map<String, JPanel> runTypes =   
+		new HashMap<String, JPanel>()   
+		{  
+		//Anonymous Inner class  
+		{  
+			put("molecular dynamics", null);  
+			put("monte carlo", null);  
+			put("energetics and material properties", null);  
+			put("optimization", null);  
+			put("fit", null); 
+			put("phonons", null); 
+			put("free energy", null); 
+			put("transition state", null); 
+			put("structure prediction", null); 
+			put("surface", null); 
+		}  
+		};
+
+	//public JPanel[] runTypes = new JPanel[labelsAndClasses.size()];
 	
 	private JComboBox cboRunType = new JComboBox(runTypeLabels);
 //	private GeneticAlgorithm pnlGeneticAlgorithm = new GeneticAlgorithm();
@@ -49,24 +79,28 @@ public class RunType extends JPanel implements Serializable {
 		private static final long serialVersionUID = -2241183516916061456L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int index = cboRunType.getSelectedIndex();
-			if (runTypes[index] == null) {
-				String pkg = "javagulp.view.";
-				try {
-					Class c = Class.forName(pkg + runTypeClassNames[index]);
-					runTypes[index] = (JPanel) c.newInstance();
-				} catch (ClassNotFoundException ex) {
-					ex.printStackTrace();
-				} catch (InstantiationException ex) {
-					ex.printStackTrace();
-				} catch (IllegalAccessException ex) {
-					ex.printStackTrace();
-				}
-			}
-			scrollPane.add(runTypes[index]);
-			scrollPane.setViewportView(runTypes[index]);
+			String type = (String)cboRunType.getSelectedItem();
+			scrollPane.add(getRunType(type));
+			scrollPane.setViewportView(getRunType(type));
 		}
 	};
+	
+	private JPanel getRunType(String type){
+		if (runTypes.get(type) == null) {
+			String pkg = "javagulp.view.";
+			try {
+				Class c = Class.forName(pkg + labelsAndClasses.get(type).getClass().getName());
+				runTypes.put(type, (JPanel) c.newInstance());
+			} catch (ClassNotFoundException ex) {
+				ex.printStackTrace();
+			} catch (InstantiationException ex) {
+				ex.printStackTrace();
+			} catch (IllegalAccessException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return runTypes.get(type);
+	}
 
 	public RunType() {
 		super();
@@ -74,19 +108,75 @@ public class RunType extends JPanel implements Serializable {
 
 //		chkPredictCrystal.addActionListener(keyPredictCrystal);
 //		chkPredictCrystal.setToolTipText("Performs structure prediction calculations");
-		lblRunType.setBounds(10, 11, 255, 30);
+		lblRunType.setBounds(10, 11, 130, 20);
 		add(lblRunType);
 
-		scrollPane.setBounds(10, 47, 987, 350);
+		scrollPane.setBounds(0, 39, 1282, 592);
 		add(scrollPane);
-		runTypes[0] = new MolecularDynamics();
-		scrollPane.add(runTypes[0]);
-		scrollPane.setViewportView(runTypes[0]);
+		runTypes.put("molecular dynamics", new MolecularDynamics());
+		scrollPane.add(runTypes.get("molecular dynamics"));
+		scrollPane.setViewportView(runTypes.get("molecular dynamics"));
 
 		cboRunType.addActionListener(keyRunType);
-		cboRunType.setBounds(271, 14, 169, 24);
+		cboRunType.setBounds(146, 9, 169, 24);
 		add(cboRunType);
 	}
+	
+//	public MolecularDynamics getMd() {
+//		return (MolecularDynamics) getRunType(0);
+//	}
+//
+////	public MDRestartInit getMdRestartInit() {
+////		return (MDRestartInit) getTopPanel(1);
+////	}
+//
+//	public MonteCarlo getMonteCarlo() {
+//		return (MonteCarlo) getRunType(1);
+//	}
+//
+//	private EnergeticsMatProp getEnergeticsMatProp() {
+//		return (EnergeticsMatProp) getRunType(2);
+//	}
+//
+//	public Optimization getOptimization() {
+//		return (Optimization) getRunType(3);
+//	}
+//	
+//	public Fit getFit() {
+//		return (Fit) getRunType(4);
+//	}
+//
+////	public XYZFit getXyzfit() {
+////		return (XYZFit) getTopPanel(7);
+////	}
+//
+//	public Phonons getPhonon() {
+//		return (Phonons) getRunType(5);
+//	}
+//	
+//	public FreeEnergy getFreeEnergy() {
+//		return (FreeEnergy) getRunType(6);
+//	}
+//
+//	public TransitionState getTransitionState() {
+//		return (TransitionState) getRunType(7);
+//	}
+//	
+//	public StructurePrediction getStructurePrediction() {
+//		return (StructurePrediction ) getRunType(8);
+//	}
+//
+////	public GeneticAlgorithm getGeneticAlgorithm() {
+////		return (GeneticAlgorithm) getTopPanel(10);
+////	}
+//
+////	public Defect getDefect() {
+////		return (Defect) getTopPanel(13);
+////	}
+//
+//	public Surface getSurface() {
+//		return (Surface) getRunType(9);
+//	}
 	
 //	public String writeStructurePrediction() throws IncompleteOptionException, InvalidOptionException {
 //		String lines = "";

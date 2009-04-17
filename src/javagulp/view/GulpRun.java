@@ -34,12 +34,9 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
-	private String[] tabNames = { "RunType", "MolecularDynamics", "MonteCarlo",
-			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
-			"Phonons", "FreeEnergy", "TransitionState", "StructurePrediction", 
-			"Surface", "ExternalForce","Structures", "Potential",
+	private String[] tabNames = { "RunType", "Constraints","Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
-			"EwaldOptions", "Output", "Execution" };
+			"EwaldOptions", "ExternalForce", "Output", "Execution"  };
 	
 	//private String[] bottomNames = {};
 
@@ -76,18 +73,17 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.addChangeListener(keyTop);
 		topPane.add(null, "run type");
-		topPane.add(null, "molecular dynamics");
-		topPane.add(null, "monte carlo");
-		topPane.add(null, "energetics and material properties");
-		topPane.add(null, "optimization");
+//		topPane.add(null, "molecular dynamics");
+//		topPane.add(null, "monte carlo");
+//		topPane.add(null, "energetics and material properties");
+//		topPane.add(null, "optimization");
 		topPane.add(null, "constraints");
-		topPane.add(null, "fit");
-		topPane.add(null, "phonons");
-		topPane.add(null, "free energy");
-		topPane.add(null, "transition state");
-		topPane.add(null, "structure prediction");
-		topPane.add(null, "surface");
-		topPane.add(null, "external force");
+//		topPane.add(null, "fit");
+//		topPane.add(null, "phonons");
+//		topPane.add(null, "free energy");
+//		topPane.add(null, "transition state");
+//		topPane.add(null, "structure prediction");
+//		topPane.add(null, "surface");
 
 		topPane.add(null, "structures");
 		topPane.add(null, "potentials");
@@ -95,9 +91,12 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "charges, elements and bonding");
 		topPane.add(null, "electrostatics");
 		topPane.add(null, "ewald options");
+		topPane.add(null, "external force");
 
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
+		
+
 	}
 	
 	public void processArguments(String[] simulationParams) {
@@ -151,7 +150,6 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 		return mat;
 	}
-
 	
 	Material getMaterialFromDb(String id){
 		String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
@@ -185,7 +183,6 @@ public class GulpRun extends JPanel implements Serializable {
 		return mat;
 	}
 
-
 	private class TopListener implements ChangeListener, Serializable {
 		private static final long serialVersionUID = -7619847591444570775L;
 		
@@ -195,7 +192,6 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 	};
 
-	
 	private JPanel getTopPanel(int index) {
 		if (top[index] == null) {
 			String pkg = "javagulp.view.";
@@ -239,98 +235,49 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	//Top
 
-	public MolecularDynamics getMd() {
-		return (MolecularDynamics) getTopPanel(0);
-	}
-
-//	public MDRestartInit getMdRestartInit() {
-//		return (MDRestartInit) getTopPanel(1);
-//	}
-
-	public MonteCarlo getMonteCarlo() {
-		return (MonteCarlo) getTopPanel(1);
-	}
-
-	private EnergeticsMatProp getEnergeticsMatProp() {
-		return (EnergeticsMatProp) getTopPanel(2);
-	}
-
-	public Optimization getOptimization() {
-		return (Optimization) getTopPanel(3);
+	
+	public RunType getRunType() {
+		return (RunType) getTopPanel(0);
 	}
 	
 	public Constraints getConstraints() {
-		return (Constraints) getTopPanel(4);
-	}
-	public Fit getFit() {
-		return (Fit) getTopPanel(5);
-	}
-
-//	public XYZFit getXyzfit() {
-//		return (XYZFit) getTopPanel(7);
-//	}
-
-	public Phonons getPhonon() {
-		return (Phonons) getTopPanel(6);
-	}
-	
-	public FreeEnergy getFreeEnergy() {
-		return (FreeEnergy) getTopPanel(7);
-	}
-
-	public TransitionState getTransitionState() {
-		return (TransitionState) getTopPanel(8);
-	}
-	
-	public StructurePrediction getStructurePrediction() {
-		return (StructurePrediction ) getTopPanel(9);
-	}
-
-//	public GeneticAlgorithm getGeneticAlgorithm() {
-//		return (GeneticAlgorithm) getTopPanel(10);
-//	}
-
-//	public Defect getDefect() {
-//		return (Defect) getTopPanel(13);
-//	}
-
-	public Surface getSurface() {
-		return (Surface) getTopPanel(10);
-	}
-
-	public ExternalForce getExternalForce() {
-		return (ExternalForce) getTopPanel(11);
+		return (Constraints) getTopPanel(1);
 	}
 	
 	public Structures getStructures() {
-		return (Structures) getTopPanel(12);
+		return (Structures) getTopPanel(2);
 	}
 
 	public Potential getPotential() {
-		return (Potential) getTopPanel(13);
+		return (Potential) getTopPanel(3);
 	}
 
 	public PotentialOptions getPotentialOptions() {
-		return (PotentialOptions) getTopPanel(14);
+		return (PotentialOptions) getTopPanel(4);
 	}
 
 	public ChargesElementsBonding getChargesElementsBonding() {
-		return (ChargesElementsBonding) getTopPanel(15);
+		return (ChargesElementsBonding) getTopPanel(5);
 	}
 
 	public Electrostatics getElectrostatics() {
-		return (Electrostatics) getTopPanel(16);
+		return (Electrostatics) getTopPanel(6);
 	}
 
 	public EwaldOptions getEwaldOptions() {
-		return (EwaldOptions) getTopPanel(17);
+		return (EwaldOptions) getTopPanel(7);
+	}
+	
+	public ExternalForce getExternalForce() {
+		return (ExternalForce) getTopPanel(8);
 	}
 
 	public Output getOutput() {
-		return (Output) getTopPanel(18);
+		return (Output) getTopPanel(9);
 	}
 
 	public Execution getExecution() {
-		return (Execution) getTopPanel(19);
+		return (Execution) getTopPanel(10);
 	}
+
 }
