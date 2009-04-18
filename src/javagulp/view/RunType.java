@@ -32,6 +32,8 @@ public class RunType extends JPanel implements Serializable {
 //			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy", 
 //			"TransitionState", "StructurePrediction", "Surface"};
 
+	//instead of two maps should actually have made a bunch of small "helper" classes...
+	
 	private Map<String, String> labelsAndClasses =
 		new HashMap<String, String>()   
 		{  
@@ -50,7 +52,7 @@ public class RunType extends JPanel implements Serializable {
 		}  
 		};
 	
-	public Map<String, JPanel> runTypes =   
+	private Map<String, JPanel> runTypes =   
 		new HashMap<String, JPanel>()   
 		{  
 		//Anonymous Inner class  
@@ -85,7 +87,7 @@ public class RunType extends JPanel implements Serializable {
 		}
 	};
 	
-	private JPanel getRunType(String type){
+	public JPanel getRunType(String type){
 		if (runTypes.get(type) == null) {
 			String pkg = "javagulp.view.";
 			try {

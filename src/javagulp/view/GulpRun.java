@@ -236,8 +236,8 @@ public class GulpRun extends JPanel implements Serializable {
 	//Top
 
 	
-	public RunType getRunType() {
-		return (RunType) getTopPanel(0);
+	public JPanel getRunType(String type) {
+		return ((RunType) getTopPanel(0)).getRunType(type);
 	}
 	
 	public Constraints getConstraints() {
