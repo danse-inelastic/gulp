@@ -32,7 +32,7 @@ public class RunType extends JPanel implements Serializable {
 //			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy", 
 //			"TransitionState", "StructurePrediction", "Surface"};
 
-	public Map<String, String> labelsAndClasses =
+	private Map<String, String> labelsAndClasses =
 		new HashMap<String, String>()   
 		{  
 		//Anonymous Inner class  
@@ -89,7 +89,7 @@ public class RunType extends JPanel implements Serializable {
 		if (runTypes.get(type) == null) {
 			String pkg = "javagulp.view.";
 			try {
-				Class c = Class.forName(pkg + labelsAndClasses.get(type).getClass().getName());
+				Class c = Class.forName(pkg + labelsAndClasses.get(type));
 				runTypes.put(type, (JPanel) c.newInstance());
 			} catch (ClassNotFoundException ex) {
 				ex.printStackTrace();

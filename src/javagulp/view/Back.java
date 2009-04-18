@@ -123,7 +123,7 @@ public class Back {
 	}
 	
 	public static JPanel getRunType(String type) {
-		return getPanel().getRunType().runTypes[index];
+		return getPanel().getRunType().runTypes.get(type);
 	}
 	
 	public static Structure getStructure() {

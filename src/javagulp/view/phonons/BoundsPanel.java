@@ -25,7 +25,8 @@ import javax.swing.JTextField;
 			@Override
 			public void keyReleased(KeyEvent e) {
 				updateBounds();
-				Back.getPanel().getPhonon().pnlDispersion.dispersionModified = true;
+				JPanel phPan = Back.getPanel().getRunType().runTypes.get("phonons");
+				phPan.pnlDispersion.dispersionModified = true;
 			}
 		};
 
