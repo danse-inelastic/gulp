@@ -20,7 +20,6 @@ import javax.swing.border.TitledBorder;
 
 public class GammaPointCalculation extends JPanel implements Serializable {
 
-	private JPanel panel;
 	private static final long serialVersionUID = -3092558433728257906L;
 
 	private TitledPanel pnlFrequencyOptions = new TitledPanel("calculate frequency");
@@ -139,8 +138,8 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		add(pnlCorrections);
 		
 		pnlAngularPoints.setTitle("angular points");
-		pnlCorrections.add(pnlAngularPoints);
 		pnlAngularPoints.setName("AngularPoints");
+		pnlCorrections.add(pnlAngularPoints, pnlAngularPoints.getName());
 		pnlAngularPoints.add(lblNumberOfAngular);
 		pnlAngularPoints.add(txtgammastepsnum);
 		lblNumberOfAngular.setBounds(10, 9, 306, 61);
