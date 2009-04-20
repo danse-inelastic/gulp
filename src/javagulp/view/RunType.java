@@ -26,14 +26,15 @@ public class RunType extends JPanel implements Serializable {
 	private String[] runTypeLabels = {"molecular dynamics", "monte carlo", 
 			"energetics and material properties", "optimization", "fit", "phonons", 
 			"free energy", "transition state", 
-			"structure prediction", "surface"};
+			"structure prediction"};
 	
 //	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
 //			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy", 
 //			"TransitionState", "StructurePrediction", "Surface"};
 
-	//instead of two maps should actually have made a bunch of small "helper" classes...
-	
+	//instead of three maps one should actually have made a bunch of small classes...
+	//but when you do, comment out runTypeLabels and provide another map with integers for how the run
+	//types should be ordered in the combo box
 	private Map<String, String> labelsAndClasses =
 		new HashMap<String, String>()   
 		{  
@@ -48,7 +49,6 @@ public class RunType extends JPanel implements Serializable {
 			put("free energy", "FreeEnergy"); 
 			put("transition state", "TransitionState"); 
 			put("structure prediction", "StructurePrediction"); 
-			put("surface", "Surface"); 
 		}  
 		};
 	
@@ -66,9 +66,25 @@ public class RunType extends JPanel implements Serializable {
 			put("free energy", null); 
 			put("transition state", null); 
 			put("structure prediction", null); 
-			put("surface", null); 
 		}  
 		};
+		
+		private Map<String, String> runTypeKeywords =   
+			new HashMap<String, String>()   
+			{  
+			//Anonymous Inner class  
+			{  
+				put("molecular dynamics", "md");  
+				put("monte carlo", "montecarlo");  
+				put("energetics and material properties", "energy");  
+				put("optimization", "optimise");  
+				put("fit", "fit"); 
+				put("phonons", "phonon"); 
+				put("free energy", "free_energy"); 
+				put("transition state", "transition_state"); 
+				put("structure prediction", "predict"); 
+			}  
+			};
 
 	//public JPanel[] runTypes = new JPanel[labelsAndClasses.size()];
 	
@@ -77,6 +93,8 @@ public class RunType extends JPanel implements Serializable {
 //	private SimulatedAnnealing pnlSimulatedAnnealing = new SimulatedAnnealing();
 	private JScrollPane scrollPane = new JScrollPane();
 	
+	//private TaskKeywordListener keyMD = new TaskKeywordListener("md");
+	
 	private SerialListener keyRunType = new SerialListener() {
 		private static final long serialVersionUID = -2241183516916061456L;
 		@Override
@@ -84,6 +102,7 @@ public class RunType extends JPanel implements Serializable {
 			String type = (String)cboRunType.getSelectedItem();
 			scrollPane.add(getRunType(type));
 			scrollPane.setViewportView(getRunType(type));
+			Back.getTaskKeys().putTaskKeywords(runTypeKeywords.get(type));
 		}
 	};
 	
@@ -120,7 +139,7 @@ public class RunType extends JPanel implements Serializable {
 		scrollPane.setViewportView(runTypes.get("molecular dynamics"));
 
 		cboRunType.addActionListener(keyRunType);
-		cboRunType.setBounds(146, 9, 169, 24);
+		cboRunType.setBounds(146, 9, 264, 24);
 		add(cboRunType);
 	}
 	

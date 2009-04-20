@@ -6,6 +6,8 @@ import java.io.Serializable;
 import javagulp.model.G;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.view.Back;
+import javagulp.view.Phonons;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,7 +27,7 @@ import javax.swing.JTextField;
 			@Override
 			public void keyReleased(KeyEvent e) {
 				updateBounds();
-				JPanel phPan = Back.getPanel().getRunType().runTypes.get("phonons");
+				Phonons phPan = (Phonons)Back.getPanel().getRunType("phonons");
 				phPan.pnlDispersion.dispersionModified = true;
 			}
 		};
@@ -68,7 +70,7 @@ import javax.swing.JTextField;
 
 		String writeDispersion() {
 			String output = "";
-			Dispersion disp = Back.getPanel().getPhonon().pnlDispersion;
+			Dispersion disp = ((Phonons)Back.getPanel().getRunType("phonons")).pnlDispersion;
 			try {
 				if (disp.dispersionModified) {
 					output += "dispersion " + disp.txtLines.getText() + " "

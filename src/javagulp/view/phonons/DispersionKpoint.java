@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javagulp.model.SerialKeyAdapter;
 import javagulp.view.Back;
+import javagulp.view.Phonons;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ public class DispersionKpoint extends JPanel implements Serializable {
 		private static final long serialVersionUID = 1268594961778847795L;
 		@Override
 		public void keyReleased(KeyEvent e) {
-			Back.getPanel().getPhonon().pnlDispersion.dispersionModified = true;
+			((Phonons)Back.getPanel().getRunType("phonons")).pnlDispersion.dispersionModified = true;
 		}
 	};
 	

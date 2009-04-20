@@ -29,8 +29,8 @@ public class MonteCarlo extends JPanel implements Serializable {
 
 	private JCheckBox chkMonteCarlo = new JCheckBox("perform a monte carlo calculation");
 
-	private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
-			"montecarlo");
+	//private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
+	//		"montecarlo");
 
 	private TitledPanel pnlChemicalPotential = new TitledPanel();
 	private TitledPanel pnlMaximumDisplacement = new TitledPanel();
@@ -197,9 +197,9 @@ public class MonteCarlo extends JPanel implements Serializable {
 		txtareaMoleculeFile.setBounds(7, 21, 126, 14);
 		pnlInsertedMolecules.add(txtareaMoleculeFile);
 
-		chkMonteCarlo.addActionListener(keyMonteCarlo);
-		chkMonteCarlo.setBounds(0, 0, 618, 25);
-		add(chkMonteCarlo);
+		//chkMonteCarlo.addActionListener(keyMonteCarlo);
+		//chkMonteCarlo.setBounds(0, 0, 618, 25);
+		//add(chkMonteCarlo);
 
 		pnlRestart.setTitle("restart");
 		pnlRestart.setBounds(624, 191, 414, 104);

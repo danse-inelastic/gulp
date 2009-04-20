@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
 
 import javagulp.model.G;
 
-public class Surface extends JPanel implements Serializable {
+public class SurfaceOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -5321125458721087743L;
 
@@ -27,7 +27,7 @@ public class Surface extends JPanel implements Serializable {
 	private JTextField txtHklPlaneSpacing = new JTextField();
 	private JTextField txtTotalEnergy = new JTextField();
 
-	public Surface() {
+	public SurfaceOptions() {
 		super();
 		setLayout(null);
 

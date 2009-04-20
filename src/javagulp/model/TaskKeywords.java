@@ -10,11 +10,17 @@ public class TaskKeywords implements Serializable {
 	
 	private TreeSet<String> taskKeywords = new TreeSet<String>();
 	
-	public void putOrRemoveTaskKeyword(final boolean discern, final String taskKeyword) {
-		if (discern)
-			taskKeywords.add(taskKeyword);
-		else
-			taskKeywords.remove(taskKeyword);
+//	public void putOrRemoveTaskKeyword(final boolean discern, final String taskKeyword) {
+//		if (discern)
+//			taskKeywords.add(taskKeyword);
+//		else
+//			taskKeywords.remove(taskKeyword);
+//	}
+	
+	public void putTaskKeywords(final String tasks) {
+		// this removes all task keywords and puts in new ones
+		taskKeywords.clear();
+		taskKeywords.add(tasks);
 	}
 	
 	public boolean containsKeyword(String taskKeyword) {

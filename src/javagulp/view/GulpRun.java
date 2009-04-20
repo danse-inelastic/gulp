@@ -73,18 +73,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.addChangeListener(keyTop);
 		topPane.add(null, "run type");
-//		topPane.add(null, "molecular dynamics");
-//		topPane.add(null, "monte carlo");
-//		topPane.add(null, "energetics and material properties");
-//		topPane.add(null, "optimization");
 		topPane.add(null, "constraints");
-//		topPane.add(null, "fit");
-//		topPane.add(null, "phonons");
-//		topPane.add(null, "free energy");
-//		topPane.add(null, "transition state");
-//		topPane.add(null, "structure prediction");
-//		topPane.add(null, "surface");
-
 		topPane.add(null, "structures");
 		topPane.add(null, "potentials");
 		topPane.add(null, "potential options");

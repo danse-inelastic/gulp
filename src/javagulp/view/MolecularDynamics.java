@@ -25,9 +25,9 @@ public class MolecularDynamics extends JPanel implements Serializable {
 
 	private G g = new G();
 
-	private JCheckBox chkMD = new JCheckBox("perform a MD simulation");
+	//private JCheckBox chkMD = new JCheckBox("perform a MD simulation");
 
-	private TaskKeywordListener keyMD = new TaskKeywordListener(chkMD, "md");
+	
 
 	private Temperature pnlTemperature = new Temperature(0);
 	public MDMass pnlMDmass = new MDMass();
@@ -59,9 +59,9 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		add(pnlPressure);
 		pnlPotentialInterpolation.setBounds(318, 169, 466, 71);
 		add(pnlPotentialInterpolation);
-		chkMD.addActionListener(keyMD);
-		chkMD.setBounds(4, 6, 307, 25);
-		add(chkMD);
+		//chkMD.addActionListener(keyMD);
+		//chkMD.setBounds(4, 6, 307, 25);
+		//add(chkMD);
 		pnlMDmassless.setBounds(821, 6, 422, 106);
 		add(pnlMDmassless);
 		pnlThermodynamicEnsembles.setBounds(2, 32, 309, 165);

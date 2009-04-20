@@ -220,8 +220,8 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 //		return (Defect) getTopPanel(13);
 //	}
 
-	public Surface getSurface() {
-		return (Surface) getTopPanel(11);
+	public SurfaceOptions getSurface() {
+		return (SurfaceOptions) getTopPanel(11);
 	}
 
 	public ExternalForce getExternalForce() {

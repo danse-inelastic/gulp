@@ -8,6 +8,8 @@ import java.util.Vector;
 
 import javagulp.view.Back;
 import javagulp.view.GulpRun;
+import javagulp.view.MolecularDynamics;
+import javagulp.view.SurfaceOptions;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.TableModelEvent;
@@ -192,14 +194,14 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 		GulpRun gr = Back.getPanel();
 		gr.getExternalForce().tdExForceTableModel.updateRows(getAtomsAndPositions());
 		gr.getExternalForce().exForceTableModel.updateRows(getAtomsAndPositions());
-		gr.getSurface().coordList.update(getAtomsAndPositions());
+		((SurfaceOptions)gr.getRunType("surface")).coordList.update(getAtomsAndPositions());
 		refreshRows(gr.getPotentialOptions().polarisabilityTableModel, getCores());
 		refreshRows(gr.getChargesElementsBonding().speciesTableModel, getAtoms());
 		Vector<String> v = new Vector<String>(getAtomsAndSpace());
 		gr.getPotentialOptions().cboSpecies.setModel(new DefaultComboBoxModel(v));
 		for (int i=0; i < gr.getPotential().createLibrary.pnlAtom.cboAtom.length; i++)
 			gr.getPotential().createLibrary.pnlAtom.cboAtom[i].setModel(new DefaultComboBoxModel(v));
-		gr.getMd().pnlMDmass.cboShellmassSpecies.setModel(new DefaultComboBoxModel(v));
+		((MolecularDynamics)gr.getRunType("molecular dyanmics")).pnlMDmass.cboShellmassSpecies.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlMortiers.cboeematom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlqeq.cboatom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().snm.cbosmatom.setModel(new DefaultComboBoxModel(v));

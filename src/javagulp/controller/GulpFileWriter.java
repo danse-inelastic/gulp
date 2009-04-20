@@ -6,7 +6,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javagulp.view.Back;
+import javagulp.view.Fit;
+import javagulp.view.FreeEnergy;
 import javagulp.view.GulpRun;
+import javagulp.view.MolecularDynamics;
+import javagulp.view.MonteCarlo;
+import javagulp.view.Optimization;
+import javagulp.view.Phonons;
+import javagulp.view.StructurePrediction;
+import javagulp.view.Structures;
+import javagulp.view.SurfaceOptions;
+import javagulp.view.Structures.Structure;
 
 import javax.swing.JOptionPane;
 
@@ -32,23 +42,23 @@ public class GulpFileWriter {
 //					o.append(Back.getPanel().getStructures().writeStructures());
 //			}
 			o.append(Back.getStructure().writeStructure());
-			o.append(gr.getSurface().writeSurface());
+			o.append(((SurfaceOptions)gr.getRunType("surface")).writeSurface());
 			o.append(gr.getPotential().writeLibrary());
 			o.append(gr.getPotential().createLibrary.writePotentials());
 			o.append(gr.getConstraints().writeUnfreeze());
 			o.append(gr.getEwaldOptions().writeEwald());
 			o.append(gr.getPotentialOptions().writePotentialOptions());
 			o.append(gr.getElectrostatics().writeElectrostatics());
-			o.append(gr.getOptimization().writeOptimization());
+			o.append(((Optimization)gr.getRunType("surface")).writeOptimization());
 			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
-			o.append(gr.getStructurePrediction().writeStructurePrediction());
-			o.append(gr.getPhonon().writePhonon());
-			o.append(gr.getFreeEnergy().writeFreeEnergy());
+			o.append(((StructurePrediction)gr.getRunType("structure prediction")).writeStructurePrediction());
+			o.append(((Phonons)gr.getRunType("phonons")).writePhonon());
+			o.append(((FreeEnergy)gr.getRunType("free energy")).writeFreeEnergy());
 //			o.append(gr.getDefect().writeDefect());
-			o.append(gr.getFit().writeFitOptions());
-			o.append(gr.getFit().fitPanelHolder.writeFitPanels());
-			o.append(gr.getMonteCarlo().writeMonteCarlo());
-			o.append(gr.getMd().writeMD());
+			o.append(((Fit)gr.getRunType("fit")).writeFitOptions());
+			o.append(((Fit)gr.getRunType("fit")).fitPanelHolder.writeFitPanels());
+			o.append(((MonteCarlo)gr.getRunType("monte carlo")).writeMonteCarlo());
+			o.append(((MolecularDynamics)gr.getRunType("molecular dynamics")).writeMD());
 			o.append(gr.getExternalForce().writeExternalForce());
 			o.append(gr.getOutput().writeExecute());
 		} catch (IncompleteOptionException e) {

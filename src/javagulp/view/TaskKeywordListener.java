@@ -13,12 +13,16 @@ public class TaskKeywordListener implements ActionListener, Serializable {
 	JCheckBox box;
 	String taskKeyword;
 
-	public TaskKeywordListener(JCheckBox box, String taskKeyword) {
-		this.box = box;
-		this.taskKeyword = taskKeyword;
-	}
+//	public TaskKeywordListener(JCheckBox box, String taskKeyword) {
+//		this.box = box;
+//		this.taskKeyword = taskKeyword;
+//	}
 
+	public TaskKeywordListener(String taskKeyword) {
+		Back.getTaskKeys().putTaskKeywords(taskKeyword);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
-		Back.getTaskKeys().putOrRemoveTaskKeyword(box.isSelected(), taskKeyword);
+		Back.getTaskKeys().putTaskKeywords(taskKeyword);
 	}
 }
