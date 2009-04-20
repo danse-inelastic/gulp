@@ -25,18 +25,21 @@ public class RunType extends JPanel implements Serializable {
 
 	private String[] runTypeLabels = {"molecular dynamics", "monte carlo", 
 			"energetics and material properties", "optimization", "fit", "phonons", 
-			"free energy", "transition state", 
+			"free energy calc/optimize", "transition state", 
 			"structure prediction"};
 	
 //	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
 //			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy", 
 //			"TransitionState", "StructurePrediction", "Surface"};
 
+	//TODO probably should combine free energy with optimize and energy tabs with option panel and/or checkbox in each which, if checked,
+	//would replace the task keyword with the free energy keyword and still allow the user to input pertinent options (i.e. optimization options)
+	
+	//TODO
 	//instead of three maps one should actually have made a bunch of small classes...
 	//but when you do, comment out runTypeLabels and provide another map with integers for how the run
 	//types should be ordered in the combo box
-	private Map<String, String> labelsAndClasses =
-		new HashMap<String, String>()   
+	private Map<String, String> labelsAndClasses = new HashMap<String, String>()   
 		{  
 		//Anonymous Inner class  
 		{  
@@ -46,7 +49,7 @@ public class RunType extends JPanel implements Serializable {
 			put("optimization", "Optimization");  
 			put("fit", "Fit"); 
 			put("phonons", "Phonons"); 
-			put("free energy", "FreeEnergy"); 
+			put("free energy calc/optimize", "FreeEnergy"); 
 			put("transition state", "TransitionState"); 
 			put("structure prediction", "StructurePrediction"); 
 		}  
@@ -63,7 +66,7 @@ public class RunType extends JPanel implements Serializable {
 			put("optimization", null);  
 			put("fit", null); 
 			put("phonons", null); 
-			put("free energy", null); 
+			put("free energy calc/optimize", null); 
 			put("transition state", null); 
 			put("structure prediction", null); 
 		}  
@@ -80,7 +83,7 @@ public class RunType extends JPanel implements Serializable {
 				put("optimization", "optimise");  
 				put("fit", "fit"); 
 				put("phonons", "phonon"); 
-				put("free energy", "free_energy"); 
+				put("free energy calc/optimize", "free_energy"); 
 				put("transition state", "transition_state"); 
 				put("structure prediction", "predict"); 
 			}  
@@ -102,7 +105,7 @@ public class RunType extends JPanel implements Serializable {
 			String type = (String)cboRunType.getSelectedItem();
 			scrollPane.add(getRunType(type));
 			scrollPane.setViewportView(getRunType(type));
-			Back.getTaskKeys().putTaskKeywords(runTypeKeywords.get(type));
+			Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));
 		}
 	};
 	

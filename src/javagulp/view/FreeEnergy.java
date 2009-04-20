@@ -20,11 +20,11 @@ public class FreeEnergy extends JPanel implements Serializable {
 	private G g = new G();
 
 	private JCheckBox chkUseTheZero = new JCheckBox("use the zero static internal stress approximation");
-	private JCheckBox chkFreeEnergy = new JCheckBox("<html>use Gibbs free-energy as the quantity to be calculated/optimized instead of the internal energy</html>");
+	//private JCheckBox chkFreeEnergy = new JCheckBox("<html>use Gibbs free-energy as the quantity to be calculated/optimized instead of the internal energy</html>");
 	private JCheckBox chkRunStaticOptimisation = new JCheckBox("run static optimization before free energy optimization");
 
 	private KeywordListener keyUseTheZero = new KeywordListener(chkUseTheZero, "zsisa");
-	private TaskKeywordListener keyFreeEnergy = new TaskKeywordListener(chkFreeEnergy, "free_energy");
+	//private TaskKeywordListener keyFreeEnergy = new TaskKeywordListener(chkFreeEnergy, "free_energy");
 	private KeywordListener keyRunStaticOptimisation = new KeywordListener(chkRunStaticOptimisation, "static_first");
 
 	private JLabel lblDensityCutoff = new JLabel("(multiple of density cutoff)");
@@ -48,10 +48,10 @@ public class FreeEnergy extends JPanel implements Serializable {
 		//panel.setBounds(0, 0, 1070, 425);
 		//add(panel);
 
-		chkFreeEnergy.setBounds(6, 10, 452, 47);
-		//panel.add(chkFreeEnergy);
-		add(chkFreeEnergy);
-		chkFreeEnergy.addActionListener(keyFreeEnergy);
+//		chkFreeEnergy.setBounds(6, 10, 452, 47);
+//		//panel.add(chkFreeEnergy);
+//		add(chkFreeEnergy);
+//		chkFreeEnergy.addActionListener(keyFreeEnergy);
 		chkUseTheZero.setBounds(39, 59, 419, 30);
 		//panel.add(chkUseTheZero);
 		add(chkUseTheZero);

@@ -19,10 +19,10 @@ public class TaskKeywordListener implements ActionListener, Serializable {
 //	}
 
 	public TaskKeywordListener(String taskKeyword) {
-		Back.getTaskKeys().putTaskKeywords(taskKeyword);
+		Back.getTaskKeywords().putTaskKeywords(taskKeyword);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		Back.getTaskKeys().putTaskKeywords(taskKeyword);
+		Back.getTaskKeywords().putTaskKeywords(taskKeyword);
 	}
 }

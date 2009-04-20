@@ -35,7 +35,6 @@ public class Phonons extends TitledPanel implements Serializable {
 
 	private G g = new G();
 
-	private JCheckBox chkCalculateFrequencies = new JCheckBox("calculate phonon frequencies");
 	private JCheckBox chkDoNotOutput = new JCheckBox(g.html("do not output a list of kpoints at each configuration"));
 	private JCheckBox chkDoNotPrint = new JCheckBox("do not output phonon DOS");
 	private JCheckBox chkDoNotPrintFreqs = new JCheckBox("do not output phonon frequencies");
@@ -50,7 +49,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	private KeywordListener keyDoNotPrint = new KeywordListener(chkDoNotPrint, "nodensity_out");
 	private KeywordListener keyDoNotPrintFreqs = new KeywordListener(chkDoNotPrintFreqs, "nofrequency");
 	private KeywordListener keyPrintEigenvectors = new KeywordListener(chkPrintEigenvectors, "eigenvectors");
-	private TaskKeywordListener keyCalculateFrequencies = new TaskKeywordListener(chkCalculateFrequencies, "phonon");
+	//private TaskKeywordListener keyCalculateFrequencies = new TaskKeywordListener(chkCalculateFrequencies, "phonon");
 	private KeywordListener keyDoNotOutput = new KeywordListener(chkDoNotOutput, "nokpoints");
 
 	public JTabbedPane paneSpecifyKpoints = new JTabbedPane();
@@ -81,13 +80,9 @@ public class Phonons extends TitledPanel implements Serializable {
 		//pnlDispersionOptions.setBounds(5, 42, 482, 109);
 		//add(pnlDispersionOptions);
 
-		chkCalculateFrequencies.addActionListener(keyCalculateFrequencies);
-		chkCalculateFrequencies.setBounds(5, 5, 359, 30);
-		add(chkCalculateFrequencies);
 
 
-
-		paneSpecifyKpoints.setBounds(493, 9, 611, 395);
+		paneSpecifyKpoints.setBounds(0, 7, 611, 395);
 		add(paneSpecifyKpoints);
 		paneSpecifyKpoints.addTab("Brillouin Zone Integration",
 				pnlBrillouinIntegration);
@@ -161,12 +156,12 @@ public class Phonons extends TitledPanel implements Serializable {
 	protected TitledPanel getPanel() {
 		if (pnlOptions == null) {
 			pnlOptions = new TitledPanel();
-			pnlOptions.setBounds(5, 41, 482, 363);
+			pnlOptions.setBounds(617, 7, 541, 395);
 			pnlOptions.setTitle("options");
 			chkDoNotPrint.addActionListener(keyDoNotPrint);
-			chkDoNotPrint.setBounds(10, 49, 462, 25);
+			chkDoNotPrint.setBounds(10, 235, 462, 25);
 			pnlOptions.add(chkDoNotPrint);
-			chkDoNotPrintFreqs.setBounds(10, 18, 462, 25);
+			chkDoNotPrintFreqs.setBounds(10, 266, 462, 25);
 			chkDoNotPrintFreqs.addActionListener(keyDoNotPrintFreqs);
 			pnlOptions.add(chkDoNotPrintFreqs);
 			chkPrintEigenvectors.addActionListener(keyPrintEigenvectors);
@@ -179,13 +174,13 @@ public class Phonons extends TitledPanel implements Serializable {
 			chkNoRealSpace.setBounds(10, 142, 462, 25);
 			pnlOptions.add(chkNoRealSpace);
 			chkNoReciprocalSpace.addActionListener(keyNoReciprocalSpace);
-			chkNoReciprocalSpace.setBounds(10, 173, 462, 25);
+			chkNoReciprocalSpace.setBounds(10, 173, 486, 25);
 			pnlOptions.add(chkNoReciprocalSpace);
 
 			chkExcludeZeroPoint.addActionListener(keyExcludeZeroPoint);
 			chkExcludeZeroPoint.setBounds(10, 204, 359, 25);
 			pnlOptions.add(chkExcludeZeroPoint);
-			lblBroadenPeaks.setBounds(79, 232, 291, 25);
+			lblBroadenPeaks.setBounds(108, 47, 291, 25);
 			pnlOptions.add(lblBroadenPeaks);
 
 			cboNumBins.addActionListener(new ActionListener() {
@@ -196,14 +191,14 @@ public class Phonons extends TitledPanel implements Serializable {
 						txtBinValue.setText("");
 				}
 			});
-			cboNumBins.setBounds(117, 268, 252, 21);
+			cboNumBins.setBounds(108, 20, 252, 21);
 			pnlOptions.add(cboNumBins);
 
 			txtBroadenPeaks.setBackground(Back.grey);
 			txtBinValue.setBackground(Back.grey);
-			txtBinValue.setBounds(10, 269, 92, 20);
+			txtBinValue.setBounds(10, 21, 92, 20);
 			pnlOptions.add(txtBinValue);
-			txtBroadenPeaks.setBounds(10, 235, 63, 20);
+			txtBroadenPeaks.setBounds(10, 47, 63, 20);
 			pnlOptions.add(txtBroadenPeaks);
 
 		}

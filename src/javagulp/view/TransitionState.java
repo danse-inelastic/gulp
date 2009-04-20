@@ -36,16 +36,16 @@ public class TransitionState extends JPanel implements Serializable {
 		private static final long serialVersionUID = 5665428119022612136L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Back.getTaskKeys().putOrRemoveTaskKeyword(false, "transition_state");
-			Back.getTaskKeys().putOrRemoveTaskKeyword(radInvokeRational.isSelected(), "rfo");
+			Back.getTaskKeywords().putTaskKeywords("transition_state");
+			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radInvokeRational.isSelected(), "rfo");
 		}
 	};
 	private SerialListener keyInvokeRFO = new SerialListener() {
 		private static final long serialVersionUID = -8125830214860897746L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Back.getTaskKeys().putOrRemoveTaskKeyword(false, "rfo");
-			Back.getTaskKeys().putOrRemoveTaskKeyword(radInvokeRFO.isSelected(), "transition_state");
+			Back.getTaskKeywords().putTaskKeywords("rfo");
+			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radInvokeRFO.isSelected(), "transition_state");
 		}
 	};
 

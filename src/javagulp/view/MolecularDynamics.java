@@ -64,11 +64,11 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		//add(chkMD);
 		pnlMDmassless.setBounds(821, 6, 422, 106);
 		add(pnlMDmassless);
-		pnlThermodynamicEnsembles.setBounds(2, 32, 309, 165);
+		pnlThermodynamicEnsembles.setBounds(4, 6, 309, 165);
 		add(pnlThermodynamicEnsembles);
-		pnlIntegrator.setBounds(4, 203, 310, 51);
+		pnlIntegrator.setBounds(2, 177, 310, 51);
 		add(pnlIntegrator);
-		pnlTimeLengths.setBounds(2, 260, 309, 105);
+		pnlTimeLengths.setBounds(2, 234, 309, 131);
 		add(pnlTimeLengths);
 		pnlOutputFormats.setBounds(826, 243, 417, 122);
 		add(pnlOutputFormats);

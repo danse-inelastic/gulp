@@ -7,12 +7,14 @@ import java.io.Serializable;
 
 import javagulp.view.fit.AbstractFit;
 import javagulp.view.fit.FitPanelHolder;
+import javax.swing.ButtonGroup;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -23,6 +25,7 @@ import javagulp.model.SerialMouseAdapter;
 
 public class Fit extends JPanel implements Serializable {
 
+	private ButtonGroup fitButtonGroup = new ButtonGroup();
 	private static final long serialVersionUID = -4430341489632365418L;
 
 	private G g = new G();
@@ -39,8 +42,8 @@ public class Fit extends JPanel implements Serializable {
 
 	private JCheckBox chkSimultaneous = new JCheckBox(g.html("do simultaneous relaxation of shells during fitting, including both position and radius"));
 	private JCheckBox chkRelax = new JCheckBox("fit to structural displacements on relaxation rather than to the derivatives");
-	private JCheckBox chkFit = new JCheckBox("do fitting run using unit matrix with BFGS method");
-	private JCheckBox chkDoFittingRun = new JCheckBox("do fitting run using full BFGS method");
+	private JRadioButton rboFit = new JRadioButton("use BFGS method but only calculate diagonal of Hessian");
+	private JRadioButton rboFullHessian = new JRadioButton("use BFGS method and calculate full Hessian");
 	private JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
 	private JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
 	
@@ -50,8 +53,8 @@ public class Fit extends JPanel implements Serializable {
 
 	private KeywordListener keySimultaneous = new KeywordListener(chkSimultaneous, "simultaneous");
 	private KeywordListener keyRelax = new KeywordListener(chkRelax, "relax");
-	private TaskKeywordListener keyFit = new TaskKeywordListener(chkFit, "fit");
-	private TaskKeywordListener keyDoFittingRun = new TaskKeywordListener(chkDoFittingRun, "fbfgs");
+//	private TaskKeywordListener keyFit = new TaskKeywordListener(rboFit, "fit");
+//	private TaskKeywordListener keyDoFittingRun = new TaskKeywordListener(rboFullHessian, "fbfgs");
 	private KeywordListener keyOptimisefitShellsBut = new KeywordListener(chkOptimisefitShellsBut, "shell");
 
 	SerialKeyAdapter listListener = new SerialKeyAdapter() {
@@ -152,18 +155,21 @@ public class Fit extends JPanel implements Serializable {
 		txtFtol.setBounds(22, 19, 80, 21);
 		pnlFuncTolerance.add(txtFtol);
 
-		chkFit.setBounds(3, 5, 483, 25);
-		chkFit.addActionListener(keyFit);
-		add(chkFit);
+		rboFit.setBounds(3, 5, 483, 25);
+		rboFit.setSelected(true);
+		fitButtonGroup.add(rboFit);
+		rboFit.addActionListener(keyTypeOfHessian);
+		add(rboFit);
 		add(chkUseGA);
 		chkUseGA.setBounds(3, 58, 182, 25);
 		chkUseGA.addActionListener(keyGA);
 		
 
-		chkDoFittingRun.addActionListener(keyDoFittingRun);
-		chkDoFittingRun.setToolTipText("involves the calculation of the full numerical hessian instead of just the diagonal elements.");
-		chkDoFittingRun.setBounds(3, 30, 404, 25);
-		add(chkDoFittingRun);
+		rboFullHessian.addActionListener(keyTypeOfHessian);
+		fitButtonGroup.add(rboFullHessian);
+		rboFullHessian.setToolTipText("involves the calculation of the full numerical hessian instead of just the diagonal elements.");
+		rboFullHessian.setBounds(3, 30, 404, 25);
+		add(rboFullHessian);
 
 		final TitledPanel pnlNumericalDifferencing = new TitledPanel();
 		pnlNumericalDifferencing.setTitle("numerical differencing");
@@ -244,6 +250,18 @@ public class Fit extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Back.getKeys().putOrRemoveKeyword(chkUseGA.isSelected(), "genetic");
+		}
+	};
+	
+	private SerialListener keyTypeOfHessian = new SerialListener() {
+		private static final long serialVersionUID = -4174465371049719236L;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(rboFit.isSelected()){
+				Back.getTaskKeywords().putTaskKeywords("fit");
+			}else{
+				Back.getTaskKeywords().putTaskKeywords("fbfgs");
+			}
 		}
 	};
 }

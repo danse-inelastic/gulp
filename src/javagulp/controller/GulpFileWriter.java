@@ -29,7 +29,7 @@ public class GulpFileWriter {
 		incomplete = false;
 		try {
 			GulpRun gr = Back.getPanel();
-			o.append(Back.getTaskKeys().writeTaskKeywords());
+			o.append(Back.getTaskKeywords().writeTaskKeywords());
 			o.append(Back.getKeys().writeKeywords());
 			o.append(gr.getOutput().writeTitleAndTimeLimit());
 //			String energy = gr.getXyzfit().writeEnergy();

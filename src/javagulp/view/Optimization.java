@@ -55,7 +55,7 @@ public class Optimization extends JPanel implements Serializable {
 	private JCheckBox chkUseNumerical = new JCheckBox("use numerical estimates of the diagonal elements as a starting point for the Hessian");
 	private JCheckBox chkUseUnit = new JCheckBox("use unit diagonal matrix as starting point for hessian");
 	private JCheckBox chklinmin = new JCheckBox("print details of line minimization");
-	private JCheckBox chkopti = new JCheckBox("perform an optimization with an exact Hessian (default)");
+	//private JCheckBox chkopti = new JCheckBox("perform an optimization with an exact Hessian (default)");
 	private JCheckBox chkoptimisefitShells = new JCheckBox("optimize only shells (optical calculation)");
 	private JCheckBox chkoutputDetailsOf = new JCheckBox("output details of the Hessian matrix");
 	private JCheckBox chkpositive = new JCheckBox(g.html("ensure that the Hessian always behaves as positive definite during Newton-Raphson <br>by ensuring the search vector has the same sign as the gradient vector"));
@@ -68,7 +68,7 @@ public class Optimization extends JPanel implements Serializable {
 	private KeywordListener keyoutputDetailsOf = new KeywordListener(chkoutputDetailsOf, "hessian");
 	private KeywordListener keypositive = new KeywordListener(chkpositive,
 			"positive");
-	private TaskKeywordListener keyopti = new TaskKeywordListener(chkopti, "optimise");
+	//private TaskKeywordListener keyopti = new TaskKeywordListener(chkopti, "optimise");
 	private KeywordListener keylinmin = new KeywordListener(chklinmin, "linmin");
 	private KeywordListener keyoptimisefitShells = new KeywordListener(chkoptimisefitShells, "shell");
 
@@ -134,18 +134,18 @@ public class Optimization extends JPanel implements Serializable {
 		pnlMaxStepSize.add(txtstepmxopt);
 
 		pnleigenvector.setTitle("imaginary eigenvector following");
-		pnleigenvector.setBounds(660, 162, 468, 83);
+		pnleigenvector.setBounds(660, 162, 468, 109);
 		add(pnleigenvector);
 		chkuseImaginaryPhonon.addActionListener(keyuseImaginaryPhonon);
 		chkuseImaginaryPhonon.setBounds(10, 23, 448, 25);
 		pnleigenvector.add(chkuseImaginaryPhonon);
-		lblScaleImaginaryMode.setBounds(10, 54, 311, 15);
+		lblScaleImaginaryMode.setBounds(10, 56, 311, 15);
 		pnleigenvector.add(lblScaleImaginaryMode);
-		txtslower.setBounds(327, 52, 87, 20);
+		txtslower.setBounds(327, 54, 87, 20);
 		pnleigenvector.add(txtslower);
 
 		pnlotheroptions.setTitle("other options");
-		pnlotheroptions.setBounds(660, 251, 468, 78);
+		pnlotheroptions.setBounds(0, 334, 643, 144);
 		add(pnlotheroptions);
 		lblStopIfCell.setBounds(10, 23, 378, 15);
 		pnlotheroptions.add(lblStopIfCell);
@@ -154,15 +154,22 @@ public class Optimization extends JPanel implements Serializable {
 		chkAllowOnlyIsotropicRadioButton.addActionListener(keyAllowOnlyIsotropicRadioButton);
 		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 385, 25);
 		pnlotheroptions.add(chkAllowOnlyIsotropicRadioButton);
+		chkoptimisefitShells.addActionListener(keyoptimisefitShells);
+		chkoptimisefitShells.setBounds(10, 74, 378, 25);
+		pnlotheroptions.add(chkoptimisefitShells);
+
+		chklinmin.addActionListener(keylinmin);
+		chklinmin.setBounds(10, 105, 320, 25);
+		pnlotheroptions.add(chklinmin);
 
 		pnlmaximumcycles.setTitle("maximum number of cycles");
-		pnlmaximumcycles.setBounds(660, 335, 215, 51);
+		pnlmaximumcycles.setBounds(660, 277, 215, 51);
 		add(pnlmaximumcycles);
 		txtmaxcycopt.setBounds(10, 22, 90, 20);
 		pnlmaximumcycles.add(txtmaxcycopt);
 
 		pnlBFGS.setTitle("order of limited-memory BFGS");
-		pnlBFGS.setBounds(881, 335, 247, 51);
+		pnlBFGS.setBounds(881, 277, 247, 51);
 		add(pnlBFGS);
 		txtlbfgs_order.setBounds(10, 22, 90, 20);
 		pnlBFGS.add(txtlbfgs_order);
@@ -186,14 +193,14 @@ public class Optimization extends JPanel implements Serializable {
 		pnlfunctiontolerance.add(txtftol);
 
 		pnlprimaryoptimizer.setTitle("primary optimizer");
-		pnlprimaryoptimizer.setBounds(0, 32, 268, 69);
+		pnlprimaryoptimizer.setBounds(0, 10, 268, 69);
 		add(pnlprimaryoptimizer);
 		cboOptimization.setBounds(10, 22, 197, 20);
 		pnlprimaryoptimizer.add(cboOptimization);
 		cboOptimization.addActionListener(keyOptimization);
 
 		pnlswitchoptimizer.setTitle("switch optimizer to");
-		pnlswitchoptimizer.setBounds(274, 32, 380, 70);
+		pnlswitchoptimizer.setBounds(274, 10, 380, 70);
 		add(pnlswitchoptimizer);
 		cboSwitchOptimization.setBounds(10, 18, 285, 20);
 		pnlswitchoptimizer.add(cboSwitchOptimization);
@@ -208,7 +215,7 @@ public class Optimization extends JPanel implements Serializable {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		pnlHessianOptions.setLayout(null);
-		pnlHessianOptions.setBounds(0, 107, 654, 243);
+		pnlHessianOptions.setBounds(0, 85, 654, 243);
 		add(pnlHessianOptions);
 		chkUseNumerical.setBounds(10, 23, 634, 25);
 		pnlHessianOptions.add(chkUseNumerical);
@@ -231,12 +238,12 @@ public class Optimization extends JPanel implements Serializable {
 		txtdelf.setBounds(564, 191, 80, 21);
 		pnlHessianOptions.add(txtdelf);
 
-		chkopti.setName("optOrNot");
-		chkopti.setBounds(0, 1, 654, 25);
-		add(chkopti);
-		chkopti.addActionListener(keyopti);
-		chkopti.setActionCommand("CALTYP_OPT");
-		chkopti.setToolTipText("Minimize the energy with respect to geometrical variables");
+//		chkopti.setName("optOrNot");
+//		chkopti.setBounds(0, 1, 654, 25);
+//		add(chkopti);
+//		chkopti.addActionListener(keyopti);
+//		chkopti.setActionCommand("CALTYP_OPT");
+//		chkopti.setToolTipText("Minimize the energy with respect to geometrical variables");
 
 		pnlLineMinimisationOptions.setTitle("line minimisation options");
 		pnlLineMinimisationOptions.setBounds(660, 1, 295, 51);
@@ -245,13 +252,6 @@ public class Optimization extends JPanel implements Serializable {
 		pnlLineMinimisationOptions.add(txtline);
 		lblmaximumNumberOf.setBounds(10, 26, 219, 15);
 		pnlLineMinimisationOptions.add(lblmaximumNumberOf);
-
-		chklinmin.addActionListener(keylinmin);
-		chklinmin.setBounds(0, 356, 320, 25);
-		add(chklinmin);
-		chkoptimisefitShells.addActionListener(keyoptimisefitShells);
-		chkoptimisefitShells.setBounds(326, 356, 328, 25);
-		add(chkoptimisefitShells);
 	}
 
 	private String writeDelf() {

@@ -139,7 +139,7 @@ public class Back {
 		return getPanel().getKeywords();
 	}
 	
-	public static TaskKeywords getTaskKeys() {
+	public static TaskKeywords getTaskKeywords() {
 		return getPanel().getTaskKeywords();
 	}
 	
