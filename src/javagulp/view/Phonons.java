@@ -8,8 +8,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.phonons.BrillouinIntegration;
 import javagulp.view.phonons.Dispersion;
-import javagulp.view.phonons.GammaPointCorrection;
-import javagulp.view.phonons.GammaPointOptions;
+import javagulp.view.phonons.GammaPointCalculation;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -31,7 +30,6 @@ public class Phonons extends TitledPanel implements Serializable {
 	private JTextField txtBinValue = new JTextField(txt_num_bins);
 	private String[] cboNumBoxesOptions = new String[]{"number", "size"};
 	private JComboBox cboNumBins = new JComboBox(new String[] {"DOS number of bins", "DOS bin size (units: 1/cm)"});
-
 
 	private G g = new G();
 
@@ -57,8 +55,8 @@ public class Phonons extends TitledPanel implements Serializable {
 	//private DispersionOptions pnlDispersionOptions = new DispersionOptions();
 	public Dispersion pnlDispersion = new Dispersion();
 	private BrillouinIntegration pnlBrillouinIntegration = new BrillouinIntegration();
-	private GammaPointOptions pnlGammaPoints = new GammaPointOptions();
-	private GammaPointCorrection pnlGammaCorrection = new GammaPointCorrection();
+	private GammaPointCalculation pnlGammaPoints = new GammaPointCalculation();
+	//private GammaPointCorrection pnlGammaCorrection = new GammaPointCorrection();
 
 	//	/**
 	//	 * @return
@@ -80,15 +78,13 @@ public class Phonons extends TitledPanel implements Serializable {
 		//pnlDispersionOptions.setBounds(5, 42, 482, 109);
 		//add(pnlDispersionOptions);
 
-
-
 		paneSpecifyKpoints.setBounds(0, 7, 611, 395);
 		add(paneSpecifyKpoints);
 		paneSpecifyKpoints.addTab("Brillouin Zone Integration",
 				pnlBrillouinIntegration);
 		paneSpecifyKpoints.addTab("Band Structure", pnlDispersion);
-		paneSpecifyKpoints.addTab("Gamma Point Options", pnlGammaPoints);
-		paneSpecifyKpoints.addTab("Gamma Point Correction", pnlGammaCorrection);
+		paneSpecifyKpoints.addTab("Gamma Point Calculation", pnlGammaPoints);
+		//paneSpecifyKpoints.addTab("Gamma Point Correction", pnlGammaCorrection);
 		add(getPanel());
 	}
 
@@ -146,7 +142,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	InvalidOptionException {
 		return writeDosOptions()
 		+ pnlDispersion.writeDispersion()
-		+ pnlGammaCorrection.writeGammaPointCorrection()
+		+ pnlGammaPoints.writeGammaPointCorrection()
 		+ pnlGammaPoints.writeGammaPointOptions()
 		+ pnlBrillouinIntegration.write();
 	}

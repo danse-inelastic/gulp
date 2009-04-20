@@ -28,6 +28,7 @@ class GammaApproach extends TitledPanel {
 		GammaApproach() {
 			super();
 			setTitle("gamma point approach");
+			setName("GammaApproach");
 			
 			lblkx.setBounds(12, 130, 15, 25);
 			txtkx.setBounds(33, 130, 50, 20);
