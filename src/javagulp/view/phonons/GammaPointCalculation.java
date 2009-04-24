@@ -82,7 +82,7 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		setBorder(border);
 		// border.setTitle("Gamma-point options");
 		setLayout(null);
-		pnlGammaApproach.setName("pnlGammaApproach");
+		pnlGammaApproach.setName("GammaApproach");
 		pnlGammaApproach.setBounds(10, 10, 449, 180);
 
 		lblInitialFrequency.setBounds(10, 39, 168, 14);
@@ -142,16 +142,19 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		
 		pnlCorrections.setBounds(10, 229, 368, 180);
 		pnlCorrections.setLayout(new CardLayout());
-		pnlCorrections.add(pnlGammaApproach, pnlGammaApproach.getName());
-		add(pnlCorrections);
+
 		
 		pnlAngularPoints.setTitle("angular points");
 		pnlAngularPoints.setName("AngularPoints");
-		pnlCorrections.add(pnlAngularPoints, pnlAngularPoints.getName());
 		pnlAngularPoints.add(lblNumberOfAngular);
 		pnlAngularPoints.add(txtgammastepsnum);
 		lblNumberOfAngular.setBounds(10, 21, 348, 49);
 		txtgammastepsnum.setBounds(10, 76, 102, 20);
+		
+		pnlCorrections.add(pnlAngularPoints, pnlAngularPoints.getName());
+		pnlCorrections.add(pnlGammaApproach, pnlGammaApproach.getName());
+		add(pnlCorrections);
+		
 		add(getPanel());
 
 	}
@@ -285,6 +288,7 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 	protected JRadioButton getAverageRadioButton() {
 		if (averageRadioButton == null) {
 			averageRadioButton = new JRadioButton();
+			averageRadioButton.setSelected(true);
 			averageRadioButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
 					if (averageRadioButton.isSelected()){
@@ -306,7 +310,7 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 			specifyDirectionOfRadioButton = new JRadioButton();
 			specifyDirectionOfRadioButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					if (averageRadioButton.isSelected()){
+					if (specifyDirectionOfRadioButton.isSelected()){
 						((CardLayout) pnlCorrections.getLayout()).show(pnlCorrections, pnlGammaApproach.getName());
 					}
 				}
