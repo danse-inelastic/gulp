@@ -78,7 +78,7 @@ public class Phonons extends TitledPanel implements Serializable {
 		//pnlDispersionOptions.setBounds(5, 42, 482, 109);
 		//add(pnlDispersionOptions);
 
-		paneSpecifyKpoints.setBounds(0, 7, 611, 395);
+		paneSpecifyKpoints.setBounds(0, 7, 654, 444);
 		add(paneSpecifyKpoints);
 		paneSpecifyKpoints.addTab("Brillouin Zone Integration",
 				pnlBrillouinIntegration);
@@ -152,7 +152,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	protected TitledPanel getPanel() {
 		if (pnlOptions == null) {
 			pnlOptions = new TitledPanel();
-			pnlOptions.setBounds(617, 7, 541, 395);
+			pnlOptions.setBounds(660, 5, 499, 446);
 			pnlOptions.setTitle("options");
 			chkDoNotPrint.addActionListener(keyDoNotPrint);
 			chkDoNotPrint.setBounds(10, 235, 462, 25);

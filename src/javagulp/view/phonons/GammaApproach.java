@@ -36,7 +36,7 @@ class GammaApproach extends TitledPanel {
 			txtkz.setBounds(187, 130, 50, 20);
 			lblky.setBounds(89, 130, 15, 25);
 			lblkz.setBounds(166, 130, 15, 25);
-			lblDirectionOfApproach.setBounds(6, 4, 390, 120);
+			lblDirectionOfApproach.setBounds(6, 22, 342, 102);
 
 			add(lblkx);
 			add(lblky);

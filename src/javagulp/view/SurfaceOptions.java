@@ -36,7 +36,7 @@ public class SurfaceOptions extends JPanel implements Serializable {
 		pnlAttachmentEnergy.setBorder(new TitledBorder(null,
 				"attachment energy", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlAttachmentEnergy.setBounds(14, 104, 381, 61);
+		pnlAttachmentEnergy.setBounds(14, 72, 381, 61);
 		add(pnlAttachmentEnergy);
 		txtWidth.setBounds(177, 22, 76, 19);
 		pnlAttachmentEnergy.add(txtWidth);
@@ -50,7 +50,7 @@ public class SurfaceOptions extends JPanel implements Serializable {
 				"bulk energy of surface atoms",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlBulkEnergy.setBounds(14, 42, 381, 56);
+		pnlBulkEnergy.setBounds(14, 10, 381, 56);
 		add(pnlBulkEnergy);
 		txtSbulkEnergy.setBounds(8, 26, 85, 20);
 		pnlBulkEnergy.add(txtSbulkEnergy);
@@ -64,24 +64,11 @@ public class SurfaceOptions extends JPanel implements Serializable {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		pnlSelectFirstAtom.setLayout(null);
-		pnlSelectFirstAtom.setBounds(401, 42, 336, 301);
+		pnlSelectFirstAtom.setBounds(401, 10, 336, 240);
 		add(pnlSelectFirstAtom);
 		final JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(14, 21, 315, 273);
+		scrollPane.setBounds(14, 21, 312, 209);
 		pnlSelectFirstAtom.add(scrollPane);
-
-		final JPanel pnlAttachmentEnergy2 = new JPanel();
-		pnlAttachmentEnergy2.setBorder(new TitledBorder(null,
-				"attachment energy", TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlAttachmentEnergy2.setLayout(null);
-		pnlAttachmentEnergy2.setBounds(14, 175, 381, 49);
-		add(pnlAttachmentEnergy2);
-		txtHklPlaneSpacing.setBounds(306, 16, 65, 20);
-		pnlAttachmentEnergy2.add(txtHklPlaneSpacing);
-		JLabel lblPlaneSpacing = new JLabel("hkl plane spacing (growth slice width)");
-		lblPlaneSpacing.setBounds(9, 18, 291, 15);
-		pnlAttachmentEnergy2.add(lblPlaneSpacing);
 
 		final JPanel pnlTotalEnergy = new JPanel();
 		pnlTotalEnergy.setLayout(null);
@@ -89,13 +76,26 @@ public class SurfaceOptions extends JPanel implements Serializable {
 				"total energy of bulk unit cell",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlTotalEnergy.setBounds(14, 230, 381, 56);
+		pnlTotalEnergy.setBounds(14, 194, 381, 56);
 		add(pnlTotalEnergy);
 		txtTotalEnergy.setBounds(8, 26, 85, 20);
 		pnlTotalEnergy.add(txtTotalEnergy);
 		JLabel lblev2 = new JLabel("eV");
 		lblev2.setBounds(98, 22, 29, 27);
 		pnlTotalEnergy.add(lblev2);
+
+		final JPanel pnlAttachmentEnergy2 = new JPanel();
+		pnlAttachmentEnergy2.setBounds(14, 139, 381, 49);
+		add(pnlAttachmentEnergy2);
+		pnlAttachmentEnergy2.setBorder(new TitledBorder(null,
+				"attachment energy", TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null));
+		pnlAttachmentEnergy2.setLayout(null);
+		txtHklPlaneSpacing.setBounds(306, 16, 65, 20);
+		pnlAttachmentEnergy2.add(txtHklPlaneSpacing);
+		JLabel lblPlaneSpacing = new JLabel("hkl plane spacing (growth slice width)");
+		lblPlaneSpacing.setBounds(9, 18, 291, 15);
+		pnlAttachmentEnergy2.add(lblPlaneSpacing);
 	}
 
 	public String writeSurface() {

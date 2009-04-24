@@ -33,27 +33,25 @@ import javax.swing.JTextField;
 			super();
 			setLayout(null);
 			
-			pnlTemperature.setBounds(10, 7, 503, 106);
+			pnlTemperature.setBounds(10, 7, 469, 106);
 			add(pnlTemperature);
-			
-			lblFactor.setBounds(10, 105, 299, 47);
-			add(lblFactor);
-			txtFactor.setBounds(314, 120, 80, 22);
-			add(txtFactor);
-			lblTempTol.setBounds(10, 149, 213, 21);
-			add(lblTempTol);
-			txtTtol.setBounds(314, 150, 80, 19);
-			add(txtTtol);
 			
 			final TitledPanel pnlOptions = new TitledPanel();
 			pnlOptions.setLayout(null);
-			pnlOptions.setBounds(0, 188, 513, 50);
+			pnlOptions.setBounds(10, 119, 469, 143);
 			add(pnlOptions);
 			pnlOptions.setTitle("options");
 
-			chkWriteRestartFiles.setBounds(0, 20, 495, 25);
+			chkWriteRestartFiles.setBounds(10, 25, 495, 25);
 			pnlOptions.add(chkWriteRestartFiles);
 			chkWriteRestartFiles.addActionListener(keyWriteRestartFiles);
+			
+			lblFactor.setBounds(10, 53, 299, 47);
+			pnlOptions.add(lblFactor);
+			pnlOptions.add(txtFactor);
+			lblTempTol.setBounds(10, 106, 213, 21);
+			pnlOptions.add(lblTempTol);
+			pnlOptions.add(txtTtol);
 		}
 
 		private String writeFactor() {
@@ -62,6 +60,7 @@ import javax.swing.JTextField;
 				Double.parseDouble(txtFactor.getText());
 				lines = "factor " + txtFactor.getText() + Back.newLine;
 			}
+			txtFactor.setBounds(315, 58, 80, 22);
 			return lines;
 		}
 		
@@ -71,10 +70,14 @@ import javax.swing.JTextField;
 				Double.parseDouble(txtTtol.getText());
 				lines = "ttol " + txtTtol.getText() + Back.newLine;
 			}
+			txtTtol.setBounds(315, 107, 80, 19);
 			return lines;
 		}
 
 		public String writeSimulatedAnnealing() {
 			return pnlTemperature.writeTemperature() + writeFactor() + writeTempTolerance();
 		}
+		/**
+		 * @return
+		 */
 	}

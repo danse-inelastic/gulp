@@ -52,23 +52,23 @@ public class FreeEnergy extends JPanel implements Serializable {
 //		//panel.add(chkFreeEnergy);
 //		add(chkFreeEnergy);
 //		chkFreeEnergy.addActionListener(keyFreeEnergy);
-		chkUseTheZero.setBounds(39, 59, 419, 30);
+		chkUseTheZero.setBounds(7, 10, 419, 30);
 		//panel.add(chkUseTheZero);
 		add(chkUseTheZero);
 		chkUseTheZero.addActionListener(keyUseTheZero);
-		chkRunStaticOptimisation.setBounds(6, 95, 451, 25);
+		chkRunStaticOptimisation.setBounds(7, 46, 451, 25);
 		add(chkRunStaticOptimisation);
 		//panel.add(chkRunStaticOptimisation);
 		chkRunStaticOptimisation.addActionListener(keyRunStaticOptimisation);
 
-		pnlTemperature.setBounds(464, 158, 398, 123);
+		pnlTemperature.setBounds(461, 88, 398, 123);
 		//panel.add(pnlTemperature);
 		add(pnlTemperature);
 
 		//panel.add(pnlMaxRange);
 		add(pnlMaxRange);
 		pnlMaxRange.setTitle("maximum search range");
-		pnlMaxRange.setBounds(10, 147, 448, 134);
+		pnlMaxRange.setBounds(7, 77, 448, 134);
 		pnlMaxRange.setToolTipText("<html>For free energy minimisation, parameter sets the maximum<br>"
 						+ "search range for pairs of atoms interacting via the same many<br>"
 						+ "body term that gives a contribution to the third derivatives.<br>"
@@ -81,17 +81,17 @@ public class FreeEnergy extends JPanel implements Serializable {
 						+ "are needed then a value of 3.0 should be used to check<br>"
 						+ "the influence. Negative values and values greater than 3.0 are<br>"
 						+ "disallowed as being stupid!</html>");
-		txtscmaxsearch.setBounds(225, 107, 87, 20);
+		txtscmaxsearch.setBounds(222, 92, 87, 20);
 		pnlMaxRange.add(txtscmaxsearch);
-		lblMaximumSearchRange.setBounds(10, 10, 328, 77);
+		lblMaximumSearchRange.setBounds(10, 24, 328, 62);
 		pnlMaxRange.add(lblMaximumSearchRange);
-		lblDensityCutoff.setBounds(10, 109, 209, 15);
+		lblDensityCutoff.setBounds(10, 92, 209, 15);
 		pnlMaxRange.add(lblDensityCutoff);
 
 		//panel.add(pnlFreeEnergy);
 		add(pnlFreeEnergy);
 		pnlFreeEnergy.setTitle("free energy from band of frequencies");
-		pnlFreeEnergy.setBounds(464, 10, 398, 134);
+		pnlFreeEnergy.setBounds(464, 10, 398, 72);
 		lblLowestBand.setBounds(10, 22, 244, 15);
 		pnlFreeEnergy.add(lblLowestBand);
 		lblHighestBand.setBounds(10, 43, 244, 15);

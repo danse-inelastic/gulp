@@ -29,6 +29,10 @@ public class StructurePrediction extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Back.getTaskKeywords().putTaskKeywords(structurePredTypes.get(cboTypeOfPrediction.getSelectedItem()));
+			if (cboTypeOfPrediction.getSelectedItem().equals("genetic algorithms"))
+				scrollPane.setViewportView(pnlGeneticAlgorithm);
+			else
+				scrollPane.setViewportView(pnlSimulatedAnnealing);
 		}
 	};
 	private JComboBox cboTypeOfPrediction = new JComboBox(new String[] {

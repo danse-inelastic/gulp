@@ -2,6 +2,8 @@ package javagulp.view.phonons;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
@@ -9,10 +11,12 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
+import javax.swing.ButtonGroup;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -20,6 +24,10 @@ import javax.swing.border.TitledBorder;
 
 public class GammaPointCalculation extends JPanel implements Serializable {
 
+	private ButtonGroup btnGrpNonAnalyticCorrection = new ButtonGroup();
+	private JRadioButton specifyDirectionOfRadioButton;
+	private JRadioButton averageRadioButton;
+	private TitledPanel pnlNonAnalyticCorrectionRadioButtons;
 	private static final long serialVersionUID = -3092558433728257906L;
 
 	private TitledPanel pnlFrequencyOptions = new TitledPanel("calculate frequency");
@@ -83,7 +91,7 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		lblFinalFrequency.setBounds(10, 118, 168, 14);
 		lblFinalFreq.setBorder(new LineBorder(Color.black, 1, false));
 		lblFinalFreq.setBounds(195, 115, 59, 20);
-		lblRelatedProperties.setBounds(10, 18, 355, 15);
+		lblRelatedProperties.setBounds(10, 18, 295, 15);
 
 		txtomegafrequency.setBounds(195, 37, 59, 20);
 		txtomegafrequency_step.setBounds(195, 63, 59, 20);
@@ -132,7 +140,7 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		pnlDirections.setTitle("frequency-dependent in/out directions");
 		pnlDirections.setBounds(331, 69, 299, 90);
 		
-		pnlCorrections.setBounds(384, 333, 344, 149);
+		pnlCorrections.setBounds(10, 229, 368, 180);
 		pnlCorrections.setLayout(new CardLayout());
 		pnlCorrections.add(pnlGammaApproach, pnlGammaApproach.getName());
 		add(pnlCorrections);
@@ -142,8 +150,9 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		pnlCorrections.add(pnlAngularPoints, pnlAngularPoints.getName());
 		pnlAngularPoints.add(lblNumberOfAngular);
 		pnlAngularPoints.add(txtgammastepsnum);
-		lblNumberOfAngular.setBounds(10, 9, 306, 61);
+		lblNumberOfAngular.setBounds(10, 21, 348, 49);
 		txtgammastepsnum.setBounds(10, 76, 102, 20);
+		add(getPanel());
 
 	}
 
@@ -256,6 +265,57 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 	public String writeGammaPointCorrection() throws InvalidOptionException,
 			IncompleteOptionException {
 		return writeGammaAngularSteps() + pnlGammaApproach.writeGammaApproach();
+	}
+	/**
+	 * @return
+	 */
+	protected TitledPanel getPanel() {
+		if (pnlNonAnalyticCorrectionRadioButtons == null) {
+			pnlNonAnalyticCorrectionRadioButtons = new TitledPanel();
+			pnlNonAnalyticCorrectionRadioButtons.setTitle("nonanalytic correction to LO/TO splitting");
+			pnlNonAnalyticCorrectionRadioButtons.setBounds(10, 165, 368, 58);
+			pnlNonAnalyticCorrectionRadioButtons.add(getAverageRadioButton());
+			pnlNonAnalyticCorrectionRadioButtons.add(getSpecifyDirectionOfRadioButton());
+		}
+		return pnlNonAnalyticCorrectionRadioButtons;
+	}
+	/**
+	 * @return
+	 */
+	protected JRadioButton getAverageRadioButton() {
+		if (averageRadioButton == null) {
+			averageRadioButton = new JRadioButton();
+			averageRadioButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					if (averageRadioButton.isSelected()){
+						((CardLayout) pnlCorrections.getLayout()).show(pnlCorrections, pnlAngularPoints.getName());
+					}
+				}
+			});
+			btnGrpNonAnalyticCorrection.add(averageRadioButton);
+			averageRadioButton.setText("average");
+			averageRadioButton.setBounds(10, 25, 103, 23);
+		}
+		return averageRadioButton;
+	}
+	/**
+	 * @return
+	 */
+	protected JRadioButton getSpecifyDirectionOfRadioButton() {
+		if (specifyDirectionOfRadioButton == null) {
+			specifyDirectionOfRadioButton = new JRadioButton();
+			specifyDirectionOfRadioButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					if (averageRadioButton.isSelected()){
+						((CardLayout) pnlCorrections.getLayout()).show(pnlCorrections, pnlGammaApproach.getName());
+					}
+				}
+			});
+			btnGrpNonAnalyticCorrection.add(specifyDirectionOfRadioButton);
+			specifyDirectionOfRadioButton.setText("specify direction of approach");
+			specifyDirectionOfRadioButton.setBounds(119, 25, 239, 23);
+		}
+		return specifyDirectionOfRadioButton;
 	}
 
 

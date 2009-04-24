@@ -45,13 +45,13 @@ public class Temperature extends TitledPanel implements Serializable {
 		lblNumSteps.setBounds(10, 70, 136, 15);
 		add(lblNumSteps);
 		txtTempScaling.setBackground(Back.grey);
-		txtTempScaling.setBounds(240, 15, 236, 43);
+		txtTempScaling.setBounds(240, 15, 195, 47);
 		add(txtTempScaling);
 		txtFirstStep.setBackground(Back.grey);
-		txtFirstStep.setBounds(272, 65, 46, 19);
+		txtFirstStep.setBounds(272, 68, 46, 19);
 		add(txtFirstStep);
 		txtFirstStep.setEnabled(false);
-		lblTimeStep.setBounds(240, 67, 26, 15);
+		lblTimeStep.setBounds(240, 70, 26, 15);
 		add(lblTimeStep);
 	}
 

@@ -114,10 +114,14 @@ public class GulpRun extends JPanel implements Serializable {
 		
 		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
 		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
-		try{
+		if(cgiMap.containsKey("sentry.ticket")&&(cgiMap.get("sentry.ticket")!=null)){
 			String val = cgiMap.get("sentry.ticket");
 			keyValsForMatter.put("sentry.ticket", val);
-		} catch(Exception e){
+//		}
+//		try{
+//			String val = cgiMap.get("sentry.ticket");
+//			keyValsForMatter.put("sentry.ticket", val);
+		} else {
 			String val = cgiMap.get("sentry.passwd");
 			keyValsForMatter.put("sentry.passwd", val);
 		}

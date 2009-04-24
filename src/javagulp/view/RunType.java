@@ -25,7 +25,7 @@ public class RunType extends JPanel implements Serializable {
 
 	private String[] runTypeLabels = {"molecular dynamics", "monte carlo", 
 			"energetics and material properties", "optimization", "fit", "phonons", 
-			"free energy calc/optimize", "transition state", 
+			"free energy calc/optimize", "surface calc/optimize", "transition state", 
 			"structure prediction"};
 	
 //	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
@@ -34,6 +34,8 @@ public class RunType extends JPanel implements Serializable {
 
 	//TODO probably should combine free energy with optimize and energy tabs with option panel and/or checkbox in each which, if checked,
 	//would replace the task keyword with the free energy keyword and still allow the user to input pertinent options (i.e. optimization options)
+	
+	//TODO should also combine surface with optimize and energy tabs with option panel 
 	
 	//TODO
 	//instead of three maps one should actually have made a bunch of small classes...
@@ -50,6 +52,7 @@ public class RunType extends JPanel implements Serializable {
 			put("fit", "Fit"); 
 			put("phonons", "Phonons"); 
 			put("free energy calc/optimize", "FreeEnergy"); 
+			put("surface calc/optimize", "SurfaceOptions");
 			put("transition state", "TransitionState"); 
 			put("structure prediction", "StructurePrediction"); 
 		}  
@@ -67,6 +70,7 @@ public class RunType extends JPanel implements Serializable {
 			put("fit", null); 
 			put("phonons", null); 
 			put("free energy calc/optimize", null); 
+			put("surface calc/optimize", null);
 			put("transition state", null); 
 			put("structure prediction", null); 
 		}  
@@ -84,6 +88,7 @@ public class RunType extends JPanel implements Serializable {
 				put("fit", "fit"); 
 				put("phonons", "phonon"); 
 				put("free energy calc/optimize", "free_energy"); 
+				put("surface calc/optimize", "");
 				put("transition state", "transition_state"); 
 				put("structure prediction", "predict"); 
 			}  
