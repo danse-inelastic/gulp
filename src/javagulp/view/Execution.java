@@ -126,13 +126,13 @@ public class Execution extends JPanel implements Serializable {
 				// run on vnf or locally or remotely 
 				if (radVnf.isSelected()) {
 					//get files as strings
-					String currentInputFile = Back.getPanel().getOutput().selectedInputFile;
+					String currentInputFile = Back.getCurrentRun().getOutput().selectedInputFile;
 					if(currentInputFile.equals("input.gin"))
-						Back.getPanel().getOutput().updateInputGin();
-					String gulpInputFile = Back.getPanel().getOutput().inputFileMap.get(currentInputFile);
-					String gulpLibrary = Back.getPanel().getPotential().libraryContents;
-					String librarySelected = Back.getPanel().getPotential().librarySelected;//post the files
-					Map<String,String> cgiMap = Back.getPanel().cgiMap;
+						Back.getCurrentRun().getOutput().updateInputGin();
+					String gulpInputFile = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
+					String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
+					String librarySelected = Back.getCurrentRun().getPotential().librarySelected;//post the files
+					Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 
 					String cgihome = cgiMap.get("cgihome");
 					CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
@@ -141,6 +141,7 @@ public class Execution extends JPanel implements Serializable {
 					cgiMap.put("actor.configurations", gulpInputFile);
 					cgiMap.put("actor.librarycontent", gulpLibrary);
 					cgiMap.put("actor.libraryname", librarySelected);
+					cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
 					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.postAndGetString();
@@ -155,14 +156,14 @@ public class Execution extends JPanel implements Serializable {
 					//System.exit(0);
 				} else if (radLocal.isSelected()) {
 					logJob();
-					if (Back.getPanel().getBinary().equals("")) {
+					if (Back.getCurrentRun().getBinary().equals("")) {
 						JOptionPane.showMessageDialog(Back.frame,
 						"Please locate the gulp executable under the file menu.");
 						return;
 					}
-					File f = new File(Back.getPanel().getWD() + "/"
-							+ Back.getPanel().getOutput().selectedInputFile);
-					if (!f.exists() || Back.getPanel().getOutput().lastViewed == Long.MAX_VALUE) {
+					File f = new File(Back.getCurrentRun().getWD() + "/"
+							+ Back.getCurrentRun().getOutput().selectedInputFile);
+					if (!f.exists() || Back.getCurrentRun().getOutput().lastViewed == Long.MAX_VALUE) {
 						JOptionPane.showMessageDialog(null,
 						"Please view your input file first.");
 						return;
@@ -173,7 +174,7 @@ public class Execution extends JPanel implements Serializable {
 //					} else {
 //						contents = Back.writer.gulpInputFileToString();
 //					}
-					contents = Back.getPanel().getOutput().inputFileMap.get(Back.getPanel().getOutput().selectedInputFile);
+					contents = Back.getCurrentRun().getOutput().inputFileMap.get(Back.getCurrentRun().getOutput().selectedInputFile);
 					if (e == null)
 						executeLocal(true);
 					else
@@ -190,13 +191,13 @@ public class Execution extends JPanel implements Serializable {
 			//queue jobs
 			jobs.clear();
 			if (chkSeparate.isSelected()) {
-				int temp = Back.getPanel().getStructures().tabs.getSelectedIndex();
-				for (int i=0; i < Back.getPanel().getStructures().tabs.getTabCount(); i++) {
-					Back.getPanel().getStructures().tabs.setSelectedIndex(i);
+				int temp = Back.getCurrentRun().getStructures().tabs.getSelectedIndex();
+				for (int i=0; i < Back.getCurrentRun().getStructures().tabs.getTabCount(); i++) {
+					Back.getCurrentRun().getStructures().tabs.setSelectedIndex(i);
 					String[] contents = {Back.getStructure().atomicCoordinates.txtName.getText(), Back.writer.gulpInputFileToString()};
 					jobs.add(contents);
 				}
-				Back.getPanel().getStructures().tabs.setSelectedIndex(temp);
+				Back.getCurrentRun().getStructures().tabs.setSelectedIndex(temp);
 			} else {
 				jobs.add(new String[]{"", Back.writer.gulpInputFileToString()});
 			}
@@ -263,11 +264,11 @@ public class Execution extends JPanel implements Serializable {
 	private void executeRemote() {
 		int numSimultaneous = 1;
 		try {
-			numSimultaneous = Integer.parseInt(Back.getPanel().getExecution().txtMultiple.getText());
+			numSimultaneous = Integer.parseInt(Back.getCurrentRun().getExecution().txtMultiple.getText());
 		} catch (NumberFormatException nfe) {
 		}
 		for (int j=0; j < numSimultaneous; j++) {
-			final Execution ex = Back.getPanel().getExecution();
+			final Execution ex = Back.getCurrentRun().getExecution();
 			for (int i=0; i < ex.hostsListModel.size(); i++) {
 				final String hostname = (String) ex.hostsListModel.get(i);
 				final PasswordAuthenticationClient pwd = new PasswordAuthenticationClient();
@@ -284,7 +285,7 @@ public class Execution extends JPanel implements Serializable {
 						String[] job = null;
 						String localDir = System.getProperty("user.home") + Back.newLine + System.nanoTime();//random directory
 						while ((job = getJob()) != null) {
-							String path = Back.getPanel().getWD() + Back.newLine + job[0];
+							String path = Back.getCurrentRun().getWD() + Back.newLine + job[0];
 							//create intermediate directories
 							new File(localDir).mkdir();
 							String jobDir = localDir + Back.newLine + job[0];
@@ -294,12 +295,12 @@ public class Execution extends JPanel implements Serializable {
 
 							//write out the files
 							try {
-								FileWriter fw = new FileWriter(jobDir + Back.newLine + Back.getPanel().getOutput().selectedInputFile);
+								FileWriter fw = new FileWriter(jobDir + Back.newLine + Back.getCurrentRun().getOutput().selectedInputFile);
 								fw.write(job[1]);
 								fw.close();
-								sendFiles(hostname, path + Back.newLine, new String[]{Back.getPanel().getOutput().selectedInputFile}, jobDir + "/", pwd);
+								sendFiles(hostname, path + Back.newLine, new String[]{Back.getCurrentRun().getOutput().selectedInputFile}, jobDir + "/", pwd);
 
-								String gulpCommand = Back.getPanel().getBinary() + " < " + Back.getPanel().getOutput().selectedInputFile + " > " + Back.getPanel().getOutput().txtOutputFile.getText();
+								String gulpCommand = Back.getCurrentRun().getBinary() + " < " + Back.getCurrentRun().getOutput().selectedInputFile + " > " + Back.getCurrentRun().getOutput().txtOutputFile.getText();
 
 								if (ex.radPBS.isSelected()) {
 									String str = null;
@@ -362,7 +363,7 @@ public class Execution extends JPanel implements Serializable {
 	private void executeLocal(boolean synchronous) {
 		int parallel = 1;
 		try {
-			parallel = Integer.parseInt(Back.getPanel().getExecution().txtMultiple.getText());
+			parallel = Integer.parseInt(Back.getCurrentRun().getExecution().txtMultiple.getText());
 		} catch (NumberFormatException nfe) {
 
 		}
@@ -373,16 +374,16 @@ public class Execution extends JPanel implements Serializable {
 					String[] job = null;
 					while ((job = getJob()) != null) {
 						//create directory
-						String path = Back.getPanel().getWD() + Back.newLine + job[0];
+						String path = Back.getCurrentRun().getWD() + Back.newLine + job[0];
 						File directory = new File(path);
 						directory.mkdir();
 
 						try {
-							Back.getPanel().getExecution().addStatus(job[0], "localhost");
-							Back.getPanel().getExecution().updateStatus(job[0], "running");
+							Back.getCurrentRun().getExecution().addStatus(job[0], "localhost");
+							Back.getCurrentRun().getExecution().updateStatus(job[0], "running");
 							String[] commands = new String[] {
-									Back.getPanel().getBinary(), Back.getPanel().getOutput().selectedInputFile,
-									Back.getPanel().getOutput().txtOutputFile.getText() };
+									Back.getCurrentRun().getBinary(), Back.getCurrentRun().getOutput().selectedInputFile,
+									Back.getCurrentRun().getOutput().txtOutputFile.getText() };
 							Process p = Runtime.getRuntime().exec(commands, null, directory);
 							BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 							bw.write(job[1]);
@@ -390,7 +391,7 @@ public class Execution extends JPanel implements Serializable {
 
 							BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 							BufferedWriter writer = new BufferedWriter(
-									new FileWriter(path + Back.newLine + Back.getPanel().getOutput().txtOutputFile.getText()));
+									new FileWriter(path + Back.newLine + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
 							String line = "";
 							while ((line = br.readLine()) != null) {
 								writer.write(line + System.getProperty("line.separator"));
@@ -398,7 +399,7 @@ public class Execution extends JPanel implements Serializable {
 							br.close();
 							writer.close();
 							p.waitFor();
-							Back.getPanel().getExecution().updateStatus(job[0], "done");
+							Back.getCurrentRun().getExecution().updateStatus(job[0], "done");
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						} catch (InterruptedException e1) {

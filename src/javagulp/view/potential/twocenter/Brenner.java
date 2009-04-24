@@ -36,7 +36,7 @@ public class Brenner extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws InvalidOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String one = (String) pot.pnlAtom.cboAtom[0].getSelectedItem();
 		String two = (String) pot.pnlAtom.cboAtom[1].getSelectedItem();
 		if (one.endsWith(" core"))

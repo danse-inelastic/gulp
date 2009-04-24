@@ -67,7 +67,7 @@ public class Sw3 extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String lines = "sw3 " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();

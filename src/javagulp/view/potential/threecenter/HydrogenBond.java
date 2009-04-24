@@ -105,7 +105,7 @@ public class HydrogenBond extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String m = txtM.getText(), n = txtN.getText(), p = txtP.getText(),
 			min = txtThetaMin.getText(), max = txtThetaMax.getText();
 		

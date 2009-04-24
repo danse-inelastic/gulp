@@ -68,7 +68,7 @@ public class Tsuneyuki extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		JTextField[] fields = { txtQ1, txtQ2, txtZeta };
 		String[] descriptions = { "Q1", "Q2", "zeta" };
 		Back.checkAllNonEmpty(fields, descriptions);

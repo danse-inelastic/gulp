@@ -72,7 +72,7 @@ public class LJBuffered extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		String lines = "";
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		PPP[] fields = {a, b, r0};
 		Back.checkAndParseD(fields);
 		

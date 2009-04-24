@@ -119,7 +119,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 		Back.checkAndParseD(p);
 		Back.checkAndParseD(c);
 		
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		String lines = "murrell-mottram " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)

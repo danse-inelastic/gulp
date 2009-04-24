@@ -60,7 +60,7 @@ public class ThreeBodyExponentialHarmonic extends PotentialPanel implements
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		String lines = "three exponential "
 				+ pot.threeAtomBondingOptions.getAll() + Back.newLine

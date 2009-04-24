@@ -72,7 +72,7 @@ public class RunType extends JPanel implements Serializable {
 		}  
 		};
 		
-		private Map<String, String> runTypeKeywords =   
+	private Map<String, String> runTypeKeywords =   
 			new HashMap<String, String>()   
 			{  
 			//Anonymous Inner class  
@@ -91,7 +91,7 @@ public class RunType extends JPanel implements Serializable {
 
 	//public JPanel[] runTypes = new JPanel[labelsAndClasses.size()];
 	
-	private JComboBox cboRunType = new JComboBox(runTypeLabels);
+	protected JComboBox cboRunType = new JComboBox(runTypeLabels);
 //	private GeneticAlgorithm pnlGeneticAlgorithm = new GeneticAlgorithm();
 //	private SimulatedAnnealing pnlSimulatedAnnealing = new SimulatedAnnealing();
 	private JScrollPane scrollPane = new JScrollPane();
@@ -103,13 +103,13 @@ public class RunType extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String type = (String)cboRunType.getSelectedItem();
-			scrollPane.add(getRunType(type));
-			scrollPane.setViewportView(getRunType(type));
+			scrollPane.add(getSelectedRunTypePanel(type));
+			scrollPane.setViewportView(getSelectedRunTypePanel(type));
 			Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));
 		}
 	};
 	
-	public JPanel getRunType(String type){
+	protected JPanel getSelectedRunTypePanel(String type){
 		if (runTypes.get(type) == null) {
 			String pkg = "javagulp.view.";
 			try {

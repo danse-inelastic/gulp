@@ -25,7 +25,7 @@ public class DispersionKpoint extends JPanel implements Serializable {
 		private static final long serialVersionUID = 1268594961778847795L;
 		@Override
 		public void keyReleased(KeyEvent e) {
-			((Phonons)Back.getPanel().getRunType("phonons")).pnlDispersion.dispersionModified = true;
+			((Phonons)Back.getCurrentRun().getSelectedRunTypePanel("phonons")).pnlDispersion.dispersionModified = true;
 		}
 	};
 	

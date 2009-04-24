@@ -70,7 +70,7 @@ public class Bacross extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException,
 			NumberFormatException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
 
 		String lines = "bacross " + pot.threeAtomBondingOptions.getAll();

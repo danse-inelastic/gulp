@@ -71,7 +71,7 @@ public class Bcoscross extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "bcoscross " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)

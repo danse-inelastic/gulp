@@ -64,7 +64,7 @@ public class Spring extends PotentialPanel implements Serializable {
 			throw new IncompleteOptionException("Please enter a value for k2");
 		Double.parseDouble(k2.txt.getText());
 
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String lines = "spring ";
 //		if (cboUnits.getSelectedIndex() != 0)
 //			lines += cboUnits.getSelectedItem();

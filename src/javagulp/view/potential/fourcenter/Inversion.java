@@ -102,7 +102,7 @@ public class Inversion extends PotentialPanel implements Serializable {
 		String lines = "inversion ";
 		if (chkSquared.isSelected())
 			lines += "squared ";
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();

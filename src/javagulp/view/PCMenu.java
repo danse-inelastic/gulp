@@ -70,7 +70,7 @@ public class PCMenu extends JMenuBar implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(frame)) {
 				try {
 					ObjectInput oi = new ObjectInputStream(new FileInputStream(fileDialog.getSelectedFile()));
@@ -99,7 +99,7 @@ public class PCMenu extends JMenuBar implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(frame)) {
 				try {
 					ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(fileDialog.getSelectedFile()));

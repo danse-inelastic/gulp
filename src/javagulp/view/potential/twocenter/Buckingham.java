@@ -104,7 +104,7 @@ public class Buckingham extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "buckingham " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)

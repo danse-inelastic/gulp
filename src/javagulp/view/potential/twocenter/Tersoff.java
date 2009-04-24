@@ -101,7 +101,7 @@ public class Tersoff extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		JTextField[] fields = { txtA, txtB, txtZa, txtZb, txtRTaper, txtrmax };
 		String[] descriptions = { "A", "B", "za", "zb", "rtaper", "rmax" };
 		Back.checkAllNonEmpty(fields, descriptions);

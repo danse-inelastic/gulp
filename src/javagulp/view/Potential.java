@@ -111,9 +111,9 @@ private LibraryListener listMouseListener = new LibraryListener();
 		@Override
 		public void actionPerformed(ActionEvent e) {
 				JFileChooser findLibrary = new JFileChooser();
-				findLibrary.setCurrentDirectory(new File(Back.getPanel().getWD()));
+				findLibrary.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 				if (JFileChooser.APPROVE_OPTION == findLibrary.showOpenDialog(getParent())) {
-					final File newLocation = new File(Back.getPanel().getWD() + "/"
+					final File newLocation = new File(Back.getCurrentRun().getWD() + "/"
 									+ findLibrary.getSelectedFile().getName());
 					try {
 						new JCopy().copy(findLibrary.getSelectedFile(), newLocation);
@@ -134,7 +134,7 @@ private LibraryListener listMouseListener = new LibraryListener();
 		String lines = "";
 		if (librarySelected!="none")
 			lines = "library " + librarySelected;
-		if (Back.getPanel().getPotentialOptions().chkDoNotInclude.isSelected())
+		if (Back.getCurrentRun().getPotentialOptions().chkDoNotInclude.isSelected())
 			lines += " nodump";
 		if (lines!="")
 			lines += Back.newLine;

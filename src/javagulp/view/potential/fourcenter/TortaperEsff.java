@@ -81,7 +81,7 @@ public class TortaperEsff extends PotentialPanel implements Serializable {
 		Back.checkAndParseD(params);
 		JTextField[] fields = { txtN, txtRTaper};
 		String[] descriptions = { "n", "rtaper"};
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 		

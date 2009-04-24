@@ -100,7 +100,7 @@ public class Lennard extends PotentialPanel implements Serializable {
 			throw new IncompleteOptionException("Please enter a value for m");
 		if (txtN.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a value for n");
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Boolean all = false;
 		
 		String lines = "lennard ", values = "", fits = "";

@@ -65,7 +65,7 @@ public class CovExp extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		String lines = "covexp " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)

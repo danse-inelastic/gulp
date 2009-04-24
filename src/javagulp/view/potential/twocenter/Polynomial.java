@@ -98,7 +98,7 @@ public class Polynomial extends PotentialPanel implements Serializable {
 			coefs[i] = params[i];
 		}
 		Back.checkAndParseD(coefs);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		lines = "polynomial " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)

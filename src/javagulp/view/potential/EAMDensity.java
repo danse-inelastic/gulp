@@ -61,7 +61,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, B, R0 };
 			Back.checkAndParseD(boxes);
-			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+			CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			String lines = "eam_density gaussian ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";
@@ -107,7 +107,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, Beta };
 			Back.checkAndParseD(boxes);
-			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+			CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			String lines = "eam_density voter ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem();
@@ -155,7 +155,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 			String lines = "eam_density power ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";
-			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+			CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			if (!N.txt.getText().equals(""))
 				lines += N.txt.getText();
 			lines += Back.newLine + pot.getAtomCombos() + Back.fieldsAndFits(boxes) + Back.newLine;
@@ -205,7 +205,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, R0 };
 			Back.checkAndParseD(boxes);
-			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+			CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			String pow = "";
 			if (power == 2)
 				pow = "quadratic";
@@ -262,7 +262,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			PPP[] boxes = { A, B, R0 };
 			Back.checkAndParseD(boxes);
-			CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+			CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			String lines = "eam_density exponential ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";

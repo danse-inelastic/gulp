@@ -91,7 +91,7 @@ public class Back {
 	public void addTab(String[] simulationParams) {
 		GulpRun gulpRun = new GulpRun();
 		tabs.add("" + (tabs.getTabCount() + 1), gulpRun);
-		getPanel().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
+		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 		gulpRun.processArguments(simulationParams);
 	}
@@ -118,16 +118,20 @@ public class Back {
 	 * 
 	 * @return the current instance of GulpRun
 	 */
-	public static GulpRun getPanel() {
+	public static GulpRun getCurrentRun() {
 		return (GulpRun) tabs.getComponent(tabs.getSelectedIndex());
 	}
 	
-	public static JPanel getRunType(String type) {
-		return getPanel().getRunType(type);
+	public static String getRunTypeKeyword() {
+		return getCurrentRun().getRunTypeKeyword();
+	}
+	
+	public static JPanel getSelectedRunTypePanel(String type) {
+		return getCurrentRun().getSelectedRunTypePanel(type);
 	}
 	
 	public static Structure getStructure() {
-		return (Structure) getPanel().getStructures().tabs.getSelectedComponent();
+		return (Structure) getCurrentRun().getStructures().tabs.getSelectedComponent();
 	}
 
 	/**
@@ -136,11 +140,11 @@ public class Back {
 	 * @return the current instance of Keywords
 	 */
 	public static Keywords getKeys() {
-		return getPanel().getKeywords();
+		return getCurrentRun().getKeywords();
 	}
 	
 	public static TaskKeywords getTaskKeywords() {
-		return getPanel().getTaskKeywords();
+		return getCurrentRun().getTaskKeywords();
 	}
 	
 	/**
@@ -148,7 +152,7 @@ public class Back {
 	 */
 	public static void clearTab() {
 		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
-		getPanel().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
+		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 	}
 	
 	/**

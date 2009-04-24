@@ -82,7 +82,7 @@ public class DampedDispersion extends PotentialPanel implements Serializable {
 		// except c6, but also claims c6, c8, and c10 must be specified.
 		PPP[] fields = {c6, c8, c10};
 		Back.checkAndParseD(fields);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		String lines = "damped " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)

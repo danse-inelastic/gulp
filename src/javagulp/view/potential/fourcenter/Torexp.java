@@ -130,7 +130,7 @@ public class Torexp extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		if (txtN.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a value for n");
 		Double.parseDouble(txtN.getText());

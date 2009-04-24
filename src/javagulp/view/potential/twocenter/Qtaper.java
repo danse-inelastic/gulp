@@ -52,7 +52,7 @@ public class Qtaper extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String line = "qtaper " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			line += cboUnits.getSelectedItem() + " ";

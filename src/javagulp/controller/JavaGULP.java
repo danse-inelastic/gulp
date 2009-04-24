@@ -45,6 +45,6 @@ public class JavaGULP {
 //		else
 //			b.addTab();
 		System.out.println("args.size " + args.size());
-		Back.getPanel().getStructures().importStructures(species, coordinates, args, names);
+		Back.getCurrentRun().getStructures().importStructures(species, coordinates, args, names);
 	}
 }

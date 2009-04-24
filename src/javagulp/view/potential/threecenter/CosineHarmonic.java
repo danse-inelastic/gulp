@@ -50,7 +50,7 @@ public class CosineHarmonic extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "three cosine " + pot.threeAtomBondingOptions.getAll()
 				+ Back.newLine + pot.getAtomCombos() + Back.concatFields(params);

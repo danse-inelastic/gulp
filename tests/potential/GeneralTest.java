@@ -33,7 +33,7 @@ public class GeneralTest extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		CreateLibrary pot = Back.getPanel().getPotential();
+		CreateLibrary pot = Back.getCurrentRun().getPotential();
 		pot.potentialNumber = 2;
 		pot.pnlAtom.cboAtom[0].addItem("H");
 		pot.pnlAtom.cboAtom[1].addItem("N");

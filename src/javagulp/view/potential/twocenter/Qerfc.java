@@ -62,7 +62,7 @@ public class Qerfc extends PotentialPanel implements Serializable {
 
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String line = "qerfc " + pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			line += cboUnits.getSelectedItem() + " ";

@@ -57,7 +57,7 @@ public class UreyBradley extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		String lines = "urey-bradley " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)

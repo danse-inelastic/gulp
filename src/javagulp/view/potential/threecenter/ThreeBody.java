@@ -79,7 +79,7 @@ public class ThreeBody extends PotentialPanel implements Serializable {
 			lines += "k3 ";
 		if (K4())
 			lines += "k4 ";
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();

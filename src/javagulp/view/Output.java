@@ -83,10 +83,10 @@ public class Output extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			File output = new File(Back.getPanel().getWD() + Back.newLine
+			File output = new File(Back.getCurrentRun().getWD() + Back.newLine
 					+ txtOutputFile.getText());
 			if (output.exists()) {
-				File f = new File(Back.getPanel().getWD() + Back.newLine
+				File f = new File(Back.getCurrentRun().getWD() + Back.newLine
 						+ txtOutputFile.getText());
 				Nutpad nut = new Nutpad(f);
 				nut.setLocationRelativeTo(getParent());

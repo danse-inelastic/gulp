@@ -181,7 +181,7 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 	};
 
-	private JPanel getTopPanel(int index) {
+	JPanel getTopPanel(int index) {
 		if (top[index] == null) {
 			String pkg = "javagulp.view.";
 			try {
@@ -222,11 +222,15 @@ public class GulpRun extends JPanel implements Serializable {
 		return taskKeywords;
 	}
 	
+	public String getRunTypeKeyword() {
+		return (String) ((RunType) getTopPanel(0)).cboRunType.getSelectedItem();
+	}	
+	
 	//Top
 
 	
-	public JPanel getRunType(String type) {
-		return ((RunType) getTopPanel(0)).getRunType(type);
+	public JPanel getSelectedRunTypePanel(String type) {
+		return ((RunType) getTopPanel(0)).getSelectedRunTypePanel(type);
 	}
 	
 	public Constraints getConstraints() {

@@ -81,7 +81,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 				Double.parseDouble(txtPhi0.getText());
 				lines += txtPhi0.getText() + " ";
 			}
-			if (!Back.getPanel().getPotential().createLibrary.threeAtomBondingOptions.Bond()) {
+			if (!Back.getCurrentRun().getPotential().createLibrary.threeAtomBondingOptions.Bond()) {
 				lines += radii.writeRadii();
 				if (cbormax41.getSelectedIndex() != 1)
 					lines += cbormax41.getSelectedItem();
@@ -143,7 +143,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 			if (cboISign.getSelectedItem().equals("-"))
 				lines += "- ";
 			lines += txtN.getText() + " ";
-			if (!Back.getPanel().getPotential().createLibrary.threeAtomBondingOptions.Bond()) {
+			if (!Back.getCurrentRun().getPotential().createLibrary.threeAtomBondingOptions.Bond()) {
 				lines += radii.writeRadii();
 				if (cbormax41.getSelectedIndex() != 1)
 					lines += cbormax41.getSelectedItem();
@@ -227,7 +227,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "";
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			if (cbormax41.getSelectedItem() == null
 					|| cbormax41.getSelectedItem().equals(""))

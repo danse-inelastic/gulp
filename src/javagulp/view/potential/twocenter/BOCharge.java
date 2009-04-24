@@ -58,7 +58,7 @@ public class BOCharge extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		JTextField[] fields = { txtDelta };
 		String[] descriptions = { "delta" };
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 

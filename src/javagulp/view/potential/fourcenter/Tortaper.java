@@ -84,7 +84,7 @@ public class Tortaper extends PotentialPanel implements Serializable {
 		String[] descriptions = { "k", "n", "rtaper"};
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		
 		String lines = "tortaper " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)

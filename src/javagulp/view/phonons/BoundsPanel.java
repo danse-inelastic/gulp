@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 			@Override
 			public void keyReleased(KeyEvent e) {
 				updateBounds();
-				Phonons phPan = (Phonons)Back.getPanel().getRunType("phonons");
+				Phonons phPan = (Phonons)Back.getCurrentRun().getSelectedRunTypePanel("phonons");
 				phPan.pnlDispersion.dispersionModified = true;
 			}
 		};
@@ -70,7 +70,7 @@ import javax.swing.JTextField;
 
 		String writeDispersion() {
 			String output = "";
-			Dispersion disp = ((Phonons)Back.getPanel().getRunType("phonons")).pnlDispersion;
+			Dispersion disp = ((Phonons)Back.getCurrentRun().getSelectedRunTypePanel("phonons")).pnlDispersion;
 			try {
 				if (disp.dispersionModified) {
 					output += "dispersion " + disp.txtLines.getText() + " "

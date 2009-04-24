@@ -113,7 +113,7 @@ public class XYZFit extends JPanel implements Serializable {
 	private File addFile(JTextField box, Object o) {
 		JFileChooser fileDialog = new JFileChooser();
 		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+		fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 		File f = null;
 		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 			f = fileDialog.getSelectedFile();
@@ -135,7 +135,7 @@ public class XYZFit extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 				File file = fileDialog.getSelectedFile();
 				WorkspaceParser wp = new WorkspaceParser(file.getParentFile());
@@ -160,7 +160,7 @@ public class XYZFit extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			ArrayList<PPP> current = new ArrayList<PPP>();
-			CreateLibrary pot = Back.getPanel().getPotential();
+			CreateLibrary pot = Back.getCurrentRun().getPotential();
 			for (PotentialPanel p: pot.potentialPanels) {
 				for (PPP ppp: p.params) {
 					if (ppp.chk.isSelected())
@@ -203,7 +203,7 @@ public class XYZFit extends JPanel implements Serializable {
 
 					//get desired PotentialPanels/PPPs
 					int[] indices1 = null;
-					CreateLibrary pot = Back.getPanel().getPotential();
+					CreateLibrary pot = Back.getCurrentRun().getPotential();
 					if (chkPotentials.isSelected() && pot.potentialList.getSelectedIndex() != -1)
 						indices1 = pot.potentialList.getSelectedIndices();
 					else {
@@ -266,7 +266,7 @@ public class XYZFit extends JPanel implements Serializable {
 								if (chkInitialize.isSelected()) {
 									ppp.txt.setText("" + (r.nextFloat() * (ppp.max - ppp.min) + ppp.min));
 								}
-								Back.getPanel().getOutput().keyRun.actionPerformed(null);
+								Back.getCurrentRun().getOutput().keyRun.actionPerformed(null);
 								ArrayList<PPP> current = new ArrayList<PPP>();
 								current.add(ppp);
 								FitParams fp;
@@ -405,8 +405,8 @@ public class XYZFit extends JPanel implements Serializable {
 	private FitParams parse(ArrayList<PPP> ppps) {
 		FitParams fp = null;
 		try {
-			String outputFile = Back.getPanel().getWD()
-			+ "/" + Back.getPanel().getOutput().txtOutputFile.getText();
+			String outputFile = Back.getCurrentRun().getWD()
+			+ "/" + Back.getCurrentRun().getOutput().txtOutputFile.getText();
 			Scanner sc = new Scanner(new File(outputFile));
 			String p = "     Parameter No.       Parameter Value          Parameter Type  Species";
 			String e = "   Observable no.  Type            Observable   Calculated    Residual  Error(%)";

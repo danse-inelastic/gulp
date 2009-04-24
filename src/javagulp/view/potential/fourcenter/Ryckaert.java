@@ -93,7 +93,7 @@ public class Ryckaert extends PotentialPanel implements Serializable {
 		Back.checkAndParseD(c0);
 		Back.checkAndParseD(coefs);
 		
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String lines = "ryckaert " + (index + 1) + Back.newLine
 				+ pot.getAtomCombos() + Back.concatFields(c0) + " "
 				+ radii.writeRadii() + Back.writeFits(c0)

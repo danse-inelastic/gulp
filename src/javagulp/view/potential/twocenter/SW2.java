@@ -55,7 +55,7 @@ public class SW2 extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
 		
 		String lines = "sw2 " + pot.twoAtomBondingOptions.getInterIntraBond();

@@ -101,7 +101,7 @@ public class Harmonic extends PotentialPanel implements Serializable {
 			lines += "k3 ";
 		if (K4())
 			lines += "k4 ";
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";

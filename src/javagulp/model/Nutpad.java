@@ -163,8 +163,8 @@ public class Nutpad extends JFrame {
                 String name = (String)JOptionPane.showInputDialog(
                         Back.frame, "Input the name of the input file", "",
                         JOptionPane.PLAIN_MESSAGE, null, null, "");
-				Back.getPanel().getOutput().inputFileMap.put(name, mEditArea.getText());
-				Back.getPanel().getOutput().inputFileModel.addElement(name);
+				Back.getCurrentRun().getOutput().inputFileMap.put(name, mEditArea.getText());
+				Back.getCurrentRun().getOutput().inputFileModel.addElement(name);
 			}
 		};
 		

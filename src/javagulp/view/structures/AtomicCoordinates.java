@@ -110,7 +110,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 				JFileChooser fileDialog = new JFileChooser();
-				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+				fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 				if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
 					String data = getTable().getData();
 					try {

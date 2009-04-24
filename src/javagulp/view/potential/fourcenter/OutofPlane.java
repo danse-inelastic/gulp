@@ -61,7 +61,7 @@ public class OutofPlane extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String lines = "outofplane " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();

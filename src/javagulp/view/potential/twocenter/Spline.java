@@ -100,7 +100,7 @@ public class Spline extends PotentialPanel implements Serializable {
 		String lines = "spline ";
 		if (cboSplineType.getSelectedIndex() == 1)
 			lines += "cubic ";
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";

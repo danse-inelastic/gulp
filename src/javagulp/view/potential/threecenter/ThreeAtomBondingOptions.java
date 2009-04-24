@@ -36,9 +36,9 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (btnGroupInterIntra.getButtonCount() == 3
-					&& Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[2])
+					&& Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().selected[2])
 				btnGroupInterIntra.clearSelection();
-			Back.getPanel().getPotential().createLibrary.getVisiblePotential().setRadiiEnabled(!chkBond.isSelected());
+			Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().setRadiiEnabled(!chkBond.isSelected());
 			updateBooleans();
 		}
 	};
@@ -47,7 +47,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[0])
+			if (Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().selected[0])
 				btnGroupInterIntra.clearSelection();
 			updateBooleans();
 		}
@@ -57,7 +57,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected[1])
+			if (Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().selected[1])
 				btnGroupInterIntra.clearSelection();
 			updateBooleans();
 		}
@@ -116,7 +116,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 		// to the button group
 		// The only other solution is to make a FourAtomBondingOptions panel,
 		// but this is easier.
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		PotentialPanel pnl = pot.getVisiblePotential();
 		
 		boolean torexp = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.Torexp");
@@ -152,7 +152,7 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 	}
 
 	private void updateBooleans() {
-		Back.getPanel().getPotential().createLibrary.getVisiblePotential().selected = getSelections();
+		Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().selected = getSelections();
 	}
 
 	private String getInterIntra() {

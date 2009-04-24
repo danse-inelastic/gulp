@@ -116,7 +116,7 @@ public class TersoffCombine extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		JTextField[] fields = { txtChir, txtChia };
 		String[] descriptions = { "Chir", "Chia" };
 		Back.checkAllNonEmpty(fields, descriptions);

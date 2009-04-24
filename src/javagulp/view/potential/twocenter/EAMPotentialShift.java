@@ -60,7 +60,7 @@ public class EAMPotentialShift extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
 		
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "eam_potential_shift " + pot.twoAtomBondingOptions.getInterIntraBond(); 
 		if (cboEnerGra.getSelectedIndex() == 1)

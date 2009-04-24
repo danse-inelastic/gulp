@@ -100,7 +100,7 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 			lines += "grad ";
 		//TODO The gulp documentation has abbreviated bonding options for this
 		// potential, but it is surely a typo. test to make sure.
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " "; 

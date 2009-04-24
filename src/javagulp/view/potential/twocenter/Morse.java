@@ -68,7 +68,7 @@ public class Morse extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getPanel().getPotential().createLibrary;
+		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
 
 		String lines = "morse " + pot.twoAtomBondingOptions.getInterIntraBond();
