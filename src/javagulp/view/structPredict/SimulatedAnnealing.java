@@ -42,7 +42,7 @@ import javax.swing.JTextField;
 			add(pnlOptions);
 			pnlOptions.setTitle("options");
 
-			chkWriteRestartFiles.setBounds(10, 25, 495, 25);
+			chkWriteRestartFiles.setBounds(10, 25, 449, 25);
 			pnlOptions.add(chkWriteRestartFiles);
 			chkWriteRestartFiles.addActionListener(keyWriteRestartFiles);
 			
