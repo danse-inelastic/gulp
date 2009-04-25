@@ -145,7 +145,7 @@ public class RunType extends JPanel implements Serializable {
 		runTypes.put("molecular dynamics", new MolecularDynamics());
 		scrollPane.add(runTypes.get("molecular dynamics"));
 		scrollPane.setViewportView(runTypes.get("molecular dynamics"));
-
+		
 		cboRunType.addActionListener(keyRunType);
 		cboRunType.setBounds(146, 9, 264, 24);
 		add(cboRunType);
