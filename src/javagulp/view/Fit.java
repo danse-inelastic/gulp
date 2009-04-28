@@ -91,89 +91,59 @@ public class Fit extends JPanel implements Serializable {
 		//this.setPreferredSize(new java.awt.Dimension(742, 350));
 
 		add(listScroll);
-		listScroll.setBounds(567, 4, 163, 399);
+		listScroll.setBounds(567, 8, 143, 245);
 		fitList.addKeyListener(listListener);
 		fitList.addMouseListener(keyList);
 
-		chkSimultaneous.addActionListener(keySimultaneous);
-		chkSimultaneous.setBounds(3, 136, 558, 52);
-		add(chkSimultaneous);
-
-		chkRelax.setToolTipText("<html>	Invokes fitting to structural displacements on relaxation rather <br>"
-			+ "than to the derivatives. also means any observables are fitted at the <br>"
-			+ "optimized rather than experimental structure. There is no need to give simultaneous <br>"
-			+ "as an option if relax fitting. method should only be used once a reasonable set of <br>"
-			+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
-			+ "It is also an order of magnitude more expensive in cputime!</html>");
-		chkRelax.addActionListener(keyRelax);
-		chkRelax.setBounds(3, 85, 558, 25);
-		add(chkRelax);
-
 		final TitledPanel pnlParameterTolerance = new TitledPanel();
 		pnlParameterTolerance.setTitle("parameter tolerance");
-		pnlParameterTolerance.setBounds(1035, 214, 208, 48);
+		pnlParameterTolerance.setBounds(716, 390, 246, 48);
 		add(pnlParameterTolerance);
 		txtXtolFit.setBounds(22, 23, 80, 21);
 		pnlParameterTolerance.add(txtXtolFit);
 
 		final TitledPanel pnlMaxStepSize = new TitledPanel();
 		pnlMaxStepSize.setTitle("maximum step size");
-		pnlMaxStepSize.setBounds(1035, 162, 208, 46);
+		pnlMaxStepSize.setBounds(716, 338, 246, 46);
 		add(pnlMaxStepSize);
 		txtStepmxFit.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtStepmxFit);
 
-		fitPanelHolder.setBounds(3, 194, 558, 244);
+		fitPanelHolder.setBounds(0, 9, 558, 244);
 		fitPanelHolder.scrollFit.setBounds(10, 64, 526, 172);
 		add(fitPanelHolder);
 
 		final TitledPanel pnlMaxNumOfCycles = new TitledPanel();
 		pnlMaxNumOfCycles.setTitle("maximum number of cycles");
-		pnlMaxNumOfCycles.setBounds(736, 194, 246, 51);
+		pnlMaxNumOfCycles.setBounds(716, 9, 246, 51);
 		add(pnlMaxNumOfCycles);
 		txtMaxCycfit.setBounds(10, 22, 228, 20);
 		pnlMaxNumOfCycles.add(txtMaxCycfit);
 
 		final TitledPanel pnlGradientTolerance = new TitledPanel();
 		pnlGradientTolerance.setTitle("gradient tolerance");
-		pnlGradientTolerance.setBounds(1035, 58, 208, 47);
+		pnlGradientTolerance.setBounds(716, 234, 246, 47);
 		add(pnlGradientTolerance);
 		txtGtol.setBounds(22, 19, 80, 21);
 		pnlGradientTolerance.add(txtGtol);
 
 		final TitledPanel pnlMaxIndividualGradient = new TitledPanel();
 		pnlMaxIndividualGradient.setTitle("maximum individual gradient");
-		pnlMaxIndividualGradient.setBounds(1035, 111, 208, 45);
+		pnlMaxIndividualGradient.setBounds(716, 287, 246, 45);
 		add(pnlMaxIndividualGradient);
 		txtGmax.setBounds(22, 19, 80, 21);
 		pnlMaxIndividualGradient.add(txtGmax);
 
 		final TitledPanel pnlFuncTolerance = new TitledPanel();
 		pnlFuncTolerance.setTitle("function tolerance");
-		pnlFuncTolerance.setBounds(1035, 5, 208, 47);
+		pnlFuncTolerance.setBounds(716, 181, 246, 47);
 		add(pnlFuncTolerance);
 		txtFtol.setBounds(22, 19, 80, 21);
 		pnlFuncTolerance.add(txtFtol);
 
-		rboFit.setBounds(3, 5, 483, 25);
-		rboFit.setSelected(true);
-		fitButtonGroup.add(rboFit);
-		rboFit.addActionListener(keyTypeOfHessian);
-		add(rboFit);
-		add(chkUseGA);
-		chkUseGA.setBounds(3, 58, 182, 25);
-		chkUseGA.addActionListener(keyGA);
-		
-
-		rboFullHessian.addActionListener(keyTypeOfHessian);
-		fitButtonGroup.add(rboFullHessian);
-		rboFullHessian.setToolTipText("involves the calculation of the full numerical hessian instead of just the diagonal elements.");
-		rboFullHessian.setBounds(3, 30, 404, 25);
-		add(rboFullHessian);
-
 		final TitledPanel pnlNumericalDifferencing = new TitledPanel();
 		pnlNumericalDifferencing.setTitle("numerical differencing");
-		pnlNumericalDifferencing.setBounds(736, 252, 246, 52);
+		pnlNumericalDifferencing.setBounds(716, 66, 246, 52);
 		add(pnlNumericalDifferencing);
 		txtFxDelta.setBounds(9, 23, 92, 20);
 		pnlNumericalDifferencing.add(txtFxDelta);
@@ -185,19 +155,54 @@ public class Fit extends JPanel implements Serializable {
 		lblFxDelta.setBounds(9, 54, 35, 15);
 		pnlNumericalDifferencing.add(lblFxDelta);
 
-		chkOptimisefitShellsBut.setBounds(3, 116, 265, 25);
-		add(chkOptimisefitShellsBut);
-		chkOptimisefitShellsBut.addActionListener(keyOptimisefitShellsBut);
-
 		final TitledPanel pnlOutputFittingParam = new TitledPanel();
 		pnlOutputFittingParam.setTitle("output fitting parameters");
-		pnlOutputFittingParam.setBounds(736, 310, 246, 51);
+		pnlOutputFittingParam.setBounds(716, 124, 246, 51);
 		add(pnlOutputFittingParam);
 		JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
 		lblOutputFittingParameters.setBounds(10, 26, 161, 18);
 		pnlOutputFittingParam.add(lblOutputFittingParameters);
 		txtOutputFittingParam.setBounds(161, 25, 78, 21);
 		pnlOutputFittingParam.add(txtOutputFittingParam);
+
+		final TitledPanel panel = new TitledPanel();
+		panel.setTitle("optimization options");
+		panel.setBounds(0, 259, 710, 237);
+		add(panel);
+
+		rboFit.setSelected(true);
+		rboFit.setBounds(10, 23, 483, 25);
+		panel.add(rboFit);
+		fitButtonGroup.add(rboFit);
+		rboFit.addActionListener(keyTypeOfHessian);
+		
+
+		rboFullHessian.addActionListener(keyTypeOfHessian);
+		rboFullHessian.setBounds(10, 54, 404, 25);
+		panel.add(rboFullHessian);
+		fitButtonGroup.add(rboFullHessian);
+		rboFullHessian.setToolTipText("involves the calculation of the full numerical hessian instead of just the diagonal elements.");
+		chkUseGA.setBounds(10, 85, 182, 25);
+		panel.add(chkUseGA);
+		chkUseGA.addActionListener(keyGA);
+
+		chkRelax.setToolTipText("<html>	Invokes fitting to structural displacements on relaxation rather <br>"
+			+ "than to the derivatives. also means any observables are fitted at the <br>"
+			+ "optimized rather than experimental structure. There is no need to give simultaneous <br>"
+			+ "as an option if relax fitting. method should only be used once a reasonable set of <br>"
+			+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
+			+ "It is also an order of magnitude more expensive in cputime!</html>");
+		chkRelax.setBounds(10, 116, 558, 25);
+		panel.add(chkRelax);
+		chkRelax.addActionListener(keyRelax);
+
+		chkOptimisefitShellsBut.setBounds(10, 147, 265, 25);
+		panel.add(chkOptimisefitShellsBut);
+		chkOptimisefitShellsBut.addActionListener(keyOptimisefitShellsBut);
+
+		chkSimultaneous.addActionListener(keySimultaneous);
+		chkSimultaneous.setBounds(10, 178, 558, 52);
+		panel.add(chkSimultaneous);
 	}
 
 	public String writeFitOptions() {
