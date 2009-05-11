@@ -3,7 +3,11 @@ package javagulp.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
@@ -30,7 +34,7 @@ public class Potential extends JPanel {
 
 	private static final long serialVersionUID = 4991943378742898078L;
 	//private String libraryPath = "src/javagulp/view/potentialLibraries";
-//	private String libraryPath = "";
+	//	private String libraryPath = "";
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
@@ -40,7 +44,7 @@ public class Potential extends JPanel {
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
 	private JTextPane libraryDisplay = new JTextPane();
-	
+
 	public Potential() {
 		super();
 		setLayout(new BorderLayout());
@@ -58,8 +62,8 @@ public class Potential extends JPanel {
 		//add(scrollPane, BorderLayout.NORTH);
 
 		//final JPanel panel_1 = new JPanel();
-		
-		
+
+
 		splitPane.setRightComponent(scrollPane);
 		scrollPane.setViewportView(libraryDisplay);
 
@@ -70,61 +74,107 @@ public class Potential extends JPanel {
 
 		final JButton importButton = new JButton();
 		importButton.setText("import");
-		importButton.setEnabled(false);
+		//importButton.setEnabled(false);
 		panel.add(importButton, BorderLayout.SOUTH);
-		importButton.addActionListener(keyLibrary);
-		
-		libraryList = new JList();
-		
+		importButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				// look for a potential on the user's machine
+				JFileChooser fileDialog = new JFileChooser();
+				fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				//fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
+				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+					File potentialFile = fileDialog.getSelectedFile();//.getPath();
+					//read the file
+					String contents = getContents(potentialFile);
+				}
+				// push the new potential file to the server
 
-	    String[] potentials = new PotentialLibs().getPotentials();
-	    
-	    for (int i=0; i<potentials.length; i++) {
-	    	// Get filename of file or directory
-	    	potentialListModel.addElement(potentials[i]);
-	    }
-	    libraryList.setModel(potentialListModel);
-	    listSelectionModel = libraryList.getSelectionModel();
-        listSelectionModel.addListSelectionListener(new LibraryListener());
-        libraryList.setSelectedValue("none", true);
+
+				//get files as strings
+				String currentInputFile = Back.getCurrentRun().getOutput().selectedInputFile;
+				if(currentInputFile.equals("input.gin"))
+					Back.getCurrentRun().getOutput().updateInputGin();
+				String gulpInputFile = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
+				String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
+				String librarySelected = Back.getCurrentRun().getPotential().librarySelected;//post the files
+				Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+
+				String cgihome = cgiMap.get("cgihome");
+				CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+
+				getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
+				cgiMap.put("actor.configurations", gulpInputFile);
+				cgiMap.put("actor.librarycontent", gulpLibrary);
+				cgiMap.put("actor.libraryname", librarySelected);
+				cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
+
+				cgiCom.setCgiParams(cgiMap);
+				String response = cgiCom.postAndGetString();
+				if (response.trim().equals("success")){
+					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
+					"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
+				}else{
+					getTxtVnfStatus().setText("There was a problem with the submission.  The server returned the following message:\n"+
+							response);
+				}
+				//close gulp
+				//System.exit(0);
+			}
+		});
+
+		libraryList = new JList();
+
+		String[] potentials = new PotentialLibs().getPotentials();
+
+		for (int i=0; i<potentials.length; i++) {
+			// Get filename of file or directory
+			potentialListModel.addElement(potentials[i]);
+		}
+		libraryList.setModel(potentialListModel);
+		listSelectionModel = libraryList.getSelectionModel();
+		listSelectionModel.addListSelectionListener(new LibraryListener());
+		libraryList.setSelectedValue("none", true);
 		panel.add(libraryList);
 	}
-	
+
 	private class LibraryListener implements
 	ListSelectionListener, Serializable {
-	private static final long serialVersionUID = -2720144256318780471L;
+		private static final long serialVersionUID = -2720144256318780471L;
 
-	public void valueChanged(ListSelectionEvent e) {
-		librarySelected = (String) libraryList.getSelectedValue();
+		public void valueChanged(ListSelectionEvent e) {
+			librarySelected = (String) libraryList.getSelectedValue();
 
-		//String libraryContents = getURLContentAsString(libURL);
-		libraryContents = new PotentialLibs().getFileContents(librarySelected);
-		libraryDisplay.setText(libraryContents);
-	}
-};
+			//String libraryContents = getURLContentAsString(libURL);
+			libraryContents = new PotentialLibs().getFileContents(librarySelected);
+			libraryDisplay.setText(libraryContents);
+		}
+	};
 
-private LibraryListener listMouseListener = new LibraryListener();
-	
+	private LibraryListener listMouseListener = new LibraryListener();
+
 	private SerialListener keyLibrary = new SerialListener() {
 		private static final long serialVersionUID = 8698926269816312994L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-				JFileChooser findLibrary = new JFileChooser();
-				findLibrary.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
-				if (JFileChooser.APPROVE_OPTION == findLibrary.showOpenDialog(getParent())) {
-					final File newLocation = new File(Back.getCurrentRun().getWD() + "/"
-									+ findLibrary.getSelectedFile().getName());
-					try {
-						new JCopy().copy(findLibrary.getSelectedFile(), newLocation);
-					} catch (final Exception e1) {
-						e1.printStackTrace();
-					}
-					librarySelected = removeDotSomething(newLocation.getName());
+			JFileChooser findLibrary = new JFileChooser();
+			findLibrary.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
+			if (JFileChooser.APPROVE_OPTION == findLibrary.showOpenDialog(getParent())) {
+				final File newLocation = new File(Back.getCurrentRun().getWD() + "/"
+						+ findLibrary.getSelectedFile().getName());
+				try {
+					new JCopy().copy(findLibrary.getSelectedFile(), newLocation);
+				} catch (final Exception e1) {
+					e1.printStackTrace();
+				}
+				librarySelected = removeDotSomething(newLocation.getName());
 			}
 		}
 	};
 
+	
+	
+	
 	private String removeDotSomething(final String name) {
 		final String[] newName = name.split("\\.");
 		return newName[0];
@@ -141,7 +191,42 @@ private LibraryListener listMouseListener = new LibraryListener();
 		return lines;
 	}
 	
-	
-	
+	/**
+	 * Fetch the entire contents of a text file, and return it in a String.
+	 * This style of implementation does not throw Exceptions to the caller.
+	 *
+	 * @param aFile is a file which already exists and can be read.
+	 */
+	public String getContents(File aFile) {
+		//...checks on aFile are elided
+		StringBuilder contents = new StringBuilder();
+
+		try {
+			//use buffering, reading one line at a time
+			//FileReader always assumes default encoding is OK!
+			BufferedReader input =  new BufferedReader(new FileReader(aFile));
+			try {
+				String line = null; //not declared within while loop
+				/*
+				 * readLine is a bit quirky :
+				 * it returns the content of a line MINUS the newline.
+				 * it returns null only for the END of the stream.
+				 * it returns an empty String if two newlines appear in a row.
+				 */
+				while (( line = input.readLine()) != null){
+					contents.append(line);
+					contents.append(System.getProperty("line.separator"));
+				}
+			}
+			finally {
+				input.close();
+			}
+		}
+		catch (IOException ex){
+			ex.printStackTrace();
+		}
+
+		return contents.toString();
+	}
 
 }
