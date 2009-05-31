@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Map;
+
+import javagulp.controller.CgiCommunicate;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
 import javagulp.model.SerialListener;
@@ -82,32 +85,40 @@ public class Potential extends JPanel {
 				JFileChooser fileDialog = new JFileChooser();
 				fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				//fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
+				String contents;
+				File potentialFile;
 				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-					File potentialFile = fileDialog.getSelectedFile();//.getPath();
+					potentialFile = fileDialog.getSelectedFile();//.getPath();
 					//read the file
-					String contents = getContents(potentialFile);
-				}
+					contents = getContents(potentialFile);
+				} else return;
 				// push the new potential file to the server
 
+//				String currentInputFile = Back.getCurrentRun().getOutput().selectedInputFile;
+//				if(currentInputFile.equals("input.gin"))
+//					Back.getCurrentRun().getOutput().updateInputGin();
+//				String gulpInputFile = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
+//				String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
+//				String librarySelected = Back.getCurrentRun().getPotential().librarySelected;//post the files
 
-				//get files as strings
-				String currentInputFile = Back.getCurrentRun().getOutput().selectedInputFile;
-				if(currentInputFile.equals("input.gin"))
-					Back.getCurrentRun().getOutput().updateInputGin();
-				String gulpInputFile = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
-				String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
-				String librarySelected = Back.getCurrentRun().getPotential().librarySelected;//post the files
 				Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 
 				String cgihome = cgiMap.get("cgihome");
 				CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 
-				getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-				cgiMap.put("actor.configurations", gulpInputFile);
-				cgiMap.put("actor.librarycontent", gulpLibrary);
-				cgiMap.put("actor.libraryname", librarySelected);
+				// eventually put a status bar at the bottom of the ui and report progress on it
+				// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
+				
+				//cgiMap.put("actor.configurations", gulpInputFile);
+				cgiMap.put("actor.librarycontent", contents);
+				cgiMap.put("actor.libraryname", potentialFile);
 				cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
 
+				// resync the list of potentials (and when coding first time, change the way the potentials
+				// are treated so that it grabs the list from the server rather than keeps them in jar
+				// and change the way it puts the job on the server so it doesn't put the potential library as well
+
+				
 				cgiCom.setCgiParams(cgiMap);
 				String response = cgiCom.postAndGetString();
 				if (response.trim().equals("success")){
