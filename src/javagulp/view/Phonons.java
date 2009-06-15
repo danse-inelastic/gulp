@@ -132,10 +132,16 @@ public class Phonons extends TitledPanel implements Serializable {
 		//		}
 		return line;
 	}
+	
+	private String writeOutputDos() throws IncompleteOptionException,
+	InvalidOptionException {
+		String line = "output phonon dos.dens." + Back.newLine;
+		return line;
+	}
 
 	public String writeDosOptions() throws IncompleteOptionException,
 	InvalidOptionException {
-		return writeDosBox() + writeBroaden();
+		return writeDosBox() + writeBroaden() + writeOutputDos();
 	}
 
 	public String writePhonon() throws IncompleteOptionException,
@@ -146,9 +152,7 @@ public class Phonons extends TitledPanel implements Serializable {
 		+ pnlGammaPoints.writeGammaPointOptions()
 		+ pnlBrillouinIntegration.write();
 	}
-	/**
-	 * @return
-	 */
+
 	protected TitledPanel getPanel() {
 		if (pnlOptions == null) {
 			pnlOptions = new TitledPanel();
