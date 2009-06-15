@@ -24,6 +24,7 @@ import javax.swing.JList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -106,30 +107,25 @@ public class Potential extends JPanel {
 				String cgihome = cgiMap.get("cgihome");
 				CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 
-				// eventually put a status bar at the bottom of the ui and report progress on it
-				// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-				
 				//cgiMap.put("actor.configurations", gulpInputFile);
 				cgiMap.put("actor.librarycontent", contents);
-				cgiMap.put("actor.libraryname", potentialFile);
+				cgiMap.put("actor.libraryname", potentialFile.getName());
 				cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
 
 				// resync the list of potentials (and when coding first time, change the way the potentials
 				// are treated so that it grabs the list from the server rather than keeps them in jar
 				// and change the way it puts the job on the server so it doesn't put the potential library as well
 
-				
+				// eventually put a status bar at the bottom of the ui and report progress on it
+				// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
 				cgiCom.setCgiParams(cgiMap);
 				String response = cgiCom.postAndGetString();
 				if (response.trim().equals("success")){
-					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
-					"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
+					JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" has been successfully uploaded.");
 				}else{
-					getTxtVnfStatus().setText("There was a problem with the submission.  The server returned the following message:\n"+
-							response);
+					JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" was not successfully uploaded.  Please report this to jbrkeith@gmail.com with the file attached.");
 				}
-				//close gulp
-				//System.exit(0);
+
 			}
 		});
 

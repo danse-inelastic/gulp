@@ -45,15 +45,17 @@ public class CgiCommunicate {
 		
 		for (String key : cgiMap.keySet()) {
 			String val = cgiMap.get(key);
+			String pair = null;
 			try {
-				String pair = URLEncoder.encode(key, "UTF-8") + "=" + URLEncoder.encode(val, "UTF-8");
-				if(data==""){
-					data = pair;
-				}else{
-					data += "&" + pair;
-				}
-			} catch (UnsupportedEncodingException e) {
+				pair = URLEncoder.encode(key, "UTF-8") + "=" + URLEncoder.encode(val, "UTF-8");
+			} catch (Exception e) {
+				System.out.println("Had trouble encoding the following key value pair: ("+ key+", "+val+").\n");
 				e.printStackTrace();
+			}
+			if(data==""){
+				data = pair;
+			}else{
+				data += "&" + pair;
 			}
         }
 	}

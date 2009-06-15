@@ -19,12 +19,12 @@ public class OutputFormats extends JPanel implements Serializable {
 
 	private String[] labels = { "THBREL/THBPHON", "BIOSYM (.xtl)",
 			"BIOSYM (.car)", "movie format", "trajectory (.trj)",
-			"SIESTA (.fdf)", "CRYSTAL98 (.str)", "phonon", "Crystal (.cif)", "MARVIN (.mvn)",
+			"SIESTA (.fdf)", "CRYSTAL98 (.str)", "Crystal (.cif)", "MARVIN (.mvn)",
 			"CRYSALIS (.xr)", "CERIUS2 (.cssr)", "(.xyz)", "movie format",
 			"DLPOLY history", "derivatives (.drv)", "forces (.frc)",
 			"frequency", "Pressure (.pre)" };
 	private String[] formats = { "thbrel", "xtl", "arc",
-			"movie arc", "trajectory", "fdf", "str", "phonon", "cif", "marvin", "xr",
+			"movie arc", "trajectory", "fdf", "str", "cif", "marvin", "xr",
 			"cssr", "xyz", "movie xyz", "history", "drv", "frc", "freq", "pre" };
 	private String[] extensions = { ".thbrel", ".xtl", "", "movie",
 			"", ".fdf", "", ".phonon", "", "", "", "", ".xyz",
