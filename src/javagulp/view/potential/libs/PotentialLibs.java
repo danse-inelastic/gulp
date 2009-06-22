@@ -9,8 +9,29 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javagulp.controller.CgiCommunicate;
+import javagulp.view.Back;
+
+import org.json.JSONArray;
 
 public class PotentialLibs {
+	
+	private String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
+			"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
+			"catlow.lib","finnissinclair.lib","suttonchen.lib",
+			"clerirosato.lib","garofalini.lib","tersoff.lib"};
+	
+	private Map<String,String> potentialContents = new HashMap<String,String>();
+	
+	public PotentialLibs(){
+		//TODO: eventually cache potentials in .gulpUi or something like that
+		//for now just instantiate each time from scratch
+		//potentialContents
+	}
 
 	public String[] getPotentials(){
 		//		URL potentialsDir = this.getClass().getResource("libs");
@@ -26,20 +47,61 @@ public class PotentialLibs {
 		////	    String p = pUri.getPath();
 		////	    String rp = pUri.getRawPath();
 		//		String[] potentials = new File(pUri).list();
-		String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
-				"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
-				"catlow.lib","finnissinclair.lib","suttonchen.lib",
-				"clerirosato.lib","garofalini.lib","tersoff.lib"};
 		return potentials;
 	}
 
 	public String getFileContents(String potentialName) {
+		//first see if the library is in the local cache
+		//libraryContents = new PotentialLibs().getFileContents(librarySelected);
 		if (potentialName=="none"){
-			return "";
+			return "";			
 		} else {
-			InputStream potentialStream = this.getClass().getResourceAsStream(potentialName);
-			return convertStreamToString(potentialStream);
+			//if the ui already has the potential contents loaded, display them
+			if(potentialContents.containsKey(potentialName)){
+				return potentialContents.get(potentialName);
+			}else{
+				//if not, see if they're "on disk"
+				try{
+					InputStream potentialStream = this.getClass().getResourceAsStream(potentialName);
+					return convertStreamToString(potentialStream);
+				//if not on disk, get them from the db
+				}catch(Exception e){
+					return getPotentialContentsFromDb(potentialName);
+				}
+			}
 		}
+	}
+
+	private String getPotentialContentsFromDb(String potentialName) {
+		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		String cgihome = cgiMap.get("cgihome");
+		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+		
+//		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
+//		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
+//		String val = cgiMap.get("sentry.ticket");
+//		if(val==null){
+//			val = cgiMap.get("sentry.passwd");
+//			keyValsForMatter.put("sentry.passwd", val);
+//		} else {
+//			keyValsForMatter.put("sentry.ticket", val);
+//		}
+		
+//		keyValsForMatter.put("content", "raw");
+//		keyValsForMatter.put("actor", "directdb");
+//		keyValsForMatter.put("routine", "get");
+//		keyValsForMatter.put("directdb.tables", "gulppotential");
+//		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
+//		keyValsForMatter.put("directdb.format", "cif");
+//		cgiCom.setCgiParams(keyValsForMatter);
+		
+		cgiMap.put("actor", "directdb");
+		cgiMap.put("routine", "getPotentialContents");
+		cgiMap.put("directdb.tables", "gulppotential");
+		cgiMap.put("directdb.where", "potential_name");
+		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
+		String[] potentialContentAsArray = (String[])potentialNamesAsJSONArray.getArrayList()[0];
+		return potentialContentAsArray[0];
 	}
 
 	public String convertStreamToString(InputStream is) {

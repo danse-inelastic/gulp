@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javagulp.controller.CgiCommunicate;
@@ -34,6 +36,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class Potential extends JPanel {
 
 	private static final long serialVersionUID = 4991943378742898078L;
@@ -48,6 +53,7 @@ public class Potential extends JPanel {
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
 	private JTextPane libraryDisplay = new JTextPane();
+	private PotentialLibs potentialLibs = new PotentialLibs();
 
 	public Potential() {
 		super();
@@ -62,12 +68,7 @@ public class Potential extends JPanel {
 
 		final JSplitPane splitPane = new JSplitPane();
 		useLibrary.add(splitPane);
-
-		//add(scrollPane, BorderLayout.NORTH);
-
-		//final JPanel panel_1 = new JPanel();
-
-
+		
 		splitPane.setRightComponent(scrollPane);
 		scrollPane.setViewportView(libraryDisplay);
 
@@ -82,66 +83,94 @@ public class Potential extends JPanel {
 		panel.add(importButton, BorderLayout.SOUTH);
 		importButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				// look for a potential on the user's machine
-				JFileChooser fileDialog = new JFileChooser();
-				fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				//fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
-				String contents;
-				File potentialFile;
-				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-					potentialFile = fileDialog.getSelectedFile();//.getPath();
-					//read the file
-					contents = getContents(potentialFile);
-				} else return;
-				// push the new potential file to the server
-
-//				String currentInputFile = Back.getCurrentRun().getOutput().selectedInputFile;
-//				if(currentInputFile.equals("input.gin"))
-//					Back.getCurrentRun().getOutput().updateInputGin();
-//				String gulpInputFile = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
-//				String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
-//				String librarySelected = Back.getCurrentRun().getPotential().librarySelected;//post the files
-
-				Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
-
-				String cgihome = cgiMap.get("cgihome");
-				CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-
-				//cgiMap.put("actor.configurations", gulpInputFile);
-				cgiMap.put("actor.librarycontent", contents);
-				cgiMap.put("actor.libraryname", potentialFile.getName());
-				cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
-
-				// resync the list of potentials (and when coding first time, change the way the potentials
-				// are treated so that it grabs the list from the server rather than keeps them in jar
-				// and change the way it puts the job on the server so it doesn't put the potential library as well
-
-				// eventually put a status bar at the bottom of the ui and report progress on it
-				// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-				cgiCom.setCgiParams(cgiMap);
-				String response = cgiCom.postAndGetString();
-				if (response.trim().equals("success")){
-					JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" has been successfully uploaded.");
-				}else{
-					JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" was not successfully uploaded.  Please report this to jbrkeith@gmail.com with the file attached.");
-				}
-
+				uploadPotential();
 			}
 		});
 
 		libraryList = new JList();
+		//get the potential names from the db
+		String[] potentialNames = getPotetentialNamesFromDb();
 
-		String[] potentials = new PotentialLibs().getPotentials();
-
-		for (int i=0; i<potentials.length; i++) {
+		for (int i=0; i<potentialNames.length; i++) {
 			// Get filename of file or directory
-			potentialListModel.addElement(potentials[i]);
+			potentialListModel.addElement(potentialNames[i]);
 		}
 		libraryList.setModel(potentialListModel);
 		listSelectionModel = libraryList.getSelectionModel();
 		listSelectionModel.addListSelectionListener(new LibraryListener());
 		libraryList.setSelectedValue("none", true);
 		panel.add(libraryList);
+	}
+	
+	private String[] getPotetentialNamesFromDb(){
+		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		String cgihome = cgiMap.get("cgihome");
+		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+		
+//		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
+//		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
+//		String val = cgiMap.get("sentry.ticket");
+//		if(val==null){
+//			val = cgiMap.get("sentry.passwd");
+//			keyValsForMatter.put("sentry.passwd", val);
+//		} else {
+//			keyValsForMatter.put("sentry.ticket", val);
+//		}
+		
+//		keyValsForMatter.put("content", "raw");
+//		keyValsForMatter.put("actor", "directdb");
+//		keyValsForMatter.put("routine", "get");
+//		keyValsForMatter.put("directdb.tables", "gulppotential");
+//		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
+//		keyValsForMatter.put("directdb.format", "cif");
+//		cgiCom.setCgiParams(keyValsForMatter);
+		
+		cgiMap.put("actor", "directdb");
+		cgiMap.put("routine", "get");
+		cgiMap.put("directdb.tables", "gulppotential");
+		cgiMap.put("directdb.columns", "potential_name");
+		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
+		String[] potentialNames = (String[])potentialNamesAsJSONArray.getArrayList();
+		return potentialNames;
+	}
+	
+	private void uploadPotential(){
+		// look for a potential on the user's machine
+		JFileChooser fileDialog = new JFileChooser();
+		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		//fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
+		String contents;
+		File potentialFile;
+		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+			potentialFile = fileDialog.getSelectedFile();//.getPath();
+			//read the file
+			contents = getContents(potentialFile);
+		} else return;
+
+		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+
+		String cgihome = cgiMap.get("cgihome");
+		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+
+		//cgiMap.put("actor.configurations", gulpInputFile);
+		cgiMap.put("actor.librarycontent", contents);
+		cgiMap.put("actor.libraryname", potentialFile.getName());
+		cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
+		cgiMap.put("routine", "storePotential");
+
+		// resync the list of potentials (and when coding first time, change the way the potentials
+		// are treated so that it grabs the list from the server rather than keeps them in jar
+		// and change the way it puts the job on the server so it doesn't put the potential library as well
+
+		// eventually put a status bar at the bottom of the ui and report progress on it
+		// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
+		cgiCom.setCgiParams(cgiMap);
+		String response = cgiCom.postAndGetString();
+		if (response.trim().equals("success")){
+			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" has been successfully uploaded.");
+		}else{
+			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" was not successfully uploaded.  Please report this to jbrkeith@gmail.com with the file attached.");
+		}
 	}
 
 	private class LibraryListener implements
@@ -152,7 +181,7 @@ public class Potential extends JPanel {
 			librarySelected = (String) libraryList.getSelectedValue();
 
 			//String libraryContents = getURLContentAsString(libURL);
-			libraryContents = new PotentialLibs().getFileContents(librarySelected);
+			libraryContents = potentialLibs.getFileContents(librarySelected);
 			libraryDisplay.setText(libraryContents);
 		}
 	};
@@ -178,9 +207,6 @@ public class Potential extends JPanel {
 			}
 		}
 	};
-
-	
-	
 	
 	private String removeDotSomething(final String name) {
 		final String[] newName = name.split("\\.");

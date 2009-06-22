@@ -142,6 +142,7 @@ public class Execution extends JPanel implements Serializable {
 					cgiMap.put("actor.librarycontent", gulpLibrary);
 					cgiMap.put("actor.libraryname", librarySelected);
 					cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
+					cgiMap.put("routine", "storeInputFile");
 					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.postAndGetString();

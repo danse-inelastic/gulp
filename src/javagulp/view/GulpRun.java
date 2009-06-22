@@ -59,11 +59,21 @@ public class GulpRun extends JPanel implements Serializable {
 	
 	private TaskKeywords taskKeywords = null;
 
-	public GulpRun() {
+	public GulpRun(String[] simulationParams) {
 		super();
 		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
 
+		cgiMap = new HashMap<String,String>();
+		if (simulationParams.length==0){
+			return;
+			//simulationParams=new String[]{"username=demo","ticket=5X","simulationId=1","matterId=9TAL9D"};
+		} else{
+		for(String param: simulationParams){
+			String[] keyVal = param.split("=");
+			cgiMap.put(keyVal[0],keyVal[1]);
+		}
+		
 //		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
 //		splitPane.setDividerSize(4);
 //		splitPane.setResizeWeight(0.5);
@@ -72,9 +82,16 @@ public class GulpRun extends JPanel implements Serializable {
 		add(topPane, BorderLayout.CENTER);
 
 		topPane.addChangeListener(keyTop);
+		
 		topPane.add(null, "run type");
 		topPane.add(null, "constraints");
 		topPane.add(null, "structures");
+
+		Material mat = getMaterialFromHttp();//keyVals);
+		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
+		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+		}
+		
 		topPane.add(null, "potentials");
 		topPane.add(null, "potential options");
 		topPane.add(null, "charges, elements and bonding");
@@ -131,7 +148,7 @@ public class GulpRun extends JPanel implements Serializable {
 		keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
 		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
 		cgiCom.setCgiParams(keyValsForMatter);
-		JSONObject matterAsJSON = cgiCom.postAndGetJSON();	
+		JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();	
 		Material mat = new Material();
 		try {
 			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();

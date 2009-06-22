@@ -15,6 +15,7 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -85,7 +86,7 @@ public class CgiCommunicate {
 		return response;
 	}
 
-	public JSONObject postAndGetJSON(){
+	public JSONObject postAndGetJSONObject(){
 		StringBuffer response = new StringBuffer();
 		try {
 			OutputStreamWriter wr;
@@ -113,6 +114,41 @@ public class CgiCommunicate {
 		JSONObject obj = null;
 		try {
 			obj = new JSONObject(response.toString());
+		} catch (JSONException e) {
+			JOptionPane.showMessageDialog(null, appName+" is unable to read the material selected.");
+			e.printStackTrace();
+		}
+		return obj;
+	}
+	
+	public JSONArray postAndGetJSONArray(){
+		StringBuffer response = new StringBuffer();
+		try {
+			OutputStreamWriter wr;
+
+			wr = new OutputStreamWriter(conn.getOutputStream());
+
+			wr.write(data);
+			wr.flush();
+			wr.close();
+
+			// Get the response
+
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = rd.readLine()) != null) {
+				response.append(line);//+"\n";
+			}
+			rd.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		//since this is a python list (of one item), remove the outer brackets
+//		response = response.deleteCharAt(response.length()-1);
+//		response = response.deleteCharAt(0);
+		JSONArray obj = null;
+		try {
+			obj = new JSONArray(response.toString());
 		} catch (JSONException e) {
 			JOptionPane.showMessageDialog(null, appName+" is unable to read the material selected.");
 			e.printStackTrace();

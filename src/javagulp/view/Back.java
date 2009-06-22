@@ -97,11 +97,11 @@ public class Back {
 	}
 
 	public void addTab(String[] simulationParams) {
-		GulpRun gulpRun = new GulpRun();
+		GulpRun gulpRun = new GulpRun(simulationParams);
 		tabs.add("" + (tabs.getTabCount() + 1), gulpRun);
 		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
-		gulpRun.processArguments(simulationParams);
+		//gulpRun.processArguments(simulationParams);
 	}
 
 	
@@ -159,7 +159,7 @@ public class Back {
 	 * This method replaces the current tab and Keywords with new instances.
 	 */
 	public static void clearTab() {
-		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun());
+		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun(new String[]{}));
 		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 	}
 	
