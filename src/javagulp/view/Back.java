@@ -101,7 +101,7 @@ public class Back {
 		tabs.add("" + (tabs.getTabCount() + 1), gulpRun);
 		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
-		//gulpRun.processArguments(simulationParams);
+		gulpRun.processArguments(simulationParams);
 	}
 
 	
