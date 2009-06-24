@@ -88,6 +88,10 @@ public class Potential extends JPanel {
 		});
 
 		libraryList = new JList();
+		panel.add(libraryList);
+	}
+	
+	public void populatePotentialList(){
 		//get the potential names from the db
 		String[] potentialNames = getPotetentialNamesFromDb();
 
@@ -99,7 +103,6 @@ public class Potential extends JPanel {
 		listSelectionModel = libraryList.getSelectionModel();
 		listSelectionModel.addListSelectionListener(new LibraryListener());
 		libraryList.setSelectedValue("none", true);
-		panel.add(libraryList);
 	}
 	
 	private String[] getPotetentialNamesFromDb(){
@@ -129,6 +132,7 @@ public class Potential extends JPanel {
 		cgiMap.put("routine", "get");
 		cgiMap.put("directdb.tables", "gulppotential");
 		cgiMap.put("directdb.columns", "potential_name");
+		cgiMap.put("directdb.where", "all");
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
 		String[] potentialNames = (String[])potentialNamesAsJSONArray.getArrayList();
 		return potentialNames;

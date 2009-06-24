@@ -102,6 +102,7 @@ public class Back {
 		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
 		gulpRun.processArguments(simulationParams);
+		gulpRun.getPotential().populatePotentialList();
 	}
 
 	
