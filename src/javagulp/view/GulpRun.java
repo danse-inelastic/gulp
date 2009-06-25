@@ -119,11 +119,12 @@ public class GulpRun extends JPanel implements Serializable {
 					String[] keyVal = param.split("=");
 					cgiMap.put(keyVal[0],keyVal[1]);
 				}
-				//retrieve matter and load it
-				//Material mat = getMaterialFromHttp(keyVals.get("matterId"));
-				Material mat = getMaterialFromHttp();//keyVals);
-				getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
-				getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+				// if matter is passed, retrieve it and load it
+				if(cgiMap.containsKey("matterId")){;
+					Material mat = getMaterialFromHttp();//keyVals);
+					getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
+					getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+				}
 			}
 			//keep the rest of the parameters and pass them to the job submission post
 		}

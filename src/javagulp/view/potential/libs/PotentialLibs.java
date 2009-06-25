@@ -99,6 +99,7 @@ public class PotentialLibs {
 		cgiMap.put("routine", "getPotentialContents");
 		cgiMap.put("directdb.tables", "gulppotential");
 		cgiMap.put("directdb.where", "potential_name");
+		cgiCom.setCgiParams(cgiMap);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
 		String[] potentialContentAsArray = (String[])potentialNamesAsJSONArray.getArrayList()[0];
 		return potentialContentAsArray[0];

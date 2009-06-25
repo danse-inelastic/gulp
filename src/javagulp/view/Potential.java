@@ -86,15 +86,13 @@ public class Potential extends JPanel {
 				uploadPotential();
 			}
 		});
-
 		libraryList = new JList();
 		panel.add(libraryList);
 	}
 	
 	public void populatePotentialList(){
 		//get the potential names from the db
-		String[] potentialNames = getPotetentialNamesFromDb();
-
+		Object[] potentialNames = getPotetentialNamesFromDb();
 		for (int i=0; i<potentialNames.length; i++) {
 			// Get filename of file or directory
 			potentialListModel.addElement(potentialNames[i]);
@@ -105,37 +103,18 @@ public class Potential extends JPanel {
 		libraryList.setSelectedValue("none", true);
 	}
 	
-	private String[] getPotetentialNamesFromDb(){
+	private Object[] getPotetentialNamesFromDb(){ //ArrayList<String>
 		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-		
-//		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
-//		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
-//		String val = cgiMap.get("sentry.ticket");
-//		if(val==null){
-//			val = cgiMap.get("sentry.passwd");
-//			keyValsForMatter.put("sentry.passwd", val);
-//		} else {
-//			keyValsForMatter.put("sentry.ticket", val);
-//		}
-		
-//		keyValsForMatter.put("content", "raw");
-//		keyValsForMatter.put("actor", "directdb");
-//		keyValsForMatter.put("routine", "get");
-//		keyValsForMatter.put("directdb.tables", "gulppotential");
-//		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
-//		keyValsForMatter.put("directdb.format", "cif");
-//		cgiCom.setCgiParams(keyValsForMatter);
-		
 		cgiMap.put("actor", "directdb");
 		cgiMap.put("routine", "get");
 		cgiMap.put("directdb.tables", "gulppotential");
 		cgiMap.put("directdb.columns", "potential_name");
 		cgiMap.put("directdb.where", "all");
+		cgiCom.setCgiParams(cgiMap);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
-		String[] potentialNames = (String[])potentialNamesAsJSONArray.getArrayList();
-		return potentialNames;
+		return potentialNamesAsJSONArray.getArrayList();
 	}
 	
 	private void uploadPotential(){
