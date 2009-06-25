@@ -6,7 +6,6 @@ public class LaunchGulpUi {
 
 	private static Back b = null;
 	
-	
 	public LaunchGulpUi(String[] simulationParams) {
 		if (b == null)
 			b = new Back(simulationParams);

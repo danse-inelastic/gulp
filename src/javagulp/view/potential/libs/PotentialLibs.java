@@ -76,30 +76,14 @@ public class PotentialLibs {
 		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-		
-//		HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
-//		keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
-//		String val = cgiMap.get("sentry.ticket");
-//		if(val==null){
-//			val = cgiMap.get("sentry.passwd");
-//			keyValsForMatter.put("sentry.passwd", val);
-//		} else {
-//			keyValsForMatter.put("sentry.ticket", val);
-//		}
-		
-//		keyValsForMatter.put("content", "raw");
-//		keyValsForMatter.put("actor", "directdb");
-//		keyValsForMatter.put("routine", "get");
-//		keyValsForMatter.put("directdb.tables", "gulppotential");
-//		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
-//		keyValsForMatter.put("directdb.format", "cif");
-//		cgiCom.setCgiParams(keyValsForMatter);
-		
-		cgiMap.put("actor", "directdb");
-		cgiMap.put("routine", "getPotentialContents");
-		cgiMap.put("directdb.tables", "gulppotential");
-		cgiMap.put("directdb.where", "potential_name");
-		cgiCom.setCgiParams(cgiMap);
+		Map<String, String> getPotentialContentsQuery = new HashMap<String, String>();
+		getPotentialContentsQuery.put("actor", "directdb");
+		getPotentialContentsQuery.put("routine", "getPotentialContents");
+		getPotentialContentsQuery.put("directdb.tables", "gulppotential");
+		getPotentialContentsQuery.put("directdb.columns", "potential_name");
+		getPotentialContentsQuery.put("directdb.creator", "everyone");
+		getPotentialContentsQuery.putAll(cgiMap);
+		cgiCom.setCgiParams(getPotentialContentsQuery);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
 		String[] potentialContentAsArray = (String[])potentialNamesAsJSONArray.getArrayList()[0];
 		return potentialContentAsArray[0];

@@ -25,8 +25,10 @@ public class CgiCommunicate {
 
 	String data = "";
 	String appName = "GulpUi";
+	String cgihome;
 	private URLConnection conn;
 	public CgiCommunicate(String cgihome){
+		this.cgihome = cgihome;
 		try {
 			URL url = new URL(cgihome);
 			conn = url.openConnection();
@@ -115,7 +117,7 @@ public class CgiCommunicate {
 		try {
 			obj = new JSONObject(response.toString());
 		} catch (JSONException e) {
-			JOptionPane.showMessageDialog(null, appName+" is unable to read the material selected.");
+			JOptionPane.showMessageDialog(null, formatQuery());
 			e.printStackTrace();
 		}
 		return obj;
@@ -137,7 +139,7 @@ public class CgiCommunicate {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = rd.readLine()) != null) {
-				response.append(line);//+"\n";
+				response.append(line+"\n");
 			}
 			rd.close();
 		} catch (IOException e) {
@@ -151,10 +153,20 @@ public class CgiCommunicate {
 		try {
 			obj = new JSONArray(response.toString());
 		} catch (JSONException e) {
-			JOptionPane.showMessageDialog(null, appName+" is unable to read the material selected.");
+			JOptionPane.showMessageDialog(null, formatQuery());
 			e.printStackTrace();
 		}
 		return obj;
+	}
+	
+	private String formatQuery(){
+		String base = this.appName+" is unable to read the response\n " +
+		"from host "+this.cgihome+" with key, value query pairs\n";
+		String[] splitData = this.data.split("&");
+		for (String piece : splitData) {
+			base += piece + "\n";
+		}
+		return base;
 	}
 
 	public static void main(String[] args){
