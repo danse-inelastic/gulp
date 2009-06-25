@@ -149,7 +149,7 @@ public class CgiCommunicate {
 //		response = response.deleteCharAt(response.length()-1);
 //		response = response.deleteCharAt(0);
 		JSONArray obj = null;
-		System.out.println(response);
+		//System.out.println(response);
 		try {
 			obj = new JSONArray(response.toString());
 		} catch (JSONException e) {

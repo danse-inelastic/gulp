@@ -85,8 +85,8 @@ public class PotentialLibs {
 		getPotentialContentsQuery.putAll(cgiMap);
 		cgiCom.setCgiParams(getPotentialContentsQuery);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
-		String[] potentialContentAsArray = (String[])potentialNamesAsJSONArray.getArrayList()[0];
-		return potentialContentAsArray[0];
+		Object[] potentialContentAsArray = potentialNamesAsJSONArray.getArrayList();
+		return (String)potentialContentAsArray[0];
 	}
 
 	public String convertStreamToString(InputStream is) {

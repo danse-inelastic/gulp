@@ -136,12 +136,13 @@ public class Potential extends JPanel {
 
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-
-		//cgiMap.put("actor.configurations", gulpInputFile);
-		cgiMap.put("actor.librarycontent", contents);
-		cgiMap.put("actor.libraryname", potentialFile.getName());
-		cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
-		cgiMap.put("routine", "storePotential");
+		Map<String, String> uploadPotentialPost = new HashMap<String, String>();
+		uploadPotentialPost.put("actor", "gulpsimulationwizard");
+		uploadPotentialPost.put("actor.librarycontent", contents);
+		uploadPotentialPost.put("actor.libraryname", potentialFile.getName());
+		uploadPotentialPost.put("actor.runtype", Back.getRunTypeKeyword());
+		uploadPotentialPost.put("routine", "storePotential");
+		uploadPotentialPost.putAll(cgiMap);
 
 		// resync the list of potentials (and when coding first time, change the way the potentials
 		// are treated so that it grabs the list from the server rather than keeps them in jar
@@ -149,13 +150,14 @@ public class Potential extends JPanel {
 
 		// eventually put a status bar at the bottom of the ui and report progress on it
 		// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-		cgiCom.setCgiParams(cgiMap);
+		cgiCom.setCgiParams(uploadPotentialPost);
 		String response = cgiCom.postAndGetString();
 		if (response.trim().equals("success")){
 			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" has been successfully uploaded.");
 		}else{
 			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" was not successfully uploaded.  Please report this to jbrkeith@gmail.com with the file attached.");
 		}
+		populatePotentialList();
 	}
 
 	private class LibraryListener implements
