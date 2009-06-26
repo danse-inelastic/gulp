@@ -150,7 +150,7 @@ public class GulpRun extends JPanel implements Serializable {
 			//		keyValsForMatter.put("content", "raw");
 			keyValsForMatter.put("actor", "directdb");
 			keyValsForMatter.put("routine", "get");
-			keyValsForMatter.put("directdb.tableNames", "polycrystals-singlecrystals-disordered");
+			keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
 			keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
 			cgiCom.setCgiParams(keyValsForMatter);
 			JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();	
