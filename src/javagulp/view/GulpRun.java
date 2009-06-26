@@ -139,15 +139,10 @@ public class GulpRun extends JPanel implements Serializable {
 			if(cgiMap.containsKey("sentry.ticket")&&(cgiMap.get("sentry.ticket")!=null)){
 				String val = cgiMap.get("sentry.ticket");
 				keyValsForMatter.put("sentry.ticket", val);
-				//		}
-				//		try{
-				//			String val = cgiMap.get("sentry.ticket");
-				//			keyValsForMatter.put("sentry.ticket", val);
 			} else {
 				String val = cgiMap.get("sentry.passwd");
 				keyValsForMatter.put("sentry.passwd", val);
 			}
-			//		keyValsForMatter.put("content", "raw");
 			keyValsForMatter.put("actor", "directdb");
 			keyValsForMatter.put("routine", "get");
 			keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");

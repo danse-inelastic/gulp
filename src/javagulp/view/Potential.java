@@ -91,6 +91,8 @@ public class Potential extends JPanel {
 	}
 	
 	public void populatePotentialList(){
+		//remove any previous entries--start from scratch
+		potentialListModel.clear();
 		//get the potential names from the db
 		Object[] potentialNames = getPotetentialNamesFromDb();
 		for (int i=0; i<potentialNames.length; i++) {
