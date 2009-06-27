@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -136,13 +137,16 @@ public class Execution extends JPanel implements Serializable {
 
 					String cgihome = cgiMap.get("cgihome");
 					CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-
 					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
-					cgiMap.put("actor.configurations", gulpInputFile);
-					cgiMap.put("actor.librarycontent", gulpLibrary);
-					cgiMap.put("actor.libraryname", librarySelected);
-					cgiMap.put("actor.runtype", Back.getRunTypeKeyword());
-					cgiMap.put("routine", "storeInputFile");
+					
+					Map<String, String> submitJobPost = new HashMap<String, String>();
+					Back.getCurrentRun().putInAuthenticationInfo(submitJobPost);
+					submitJobPost.put("actor", "gulpsimulationwizard");
+					submitJobPost.put("actor.configurations", gulpInputFile);
+					//submitJobPost.put("actor.librarycontent", gulpLibrary);
+					submitJobPost.put("actor.libraryname", librarySelected);
+					submitJobPost.put("actor.runtype", Back.getRunTypeKeyword());
+					submitJobPost.put("routine", "storeInputFile");
 					
 					cgiCom.setCgiParams(cgiMap);
 					String response = cgiCom.postAndGetString();

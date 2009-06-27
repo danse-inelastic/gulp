@@ -94,7 +94,7 @@ public class Potential extends JPanel {
 		//remove any previous entries--start from scratch
 		potentialListModel.clear();
 		//get the potential names from the db
-		Object[] potentialNames = getPotetentialNamesFromDb();
+		Object[] potentialNames = getPotentialNamesFromDb();
 		for (int i=0; i<potentialNames.length; i++) {
 			// Get filename of file or directory
 			potentialListModel.addElement(potentialNames[i]);
@@ -105,17 +105,18 @@ public class Potential extends JPanel {
 		libraryList.setSelectedValue("none", true);
 	}
 	
-	private Object[] getPotetentialNamesFromDb(){ //ArrayList<String>
+	private Object[] getPotentialNamesFromDb(){ //ArrayList<String>
 		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+		
 		Map<String, String> getPotentialNamesQuery = new HashMap<String, String>();
+		Back.getCurrentRun().putInAuthenticationInfo(getPotentialNamesQuery);
 		getPotentialNamesQuery.put("actor", "directdb");
 		getPotentialNamesQuery.put("routine", "get");
 		getPotentialNamesQuery.put("directdb.tables", "gulppotential");
 		getPotentialNamesQuery.put("directdb.columns", "potential_name");
 		getPotentialNamesQuery.put("directdb.creator", "everyone");
-		getPotentialNamesQuery.putAll(cgiMap);
 		cgiCom.setCgiParams(getPotentialNamesQuery);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
 		return potentialNamesAsJSONArray.getArrayList();

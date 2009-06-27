@@ -64,21 +64,6 @@ public class GulpRun extends JPanel implements Serializable {
 		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
 
-//		cgiMap = new HashMap<String,String>();
-//		if (simulationParams.length==0){
-//			return;
-//			//simulationParams=new String[]{"username=demo","ticket=5X","simulationId=1","matterId=9TAL9D"};
-//		} else{
-//			for(String param: simulationParams){
-//				String[] keyVal = param.split("=");
-//				cgiMap.put(keyVal[0],keyVal[1]);
-//			}
-
-			//		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
-			//		splitPane.setDividerSize(4);
-			//		splitPane.setResizeWeight(0.5);
-			//		add(splitPane, BorderLayout.CENTER);
-
 			add(topPane, BorderLayout.CENTER);
 
 			topPane.addChangeListener(keyTop);
@@ -86,15 +71,6 @@ public class GulpRun extends JPanel implements Serializable {
 			topPane.add(null, "run type");
 			topPane.add(null, "constraints");
 			topPane.add(null, "structures");
-			//		// structures has to be instantiated early in order to load material
-			//		JPanel structures = getTopPanel(2);
-			//		//Structures structures = new Structures();
-			//		topPane.add("structures", structures);
-			//
-			//		Material mat = getMaterialFromHttp();//keyVals);
-			//		getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
-			//		getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
-			//		}
 
 			topPane.add(null, "potentials");
 			topPane.add(null, "potential options");
@@ -128,21 +104,36 @@ public class GulpRun extends JPanel implements Serializable {
 			}
 			//keep the rest of the parameters and pass them to the job submission post
 		}
-
-		Material getMaterialFromHttp(){//Map<String,String> cgiMap){//String matterId){
-			//Map<String,String> cgiMap = Back.getPanel().keyVals;
-			String cgihome = cgiMap.get("cgihome");
-			CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-
-			HashMap<String,String> keyValsForMatter = new HashMap<String,String>();
-			keyValsForMatter.put("sentry.username", cgiMap.get("sentry.username"));
+		
+		public HashMap<String,String> putInAuthenticationInfo2(HashMap<String,String> map){
+			map.put("sentry.username", cgiMap.get("sentry.username"));
 			if(cgiMap.containsKey("sentry.ticket")&&(cgiMap.get("sentry.ticket")!=null)){
 				String val = cgiMap.get("sentry.ticket");
-				keyValsForMatter.put("sentry.ticket", val);
+				map.put("sentry.ticket", val);
 			} else {
 				String val = cgiMap.get("sentry.passwd");
-				keyValsForMatter.put("sentry.passwd", val);
+				map.put("sentry.passwd", val);
 			}
+			return map;
+		}
+		
+		public void putInAuthenticationInfo(Map<String,String> map){
+			map.put("sentry.username", cgiMap.get("sentry.username"));
+			if(cgiMap.containsKey("sentry.ticket")&&(cgiMap.get("sentry.ticket")!=null)){
+				String val = cgiMap.get("sentry.ticket");
+				map.put("sentry.ticket", val);
+			} else {
+				String val = cgiMap.get("sentry.passwd");
+				map.put("sentry.passwd", val);
+			}
+		}
+
+		Material getMaterialFromHttp(){
+			String cgihome = cgiMap.get("cgihome");
+			CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+			
+			Map<String,String> keyValsForMatter = new HashMap<String,String>();
+			putInAuthenticationInfo(keyValsForMatter);
 			keyValsForMatter.put("actor", "directdb");
 			keyValsForMatter.put("routine", "get");
 			keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");

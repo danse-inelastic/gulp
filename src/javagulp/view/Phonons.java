@@ -135,7 +135,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	
 	private String writeOutputDos() throws IncompleteOptionException,
 	InvalidOptionException {
-		String line = "output phonon dos.dens." + Back.newLine;
+		String line = "output phonon dos.dens" + Back.newLine;
 		return line;
 	}
 
