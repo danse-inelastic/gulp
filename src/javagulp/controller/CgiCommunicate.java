@@ -114,7 +114,7 @@ public class CgiCommunicate {
 		try {
 			obj = new JSONObject(response.toString());
 		} catch (JSONException e) {
-			JOptionPane.showMessageDialog(null, formatQuery());
+			JOptionPane.showMessageDialog(null, formatQuery(response.toString()));
 			e.printStackTrace();
 		}
 		return obj;
@@ -150,15 +150,18 @@ public class CgiCommunicate {
 		try {
 			obj = new JSONArray(response.toString());
 		} catch (JSONException e) {
-			JOptionPane.showMessageDialog(null, formatQuery());
+			JOptionPane.showMessageDialog(null, formatQuery(response.toString()));
 			e.printStackTrace();
 		}
 		return obj;
 	}
 	
-	private String formatQuery(){
-		String base = this.appName+" is unable to read the response\n " +
-		"from host "+this.cgihome+" with key, value query pairs\n";
+	private String formatQuery(String response){
+		String base = this.appName+" is unable to read the response\n" + 
+		response + "\n" +
+		"which it tried to retrieve from\n"+
+		this.cgihome + "\n" + 
+		"using key, value query pairs\n";
 		String[] splitData = this.data.split("&");
 		for (String piece : splitData) {
 			base += piece + "\n";
@@ -167,7 +170,6 @@ public class CgiCommunicate {
 	}
 
 	public static void main(String[] args){
-
 //					URL                 url = null;
 //					URLConnection   urlConn = null;
 //					DataOutputStream    printout;
@@ -177,7 +179,6 @@ public class CgiCommunicate {
 //					try {
 //						url = new URL ("http://trueblue.caltech.edu/cgi-bin/vnf/main.cgi");
 //					} catch (MalformedURLException e) {
-//						// TODO Auto-generated catch block
 //						e.printStackTrace();
 //					}
 //		
@@ -185,7 +186,6 @@ public class CgiCommunicate {
 //					try {
 //						urlConn = url.openConnection();
 //					} catch (IOException e) {
-//						// TODO Auto-generated catch block
 //						e.printStackTrace();
 //					}
 //					// Let the run-time system (RTS) know that we want input.
@@ -200,7 +200,6 @@ public class CgiCommunicate {
 //					try {
 //						printout = new DataOutputStream (urlConn.getOutputStream ());
 //					} catch (IOException e) {
-//						// TODO Auto-generated catch block
 //						e.printStackTrace();
 //					}
 //					String content =

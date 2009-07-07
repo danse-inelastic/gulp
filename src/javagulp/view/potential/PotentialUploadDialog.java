@@ -1,5 +1,6 @@
 package javagulp.view.potential;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -19,6 +20,7 @@ import javax.swing.JButton;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,6 +30,9 @@ import javax.swing.border.LineBorder;
 
 public class PotentialUploadDialog extends JDialog {
 
+	//String potentialName="";
+	File potentialFile;
+	
 	public PotentialUploadDialog(Frame frame) {
 		super(frame, "Input potential details", false);
 		getContentPane().setLayout(new GridLayout(0, 1));
@@ -65,7 +70,7 @@ public class PotentialUploadDialog extends JDialog {
 
 		final JTextArea textArea = new JTextArea();
 		textArea.setBorder(new LineBorder(Color.black, 1, false));
-		textArea.setRows(4);
+		textArea.setRows(3);
 		textArea.setColumns(30);
 		panel_2.add(textArea);
 
@@ -83,27 +88,48 @@ public class PotentialUploadDialog extends JDialog {
 		final JButton browseButton = new JButton();
 		browseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				uploadPotential();
+				JFileChooser fileDialog = new JFileChooser();
+				fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+					potentialFile = fileDialog.getSelectedFile();//.getPath();	
+				}
+				//potentialName = getPotentialFile();
+				textField_2.setText(potentialFile.getName());
 			}
 		});
 		browseButton.setText("Browse");
 		panel_3.add(browseButton);
+
+		final JPanel panel_4 = new JPanel();
+		getContentPane().add(panel_4);
+
+		final JButton okButton = new JButton();
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				sendPotentialToServer(potentialFile);
+			}
+		});
+		okButton.setText("OK");
+		panel_4.add(okButton);
 		// TODO Auto-generated constructor stub
 	}
 
-	private void uploadPotential(){
-		// look for a potential on the user's machine
-		JFileChooser fileDialog = new JFileChooser();
-		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		//fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
-		String contents;
-		File potentialFile;
-		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-			potentialFile = fileDialog.getSelectedFile();//.getPath();
-			//read the file
-			contents = getContents(potentialFile);
-		} else return;
-
+//	private File getPotentialFile(){
+//		// look for a potential on the user's machine
+//		JFileChooser fileDialog = new JFileChooser();
+//		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//		File potentialFile;
+//		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+//			potentialFile = fileDialog.getSelectedFile();//.getPath();
+//			return potentialFile;
+//			
+//		}
+//	}
+	
+	private void sendPotentialToServer(File potentialFile){
+		//read the file
+		String contents = getContents(potentialFile);
+		
 		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 
 		String cgihome = cgiMap.get("cgihome");
@@ -169,5 +195,32 @@ public class PotentialUploadDialog extends JDialog {
 
 		return contents.toString();
 	}
+	
+//	public static void main(String[] args){
+//		//1. Create the frame.
+//		JFrame frame = new JFrame("test");
+//
+//		//2. Optional: What happens when the frame closes?
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//		//3. Create components and put them in the frame.
+//		//...create emptyLabel...
+//		JButton jButton = new JButton();
+//		frame.getContentPane().add(jButton, BorderLayout.CENTER);
+//		jButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(final ActionEvent e) {
+//				new PotentialUploadDialog(frame);
+//			}
+//		});
+//		jButton.setText("test");
+//		
+//		//4. Size the frame.
+//		frame.pack();
+//
+//		//5. Show it.
+//		frame.setVisible(true);
+//		
+//	}
+	
 
 }

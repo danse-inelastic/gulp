@@ -81,7 +81,7 @@ public class PotentialLibs {
 		getPotentialContentsQuery.put("directdb.tables", "gulppotential");
 		//getPotentialContentsQuery.put("directdb.columns", "potential_name");
 		getPotentialContentsQuery.put("directdb.creator", "everyone");
-		getPotentialContentsQuery.put("directdb.where", "everyone");
+		getPotentialContentsQuery.put("directdb.where", "potential_name='"+potentialName+"'");
 		//getPotentialContentsQuery.putAll(cgiMap);
 		cgiCom.setCgiParams(getPotentialContentsQuery);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
@@ -93,7 +93,7 @@ public class PotentialLibs {
 		/*
 		 * To convert the InputStream to String we use the BufferedReader.readLine()
 		 * method. We iterate until the BufferedReader return null which means
-		 * there's no more data to read. Each line will appended to a StringBuilder
+		 * there's no more data to read. Each line will be appended to a StringBuilder
 		 * and returned as String.
 		 */
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -118,44 +118,44 @@ public class PotentialLibs {
 	}
 
 
-	public String getFileContents2(String potentialName) {
-		URL potentialsDir = this.getClass().getResource(potentialName);
-		URI pUri = null;
-		try {
-			pUri = potentialsDir.toURI();
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		File potential = new File(pUri);
-		//File aFile = new File("libs/"+potential);
-		StringBuilder contents = new StringBuilder();
-
-		try {
-			//use buffering, reading one line at a time
-			//FileReader always assumes default encoding is OK!
-			BufferedReader input =  new BufferedReader(new FileReader(potential));
-			try {
-				String line = null; //not declared within while loop
-				/*
-				 * readLine is a bit quirky :
-				 * it returns the content of a line MINUS the newline.
-				 * it returns null only for the END of the stream.
-				 * it returns an empty String if two newlines appear in a row.
-				 */
-				while (( line = input.readLine()) != null){
-					contents.append(line);
-					contents.append(System.getProperty("line.separator"));
-				}
-			}
-			finally {
-				input.close();
-			}
-		}
-		catch (IOException ex){
-			ex.printStackTrace();
-		}
-
-		return contents.toString();
-	}
+//	public String getFileContents2(String potentialName) {
+//		URL potentialsDir = this.getClass().getResource(potentialName);
+//		URI pUri = null;
+//		try {
+//			pUri = potentialsDir.toURI();
+//		} catch (URISyntaxException e1) {
+//			e1.printStackTrace();
+//		}
+//		File potential = new File(pUri);
+//		//File aFile = new File("libs/"+potential);
+//		StringBuilder contents = new StringBuilder();
+//
+//		try {
+//			//use buffering, reading one line at a time
+//			//FileReader always assumes default encoding is OK!
+//			BufferedReader input =  new BufferedReader(new FileReader(potential));
+//			try {
+//				String line = null; //not declared within while loop
+//				/*
+//				 * readLine is a bit quirky :
+//				 * it returns the content of a line MINUS the newline.
+//				 * it returns null only for the END of the stream.
+//				 * it returns an empty String if two newlines appear in a row.
+//				 */
+//				while (( line = input.readLine()) != null){
+//					contents.append(line);
+//					contents.append(System.getProperty("line.separator"));
+//				}
+//			}
+//			finally {
+//				input.close();
+//			}
+//		}
+//		catch (IOException ex){
+//			ex.printStackTrace();
+//		}
+//
+//		return contents.toString();
+//	}
 
 }
