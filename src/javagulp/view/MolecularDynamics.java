@@ -15,7 +15,6 @@ import javagulp.view.md.Thermodynamics;
 import javagulp.view.md.TimeLengths;
 import javagulp.view.md.VectorTable;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javagulp.model.G;
 

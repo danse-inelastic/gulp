@@ -8,10 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
-
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Keywords;

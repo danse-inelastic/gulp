@@ -1,8 +1,6 @@
 package javagulp.view.phonons;
 
 import java.awt.event.KeyEvent;
-import java.io.Serializable;
-
 import javagulp.model.G;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.view.Back;

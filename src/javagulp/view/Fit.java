@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
-import javagulp.view.fit.AbstractFit;
 import javagulp.view.fit.FitPanelHolder;
 import javax.swing.ButtonGroup;
 

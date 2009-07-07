@@ -1,10 +1,8 @@
 package javagulp.view.potential.twocenter;
 
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -14,15 +12,12 @@ import javagulp.view.potential.Radii;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import javagulp.model.G;
-import javagulp.model.SerialListener;
 
 public class Lennard extends PotentialPanel implements Serializable {
 

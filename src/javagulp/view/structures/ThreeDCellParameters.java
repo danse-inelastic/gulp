@@ -1,12 +1,9 @@
 package javagulp.view.structures;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
 
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

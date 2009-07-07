@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,10 +77,11 @@ public class PotentialLibs {
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 		Map<String, String> getPotentialContentsQuery = new HashMap<String, String>();
 		getPotentialContentsQuery.put("actor", "directdb");
-		getPotentialContentsQuery.put("routine", "getPotentialContents");
+		getPotentialContentsQuery.put("routine", "getAssociatedData");
 		getPotentialContentsQuery.put("directdb.tables", "gulppotential");
-		getPotentialContentsQuery.put("directdb.columns", "potential_name");
+		//getPotentialContentsQuery.put("directdb.columns", "potential_name");
 		getPotentialContentsQuery.put("directdb.creator", "everyone");
+		getPotentialContentsQuery.put("directdb.where", "everyone");
 		//getPotentialContentsQuery.putAll(cgiMap);
 		cgiCom.setCgiParams(getPotentialContentsQuery);
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	

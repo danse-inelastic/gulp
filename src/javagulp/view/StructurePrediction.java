@@ -10,7 +10,6 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.view.structPredict.GeneticAlgorithm;
 import javagulp.view.structPredict.SimulatedAnnealing;
 
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

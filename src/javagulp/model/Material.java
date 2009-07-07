@@ -1,9 +1,5 @@
 package javagulp.model;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-
 public class Material {
 	
 	public Object[] latticeVec;

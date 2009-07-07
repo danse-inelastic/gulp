@@ -14,10 +14,7 @@ import javagulp.view.MonteCarlo;
 import javagulp.view.Optimization;
 import javagulp.view.Phonons;
 import javagulp.view.StructurePrediction;
-import javagulp.view.Structures;
 import javagulp.view.SurfaceOptions;
-import javagulp.view.Structures.Structure;
-
 import javax.swing.JOptionPane;
 
 public class GulpFileWriter {

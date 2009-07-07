@@ -3,8 +3,6 @@ package javagulp.model;
 import java.io.Serializable;
 import java.util.TreeSet;
 
-import javagulp.view.Back;
-
 public class TaskKeywords implements Serializable {
 	private static final long serialVersionUID = -7544313514620261471L;
 	
