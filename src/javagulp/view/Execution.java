@@ -57,9 +57,9 @@ import javagulp.model.SerialMouseAdapter;
 
 public class Execution extends JPanel implements Serializable {
 	private JScrollPane scrollPane;
-	private JLabel statusLabel;
+	private JLabel lblStatus;
 	private JTextArea txtVnfStatus;
-	private JLabel nLabel;
+	private JLabel lblN;
 	private TitledPanel pnlVnfExecution;
 	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
@@ -869,12 +869,12 @@ public class Execution extends JPanel implements Serializable {
 	 * @return
 	 */
 	protected JLabel getNLabel() {
-		if (nLabel == null) {
-			nLabel = new JLabel();
-			nLabel.setText("n");
-			nLabel.setBounds(20, 105, 25, 21);
+		if (lblN == null) {
+			lblN = new JLabel();
+			lblN.setText("n");
+			lblN.setBounds(20, 105, 25, 21);
 		}
-		return nLabel;
+		return lblN;
 	}
 	/**
 	 * @return
@@ -889,12 +889,12 @@ public class Execution extends JPanel implements Serializable {
 	 * @return
 	 */
 	protected JLabel getStatusLabel() {
-		if (statusLabel == null) {
-			statusLabel = new JLabel();
-			statusLabel.setText("status");
-			statusLabel.setBounds(10, 26, 228, 15);
+		if (lblStatus == null) {
+			lblStatus = new JLabel();
+			lblStatus.setText("status");
+			lblStatus.setBounds(10, 26, 228, 15);
 		}
-		return statusLabel;
+		return lblStatus;
 	}
 	/**
 	 * @return

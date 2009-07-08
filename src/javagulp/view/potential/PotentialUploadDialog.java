@@ -32,61 +32,66 @@ public class PotentialUploadDialog extends JDialog {
 
 	//String potentialName="";
 	File potentialFile;
+	private final JTextField txtPotentialName;
+	private final JTextArea txtDescription;
+	private final JTextField txtCreator;
 	
 	public PotentialUploadDialog(Frame frame) {
 		super(frame, "Input potential details", false);
-		getContentPane().setLayout(new GridLayout(0, 1));
-
+		//getContentPane().setLayout(new GridLayout(0, 1));
+		
 		final JPanel panel = new JPanel();
+		panel.setLayout(null);
 		getContentPane().add(panel);
 
-		final JLabel label = new JLabel();
-		label.setText("What is the name of your potential?");
-		panel.add(label);
+		final JLabel lblPotentialName = new JLabel();
+		lblPotentialName.setBounds(25, 7, 270, 15);
+		lblPotentialName.setText("What is the name of the potential?");
+		panel.add(lblPotentialName);
 
-		final JTextField textField = new JTextField();
-		textField.setColumns(20);
-		panel.add(textField);
+		txtPotentialName = new JTextField();
+		txtPotentialName.setBounds(301, 5, 224, 19);
+		txtPotentialName.setColumns(20);
+		panel.add(txtPotentialName);
 
-		final JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1);
-
+		final JLabel lblCreator = new JLabel();
+		lblCreator.setBounds(25, 28, 137, 15);
+		panel.add(lblCreator);
+		lblCreator.setText("Who created it?");
+		
 		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		String user = cgiMap.get("sentry.username");
-		final JLabel label_1 = new JLabel(user);
-		label_1.setText("Who created it?");
-		panel_1.add(label_1);
+		txtCreator = new JTextField(user);
+		txtCreator.setBounds(168, 26, 224, 19);
+		panel.add(txtCreator);
+		txtCreator.setColumns(20);
 
-		final JTextField textField_1 = new JTextField();
-		textField_1.setColumns(20);
-		panel_1.add(textField_1);
+		final JLabel lblDescription = new JLabel();
+		lblDescription.setBounds(25, 49, 86, 15);
+		panel.add(lblDescription);
+		lblDescription.setText("Description:");
 
-		final JPanel panel_2 = new JPanel();
-		getContentPane().add(panel_2);
+		txtDescription = new JTextArea();
+		txtDescription.setBounds(25, 70, 332, 47);
+		panel.add(txtDescription);
+		txtDescription.setBorder(new LineBorder(Color.black, 1, false));
+		txtDescription.setRows(3);
+		txtDescription.setColumns(30);
 
-		final JLabel label_2 = new JLabel();
-		label_2.setText("Description:");
-		panel_2.add(label_2);
+		final JLabel lblLocation = new JLabel();
+		lblLocation.setBounds(25, 131, 105, 15);
+		panel.add(lblLocation);
+		lblLocation.setText("Location:");
 
-		final JTextArea textArea = new JTextArea();
-		textArea.setBorder(new LineBorder(Color.black, 1, false));
-		textArea.setRows(3);
-		textArea.setColumns(30);
-		panel_2.add(textArea);
+		final JTextField txtLocation = new JTextField();
+		txtLocation.setBounds(136, 129, 343, 19);
+		panel.add(txtLocation);
+		txtLocation.setColumns(30);
 
-		final JPanel panel_3 = new JPanel();
-		getContentPane().add(panel_3);
-
-		final JLabel label_3 = new JLabel();
-		label_3.setText("Locate:");
-		panel_3.add(label_3);
-
-		final JTextField textField_2 = new JTextField();
-		textField_2.setColumns(30);
-		panel_3.add(textField_2);
-
-		final JButton browseButton = new JButton();
-		browseButton.addActionListener(new ActionListener() {
+		final JButton btnBrowse = new JButton();
+		btnBrowse.setBounds(485, 126, 87, 25);
+		panel.add(btnBrowse);
+		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				JFileChooser fileDialog = new JFileChooser();
 				fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -94,24 +99,24 @@ public class PotentialUploadDialog extends JDialog {
 					potentialFile = fileDialog.getSelectedFile();//.getPath();	
 				}
 				//potentialName = getPotentialFile();
-				textField_2.setText(potentialFile.getName());
+				txtLocation.setText(potentialFile.getPath());
 			}
 		});
-		browseButton.setText("Browse");
-		panel_3.add(browseButton);
-
-		final JPanel panel_4 = new JPanel();
-		getContentPane().add(panel_4);
+		btnBrowse.setText("Browse");
 
 		final JButton okButton = new JButton();
+		okButton.setBounds(25, 167, 54, 25);
+		panel.add(okButton);
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				sendPotentialToServer(potentialFile);
+				setVisible(false);
 			}
 		});
 		okButton.setText("OK");
-		panel_4.add(okButton);
-		// TODO Auto-generated constructor stub
+		//pack();
+        setLocationRelativeTo(frame);
+        setVisible(true);
 	}
 
 //	private File getPotentialFile(){
@@ -135,12 +140,18 @@ public class PotentialUploadDialog extends JDialog {
 		String cgihome = cgiMap.get("cgihome");
 		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 		Map<String, String> uploadPotentialPost = new HashMap<String, String>();
+		uploadPotentialPost.put("routine", "storePotential");
+		
 		uploadPotentialPost.put("actor", "gulpsimulationwizard");
 		uploadPotentialPost.put("actor.librarycontent", contents);
-		uploadPotentialPost.put("actor.libraryname", potentialFile.getName());
-		uploadPotentialPost.put("actor.runtype", Back.getRunTypeKeyword());
+		uploadPotentialPost.put("actor.potential_name", txtPotentialName.getText());
+		uploadPotentialPost.put("actor.potential_filename", potentialFile.getName());
+		uploadPotentialPost.put("actor.description", txtDescription.getText());
+		uploadPotentialPost.put("actor.creator", txtCreator.getText());
+		//uploadPotentialPost.put("actor.runtype", Back.getRunTypeKeyword());
 		uploadPotentialPost.put("routine", "storePotential");
-		uploadPotentialPost.putAll(cgiMap);
+		Back.getCurrentRun().putInAuthenticationInfo(uploadPotentialPost);
+		//uploadPotentialPost.putAll(cgiMap);
 
 		// resync the list of potentials (and when coding first time, change the way the potentials
 		// are treated so that it grabs the list from the server rather than keeps them in jar

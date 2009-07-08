@@ -157,8 +157,9 @@ public class CgiCommunicate {
 	}
 	
 	private String formatQuery(String response){
+		System.out.print(response);
 		String base = this.appName+" is unable to read the response\n" + 
-		response + "\n" +
+		//response + "\n" +
 		"which it tried to retrieve from\n"+
 		this.cgihome + "\n" + 
 		"using key, value query pairs\n";
