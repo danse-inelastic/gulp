@@ -116,8 +116,6 @@ public class Potential extends JPanel {
 		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
 		return potentialNamesAsJSONArray.getArrayList();
 	}
-	
-
 
 	private class LibraryListener implements
 	ListSelectionListener, Serializable {
