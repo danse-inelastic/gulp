@@ -40,8 +40,8 @@ public class PotentialUploadDialog extends JDialog {
 	public PotentialUploadDialog(Frame frame) {
 		super(frame, "Input potential details", true);
 		setModal(true);
-		setPreferredSize(new Dimension(200,400));
-		setMinimumSize(new Dimension(200, 400));
+		setPreferredSize(new Dimension(800,400));
+		setMinimumSize(new Dimension(800, 400));
 		//getContentPane().setLayout(new GridLayout(0, 1));
 		
 		final JPanel panel = new JPanel();
@@ -111,17 +111,20 @@ public class PotentialUploadDialog extends JDialog {
 		final JButton okButton = new JButton();
 		okButton.setBounds(25, 167, 54, 25);
 		panel.add(okButton);
-		okButton.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				sendPotentialToServer(potentialFile);
-				setVisible(false);
-			}
-		});
+		okButton.addActionListener(keyOk);
 		okButton.setText("OK");
 		//pack();
         setLocationRelativeTo(frame);
         setVisible(true);
 	}
+	
+	private ActionListener keyOk = new ActionListener() {
+		
+		public void actionPerformed(final ActionEvent e) {
+			sendPotentialToServer(potentialFile);
+			PotentialUploadDialog.this.dispose();
+		}
+	};
 
 //	private File getPotentialFile(){
 //		// look for a potential on the user's machine

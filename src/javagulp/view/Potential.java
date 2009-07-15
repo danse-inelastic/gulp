@@ -47,7 +47,7 @@ public class Potential extends JPanel {
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
-	private JTextPane libraryDisplay = new JTextPane();
+	public JTextPane libraryDisplay = new JTextPane();
 	private PotentialLibs potentialLibs = new PotentialLibs();
 
 	public Potential() {
@@ -124,9 +124,13 @@ public class Potential extends JPanel {
 
 		public void valueChanged(ListSelectionEvent e) {
 			librarySelected = (String) libraryList.getSelectedValue();
+			if(librarySelected.equals(null)){
+				librarySelected="none";
+			}
 
 			//String libraryContents = getURLContentAsString(libURL);
 			libraryContents = potentialLibs.getFileContents(librarySelected);
+			potentialLibs.potentialContents.put(librarySelected, libraryContents);
 			libraryDisplay.setText(libraryContents);
 		}
 	};

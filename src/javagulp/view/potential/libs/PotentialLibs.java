@@ -24,7 +24,7 @@ public class PotentialLibs {
 			"catlow.lib","finnissinclair.lib","suttonchen.lib",
 			"clerirosato.lib","garofalini.lib","tersoff.lib"};
 	
-	private Map<String,String> potentialContents = new HashMap<String,String>();
+	public Map<String,String> potentialContents = new HashMap<String,String>();
 	
 	public PotentialLibs(){
 		//TODO: eventually cache potentials in .gulpUi or something like that
@@ -59,12 +59,13 @@ public class PotentialLibs {
 			if(potentialContents.containsKey(potentialName)){
 				return potentialContents.get(potentialName);
 			}else{
-				//if not, see if they're "on disk"
+				//if not, see if they're prepackaged in the jar
 				try{
-					InputStream potentialStream = this.getClass().getResourceAsStream(potentialName);
+					InputStream potentialStream = this.getClass().getResourceAsStream(potentialName+".lib");
 					return convertStreamToString(potentialStream);
 				//if not on disk, get them from the db
 				}catch(Exception e){
+					Back.getCurrentRun().getPotential().libraryDisplay.setText("Downloading library from server...please wait...");
 					return getPotentialContentsFromDb(potentialName);
 				}
 			}
