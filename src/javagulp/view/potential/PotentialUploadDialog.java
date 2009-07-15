@@ -2,6 +2,7 @@ package javagulp.view.potential;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,10 @@ public class PotentialUploadDialog extends JDialog {
 	private final JTextField txtCreator;
 	
 	public PotentialUploadDialog(Frame frame) {
-		super(frame, "Input potential details", false);
+		super(frame, "Input potential details", true);
+		setModal(true);
+		setPreferredSize(new Dimension(200,400));
+		setMinimumSize(new Dimension(200, 400));
 		//getContentPane().setLayout(new GridLayout(0, 1));
 		
 		final JPanel panel = new JPanel();
