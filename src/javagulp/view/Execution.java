@@ -149,13 +149,20 @@ public class Execution extends JPanel implements Serializable {
 					submitJobPost.put("actor.runtype", Back.getRunTypeKeyword());
 					submitJobPost.put("routine", "storeInputFile");
 					
-					cgiCom.setCgiParams(cgiMap);
+					cgiCom.setCgiParams(submitJobPost);
 					String response = cgiCom.postAndGetString();
 					if (response.trim().equals("success")){
 						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
 							"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
 					}else{
-						getTxtVnfStatus().setText("There was a problem with the submission.  The server returned the following message:\n"+
+						String parameters="";
+			            for (String s : submitJobPost.keySet()) {
+			                parameters+= s + ":" + submitJobPost.get(s)+System.getProperty ( "line.separator" );
+			            }
+						getTxtVnfStatus().setText("There was a problem with the submission.  " +
+								"After submitting a request with the following key,value pairs:" + System.getProperty ( "line.separator" )+
+								parameters+
+								"the server returned the following message:"+System.getProperty ( "line.separator" )+
 								response);
 					}
 					//close gulp
