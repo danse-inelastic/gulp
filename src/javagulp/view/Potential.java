@@ -42,7 +42,7 @@ public class Potential extends JPanel {
 	private JList libraryList;
 	private DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
-	public String librarySelected = "none";
+	public String potentialSelected = "none";
 	public String libraryContents = "";
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
@@ -123,14 +123,14 @@ public class Potential extends JPanel {
 		private static final long serialVersionUID = -2720144256318780471L;
 
 		public void valueChanged(ListSelectionEvent e) {
-			librarySelected = (String) libraryList.getSelectedValue();
-			if(librarySelected.equals(null)){
-				librarySelected="none";
+			potentialSelected = (String) libraryList.getSelectedValue();
+			if(potentialSelected.equals(null)){
+				potentialSelected="none";
 			}
 
 			//String libraryContents = getURLContentAsString(libURL);
-			libraryContents = potentialLibs.getFileContents(librarySelected);
-			potentialLibs.potentialContents.put(librarySelected, libraryContents);
+			libraryContents = potentialLibs.getFileContents(potentialSelected);
+			potentialLibs.potentialContents.put(potentialSelected, libraryContents);
 			libraryDisplay.setText(libraryContents);
 		}
 	};
@@ -152,7 +152,7 @@ public class Potential extends JPanel {
 				} catch (final Exception e1) {
 					e1.printStackTrace();
 				}
-				librarySelected = removeDotSomething(newLocation.getName());
+				potentialSelected = removeDotSomething(newLocation.getName());
 			}
 		}
 	};
@@ -164,8 +164,8 @@ public class Potential extends JPanel {
 
 	public String writeLibrary() throws IncompleteOptionException {
 		String lines = "";
-		if (librarySelected!="none")
-			lines = "library " + librarySelected;
+		if (potentialSelected!="none")
+			lines = "library " + potentialSelected;
 		if (Back.getCurrentRun().getPotentialOptions().chkDoNotInclude.isSelected())
 			lines += " nodump";
 		if (lines!="")

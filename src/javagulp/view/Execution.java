@@ -130,9 +130,9 @@ public class Execution extends JPanel implements Serializable {
 					String currentInputFile = Back.getCurrentRun().getOutput().selectedInputFile;
 					if(currentInputFile.equals("input.gin"))
 						Back.getCurrentRun().getOutput().updateInputGin();
-					String gulpInputFile = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
-					String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
-					String librarySelected = Back.getCurrentRun().getPotential().librarySelected;//post the files
+					String inputFileContents = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
+					//String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
+					String potentialSelected = Back.getCurrentRun().getPotential().potentialSelected;//post the files
 					Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 
 					String cgihome = cgiMap.get("cgihome");
@@ -141,10 +141,11 @@ public class Execution extends JPanel implements Serializable {
 					
 					Map<String, String> submitJobPost = new HashMap<String, String>();
 					Back.getCurrentRun().putInAuthenticationInfo(submitJobPost);
+					submitJobPost.put("actor.id", cgiMap.get("simulationId"));
+					submitJobPost.put("actor.type", cgiMap.get("simulationId"));
 					submitJobPost.put("actor", "gulpsimulationwizard");
-					submitJobPost.put("actor.configurations", gulpInputFile);
-					//submitJobPost.put("actor.librarycontent", gulpLibrary);
-					submitJobPost.put("actor.libraryname", librarySelected);
+					submitJobPost.put("actor.inputFileContents", inputFileContents);
+					submitJobPost.put("actor.potential_name", potentialSelected);
 					submitJobPost.put("actor.runtype", Back.getRunTypeKeyword());
 					submitJobPost.put("routine", "storeInputFile");
 					
