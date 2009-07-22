@@ -87,7 +87,7 @@ public class Potential extends JPanel {
 	
 	public void populatePotentialList(){
 		//remove any previous entries--start from scratch
-		potentialListModel.clear();
+		this.potentialListModel.clear();
 		potentialListModel.addElement("none");
 		//get the potential names from the db
 		Object[] potentialNames = getPotentialNamesFromDb();
@@ -124,7 +124,7 @@ public class Potential extends JPanel {
 
 		public void valueChanged(ListSelectionEvent e) {
 			potentialSelected = (String) libraryList.getSelectedValue();
-			if(potentialSelected.equals(null)){
+			if(potentialSelected==null){
 				potentialSelected="none";
 			}
 

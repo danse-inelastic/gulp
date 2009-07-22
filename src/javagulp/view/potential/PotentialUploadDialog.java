@@ -123,6 +123,8 @@ public class PotentialUploadDialog extends JDialog {
 		public void actionPerformed(final ActionEvent e) {
 			sendPotentialToServer(potentialFile);
 			PotentialUploadDialog.this.dispose();
+			dispose();
+			hide();
 		}
 	};
 
