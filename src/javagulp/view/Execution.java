@@ -142,7 +142,7 @@ public class Execution extends JPanel implements Serializable {
 					Map<String, String> submitJobPost = new HashMap<String, String>();
 					Back.getCurrentRun().putInAuthenticationInfo(submitJobPost);
 					submitJobPost.put("actor.id", cgiMap.get("simulationId"));
-					submitJobPost.put("actor.type", cgiMap.get("simulationId"));
+					submitJobPost.put("actor.type", cgiMap.get("simulationType"));
 					submitJobPost.put("actor", "gulpsimulationwizard");
 					submitJobPost.put("actor.inputFileContents", inputFileContents);
 					submitJobPost.put("actor.potential_name", potentialSelected);
