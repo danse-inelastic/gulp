@@ -41,7 +41,7 @@ import javax.swing.JCheckBox;
 			}
 			{
 				textField = new JTextField();
-				textField.setBounds(168, 48, 294, 21);
+				textField.setBounds(182, 48, 294, 21);
 				add(textField);
 				textField.setColumns(10);
 			}
@@ -53,7 +53,7 @@ import javax.swing.JCheckBox;
 			{
 				textField_1 = new JTextField();
 				textField_1.setColumns(10);
-				textField_1.setBounds(202, 82, 260, 21);
+				textField_1.setBounds(217, 82, 260, 21);
 				add(textField_1);
 			}
 		}

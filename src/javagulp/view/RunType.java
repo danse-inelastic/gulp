@@ -9,6 +9,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import javagulp.controller.IncompleteOptionException;
+import javagulp.controller.InvalidOptionException;
 import javagulp.model.SerialListener;
 
 public class RunType extends JPanel implements Serializable {
@@ -143,6 +146,28 @@ public class RunType extends JPanel implements Serializable {
 		cboRunType.addActionListener(keyRunType);
 		cboRunType.setBounds(146, 9, 264, 24);
 		add(cboRunType);
+	}
+	
+	public String writeRuntype() throws IncompleteOptionException, InvalidOptionException {
+		String runtypeLines="";
+		String optionChosen = (String)cboRunType.getSelectedItem();
+		if (optionChosen.equals("optimization"))
+			runtypeLines = ((Optimization)getSelectedRunTypePanel("optimization")).writeOptimization();
+		else if (optionChosen.equals("structure prediction"))
+			runtypeLines = ((StructurePrediction)getSelectedRunTypePanel("structure prediction")).writeStructurePrediction();
+		else if (optionChosen.equals("phonons"))
+			runtypeLines = ((Phonons)getSelectedRunTypePanel("phonons")).writePhonon();
+		else if (optionChosen.equals("free energy calc/optimize"))
+			runtypeLines = ((FreeEnergy)getSelectedRunTypePanel("free energy calc/optimize")).writeFreeEnergy();
+		else if (optionChosen.equals("fit")) {
+			runtypeLines = ((Fit)getSelectedRunTypePanel("fit")).writeFitOptions() + 
+				((Fit)getSelectedRunTypePanel("fit")).fitPanelHolder.writeFitPanels();
+		} else if (optionChosen.equals("monte carlo"))		
+			runtypeLines = ((MonteCarlo)getSelectedRunTypePanel("monte carlo")).writeMonteCarlo();
+		else if (optionChosen.equals("molecular dynamics"))
+			runtypeLines = ((MolecularDynamics)getSelectedRunTypePanel("molecular dynamics")).writeMD();
+//		getDefect().writeDefect();
+		return runtypeLines;
 	}
 	
 //	public MolecularDynamics getMd() {

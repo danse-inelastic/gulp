@@ -45,17 +45,9 @@ public class GulpFileWriter {
 			o.append(gr.getConstraints().writeUnfreeze());
 			o.append(gr.getEwaldOptions().writeEwald());
 			o.append(gr.getPotentialOptions().writePotentialOptions());
-			o.append(gr.getElectrostatics().writeElectrostatics());
-			o.append(((Optimization)gr.getSelectedRunTypePanel("optimization")).writeOptimization());
+			o.append(gr.getElectrostatics().writeElectrostatics());			
 			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
-			o.append(((StructurePrediction)gr.getSelectedRunTypePanel("structure prediction")).writeStructurePrediction());
-			o.append(((Phonons)gr.getSelectedRunTypePanel("phonons")).writePhonon());
-			o.append(((FreeEnergy)gr.getSelectedRunTypePanel("free energy calc/optimize")).writeFreeEnergy());
-//			o.append(gr.getDefect().writeDefect());
-			o.append(((Fit)gr.getSelectedRunTypePanel("fit")).writeFitOptions());
-			o.append(((Fit)gr.getSelectedRunTypePanel("fit")).fitPanelHolder.writeFitPanels());
-			o.append(((MonteCarlo)gr.getSelectedRunTypePanel("monte carlo")).writeMonteCarlo());
-			o.append(((MolecularDynamics)gr.getSelectedRunTypePanel("molecular dynamics")).writeMD());
+			o.append(gr.getRunTypePanel().writeRuntype());
 			o.append(gr.getExternalForce().writeExternalForce());
 			o.append(gr.getOutput().writeExecute());
 		} catch (IncompleteOptionException e) {

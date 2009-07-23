@@ -10,6 +10,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 	public class Thermodynamics extends TitledPanel {
 		
@@ -42,8 +44,18 @@ import javax.swing.JTextField;
 			radNone.setSelected(true);
 			radEnsembleNVE.setBounds(5, 30, 165, 30);
 			add(radEnsembleNVE);
+			radEnsembleNVT.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Back.getKeys().putOrRemoveKeyword(radEnsembleNVT.isSelected(), "conv");
+				}
+			});
 			radEnsembleNVT.setBounds(5, 60, 187, 25);
 			add(radEnsembleNVT);
+			radEnsembleNPT.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Back.getKeys().putOrRemoveKeyword(radEnsembleNPT.isSelected(), "conp");
+				}
+			});
 			radEnsembleNPT.setBounds(5, 84, 187, 25);
 			add(radEnsembleNPT);
 			chkConserved.setBounds(5, 135, 294, 25);
@@ -64,13 +76,11 @@ import javax.swing.JTextField;
 				lines = "ensemble nve" + Back.newLine;
 			else if (radEnsembleNVT.isSelected()) {
 				if (!txtQnose.getText().equals("")){
-					Back.getKeys().putOrRemoveKeyword(radEnsembleNVT.isSelected(), "conv");
 					lines += "ensemble nvt " + txtQnose.getText() + Back.newLine;
 				} else
 					throw new IncompleteOptionException("Missing nvt qnose in Molecular Dynamics");
 			} else if (radEnsembleNPT.isSelected()) {
 				if (!txtQnose2.getText().equals("") && !txtQpress.getText().equals("")){
-					Back.getKeys().putOrRemoveKeyword(radEnsembleNPT.isSelected(), "conp");
 					lines += "ensemble npt " + txtQnose2.getText() + " " + txtQpress.getText() + Back.newLine;
 				} else
 					throw new IncompleteOptionException("Missing npt qnose or qpress in Molecular Dynamics");
