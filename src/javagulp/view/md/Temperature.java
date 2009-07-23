@@ -32,26 +32,26 @@ public class Temperature extends TitledPanel implements Serializable {
 		
 		lblTemperature.setBounds(10, 19, 136, 20);
 		add(lblTemperature);
-		txtTemp.setBounds(152, 20, 63, 19);
+		txtTemp.setBounds(152, 20, 108, 19);
 		add(txtTemp);
 		lblIncrement.setBounds(10, 45, 136, 15);
 		add(lblIncrement);
 		txtIncrement.setBackground(Back.grey);
-		txtIncrement.setBounds(152, 43, 63, 19);
+		txtIncrement.setBounds(152, 43, 108, 19);
 		add(txtIncrement);
 		txtNumSteps.setBackground(Back.grey);
-		txtNumSteps.setBounds(152, 68, 63, 19);
+		txtNumSteps.setBounds(152, 68, 108, 19);
 		add(txtNumSteps);
 		lblNumSteps.setBounds(10, 70, 136, 15);
 		add(lblNumSteps);
 		txtTempScaling.setBackground(Back.grey);
-		txtTempScaling.setBounds(240, 15, 195, 47);
+		txtTempScaling.setBounds(10, 99, 235, 47);
 		add(txtTempScaling);
 		txtFirstStep.setBackground(Back.grey);
-		txtFirstStep.setBounds(272, 68, 46, 19);
+		txtFirstStep.setBounds(48, 158, 46, 19);
 		add(txtFirstStep);
 		txtFirstStep.setEnabled(false);
-		lblTimeStep.setBounds(240, 70, 26, 15);
+		lblTimeStep.setBounds(10, 158, 26, 15);
 		add(lblTimeStep);
 	}
 

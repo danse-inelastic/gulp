@@ -47,15 +47,9 @@ public class Output extends JPanel implements Serializable {
 	public String selectedInputFile = "input.gin";
 //	private transient RBSubmitReturn submit;//inherit from this class to serialize?
 
-	private OutputFormats pnlOutputFormats = new OutputFormats();
+	//private OutputFormats pnlOutputFormats = new OutputFormats();
 	private Terse pnlTerse = new Terse();
-	private TitledPanel pnlDump = new TitledPanel();
 
-	private JCheckBox chkAfterEvery = new JCheckBox("after every");
-	private JCheckBox chkOutputConstraints = new JCheckBox("output constraints");
-	private JCheckBox chkProduceRestartFile = new JCheckBox("produce fitting/optimization dumpfile");
-
-	private JLabel lblCycles = new JLabel("cycle(s)");
 	private JLabel lblOutputFile = new JLabel("gulp stdout file");
 	private JLabel lblTimeLimit = new JLabel("calculation time limit");
 	private JLabel savedInputFilesLabel;
@@ -63,8 +57,6 @@ public class Output extends JPanel implements Serializable {
 	private JPanel pnlCalculationTitle = new JPanel();
 
 	private JTextField txtCalculationTitle = new JTextField();
-	private JTextField txtDumpEvery = new JTextField("1");
-	private JTextField txtFort12 = new JTextField("fort.12");
 	private JTextField txtInfinity = new JTextField("infinity");
 	//public JTextField txtInputFile = new JTextField("input.gin");
 	public JTextField txtOutputFile = new JTextField("output.gout");
@@ -127,8 +119,7 @@ public class Output extends JPanel implements Serializable {
 		} 
 	}
 	
-	private KeywordListener keyOutputConstraints = new KeywordListener(chkOutputConstraints, "outcon");
-
+	
 	public Output() {
 		super();
 		setLayout(null);
@@ -159,8 +150,8 @@ public class Output extends JPanel implements Serializable {
 		btnViewInput.setBounds(151, 5, 93, 20);
 		add(btnViewInput);
 
-		pnlOutputFormats.setBounds(250, 7, 330, 300);
-		add(pnlOutputFormats);
+		//pnlOutputFormats.setBounds(250, 7, 330, 300);
+		//add(pnlOutputFormats);
 		pnlTerse.setBounds(586, 134, 443, 230);
 		add(pnlTerse);
 		//txtInputFile.setBounds(180, 6, 152, 20);
@@ -171,29 +162,9 @@ public class Output extends JPanel implements Serializable {
 		inputFileDisplayList.setSelectedIndex(0);
 		add(inputFileDisplayList);
 		add(getSavedInputFilesLabel());
-		
-		pnlDump.setBounds(586, 7, 443, 121);
-		pnlDump.setTitle("dump file");
-		txtFort12.setBackground(Back.grey);
-		txtFort12.setBounds(304, 24, 118, 20);
-		pnlDump.add(txtFort12);
-		txtDumpEvery.setBackground(Back.grey);
-		lblCycles.setBounds(236, 55, 53, 25);
-		pnlDump.add(lblCycles);
-		chkOutputConstraints.addActionListener(keyOutputConstraints);
-		chkOutputConstraints.setBounds(67, 88, 173, 25);
-		pnlDump.add(chkOutputConstraints);
-		chkProduceRestartFile.setBounds(10, 21, 288, 25);
-		pnlDump.add(chkProduceRestartFile);
-		txtDumpEvery.setBounds(182, 58, 48, 20);
-		pnlDump.add(txtDumpEvery);
-		chkAfterEvery.setBounds(67, 52, 109, 30);
-		pnlDump.add(chkAfterEvery);
-		add(pnlDump);
-
-
+	
+		//add(pnlRestart);
 	}
-
 
 //	public void runRequestBroker(String contents) {
 //		try {
@@ -218,27 +189,10 @@ public class Output extends JPanel implements Serializable {
 //		}
 //	}
 
-	private String writeDump() {
-		String lines = "";
-		if (chkProduceRestartFile.isSelected()) {
-			lines = "dump";
-			if (chkAfterEvery.isSelected()
-					&& !txtDumpEvery.getText().equals("1")) {
-				Integer.parseInt(txtDumpEvery.getText());
-
-				lines += " every " + txtDumpEvery.getText();
-			}
-			if (!txtFort12.getText().equals("fort.12")) {
-				lines += " " + txtFort12.getText();
-			}
-			lines += Back.newLine;
-		}
-		return lines;
-	}
-
 	public String writeExecute() throws IncompleteOptionException {
-		return pnlOutputFormats.writeOutputFormats() + writeDump()
-				+ pnlTerse.writeTerse();// written twice
+//		return pnlOutputFormats.writeOutputFormats() + writeDump()
+//				+ pnlTerse.writeTerse();// written twice
+		return pnlTerse.writeTerse();// written twice
 	}
 
 	public String writeTitleAndTimeLimit() {

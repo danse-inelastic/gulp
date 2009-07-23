@@ -35,10 +35,6 @@ public class Constraints extends JPanel implements Serializable {
 	private Unfreeze pnlUnfreeze = new Unfreeze(pnlExternalField.radNone);
 
 
-
-
-	
-
 	public Constraints() {
 		super();
 		setLayout(null);
@@ -49,7 +45,7 @@ public class Constraints extends JPanel implements Serializable {
 		pnlExternalField.radConstantVolume.addActionListener(a);
 		pnlExternalField.radNone.addActionListener(a);
 		pnlExternalField.setBounds(0, 0, 260, 148);
-		add(pnlExternalField);
+		//add(pnlExternalField);
 		
 
 		ConstraintsOptions pnlOptions = new ConstraintsOptions();

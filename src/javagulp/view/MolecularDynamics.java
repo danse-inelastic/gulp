@@ -26,8 +26,6 @@ public class MolecularDynamics extends JPanel implements Serializable {
 
 	//private JCheckBox chkMD = new JCheckBox("perform a MD simulation");
 
-	
-
 	private Temperature pnlTemperature = new Temperature(0);
 	public MDMass pnlMDmass = new MDMass();
 	private Integrator pnlIntegrator = new Integrator();
@@ -39,6 +37,7 @@ public class MolecularDynamics extends JPanel implements Serializable {
 
 	private TimeLengths pnlTimeLengths = new TimeLengths();
 	private OutputFormats pnlOutputFormats = new OutputFormats();
+	private RestartFile pnlRestartFile = new RestartFile();
 
 	//private String uriJPad = "http://cseobb.hec.utah.edu:18080/JPad/OPENARCH-INF/JPad.xml";
 
@@ -46,35 +45,34 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		pnlTemperature.setBounds(317, 6, 498, 106);
+		pnlTemperature.setBounds(317, 6, 289, 197);
 		add(pnlTemperature);
 		pnlTemperature.txtFirstStep.setEnabled(true);
-		pnlMDmass.setBounds(790, 119, 453, 118);
+		pnlMDmass.setBounds(618, 111, 503, 118);
 		pnlMDmass.cboShellmassSpecies.setBounds(180, 18, 116, 25);
 		add(pnlMDmass);
-		pnlVectorTable.setBounds(317, 243, 503, 122);
+		pnlVectorTable.setBounds(618, 226, 503, 122);
 		add(pnlVectorTable);
-		pnlPressure.setBounds(317, 119, 467, 44);
+		pnlPressure.setBounds(317, 204, 289, 44);
 		add(pnlPressure);
-		pnlPotentialInterpolation.setBounds(318, 169, 466, 71);
+		pnlPotentialInterpolation.setBounds(618, 346, 503, 71);
 		add(pnlPotentialInterpolation);
 		//chkMD.addActionListener(keyMD);
 		//chkMD.setBounds(4, 6, 307, 25);
 		//add(chkMD);
-		pnlMDmassless.setBounds(821, 6, 422, 106);
+		pnlMDmassless.setBounds(618, 6, 503, 106);
 		add(pnlMDmassless);
 		pnlThermodynamicEnsembles.setBounds(4, 6, 309, 165);
 		add(pnlThermodynamicEnsembles);
-		pnlIntegrator.setBounds(2, 177, 310, 51);
+		pnlIntegrator.setBounds(317, 254, 289, 51);
 		add(pnlIntegrator);
-		pnlTimeLengths.setBounds(2, 234, 309, 131);
+		pnlTimeLengths.setBounds(4, 171, 309, 131);
 		add(pnlTimeLengths);
-		pnlOutputFormats.setBounds(826, 243, 417, 122);
+		pnlOutputFormats.setBounds(4, 302, 602, 118);
 		add(pnlOutputFormats);
+		pnlRestartFile.setBounds(4, 418, 602, 118);
+		add(pnlRestartFile);
 	}
-
-
-
 
 
 	public String writeMD() throws IncompleteOptionException,
@@ -86,13 +84,13 @@ public class MolecularDynamics extends JPanel implements Serializable {
 				+ pnlMDmass.writeShellMassRatio()
 				+ pnlVectorTable.writeResetvectors()
 				+ pnlPressure.writePressure()
-				+ pnlOutputFormats.writeMDarchive()
+				//+ pnlOutputFormats.writeMDarchive()
 				+ pnlPotentialInterpolation.writePotentialInterpolation()
 				+ pnlMDmassless.writeIterations()
 				+ pnlIntegrator.writeIntegrator()
 				+ pnlVectorTable.writeExtracutoff()
 				+ pnlThermodynamicEnsembles.writeEnsemble()
-				//+ m.writeMDRestart() + pnlTemperature.writeTemperature();
-				+ pnlTemperature.writeTemperature();
+				+ pnlTemperature.writeTemperature()
+				+ pnlRestartFile.writeOption();
 	}
 }

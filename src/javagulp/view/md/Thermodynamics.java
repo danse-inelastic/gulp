@@ -63,16 +63,16 @@ import javax.swing.JTextField;
 			if (radEnsembleNVE.isSelected())
 				lines = "ensemble nve" + Back.newLine;
 			else if (radEnsembleNVT.isSelected()) {
-				if (!txtQnose.getText().equals(""))
+				if (!txtQnose.getText().equals("")){
+					Back.getKeys().putOrRemoveKeyword(radEnsembleNVT.isSelected(), "conv");
 					lines += "ensemble nvt " + txtQnose.getText() + Back.newLine;
-				else
+				} else
 					throw new IncompleteOptionException("Missing nvt qnose in Molecular Dynamics");
 			} else if (radEnsembleNPT.isSelected()) {
-				if (!txtQnose2.getText().equals("")
-						&& !txtQpress.getText().equals(""))
-					lines += "ensemble npt " + txtQnose2.getText() + " "
-							+ txtQpress.getText() + Back.newLine;
-				else
+				if (!txtQnose2.getText().equals("") && !txtQpress.getText().equals("")){
+					Back.getKeys().putOrRemoveKeyword(radEnsembleNPT.isSelected(), "conp");
+					lines += "ensemble npt " + txtQnose2.getText() + " " + txtQpress.getText() + Back.newLine;
+				} else
 					throw new IncompleteOptionException("Missing npt qnose or qpress in Molecular Dynamics");
 			}
 			if (chkConserved.isSelected())
