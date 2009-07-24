@@ -67,7 +67,7 @@ public class GulpRun extends JPanel implements Serializable {
 			topPane.addChangeListener(keyTop);
 
 			topPane.add(null, "run type");
-			topPane.add(null, "constraints");
+			//topPane.add(null, "constraints");
 			topPane.add(null, "structures");
 
 			topPane.add(null, "potentials");
@@ -246,44 +246,44 @@ public class GulpRun extends JPanel implements Serializable {
 			return ((RunType) getTopPanel(0)).getSelectedRunTypePanel(type);
 		}
 
-		public Constraints getConstraints() {
-			return (Constraints) getTopPanel(1);
-		}
+//		public Constraints getConstraints() {
+//			return (Constraints) getTopPanel(1);
+//		}
 
 		public Structures getStructures() {
-			return (Structures) getTopPanel(2);
+			return (Structures) getTopPanel(1);
 		}
 
 		public Potential getPotential() {
-			return (Potential) getTopPanel(3);
+			return (Potential) getTopPanel(2);
 		}
 
 		public PotentialOptions getPotentialOptions() {
-			return (PotentialOptions) getTopPanel(4);
+			return (PotentialOptions) getTopPanel(3);
 		}
 
 		public ChargesElementsBonding getChargesElementsBonding() {
-			return (ChargesElementsBonding) getTopPanel(5);
+			return (ChargesElementsBonding) getTopPanel(4);
 		}
 
 		public Electrostatics getElectrostatics() {
-			return (Electrostatics) getTopPanel(6);
+			return (Electrostatics) getTopPanel(5);
 		}
 
 		public EwaldOptions getEwaldOptions() {
-			return (EwaldOptions) getTopPanel(7);
+			return (EwaldOptions) getTopPanel(6);
 		}
 
 		public ExternalForce getExternalForce() {
-			return (ExternalForce) getTopPanel(8);
+			return (ExternalForce) getTopPanel(7);
 		}
 
 		public Output getOutput() {
-			return (Output) getTopPanel(9);
+			return (Output) getTopPanel(8);
 		}
 
 		public Execution getExecution() {
-			return (Execution) getTopPanel(10);
+			return (Execution) getTopPanel(9);
 		}
 
 	}

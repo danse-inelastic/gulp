@@ -39,7 +39,7 @@ public class Constraints extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 
-		pnlUnfreeze.setBounds(266, 0, 412, 147);
+		pnlUnfreeze.setBounds(0, 0, 412, 147);
 		add(pnlUnfreeze);
 		pnlExternalField.radConstantPressure.addActionListener(a);
 		pnlExternalField.radConstantVolume.addActionListener(a);

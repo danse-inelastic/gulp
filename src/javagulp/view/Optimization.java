@@ -57,9 +57,13 @@ public class Optimization extends JPanel implements Serializable {
 	private JCheckBox chklinmin = new JCheckBox("print details of line minimization");
 	//private JCheckBox chkopti = new JCheckBox("perform an optimization with an exact Hessian (default)");
 	private JCheckBox chkoptimisefitShells = new JCheckBox("optimize only shells (optical calculation)");
+	private JCheckBox chkOptimizeCellRadii = new JCheckBox("optimize only shell radii");
 	private JCheckBox chkoutputDetailsOf = new JCheckBox("output details of the Hessian matrix");
 	private JCheckBox chkpositive = new JCheckBox(g.html("ensure that the Hessian always behaves as positive definite during Newton-Raphson <br>by ensuring the search vector has the same sign as the gradient vector"));
 	private JCheckBox chkuseImaginaryPhonon = new JCheckBox("use imaginary phonon modes to lower structural symmetry");
+	private JCheckBox chkExcludeShellRadii = new JCheckBox("exclude shell radii from the fitting/optimization");
+	private JCheckBox chkOptimizeUnitCell = new JCheckBox("optimize/fit unit cell coordinates but leave internal atomic coordinates fixed");
+
 
 	private KeywordListener keyuseImaginaryPhonon = new KeywordListener(chkuseImaginaryPhonon, "lower_symmetry");
 	private KeywordListener keyAllowOnlyIsotropicRadioButton = new KeywordListener(chkAllowOnlyIsotropicRadioButton, "isotropic");
@@ -71,6 +75,10 @@ public class Optimization extends JPanel implements Serializable {
 	//private TaskKeywordListener keyopti = new TaskKeywordListener(chkopti, "optimise");
 	private KeywordListener keylinmin = new KeywordListener(chklinmin, "linmin");
 	private KeywordListener keyoptimisefitShells = new KeywordListener(chkoptimisefitShells, "shell");
+	private KeywordListener keyOptimizeCellRadii = new KeywordListener(chkOptimizeCellRadii, "breathe");
+	private KeywordListener keyExcludeShellRadii = new KeywordListener(chkExcludeShellRadii, "nobreathe");
+	private KeywordListener keyOptimizeUnitCell = new KeywordListener(chkOptimizeUnitCell, "cellonly");
+	
 
 	private JLabel lblAfter = new JLabel("after");
 	private JLabel lblmaximumNumberOf = new JLabel("maximum number of points");
@@ -91,6 +99,7 @@ public class Optimization extends JPanel implements Serializable {
 	private TitledPanel pnlotheroptions = new TitledPanel();
 	private TitledPanel pnlprimaryoptimizer = new TitledPanel();
 	private TitledPanel pnlswitchoptimizer = new TitledPanel();
+	private TitledPanel pnlunitcelloptions = new TitledPanel();
 
 	private JPanel pnlHessianOptions = new JPanel();
 
@@ -122,10 +131,26 @@ public class Optimization extends JPanel implements Serializable {
 		// jTextArea4.setBackground(new Color(204, 204, 204));
 
 		pnlParameterTolerance.setTitle("parameter tolerance");
-		pnlParameterTolerance.setBounds(660, 57, 236, 48);
+		pnlParameterTolerance.setBounds(660, 334, 236, 48);
 		add(pnlParameterTolerance);
 		txtxtolopt.setBounds(9, 18, 80, 21);
 		pnlParameterTolerance.add(txtxtolopt);
+		
+		pnlunitcelloptions.setTitle("unit cell options");
+		pnlunitcelloptions.setBounds(660, 384, 452, 117);
+		add(pnlunitcelloptions);
+		chkoptimisefitShells.setBounds(12, 22, 378, 25);
+		pnlunitcelloptions.add(chkoptimisefitShells);
+		chkOptimizeCellRadii.setBounds(12, 51, 537, 25);
+		pnlunitcelloptions.add(chkOptimizeCellRadii);
+		chkOptimizeCellRadii.addActionListener(keyOptimizeCellRadii);
+		chkoptimisefitShells.addActionListener(keyoptimisefitShells);
+		chkExcludeShellRadii.setBounds(7, 117, 536, 25);
+		add(chkExcludeShellRadii);
+		chkExcludeShellRadii.addActionListener(keyExcludeShellRadii);
+		chkOptimizeUnitCell.setBounds(7, 148, 846, 25);
+		add(chkOptimizeUnitCell);
+		chkOptimizeUnitCell.addActionListener(keyOptimizeUnitCell);
 
 		pnlMaxStepSize.setTitle("maximum step size");
 		pnlMaxStepSize.setBounds(961, 1, 167, 50);
@@ -145,22 +170,18 @@ public class Optimization extends JPanel implements Serializable {
 		pnleigenvector.add(txtslower);
 
 		pnlotheroptions.setTitle("other options");
-		pnlotheroptions.setBounds(0, 334, 643, 144);
+		pnlotheroptions.setBounds(66, 385, 468, 166);
 		add(pnlotheroptions);
 		lblStopIfCell.setBounds(10, 23, 378, 15);
 		pnlotheroptions.add(lblStopIfCell);
-		txtmincell.setBounds(394, 21, 64, 20);
+		txtmincell.setBounds(356, 20, 64, 20);
 		pnlotheroptions.add(txtmincell);
 		chkAllowOnlyIsotropicRadioButton.addActionListener(keyAllowOnlyIsotropicRadioButton);
 		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 385, 25);
 		pnlotheroptions.add(chkAllowOnlyIsotropicRadioButton);
-		chkoptimisefitShells.addActionListener(keyoptimisefitShells);
-		chkoptimisefitShells.setBounds(10, 74, 378, 25);
-		pnlotheroptions.add(chkoptimisefitShells);
-
-		chklinmin.addActionListener(keylinmin);
-		chklinmin.setBounds(10, 105, 320, 25);
-		pnlotheroptions.add(chklinmin);
+		
+		
+		
 
 		pnlmaximumcycles.setTitle("maximum number of cycles");
 		pnlmaximumcycles.setBounds(660, 277, 215, 51);
@@ -187,7 +208,7 @@ public class Optimization extends JPanel implements Serializable {
 		pnlMaxIndividualGradient.add(txtgmax);
 
 		pnlfunctiontolerance.setTitle("function tolerance");
-		pnlfunctiontolerance.setBounds(902, 57, 226, 48);
+		pnlfunctiontolerance.setBounds(902, 334, 226, 48);
 		add(pnlfunctiontolerance);
 		txtftol.setBounds(9, 19, 80, 21);
 		pnlfunctiontolerance.add(txtftol);
@@ -246,12 +267,16 @@ public class Optimization extends JPanel implements Serializable {
 //		chkopti.setToolTipText("Minimize the energy with respect to geometrical variables");
 
 		pnlLineMinimisationOptions.setTitle("line minimisation options");
-		pnlLineMinimisationOptions.setBounds(660, 1, 295, 51);
+		pnlLineMinimisationOptions.setBounds(660, 1, 295, 98);
 		add(pnlLineMinimisationOptions);
 		txtline.setBounds(235, 24, 50, 20);
 		pnlLineMinimisationOptions.add(txtline);
 		lblmaximumNumberOf.setBounds(10, 26, 219, 15);
 		pnlLineMinimisationOptions.add(lblmaximumNumberOf);
+				chklinmin.setBounds(10, 61, 269, 25);
+				pnlLineMinimisationOptions.add(chklinmin);
+		
+				chklinmin.addActionListener(keylinmin);
 	}
 
 	private String writeDelf() {

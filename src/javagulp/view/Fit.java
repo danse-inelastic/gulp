@@ -45,6 +45,7 @@ public class Fit extends JPanel implements Serializable {
 	private JRadioButton rboFullHessian = new JRadioButton("use BFGS method and calculate full Hessian");
 	private JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
 	private JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
+	private JCheckBox chkDoNotSet = new JCheckBox("do not set any flags for fitting");
 	
 	public FitPanelHolder fitPanelHolder = new FitPanelHolder();
 	private JList fitList = new JList(fitPanelHolder.fitListModel);
@@ -55,6 +56,7 @@ public class Fit extends JPanel implements Serializable {
 //	private TaskKeywordListener keyFit = new TaskKeywordListener(rboFit, "fit");
 //	private TaskKeywordListener keyDoFittingRun = new TaskKeywordListener(rboFullHessian, "fbfgs");
 	private KeywordListener keyOptimisefitShellsBut = new KeywordListener(chkOptimisefitShellsBut, "shell");
+	private KeywordListener keyDoNotSet = new KeywordListener(chkDoNotSet, "noflags");
 
 	SerialKeyAdapter listListener = new SerialKeyAdapter() {
 		private static final long serialVersionUID = -8369027767995116365L;
@@ -165,9 +167,13 @@ public class Fit extends JPanel implements Serializable {
 		pnlOutputFittingParam.add(txtOutputFittingParam);
 
 		final TitledPanel panel = new TitledPanel();
-		panel.setTitle("optimization options");
-		panel.setBounds(0, 259, 710, 237);
+		panel.setTitle("fitting options");
+		panel.setBounds(0, 259, 710, 269);
 		add(panel);
+		
+		chkDoNotSet.setBounds(10, 220, 537, 25);
+		panel.add(chkDoNotSet);
+		chkDoNotSet.addActionListener(keyDoNotSet);
 
 		rboFit.setSelected(true);
 		rboFit.setBounds(10, 23, 483, 25);
@@ -200,7 +206,7 @@ public class Fit extends JPanel implements Serializable {
 		chkOptimisefitShellsBut.addActionListener(keyOptimisefitShellsBut);
 
 		chkSimultaneous.addActionListener(keySimultaneous);
-		chkSimultaneous.setBounds(10, 178, 558, 52);
+		chkSimultaneous.setBounds(10, 178, 647, 30);
 		panel.add(chkSimultaneous);
 	}
 
