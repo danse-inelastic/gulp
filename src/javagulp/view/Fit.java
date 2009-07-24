@@ -170,7 +170,7 @@ public class Fit extends JPanel implements Serializable {
 		panel.setBounds(0, 259, 710, 269);
 		add(panel);
 
-		chkDoNotSet.setBounds(10, 220, 537, 25);
+		chkDoNotSet.setBounds(10, 209, 537, 25);
 		panel.add(chkDoNotSet);
 		chkDoNotSet.addActionListener(keyDoNotSet);
 

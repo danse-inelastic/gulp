@@ -7,6 +7,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.model.SerialListener;
 import javagulp.view.constraints.ExternalFieldConstraints;
+import javagulp.view.optimization.OutputFormats;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -39,7 +40,6 @@ public class Optimization extends JPanel implements Serializable {
 	private final SerialListener keyOptimization = new SerialListener() {
 
 		private static final long serialVersionUID = -6450781303665298416L;
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Back.getKeys().putOrRemoveKeyword(false, "dfp");
@@ -63,7 +63,7 @@ public class Optimization extends JPanel implements Serializable {
 	private final JCheckBox chkuseImaginaryPhonon = new JCheckBox("use imaginary phonon modes to lower structural symmetry");
 	private final JCheckBox chkExcludeShellRadii = new JCheckBox("exclude shell radii from the fitting/optimization");
 	private final JCheckBox chkOptimizeUnitCell = new JCheckBox("optimize/fit unit cell coordinates but leave internal atomic coordinates fixed");
-
+	private final JCheckBox chkXYZTrajectory = new JCheckBox("write xyz trajectory");
 
 	private final KeywordListener keyuseImaginaryPhonon = new KeywordListener(chkuseImaginaryPhonon, "lower_symmetry");
 	private final KeywordListener keyAllowOnlyIsotropicRadioButton = new KeywordListener(chkAllowOnlyIsotropicRadioButton, "isotropic");
@@ -100,9 +100,12 @@ public class Optimization extends JPanel implements Serializable {
 	private final TitledPanel pnlprimaryoptimizer = new TitledPanel();
 	private final TitledPanel pnlswitchoptimizer = new TitledPanel();
 	private final TitledPanel pnlunitcelloptions = new TitledPanel();
+	private final TitledPanel pnloutputoptions = new TitledPanel();
 
 	private final JPanel pnlHessianOptions = new JPanel();
 	private final ExternalFieldConstraints pnlExternalField = new ExternalFieldConstraints();
+	//private final OutputFormats pnlOutputFormats = new OutputFormats();
+	private final RestartFile pnlRestartFile = new RestartFile();
 
 	private final JTextField txtdelf = new JTextField();
 	private final JTextField txtftol = new JTextField("0.00001");
@@ -123,6 +126,7 @@ public class Optimization extends JPanel implements Serializable {
 	private final String TXT_UPDATE = "10";
 	private final JTextField txtupdate = new JTextField(TXT_UPDATE);
 	private final JTextField txtxtolopt = new JTextField("0.00001");
+	private final JTextField txtxyz = new JTextField();
 
 	public Optimization() {
 		super();
@@ -136,25 +140,32 @@ public class Optimization extends JPanel implements Serializable {
 		add(pnlParameterTolerance);
 		txtxtolopt.setBounds(9, 18, 80, 21);
 		pnlParameterTolerance.add(txtxtolopt);
+		
+		pnloutputoptions.setBounds(660, 382, 468, 69);
+		add(pnloutputoptions);
+		pnloutputoptions.setTitle("output formats");
+		chkXYZTrajectory.setBounds(7, 21, 163, 22);
+		pnloutputoptions.add(chkXYZTrajectory);
+		txtxyz.setBounds(182, 22, 267, 21);
+		pnloutputoptions.add(txtxyz);
+		pnlRestartFile.setBounds(660, 452, 468, 123);
+		add(pnlRestartFile);
 
-		pnlunitcelloptions.setTitle("unit cell options");
-		pnlunitcelloptions.setBounds(660, 384, 452, 117);
+		pnlunitcelloptions.setTitle("shell options");
+		pnlunitcelloptions.setBounds(208, 334, 446, 117);
 		add(pnlunitcelloptions);
-		chkoptimisefitShells.setBounds(12, 22, 378, 25);
+		chkoptimisefitShells.setBounds(12, 22, 384, 25);
 		pnlunitcelloptions.add(chkoptimisefitShells);
-		chkOptimizeCellRadii.setBounds(12, 51, 537, 25);
+		chkOptimizeCellRadii.setBounds(12, 51, 384, 25);
 		pnlunitcelloptions.add(chkOptimizeCellRadii);
+		chkExcludeShellRadii.setBounds(12, 80, 391, 25);
+		pnlunitcelloptions.add(chkExcludeShellRadii);
+		chkExcludeShellRadii.addActionListener(keyExcludeShellRadii);
 		chkOptimizeCellRadii.addActionListener(keyOptimizeCellRadii);
 		chkoptimisefitShells.addActionListener(keyoptimisefitShells);
-		chkExcludeShellRadii.setBounds(7, 117, 536, 25);
-		add(chkExcludeShellRadii);
-		chkExcludeShellRadii.addActionListener(keyExcludeShellRadii);
-		chkOptimizeUnitCell.setBounds(7, 148, 846, 25);
-		add(chkOptimizeUnitCell);
-		chkOptimizeUnitCell.addActionListener(keyOptimizeUnitCell);
 
 		pnlMaxStepSize.setTitle("maximum step size");
-		pnlMaxStepSize.setBounds(961, 1, 167, 50);
+		pnlMaxStepSize.setBounds(961, 1, 167, 98);
 		add(pnlMaxStepSize);
 		txtstepmxopt.setBounds(22, 19, 80, 21);
 		pnlMaxStepSize.add(txtstepmxopt);
@@ -170,8 +181,8 @@ public class Optimization extends JPanel implements Serializable {
 		txtslower.setBounds(327, 54, 87, 20);
 		pnleigenvector.add(txtslower);
 
-		pnlotheroptions.setTitle("other options");
-		pnlotheroptions.setBounds(66, 385, 468, 166);
+		pnlotheroptions.setTitle("unit cell options");
+		pnlotheroptions.setBounds(0, 452, 654, 109);
 		add(pnlotheroptions);
 		lblStopIfCell.setBounds(10, 23, 378, 15);
 		pnlotheroptions.add(lblStopIfCell);
@@ -180,9 +191,9 @@ public class Optimization extends JPanel implements Serializable {
 		chkAllowOnlyIsotropicRadioButton.addActionListener(keyAllowOnlyIsotropicRadioButton);
 		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 385, 25);
 		pnlotheroptions.add(chkAllowOnlyIsotropicRadioButton);
-
-
-
+		chkOptimizeUnitCell.setBounds(10, 71, 614, 25);
+		pnlotheroptions.add(chkOptimizeUnitCell);
+		chkOptimizeUnitCell.addActionListener(keyOptimizeUnitCell);
 
 		pnlmaximumcycles.setTitle("maximum number of cycles");
 		pnlmaximumcycles.setBounds(660, 277, 215, 51);
@@ -253,11 +264,11 @@ public class Optimization extends JPanel implements Serializable {
 		chkpositive.addActionListener(keypositive);
 		lblMaximumNumberOf.setBounds(10, 150, 548, 33);
 		pnlHessianOptions.add(lblMaximumNumberOf);
-		txtupdate.setBounds(564, 149, 80, 20);
+		txtupdate.setBounds(564, 155, 80, 20);
 		pnlHessianOptions.add(txtupdate);
 		lblMaximumFunctionalChange.setBounds(10, 188, 548, 42);
 		pnlHessianOptions.add(lblMaximumFunctionalChange);
-		txtdelf.setBounds(564, 191, 80, 21);
+		txtdelf.setBounds(564, 195, 80, 21);
 		pnlHessianOptions.add(txtdelf);
 
 		//		chkopti.setName("optOrNot");
@@ -278,9 +289,12 @@ public class Optimization extends JPanel implements Serializable {
 		pnlLineMinimisationOptions.add(chklinmin);
 
 		chklinmin.addActionListener(keylinmin);
+		pnlExternalField.radConstantVolume.setBounds(10, 53, 174, 23);
+		pnlExternalField.radConstantPressure.setBounds(10, 82, 174, 23);
+		pnlExternalField.radNone.setBounds(10, 24, 174, 23);
 
 
-		pnlExternalField.setBounds(0, 0, 860, 148);
+		pnlExternalField.setBounds(0, 334, 206, 117);
 		add(pnlExternalField);
 
 	}
@@ -351,13 +365,6 @@ public class Optimization extends JPanel implements Serializable {
 		return line;
 	}
 
-	public String writeOptimization() throws IncompleteOptionException {
-		return writeUpdate() + writeSlower() + writeSwitch_minimiser()
-		+ writeStepMaxOpt() + writeMincell() + writeTolerance()
-		+ writeLine() + writeLbfgs_order() + writeTol() + writeDelf()
-		+ writeMaxcyc();
-	}
-
 	private String writeSlower() {
 		String line = "";
 		if (!txtslower.getText().equals("")
@@ -407,4 +414,24 @@ public class Optimization extends JPanel implements Serializable {
 		}
 		return line;
 	}
+	
+	private String writeOutputs() throws IncompleteOptionException {
+		String line = "";
+		if (chkXYZTrajectory.isSelected() && txtxyz.getText().equals(""))
+			throw new IncompleteOptionException("Please enter an output filename");
+		if (chkXYZTrajectory.isSelected()) {
+			line += "output movie xyz "
+			+ txtxyz.getText() + Back.newLine;
+		}
+		return line;
+	}
+	
+
+	public String writeOptimization() throws IncompleteOptionException {
+		return writeUpdate() + writeSlower() + writeSwitch_minimiser()
+		+ writeStepMaxOpt() + writeMincell() + writeTolerance()
+		+ writeLine() + writeLbfgs_order() + writeTol() + writeDelf()
+		+ writeMaxcyc() + writeOutputs() + pnlRestartFile.writeOption();
+	}
+	
 }

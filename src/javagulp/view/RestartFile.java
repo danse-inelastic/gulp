@@ -22,7 +22,6 @@ public class RestartFile extends TitledPanel {
 	public RestartFile() {
 		setTitle("restart file");
 		setBounds(586, 7, 443, 121);
-		setTitle("dump file");
 		txtFort12.setBackground(Back.grey);
 		txtFort12.setBounds(304, 24, 118, 20);
 		add(txtFort12);

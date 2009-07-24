@@ -12,6 +12,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Nutpad;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
+import javagulp.view.optimization.OutputFormats;
 import javagulp.view.output.Terse;
 
 import javax.swing.DefaultListModel;
@@ -44,7 +45,7 @@ public class Output extends JPanel implements Serializable {
 	public String selectedInputFile = "input.gin";
 	//	private transient RBSubmitReturn submit;//inherit from this class to serialize?
 
-	//private OutputFormats pnlOutputFormats = new OutputFormats();
+	private OutputFormats pnlOutputFormats = new OutputFormats();
 	private final Terse pnlTerse = new Terse();
 
 	private final JLabel lblOutputFile = new JLabel("gulp stdout file");
@@ -129,14 +130,6 @@ public class Output extends JPanel implements Serializable {
 		add(cboTimeUnits);
 		lblOutputFile.setBounds(9, 160, 136, 15);
 		add(lblOutputFile);
-		pnlCalculationTitle.setLayout(null);
-		pnlCalculationTitle.setBorder(new TitledBorder(null,
-				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlCalculationTitle.setBounds(250, 316, 330, 48);
-		add(pnlCalculationTitle);
-		txtCalculationTitle.setBounds(9, 20, 311, 19);
-		pnlCalculationTitle.add(txtCalculationTitle);
 		txtInfinity.setBounds(9, 227, 136, 20);
 		add(txtInfinity);
 		lblTimeLimit.setBounds(9, 206, 165, 15);
@@ -147,9 +140,9 @@ public class Output extends JPanel implements Serializable {
 		btnViewInput.setBounds(151, 5, 93, 20);
 		add(btnViewInput);
 
-		//pnlOutputFormats.setBounds(250, 7, 330, 300);
-		//add(pnlOutputFormats);
-		pnlTerse.setBounds(586, 134, 443, 230);
+		pnlOutputFormats.setBounds(250, 7, 335, 239);
+		add(pnlOutputFormats);
+		pnlTerse.setBounds(591, 7, 443, 239);
 		add(pnlTerse);
 		//txtInputFile.setBounds(180, 6, 152, 20);
 		//add(txtInputFile);
@@ -159,6 +152,14 @@ public class Output extends JPanel implements Serializable {
 		inputFileDisplayList.setSelectedIndex(0);
 		add(inputFileDisplayList);
 		add(getSavedInputFilesLabel());
+		pnlCalculationTitle.setBounds(9, 258, 443, 48);
+		add(pnlCalculationTitle);
+		pnlCalculationTitle.setLayout(null);
+		pnlCalculationTitle.setBorder(new TitledBorder(null,
+				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null));
+		txtCalculationTitle.setBounds(9, 20, 422, 19);
+		pnlCalculationTitle.add(txtCalculationTitle);
 
 		//add(pnlRestart);
 	}

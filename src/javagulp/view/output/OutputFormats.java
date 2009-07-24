@@ -17,17 +17,10 @@ public class OutputFormats extends JPanel implements Serializable {
 
 	private final JTextField txtOutputFilename = new JTextField("output");
 
-	private final String[] labels = { "THBREL/THBPHON", "BIOSYM (.xtl)",
-			"BIOSYM (.car)", "movie format", "trajectory (.trj)",
-			"SIESTA (.fdf)", "CRYSTAL98 (.str)", "Crystal (.cif)", "MARVIN (.mvn)",
-			"CRYSALIS (.xr)", "CERIUS2 (.cssr)", "(.xyz)", "movie format",
-			"DLPOLY history", "derivatives (.drv)", "forces (.frc)",
-			"frequency", "Pressure (.pre)" };
-	private final String[] formats = { "thbrel", "xtl", "arc",
-			"movie arc", "trajectory", "fdf", "str", "cif", "marvin", "xr",
-			"cssr", "xyz", "movie xyz", "history", "drv", "frc", "freq", "pre" };
-	private final String[] extensions = { ".thbrel", ".xtl", "", "movie",
-			"", ".fdf", "", ".phonon", "", "", "", "", ".xyz",
+	private final String[] labels = { "SIESTA (.fdf)", "CRYSTAL98 (.str)", "Crystal (.cif)", "MARVIN (.mvn)",
+			"derivatives (.drv)", "forces (.frc)", "frequency", "Pressure (.pre)" };
+	private final String[] formats = { "fdf", "cif", "marvin", "drv", "frc", "freq", "pre" };
+	private final String[] extensions = {".fdf", "", ".phonon", "", "", "", "", ".xyz",
 			"movie.xyz", ".history", ".drv", ".frc", ".freq", ".pre" };
 	// TODO add trajectory ascii and equil options, frequency text option, and osc format
 	// It seems some of these formats don't work. I don't know if it is because
