@@ -20,7 +20,7 @@ public class ExForceTableEntry {
 	@Override
 	public String toString() {
 		return this.atom + " " + this.atomLocation + " " + this.fx + " "
-				+ this.fy + " " + this.fz;
+		+ this.fy + " " + this.fz;
 	}
 
 }

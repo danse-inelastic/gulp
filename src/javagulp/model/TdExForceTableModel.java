@@ -8,10 +8,8 @@ import javagulp.view.Back;
 
 import javax.swing.table.AbstractTableModel;
 
-import javagulp.model.G;
-
 public class TdExForceTableModel extends AbstractTableModel implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = 2941977560557191547L;
 
@@ -100,7 +98,7 @@ public class TdExForceTableModel extends AbstractTableModel implements
 			final String[] values = data.elementAt(i);
 			if (!values[1].equals(""))
 				lines += "td_external_force " + (i + 1) + " " + values[1] + " "
-						+ values[2] + " " + values[3] + " " + values[4] + Back.newLine;
+				+ values[2] + " " + values[3] + " " + values[4] + Back.newLine;
 		}
 		return lines;
 	}

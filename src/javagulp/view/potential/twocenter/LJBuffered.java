@@ -16,23 +16,23 @@ import javax.swing.JLabel;
 public class LJBuffered extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -2558871822990040094L;
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblEquation = new JLabel("<html>E = A / (r + r<sub>0</sub>)<sup>m</sup> - B / (r " +
-											"+ r<sub>0</sub>)<sup>n</sup></html>");
-	
-	private PPP m = new PPP("m");
-	private PPP n = new PPP("n");
-	private PPP a = new PPP("A");
-	private PPP b = new PPP("B");
-	private PPP r0 = new PPP("r0");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEquation = new JLabel("<html>E = A / (r + r<sub>0</sub>)<sup>m</sup> - B / (r " +
+	"+ r<sub>0</sub>)<sup>n</sup></html>");
+
+	private final PPP m = new PPP("m");
+	private final PPP n = new PPP("n");
+	private final PPP a = new PPP("A");
+	private final PPP b = new PPP("B");
+	private final PPP r0 = new PPP("r0");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
 	public LJBuffered() {
 		super(2);
 		enabled = new boolean[] { true, true, true, true, true, true };
-		
+
 		setTitle("buffered lennard-jones");
 		add(lblEquation);
 		lblEquation.setBounds(10, 20, 225, 21);
@@ -58,13 +58,13 @@ public class LJBuffered extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 125, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{a, b, r0};
 	}
 
 	@Override
 	public PotentialPanel clone() {
-		LJBuffered lj = new LJBuffered();
+		final LJBuffered lj = new LJBuffered();
 		lj.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(lj);
 	}
@@ -72,10 +72,10 @@ public class LJBuffered extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		String lines = "";
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		PPP[] fields = {a, b, r0};
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final PPP[] fields = {a, b, r0};
 		Back.checkAndParseD(fields);
-		
+
 		lines += "ljbuffered ";
 		if (!m.txt.getText().equals("") && !m.txt.getText().equals("12"))
 			lines += m.txt.getText() + " ";
@@ -84,8 +84,8 @@ public class LJBuffered extends PotentialPanel implements Serializable {
 		lines += pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos() 
-				+ Back.concatFields(fields);
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		+ Back.concatFields(fields);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}

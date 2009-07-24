@@ -4,9 +4,10 @@ import java.awt.BorderLayout;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.Material;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javagulp.model.Material;
 
 public class ThreeDUnitCell extends JPanel implements Serializable {
 
@@ -15,9 +16,9 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -6275533707695311267L;
 
-	private JTabbedPane tabbedPane = new JTabbedPane();
-	private ThreeDCellParameters cellParameters = new ThreeDCellParameters();
-	private ThreeDCellVectors cellVectors = new ThreeDCellVectors();
+	private final JTabbedPane tabbedPane = new JTabbedPane();
+	private final ThreeDCellParameters cellParameters = new ThreeDCellParameters();
+	private final ThreeDCellVectors cellVectors = new ThreeDCellVectors();
 
 	public ThreeDUnitCell() {
 		super();
@@ -26,7 +27,7 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		add(tabbedPane);
 		tabbedPane.add(cellVectors, "vectors");
 		tabbedPane.add(cellParameters, "parameters");
-		
+
 	}
 
 	public String write3DUnitCell() throws IncompleteOptionException {
@@ -35,7 +36,7 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		else
 			return cellParameters.writeCellParameters();
 	}
-	
+
 	public void setParameters(String[] params) {
 		cellParameters.txtA.setText(params[1]);
 		cellParameters.txtB.setText(params[2]);
@@ -44,7 +45,7 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		cellParameters.txtBeta.setText(params[5]);
 		cellParameters.txtGamma.setText(params[6]);
 	}
-	
+
 	public void setVectors(String[] vecs) {
 		cellVectors.txtAx.setText(vecs[1]);
 		cellVectors.txtAy.setText(vecs[2]);
@@ -56,7 +57,7 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		cellVectors.txtCy.setText(vecs[8]);
 		cellVectors.txtCz.setText(vecs[9]);
 	}
-	
+
 	public void setVectors(Material mat) {
 		cellVectors.txtAx.setText(""+mat.latticeVec[0]);
 		cellVectors.txtAy.setText(""+mat.latticeVec[1]);
@@ -68,7 +69,7 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		cellVectors.txtCy.setText(""+mat.latticeVec[7]);
 		cellVectors.txtCz.setText(""+mat.latticeVec[8]);
 	}
-	
+
 	/**
 	 * This method will convert lattice parameters (a b c alpha beta gamma) into
 	 * lattice vectors. Assumes a is in the x direction and b is in the xy plane.
@@ -82,22 +83,22 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		double conv = 1;
 		if (degrees)
 			conv = Math.PI / 180;
-		
-		double cosal = Math.cos(p[3] * conv);
-		double cosbe = Math.cos(p[4] * conv);
-		double cosga = Math.cos(p[5] * conv);
-		double sinbe = Math.sin(p[4] * conv);
-		double singa = Math.sin(p[5] * conv);
+
+		final double cosal = Math.cos(p[3] * conv);
+		final double cosbe = Math.cos(p[4] * conv);
+		final double cosga = Math.cos(p[5] * conv);
+		final double sinbe = Math.sin(p[4] * conv);
+		final double singa = Math.sin(p[5] * conv);
 		//perform conversion
-		double cosAlStar = ( cosbe * cosga - cosal ) / (sinbe * singa);
-		double V = p[0]*p[1]*p[2]*Math.sqrt(1 - cosal*cosal - cosbe*cosbe - cosga*cosga + 2*cosal*cosbe*cosga);
-		double cStar = p[0]*p[1]*singa/V;
-		double[][] vector = {{p[0], 0, 0},
+		final double cosAlStar = ( cosbe * cosga - cosal ) / (sinbe * singa);
+		final double V = p[0]*p[1]*p[2]*Math.sqrt(1 - cosal*cosal - cosbe*cosbe - cosga*cosga + 2*cosal*cosbe*cosga);
+		final double cStar = p[0]*p[1]*singa/V;
+		final double[][] vector = {{p[0], 0, 0},
 				{p[1]*cosga, p[1]*singa, 0},
 				{p[2]*cosbe, -p[2]*sinbe*cosAlStar, 1/cStar}};
 		return vector;
 	}
-	
+
 	/**
 	 * This method will convert a fractional coordinate to its cartesian equivalent.
 	 * 
@@ -117,11 +118,11 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		return d;
 	}*/
 	public double[] convertToCartesian(double[] fractionalCoordinate, double[][] latticeVector, boolean coordinate) {
-		double[] d = new double[fractionalCoordinate.length];
+		final double[] d = new double[fractionalCoordinate.length];
 		for (int i=0; i < fractionalCoordinate.length; i++) {
 			double num = 0;
-			for (int j=0; j < latticeVector.length; j++) {
-				num += latticeVector[j][i];
+			for (final double[] element : latticeVector) {
+				num += element[i];
 			}
 			if (coordinate)
 				d[i] = fractionalCoordinate[i] * num;
@@ -130,17 +131,17 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		}
 		return d;
 	}
-	
+
 	private double round(double val, int places) {
-		long factor = (long)Math.pow(10,places);
+		final long factor = (long)Math.pow(10,places);
 		val = val * factor;
-		long tmp = Math.round(val);
+		final long tmp = Math.round(val);
 		return (double)tmp / factor;
 	}
 
 	public double[][] getVector() {
 		if (tabbedPane.getSelectedIndex() == 0) {
-			double[] p = new double[6];
+			final double[] p = new double[6];
 			p[0] = Float.parseFloat(cellParameters.txtA.getText());
 			p[1] = Float.parseFloat(cellParameters.txtB.getText());
 			p[2] = Float.parseFloat(cellParameters.txtC.getText());
@@ -149,7 +150,7 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 			p[5] = Float.parseFloat(cellParameters.txtGamma.getText());
 			return parametersToVectors(p, true);
 		} else {
-			double[][] v = new double[3][3];
+			final double[][] v = new double[3][3];
 			v[0][0] = Double.parseDouble(cellVectors.txtAx.getText());
 			v[0][1] = Double.parseDouble(cellVectors.txtAy.getText());
 			v[0][2] = Double.parseDouble(cellVectors.txtAz.getText());

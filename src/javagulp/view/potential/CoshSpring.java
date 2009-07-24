@@ -12,15 +12,15 @@ import javax.swing.JLabel;
 public class CoshSpring extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -3167709441178868192L;
-	
-	private PPP k2 = new PPP("k2");
-	private PPP d = new PPP("d");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
+
+	private final PPP k2 = new PPP("k2");
+	private final PPP d = new PPP("d");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
 	//TODO check this equation
-	private JLabel lblEquation = new JLabel("<html>E = 1/2 * k<sub>2</sub>d<sup>2</sup></html>");
-	private JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEquation = new JLabel("<html>E = 1/2 * k<sub>2</sub>d<sup>2</sup></html>");
+	private final JLabel lblUnits = new JLabel("units");
 
 	public CoshSpring() {
 		super(1);
@@ -35,7 +35,7 @@ public class CoshSpring extends PotentialPanel implements Serializable {
 		add(lblUnits);
 		cboUnits.setBounds(100, 110, 85, 21);
 		add(cboUnits);
-		
+
 		params = new PPP[] {k2, d};
 	}
 
@@ -43,11 +43,11 @@ public class CoshSpring extends PotentialPanel implements Serializable {
 	public PotentialPanel clone() {
 		return new CoshSpring();
 	}
-	
+
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		Back.checkAndParseD(params);
-		
+
 		String lines = "cosh-spring";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += " " + cboUnits.getSelectedItem();

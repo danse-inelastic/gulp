@@ -13,34 +13,34 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
-//	private String[] topNames = { "MD", "MDRestartInit", "MonteCarlo",
-//			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
-//			"XYZFit", "Phonons", "FreeEnergy", "TransitionState",
-//			"StructurePrediction", "GeneticAlgorithm", "Defect", "Surface",
-//			"ExternalForce" };
+	//	private String[] topNames = { "MD", "MDRestartInit", "MonteCarlo",
+	//			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
+	//			"XYZFit", "Phonons", "FreeEnergy", "TransitionState",
+	//			"StructurePrediction", "GeneticAlgorithm", "Defect", "Surface",
+	//			"ExternalForce" };
 
-	private String[] topNames = { "MolecularDynamics", "MonteCarlo",
+	private final String[] topNames = { "MolecularDynamics", "MonteCarlo",
 			"EnergeticsMatProp", "Optimization", "Constraints", "Fit",
 			"Phonons", "FreeEnergy", "TransitionState", "StructurePrediction", "Surface",
 			"ExternalForce","Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
 			"EwaldOptions", "Output", "Execution" };
-	
+
 	//private String[] bottomNames = {};
 
-	private JPanel[] top = new JPanel[topNames.length];
-//	private JPanel[] bottom = new JPanel[bottomNames.length];
+	private final JPanel[] top = new JPanel[topNames.length];
+	//	private JPanel[] bottom = new JPanel[bottomNames.length];
 
 	//public JTabbedPane topPane = new JTabbedPane();
 	//public JScrollPane topScroll = new JScrollPane(topPane);
 
 
 
-//	public JTabbedPane bottomPane = new JTabbedPane();
-//	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
+	//	public JTabbedPane bottomPane = new JTabbedPane();
+	//	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
 
-//	private JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-//			topScroll, bottomScroll);
+	//	private JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+	//			topScroll, bottomScroll);
 
 	private Keywords keywords = null;
 
@@ -48,12 +48,12 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 		super();
 		setLayout(new CardLayout());
 
-//		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
-//		splitPane.setDividerSize(4);
-//		splitPane.setResizeWeight(0.5);
-//		add(splitPane, BorderLayout.CENTER);
-		
-//		add(topPane, BorderLayout.CENTER);
+		//		splitPane.setDividerLocation((Back.frame.getHeight() - 135) / 2);
+		//		splitPane.setDividerSize(4);
+		//		splitPane.setResizeWeight(0.5);
+		//		add(splitPane, BorderLayout.CENTER);
+
+		//		add(topPane, BorderLayout.CENTER);
 
 		//topPane.addChangeListener(keyTop);
 		add(null, "molecular dynamics");
@@ -80,99 +80,99 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 		add(null, "output");
 		add(null, "execution");
 	}
-	
-//	private class TopListener implements ChangeListener, Serializable {
-//		private static final long serialVersionUID = -7619847591444570775L;
-//		
-//		public void stateChanged(ChangeEvent e) {
-//			int index = topPane.getSelectedIndex();
-//			topPane.setComponentAt(index, getTopPanel(index));
-//		}
-//	};
-//	private TopListener keyTop = new TopListener();
-	
+
+	//	private class TopListener implements ChangeListener, Serializable {
+	//		private static final long serialVersionUID = -7619847591444570775L;
+	//
+	//		public void stateChanged(ChangeEvent e) {
+	//			int index = topPane.getSelectedIndex();
+	//			topPane.setComponentAt(index, getTopPanel(index));
+	//		}
+	//	};
+	//	private TopListener keyTop = new TopListener();
+
 	private JPanel getTopPanel(int index) {
 		if (top[index] == null) {
-			String pkg = "javagulp.view.top.";
+			final String pkg = "javagulp.view.top.";
 			try {
-				Class c = Class.forName(pkg + topNames[index]);
+				final Class c = Class.forName(pkg + topNames[index]);
 				top[index] = (JPanel) c.newInstance();
-			} catch (ClassNotFoundException e) {
+			} catch (final ClassNotFoundException e) {
 				e.printStackTrace();
-			} catch (InstantiationException e) {
+			} catch (final InstantiationException e) {
 				e.printStackTrace();
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
 		return top[index];
 	}
-	
-//	private class BottomListener implements ChangeListener, Serializable {
-//		private static final long serialVersionUID = -7847271919463899366L;
-//	
-//		public void stateChanged(ChangeEvent e) {
-//			int index = bottomPane.getSelectedIndex();
-//			bottomPane.setComponentAt(index, getBottomPanel(index));
-//		}
-//	};
-//	private BottomListener keyBottom = new BottomListener();
-//	private SerialKeyAdapter keyDelete = new SerialKeyAdapter() {
-//		private static final long serialVersionUID = -3244021879612727287L;
-//		@Override
-//		public void keyReleased(KeyEvent e) {
-//			int index = bottomPane.getSelectedIndex();
-//			if (index == 0 && e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-//				if (JOptionPane.showConfirmDialog(null,
-//						"Are you sure you want to delete all structures?") == JOptionPane.YES_OPTION) {
-//					Structures s = Back.getPanel().getStructures();
-//					s.tabs.removeAll();
-//					s.tabs.addTab("" + (s.tabs.getTabCount() + 1), s.new Structure());
-//				}
-//			}
-//		}
-//	};
-	
-//	private JPanel getBottomPanel(int index) {
-//		if (bottom[index] == null) {
-//			String pkg = "javagulp.view.bottom.";
-//			try {
-//				Class c = Class.forName(pkg + bottomNames[index]);
-//				bottom[index] = (JPanel) c.newInstance();
-//			} catch (ClassNotFoundException e) {
-//				e.printStackTrace();
-//			} catch (InstantiationException e) {
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return bottom[index];
-//	}
-	
+
+	//	private class BottomListener implements ChangeListener, Serializable {
+	//		private static final long serialVersionUID = -7847271919463899366L;
+	//
+	//		public void stateChanged(ChangeEvent e) {
+	//			int index = bottomPane.getSelectedIndex();
+	//			bottomPane.setComponentAt(index, getBottomPanel(index));
+	//		}
+	//	};
+	//	private BottomListener keyBottom = new BottomListener();
+	//	private SerialKeyAdapter keyDelete = new SerialKeyAdapter() {
+	//		private static final long serialVersionUID = -3244021879612727287L;
+	//		@Override
+	//		public void keyReleased(KeyEvent e) {
+	//			int index = bottomPane.getSelectedIndex();
+	//			if (index == 0 && e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+	//				if (JOptionPane.showConfirmDialog(null,
+	//						"Are you sure you want to delete all structures?") == JOptionPane.YES_OPTION) {
+	//					Structures s = Back.getPanel().getStructures();
+	//					s.tabs.removeAll();
+	//					s.tabs.addTab("" + (s.tabs.getTabCount() + 1), s.new Structure());
+	//				}
+	//			}
+	//		}
+	//	};
+
+	//	private JPanel getBottomPanel(int index) {
+	//		if (bottom[index] == null) {
+	//			String pkg = "javagulp.view.bottom.";
+	//			try {
+	//				Class c = Class.forName(pkg + bottomNames[index]);
+	//				bottom[index] = (JPanel) c.newInstance();
+	//			} catch (ClassNotFoundException e) {
+	//				e.printStackTrace();
+	//			} catch (InstantiationException e) {
+	//				e.printStackTrace();
+	//			} catch (IllegalAccessException e) {
+	//				e.printStackTrace();
+	//			}
+	//		}
+	//		return bottom[index];
+	//	}
+
 	public String getWD() {
 		return getExecution().txtWorkingDirectory.getText();
 	}
-	
+
 	public String getBinary() {
 		return getExecution().txtGulpBinary.getText();
 	}
-	
+
 	public Keywords getKeywords() {
 		if (keywords == null)
 			keywords = new Keywords();
 		return keywords;
 	}
-	
+
 	//Top
 
 	public MolecularDynamics getMd() {
 		return (MolecularDynamics) getTopPanel(0);
 	}
 
-//	public MDRestartInit getMdRestartInit() {
-//		return (MDRestartInit) getTopPanel(1);
-//	}
+	//	public MDRestartInit getMdRestartInit() {
+	//		return (MDRestartInit) getTopPanel(1);
+	//	}
 
 	public MonteCarlo getMonteCarlo() {
 		return (MonteCarlo) getTopPanel(1);
@@ -185,7 +185,7 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 	public Optimization getOptimization() {
 		return (Optimization) getTopPanel(3);
 	}
-	
+
 	public Constraints getConstraints() {
 		return (Constraints) getTopPanel(4);
 	}
@@ -193,14 +193,14 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 		return (Fit) getTopPanel(5);
 	}
 
-//	public XYZFit getXyzfit() {
-//		return (XYZFit) getTopPanel(7);
-//	}
+	//	public XYZFit getXyzfit() {
+	//		return (XYZFit) getTopPanel(7);
+	//	}
 
 	public Phonons getPhonon() {
 		return (Phonons) getTopPanel(6);
 	}
-	
+
 	public FreeEnergy getFreeEnergy() {
 		return (FreeEnergy) getTopPanel(7);
 	}
@@ -216,9 +216,9 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 		return (GeneticAlgorithm) getTopPanel(10);
 	}
 
-//	public Defect getDefect() {
-//		return (Defect) getTopPanel(13);
-//	}
+	//	public Defect getDefect() {
+	//		return (Defect) getTopPanel(13);
+	//	}
 
 	public SurfaceOptions getSurface() {
 		return (SurfaceOptions) getTopPanel(11);
@@ -227,9 +227,9 @@ public class GulpRunCardLayout extends JPanel implements Serializable {
 	public ExternalForce getExternalForce() {
 		return (ExternalForce) getTopPanel(12);
 	}
-	
+
 	//Bottom
-	
+
 	public Structures getStructures() {
 		return (Structures) getTopPanel(13);
 	}

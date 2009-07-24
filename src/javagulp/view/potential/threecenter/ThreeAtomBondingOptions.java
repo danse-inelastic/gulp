@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ButtonGroupTransitional;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
@@ -16,19 +18,16 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 1187901338934861410L;
 
-	private ButtonGroupTransitional btnGroupInterIntra = new ButtonGroupTransitional();
+	private final ButtonGroupTransitional btnGroupInterIntra = new ButtonGroupTransitional();
 
-	private JRadioButton radInter;
-	private JRadioButton radIntra;
-	private JCheckBox chkBond;
-	private G g = new G();
+	private final JRadioButton radInter;
+	private final JRadioButton radIntra;
+	private final JCheckBox chkBond;
+	private final G g = new G();
 
 	SerialListener keyBond = new SerialListener() {
 		private static final long serialVersionUID = 8564984988556729954L;
@@ -116,13 +115,13 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 		// to the button group
 		// The only other solution is to make a FourAtomBondingOptions panel,
 		// but this is easier.
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		PotentialPanel pnl = pot.getVisiblePotential();
-		
-		boolean torexp = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.Torexp");
-		boolean tortaper = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.Tortaper");
-		boolean tortaperEsff = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.TortaperEsff");
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final PotentialPanel pnl = pot.getVisiblePotential();
+
+		final boolean torexp = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.Torexp");
+		final boolean tortaper = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.Tortaper");
+		final boolean tortaperEsff = pnl.getClass().getName().equals("javagulp.view.potential.fourcenter.TortaperEsff");
+
 		if (torexp || tortaper || tortaperEsff) {
 			btnGroupInterIntra.add(chkBond);
 

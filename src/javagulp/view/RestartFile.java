@@ -6,15 +6,19 @@ import javax.swing.JTextField;
 
 public class RestartFile extends TitledPanel {
 
-	private JCheckBox chkAfterEvery = new JCheckBox("after every");
-	private JCheckBox chkOutputConstraints = new JCheckBox("output constraints");
-	private JCheckBox chkProduceRestartFile = new JCheckBox("produce fitting/optimization dumpfile");
-	
-	private JLabel lblCycles = new JLabel("cycle(s)");
-	
-	private JTextField txtDumpEvery = new JTextField("1");
-	private JTextField txtFort12 = new JTextField("fort.12");
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3821486223095885255L;
+	private final JCheckBox chkAfterEvery = new JCheckBox("after every");
+	private final JCheckBox chkOutputConstraints = new JCheckBox("output constraints");
+	private final JCheckBox chkProduceRestartFile = new JCheckBox("produce fitting/optimization dumpfile");
+
+	private final JLabel lblCycles = new JLabel("cycle(s)");
+
+	private final JTextField txtDumpEvery = new JTextField("1");
+	private final JTextField txtFort12 = new JTextField("fort.12");
+
 	public RestartFile() {
 		setTitle("restart file");
 		setBounds(586, 7, 443, 121);
@@ -35,8 +39,8 @@ public class RestartFile extends TitledPanel {
 		chkAfterEvery.setBounds(67, 52, 109, 30);
 		add(chkAfterEvery);
 	}
-	
-	private KeywordListener keyOutputConstraints = new KeywordListener(chkOutputConstraints, "outcon");
+
+	private final KeywordListener keyOutputConstraints = new KeywordListener(chkOutputConstraints, "outcon");
 
 
 	public String writeOption() {
@@ -56,6 +60,6 @@ public class RestartFile extends TitledPanel {
 		}
 		return lines;
 	}
-	
-	
+
+
 }

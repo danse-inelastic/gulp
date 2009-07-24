@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -15,30 +16,28 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Tortaper extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 4175306826241667614L;
 
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	private JCheckBox chkK = new JCheckBox("fit");
-	private G g = new G();
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final JCheckBox chkK = new JCheckBox("fit");
+	private final G g = new G();
 
-	private JTextField txtK = new JTextField();
-	private JTextField txtN = new JTextField();
-	private JTextField txtPhi0 = new JTextField();
-	private JTextField txtRTaper = new JTextField();
+	private final JTextField txtK = new JTextField();
+	private final JTextField txtN = new JTextField();
+	private final JTextField txtPhi0 = new JTextField();
+	private final JTextField txtRTaper = new JTextField();
 
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblN = new JLabel(g.html("n"));
-	private JLabel lblK = new JLabel(g.html("k (eV)"));
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
-	private JLabel lblPhi0 = new JLabel("<html>" + "&#966" + "<sub>0</sub> (deg)</html>");
-	private JLabel lblRTaper = new JLabel("<html>r<sub>taper</sub> (" + "&Aring" + ")</html>");
-	private JLabel lblFourBodyEq = new JLabel(g.html("E = k (1 + cos(n " + g.phi + " - " + g.phi
-		+ "<sub>0</sub>)) f(r<sub>12</sub>) f(r<sub>23</sub>) f(r<sub>34</sub>)<br>"
-		+ "where f(r) = cosine tapering function"));
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblN = new JLabel(g.html("n"));
+	private final JLabel lblK = new JLabel(g.html("k (eV)"));
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
+	private final JLabel lblPhi0 = new JLabel("<html>" + "&#966" + "<sub>0</sub> (deg)</html>");
+	private final JLabel lblRTaper = new JLabel("<html>r<sub>taper</sub> (" + "&Aring" + ")</html>");
+	private final JLabel lblFourBodyEq = new JLabel(g.html("E = k (1 + cos(n " + g.phi + " - " + g.phi
+			+ "<sub>0</sub>)) f(r<sub>12</sub>) f(r<sub>23</sub>) f(r<sub>34</sub>)<br>"
+			+ "where f(r) = cosine tapering function"));
 
 	public Tortaper() {
 		super(4);
@@ -80,31 +79,31 @@ public class Tortaper extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		JTextField[] fields = { txtK, txtN, txtRTaper};
-		String[] descriptions = { "k", "n", "rtaper"};
+		final JTextField[] fields = { txtK, txtN, txtRTaper};
+		final String[] descriptions = { "k", "n", "rtaper"};
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "tortaper " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
 		lines += Back.newLine + pot.getAtomCombos() + txtK.getText() + " "
-				+ txtN.getText() + " ";
+		+ txtN.getText() + " ";
 		if (!txtPhi0.getText().equals("")) {
 			Double.parseDouble(txtPhi0.getText());
 			lines += txtPhi0.getText() + " ";
 		}
 		lines += txtRTaper.getText() + " " + radii.writeRadii();
-		JCheckBox[] boxes = {chkK};
+		final JCheckBox[] boxes = {chkK};
 		return lines + Back.writeFits(boxes) + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
 		return new Tortaper();
 	}
-	
+
 	@Override
 	public int currentParameterCount() {
 		int count = 0;

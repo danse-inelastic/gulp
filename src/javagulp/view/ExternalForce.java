@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ExForceTableModel;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.model.TdExForceTableModel;
 import javagulp.view.potential.IconHeaderRenderer;
 
@@ -21,51 +23,48 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class ExternalForce extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -6491244221778088155L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JPanel backdrop = new JPanel();
+	private final JPanel backdrop = new JPanel();
 
-	private ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	public ExForceTableModel exForceTableModel = new ExForceTableModel();
-	private IconHeaderRenderer iconHeaderRenderer = new IconHeaderRenderer();
-	private JLabel lblDelayExternalForce = new JLabel("delay external force until (ps)");
+	private final IconHeaderRenderer iconHeaderRenderer = new IconHeaderRenderer();
+	private final JLabel lblDelayExternalForce = new JLabel("delay external force until (ps)");
 
-	private JLabel lblfA = new JLabel(g.html("F = A cos[2 " + g.pi
+	private final JLabel lblfA = new JLabel(g.html("F = A cos[2 " + g.pi
 			+ " (B t + C)]"));
-	private JLabel lblRemoveExternalForce = new JLabel("remove external force at (ps)");
-	private JPanel pnlexforce = new JPanel();
+	private final JLabel lblRemoveExternalForce = new JLabel("remove external force at (ps)");
+	private final JPanel pnlexforce = new JPanel();
 
-	private JPanel pnltdexforce = new JPanel();
-	private JRadioButton radexforce = new JRadioButton("external force");
+	private final JPanel pnltdexforce = new JPanel();
+	private final JRadioButton radexforce = new JRadioButton("external force");
 
-	private JRadioButton radtdexforce = new JRadioButton("time-dependent external force");
-	private JScrollPane scrpaneTdexForce = new JScrollPane();
+	private final JRadioButton radtdexforce = new JRadioButton("time-dependent external force");
+	private final JScrollPane scrpaneTdexForce = new JScrollPane();
 
-	private JScrollPane scrpaneLexforce = new JScrollPane();
-	private JTable tableTdexforce = new JTable();
+	private final JScrollPane scrpaneLexforce = new JScrollPane();
+	private final JTable tableTdexforce = new JTable();
 
-	private JTable tableLexforce = new JTable();
+	private final JTable tableLexforce = new JTable();
 	public TdExForceTableModel tdExForceTableModel = new TdExForceTableModel();
 
-	private JTextField txtDelayExternalForce = new JTextField();
-	private JTextField txtendforce = new JTextField();
-	
-	private SerialListener keyexforce = new SerialListener() {
+	private final JTextField txtDelayExternalForce = new JTextField();
+	private final JTextField txtendforce = new JTextField();
+
+	private final SerialListener keyexforce = new SerialListener() {
 		private static final long serialVersionUID = 484346962122055547L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			((CardLayout) backdrop.getLayout()).show(backdrop, "exforce");
 		}
 	};
-	private SerialListener keytdexforce = new SerialListener() {
+	private final SerialListener keytdexforce = new SerialListener() {
 		private static final long serialVersionUID = -1157345058515543026L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -121,14 +120,14 @@ public class ExternalForce extends JPanel implements Serializable {
 	private void setUpForceColumn(JTable table2, TableColumn forceColumn) {
 
 		// Set up the editor for the force cells.
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		comboBox.addItem("x");
 		comboBox.addItem("y");
 		comboBox.addItem("z");
 		forceColumn.setCellEditor(new DefaultCellEditor(comboBox));
 
 		// Set up tool tips for the force cells.
-		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+		final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 		renderer.setToolTipText("Click for combo box");
 		forceColumn.setCellRenderer(renderer);
 
@@ -139,7 +138,7 @@ public class ExternalForce extends JPanel implements Serializable {
 		if (!txtDelayExternalForce.getText().equals("")) {
 			try {
 				Double.parseDouble(txtDelayExternalForce.getText());
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for ExternalForce delay.");
 			}
 			lines = "delayforce " + txtDelayExternalForce.getText() + Back.newLine;
@@ -149,8 +148,8 @@ public class ExternalForce extends JPanel implements Serializable {
 
 	public String writeExternalForce() throws IncompleteOptionException {
 		return tdExForceTableModel.writeTdExternalForce()
-				+ exForceTableModel.writeExternalForce() + writeProduction()
-				+ writeDelayForce();
+		+ exForceTableModel.writeExternalForce() + writeProduction()
+		+ writeDelayForce();
 	}
 
 	private String writeProduction() {
@@ -158,7 +157,7 @@ public class ExternalForce extends JPanel implements Serializable {
 		if (!txtendforce.getText().equals("")) {
 			try {
 				Double.parseDouble(txtendforce.getText());
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for ExternalForce end.");
 			}
 			lines = "endforce " + txtendforce.getText() + Back.newLine;

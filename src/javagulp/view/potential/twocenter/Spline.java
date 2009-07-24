@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.model.GenericTableModel;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -19,40 +21,37 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Spline extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 6413833934403141616L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JButton btnSet = new JButton("set");
+	private final JButton btnSet = new JButton("set");
 
-	private JComboBox cboSplineType = new JComboBox(new String[] { "rational", "cubic" });
-	private JComboBox cboUnits = new JComboBox(new String[] { "kjmol", "kcal" });
-	
-	private GenericTableModel energyDistanceTableModel = new GenericTableModel(new String[] { "interatomic distance (ang)", "energy (eV)" }, 0);
-	private JTable energyDistanceTable = new JTable(energyDistanceTableModel);
-	private JScrollPane scrollPane3 = new JScrollPane(energyDistanceTable);
+	private final JComboBox cboSplineType = new JComboBox(new String[] { "rational", "cubic" });
+	private final JComboBox cboUnits = new JComboBox(new String[] { "kjmol", "kcal" });
 
-	private JLabel lblNumberOfEnergies = new JLabel("number of energies");
-	private JLabel lblSplineType = new JLabel("spline type");
-	private JLabel lblUnits = new JLabel("units");
+	private final GenericTableModel energyDistanceTableModel = new GenericTableModel(new String[] { "interatomic distance (ang)", "energy (eV)" }, 0);
+	private final JTable energyDistanceTable = new JTable(energyDistanceTableModel);
+	private final JScrollPane scrollPane3 = new JScrollPane(energyDistanceTable);
 
-	private PPP shift = new PPP("shift");
-	
-	private JTextField txtNumEn = new JTextField();
-	
-	private SerialListener keySet = new SerialListener() {
+	private final JLabel lblNumberOfEnergies = new JLabel("number of energies");
+	private final JLabel lblSplineType = new JLabel("spline type");
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final PPP shift = new PPP("shift");
+
+	private final JTextField txtNumEn = new JTextField();
+
+	private final SerialListener keySet = new SerialListener() {
 		private static final long serialVersionUID = -3780821019273150654L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				int rowCount = Integer.parseInt(txtNumEn.getText());
+				final int rowCount = Integer.parseInt(txtNumEn.getText());
 				energyDistanceTableModel.setRowCount(rowCount);
-			} catch (NumberFormatException e1) {
+			} catch (final NumberFormatException e1) {
 				JOptionPane.showMessageDialog(null,
 						"Please enter a positive integer");
 			}
@@ -87,7 +86,7 @@ public class Spline extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(394, 84, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{shift};
 	}
 
@@ -96,11 +95,11 @@ public class Spline extends PotentialPanel implements Serializable {
 		if (energyDistanceTableModel.getRowCount() == 0)
 			throw new IncompleteOptionException("Please enter one or more rows");
 		Back.checkAndParseD(params);
-		
+
 		String lines = "spline ";
 		if (cboSplineType.getSelectedIndex() == 1)
 			lines += "cubic ";
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
@@ -111,14 +110,14 @@ public class Spline extends PotentialPanel implements Serializable {
 		lines += Back.writeFits(params) + " ";
 		for (int i = 0; i < energyDistanceTableModel.getRowCount(); i++) {
 			lines += energyDistanceTableModel.getValueAt(i, 1) + " "
-					+ energyDistanceTableModel.getValueAt(i, 0) + " ";
+			+ energyDistanceTableModel.getValueAt(i, 0) + " ";
 		}
 		return lines + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Spline s = new Spline();
+		final Spline s = new Spline();
 		s.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		s.cboSplineType.setSelectedIndex(this.cboSplineType.getSelectedIndex());
 		s.txtNumEn.setText(this.txtNumEn.getText());

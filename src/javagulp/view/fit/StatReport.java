@@ -16,21 +16,21 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class StatReport extends JFrame {
-private static final long serialVersionUID = 6614798981469880622L;
-	
-	private JScrollPane scrollStats = new JScrollPane();
-	private DefaultTableModel dtmStats;
-	private JTable tableStats;
-	
-	private JScrollPane scrollValues = new JScrollPane();
-	private DefaultTableModel dtmValues;
-	private JTable tableValues;
-	
+	private static final long serialVersionUID = 6614798981469880622L;
+
+	private final JScrollPane scrollStats = new JScrollPane();
+	private final DefaultTableModel dtmStats;
+	private final JTable tableStats;
+
+	private final JScrollPane scrollValues = new JScrollPane();
+	private final DefaultTableModel dtmValues;
+	private final JTable tableValues;
+
 	public class ColorTableCellRenderer extends DefaultTableCellRenderer {
 		private static final long serialVersionUID = -8523018862617537969L;
-		
-		private HashMap<Integer, Color> c = new HashMap<Integer, Color>();
-		
+
+		private final HashMap<Integer, Color> c = new HashMap<Integer, Color>();
+
 		public void setColor(Color color, int row) {
 			c.put(row, color);
 		}
@@ -39,43 +39,43 @@ private static final long serialVersionUID = 6614798981469880622L;
 		public Component getTableCellRendererComponent(JTable table,
 				Object value, boolean isSelected, boolean hasFocus, int row,
 				int column) {
-			Component cell = super.getTableCellRendererComponent(table, value,
+			final Component cell = super.getTableCellRendererComponent(table, value,
 					isSelected, hasFocus, row, column);
-			Color temp = c.get(row);
+			final Color temp = c.get(row);
 			if (temp != null) {
 				cell.setForeground(temp);
 			}
 			return cell;
 		}
 	}
-	
+
 	public StatReport(ArrayList<double[]> values, ArrayList<PPP> panels, Stats[] stats) {
 		super();
 		setLayout(null);
 		setSize(1024, 768);
-		
-		String[] cols = new String[values.size()];
+
+		final String[] cols = new String[values.size()];
 		for (int i=0; i < cols.length; i++) {
 			cols[i] = panels.get(i).lbl.getText();
 		}
-		
+
 		dtmStats = new DefaultTableModel(cols, 4);
 		tableStats = new JTable(dtmStats);
 		dtmValues = new DefaultTableModel(cols, values.get(0).length);
 		tableValues = new JTable(dtmValues);
-		
-		TableColumnModel tcm = tableStats.getColumnModel();
-		ColorTableCellRenderer ctcr = new ColorTableCellRenderer();
+
+		final TableColumnModel tcm = tableStats.getColumnModel();
+		final ColorTableCellRenderer ctcr = new ColorTableCellRenderer();
 		for (int i=0; i < tcm.getColumnCount(); i++) {
 			tcm.getColumn(i).setCellRenderer(ctcr);
 		}
-		
-		DecimalFormat df = new DecimalFormat();
+
+		final DecimalFormat df = new DecimalFormat();
 		df.setMinimumFractionDigits(6);
-		
+
 		try {
 			for (int i=0; i < values.size(); i++) {
-				double[] d = values.get(i);
+				final double[] d = values.get(i);
 				for (int j=0; j < d.length; j++) {
 					dtmValues.setValueAt(df.format(d[j]), j, i);
 				}
@@ -91,7 +91,7 @@ private static final long serialVersionUID = 6614798981469880622L;
 				dtmStats.setValueAt(temp, 3, i);
 				((ColorTableCellRenderer) tableStats.getCellRenderer(3, i)).setColor(Color.lightGray, 3);
 			}
-		} catch (ClassCastException e) {
+		} catch (final ClassCastException e) {
 			e.printStackTrace();
 		}
 

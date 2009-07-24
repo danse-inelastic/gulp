@@ -2,6 +2,7 @@ package javagulp.view;
 
 import java.io.Serializable;
 
+import javagulp.model.G;
 import javagulp.model.ListModelAddMore;
 
 import javax.swing.JLabel;
@@ -11,21 +12,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-
 public class SurfaceOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -5321125458721087743L;
 
-	private G g = new G();
+	private final G g = new G();
 
 	public ListModelAddMore coordList = new ListModelAddMore();
-	private JList list = new JList(coordList);
+	private final JList list = new JList(coordList);
 
-	private JTextField txtWidth = new JTextField();
-	private JTextField txtSbulkEnergy = new JTextField();
-	private JTextField txtHklPlaneSpacing = new JTextField();
-	private JTextField txtTotalEnergy = new JTextField();
+	private final JTextField txtWidth = new JTextField();
+	private final JTextField txtSbulkEnergy = new JTextField();
+	private final JTextField txtHklPlaneSpacing = new JTextField();
+	private final JTextField txtTotalEnergy = new JTextField();
 
 	public SurfaceOptions() {
 		super();
@@ -40,7 +39,7 @@ public class SurfaceOptions extends JPanel implements Serializable {
 		add(pnlAttachmentEnergy);
 		txtWidth.setBounds(177, 22, 76, 19);
 		pnlAttachmentEnergy.add(txtWidth);
-		JLabel lblWidthOfGrowth = new JLabel(g.html("relaxation layer width (&Aring;)"));
+		final JLabel lblWidthOfGrowth = new JLabel(g.html("relaxation layer width (&Aring;)"));
 		lblWidthOfGrowth.setBounds(10, 24, 175, 15);
 		pnlAttachmentEnergy.add(lblWidthOfGrowth);
 
@@ -54,7 +53,7 @@ public class SurfaceOptions extends JPanel implements Serializable {
 		add(pnlBulkEnergy);
 		txtSbulkEnergy.setBounds(8, 26, 85, 20);
 		pnlBulkEnergy.add(txtSbulkEnergy);
-		JLabel lblev = new JLabel("eV");
+		final JLabel lblev = new JLabel("eV");
 		lblev.setBounds(98, 22, 29, 27);
 		pnlBulkEnergy.add(lblev);
 
@@ -80,7 +79,7 @@ public class SurfaceOptions extends JPanel implements Serializable {
 		add(pnlTotalEnergy);
 		txtTotalEnergy.setBounds(8, 26, 85, 20);
 		pnlTotalEnergy.add(txtTotalEnergy);
-		JLabel lblev2 = new JLabel("eV");
+		final JLabel lblev2 = new JLabel("eV");
 		lblev2.setBounds(98, 22, 29, 27);
 		pnlTotalEnergy.add(lblev2);
 
@@ -93,7 +92,7 @@ public class SurfaceOptions extends JPanel implements Serializable {
 		pnlAttachmentEnergy2.setLayout(null);
 		txtHklPlaneSpacing.setBounds(306, 16, 65, 20);
 		pnlAttachmentEnergy2.add(txtHklPlaneSpacing);
-		JLabel lblPlaneSpacing = new JLabel("hkl plane spacing (growth slice width)");
+		final JLabel lblPlaneSpacing = new JLabel("hkl plane spacing (growth slice width)");
 		lblPlaneSpacing.setBounds(9, 18, 291, 15);
 		pnlAttachmentEnergy2.add(lblPlaneSpacing);
 	}

@@ -2,7 +2,6 @@ package javagulp.view.output;
 
 import java.io.Serializable;
 
-
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
 
@@ -14,21 +13,21 @@ public class Terse extends TitledPanel implements Serializable {
 
 	private static final long serialVersionUID = -8004045257003429159L;
 
-	private JLabel lblTerse = new JLabel("make terse");
-	private JRadioButton radNone1 = new JRadioButton("none");
-	private JRadioButton radInput = new JRadioButton("input");
-	private JRadioButton radOutput = new JRadioButton("output");
-	private JRadioButton radInputOutput = new JRadioButton("input and output");
-	private ButtonGroup group1 = new ButtonGroup();
+	private final JLabel lblTerse = new JLabel("make terse");
+	private final JRadioButton radNone1 = new JRadioButton("none");
+	private final JRadioButton radInput = new JRadioButton("input");
+	private final JRadioButton radOutput = new JRadioButton("output");
+	private final JRadioButton radInputOutput = new JRadioButton("input and output");
+	private final ButtonGroup group1 = new ButtonGroup();
 
-	private JLabel lblDoNotOutput = new JLabel("do not output");
-	private JRadioButton radNone2 = new JRadioButton("show full output");
-	private JRadioButton radCell = new JRadioButton("unit cell parameters for vectors");
-	private JRadioButton radCoordinates = new JRadioButton("the coordinates of the atoms");
-	private JRadioButton radStructure = new JRadioButton("unit cell or coordinates");
-	private JRadioButton radPotentials = new JRadioButton("interatomic potentials");
-	private JRadioButton radDerivatives = new JRadioButton("derivatives");
-	private ButtonGroup group2 = new ButtonGroup();
+	private final JLabel lblDoNotOutput = new JLabel("do not output");
+	private final JRadioButton radNone2 = new JRadioButton("show full output");
+	private final JRadioButton radCell = new JRadioButton("unit cell parameters for vectors");
+	private final JRadioButton radCoordinates = new JRadioButton("the coordinates of the atoms");
+	private final JRadioButton radStructure = new JRadioButton("unit cell or coordinates");
+	private final JRadioButton radPotentials = new JRadioButton("interatomic potentials");
+	private final JRadioButton radDerivatives = new JRadioButton("derivatives");
+	private final ButtonGroup group2 = new ButtonGroup();
 
 	public Terse() {
 		super();

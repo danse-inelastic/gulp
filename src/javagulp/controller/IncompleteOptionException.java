@@ -7,7 +7,7 @@ import javagulp.view.Back;
 import javax.swing.JOptionPane;
 
 public class IncompleteOptionException extends Exception implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = 3422956625510524280L;
 	String message;
@@ -16,7 +16,7 @@ public class IncompleteOptionException extends Exception implements
 		super(message);
 		this.message = message;
 		this.message += Back.newLine + Back.getCurrentRun().getOutput().selectedInputFile
-				+ " was not written.";
+		+ " was not written.";
 	}
 
 	public void displayErrorAsPopup() {

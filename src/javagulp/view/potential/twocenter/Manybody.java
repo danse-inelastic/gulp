@@ -24,7 +24,7 @@ public class Manybody extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		return radii.writeRadii() + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
 		return super.clone(new Manybody());

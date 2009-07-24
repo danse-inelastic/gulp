@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -14,23 +15,21 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class Torharm extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -8336235161420161412L;
 
-	private G g = new G();
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final G g = new G();
 
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
-	private JLabel lblFourBodyEq = new JLabel(g.html("E = 1/2 k (" + g.phi
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
+	private final JLabel lblFourBodyEq = new JLabel(g.html("E = 1/2 k (" + g.phi
 			+ " - " + g.phi + "<sub>0</sub>)<sup>2</sup>"));
 
-	private PPP K = new PPP(g.html("k (eV/rad<sup>2</sup>)"));
-	private PPP Phi0 = new PPP(g.html(g.phi + "<sub>0</sub> (deg)"));
+	private final PPP K = new PPP(g.html("k (eV/rad<sup>2</sup>)"));
+	private final PPP Phi0 = new PPP(g.html(g.phi + "<sub>0</sub> (deg)"));
 
 	public Torharm() {
 		super(4);
@@ -60,19 +59,19 @@ public class Torharm extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "torharm " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params) + " "
-				+ radii.writeRadii() + Back.writeFits(params) + Back.newLine;
+		+ radii.writeRadii() + Back.writeFits(params) + Back.newLine;
 		return lines;
 	}
 
 	@Override
 	public PotentialPanel clone() {
-		Torharm t = new Torharm();
+		final Torharm t = new Torharm();
 		t.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(t);
 	}

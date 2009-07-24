@@ -1,10 +1,8 @@
 package javagulp.view.potential;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -18,10 +16,8 @@ import javagulp.controller.CgiCommunicate;
 import javagulp.view.Back;
 
 import javax.swing.JButton;
-
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,19 +27,23 @@ import javax.swing.border.LineBorder;
 
 public class PotentialUploadDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5670454762533030375L;
 	//String potentialName="";
 	File potentialFile;
 	private final JTextField txtPotentialName;
 	private final JTextArea txtDescription;
 	private final JTextField txtCreator;
-	
+
 	public PotentialUploadDialog(Frame frame) {
 		super(frame, "Input potential details", true);
 		setModal(true);
 		setPreferredSize(new Dimension(800,400));
 		setMinimumSize(new Dimension(800, 400));
 		//getContentPane().setLayout(new GridLayout(0, 1));
-		
+
 		final JPanel panel = new JPanel();
 		panel.setLayout(null);
 		getContentPane().add(panel);
@@ -62,9 +62,9 @@ public class PotentialUploadDialog extends JDialog {
 		lblCreator.setBounds(25, 28, 137, 15);
 		panel.add(lblCreator);
 		lblCreator.setText("Who created it?");
-		
-		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
-		String user = cgiMap.get("sentry.username");
+
+		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		final String user = cgiMap.get("sentry.username");
 		txtCreator = new JTextField(user);
 		txtCreator.setBounds(168, 26, 224, 19);
 		panel.add(txtCreator);
@@ -97,10 +97,10 @@ public class PotentialUploadDialog extends JDialog {
 		panel.add(btnBrowse);
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				JFileChooser fileDialog = new JFileChooser();
+				final JFileChooser fileDialog = new JFileChooser();
 				fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-					potentialFile = fileDialog.getSelectedFile();//.getPath();	
+					potentialFile = fileDialog.getSelectedFile();//.getPath();
 				}
 				//potentialName = getPotentialFile();
 				txtLocation.setText(potentialFile.getPath());
@@ -114,12 +114,12 @@ public class PotentialUploadDialog extends JDialog {
 		okButton.addActionListener(keyOk);
 		okButton.setText("OK");
 		//pack();
-        setLocationRelativeTo(frame);
-        setVisible(true);
+		setLocationRelativeTo(frame);
+		setVisible(true);
 	}
-	
-	private ActionListener keyOk = new ActionListener() {
-		
+
+	private final ActionListener keyOk = new ActionListener() {
+
 		public void actionPerformed(final ActionEvent e) {
 			sendPotentialToServer(potentialFile);
 			PotentialUploadDialog.this.dispose();
@@ -128,29 +128,29 @@ public class PotentialUploadDialog extends JDialog {
 		}
 	};
 
-//	private File getPotentialFile(){
-//		// look for a potential on the user's machine
-//		JFileChooser fileDialog = new JFileChooser();
-//		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//		File potentialFile;
-//		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-//			potentialFile = fileDialog.getSelectedFile();//.getPath();
-//			return potentialFile;
-//			
-//		}
-//	}
-	
+	//	private File getPotentialFile(){
+	//		// look for a potential on the user's machine
+	//		JFileChooser fileDialog = new JFileChooser();
+	//		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	//		File potentialFile;
+	//		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+	//			potentialFile = fileDialog.getSelectedFile();//.getPath();
+	//			return potentialFile;
+	//
+	//		}
+	//	}
+
 	private void sendPotentialToServer(File potentialFile){
 		//read the file
-		String contents = getContents(potentialFile);
-		
-		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		final String contents = getContents(potentialFile);
 
-		String cgihome = cgiMap.get("cgihome");
-		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-		Map<String, String> uploadPotentialPost = new HashMap<String, String>();
+		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+
+		final String cgihome = cgiMap.get("cgihome");
+		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+		final Map<String, String> uploadPotentialPost = new HashMap<String, String>();
 		uploadPotentialPost.put("routine", "storePotential");
-		
+
 		uploadPotentialPost.put("actor", "gulpsimulationwizard");
 		uploadPotentialPost.put("actor.librarycontent", contents);
 		uploadPotentialPost.put("actor.potential_name", txtPotentialName.getText());
@@ -169,7 +169,7 @@ public class PotentialUploadDialog extends JDialog {
 		// eventually put a status bar at the bottom of the ui and report progress on it
 		// getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
 		cgiCom.setCgiParams(uploadPotentialPost);
-		String response = cgiCom.postAndGetString();
+		final String response = cgiCom.postAndGetString();
 		if (response.trim().equals("success")){
 			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" has been successfully uploaded.");
 		}else{
@@ -177,7 +177,7 @@ public class PotentialUploadDialog extends JDialog {
 		}
 		Back.getCurrentRun().getPotential().populatePotentialList();
 	}
-	
+
 	/**
 	 * Fetch the entire contents of a text file, and return it in a String.
 	 * This style of implementation does not throw Exceptions to the caller.
@@ -186,12 +186,12 @@ public class PotentialUploadDialog extends JDialog {
 	 */
 	public String getContents(File aFile) {
 		//...checks on aFile are elided
-		StringBuilder contents = new StringBuilder();
+		final StringBuilder contents = new StringBuilder();
 
 		try {
 			//use buffering, reading one line at a time
 			//FileReader always assumes default encoding is OK!
-			BufferedReader input =  new BufferedReader(new FileReader(aFile));
+			final BufferedReader input =  new BufferedReader(new FileReader(aFile));
 			try {
 				String line = null; //not declared within while loop
 				/*
@@ -209,38 +209,38 @@ public class PotentialUploadDialog extends JDialog {
 				input.close();
 			}
 		}
-		catch (IOException ex){
+		catch (final IOException ex){
 			ex.printStackTrace();
 		}
 
 		return contents.toString();
 	}
-	
-//	public static void main(String[] args){
-//		//1. Create the frame.
-//		JFrame frame = new JFrame("test");
-//
-//		//2. Optional: What happens when the frame closes?
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//		//3. Create components and put them in the frame.
-//		//...create emptyLabel...
-//		JButton jButton = new JButton();
-//		frame.getContentPane().add(jButton, BorderLayout.CENTER);
-//		jButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(final ActionEvent e) {
-//				new PotentialUploadDialog(frame);
-//			}
-//		});
-//		jButton.setText("test");
-//		
-//		//4. Size the frame.
-//		frame.pack();
-//
-//		//5. Show it.
-//		frame.setVisible(true);
-//		
-//	}
-	
+
+	//	public static void main(String[] args){
+	//		//1. Create the frame.
+	//		JFrame frame = new JFrame("test");
+	//
+	//		//2. Optional: What happens when the frame closes?
+	//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//
+	//		//3. Create components and put them in the frame.
+	//		//...create emptyLabel...
+	//		JButton jButton = new JButton();
+	//		frame.getContentPane().add(jButton, BorderLayout.CENTER);
+	//		jButton.addActionListener(new ActionListener() {
+	//			public void actionPerformed(final ActionEvent e) {
+	//				new PotentialUploadDialog(frame);
+	//			}
+	//		});
+	//		jButton.setText("test");
+	//
+	//		//4. Size the frame.
+	//		frame.pack();
+	//
+	//		//5. Show it.
+	//		frame.setVisible(true);
+	//
+	//	}
+
 
 }

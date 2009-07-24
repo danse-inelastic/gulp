@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.SerialListener;
+import javagulp.view.Back;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -13,9 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
-import javagulp.model.SerialListener;
-import javagulp.view.Back;
 
 public class SpaceGroup extends JPanel implements Serializable {
 
@@ -30,9 +29,9 @@ public class SpaceGroup extends JPanel implements Serializable {
 				"7/12", "5/8", "2/3", "17/24", "3/4", "19/24", "5/6", "7/8",
 				"11/12", "23/24" };
 
-		private JComboBox cboFracX = new JComboBox(fracInts);
-		private JComboBox cboFracY = new JComboBox(fracInts);
-		private JComboBox cboFracZ = new JComboBox(fracInts);
+		private final JComboBox cboFracX = new JComboBox(fracInts);
+		private final JComboBox cboFracY = new JComboBox(fracInts);
+		private final JComboBox cboFracZ = new JComboBox(fracInts);
 
 		public FracInt() {
 			super();
@@ -49,8 +48,8 @@ public class SpaceGroup extends JPanel implements Serializable {
 
 		public String getComboBoxes() {
 			return cboFracX.getSelectedItem() + " "
-					+ cboFracY.getSelectedItem() + " "
-					+ cboFracZ.getSelectedItem();
+			+ cboFracY.getSelectedItem() + " "
+			+ cboFracZ.getSelectedItem();
 		}
 	}
 
@@ -58,10 +57,10 @@ public class SpaceGroup extends JPanel implements Serializable {
 
 		private static final long serialVersionUID = 4481318866877519419L;
 
-		private ButtonGroup originChoice = new ButtonGroup();
+		private final ButtonGroup originChoice = new ButtonGroup();
 
-		private JRadioButton radOne = new JRadioButton("1");
-		private JRadioButton radTwo = new JRadioButton("2");
+		private final JRadioButton radOne = new JRadioButton("1");
+		private final JRadioButton radTwo = new JRadioButton("2");
 
 		public Number() {
 			super();
@@ -80,9 +79,9 @@ public class SpaceGroup extends JPanel implements Serializable {
 	private class FracFloat extends JPanel {
 
 		private static final long serialVersionUID = 1720357885366990603L;
-		private JTextField txtXFracFloat = new JTextField();
-		private JTextField txtYFracFloat = new JTextField();
-		private JTextField txtZFracFloat = new JTextField();
+		private final JTextField txtXFracFloat = new JTextField();
+		private final JTextField txtYFracFloat = new JTextField();
+		private final JTextField txtZFracFloat = new JTextField();
 
 		public FracFloat() {
 			super();
@@ -98,20 +97,20 @@ public class SpaceGroup extends JPanel implements Serializable {
 		}
 	}
 
-	private Number number = new Number();
-	private FracFloat fracFloat = new FracFloat();
-	private FracInt fracInt = new FracInt();
-	private JTextField txtSpaceGroup = new JTextField();
+	private final Number number = new Number();
+	private final FracFloat fracFloat = new FracFloat();
+	private final FracInt fracInt = new FracInt();
+	private final JTextField txtSpaceGroup = new JTextField();
 
 	final String[] originChoices = { "number", "fractional",
-			"fractional integers" };
+	"fractional integers" };
 
-	private JComboBox cboOriginNumber = new JComboBox(originChoices);
+	private final JComboBox cboOriginNumber = new JComboBox(originChoices);
 
 	final JPanel panel = new JPanel();
 
-	private SerialListener keyPanel = new SerialListener() {
-		
+	private final SerialListener keyPanel = new SerialListener() {
+
 		private static final long serialVersionUID = 678782875611473058L;
 
 		@Override
@@ -141,7 +140,7 @@ public class SpaceGroup extends JPanel implements Serializable {
 		add(cboNumber);
 		txtSpaceGroup.setBounds(120, 28, 75, 20);
 		add(txtSpaceGroup);
-		JLabel lblOrigin = new JLabel("origin");
+		final JLabel lblOrigin = new JLabel("origin");
 		lblOrigin.setBounds(12, 67, 52, 15);
 		add(lblOrigin);
 
@@ -177,9 +176,9 @@ public class SpaceGroup extends JPanel implements Serializable {
 				lines += "2";
 			}
 		} else if (cboOriginNumber.getSelectedIndex() == 1) {
-			JTextField x = fracFloat.txtXFracFloat;
-			JTextField y = fracFloat.txtYFracFloat;
-			JTextField z = fracFloat.txtZFracFloat;
+			final JTextField x = fracFloat.txtXFracFloat;
+			final JTextField y = fracFloat.txtYFracFloat;
+			final JTextField z = fracFloat.txtZFracFloat;
 			if (!x.getText().equals("") || !y.getText().equals("")
 					|| !z.getText().equals("")) {
 				if (x.getText().equals(""))

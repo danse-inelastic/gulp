@@ -13,17 +13,17 @@ public class LaunchGulpUIOld {
 	public LaunchGulpUIOld() {
 		// assume the lattice and the atoms are
 		// located in "lattice.txt" and "atoms.txt"
-		String base = "http://trueblue.caltech.edu/java";//System.getProperty("user.dir");
-		String[] args = new String[10];
-		String atomsContent = getURLContentAsString(base + File.separatorChar
+		final String base = "http://trueblue.caltech.edu/java";//System.getProperty("user.dir");
+		final String[] args = new String[10];
+		final String atomsContent = getURLContentAsString(base + File.separatorChar
 				+ "atoms.html");
-		String latticeContent = getURLContentAsString(base + File.separatorChar
+		final String latticeContent = getURLContentAsString(base + File.separatorChar
 				+ "lattice.html");
 		//put atoms in args
 		args[0] = atomsContent;
 		//put lattice in args
 		Pattern p = Pattern.compile("\n");
-		String[] coordLines = p.split(latticeContent);
+		final String[] coordLines = p.split(latticeContent);
 		p = Pattern.compile("\\s");
 		String[] coords = p.split(coordLines[0]);
 		args[1] = coords[0];
@@ -43,21 +43,21 @@ public class LaunchGulpUIOld {
 
 	public String getURLContentAsString(String urlString) {
 		String content = "";
-	    try {
-	        // Create a URL for the desired page
-	        URL url = new URL(urlString);
-	        // Read all the text returned by the server
-	        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-	        String str;
-	        while ((str = in.readLine()) != null) {
-	            // str is one line of text; readLine() strips the newline character(s)
-	        	content+=str;
-	        	content+=System.getProperty("line.separator");
-	        }
-	        in.close();
-	    } catch (MalformedURLException e) {
-	    } catch (IOException e) {
-	    }
+		try {
+			// Create a URL for the desired page
+			final URL url = new URL(urlString);
+			// Read all the text returned by the server
+			final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String str;
+			while ((str = in.readLine()) != null) {
+				// str is one line of text; readLine() strips the newline character(s)
+				content+=str;
+				content+=System.getProperty("line.separator");
+			}
+			in.close();
+		} catch (final MalformedURLException e) {
+		} catch (final IOException e) {
+		}
 		return content;
 	}
 

@@ -15,11 +15,11 @@ public class FitEnergy extends AbstractFit implements Serializable {
 	private JLabel energyLabel;
 	private static final long serialVersionUID = 4113828552611838086L;
 
-	private JTextField txtWeight = new JTextField("1.0");
+	private final JTextField txtWeight = new JTextField("1.0");
 
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblWeight = new JLabel("weight");
 
-	private JComboBox cboUnits = new JComboBox(new String[] { "eV", "kcal",
+	private final JComboBox cboUnits = new JComboBox(new String[] { "eV", "kcal",
 			"au", "kjmol-1" });
 
 	public String gulpFileLines = "";
@@ -75,5 +75,5 @@ public class FitEnergy extends AbstractFit implements Serializable {
 		}
 		return txtEnergy;
 	}
-	
+
 }

@@ -11,8 +11,8 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
-import javax.swing.ButtonGroup;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,59 +23,59 @@ import javax.swing.border.TitledBorder;
 
 public class GammaPointCalculation extends JPanel implements Serializable {
 
-	private ButtonGroup btnGrpNonAnalyticCorrection = new ButtonGroup();
+	private final ButtonGroup btnGrpNonAnalyticCorrection = new ButtonGroup();
 	private JRadioButton specifyDirectionOfRadioButton;
 	private JRadioButton averageRadioButton;
 	private TitledPanel pnlNonAnalyticCorrectionRadioButtons;
 	private static final long serialVersionUID = -3092558433728257906L;
 
-	private TitledPanel pnlFrequencyOptions = new TitledPanel("calculate frequency");
+	private final TitledPanel pnlFrequencyOptions = new TitledPanel("calculate frequency");
 
-	private JLabel lblInitialFrequency = new JLabel("initial frequency");
-	private JLabel lblfrequencystep = new JLabel("frequency step");
-	private JLabel lblNumSteps = new JLabel("no. of steps");
-	private JLabel lblFinalFrequency = new JLabel("final frequency");
-	private JLabel lblFinalFreq = new JLabel("");
-	private JLabel lblRelatedProperties = new JLabel("related properties over frequency range ");
+	private final JLabel lblInitialFrequency = new JLabel("initial frequency");
+	private final JLabel lblfrequencystep = new JLabel("frequency step");
+	private final JLabel lblNumSteps = new JLabel("no. of steps");
+	private final JLabel lblFinalFrequency = new JLabel("final frequency");
+	private final JLabel lblFinalFreq = new JLabel("");
+	private final JLabel lblRelatedProperties = new JLabel("related properties over frequency range ");
 
-	private JTextField txtomegafrequency = new JTextField();
-	private JTextField txtomegafrequency_step = new JTextField();
-	private JTextField txtomegano_of_steps = new JTextField();
+	private final JTextField txtomegafrequency = new JTextField();
+	private final JTextField txtomegafrequency_step = new JTextField();
+	private final JTextField txtomegano_of_steps = new JTextField();
 
-	private TitledPanel pnlDirections = new TitledPanel("frequency-dependent in/out directions");
+	private final TitledPanel pnlDirections = new TitledPanel("frequency-dependent in/out directions");
 
-	private JLabel lblIn = new JLabel("in");
-	private JLabel lblOut = new JLabel("out");
-	private JComboBox cboCoordinates = new JComboBox(new String[] {"cartesian", "fractional" });
+	private final JLabel lblIn = new JLabel("in");
+	private final JLabel lblOut = new JLabel("out");
+	private final JComboBox cboCoordinates = new JComboBox(new String[] {"cartesian", "fractional" });
 
-	private JTextField txtodirinx = new JTextField();
-	private JTextField txtodiriny = new JTextField();
-	private JTextField txtodirinz = new JTextField();
-	private JTextField txtodiroutx = new JTextField();
-	private JTextField txtodirouty = new JTextField();
-	private JTextField txtodiroutz = new JTextField();
+	private final JTextField txtodirinx = new JTextField();
+	private final JTextField txtodiriny = new JTextField();
+	private final JTextField txtodirinz = new JTextField();
+	private final JTextField txtodiroutx = new JTextField();
+	private final JTextField txtodirouty = new JTextField();
+	private final JTextField txtodiroutz = new JTextField();
 
-	private JTextField txtomega_damping = new JTextField();
+	private final JTextField txtomega_damping = new JTextField();
 
 	TitledBorder border = new TitledBorder(null, null, TitledBorder.LEFT,
 			TitledBorder.DEFAULT_POSITION, null, null);
 
 	//	private FrequencyOptions pnlFrequencyOptions = new FrequencyOptions();
-	private TitledPanel pnlFrequencyDamping = new TitledPanel();
+	private final TitledPanel pnlFrequencyDamping = new TitledPanel();
 	//	private Directions pnlDirections = new Directions();
 
-	private G g = new G();
+	private final G g = new G();
 
-	private TitledPanel pnlAngularPoints = new TitledPanel();
-	private GammaApproach pnlGammaApproach = new GammaApproach();
+	private final TitledPanel pnlAngularPoints = new TitledPanel();
+	private final GammaApproach pnlGammaApproach = new GammaApproach();
 
 	// angular points fields
-	private JLabel lblNumberOfAngular = new JLabel(g.html("Number of points for averaging the nonanalytic correction to the dynamical matrix"));
+	private final JLabel lblNumberOfAngular = new JLabel(g.html("Number of points for averaging the nonanalytic correction to the dynamical matrix"));
 	private final String stepsnumDefault = "0";
-	private JTextField txtgammastepsnum = new JTextField(stepsnumDefault);
-	
-	private JPanel pnlCorrections = new JPanel();
-			
+	private final JTextField txtgammastepsnum = new JTextField(stepsnumDefault);
+
+	private final JPanel pnlCorrections = new JPanel();
+
 	public GammaPointCalculation() {
 		super();
 		setBorder(border);
@@ -138,28 +138,28 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		pnlDirections.add(cboCoordinates);
 		pnlDirections.setTitle("frequency-dependent in/out directions");
 		pnlDirections.setBounds(331, 69, 299, 90);
-		
+
 		pnlCorrections.setBounds(10, 229, 368, 180);
 		pnlCorrections.setLayout(new CardLayout());
 
-		
+
 		pnlAngularPoints.setTitle("angular points");
 		pnlAngularPoints.setName("AngularPoints");
 		pnlAngularPoints.add(lblNumberOfAngular);
 		pnlAngularPoints.add(txtgammastepsnum);
 		lblNumberOfAngular.setBounds(10, 21, 348, 49);
 		txtgammastepsnum.setBounds(10, 76, 102, 20);
-		
+
 		pnlCorrections.add(pnlAngularPoints, pnlAngularPoints.getName());
 		pnlCorrections.add(pnlGammaApproach, pnlGammaApproach.getName());
 		add(pnlCorrections);
-		
+
 		add(getPanel());
 
 	}
 
 	private void setFinalFrequency() {
-		double no_of_steps = 0.0, start = 0.0, step = 0.0;
+		final double no_of_steps = 0.0, start = 0.0, step = 0.0;
 		if ((start != 0.0) && (step != 0.0) && (no_of_steps != 0.0)) {
 			lblFinalFreq.setText(String.valueOf(start + no_of_steps * step));
 		}
@@ -175,16 +175,16 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 					&& !txtomegafrequency_step.getText().equals("")
 					&& !txtomegano_of_steps.getText().equals("")) {
 				try {
-					double frequency = Double.parseDouble(txtomegafrequency.getText());
-					double stepsize = Double.parseDouble(txtomegafrequency_step.getText());
-					int steps = Integer.parseInt(txtomegano_of_steps.getText());
+					final double frequency = Double.parseDouble(txtomegafrequency.getText());
+					final double stepsize = Double.parseDouble(txtomegafrequency_step.getText());
+					final int steps = Integer.parseInt(txtomegano_of_steps.getText());
 					if (frequency < 0)
 						throw new InvalidOptionException("Phonon omega frequency must be >= 0");
 					if (stepsize < 0)
 						throw new InvalidOptionException("Phonon omega frequency increment must be >= 0");
 					if (steps < 0)
 						throw new InvalidOptionException("Phonon omega number of steps must be >= 0");
-				} catch (NumberFormatException nfe) {
+				} catch (final NumberFormatException nfe) {
 					throw new NumberFormatException("Please enter a number for Phonon omega frequency.");
 				}
 				lines = "omega " + txtomegafrequency.getText() + " "
@@ -225,16 +225,16 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 			}
 		}
 		return lines;
-	}	
-	
+	}
+
 	private String writeOmegaDamping() throws InvalidOptionException {
 		String line = "";
 		if (!txtomega_damping.getText().equals("")) {
 			try {
-				double damping = Double.parseDouble(txtomega_damping.getText());
+				final double damping = Double.parseDouble(txtomega_damping.getText());
 				if (damping < .000001)
 					throw new InvalidOptionException("Phonon omega damping must be > .000001");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Phonon omega damping.");
 			}
 			line = "omega_damping " + txtomega_damping.getText() + Back.newLine;
@@ -247,16 +247,16 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 		return writeInOutDirections()
 		+ writeOmega() + writeOmegaDamping();
 	}
-	
+
 	private String writeGammaAngularSteps() throws InvalidOptionException {
 		String line = "";
 		if (!txtgammastepsnum.getText().equals("")
 				&& !txtgammastepsnum.getText().equals(stepsnumDefault)) {
 			try {
-				int steps = Integer.parseInt(txtgammastepsnum.getText());
+				final int steps = Integer.parseInt(txtgammastepsnum.getText());
 				if (steps < 0)
 					throw new InvalidOptionException("Phonon gamma angular steps must be > 0.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter an integer for Phonon gamma angular steps.");
 			}
 			line = "gamma_angular_steps " + txtgammastepsnum.getText() + Back.newLine;
@@ -265,7 +265,7 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 	}
 
 	public String writeGammaPointCorrection() throws InvalidOptionException,
-			IncompleteOptionException {
+	IncompleteOptionException {
 		return writeGammaAngularSteps() + pnlGammaApproach.writeGammaApproach();
 	}
 	/**
@@ -322,5 +322,5 @@ public class GammaPointCalculation extends JPanel implements Serializable {
 	}
 
 
-	
+
 }

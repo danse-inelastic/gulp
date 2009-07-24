@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
@@ -12,39 +15,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-
 public class Qeq extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7473602267117789109L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblmuev = new JLabel("<html>&#956; (eV)</html>");
-	private JLabel lblXev = new JLabel("<html>&#967; (eV)</html>");
-	private JLabel lblAtom = new JLabel("atom");
-	private JLabel lblMaximumIterations = new JLabel("maximum number of iterations");
-	private JLabel lblMaximumRadius = new JLabel(g.html("maximum radius for slater-type coloumb calculation; <br>becomes inverse distance beyond this (ang)"));
-	private JLabel lblToleranceOfCharge = new JLabel("tolerance of charge change between iterations (electrons)");
+	private final JLabel lblmuev = new JLabel("<html>&#956; (eV)</html>");
+	private final JLabel lblXev = new JLabel("<html>&#967; (eV)</html>");
+	private final JLabel lblAtom = new JLabel("atom");
+	private final JLabel lblMaximumIterations = new JLabel("maximum number of iterations");
+	private final JLabel lblMaximumRadius = new JLabel(g.html("maximum radius for slater-type coloumb calculation; <br>becomes inverse distance beyond this (ang)"));
+	private final JLabel lblToleranceOfCharge = new JLabel("tolerance of charge change between iterations (electrons)");
 
-	private JTextField txtMaxNumOfIterations = new JTextField("20");
+	private final JTextField txtMaxNumOfIterations = new JTextField("20");
 	private final String radiusDefault = "15.0";
-	private JTextField txtradius = new JTextField(radiusDefault);
+	private final JTextField txtradius = new JTextField(radiusDefault);
 	private final String tolDefault = "0.000001";
-	private JTextField txttol = new JTextField(tolDefault);
-	private JTextField txtchi = new JTextField();
-	private JTextField txtmu = new JTextField();
+	private final JTextField txttol = new JTextField(tolDefault);
+	private final JTextField txtchi = new JTextField();
+	private final JTextField txtmu = new JTextField();
 
-	private DefaultComboBoxModel uniqueAtomList = new DefaultComboBoxModel();
+	private final DefaultComboBoxModel uniqueAtomList = new DefaultComboBoxModel();
 	public JComboBox cboatom = new JComboBox(uniqueAtomList);
 
-	private JCheckBox chkchi = new JCheckBox("fit");
-	private JCheckBox chkmu = new JCheckBox("fit");
-	private JCheckBox chkqeq = new JCheckBox("use QEQ electronegativity equalization to determine charges");
-	
-	private KeywordListener keyqeq = new KeywordListener(chkqeq, "qeq");
+	private final JCheckBox chkchi = new JCheckBox("fit");
+	private final JCheckBox chkmu = new JCheckBox("fit");
+	private final JCheckBox chkqeq = new JCheckBox("use QEQ electronegativity equalization to determine charges");
+
+	private final KeywordListener keyqeq = new KeywordListener(chkqeq, "qeq");
 
 	public Qeq() {
 		super();
@@ -89,10 +88,10 @@ public class Qeq extends JPanel implements Serializable {
 		if (!txtradius.getText().equals("")
 				&& !txtradius.getText().equals(radiusDefault)) {
 			try {
-				double tolerance = Double.parseDouble(txtradius.getText());
+				final double tolerance = Double.parseDouble(txtradius.getText());
 				if (tolerance < 0)
 					throw new InvalidOptionException("Please enter a number > 0 for Electrostatics qeq radius.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number > 0 for Electrostatics qeq radius.");
 			}
 			line = "qeqradius " + txtradius.getText() + Back.newLine;
@@ -105,10 +104,10 @@ public class Qeq extends JPanel implements Serializable {
 		if (!txttol.getText().equals("")
 				&& !txttol.getText().equals(tolDefault)) {
 			try {
-				double tolerance = Double.parseDouble(txttol.getText());
+				final double tolerance = Double.parseDouble(txttol.getText());
 				if (tolerance < 0)
 					throw new InvalidOptionException("Please enter a small number > 0 for Electrostatics qeq tolerance.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a small number > 0 for Electrostatics qeq tolerance.");
 			}
 			line = "qeqtol " + txttol.getText() + Back.newLine;
@@ -129,7 +128,7 @@ public class Qeq extends JPanel implements Serializable {
 				lines += " " + txtmu.getText();
 				Double.parseDouble(txtmu.getText());
 			}
-			JCheckBox[] boxes = {chkchi, chkmu};
+			final JCheckBox[] boxes = {chkchi, chkmu};
 			lines += Back.writeFits(boxes) + Back.newLine;
 		}
 		return lines;

@@ -5,9 +5,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
+import javagulp.model.G;
+import javagulp.model.SerialKeyAdapter;
+import javagulp.model.SerialListener;
+import javagulp.model.SerialMouseAdapter;
 import javagulp.view.fit.FitPanelHolder;
-import javax.swing.ButtonGroup;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,46 +21,41 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialKeyAdapter;
-import javagulp.model.SerialListener;
-import javagulp.model.SerialMouseAdapter;
-
 public class Fit extends JPanel implements Serializable {
 
-	private ButtonGroup fitButtonGroup = new ButtonGroup();
+	private final ButtonGroup fitButtonGroup = new ButtonGroup();
 	private static final long serialVersionUID = -4430341489632365418L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JTextField txtFxDelta = new JTextField("0.00001");
+	private final JTextField txtFxDelta = new JTextField("0.00001");
 	private final String TXTMAXCYCFIT = "500 * <no. of fitting variables>";
-	private JTextField txtMaxCycfit = new JTextField(TXTMAXCYCFIT);
-	private JTextField txtXtolFit = new JTextField("0.00001");
-	private JTextField txtStepmxFit = new JTextField("1.0");
-	private JTextField txtGtol = new JTextField("0.0001");
-	private JTextField txtGmax = new JTextField("0.001");
-	private JTextField txtFtol = new JTextField("0.00001");
-	private JTextField txtOutputFittingParam = new JTextField();
+	private final JTextField txtMaxCycfit = new JTextField(TXTMAXCYCFIT);
+	private final JTextField txtXtolFit = new JTextField("0.00001");
+	private final JTextField txtStepmxFit = new JTextField("1.0");
+	private final JTextField txtGtol = new JTextField("0.0001");
+	private final JTextField txtGmax = new JTextField("0.001");
+	private final JTextField txtFtol = new JTextField("0.00001");
+	private final JTextField txtOutputFittingParam = new JTextField();
 
-	private JCheckBox chkSimultaneous = new JCheckBox(g.html("do simultaneous relaxation of shells during fitting, including both position and radius"));
-	private JCheckBox chkRelax = new JCheckBox("fit to structural displacements on relaxation rather than to the derivatives");
-	private JRadioButton rboFit = new JRadioButton("use BFGS method but only calculate diagonal of Hessian");
-	private JRadioButton rboFullHessian = new JRadioButton("use BFGS method and calculate full Hessian");
-	private JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
-	private JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
-	private JCheckBox chkDoNotSet = new JCheckBox("do not set any flags for fitting");
-	
+	private final JCheckBox chkSimultaneous = new JCheckBox(g.html("do simultaneous relaxation of shells during fitting, including both position and radius"));
+	private final JCheckBox chkRelax = new JCheckBox("fit to structural displacements on relaxation rather than to the derivatives");
+	private final JRadioButton rboFit = new JRadioButton("use BFGS method but only calculate diagonal of Hessian");
+	private final JRadioButton rboFullHessian = new JRadioButton("use BFGS method and calculate full Hessian");
+	private final JCheckBox chkOptimisefitShellsBut = new JCheckBox("fit only shells (optical calculation)");
+	private final JCheckBox chkUseGA = new JCheckBox("use genetic algorithm");
+	private final JCheckBox chkDoNotSet = new JCheckBox("do not set any flags for fitting");
+
 	public FitPanelHolder fitPanelHolder = new FitPanelHolder();
-	private JList fitList = new JList(fitPanelHolder.fitListModel);
-	private JScrollPane listScroll = new JScrollPane(fitList);
+	private final JList fitList = new JList(fitPanelHolder.fitListModel);
+	private final JScrollPane listScroll = new JScrollPane(fitList);
 
-	private KeywordListener keySimultaneous = new KeywordListener(chkSimultaneous, "simultaneous");
-	private KeywordListener keyRelax = new KeywordListener(chkRelax, "relax");
-//	private TaskKeywordListener keyFit = new TaskKeywordListener(rboFit, "fit");
-//	private TaskKeywordListener keyDoFittingRun = new TaskKeywordListener(rboFullHessian, "fbfgs");
-	private KeywordListener keyOptimisefitShellsBut = new KeywordListener(chkOptimisefitShellsBut, "shell");
-	private KeywordListener keyDoNotSet = new KeywordListener(chkDoNotSet, "noflags");
+	private final KeywordListener keySimultaneous = new KeywordListener(chkSimultaneous, "simultaneous");
+	private final KeywordListener keyRelax = new KeywordListener(chkRelax, "relax");
+	//	private TaskKeywordListener keyFit = new TaskKeywordListener(rboFit, "fit");
+	//	private TaskKeywordListener keyDoFittingRun = new TaskKeywordListener(rboFullHessian, "fbfgs");
+	private final KeywordListener keyOptimisefitShellsBut = new KeywordListener(chkOptimisefitShellsBut, "shell");
+	private final KeywordListener keyDoNotSet = new KeywordListener(chkDoNotSet, "noflags");
 
 	SerialKeyAdapter listListener = new SerialKeyAdapter() {
 		private static final long serialVersionUID = -8369027767995116365L;
@@ -65,9 +64,9 @@ public class Fit extends JPanel implements Serializable {
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 				if (JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to remove this fit?") == JOptionPane.YES_OPTION) {
+				"Are you sure you want to remove this fit?") == JOptionPane.YES_OPTION) {
 					if (fitPanelHolder.fitListModel.getSize() > 0) {
-						int index = fitList.getSelectedIndex();
+						final int index = fitList.getSelectedIndex();
 						fitPanelHolder.fitListModel.remove(index);
 						fitPanelHolder.fitPanelsForGulpInputFile.remove(index);
 					}
@@ -75,8 +74,8 @@ public class Fit extends JPanel implements Serializable {
 			}
 		}
 	};
-	
-	private SerialMouseAdapter keyList = new SerialMouseAdapter() {
+
+	private final SerialMouseAdapter keyList = new SerialMouseAdapter() {
 		private static final long serialVersionUID = 5923969703181724344L;
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -148,11 +147,11 @@ public class Fit extends JPanel implements Serializable {
 		add(pnlNumericalDifferencing);
 		txtFxDelta.setBounds(9, 23, 92, 20);
 		pnlNumericalDifferencing.add(txtFxDelta);
-		JLabel lblFxDeltaFormula = new JLabel(g.html(("df(x)/dx = (f(x + "
+		final JLabel lblFxDeltaFormula = new JLabel(g.html(("df(x)/dx = (f(x + "
 				+ g.delta + ") - f(x))/" + g.delta)));
 		lblFxDeltaFormula.setBounds(9, 19, 191, 27);
 		pnlNumericalDifferencing.add(lblFxDeltaFormula);
-		JLabel lblFxDelta = new JLabel(g.html(g.delta + " (&Aring;)"));
+		final JLabel lblFxDelta = new JLabel(g.html(g.delta + " (&Aring;)"));
 		lblFxDelta.setBounds(9, 54, 35, 15);
 		pnlNumericalDifferencing.add(lblFxDelta);
 
@@ -160,7 +159,7 @@ public class Fit extends JPanel implements Serializable {
 		pnlOutputFittingParam.setTitle("output fitting parameters");
 		pnlOutputFittingParam.setBounds(716, 124, 246, 51);
 		add(pnlOutputFittingParam);
-		JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
+		final JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
 		lblOutputFittingParameters.setBounds(10, 26, 161, 18);
 		pnlOutputFittingParam.add(lblOutputFittingParameters);
 		txtOutputFittingParam.setBounds(161, 25, 78, 21);
@@ -170,7 +169,7 @@ public class Fit extends JPanel implements Serializable {
 		panel.setTitle("fitting options");
 		panel.setBounds(0, 259, 710, 269);
 		add(panel);
-		
+
 		chkDoNotSet.setBounds(10, 220, 537, 25);
 		panel.add(chkDoNotSet);
 		chkDoNotSet.addActionListener(keyDoNotSet);
@@ -180,7 +179,7 @@ public class Fit extends JPanel implements Serializable {
 		panel.add(rboFit);
 		fitButtonGroup.add(rboFit);
 		rboFit.addActionListener(keyTypeOfHessian);
-		
+
 
 		rboFullHessian.addActionListener(keyTypeOfHessian);
 		rboFullHessian.setBounds(10, 54, 404, 25);
@@ -192,11 +191,11 @@ public class Fit extends JPanel implements Serializable {
 		chkUseGA.addActionListener(keyGA);
 
 		chkRelax.setToolTipText("<html>	Invokes fitting to structural displacements on relaxation rather <br>"
-			+ "than to the derivatives. also means any observables are fitted at the <br>"
-			+ "optimized rather than experimental structure. There is no need to give simultaneous <br>"
-			+ "as an option if relax fitting. method should only be used once a reasonable set of <br>"
-			+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
-			+ "It is also an order of magnitude more expensive in cputime!</html>");
+				+ "than to the derivatives. also means any observables are fitted at the <br>"
+				+ "optimized rather than experimental structure. There is no need to give simultaneous <br>"
+				+ "as an option if relax fitting. method should only be used once a reasonable set of <br>"
+				+ "potentials have been obtained by conventional fitting, otherwise the optimizations may fail. <br>"
+				+ "It is also an order of magnitude more expensive in cputime!</html>");
 		chkRelax.setBounds(10, 116, 558, 25);
 		panel.add(chkRelax);
 		chkRelax.addActionListener(keyRelax);
@@ -212,58 +211,58 @@ public class Fit extends JPanel implements Serializable {
 
 	public String writeFitOptions() {
 		String lines = "";
-		String max = txtMaxCycfit.getText();
+		final String max = txtMaxCycfit.getText();
 		if (max.equals("") && max.equals(TXTMAXCYCFIT)) {
 			Double.parseDouble(max);
 			lines += "maxcyc fit " + max + Back.newLine;
 		}
-		String delta = txtFxDelta.getText();
+		final String delta = txtFxDelta.getText();
 		if (delta.equals("") && delta.equals("0.00001")) {
 			Double.parseDouble(delta);
 			lines = "delta " + delta + Back.newLine;
 		}
-		String print = txtOutputFittingParam.getText();
+		final String print = txtOutputFittingParam.getText();
 		if (!print.equals("")) {
 			Integer.parseInt(print);
 			lines += "print " + print + Back.newLine;
 		}
-		String ftol = txtFtol.getText();
+		final String ftol = txtFtol.getText();
 		if (ftol.equals("") && ftol.equals("0.00001")) {
 			Double.parseDouble(ftol);
 			lines = "ftol " + ftol + Back.newLine;
 		}
-		String gtol = txtGtol.getText();
+		final String gtol = txtGtol.getText();
 		if (gtol.equals("") && gtol.equals("0.0001")) {
 			Double.parseDouble(gtol);
 			lines = "gtol " + gtol + Back.newLine;
 		}
-		String gmax = txtGmax.getText();
+		final String gmax = txtGmax.getText();
 		if (gmax.equals("") && gmax.equals("0.001")) {
 			Double.parseDouble(gmax);
 			lines = "gmax " + gmax + Back.newLine;
 		}
-		String stepmx = txtStepmxFit.getText();
+		final String stepmx = txtStepmxFit.getText();
 		if (stepmx.equals("") && stepmx.equals("1.0")) {
 			Double.parseDouble(stepmx);
 			lines = "stepmx fit " + stepmx + Back.newLine;
 		}
-		String xtol = txtXtolFit.getText();
+		final String xtol = txtXtolFit.getText();
 		if (!xtol.equals("") && !xtol.equals("0.00001")) {
 			Double.parseDouble(xtol);
 			lines += "xtol fit " + xtol + Back.newLine;
 		}
 		return lines;
 	}
-	
-	private SerialListener keyGA = new SerialListener() {
+
+	private final SerialListener keyGA = new SerialListener() {
 		private static final long serialVersionUID = -4174465371049719236L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Back.getKeys().putOrRemoveKeyword(chkUseGA.isSelected(), "genetic");
 		}
 	};
-	
-	private SerialListener keyTypeOfHessian = new SerialListener() {
+
+	private final SerialListener keyTypeOfHessian = new SerialListener() {
 		private static final long serialVersionUID = -4174465371049719236L;
 		@Override
 		public void actionPerformed(ActionEvent e) {

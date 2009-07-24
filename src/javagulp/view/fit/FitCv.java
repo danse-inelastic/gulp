@@ -3,28 +3,27 @@ package javagulp.view.fit;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class FitCv extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -7112920960813223133L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtWeight = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtWeight = new JTextField();
 
-	private JLabel lblEnergy = new JLabel(g.html("heat capacity C<sub>V</sub>"));
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblEnergy = new JLabel(g.html("heat capacity C<sub>V</sub>"));
+	private final JLabel lblWeight = new JLabel("weight");
 
-	private JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
-			"J/(Kmol)" });
+	private final JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
+	"J/(Kmol)" });
 
 	public String gulpFileLines = "Cv " + txtConstant.getText();
 
@@ -64,5 +63,5 @@ public class FitCv extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

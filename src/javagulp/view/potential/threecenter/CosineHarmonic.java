@@ -3,6 +3,7 @@ package javagulp.view.potential.threecenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -12,21 +13,19 @@ import javagulp.view.potential.Radii;
 
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class CosineHarmonic extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 5592680936519533158L;
 
-	private G g = new G();
-	
-	private PPP k = new PPP(g.html("k (eV rad<sup>-2</sup>)"));
-	private PPP theta = new PPP(g.html(g.theta + "<sub>0</sub> (deg)"));
-	
-	private JLabel lblThreeBodyEq = new JLabel(g.html("E = k(cos " + g.theta
+	private final G g = new G();
+
+	private final PPP k = new PPP(g.html("k (eV rad<sup>-2</sup>)"));
+	private final PPP theta = new PPP(g.html(g.theta + "<sub>0</sub> (deg)"));
+
+	private final JLabel lblThreeBodyEq = new JLabel(g.html("E = k(cos " + g.theta
 			+ " - cos " + g.theta + "<sub>0</sub>)<sup>2</sup>"));
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
-	
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
+
 	public CosineHarmonic() {
 		super(3);
 		setTitle("cosine harmonic");
@@ -43,17 +42,17 @@ public class CosineHarmonic extends PotentialPanel implements Serializable {
 		add(radii);
 		lblImage.setBounds(419, 11, 122, 80);
 		add(lblImage);
-		
+
 		params = new PPP[] {k, theta};
 	}
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "three cosine " + pot.threeAtomBondingOptions.getAll()
-				+ Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		+ Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}
@@ -64,10 +63,10 @@ public class CosineHarmonic extends PotentialPanel implements Serializable {
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		CosineHarmonic c = new CosineHarmonic();
+		final CosineHarmonic c = new CosineHarmonic();
 		return super.clone(c);
 	}
 }

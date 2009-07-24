@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 
 import javax.swing.JCheckBox;
@@ -15,22 +17,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class TersoffBondOrder extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -5094836799383225017L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JCheckBox chkButton = new JCheckBox();
-	private JCheckBox chkAlpha = new JCheckBox("fit");
-	private JCheckBox chkN = new JCheckBox("fit");
-	private JCheckBox chkLambda = new JCheckBox("fit");
-	private JCheckBox chkC = new JCheckBox("fit");
-	private JCheckBox chkD = new JCheckBox("fit");
-	private JCheckBox chkH = new JCheckBox("fit");
+	private final JCheckBox chkButton = new JCheckBox();
+	private final JCheckBox chkAlpha = new JCheckBox("fit");
+	private final JCheckBox chkN = new JCheckBox("fit");
+	private final JCheckBox chkLambda = new JCheckBox("fit");
+	private final JCheckBox chkC = new JCheckBox("fit");
+	private final JCheckBox chkD = new JCheckBox("fit");
+	private final JCheckBox chkH = new JCheckBox("fit");
 
 	public JTextField txtAlpha = new JTextField();
 	public JTextField txtAtom = new JTextField();
@@ -45,16 +44,16 @@ public class TersoffBondOrder extends JPanel implements Serializable {
 
 	public JPanel pnlTheta = new JPanel();
 
-	private JLabel lblAtom = new JLabel("atom");
-	private JLabel lblH = new JLabel("h");
-	private JLabel lblD = new JLabel("d");
-	private JLabel lblC = new JLabel("c");
-	private JLabel lblLambda = new JLabel(g.html(g.lambda));
-	private JLabel lblN = new JLabel("n");
-	private JLabel lblM = new JLabel("m");
-	private JLabel lblAlpha = new JLabel(g.html(g.alpha));
+	private final JLabel lblAtom = new JLabel("atom");
+	private final JLabel lblH = new JLabel("h");
+	private final JLabel lblD = new JLabel("d");
+	private final JLabel lblC = new JLabel("c");
+	private final JLabel lblLambda = new JLabel(g.html(g.lambda));
+	private final JLabel lblN = new JLabel("n");
+	private final JLabel lblM = new JLabel("m");
+	private final JLabel lblAlpha = new JLabel(g.html(g.alpha));
 
-	private SerialListener keyButton = new SerialListener() {
+	private final SerialListener keyButton = new SerialListener() {
 		private static final long serialVersionUID = -6539090813357848327L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -75,7 +74,7 @@ public class TersoffBondOrder extends JPanel implements Serializable {
 				TitledBorder.DEFAULT_POSITION, null, null));
 		this.setPreferredSize(new java.awt.Dimension(329, 98));
 
-		TitledBorder tb = new TitledBorder(null, null, TitledBorder.LEFT,
+		final TitledBorder tb = new TitledBorder(null, null, TitledBorder.LEFT,
 				TitledBorder.DEFAULT_POSITION, null, null);
 		tb.setTitle("       theta option");
 		pnlTheta.setBorder(tb);
@@ -141,8 +140,8 @@ public class TersoffBondOrder extends JPanel implements Serializable {
 	}
 
 	public String writeBondOrder() throws IncompleteOptionException {
-		JTextField[] fields1 = { txtAlpha, txtM, txtN, txtLambda };
-		String[] descriptions1 = { "alpha", "m", "n", "lambda" };
+		final JTextField[] fields1 = { txtAlpha, txtM, txtN, txtLambda };
+		final String[] descriptions1 = { "alpha", "m", "n", "lambda" };
 		Back.checkAllNonEmpty(fields1, descriptions1);
 		Back.parseFieldsD(fields1, descriptions1);
 
@@ -151,16 +150,16 @@ public class TersoffBondOrder extends JPanel implements Serializable {
 			lines += " theta";
 		lines += Back.newLine + txtAtom.getText() + " " + Back.concatFields(fields1);
 		if (chkButton.isSelected()) {
-			JTextField[] fields2 = { txtC, txtD, txtH };
-			String[] descriptions2 = { "c", "d", "h" };
+			final JTextField[] fields2 = { txtC, txtD, txtH };
+			final String[] descriptions2 = { "c", "d", "h" };
 			Back.checkAllNonEmpty(fields2, descriptions2);
 			Back.parseFieldsD(fields2, descriptions2);
 			lines += " " + Back.concatFields(fields2);
 		}
-		JCheckBox[] boxes1 = { chkAlpha, chkN, chkLambda };
+		final JCheckBox[] boxes1 = { chkAlpha, chkN, chkLambda };
 		lines += Back.writeFits(boxes1);
 		if (chkButton.isSelected()) {
-			JCheckBox[] boxes2 = { chkC, chkD, chkH };
+			final JCheckBox[] boxes2 = { chkC, chkD, chkH };
 			lines += Back.writeFits(boxes2);
 		}
 		return lines + Back.newLine;

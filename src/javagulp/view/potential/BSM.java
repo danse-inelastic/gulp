@@ -6,29 +6,28 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class BSM extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 8288060557186331610L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblEquation = new JLabel("<html>E(bs) = 1/2 * K(r - r<sub>0</sub>)<sup>2</sup></html>");
-	
-	private JComboBox cboExponential = new JComboBox(new String[] { "harmonic", "exponential", "single_exponential" });
-	private JComboBox cboCoreShell = new JComboBox(new String[] { "core", "shell" });
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final JLabel lblEquation = new JLabel("<html>E(bs) = 1/2 * K(r - r<sub>0</sub>)<sup>2</sup></html>");
 
-	private PPP k = new PPP("K");
-	private PPP r0 = new PPP("r0");
-	private PPP rho = new PPP("rho");
-	
+	private final JComboBox cboExponential = new JComboBox(new String[] { "harmonic", "exponential", "single_exponential" });
+	private final JComboBox cboCoreShell = new JComboBox(new String[] { "core", "shell" });
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final PPP k = new PPP("K");
+	private final PPP r0 = new PPP("r0");
+	private final PPP rho = new PPP("rho");
+
 	public BSM() {
 		super(1);
 		setTitle("breathing shell model");
@@ -43,7 +42,7 @@ public class BSM extends PotentialPanel implements Serializable {
 				else if (cboExponential.getSelectedIndex() == 1){
 					lblEquation.setText(g.html(
 							"E(bs) = K * [exp(" + g.rho + " * (r - r<sub>0</sub>)) + exp(-" + g.rho +
-							" * (r - r<sub>0</sub>))]"));
+					" * (r - r<sub>0</sub>))]"));
 					rho.txt.setEnabled(true);
 				}
 				else if (cboExponential.getSelectedIndex() == 2){
@@ -67,15 +66,15 @@ public class BSM extends PotentialPanel implements Serializable {
 		cboUnits.setBounds(90, 84, 85, 21);
 		getParams();
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-//		BSM bs = new BSM();
-//		getParams();
-//		bs.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
-//		bs.cboExponential.setSelectedIndex(this.cboExponential.getSelectedIndex());
-//		bs.cboCoreShell.setSelectedIndex(this.cboCoreShell.getSelectedIndex());
-//		return super.clone(bs);
+		//		BSM bs = new BSM();
+		//		getParams();
+		//		bs.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
+		//		bs.cboExponential.setSelectedIndex(this.cboExponential.getSelectedIndex());
+		//		bs.cboCoreShell.setSelectedIndex(this.cboCoreShell.getSelectedIndex());
+		//		return super.clone(bs);
 		return new BSM();
 	}
 
@@ -84,17 +83,17 @@ public class BSM extends PotentialPanel implements Serializable {
 		String lines = "";
 		getParams();
 		Back.checkAndParseD(params);
-	
+
 		lines += "bsm" + Back.newLine;
 		if (cboExponential.getSelectedIndex() != 0)
 			lines += cboExponential.getSelectedItem() + " ";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += Back.getCurrentRun().getPotential().createLibrary.getAtomCombos() + " " 
-				+ cboCoreShell.getSelectedItem() + " " + Back.fieldsAndFits(params);
+		lines += Back.getCurrentRun().getPotential().createLibrary.getAtomCombos() + " "
+		+ cboCoreShell.getSelectedItem() + " " + Back.fieldsAndFits(params);
 		return lines + Back.newLine;
 	}
-	
+
 	private void getParams() {
 		if (cboExponential.getSelectedIndex() == 0)
 			params = new PPP[] {k, r0};

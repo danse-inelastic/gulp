@@ -17,21 +17,21 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 
 public class GeneticAlgorithm extends JPanel implements Serializable {
-	
+
 	private static final long serialVersionUID = 5526997928406360022L;
 
 	private class Grid extends TitledPanel implements Serializable {
 		private static final long serialVersionUID = -3709125169034847513L;
 
-		private JTextField txtMin = new JTextField("6");
-		private JTextField txtMax = new JTextField("6");
-		private JTextField txtNumber = new JTextField("20");
+		private final JTextField txtMin = new JTextField("6");
+		private final JTextField txtMax = new JTextField("6");
+		private final JTextField txtNumber = new JTextField("20");
 
-		private JLabel lblNumber = new JLabel("increase the grid side length after");
-		private JLabel lblMin = new JLabel("from a minimum of (2");
-		private JLabel lblMax = new JLabel("<html>)<sup>3</sup> by 1 until (2</html>");
-		private JLabel lblMaxPower = new JLabel("<html>)<sup>3</sup></html>");
-		private JLabel lblIterations = new JLabel("iterations");
+		private final JLabel lblNumber = new JLabel("increase the grid side length after");
+		private final JLabel lblMin = new JLabel("from a minimum of (2");
+		private final JLabel lblMax = new JLabel("<html>)<sup>3</sup> by 1 until (2</html>");
+		private final JLabel lblMaxPower = new JLabel("<html>)<sup>3</sup></html>");
+		private final JLabel lblIterations = new JLabel("iterations");
 
 		private Grid() {
 			super();
@@ -57,7 +57,8 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		}
 
 		private String writeGrid() throws IncompleteOptionException {
-			String lines = "", min = txtMin.getText(), max = txtMax.getText(), n = txtNumber.getText();
+			String lines = "";
+			final String min = txtMin.getText(), max = txtMax.getText(), n = txtNumber.getText();
 			if (!min.equals("6") || !max.equals("6") || !n.equals("20")) {
 				if (min.equals(""))
 					throw new IncompleteOptionException("Please enter a value for genetic algorithm grid min");
@@ -86,13 +87,13 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 
 		private static final long serialVersionUID = -3210983757540993050L;
 
-		private JTextField txtMin = new JTextField("0.4");
-		private JTextField txtMax = new JTextField("0.4");
-		private JTextField txtIncrease = new JTextField("0.0");
+		private final JTextField txtMin = new JTextField("0.4");
+		private final JTextField txtMax = new JTextField("0.4");
+		private final JTextField txtIncrease = new JTextField("0.0");
 
-		private JLabel lblMin = new JLabel("from");
-		private JLabel lblMax = new JLabel("to");
-		private JLabel lblIncrease = new JLabel("increase crossover probability by");
+		private final JLabel lblMin = new JLabel("from");
+		private final JLabel lblMax = new JLabel("to");
+		private final JLabel lblIncrease = new JLabel("increase crossover probability by");
 
 		private CrossoverProbability() {
 			super();
@@ -114,7 +115,8 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		}
 
 		private String writeCrossover() throws IncompleteOptionException {
-			String lines = "", min = txtMin.getText(), max = txtMax.getText(), inc = txtIncrease.getText();
+			String lines = "";
+			final String min = txtMin.getText(), max = txtMax.getText(), inc = txtIncrease.getText();
 			if (!min.equals("0.4") && !max.equals("0.4") && inc.equals("0.0")) {
 				if (min.equals("") || max.equals("") || inc.equals(""))
 					throw new IncompleteOptionException("Please enter a values for crossover probability.");
@@ -137,17 +139,17 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 	private class MutationProbability extends TitledPanel implements Serializable {
 		private static final long serialVersionUID = -2625966816110087416L;
 
-		private JTextField txtInitial = new JTextField();
-		private JTextField txtFinal = new JTextField();
-		private JTextField txtIncrease = new JTextField("0.0");
+		private final JTextField txtInitial = new JTextField();
+		private final JTextField txtFinal = new JTextField();
+		private final JTextField txtIncrease = new JTextField("0.0");
 
-		private JLabel lblInitial = new JLabel("initial");
-		private JLabel lblFinal = new JLabel("final");
-		private JLabel lblIncrease = new JLabel("<html>increase every 20 iterations by</html>");
+		private final JLabel lblInitial = new JLabel("initial");
+		private final JLabel lblFinal = new JLabel("final");
+		private final JLabel lblIncrease = new JLabel("<html>increase every 20 iterations by</html>");
 
 		private MutationProbability() {
 			super();
-			
+
 			txtInitial.setBounds(51, 25, 75, 19);
 			add(txtInitial);
 			lblFinal.setBounds(157, 27, 30, 15);
@@ -192,14 +194,14 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 	private class Configurations extends TitledPanel implements Serializable {
 		private static final long serialVersionUID = 4730400389192705976L;
 
-		private JComboBox cboStepSize = new JComboBox(new String[] { "0", "2" });
+		private final JComboBox cboStepSize = new JComboBox(new String[] { "0", "2" });
 
-		private JLabel lblNumber = new JLabel("number of configurations (must be even)");
-		private JLabel lblMax = new JLabel("maximum configurations");
-		private JLabel lblCombo = new JLabel("step size");
+		private final JLabel lblNumber = new JLabel("number of configurations (must be even)");
+		private final JLabel lblMax = new JLabel("maximum configurations");
+		private final JLabel lblCombo = new JLabel("step size");
 
-		private JTextField txtNumber = new JTextField("10");
-		private JTextField txtMax = new JTextField("10");
+		private final JTextField txtNumber = new JTextField("10");
+		private final JTextField txtMax = new JTextField("10");
 
 		private Configurations() {
 			super();
@@ -225,7 +227,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 			if (!txtNumber.getText().equals("10") || !txtMax.getText().equals("10")) {
 				if (txtNumber.getText().equals(""))
 					throw new IncompleteOptionException("Please enter a value for genetic algorithm configurations number");
-				int number = Integer.parseInt(txtNumber.getText());
+				final int number = Integer.parseInt(txtNumber.getText());
 				if (number % 2 != 0)
 					throw new InvalidOptionException("genetic algorithm configurations number must be even");
 				lines = "configurations " + txtNumber.getText();
@@ -243,16 +245,16 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 	private class TournamentSelectionProbability extends TitledPanel implements Serializable {
 		private static final long serialVersionUID = -6288129306797651735L;
 
-		private int TOUR_MIN = 0, TOUR_MAX = 100, TOUR_INIT = 80;
+		private final int TOUR_MIN = 0, TOUR_MAX = 100, TOUR_INIT = 80;
 
-		private JSlider sldInitial = new JSlider(SwingConstants.HORIZONTAL, TOUR_MIN,
+		private final JSlider sldInitial = new JSlider(SwingConstants.HORIZONTAL, TOUR_MIN,
 				TOUR_MAX, TOUR_INIT);
-		private JLabel lblInitial = new JLabel("initial");
-		private JSlider sldFinal = new JSlider(SwingConstants.HORIZONTAL, TOUR_MIN,
+		private final JLabel lblInitial = new JLabel("initial");
+		private final JSlider sldFinal = new JSlider(SwingConstants.HORIZONTAL, TOUR_MIN,
 				TOUR_MAX, TOUR_INIT);
-		private JLabel lblFinal = new JLabel("final");
-		private JLabel lblStepSize = new JLabel("step size");
-		private JTextField txtStepSize = new JTextField("0.0");
+		private final JLabel lblFinal = new JLabel("final");
+		private final JLabel lblStepSize = new JLabel("step size");
+		private final JTextField txtStepSize = new JTextField("0.0");
 
 		private TournamentSelectionProbability() {
 			super();
@@ -280,8 +282,9 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		}
 
 		private String writeTournament() throws IncompleteOptionException {
-			String lines = "", step = txtStepSize.getText();
-			double init = sldInitial.getValue(), finl = sldFinal.getValue();
+			String lines = "";
+			final String step = txtStepSize.getText();
+			final double init = sldInitial.getValue(), finl = sldFinal.getValue();
 			if (init != 80 || finl != 80 || !step.equals("0.0")) {
 				lines = "tournament " + (init/100) + " " + (finl/100);
 				if (!step.equals("0.0")) {
@@ -289,7 +292,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 					lines += " " + step;
 				}
 				lines += Back.newLine;
-			}			
+			}
 			return lines;
 		}
 	}
@@ -298,14 +301,14 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 
 		private static final long serialVersionUID = -1060521026503135675L;
 
-		private JLabel lblIterationsInterval = new JLabel("candidates per");
-		private JLabel lblSaveTheBest = new JLabel("save the best");
-		private JLabel lblComboIterations = new JLabel("iterations");
+		private final JLabel lblIterationsInterval = new JLabel("candidates per");
+		private final JLabel lblSaveTheBest = new JLabel("save the best");
+		private final JLabel lblComboIterations = new JLabel("iterations");
 
-		private JTextField txtSaveTheBest = new JTextField("2");
-		private JTextField txtIterationsInterval = new JTextField();
-		
-		private JCheckBox chkOnly = new JCheckBox("<html>Save a <i>total</i> of n candidates for <i>all</i> iterations</html>");
+		private final JTextField txtSaveTheBest = new JTextField("2");
+		private final JTextField txtIterationsInterval = new JTextField();
+
+		private final JCheckBox chkOnly = new JCheckBox("<html>Save a <i>total</i> of n candidates for <i>all</i> iterations</html>");
 
 		private Optimization() {
 			super();
@@ -325,7 +328,8 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		}
 
 		private String writeBest() throws IncompleteOptionException {
-			String lines = "", best = txtSaveTheBest.getText(), iter = txtIterationsInterval.getText();
+			String lines = "";
+			final String best = txtSaveTheBest.getText(), iter = txtIterationsInterval.getText();
 			if (!best.equals("2") || !iter.equals("") || chkOnly.isSelected()) {
 				lines = "best";
 				if (best.equals(""))
@@ -339,26 +343,26 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 				if (chkOnly.isSelected())
 					lines += "only";
 				lines += Back.newLine;
-			}			
+			}
 			return lines;
 		}
 	}
-	
+
 	//TODO add minimum, maximum, dminimum, and dmaximum options
 
-	private Grid pnlGrid = new Grid();
-	private CrossoverProbability pnlCrossoverProbability = new CrossoverProbability();
-	private MutationProbability pnlMutationProbability = new MutationProbability();
-	private Configurations pnlConfigurations = new Configurations();
-	private TournamentSelectionProbability pnlTSP = new TournamentSelectionProbability();
-	private Optimization pnlOptimisation = new Optimization();
+	private final Grid pnlGrid = new Grid();
+	private final CrossoverProbability pnlCrossoverProbability = new CrossoverProbability();
+	private final MutationProbability pnlMutationProbability = new MutationProbability();
+	private final Configurations pnlConfigurations = new Configurations();
+	private final TournamentSelectionProbability pnlTSP = new TournamentSelectionProbability();
+	private final Optimization pnlOptimisation = new Optimization();
 
-	private JLabel lblMinCostFunctionDifference = new JLabel("<html>any two candidates must have a cost function difference of at least</html>");
-	private JLabel lblTwo = new JLabel("2");
+	private final JLabel lblMinCostFunctionDifference = new JLabel("<html>any two candidates must have a cost function difference of at least</html>");
+	private final JLabel lblTwo = new JLabel("2");
 
-	private JTextField txtDiscretizationIntervalPower = new JTextField("6");
-	private JTextField txtMinCostFunctionDifference = new JTextField("0.0");
-	private JTextField txtRandomNumberSeed = new JTextField("-1");
+	private final JTextField txtDiscretizationIntervalPower = new JTextField("6");
+	private final JTextField txtMinCostFunctionDifference = new JTextField("0.0");
+	private final JTextField txtRandomNumberSeed = new JTextField("-1");
 
 	public GeneticAlgorithm() {
 		super();
@@ -399,7 +403,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		pnlFittingResolution.add(lblTwo);
 		txtDiscretizationIntervalPower.setBounds(298, 10, 26, 20);
 		pnlFittingResolution.add(txtDiscretizationIntervalPower);
-		JLabel lblDiscretizationInterval = new JLabel("<html>discretization interval for a fitted variable</html>");
+		final JLabel lblDiscretizationInterval = new JLabel("<html>discretization interval for a fitted variable</html>");
 		lblDiscretizationInterval.setBounds(10, 19, 271, 27);
 		pnlFittingResolution.add(lblDiscretizationInterval);
 		// JCheckBox25 = new JCheckBox();
@@ -419,7 +423,8 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 
 	private String writeDiscrete() {
 		// TODO check format and add proper error checking
-		String lines = "", text = txtDiscretizationIntervalPower.getText();
+		String lines = "";
+		final String text = txtDiscretizationIntervalPower.getText();
 		if (!text.equals("") && !text.equals("6")) {
 			lines = "discrete " + text + Back.newLine;
 		}
@@ -429,15 +434,16 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 	public String writeGeneticAlgorithm() throws IncompleteOptionException, InvalidOptionException {
 		//TODO This *may* only need to be written if doing a fit operation.  Investigate.
 		return writeUnique() + pnlTSP.writeTournament() + pnlGrid.writeGrid()
-				+ writeDiscrete() + writeSeed()
-				+ pnlCrossoverProbability.writeCrossover()
-				+ pnlOptimisation.writeBest()
-				+ pnlConfigurations.writeConfigurations()
-				+ pnlMutationProbability.writeMutation();
+		+ writeDiscrete() + writeSeed()
+		+ pnlCrossoverProbability.writeCrossover()
+		+ pnlOptimisation.writeBest()
+		+ pnlConfigurations.writeConfigurations()
+		+ pnlMutationProbability.writeMutation();
 	}
 
 	private String writeSeed() {
-		String lines = "", text = txtRandomNumberSeed.getText();
+		String lines = "";
+		final String text = txtRandomNumberSeed.getText();
 		if (!text.equals("") && !text.equals("-1")) {
 			Double.parseDouble(text);
 			lines = "seed " + text + Back.newLine;
@@ -446,7 +452,8 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 	}
 
 	private String writeUnique() {
-		String lines = "", text = txtMinCostFunctionDifference.getText();
+		String lines = "";
+		final String text = txtMinCostFunctionDifference.getText();
 		if (!text.equals("") && !text.equals("0.0")) {
 			Double.parseDouble(text);
 			lines = "unique " + text + Back.newLine;

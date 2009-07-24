@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.G;
 import javagulp.view.md.Integrator;
 import javagulp.view.md.Interpolation;
 import javagulp.view.md.MDMass;
@@ -16,28 +17,27 @@ import javagulp.view.md.TimeLengths;
 import javagulp.view.md.VectorTable;
 
 import javax.swing.JPanel;
-import javagulp.model.G;
 
 public class MolecularDynamics extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -9015449918647439906L;
 
-	private G g = new G();
+	private final G g = new G();
 
 	//private JCheckBox chkMD = new JCheckBox("perform a MD simulation");
 
-	private Temperature pnlTemperature = new Temperature(0);
+	private final Temperature pnlTemperature = new Temperature(0);
 	public MDMass pnlMDmass = new MDMass();
-	private Integrator pnlIntegrator = new Integrator();
-	private MDMassless pnlMDmassless = new MDMassless();
-	private Interpolation pnlPotentialInterpolation = new Interpolation();
-	private Pressure pnlPressure = new Pressure();
-	private Thermodynamics pnlThermodynamicEnsembles = new Thermodynamics();
-	private VectorTable pnlVectorTable = new VectorTable();
+	private final Integrator pnlIntegrator = new Integrator();
+	private final MDMassless pnlMDmassless = new MDMassless();
+	private final Interpolation pnlPotentialInterpolation = new Interpolation();
+	private final Pressure pnlPressure = new Pressure();
+	private final Thermodynamics pnlThermodynamicEnsembles = new Thermodynamics();
+	private final VectorTable pnlVectorTable = new VectorTable();
 
-	private TimeLengths pnlTimeLengths = new TimeLengths();
-	private OutputFormats pnlOutputFormats = new OutputFormats();
-	private RestartFile pnlRestartFile = new RestartFile();
+	private final TimeLengths pnlTimeLengths = new TimeLengths();
+	private final OutputFormats pnlOutputFormats = new OutputFormats();
+	private final RestartFile pnlRestartFile = new RestartFile();
 
 	//private String uriJPad = "http://cseobb.hec.utah.edu:18080/JPad/OPENARCH-INF/JPad.xml";
 
@@ -76,21 +76,21 @@ public class MolecularDynamics extends JPanel implements Serializable {
 
 
 	public String writeMD() throws IncompleteOptionException,
-			InvalidOptionException {
+	InvalidOptionException {
 		//MDRestartInit m;
 		//m = Back.getPanel().getMdRestartInit();
 		return pnlTimeLengths.writeTime()
-				+ pnlOutputFormats.writeMDWriteFrequency()
-				+ pnlMDmass.writeShellMassRatio()
-				+ pnlVectorTable.writeResetvectors()
-				+ pnlPressure.writePressure()
-				//+ pnlOutputFormats.writeMDarchive()
-				+ pnlPotentialInterpolation.writePotentialInterpolation()
-				+ pnlMDmassless.writeIterations()
-				+ pnlIntegrator.writeIntegrator()
-				+ pnlVectorTable.writeExtracutoff()
-				+ pnlThermodynamicEnsembles.writeEnsemble()
-				+ pnlTemperature.writeTemperature()
-				+ pnlRestartFile.writeOption();
+		+ pnlOutputFormats.writeMDWriteFrequency()
+		+ pnlMDmass.writeShellMassRatio()
+		+ pnlVectorTable.writeResetvectors()
+		+ pnlPressure.writePressure()
+		//+ pnlOutputFormats.writeMDarchive()
+		+ pnlPotentialInterpolation.writePotentialInterpolation()
+		+ pnlMDmassless.writeIterations()
+		+ pnlIntegrator.writeIntegrator()
+		+ pnlVectorTable.writeExtracutoff()
+		+ pnlThermodynamicEnsembles.writeEnsemble()
+		+ pnlTemperature.writeTemperature()
+		+ pnlRestartFile.writeOption();
 	}
 }

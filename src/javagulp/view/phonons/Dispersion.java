@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.BareBonesBrowserLaunch;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
 
@@ -17,9 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Dispersion extends TitledPanel implements Serializable {
 
 	private TitledPanel pnlOptions;
@@ -29,11 +28,11 @@ public class Dispersion extends TitledPanel implements Serializable {
 
 	JTabbedPane paneDispersion = new JTabbedPane();
 	public boolean dispersionModified = false;
-	
-	private G g = new G();
-	private JButton btnVisualizeBrillouinZone = new JButton("<html>visualize Brillouin zone</html>");
 
-	private SerialListener keyVisualizeBrillouinZone = new SerialListener() {
+	private final G g = new G();
+	private final JButton btnVisualizeBrillouinZone = new JButton("<html>visualize Brillouin zone</html>");
+
+	private final SerialListener keyVisualizeBrillouinZone = new SerialListener() {
 		private static final long serialVersionUID = -7205702855296565824L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -41,12 +40,12 @@ public class Dispersion extends TitledPanel implements Serializable {
 		}
 	};
 
-	private JCheckBox chkKpointsAreFor = new JCheckBox("<html>kpoints are for centered cell rather than primitive</html>");
+	private final JCheckBox chkKpointsAreFor = new JCheckBox("<html>kpoints are for centered cell rather than primitive</html>");
 
-	private KeywordListener keyKpointsAreFor = new KeywordListener(chkKpointsAreFor, "kfull");
+	private final KeywordListener keyKpointsAreFor = new KeywordListener(chkKpointsAreFor, "kfull");
 
-	private JLabel lblLines = new JLabel("number of unconnected dispersion lines");
-	private JLabel lblFrequency = new JLabel("number of sampled points between kpoints");
+	private final JLabel lblLines = new JLabel("number of unconnected dispersion lines");
+	private final JLabel lblFrequency = new JLabel("number of sampled points between kpoints");
 
 	private final String TXT_LINES = "1";
 	JTextField txtLines = new JTextField(TXT_LINES);
@@ -64,11 +63,11 @@ public class Dispersion extends TitledPanel implements Serializable {
 		private static final long serialVersionUID = 83298433634021501L;
 		@Override
 		public void keyReleased(KeyEvent e) {
-			int oldSize = paneDispersion.getComponentCount();
+			final int oldSize = paneDispersion.getComponentCount();
 			int newSize;
 			try {
 				newSize = Integer.parseInt(txtLines.getText());
-			} catch (NumberFormatException e1) {
+			} catch (final NumberFormatException e1) {
 				return;
 			}
 			if (newSize > oldSize) {
@@ -84,7 +83,7 @@ public class Dispersion extends TitledPanel implements Serializable {
 		}
 	}
 
-	private LinesKeyListener linesKeyListener = new LinesKeyListener();
+	private final LinesKeyListener linesKeyListener = new LinesKeyListener();
 
 	public Dispersion() {
 		super();
@@ -103,32 +102,32 @@ public class Dispersion extends TitledPanel implements Serializable {
 		txtLines.addKeyListener(linesKeyListener);
 		add(getPanel());
 		add(getPnlOptions());
-		
-//		do not delete these lines		
-//		txtboxvalue.setBounds(575, 258, 77, 19);
-//		add(txtboxvalue);
-//		lblChangeThe.setBounds(354, 260, 70, 15);
-//		add(lblChangeThe);
-//		cboNumBoxes.setBounds(430, 257, 139, 21);
-//		add(cboNumBoxes);
+
+		//		do not delete these lines
+		//		txtboxvalue.setBounds(575, 258, 77, 19);
+		//		add(txtboxvalue);
+		//		lblChangeThe.setBounds(354, 260, 70, 15);
+		//		add(lblChangeThe);
+		//		cboNumBoxes.setBounds(430, 257, 139, 21);
+		//		add(cboNumBoxes);
 	}
 
-//	private String writeDispersionBox() throws IncompleteOptionException {
-//		String lines = "";
-//		if (!txtboxvalue.getText().equals("")) {
-//			try {
-//				Integer.parseInt(txtboxvalue.getText());
-//			} catch (NumberFormatException e) {
-//				throw new NumberFormatException("Please enter an integer for the number of boxes in Phonons");
-//			}
-//			lines = "box dispersion " + cboNumBoxes.getSelectedItem() + " "
-//			+ txtboxvalue.getText() + Back.newLine;
-//		}
-//		return lines;
-//	}
-	
+	//	private String writeDispersionBox() throws IncompleteOptionException {
+	//		String lines = "";
+	//		if (!txtboxvalue.getText().equals("")) {
+	//			try {
+	//				Integer.parseInt(txtboxvalue.getText());
+	//			} catch (NumberFormatException e) {
+	//				throw new NumberFormatException("Please enter an integer for the number of boxes in Phonons");
+	//			}
+	//			lines = "box dispersion " + cboNumBoxes.getSelectedItem() + " "
+	//			+ txtboxvalue.getText() + Back.newLine;
+	//		}
+	//		return lines;
+	//	}
+
 	public String writeDispersion() throws IncompleteOptionException {
-		BoundsPanel b = (BoundsPanel) paneDispersion.getComponent(0);
+		final BoundsPanel b = (BoundsPanel) paneDispersion.getComponent(0);
 		//TODO remove 0 and use all
 		return b.writeDispersion();//+writeDispersionBox();
 	}

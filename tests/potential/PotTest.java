@@ -8,39 +8,39 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 public class PotTest {
-	
+
 	public static Test suite() {
 		new Back(null);
 		Back.frame.setVisible(false);
-		TestSuite suite = new TestSuite("Test for test.potential");
+		final TestSuite suite = new TestSuite("Test for test.potential");
 		//$JUnit-BEGIN$
 		suite.addTestSuite(AxilrodTellerTest.class);
 		suite.addTestSuite(GeneralTest.class);
 		//$JUnit-END$
 		return suite;
 	}
-	
+
 	public static Object getField(String fieldName, Object instance) {
 		try {
-			Field f = instance.getClass().getDeclaredField(fieldName);
+			final Field f = instance.getClass().getDeclaredField(fieldName);
 			f.setAccessible(true);
 			return f.get(instance);
-		} catch (SecurityException e) {
+		} catch (final SecurityException e) {
 			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
+		} catch (final NoSuchFieldException e) {
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
+		} catch (final IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (final IllegalAccessException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println("NULL");
 		//JOptionPane.showMessageDialog(null, "");
 		return null;
 	}
-	
+
 	//TODO if users rename atoms in ChargesElementsBonding, this will need to be changed
 	public static final String[] elements = { "H", "He", "Li", "Be", "B", "C",
 		"N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar",
@@ -53,12 +53,12 @@ public class PotTest {
 		"At", "Rn", "Fr", "Ra", "Ac", "Th", "U", "Np", "Pu", "Am", "Cm",
 		"Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh",
 		"Hs", "Mt", "Ds", "Rg" };
-	
+
 	private static boolean isElement(String atom) {
 		atom = atom.trim();
 		if (!(atom.length() == 1 || atom.length() == 2))
 			return false;
-		for (String s: elements)
+		for (final String s: elements)
 			if (s.equals(atom))
 				return true;
 		//case insensitive version
@@ -67,10 +67,10 @@ public class PotTest {
 				return true;*/
 		return false;
 	}
-	
+
 	public static boolean areElements(String[] atoms) {
 		boolean flag = true;
-		for(String atom: atoms) {
+		for(final String atom: atoms) {
 			if (!isElement(atom)) {
 				flag = false;
 				System.out.println(atom + " is not an atom");
@@ -78,23 +78,23 @@ public class PotTest {
 		}
 		return flag;
 	}
-	
+
 	private static String fp = "([-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)? *)";
 	private static String bonding = "( +inter| +intra)?( +bond)?( +kcal| +kjmol)?";
 	private static String atom = "([A-Za-z]{1,2} +)";
 	private static String flag = "([01] +)";
-	
+
 	public static String genAtoms(int numAtoms) {
 		String s = "";
 		for (int i=0; i < numAtoms; i++)
 			s += atom;
 		return s;
 	}
-	
+
 	public static String genBondingOptions() {
 		return bonding;
 	}
-	
+
 	public static String genFloats(int min, int max) {
 		String s = "";
 		for (int i=0; i < min; i++)
@@ -103,7 +103,7 @@ public class PotTest {
 			s += fp + "?";
 		return s;
 	}
-	
+
 	public static String genFlags(int min, int max) {
 		String s = "";
 		//TODO determine when fitting is being performed and generate more specific regex
@@ -113,17 +113,17 @@ public class PotTest {
 			s += flag + "?";
 		return s;
 	}
-	
+
 	private static Random r = new Random();
-	
+
 	public static String getRandomFloat() {
 		return "" + (r.nextFloat()*1000000000-500000000);
 	}
-	
+
 	public static String getRandomFloat(double min, double max) {
 		return "" + (r.nextFloat()*(max-min)+min);
 	}
-	
+
 	public static String getRandomElement() {
 		return elements[r.nextInt(elements.length)];
 	}

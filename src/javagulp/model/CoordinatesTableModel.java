@@ -12,11 +12,12 @@ import javagulp.view.MolecularDynamics;
 import javagulp.view.SurfaceOptions;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
 public class CoordinatesTableModel extends AbstractTableModel implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = -4493355230672725945L;
 
@@ -35,9 +36,9 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	}
 
 	public TreeSet<String> getAtoms() {
-		TreeSet<String> atoms = new TreeSet<String>();
+		final TreeSet<String> atoms = new TreeSet<String>();
 		for (int i = 0; i < data.size(); i++) {
-			String[] row = data.get(i);
+			final String[] row = data.get(i);
 			if (row[indices[1]].equals(""))
 				atoms.add(row[indices[0]]);
 			else
@@ -47,15 +48,15 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	}
 
 	public TreeSet<String> getAtomsAndSpace() {
-		TreeSet<String> atoms = getAtoms();
+		final TreeSet<String> atoms = getAtoms();
 		atoms.add("");
 		return atoms;
 	}
-	
+
 	public ArrayList<double[]> getCoordinates() {
-		ArrayList<double[]> xyz = new ArrayList<double[]>();
+		final ArrayList<double[]> xyz = new ArrayList<double[]>();
 		for (int i=0; i < data.size(); i++) {
-			double[] d = new double[3];
+			final double[] d = new double[3];
 			d[0] = Double.parseDouble(data.get(i)[indices[2]]);
 			d[1] = Double.parseDouble(data.get(i)[indices[3]]);
 			d[2] = Double.parseDouble(data.get(i)[indices[4]]);
@@ -63,9 +64,9 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 		}
 		return xyz;
 	};
-	
+
 	public ArrayList<String> getAllAtoms() {
-		ArrayList<String> xyz = new ArrayList<String>(data.size());
+		final ArrayList<String> xyz = new ArrayList<String>(data.size());
 		for (int i=0; i < data.size(); i++) {
 			xyz.add(data.get(i)[indices[0]]);
 		}
@@ -73,21 +74,21 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	};
 
 	private ArrayList<String> getAtomsAndPositions() {
-		ArrayList<String> atomsAndPositions = new ArrayList<String>(data.size());
+		final ArrayList<String> atomsAndPositions = new ArrayList<String>(data.size());
 		for (int i = 0; i < data.size(); i++) {
-			String[] row = data.get(i);
-			String line = row[indices[0]] + " " + row[indices[1]] + " "
-					+ row[indices[2]] + " " + row[indices[3]] + " "
-					+ row[indices[4]] + Back.newLine;// may not need newline
+			final String[] row = data.get(i);
+			final String line = row[indices[0]] + " " + row[indices[1]] + " "
+			+ row[indices[2]] + " " + row[indices[3]] + " "
+			+ row[indices[4]] + Back.newLine;// may not need newline
 			atomsAndPositions.add(line);
 		}
 		return atomsAndPositions;
 	}
 
 	private TreeSet<String> getCores() {
-		TreeSet<String> atoms = new TreeSet<String>();
+		final TreeSet<String> atoms = new TreeSet<String>();
 		for (int i = 0; i < data.size(); i++) {
-			String[] row = data.get(i);
+			final String[] row = data.get(i);
 			if (!row[indices[1]].equals("shell")) {
 				atoms.add(row[indices[0]]);
 			}
@@ -109,7 +110,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	}
 
 	public String getValueAt(final int row, final int column) {
-		String[] pair = data.get(row);
+		final String[] pair = data.get(row);
 		return pair[column];
 	}
 
@@ -120,12 +121,12 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 
 	@Override
 	public void setValueAt(final Object value, final int row, final int col) {
-		String[] pair = data.get(row);
+		final String[] pair = data.get(row);
 		pair[col] = (String) value;
 		fireTableCellUpdated(row, col);
 		updateAllAtomicLists();
 	}
-	
+
 	public void importCoordinates(Material mat) {
 		// loads the coordinates from a Material object
 		data.clear();
@@ -133,7 +134,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 
 		// add rows manually for speed
 		for (int i = 0; i < mat.atomSymbols.length; i++) {
-			String[] row = new String[COLUMN_NAMES.length];
+			final String[] row = new String[COLUMN_NAMES.length];
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = ""+mat.atomSymbols[i];
@@ -145,14 +146,14 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 		fireTableChanged(new TableModelEvent(this));
 		updateAllAtomicLists();
 	}
-	
+
 	public void importCoordinates(ArrayList<String> species, ArrayList<double[]> coordinates) {
 		data.clear();
 		data.ensureCapacity(species.size());
 
 		// add rows manually for speed
 		for (int i = 0; i < species.size(); i++) {
-			String[] row = new String[COLUMN_NAMES.length];
+			final String[] row = new String[COLUMN_NAMES.length];
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = ""+species.get(i);
@@ -167,8 +168,8 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 
 	public void importCoordinates(String fileContents) {
 		// this method expects coordinates to be in xyz format!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		Scanner in = new Scanner(fileContents);
-		int numOfLines = in.nextInt();
+		final Scanner in = new Scanner(fileContents);
+		final int numOfLines = in.nextInt();
 		in.nextLine();
 		in.nextLine();
 		data.clear();
@@ -176,7 +177,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 
 		// add rows manually for speed
 		for (int i = 0; i < numOfLines; i++) {
-			String[] row = new String[COLUMN_NAMES.length];
+			final String[] row = new String[COLUMN_NAMES.length];
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = in.next();
@@ -191,23 +192,23 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	}
 
 	private void updateAllAtomicLists() {
-		GulpRun gr = Back.getCurrentRun();
+		final GulpRun gr = Back.getCurrentRun();
 		gr.getExternalForce().tdExForceTableModel.updateRows(getAtomsAndPositions());
 		gr.getExternalForce().exForceTableModel.updateRows(getAtomsAndPositions());
 		((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).coordList.update(getAtomsAndPositions());
 		refreshRows(gr.getPotentialOptions().polarisabilityTableModel, getCores());
 		refreshRows(gr.getChargesElementsBonding().speciesTableModel, getAtoms());
-		Vector<String> v = new Vector<String>(getAtomsAndSpace());
+		final Vector<String> v = new Vector<String>(getAtomsAndSpace());
 		gr.getPotentialOptions().cboSpecies.setModel(new DefaultComboBoxModel(v));
-		for (int i=0; i < gr.getPotential().createLibrary.pnlAtom.cboAtom.length; i++)
-			gr.getPotential().createLibrary.pnlAtom.cboAtom[i].setModel(new DefaultComboBoxModel(v));
+		for (final JComboBox element : gr.getPotential().createLibrary.pnlAtom.cboAtom)
+			element.setModel(new DefaultComboBoxModel(v));
 		((MolecularDynamics)gr.getSelectedRunTypePanel("molecular dynamics")).pnlMDmass.cboShellmassSpecies.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlMortiers.cboeematom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlqeq.cboatom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().snm.cbosmatom.setModel(new DefaultComboBoxModel(v));
 
 		// fire the selection changed
-		int number = gr.getPotential().createLibrary.getCurrentPotential().potentialNumber;
+		final int number = gr.getPotential().createLibrary.getCurrentPotential().potentialNumber;
 		if (number == 1) {
 			gr.getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboOneBodyPotential.getSelectedIndex());
 		} else if (number == 2) {
@@ -227,13 +228,13 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	 * @param newList
 	 */
 	private void refreshRows(GenericTableModel gtm, TreeSet<String> newList) {
-		Vector<Vector<String>> replacementList = new Vector<Vector<String>>();
+		final Vector<Vector<String>> replacementList = new Vector<Vector<String>>();
 		for (final String element : newList) {
 			boolean notFound = true;
 			for (int j = 0; j < gtm.getRowCount(); j++) {
-				String pair = (String) gtm.getValueAt(j, 0);
+				final String pair = (String) gtm.getValueAt(j, 0);
 				if (element.equals(pair)) {
-					Vector<String> row = new Vector<String>();
+					final Vector<String> row = new Vector<String>();
 					for (int i = 0; i < gtm.getColumnCount(); i++) {
 						row.add((String) gtm.getValueAt(j, i));
 					}
@@ -243,12 +244,12 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 				}
 			}
 			if (notFound) {
-				Vector<String> v = new Vector<String>();
+				final Vector<String> v = new Vector<String>();
 				v.add(element);
 				replacementList.add(v);
 			}
 		}
-		Vector<String> columnNames = new Vector<String>();
+		final Vector<String> columnNames = new Vector<String>();
 		for (int i = 0; i < gtm.getColumnCount(); i++) {
 			columnNames.add(gtm.getColumnName(i));
 		}
@@ -257,7 +258,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 
 	final public void updateRows(final int newRowNum) {
 		// this.numRows = newRowNum;
-		int currentSize = data.size();
+		final int currentSize = data.size();
 		// chop rows off
 		if (currentSize > newRowNum) {
 			for (int i = currentSize; i > newRowNum; i--)
@@ -268,7 +269,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 			// add rows on
 		} else if (currentSize < newRowNum) {
 			for (int i = currentSize; i < newRowNum; i++) {
-				String[] blanks = new String[COLUMN_NAMES.length];
+				final String[] blanks = new String[COLUMN_NAMES.length];
 				for (int j = 0; j < COLUMN_NAMES.length; j++)
 					blanks[j] = "";
 				data.add(blanks);
@@ -278,12 +279,12 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	}
 
 	public String writeTable() {// this outputs in the wrong format
-		StringBuffer lines = new StringBuffer();
+		final StringBuffer lines = new StringBuffer();
 		if (data.size() > 0)
 			lines.append(keyword + " " + data.size() + Back.newLine);
-		boolean fit = Back.getKeys().containsKeyword("fit");
+		final boolean fit = Back.getKeys().containsKeyword("fit");
 		for (int i = 0; i < data.size(); i++) {
-			String[] row = data.get(i);
+			final String[] row = data.get(i);
 			for (int j = 0; j < row.length - 1; j++) {//minus 1 so we don't write out tether
 				if (!row[j].equals("")) {
 					String value = "";
@@ -311,7 +312,7 @@ public class CoordinatesTableModel extends AbstractTableModel implements
 	public String writeTether() {
 		String lines = "";
 		for (int i = 0; i < data.size(); i++) {
-			String value = data.get(i)[COLUMN_NAMES.length - 1];
+			final String value = data.get(i)[COLUMN_NAMES.length - 1];
 			if (value.equals("yes"))
 				lines += (i + 1) + ",";
 		}

@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -12,20 +13,18 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class Qtaper extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -3158630926642421049L;
-	private G g = new G();
+	private final G g = new G();
 
-	private PPP C = new PPP("C (eV)");
-	
-	private JLabel lblEq = new JLabel(g.html("E = q<sub>i</sub>q<sub>j</sub>/r f(r) + C (1 - f(r)) <br>"
-					+ "where<br>" + "f(r) = polynomial taper"));
-	private JLabel lblUnits = new JLabel("units");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final PPP C = new PPP("C (eV)");
+
+	private final JLabel lblEq = new JLabel(g.html("E = q<sub>i</sub>q<sub>j</sub>/r f(r) + C (1 - f(r)) <br>"
+			+ "where<br>" + "f(r) = polynomial taper"));
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
 	public Qtaper() {
 		super(2);
@@ -44,7 +43,7 @@ public class Qtaper extends PotentialPanel implements Serializable {
 		radii = new Radii();
 		radii.setBounds(240, 100, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{C};
 	}
 
@@ -52,12 +51,12 @@ public class Qtaper extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String line = "qtaper " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			line += cboUnits.getSelectedItem() + " ";
-		line += pot.twoAtomBondingOptions.getScale14() + Back.newLine 
-						+ pot.getAtomCombos() + Back.concatFields(params);
+		line += pot.twoAtomBondingOptions.getScale14() + Back.newLine
+		+ pot.getAtomCombos() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			line += " " + radii.writeRadii();
 		}
@@ -66,7 +65,7 @@ public class Qtaper extends PotentialPanel implements Serializable {
 
 	@Override
 	public PotentialPanel clone() {
-		Qtaper q = new Qtaper();
+		final Qtaper q = new Qtaper();
 		q.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(q);
 	}

@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.G;
 import javagulp.view.phonons.BrillouinIntegration;
 import javagulp.view.phonons.Dispersion;
 import javagulp.view.phonons.GammaPointCalculation;
@@ -16,8 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Phonons extends TitledPanel implements Serializable {
 
 
@@ -25,37 +24,37 @@ public class Phonons extends TitledPanel implements Serializable {
 	private static final long serialVersionUID = 820917949787670204L;
 	private final String TXT_BROADEN_PEAKS = "2.0";
 	private final String txt_num_bins = "64";
-	private JTextField txtBroadenPeaks = new JTextField(TXT_BROADEN_PEAKS);
-	private JLabel lblBroadenPeaks = new JLabel("DOS peak-broadening factor");
-	private JTextField txtBinValue = new JTextField(txt_num_bins);
-	private String[] cboNumBoxesOptions = new String[]{"number", "size"};
-	private JComboBox cboNumBins = new JComboBox(new String[] {"DOS number of bins", "DOS bin size (units: 1/cm)"});
+	private final JTextField txtBroadenPeaks = new JTextField(TXT_BROADEN_PEAKS);
+	private final JLabel lblBroadenPeaks = new JLabel("DOS peak-broadening factor");
+	private final JTextField txtBinValue = new JTextField(txt_num_bins);
+	private final String[] cboNumBoxesOptions = new String[]{"number", "size"};
+	private final JComboBox cboNumBins = new JComboBox(new String[] {"DOS number of bins", "DOS bin size (units: 1/cm)"});
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JCheckBox chkDoNotOutput = new JCheckBox(g.html("do not output a list of kpoints at each configuration"));
-	private JCheckBox chkDoNotPrint = new JCheckBox("do not output phonon DOS");
-	private JCheckBox chkDoNotPrintFreqs = new JCheckBox("do not output phonon frequencies");
-	private JCheckBox chkExcludeZeroPoint = new JCheckBox("exclude zero point energy");
-	private JCheckBox chkNoRealSpace = new JCheckBox(g.html("no real space contributions to energy and its derivatives"));
-	private JCheckBox chkNoReciprocalSpace = new JCheckBox(g.html("no reciprocal space contributions to energy and its derivatives"));
-	private JCheckBox chkPrintEigenvectors = new JCheckBox("output eigenvectors in addition to eigenvalues");
+	private final JCheckBox chkDoNotOutput = new JCheckBox(g.html("do not output a list of kpoints at each configuration"));
+	private final JCheckBox chkDoNotPrint = new JCheckBox("do not output phonon DOS");
+	private final JCheckBox chkDoNotPrintFreqs = new JCheckBox("do not output phonon frequencies");
+	private final JCheckBox chkExcludeZeroPoint = new JCheckBox("exclude zero point energy");
+	private final JCheckBox chkNoRealSpace = new JCheckBox(g.html("no real space contributions to energy and its derivatives"));
+	private final JCheckBox chkNoReciprocalSpace = new JCheckBox(g.html("no reciprocal space contributions to energy and its derivatives"));
+	private final JCheckBox chkPrintEigenvectors = new JCheckBox("output eigenvectors in addition to eigenvalues");
 
-	private KeywordListener keyExcludeZeroPoint = new KeywordListener(chkExcludeZeroPoint, "nozeropt");
-	private KeywordListener keyNoReciprocalSpace = new KeywordListener(chkNoReciprocalSpace, "norecip");
-	private KeywordListener keyNoRealSpace = new KeywordListener(chkNoRealSpace, "noreal");
-	private KeywordListener keyDoNotPrint = new KeywordListener(chkDoNotPrint, "nodensity_out");
-	private KeywordListener keyDoNotPrintFreqs = new KeywordListener(chkDoNotPrintFreqs, "nofrequency");
-	private KeywordListener keyPrintEigenvectors = new KeywordListener(chkPrintEigenvectors, "eigenvectors");
+	private final KeywordListener keyExcludeZeroPoint = new KeywordListener(chkExcludeZeroPoint, "nozeropt");
+	private final KeywordListener keyNoReciprocalSpace = new KeywordListener(chkNoReciprocalSpace, "norecip");
+	private final KeywordListener keyNoRealSpace = new KeywordListener(chkNoRealSpace, "noreal");
+	private final KeywordListener keyDoNotPrint = new KeywordListener(chkDoNotPrint, "nodensity_out");
+	private final KeywordListener keyDoNotPrintFreqs = new KeywordListener(chkDoNotPrintFreqs, "nofrequency");
+	private final KeywordListener keyPrintEigenvectors = new KeywordListener(chkPrintEigenvectors, "eigenvectors");
 	//private TaskKeywordListener keyCalculateFrequencies = new TaskKeywordListener(chkCalculateFrequencies, "phonon");
-	private KeywordListener keyDoNotOutput = new KeywordListener(chkDoNotOutput, "nokpoints");
+	private final KeywordListener keyDoNotOutput = new KeywordListener(chkDoNotOutput, "nokpoints");
 
 	public JTabbedPane paneSpecifyKpoints = new JTabbedPane();
 
 	//private DispersionOptions pnlDispersionOptions = new DispersionOptions();
 	public Dispersion pnlDispersion = new Dispersion();
-	private BrillouinIntegration pnlBrillouinIntegration = new BrillouinIntegration();
-	private GammaPointCalculation pnlGammaPoints = new GammaPointCalculation();
+	private final BrillouinIntegration pnlBrillouinIntegration = new BrillouinIntegration();
+	private final GammaPointCalculation pnlGammaPoints = new GammaPointCalculation();
 	//private GammaPointCorrection pnlGammaCorrection = new GammaPointCorrection();
 
 	//	/**
@@ -63,7 +62,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	//	 */
 	//	protected JCheckBox getChkDoNotPrintFreq() {
 	//		if (chkDoNotPrintFreqs == null) {
-	//			chkDoNotPrintFreqs = 
+	//			chkDoNotPrintFreqs =
 	//			chkDoNotPrintFreqs.setText("do not output phonon frequencies");
 	//			chkDoNotPrintFreqs.setBounds(10, 18, 425, 25);
 	//			chkDoNotPrintFreqs.addActionListener(keyDoNotPrintFreqs);
@@ -94,7 +93,7 @@ public class Phonons extends TitledPanel implements Serializable {
 			if (!txtBinValue.getText().equals(txt_num_bins)) {
 				try {
 					Integer.parseInt(txtBinValue.getText());
-				} catch (NumberFormatException e) {
+				} catch (final NumberFormatException e) {
 					throw new NumberFormatException("Please enter an integer for the number of bins in Phonons");
 				}
 				lines = "box density " + cboNumBoxesOptions[0] + " "
@@ -104,7 +103,7 @@ public class Phonons extends TitledPanel implements Serializable {
 			if (!txtBinValue.getText().equals("")) {
 				try {
 					Integer.parseInt(txtBinValue.getText());
-				} catch (NumberFormatException e) {
+				} catch (final NumberFormatException e) {
 					throw new NumberFormatException("Please enter an integer for the bin size in Phonons");
 				}
 				lines = "box density " + cboNumBoxesOptions[1] + " "
@@ -119,11 +118,11 @@ public class Phonons extends TitledPanel implements Serializable {
 		String line = "";
 		if (!txtBroadenPeaks.getText().equals(TXT_BROADEN_PEAKS)) {
 			try {
-				double broaden = Double.parseDouble(txtBroadenPeaks.getText());
+				final double broaden = Double.parseDouble(txtBroadenPeaks.getText());
 				// and > 1?
 				if (broaden < 0)
 					throw new InvalidOptionException("Phonon broadening must be greater than 0");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Phonon broadening.");
 			}
 			line = "broaden_dos " + txtBroadenPeaks.getText() + Back.newLine;
@@ -132,10 +131,10 @@ public class Phonons extends TitledPanel implements Serializable {
 		//		}
 		return line;
 	}
-	
+
 	private String writeOutputDos() throws IncompleteOptionException,
 	InvalidOptionException {
-		String line = "output phonon dos.dens" + Back.newLine;
+		final String line = "output phonon dos.dens" + Back.newLine;
 		return line;
 	}
 

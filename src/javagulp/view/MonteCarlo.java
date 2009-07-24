@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.G;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -13,88 +14,86 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class MonteCarlo extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 927197258293319661L;
 
-	private G g = new G();
+	private final G g = new G();
 
 	//private JButton button = new JButton("New JButton");
-	private JButton btnCreate = new JButton("create");
+	private final JButton btnCreate = new JButton("create");
 
-	private JTextArea txtareaMoleculeFile = new JTextArea("molecule atom file");
-	private JTextArea txtareaSymbol = new JTextArea("symbol");
+	private final JTextArea txtareaMoleculeFile = new JTextArea("molecule atom file");
+	private final JTextArea txtareaSymbol = new JTextArea("symbol");
 
-	private JCheckBox chkMonteCarlo = new JCheckBox("perform a monte carlo calculation");
+	private final JCheckBox chkMonteCarlo = new JCheckBox("perform a monte carlo calculation");
 
 	//private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
 	//		"montecarlo");
 
-	private TitledPanel pnlChemicalPotential = new TitledPanel();
-	private TitledPanel pnlMaximumDisplacement = new TitledPanel();
-	private TitledPanel pnlMaximumRotation = new TitledPanel();
-	private TitledPanel pnlVolume = new TitledPanel();
-	private TitledPanel pnlRestart = new TitledPanel();
-	private TitledPanel pnlAtomCreation = new TitledPanel();
-	private TitledPanel pnlAtomDestruction = new TitledPanel();
-	private TitledPanel pnlAtomDisplacement = new TitledPanel();
-	private TitledPanel pnlMolecularRotation = new TitledPanel();
-	private TitledPanel pnlSamplingFrequency = new TitledPanel();
-	private TitledPanel pnlTrialMoves = new TitledPanel();
-	private TitledPanel pnlInsertedMolecules = new TitledPanel();
-	private TitledPanel pnlOutputFrequency = new TitledPanel();
+	private final TitledPanel pnlChemicalPotential = new TitledPanel();
+	private final TitledPanel pnlMaximumDisplacement = new TitledPanel();
+	private final TitledPanel pnlMaximumRotation = new TitledPanel();
+	private final TitledPanel pnlVolume = new TitledPanel();
+	private final TitledPanel pnlRestart = new TitledPanel();
+	private final TitledPanel pnlAtomCreation = new TitledPanel();
+	private final TitledPanel pnlAtomDestruction = new TitledPanel();
+	private final TitledPanel pnlAtomDisplacement = new TitledPanel();
+	private final TitledPanel pnlMolecularRotation = new TitledPanel();
+	private final TitledPanel pnlSamplingFrequency = new TitledPanel();
+	private final TitledPanel pnlTrialMoves = new TitledPanel();
+	private final TitledPanel pnlInsertedMolecules = new TitledPanel();
+	private final TitledPanel pnlOutputFrequency = new TitledPanel();
 
-	private TitledPanel pnlAtomInsertion = new TitledPanel();
+	private final TitledPanel pnlAtomInsertion = new TitledPanel();
 
-	private JLabel lblEv = new JLabel("eV");
-	private JLabel lblAevery = new JLabel(g.html(g.ang + " every"));
-	private JLabel lblDegEvery = new JLabel("deg every");
-	private JLabel lblA3 = new JLabel(g.html(g.ang + "<sup>3</sup>"));
-	private JLabel lblFirstStepNumber = new JLabel("first step number");
-	private JLabel lblFilename = new JLabel("filename (*.gmc)");
-	private JLabel lblMaxDisplacementMoves = new JLabel("moves");
-	private JLabel lblMaxRotationMoves = new JLabel("moves");
-	private JLabel lblNumberOfAccepted = new JLabel("number of accepted operations between file writes");
-	private JLabel lblNumberOfAtoms = new JLabel("number of atoms");
-	private JLabel lblNumberOfAcceptedSteps = new JLabel("number of steps accepted so far");
-	private JLabel lblRunningMeanOf = new JLabel("running mean of the energy");
-	private JLabel lblMaxDisplacementRatio = new JLabel("to achieve an acceptance ratio");
-	private JLabel lblMaxRotationRatio = new JLabel("to achieve an acceptance ratio");
-	private JLabel lblTrialOperationsBetween = new JLabel("trial operations between output");
+	private final JLabel lblEv = new JLabel("eV");
+	private final JLabel lblAevery = new JLabel(g.html(g.ang + " every"));
+	private final JLabel lblDegEvery = new JLabel("deg every");
+	private final JLabel lblA3 = new JLabel(g.html(g.ang + "<sup>3</sup>"));
+	private final JLabel lblFirstStepNumber = new JLabel("first step number");
+	private final JLabel lblFilename = new JLabel("filename (*.gmc)");
+	private final JLabel lblMaxDisplacementMoves = new JLabel("moves");
+	private final JLabel lblMaxRotationMoves = new JLabel("moves");
+	private final JLabel lblNumberOfAccepted = new JLabel("number of accepted operations between file writes");
+	private final JLabel lblNumberOfAtoms = new JLabel("number of atoms");
+	private final JLabel lblNumberOfAcceptedSteps = new JLabel("number of steps accepted so far");
+	private final JLabel lblRunningMeanOf = new JLabel("running mean of the energy");
+	private final JLabel lblMaxDisplacementRatio = new JLabel("to achieve an acceptance ratio");
+	private final JLabel lblMaxRotationRatio = new JLabel("to achieve an acceptance ratio");
+	private final JLabel lblTrialOperationsBetween = new JLabel("trial operations between output");
 
 	// TODO This textbox is never used
-	private JTextField txtMoleculeFile = new JTextField();
-	private JTextField txtAtomSymbol = new JTextField();
+	private final JTextField txtMoleculeFile = new JTextField();
+	private final JTextField txtAtomSymbol = new JTextField();
 	private final String TXT_MCCHEMICAL_POTENTIAL = "0.0";
-	private JTextField txtmcchemicalpotential = new JTextField(TXT_MCCHEMICAL_POTENTIAL);
-	private JTextField txtmccreate = new JTextField();
-	private JTextField txtmcdestroy = new JTextField();
-	private JTextField txtMcMaxDisplaceFrequency = new JTextField();
+	private final JTextField txtmcchemicalpotential = new JTextField(TXT_MCCHEMICAL_POTENTIAL);
+	private final JTextField txtmccreate = new JTextField();
+	private final JTextField txtmcdestroy = new JTextField();
+	private final JTextField txtMcMaxDisplaceFrequency = new JTextField();
 	private final String TXT_MCMAX_DISPLACELENGTH = "0.05";
-	private JTextField txtMcMaxDisplaceLength = new JTextField(TXT_MCMAX_DISPLACELENGTH);
-	private JTextField txtMcMaxDisplaceTargetRatio = new JTextField();
+	private final JTextField txtMcMaxDisplaceLength = new JTextField(TXT_MCMAX_DISPLACELENGTH);
+	private final JTextField txtMcMaxDisplaceTargetRatio = new JTextField();
 	private final String TXT_MCMAX_ROTATION_MAX = "180";
-	private JTextField txtMcmaxrotationMax = new JTextField(TXT_MCMAX_ROTATION_MAX);
-	private JTextField txtMcmaxrotationPermoves = new JTextField();
-	private JTextField txtMcmaxrotationRatio = new JTextField();
-	private JTextField txtMcmeansEnergy = new JTextField();
-	private JTextField txtMcmeansNumAtoms = new JTextField();
+	private final JTextField txtMcmaxrotationMax = new JTextField(TXT_MCMAX_ROTATION_MAX);
+	private final JTextField txtMcmaxrotationPermoves = new JTextField();
+	private final JTextField txtMcmaxrotationRatio = new JTextField();
+	private final JTextField txtMcmeansEnergy = new JTextField();
+	private final JTextField txtMcmeansNumAtoms = new JTextField();
 	private final String TXT_MC_MOVE = "1.0";
-	private JTextField txtmcmove = new JTextField(TXT_MC_MOVE);
+	private final JTextField txtmcmove = new JTextField(TXT_MC_MOVE);
 	private final String TXT_MC_OUT_FREQ = "100";
-	private JTextField txtmcoutfreq = new JTextField(TXT_MC_OUT_FREQ);
+	private final JTextField txtmcoutfreq = new JTextField(TXT_MC_OUT_FREQ);
 	private final String TXT_MC_ROTATE = "0.0";
-	private JTextField txtmcrotate = new JTextField(TXT_MC_ROTATE);
-	private JTextField txtMcsampleFilename = new JTextField();
+	private final JTextField txtmcrotate = new JTextField(TXT_MC_ROTATE);
+	private final JTextField txtMcsampleFilename = new JTextField();
 	private final String TXT_MC_SAMPLE_FREQUENCY = "10";
-	private JTextField txtMcsampleFrequency = new JTextField(TXT_MC_SAMPLE_FREQUENCY);
-	private JTextField txtMcFirststep = new JTextField();
-	private JTextField txtMcStepsofar = new JTextField();
+	private final JTextField txtMcsampleFrequency = new JTextField(TXT_MC_SAMPLE_FREQUENCY);
+	private final JTextField txtMcFirststep = new JTextField();
+	private final JTextField txtMcStepsofar = new JTextField();
 	private final String TXT_MC_TRIAL = "0";
-	private JTextField txtmctrial = new JTextField(TXT_MC_TRIAL);
-	private JTextField txtmcvolume = new JTextField();
+	private final JTextField txtmctrial = new JTextField(TXT_MC_TRIAL);
+	private final JTextField txtmcvolume = new JTextField();
 
 	// TODO fix atoms to be inserted to allow more than one atom since we
 	// eliminated AddPanel
@@ -308,11 +307,11 @@ public class MonteCarlo extends JPanel implements Serializable {
 				&& !txtmcchemicalpotential.getText().equals(TXT_MCCHEMICAL_POTENTIAL)) {
 			try {
 				Double.parseDouble(txtmcchemicalpotential.getText());
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Monte Carlo chemical potential.");
 			}
 			lines = "mcchemicalpotential " + txtmcchemicalpotential.getText()
-					+ Back.newLine;
+			+ Back.newLine;
 		}
 		return lines;
 	}
@@ -321,10 +320,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 		String lines = "";
 		if (!txtmccreate.getText().equals("")) {
 			try {
-				double mccreate = Double.parseDouble(txtmccreate.getText());
+				final double mccreate = Double.parseDouble(txtmccreate.getText());
 				if (mccreate < 0 || mccreate > 1)
 					throw new InvalidOptionException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo create.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo create.");
 			}
 			lines = "mccreate " + txtmccreate.getText() + Back.newLine;
@@ -336,10 +335,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 		String lines = "";
 		if (!txtmcdestroy.getText().equals("")) {
 			try {
-				double mcdestroy = Double.parseDouble(txtmcdestroy.getText());
+				final double mcdestroy = Double.parseDouble(txtmcdestroy.getText());
 				if (mcdestroy < 0 || mcdestroy > 1)
 					throw new InvalidOptionException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo destroy.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo destroy.");
 			}
 			lines = "mcdestroy " + txtmcdestroy.getText() + Back.newLine;
@@ -348,13 +347,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 	}
 
 	private String writeMCDisplace() {
-		String lines = "", displace = txtMcMaxDisplaceLength.getText(), ratio = txtMcMaxDisplaceTargetRatio.getText(), frequency = txtMcMaxDisplaceFrequency.getText();
+		String lines = "";
+		final String displace = txtMcMaxDisplaceLength.getText(), ratio = txtMcMaxDisplaceTargetRatio.getText(), frequency = txtMcMaxDisplaceFrequency.getText();
 		if (!displace.equals("")
 				&& !displace.equals(TXT_MCMAX_DISPLACELENGTH)) {
 			lines = "mcmaxdisplacement ";
 			try {
 				Double.parseDouble(displace);
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Monte Carlo displace.");
 			}
 			lines += displace + " ";
@@ -362,14 +362,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 		if (!ratio.equals("")) {
 			try {
 				Double.parseDouble(ratio);
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Monte Carlo ratio.");
 			}
 			lines += "target " + ratio;
 			if (!frequency.equals("")) {
 				try {
 					Double.parseDouble(frequency);
-				} catch (NumberFormatException nfe) {
+				} catch (final NumberFormatException nfe) {
 					throw new NumberFormatException("Please enter a number for Monte Carlo frequency.");
 				}
 				lines += " " + frequency;
@@ -384,13 +384,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 	}
 
 	private String writeMCMaxRotation() {
-		String lines = "", rotation = txtMcmaxrotationMax.getText(), ratio = txtMcmaxrotationRatio.getText(), frequency = txtMcmaxrotationPermoves.getText();
+		String lines = "";
+		final String rotation = txtMcmaxrotationMax.getText(), ratio = txtMcmaxrotationRatio.getText(), frequency = txtMcmaxrotationPermoves.getText();
 		if (!rotation.equals("")
 				&& !rotation.equals(TXT_MCMAX_ROTATION_MAX)) {
 			lines = "mcmaxrotation ";
 			try {
 				Double.parseDouble(rotation);
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Monte Carlo rotation.");
 			}
 			lines += rotation + " ";
@@ -400,14 +401,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 				lines = "mcmaxrotation ";
 			try {
 				Double.parseDouble(ratio);
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Monte Carlo ratio.");
 			}
 			lines += "target " + ratio;
 			if (!frequency.equals("")) {
 				try {
 					Double.parseDouble(frequency);
-				} catch (NumberFormatException nfe) {
+				} catch (final NumberFormatException nfe) {
 					throw new NumberFormatException("Please enter a number for Monte Carlo frequency.");
 				}
 				lines += " " + frequency;
@@ -419,13 +420,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 	}
 
 	private String writeMCMeans() throws IncompleteOptionException {
-		String lines = "", energy = txtMcmeansEnergy.getText(), atoms = txtMcmeansNumAtoms.getText();
+		String lines = "";
+		final String energy = txtMcmeansEnergy.getText(), atoms = txtMcmeansNumAtoms.getText();
 		if (!energy.equals("") || !atoms.equals("")) {
 			if (!energy.equals("") && !atoms.equals("")) {
 				try {
 					Double.parseDouble(energy);
 					Double.parseDouble(atoms);
-				} catch (NumberFormatException nfe) {
+				} catch (final NumberFormatException nfe) {
 					throw new NumberFormatException("Please enter a number for Monte Carlo means.");
 				}
 				lines = "mcmeans " + energy + " " + atoms + Back.newLine;
@@ -441,10 +443,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 		if (!txtmcmove.getText().equals("")
 				&& !txtmcmove.getText().equals(TXT_MC_MOVE)) {
 			try {
-				double mcrotate = Double.parseDouble(txtmcmove.getText());
+				final double mcrotate = Double.parseDouble(txtmcmove.getText());
 				if (mcrotate < 0 || mcrotate > 1)
 					throw new InvalidOptionException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo move.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo move.");
 			}
 			lines = "mcmove " + txtmcmove.getText() + Back.newLine;
@@ -458,7 +460,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 				&& !txtmcoutfreq.getText().equals(TXT_MC_OUT_FREQ)) {
 			try {
 				Integer.parseInt(txtmcoutfreq.getText());
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter an integer for Monte Carlo out frequency.");
 			}
 			lines = "mcoutfreq " + txtmcoutfreq.getText() + Back.newLine;
@@ -471,10 +473,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 		if (!txtmcrotate.getText().equals("")
 				&& !txtmcrotate.getText().equals(TXT_MC_ROTATE)) {
 			try {
-				double mcrotate = Double.parseDouble(txtmcrotate.getText());
+				final double mcrotate = Double.parseDouble(txtmcrotate.getText());
 				if (mcrotate < 0 || mcrotate > 1)
 					throw new InvalidOptionException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo rotate.");
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number between 0 and 1 (inclusive) for Monte Carlo rotate.");
 			}
 			lines = "mcrotate " + txtmcrotate.getText() + Back.newLine;
@@ -483,7 +485,8 @@ public class MonteCarlo extends JPanel implements Serializable {
 	}
 
 	private String writeMCSample() {
-		String lines = "", frequency = txtMcsampleFrequency.getText(), filename = txtMcsampleFilename.getText();
+		String lines = "";
+		final String frequency = txtMcsampleFrequency.getText(), filename = txtMcsampleFilename.getText();
 		if (!frequency.equals("")
 				&& !frequency.equals(TXT_MC_SAMPLE_FREQUENCY)) {
 			lines = "mcsample " + frequency;
@@ -500,16 +503,17 @@ public class MonteCarlo extends JPanel implements Serializable {
 	}
 
 	private String writeMCStep() throws IncompleteOptionException,
-			InvalidOptionException {
-		String lines = "", first = txtMcFirststep.getText(), sofar = txtMcStepsofar.getText();
+	InvalidOptionException {
+		String lines = "";
+		final String first = txtMcFirststep.getText(), sofar = txtMcStepsofar.getText();
 		if (!first.equals("") || !sofar.equals("")) {
 			if (!first.equals("") && !sofar.equals("")) {
 				try {
-					int ifirst = Integer.parseInt(first);
-					int isofar = Integer.parseInt(sofar);
+					final int ifirst = Integer.parseInt(first);
+					final int isofar = Integer.parseInt(sofar);
 					if (isofar > ifirst)
 						throw new InvalidOptionException("First step should be greater than current steps in Monte Carlo means.");
-				} catch (NumberFormatException nfe) {
+				} catch (final NumberFormatException nfe) {
 					throw new NumberFormatException("Please enter numbers for Monte Carlo step.");
 				}
 				lines = "mcstep " + first + " " + sofar + Back.newLine;
@@ -526,7 +530,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 				&& !txtmctrial.getText().equals(TXT_MC_TRIAL)) {
 			try {
 				Integer.parseInt(txtmctrial.getText());
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter an integer for Monte Carlo trial.");
 			}
 			lines = "mctrial " + txtmctrial.getText() + Back.newLine;
@@ -540,7 +544,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		if (!txtmcvolume.getText().equals("")) {
 			try {
 				Double.parseDouble(txtmcvolume.getText());
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				throw new NumberFormatException("Please enter a number for Monte Carlo volume.");
 			}
 			lines = "mcvolume " + txtmcvolume.getText() + Back.newLine;
@@ -549,12 +553,12 @@ public class MonteCarlo extends JPanel implements Serializable {
 	}
 
 	public String writeMonteCarlo() throws IncompleteOptionException,
-			InvalidOptionException {
+	InvalidOptionException {
 		return writeMCChemicalPotential() + writeMCDisplace() + writeMCVolume()
-				+ writeMCCreate() + writeMCDestroy() + writeMCMove()
-				+ writeMCTrial() + writeMCStep() + writeMCSample()
-				+ writeMCRotate() + writeMCOutfreq() + writeMCMeans()
-				+ writeMCMaxRotation() + writeSpecies();
+		+ writeMCCreate() + writeMCDestroy() + writeMCMove()
+		+ writeMCTrial() + writeMCStep() + writeMCSample()
+		+ writeMCRotate() + writeMCOutfreq() + writeMCMeans()
+		+ writeMCMaxRotation() + writeSpecies();
 	}
 
 	private String writeSpecies() {

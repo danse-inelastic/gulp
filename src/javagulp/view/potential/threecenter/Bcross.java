@@ -3,6 +3,7 @@ package javagulp.view.potential.threecenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -13,23 +14,21 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class Bcross extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -6896976962343966744L;
 
-	private G g = new G();
-	
-	private PPP k = new PPP(g.html("k (eV/" + g.ang + "<sup>2</sup>)"));
-	private PPP r12 = new PPP("<html>r<sub>12</sub><sup>0</sup> (" + g.ang + ")</html>");
-	private PPP r13 = new PPP("<html>r<sub>13</sub><sup>0</sup> (" + g.ang + ")</html>");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
-	private JLabel threeBodyEq = new JLabel(g.html("E = k (r<sub>12</sub> - "
+	private final G g = new G();
+
+	private final PPP k = new PPP(g.html("k (eV/" + g.ang + "<sup>2</sup>)"));
+	private final PPP r12 = new PPP("<html>r<sub>12</sub><sup>0</sup> (" + g.ang + ")</html>");
+	private final PPP r13 = new PPP("<html>r<sub>13</sub><sup>0</sup> (" + g.ang + ")</html>");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
+	private final JLabel threeBodyEq = new JLabel(g.html("E = k (r<sub>12</sub> - "
 			+ "r<sub>12</sub><sup>0</sup>) (r<sub>13</sub> - r<sub>13</sub><sup>0</sup>)"));
 
 	public Bcross() {
@@ -54,14 +53,14 @@ public class Bcross extends PotentialPanel implements Serializable {
 		add(cboUnits);
 		lblUnits.setBounds(19, 145, 40, 21);
 		add(lblUnits);
-		
+
 		params = new PPP[] {k, r12, r13};
 	}
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "bcross " + pot.threeAtomBondingOptions.getAll();;
 		if (cboUnits.getSelectedIndex() != 0)
@@ -77,10 +76,10 @@ public class Bcross extends PotentialPanel implements Serializable {
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Bcross b = new Bcross();
+		final Bcross b = new Bcross();
 		b.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(b);
 	}

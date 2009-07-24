@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -14,33 +16,30 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Polynomial extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -1569248852541678518L;
 
-	private PPP[] params = new PPP[6];
-	
-	private G g = new G();
-	private JComboBox cboPolynomialOrder = new JComboBox(new String[] { "1",
+	private final PPP[] params = new PPP[6];
+
+	private final G g = new G();
+	private final JComboBox cboPolynomialOrder = new JComboBox(new String[] { "1",
 			"2", "3", "4", "5" });
-	private JComboBox cboUnits = new JComboBox(new String[] { "kjmol", "kcal" });
+	private final JComboBox cboUnits = new JComboBox(new String[] { "kjmol", "kcal" });
 	// private JCheckBox chkHarmonicFactor = new JCheckBox("harmonic factor");
 
-	private JLabel lblPolynomialOrder = new JLabel("polynomial order");
-	private JLabel lblEquation = new JLabel();
-	private JLabel lblUnits = new JLabel("units");
+	private final JLabel lblPolynomialOrder = new JLabel("polynomial order");
+	private final JLabel lblEquation = new JLabel();
+	private final JLabel lblUnits = new JLabel("units");
 
-	private SerialListener keyOrder = new SerialListener() {
+	private final SerialListener keyOrder = new SerialListener() {
 		private static final long serialVersionUID = -1288769483834281993L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (PPP param: params)
+			for (final PPP param: params)
 				param.setVisible(false);
 
-			int orderNum = cboPolynomialOrder.getSelectedIndex() + 2;
+			final int orderNum = cboPolynomialOrder.getSelectedIndex() + 2;
 			String equation = "E = ";
 			for (int i = 0; i < orderNum; i++) {
 				equation += "c<sub>" + i + "</sub>" + "*r<sup>" + i + "</sup> " + " + ";
@@ -58,7 +57,7 @@ public class Polynomial extends PotentialPanel implements Serializable {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		enabled = new boolean[] { true, true, true, true, true, true };
-		
+
 		int x = 10, y = 80;
 		for (int i=0; i < params.length; i++) {
 			if (i == params.length / 2) {
@@ -92,28 +91,28 @@ public class Polynomial extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "";
-		int index = cboPolynomialOrder.getSelectedIndex() + 2;
-		PPP[] coefs = new PPP[index];
+		final int index = cboPolynomialOrder.getSelectedIndex() + 2;
+		final PPP[] coefs = new PPP[index];
 		for (int i = 0; i < index; i++) {
 			coefs[i] = params[i];
 		}
 		Back.checkAndParseD(coefs);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		lines = "polynomial " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + (index + 1) + Back.newLine 
-			+ pot.getAtomCombos() + Back.concatFields(coefs);
+		lines += pot.twoAtomBondingOptions.getScale14() + (index + 1) + Back.newLine
+		+ pot.getAtomCombos() + Back.concatFields(coefs);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}
 		return lines + Back.writeFits(coefs) + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Polynomial p = new Polynomial();
+		final Polynomial p = new Polynomial();
 		p.cboPolynomialOrder.setSelectedIndex(this.cboPolynomialOrder.getSelectedIndex());
 		p.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(p);

@@ -12,15 +12,15 @@ public class ElasticConstant extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = 876873876083648134L;
 
-	private JLabel lblConstant = new JLabel("E(i,j) (GPa)");
-	private JLabel lblElastici = new JLabel("i");
-	private JLabel lblWeight = new JLabel("weight");
-	private JLabel lblElasticj = new JLabel("j");
+	private final JLabel lblConstant = new JLabel("E(i,j) (GPa)");
+	private final JLabel lblElastici = new JLabel("i");
+	private final JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblElasticj = new JLabel("j");
 
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtJ = new JTextField();
-	private JTextField txtI = new JTextField();
-	private JTextField txtWeight = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtJ = new JTextField();
+	private final JTextField txtI = new JTextField();
+	private final JTextField txtWeight = new JTextField();
 
 	//public String gulpFileLines;
 
@@ -48,8 +48,8 @@ public class ElasticConstant extends AbstractFit implements Serializable {
 
 	@Override
 	public String writeFitPanel() throws IncompleteOptionException {
-		JTextField[] fields = { txtI, txtJ, txtConstant };
-		String[] descriptions = { "i", "j", "the elastic constant" };
+		final JTextField[] fields = { txtI, txtJ, txtConstant };
+		final String[] descriptions = { "i", "j", "the elastic constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		gulpFileLines = "elastic " + Back.newLine + Back.concatFields(fields);
 		if (!txtWeight.getText().equals("")) {
@@ -59,5 +59,5 @@ public class ElasticConstant extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

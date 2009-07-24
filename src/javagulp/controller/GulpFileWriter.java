@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javagulp.view.Back;
-import javagulp.view.Fit;
-import javagulp.view.FreeEnergy;
 import javagulp.view.GulpRun;
-import javagulp.view.MolecularDynamics;
-import javagulp.view.MonteCarlo;
-import javagulp.view.Optimization;
-import javagulp.view.Phonons;
-import javagulp.view.StructurePrediction;
 import javagulp.view.SurfaceOptions;
+
 import javax.swing.JOptionPane;
 
 public class GulpFileWriter {
@@ -22,49 +16,49 @@ public class GulpFileWriter {
 	public boolean incomplete = false;
 
 	public String gulpInputFileToString() {
-		StringBuffer o = new StringBuffer();
+		final StringBuffer o = new StringBuffer();
 		incomplete = false;
 		try {
-			GulpRun gr = Back.getCurrentRun();
+			final GulpRun gr = Back.getCurrentRun();
 			o.append(Back.getTaskKeywords().writeTaskKeywords());
 			o.append(Back.getKeys().writeKeywords());
 			o.append(gr.getOutput().writeTitleAndTimeLimit());
-//			String energy = gr.getXyzfit().writeEnergy();
-//			if (!energy.equals(""))
-//				o.append(energy);
-//			else {
-//				if (Back.getPanel().getOutput().chkSeparate.isSelected())
-//					o.append(Back.getStructure().writeStructure());
-//				else
-//					o.append(Back.getPanel().getStructures().writeStructures());
-//			}
+			//			String energy = gr.getXyzfit().writeEnergy();
+			//			if (!energy.equals(""))
+			//				o.append(energy);
+			//			else {
+			//				if (Back.getPanel().getOutput().chkSeparate.isSelected())
+			//					o.append(Back.getStructure().writeStructure());
+			//				else
+			//					o.append(Back.getPanel().getStructures().writeStructures());
+			//			}
 			o.append(Back.getStructure().writeStructure());
 			o.append(((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).writeSurface());
 			o.append(gr.getPotential().writeLibrary());
 			o.append(gr.getPotential().createLibrary.writePotentials());
-			o.append(gr.getConstraints().writeUnfreeze());
+			//o.append(gr.getConstraints().writeUnfreeze());
 			o.append(gr.getEwaldOptions().writeEwald());
 			o.append(gr.getPotentialOptions().writePotentialOptions());
-			o.append(gr.getElectrostatics().writeElectrostatics());			
+			o.append(gr.getElectrostatics().writeElectrostatics());
 			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
 			o.append(gr.getRunTypePanel().writeRuntype());
 			o.append(gr.getExternalForce().writeExternalForce());
 			o.append(gr.getOutput().writeExecute());
-		} catch (IncompleteOptionException e) {
+		} catch (final IncompleteOptionException e) {
 			e.displayErrorAsPopup();
 			incomplete = true;
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			//nfe.printStackTrace();
 			JOptionPane.showMessageDialog(null, nfe.getMessage(),
 					"NumberFormatException", JOptionPane.ERROR_MESSAGE);
 			incomplete = true;
-		} catch (InvalidOptionException e) {
+		} catch (final InvalidOptionException e) {
 			e.displayErrorAsPopup();
 			incomplete = true;
 		}
-		
-		Scanner sc = new Scanner(o.toString());
-		StringBuffer sb = new StringBuffer();
+
+		final Scanner sc = new Scanner(o.toString());
+		final StringBuffer sb = new StringBuffer();
 		while (sc.hasNext()) {
 			String line = sc.nextLine();
 			while (line.length() > 77) {
@@ -78,11 +72,11 @@ public class GulpFileWriter {
 		}
 		return sb.toString();
 	}
-	
+
 	public void writeAll(String output, String outputFileName) {
 		try {
 			if (!incomplete) {
-				BufferedWriter out = new BufferedWriter(new FileWriter(Back.getCurrentRun().getWD() + Back.newLine + outputFileName));
+				final BufferedWriter out = new BufferedWriter(new FileWriter(Back.getCurrentRun().getWD() + Back.newLine + outputFileName));
 				out.write(output);
 				out.close();
 			}

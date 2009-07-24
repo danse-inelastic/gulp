@@ -13,14 +13,14 @@ public class FitEntropy extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = 4224801003945809227L;
 
-	private JTextField txtWeight = new JTextField();
-	private JTextField txtConstant = new JTextField();
+	private final JTextField txtWeight = new JTextField();
+	private final JTextField txtConstant = new JTextField();
 
-	private JLabel lblEnergy = new JLabel("entropy");
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblEnergy = new JLabel("entropy");
+	private final JLabel lblWeight = new JLabel("weight");
 
-	private JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
-			"J/(Kmol)" });
+	private final JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
+	"J/(Kmol)" });
 
 	public String gulpFileLines = "";
 
@@ -60,5 +60,5 @@ public class FitEntropy extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

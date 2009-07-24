@@ -3,29 +3,28 @@ package javagulp.view.fit;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Hfdlc extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -955875921962168869L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblConstant = new JLabel(g.html(g.epsilon + "<sub>"
+	private final JLabel lblConstant = new JLabel(g.html(g.epsilon + "<sub>"
 			+ g.infinity + "</sub>"));
-	private JLabel lblI = new JLabel("i");
-	private JLabel lblJ = new JLabel("j");
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblI = new JLabel("i");
+	private final JLabel lblJ = new JLabel("j");
+	private final JLabel lblWeight = new JLabel("weight");
 
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtI = new JTextField();
-	private JTextField txtJ = new JTextField();
-	private JTextField txtWeight = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtI = new JTextField();
+	private final JTextField txtJ = new JTextField();
+	private final JTextField txtWeight = new JTextField();
 
 	//public String gulpFileLines;
 
@@ -53,8 +52,8 @@ public class Hfdlc extends AbstractFit implements Serializable {
 
 	@Override
 	public String writeFitPanel() throws IncompleteOptionException {
-		JTextField[] fields = { txtJ, txtI, txtConstant };
-		String[] descriptions = { "i", "j", "the dielectric constant" };
+		final JTextField[] fields = { txtJ, txtI, txtConstant };
+		final String[] descriptions = { "i", "j", "the dielectric constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
@@ -66,5 +65,5 @@ public class Hfdlc extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

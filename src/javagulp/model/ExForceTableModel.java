@@ -8,16 +8,14 @@ import javagulp.view.Back;
 
 import javax.swing.table.AbstractTableModel;
 
-import javagulp.model.G;
-
 public class ExForceTableModel extends AbstractTableModel implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = -6164026326698158299L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private String[] COLUMN_NAMES = { "atom and position",
+	private final String[] COLUMN_NAMES = { "atom and position",
 			g.html("F<sub>x</sub> (eV/&Aring;)"),
 			g.html("F<sub>y</sub> (eV/&Aring;)"),
 			g.html("F<sub>z</sub> (eV/&Aring;)") };
@@ -113,7 +111,7 @@ public class ExForceTableModel extends AbstractTableModel implements
 			final String[] values = data.elementAt(i);
 			if (!values[1].equals(""))
 				lines += "external_force " + (i + 1) + " " + values[1] + " "
-						+ values[2] + " " + values[3] + Back.newLine;
+				+ values[2] + " " + values[3] + Back.newLine;
 		}
 		return lines;
 	}

@@ -3,28 +3,27 @@ package javagulp.view.fit;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class FitFrequency extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = 6388487079221677793L;
 
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtCstFrequency = new JTextField();
-	private JTextField txtWeight = new JTextField("1.0");
-	private JTextField txtKPoint = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtCstFrequency = new JTextField();
+	private final JTextField txtWeight = new JTextField("1.0");
+	private final JTextField txtKPoint = new JTextField();
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblConstant = new JLabel("mode position (in order of increasing frequency)");
-	private JLabel lblWeight = new JLabel("weight");
-	private JLabel lblCstFrequency = new JLabel(g.html("frequency (cm<sup>-1</sup>)"));
-	private JLabel lblKPoint = new JLabel("k point number");
+	private final JLabel lblConstant = new JLabel("mode position (in order of increasing frequency)");
+	private final JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblCstFrequency = new JLabel(g.html("frequency (cm<sup>-1</sup>)"));
+	private final JLabel lblKPoint = new JLabel("k point number");
 
 	public String gulpFileLines = "";
 
@@ -65,5 +64,5 @@ public class FitFrequency extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

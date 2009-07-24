@@ -3,6 +3,9 @@ package javagulp.view.potentialOptions;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
@@ -11,38 +14,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.view.Back;
-import javagulp.view.KeywordListener;
-
 public class SnM extends JPanel implements Serializable {
 	// Who can take ___...
 	private static final long serialVersionUID = -1793228478407003415L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization to determine charges");
-	
-	private JCheckBox chkchi = new JCheckBox("fit");
-	private JCheckBox chkmu = new JCheckBox("fit");
-	private JCheckBox chkzeta = new JCheckBox("fit");
-	private JCheckBox chkZnuc = new JCheckBox("fit");
+	private final JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization to determine charges");
 
-	private JLabel lblmuev = new JLabel("<html>&#956; (eV)</html>");
-	private JLabel lblXev = new JLabel("<html>&#967; (eV)</html>");
-	private JLabel lblAtom = new JLabel("atom");
-	private JLabel lblzeta = new JLabel(g.html(g.zeta + " (" + g.ang + "<sup>-1</sup>)"));
-	private JLabel lblznuc = new JLabel(g.html("Z<sub>nuc</sub> (au)"));
+	private final JCheckBox chkchi = new JCheckBox("fit");
+	private final JCheckBox chkmu = new JCheckBox("fit");
+	private final JCheckBox chkzeta = new JCheckBox("fit");
+	private final JCheckBox chkZnuc = new JCheckBox("fit");
 
-	private JTextField txtchi = new JTextField();
-	private JTextField txtmu = new JTextField();
-	private JTextField txtzeta = new JTextField();
-	private JTextField txtZnuc = new JTextField();
+	private final JLabel lblmuev = new JLabel("<html>&#956; (eV)</html>");
+	private final JLabel lblXev = new JLabel("<html>&#967; (eV)</html>");
+	private final JLabel lblAtom = new JLabel("atom");
+	private final JLabel lblzeta = new JLabel(g.html(g.zeta + " (" + g.ang + "<sup>-1</sup>)"));
+	private final JLabel lblznuc = new JLabel(g.html("Z<sub>nuc</sub> (au)"));
 
-	private DefaultComboBoxModel uniqueAtomListSM = new DefaultComboBoxModel();
+	private final JTextField txtchi = new JTextField();
+	private final JTextField txtmu = new JTextField();
+	private final JTextField txtzeta = new JTextField();
+	private final JTextField txtZnuc = new JTextField();
+
+	private final DefaultComboBoxModel uniqueAtomListSM = new DefaultComboBoxModel();
 	public JComboBox cbosmatom = new JComboBox(uniqueAtomListSM);
 
-	private KeywordListener keyStreitzAndMintmire = new KeywordListener(chkStreitzAndMintmire, "sm");
+	private final KeywordListener keyStreitzAndMintmire = new KeywordListener(chkStreitzAndMintmire, "sm");
 
 	public SnM() {
 		super();
@@ -51,7 +50,7 @@ public class SnM extends JPanel implements Serializable {
 		chkStreitzAndMintmire.addActionListener(keyStreitzAndMintmire);
 		chkStreitzAndMintmire.setBounds(5, 1, 562, 25);
 		add(chkStreitzAndMintmire);
-		
+
 		cbosmatom.setBounds(56, 49, 66, 26);
 		add(cbosmatom);
 		lblzeta.setBounds(5, 126, 60, 15);
@@ -87,12 +86,12 @@ public class SnM extends JPanel implements Serializable {
 		if (chkStreitzAndMintmire.isSelected()) {
 			if (cbosmatom.getSelectedItem() == null || cbosmatom.getSelectedItem() == "")
 				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
-			JTextField[] fields = {txtchi, txtmu, txtzeta, txtZnuc};
-			String[] descriptions = {"Streitz and Mintmire chi", "Streitz and Mintmire mu", "Streitz and Mintmire zeta", "Streitz and Mintmire Znuc"};
+			final JTextField[] fields = {txtchi, txtmu, txtzeta, txtZnuc};
+			final String[] descriptions = {"Streitz and Mintmire chi", "Streitz and Mintmire mu", "Streitz and Mintmire zeta", "Streitz and Mintmire Znuc"};
 			Back.checkAllNonEmpty(fields, descriptions);
-			JCheckBox[] boxes = { chkchi, chkmu, chkzeta, chkZnuc };
+			final JCheckBox[] boxes = { chkchi, chkmu, chkzeta, chkZnuc };
 			lines = "smelectronegativity " + cbosmatom.getSelectedItem() + " "
-					+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
+			+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
 		}
 		return lines;
 	}

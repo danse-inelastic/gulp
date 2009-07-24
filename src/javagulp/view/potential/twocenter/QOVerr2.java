@@ -16,19 +16,19 @@ import javax.swing.JLabel;
 public class QOVerr2 extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -8213892552287868532L;
-	
-	private JLabel lblEquation = new JLabel("<html>E = q<sub>i</sub>q<sub>j</sub> / r<sup>2</sup></html>");
-	private JLabel lblUnits = new JLabel("units");
-	
-	private JComboBox cboUnits = new JComboBox(new DefaultComboBoxModel(
+
+	private final JLabel lblEquation = new JLabel("<html>E = q<sub>i</sub>q<sub>j</sub> / r<sup>2</sup></html>");
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final JComboBox cboUnits = new JComboBox(new DefaultComboBoxModel(
 			new String[] {"au", "nm", "pm"}));
-	private JComboBox cboEnerGrad = new JComboBox(new DefaultComboBoxModel(
+	private final JComboBox cboEnerGrad = new JComboBox(new DefaultComboBoxModel(
 			new String[] {"energy", "gradient"}));
-	
+
 	public QOVerr2() {
 		super(2);
 		enabled = new boolean[] { true, true, true, true, true, true };
-		
+
 		setTitle("qoverr2");
 		add(lblEquation);
 		lblEquation.setBounds(10, 20, 225, 21);
@@ -45,7 +45,7 @@ public class QOVerr2 extends PotentialPanel implements Serializable {
 
 	@Override
 	public PotentialPanel clone() {
-		QOVerr2 q = new QOVerr2();
+		final QOVerr2 q = new QOVerr2();
 		q.cboEnerGrad.setSelectedIndex(this.cboEnerGrad.getSelectedIndex());
 		q.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(q);
@@ -53,8 +53,8 @@ public class QOVerr2 extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "qoverr2 " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";

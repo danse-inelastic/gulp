@@ -5,32 +5,32 @@ import java.util.TreeSet;
 
 public class TaskKeywords implements Serializable {
 	private static final long serialVersionUID = -7544313514620261471L;
-	
-	private TreeSet<String> taskKeywords = new TreeSet<String>();
-	
-//	public void putOrRemoveTaskKeyword(final boolean discern, final String taskKeyword) {
-//		if (discern)
-//			taskKeywords.add(taskKeyword);
-//		else
-//			taskKeywords.remove(taskKeyword);
-//	}
-	
+
+	private final TreeSet<String> taskKeywords = new TreeSet<String>();
+
+	//	public void putOrRemoveTaskKeyword(final boolean discern, final String taskKeyword) {
+	//		if (discern)
+	//			taskKeywords.add(taskKeyword);
+	//		else
+	//			taskKeywords.remove(taskKeyword);
+	//	}
+
 	public void putTaskKeywords(final String tasks) {
 		// this removes all task keywords and puts in new ones
 		taskKeywords.clear();
 		taskKeywords.add(tasks);
 	}
-	
+
 	public boolean containsKeyword(String taskKeyword) {
 		if (taskKeywords.contains(taskKeyword))
 			return true;
 		else
 			return false;
 	}
-	
+
 	public String writeTaskKeywords() {
 		String lines = "";
-		for (String word: taskKeywords)
+		for (final String word: taskKeywords)
 			lines += word + " ";
 		return lines;
 	}

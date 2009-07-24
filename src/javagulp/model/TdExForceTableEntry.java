@@ -25,7 +25,7 @@ public class TdExForceTableEntry implements Serializable {
 	@Override
 	public String toString() {
 		return this.atom + " " + this.atomLocation + " " + this.forceDirection
-				+ " " + this.A + " " + this.B + " " + this.C;
+		+ " " + this.A + " " + this.B + " " + this.C;
 	}
 
 }

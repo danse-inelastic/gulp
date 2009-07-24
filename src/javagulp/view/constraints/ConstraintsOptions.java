@@ -5,27 +5,27 @@ import javagulp.view.TitledPanel;
 
 import javax.swing.JCheckBox;
 
-	public class ConstraintsOptions extends TitledPanel {
+public class ConstraintsOptions extends TitledPanel {
 
-		private static final long serialVersionUID = 740089487749329041L;
-
-
-
-		private JCheckBox chkHtmlDoNotFreeze = new JCheckBox("<html>do not freeze out atoms with no degrees of freedom from first and and second derivative calculations during optimization</html>");
+	private static final long serialVersionUID = 740089487749329041L;
 
 
-		private KeywordListener keyHtmlDoNotFreeze = new KeywordListener(chkHtmlDoNotFreeze, "noexclude");
+
+	private final JCheckBox chkHtmlDoNotFreeze = new JCheckBox("<html>do not freeze out atoms with no degrees of freedom from first and and second derivative calculations during optimization</html>");
 
 
-		public ConstraintsOptions() {
-			super();
-			setTitle("options");
+	private final KeywordListener keyHtmlDoNotFreeze = new KeywordListener(chkHtmlDoNotFreeze, "noexclude");
 
 
-			chkHtmlDoNotFreeze.setBounds(7, 86, 945, 25);
-			add(chkHtmlDoNotFreeze);
-			chkHtmlDoNotFreeze.addActionListener(keyHtmlDoNotFreeze);
+	public ConstraintsOptions() {
+		super();
+		setTitle("options");
 
-		}
+
+		chkHtmlDoNotFreeze.setBounds(7, 86, 945, 25);
+		add(chkHtmlDoNotFreeze);
+		chkHtmlDoNotFreeze.addActionListener(keyHtmlDoNotFreeze);
+
 	}
+}
 

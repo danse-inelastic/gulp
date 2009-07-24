@@ -18,12 +18,12 @@ public class AboutBox extends JFrame implements Serializable {
 	private JPanel panel;
 	private static final long serialVersionUID = -2512309683667207622L;
 
-	private ImageIcon icon = new CreateIcon().createIcon("banner.png");
+	private final ImageIcon icon = new CreateIcon().createIcon("banner.png");
 
-	private JLabel lblComments = new JLabel("Designed for GULP binary 3.1");
-	private JLabel lblCopyright = new JLabel("Copyright (c) 2009");
-	private JLabel lblIcon = new JLabel(icon);
-	private JLabel lblProduct = new JLabel(Back.version);
+	private final JLabel lblComments = new JLabel("Designed for GULP binary 3.1");
+	private final JLabel lblCopyright = new JLabel("Copyright (c) 2009");
+	private final JLabel lblIcon = new JLabel(icon);
+	private final JLabel lblProduct = new JLabel(Back.version);
 
 	public AboutBox() {
 		super();

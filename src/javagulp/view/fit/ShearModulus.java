@@ -11,12 +11,12 @@ public class ShearModulus extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -4906544212537436483L;
 
-	private JTextField txtWeight = new JTextField();
-	private JLabel lblWeight = new JLabel("weight (GPa)");
+	private final JTextField txtWeight = new JTextField();
+	private final JLabel lblWeight = new JLabel("weight (GPa)");
 
 	public String gulpFileLines = "";
-	
-	private JTextField txtShearModulus;
+
+	private final JTextField txtShearModulus;
 
 	public ShearModulus() {
 		super();
@@ -26,7 +26,7 @@ public class ShearModulus extends AbstractFit implements Serializable {
 		txtWeight.setBounds(441, 21, 70, 21);
 		txtWeight.setBackground(Back.grey);
 		add(txtWeight);
-		
+
 		txtShearModulus = new JTextField();
 		txtShearModulus.setBounds(189, 22, 90, 20);
 		add(txtShearModulus);
@@ -50,5 +50,5 @@ public class ShearModulus extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

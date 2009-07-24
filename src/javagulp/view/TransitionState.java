@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.SerialListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -13,8 +14,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.SerialListener;
-
 public class TransitionState extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 1481985392857820882L;
@@ -22,17 +21,17 @@ public class TransitionState extends JPanel implements Serializable {
 	private final ButtonGroup btnGroupTransitionState = new ButtonGroup();
 	private final ButtonGroup btnGroupRFOOptions = new ButtonGroup();
 
-	private JTextField txtModeNumber = new JTextField();
-	private JTextField txtOrderOfTransitionState = new JTextField("1");
+	private final JTextField txtModeNumber = new JTextField();
+	private final JTextField txtOrderOfTransitionState = new JTextField("1");
 
-	private JRadioButton radInvokeRational = new JRadioButton();
-	private JRadioButton radInvokeRFO = new JRadioButton();
-	private JRadioButton radNone1 = new JRadioButton();
-	private JRadioButton radNone2 = new JRadioButton();
-	private JRadioButton radFindTransitionState = new JRadioButton("find transition state along mode number");
-	private JRadioButton radTransitionStateOfOrder = new JRadioButton("or find transition state of order");
+	private final JRadioButton radInvokeRational = new JRadioButton();
+	private final JRadioButton radInvokeRFO = new JRadioButton();
+	private final JRadioButton radNone1 = new JRadioButton();
+	private final JRadioButton radNone2 = new JRadioButton();
+	private final JRadioButton radFindTransitionState = new JRadioButton("find transition state along mode number");
+	private final JRadioButton radTransitionStateOfOrder = new JRadioButton("or find transition state of order");
 
-	private SerialListener keyInvokeRational = new SerialListener() {
+	private final SerialListener keyInvokeRational = new SerialListener() {
 		private static final long serialVersionUID = 5665428119022612136L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -40,7 +39,7 @@ public class TransitionState extends JPanel implements Serializable {
 			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radInvokeRational.isSelected(), "rfo");
 		}
 	};
-	private SerialListener keyInvokeRFO = new SerialListener() {
+	private final SerialListener keyInvokeRFO = new SerialListener() {
 		private static final long serialVersionUID = -8125830214860897746L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -124,7 +123,7 @@ public class TransitionState extends JPanel implements Serializable {
 			Integer.parseInt(txtModeNumber.getText());
 			lines = "maximise mode " + txtModeNumber.getText() + Back.newLine;
 		} else if (radTransitionStateOfOrder.isSelected()) {
-			String order = txtOrderOfTransitionState.getText();
+			final String order = txtOrderOfTransitionState.getText();
 			if (order.equals(""))
 				throw new IncompleteOptionException("Please enter a value for transition state RFO order.");
 			Integer.parseInt(order);

@@ -9,10 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.Nutpad;
+import javagulp.model.SerialListener;
+import javagulp.model.SerialMouseAdapter;
+import javagulp.view.output.Terse;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -20,12 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-
-import javagulp.model.Nutpad;
-import javagulp.model.SerialListener;
-import javagulp.model.SerialMouseAdapter;
-import javagulp.view.output.OutputFormats;
-import javagulp.view.output.Terse;
 
 
 
@@ -38,49 +35,49 @@ public class Output extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4891514818536259508L;
 
-	private JButton btnViewInput = new JButton("view");
-	private JButton btnViewOutput = new JButton("view");
+	private final JButton btnViewInput = new JButton("view");
+	private final JButton btnViewOutput = new JButton("view");
 
-	private JComboBox cboTimeUnits = new JComboBox(new String[] { "seconds", "minutes", "hours" });
+	private final JComboBox cboTimeUnits = new JComboBox(new String[] { "seconds", "minutes", "hours" });
 
 	//private String caller_TaskID;
 	public String selectedInputFile = "input.gin";
-//	private transient RBSubmitReturn submit;//inherit from this class to serialize?
+	//	private transient RBSubmitReturn submit;//inherit from this class to serialize?
 
 	//private OutputFormats pnlOutputFormats = new OutputFormats();
-	private Terse pnlTerse = new Terse();
+	private final Terse pnlTerse = new Terse();
 
-	private JLabel lblOutputFile = new JLabel("gulp stdout file");
-	private JLabel lblTimeLimit = new JLabel("calculation time limit");
+	private final JLabel lblOutputFile = new JLabel("gulp stdout file");
+	private final JLabel lblTimeLimit = new JLabel("calculation time limit");
 	private JLabel savedInputFilesLabel;
 
-	private JPanel pnlCalculationTitle = new JPanel();
+	private final JPanel pnlCalculationTitle = new JPanel();
 
-	private JTextField txtCalculationTitle = new JTextField();
-	private JTextField txtInfinity = new JTextField("infinity");
+	private final JTextField txtCalculationTitle = new JTextField();
+	private final JTextField txtInfinity = new JTextField("infinity");
 	//public JTextField txtInputFile = new JTextField("input.gin");
 	public JTextField txtOutputFile = new JTextField("output.gout");
 
 	public long lastViewed = Long.MAX_VALUE;
-	
+
 	public Map<String,String> inputFileMap = new HashMap<String,String>();
 
 	public DefaultListModel inputFileModel = new DefaultListModel();
-	
-	private JList inputFileDisplayList = new JList(inputFileModel);
-	
-	private SerialListener keyViewOutput = new SerialListener() {
-		
+
+	private final JList inputFileDisplayList = new JList(inputFileModel);
+
+	private final SerialListener keyViewOutput = new SerialListener() {
+
 		private static final long serialVersionUID = -8408579526286084765L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			File output = new File(Back.getCurrentRun().getWD() + Back.newLine
+			final File output = new File(Back.getCurrentRun().getWD() + Back.newLine
 					+ txtOutputFile.getText());
 			if (output.exists()) {
-				File f = new File(Back.getCurrentRun().getWD() + Back.newLine
+				final File f = new File(Back.getCurrentRun().getWD() + Back.newLine
 						+ txtOutputFile.getText());
-				Nutpad nut = new Nutpad(f);
+				final Nutpad nut = new Nutpad(f);
 				nut.setLocationRelativeTo(getParent());
 				nut.pack();
 				nut.setVisible(true);
@@ -91,8 +88,8 @@ public class Output extends JPanel implements Serializable {
 		}
 	};
 
-	private SerialListener keyViewInput = new SerialListener() {
-		
+	private final SerialListener keyViewInput = new SerialListener() {
+
 		private static final long serialVersionUID = 7165880120019172111L;
 
 		@Override
@@ -100,26 +97,26 @@ public class Output extends JPanel implements Serializable {
 			if(selectedInputFile.equals(""))
 				JOptionPane.showMessageDialog(null, "Please choose an input file.");
 			else{
-			if(selectedInputFile.equals("input.gin"))
-				updateInputGin();
-			Nutpad nut = new Nutpad(inputFileMap.get(selectedInputFile));
-			//Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + Back.newLine + txtInputFile.getText()));
-			nut.setVisible(true);
+				if(selectedInputFile.equals("input.gin"))
+					updateInputGin();
+				final Nutpad nut = new Nutpad(inputFileMap.get(selectedInputFile));
+				//Nutpad nut = new Nutpad(new File(Back.getPanel().getWD() + Back.newLine + txtInputFile.getText()));
+				nut.setVisible(true);
 			}
 		}
 	};
 
 	public void updateInputGin(){
-		String contents = Back.writer.gulpInputFileToString();
+		final String contents = Back.writer.gulpInputFileToString();
 		if (!Back.writer.incomplete) {
 			inputFileMap.put("input.gin",contents); // this will replace any previous contents
 			//Back.writer.writeAll(contents, "input.gin");
-			Date d = new Date();
+			final Date d = new Date();
 			lastViewed = d.getTime();
-		} 
+		}
 	}
-	
-	
+
+
 	public Output() {
 		super();
 		setLayout(null);
@@ -162,36 +159,36 @@ public class Output extends JPanel implements Serializable {
 		inputFileDisplayList.setSelectedIndex(0);
 		add(inputFileDisplayList);
 		add(getSavedInputFilesLabel());
-	
+
 		//add(pnlRestart);
 	}
 
-//	public void runRequestBroker(String contents) {
-//		try {
-//			RBSubmit gis = new RBSubmit();
-//			FilePackage fp = new FilePackage(null, txtInputFile.getText(),
-//					contents.getBytes());
-//			gis.AddInput(fp);
-//			// add other files..
-//
-//			// This needs to match the app name set in RB
-//			gis.Configuration = "GULP";
-//			caller_TaskID = gis.returnCaller_TaskID();
-//			String RB_id = Back.reqboxLocal.loadApplication("Resource Broker");
-//			submit = (RBSubmitReturn) Back.reqboxLocal.sendRequest(RB_id,
-//					"DirectSubmit", gis, null);
-//			// System.out.println(submit.err_msg);
-//			// System.out.println(submit.job_id);
-//		} catch (JODAFException e) {
-//			e.displayErrorAsPopup();
-//		} catch (Exception e) {
-//			JOptionPane.showMessageDialog(null, e.getMessage());
-//		}
-//	}
+	//	public void runRequestBroker(String contents) {
+	//		try {
+	//			RBSubmit gis = new RBSubmit();
+	//			FilePackage fp = new FilePackage(null, txtInputFile.getText(),
+	//					contents.getBytes());
+	//			gis.AddInput(fp);
+	//			// add other files..
+	//
+	//			// This needs to match the app name set in RB
+	//			gis.Configuration = "GULP";
+	//			caller_TaskID = gis.returnCaller_TaskID();
+	//			String RB_id = Back.reqboxLocal.loadApplication("Resource Broker");
+	//			submit = (RBSubmitReturn) Back.reqboxLocal.sendRequest(RB_id,
+	//					"DirectSubmit", gis, null);
+	//			// System.out.println(submit.err_msg);
+	//			// System.out.println(submit.job_id);
+	//		} catch (JODAFException e) {
+	//			e.displayErrorAsPopup();
+	//		} catch (Exception e) {
+	//			JOptionPane.showMessageDialog(null, e.getMessage());
+	//		}
+	//	}
 
 	public String writeExecute() throws IncompleteOptionException {
-//		return pnlOutputFormats.writeOutputFormats() + writeDump()
-//				+ pnlTerse.writeTerse();// written twice
+		//		return pnlOutputFormats.writeOutputFormats() + writeDump()
+		//				+ pnlTerse.writeTerse();// written twice
 		return pnlTerse.writeTerse();// written twice
 	}
 
@@ -203,12 +200,12 @@ public class Output extends JPanel implements Serializable {
 		if (!txtInfinity.getText().equals("infinity")) {
 			Double.parseDouble(txtInfinity.getText());
 			lines += "time " + txtInfinity.getText() + " "
-					+ cboTimeUnits.getSelectedItem() + Back.newLine;
+			+ cboTimeUnits.getSelectedItem() + Back.newLine;
 		}
 		return lines;
 	}
-	
-	private SerialMouseAdapter keyList = new SerialMouseAdapter() {
+
+	private final SerialMouseAdapter keyList = new SerialMouseAdapter() {
 		private static final long serialVersionUID = 5923969703181724344L;
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -228,5 +225,5 @@ public class Output extends JPanel implements Serializable {
 		}
 		return savedInputFilesLabel;
 	}
-	
+
 }

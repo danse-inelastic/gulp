@@ -3,28 +3,27 @@ package javagulp.view.fit;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Sdlc extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -3600946579130559583L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblConstant = new JLabel(g.html(g.epsilon + "<sub>s</sub>"));
-	private JLabel lblSdlci = new JLabel("i");
-	private JLabel lblWeight = new JLabel("weight");
-	private JLabel lblSdlcj = new JLabel("j");
+	private final JLabel lblConstant = new JLabel(g.html(g.epsilon + "<sub>s</sub>"));
+	private final JLabel lblSdlci = new JLabel("i");
+	private final JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblSdlcj = new JLabel("j");
 
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtSdlcj = new JTextField();
-	private JTextField txtSdlci = new JTextField();
-	private JTextField txtSdlcWeight = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtSdlcj = new JTextField();
+	private final JTextField txtSdlci = new JTextField();
+	private final JTextField txtSdlcWeight = new JTextField();
 
 	//public String gulpFileLines;
 
@@ -60,8 +59,8 @@ public class Sdlc extends AbstractFit implements Serializable {
 
 	@Override
 	public String writeFitPanel() throws IncompleteOptionException {
-		JTextField[] fields = { txtSdlci, txtSdlcj, txtConstant };
-		String[] descriptions = { "i", "j", "the dielectric constant" };
+		final JTextField[] fields = { txtSdlci, txtSdlcj, txtConstant };
+		final String[] descriptions = { "i", "j", "the dielectric constant" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		gulpFileLines = "sdlc " + Back.newLine + Back.concatFields(fields);
 		if (!txtSdlcWeight.getText().equals(""))
@@ -69,5 +68,5 @@ public class Sdlc extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

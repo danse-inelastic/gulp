@@ -17,20 +17,20 @@ class ExplicitKpoints extends JPanel {
 	private JTextArea textArea;
 	private static final long serialVersionUID = -6773882634142073544L;
 
-	private JTextField txtexplicitkx = new JTextField();
-	private JTextField txtexplicitky = new JTextField();
-	private JTextField txtexplicitkz = new JTextField();
+	private final JTextField txtexplicitkx = new JTextField();
+	private final JTextField txtexplicitky = new JTextField();
+	private final JTextField txtexplicitkz = new JTextField();
 	public final String TXT_EXPLICT_WEIGHT = "1.0";
-	private JTextField txtexplicitWeight = new JTextField(TXT_EXPLICT_WEIGHT);
+	private final JTextField txtexplicitWeight = new JTextField(TXT_EXPLICT_WEIGHT);
 
-	private JLabel lblexplicitkx = new JLabel("<html>k<sub>x</sub></html>");
-	private JLabel lblexplicitky = new JLabel("<html>k<sub>y</sub></html>");
-	private JLabel lblexplicitkz = new JLabel("<html>k<sub>z</sub></html>");
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblexplicitkx = new JLabel("<html>k<sub>x</sub></html>");
+	private final JLabel lblexplicitky = new JLabel("<html>k<sub>y</sub></html>");
+	private final JLabel lblexplicitkz = new JLabel("<html>k<sub>z</sub></html>");
+	private final JLabel lblWeight = new JLabel("weight");
 
-	private JCheckBox chkKpointsAreFor = new JCheckBox("<html>kpoints are for centered cell rather than primitive</html>");
+	private final JCheckBox chkKpointsAreFor = new JCheckBox("<html>kpoints are for centered cell rather than primitive</html>");
 
-	private KeywordListener keyKpointsAreFor = new KeywordListener(chkKpointsAreFor, "kfull");
+	private final KeywordListener keyKpointsAreFor = new KeywordListener(chkKpointsAreFor, "kfull");
 
 	ExplicitKpoints() {
 		super();

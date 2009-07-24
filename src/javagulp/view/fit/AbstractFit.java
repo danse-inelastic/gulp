@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 
 public abstract class AbstractFit extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7553135746194739969L;
 	public String gulpFileLines = "";
 
 	public AbstractFit() {

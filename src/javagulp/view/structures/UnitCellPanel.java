@@ -14,10 +14,10 @@ public class UnitCellPanel extends TitledPanel implements Serializable {
 
 
 
-	private JTabbedPane tabbedPane = new JTabbedPane();
+	private final JTabbedPane tabbedPane = new JTabbedPane();
 	public ThreeDUnitCell threeDUnitCell = new ThreeDUnitCell();
-	private TwoDUnitCell twoDUnitCell = new TwoDUnitCell();
-	private OneDUnitCell oneDUnitCell = new OneDUnitCell();
+	private final TwoDUnitCell twoDUnitCell = new TwoDUnitCell();
+	private final OneDUnitCell oneDUnitCell = new OneDUnitCell();
 
 	public UnitCellPanel() {
 		super();
@@ -35,7 +35,7 @@ public class UnitCellPanel extends TitledPanel implements Serializable {
 
 	public String writeUnitCell() throws IncompleteOptionException {
 		return threeDUnitCell.write3DUnitCell()
-				+ twoDUnitCell.write2DUnitCell()
-				+ oneDUnitCell.writeOneDUnitCell();
+		+ twoDUnitCell.write2DUnitCell()
+		+ oneDUnitCell.writeOneDUnitCell();
 	}
 }

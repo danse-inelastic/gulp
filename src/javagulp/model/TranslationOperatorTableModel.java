@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.swing.table.AbstractTableModel;
 
 public class TranslationOperatorTableModel extends AbstractTableModel implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = -2319627465799138686L;
 

@@ -11,12 +11,12 @@ public class BulkModulus extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -5936266634534615464L;
 
-	private JTextField txtWeight = new JTextField();
-	private JLabel lblWeight = new JLabel("weight");
+	private final JTextField txtWeight = new JTextField();
+	private final JLabel lblWeight = new JLabel("weight");
 
 	public String gulpFileLines = "";
 
-	private JTextField txtBulkModulus;
+	private final JTextField txtBulkModulus;
 
 	public BulkModulus() {
 		super();

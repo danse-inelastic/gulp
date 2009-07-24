@@ -16,16 +16,16 @@ import javax.swing.JLabel;
 public class FermiDirac extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -1726262428393032999L;
-	
-	private JLabel lblEquation = new JLabel("<html>E = a / (1 + exp(b(r - r<sub>0</sub>)))</html>");
-	private JLabel lblUnits = new JLabel("units");
-	
-	private PPP a = new PPP("a");
-	private PPP b = new PPP("b");
-	private PPP r0 = new PPP("r0");
-	
-	private JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final JLabel lblEquation = new JLabel("<html>E = a / (1 + exp(b(r - r<sub>0</sub>)))</html>");
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final PPP a = new PPP("a");
+	private final PPP b = new PPP("b");
+	private final PPP r0 = new PPP("r0");
+
+	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
 	public FermiDirac() {
 		super(2);
@@ -49,13 +49,13 @@ public class FermiDirac extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 95, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{a, b, r0};
 	}
 
 	@Override
 	public PotentialPanel clone() {
-		FermiDirac fd = new FermiDirac();
+		final FermiDirac fd = new FermiDirac();
 		fd.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		fd.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
 		return super.clone(fd);
@@ -64,12 +64,12 @@ public class FermiDirac extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "fermi-dirac " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14(); 
+		lines += pot.twoAtomBondingOptions.getScale14();
 		if (cboEnerGra.getSelectedIndex() == 1)
 			lines += "grad";
 		else

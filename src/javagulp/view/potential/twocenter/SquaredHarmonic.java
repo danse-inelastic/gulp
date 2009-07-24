@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -13,27 +14,25 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class SquaredHarmonic extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 8449636138551488882L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JTextField txtC = new JTextField("1.0");
-	
-	private JLabel lblC = new JLabel("C");
-	private JLabel lblEq = new JLabel(g.html("E = 1/4 k<sub>2</sub>(r<sup>2</sup>  - r<sub>0</sub><sup>2</sup>)"
+	private final JTextField txtC = new JTextField("1.0");
+
+	private final JLabel lblC = new JLabel("C");
+	private final JLabel lblEq = new JLabel(g.html("E = 1/4 k<sub>2</sub>(r<sup>2</sup>  - r<sub>0</sub><sup>2</sup>)"
 			+ "<sup>2</sup> - C q<sub>i</sub>q<sub>j</sub>/r"));
-	private JLabel lblUnits = new JLabel("units");
+	private final JLabel lblUnits = new JLabel("units");
 
-	private PPP K2 = new PPP(g.html("k<sub>2</sub> (eV/&Aring;<sup>4</sup>)"));
-	private PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	private JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
-	
+	private final PPP K2 = new PPP(g.html("k<sub>2</sub> (eV/&Aring;<sup>4</sup>)"));
+	private final PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
+
 	public SquaredHarmonic() {
 		super(2);
 		setTitle("squared harmonic");
@@ -60,7 +59,7 @@ public class SquaredHarmonic extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 55, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{K2, r0};
 	}
 
@@ -68,14 +67,14 @@ public class SquaredHarmonic extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		String lines = "squaredharmonic " + pot.twoAtomBondingOptions.getInterIntraBond(); 
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		String lines = "squaredharmonic " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		if (cboEnerGra.getSelectedIndex() == 1)
 			lines += "grad ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos() 
-				+ Back.concatFields(params);
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		+ Back.concatFields(params);
 		if (!txtC.getText().equals("") && !txtC.getText().equals("1.0")) {
 			Double.parseDouble(txtC.getText());
 			lines += " " + txtC.getText();
@@ -85,10 +84,10 @@ public class SquaredHarmonic extends PotentialPanel implements Serializable {
 		}
 		return lines + Back.writeFits(params) + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		SquaredHarmonic sq = new SquaredHarmonic();
+		final SquaredHarmonic sq = new SquaredHarmonic();
 		sq.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		sq.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
 		return super.clone(sq);

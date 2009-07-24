@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -19,32 +20,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Torsion extends PotentialPanel implements Serializable {
-	
+
 	private class Regular extends JPanel implements Serializable {
 		private static final long serialVersionUID = 2667154652151595423L;
 
-		private PPP k = new PPP("k (eV)");
-		
+		private final PPP k = new PPP("k (eV)");
+
 		G g = new G();
-		
-		private JLabel lblISign = new JLabel("<html>isign</html>");
-		private JLabel lblN = new JLabel("n");
-		private JLabel lblPhi0 = new JLabel(g.html(g.phi + "<sub>0</sub> (deg)"));
-		private JLabel lblUnits = new JLabel("units");
 
-		private JComboBox cboISign = new JComboBox(new String[] { "+", "-" });
-		private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+		private final JLabel lblISign = new JLabel("<html>isign</html>");
+		private final JLabel lblN = new JLabel("n");
+		private final JLabel lblPhi0 = new JLabel(g.html(g.phi + "<sub>0</sub> (deg)"));
+		private final JLabel lblUnits = new JLabel("units");
 
-		private JTextField txtN = new JTextField();
-		private JTextField txtPhi0 = new JTextField("0.0");
-		
+		private final JComboBox cboISign = new JComboBox(new String[] { "+", "-" });
+		private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+		private final JTextField txtN = new JTextField();
+		private final JTextField txtPhi0 = new JTextField("0.0");
+
 		private Regular() {
 			super();
 			setLayout(null);
-			
+
 			k.setBounds(0, 0, 225, 25);
 			add(k);
 			lblN.setBounds(0, 25, 80, 20);
@@ -56,23 +55,23 @@ public class Torsion extends PotentialPanel implements Serializable {
 			txtPhi0.setBackground(Back.grey);
 			txtPhi0.setBounds(80, 50, 100, 20);
 			add(txtPhi0);
-//			lblISign.setBounds(0, 75, 80, 20);
-//			add(lblISign);
-//			lblUnits.setBounds(0, 100, 40, 21);
-//			add(lblUnits);
-//			cboISign.setBounds(80, 75, 100, 20);
-//			add(cboISign);
-//			cboUnits.setBounds(80, 100, 70, 21);
-//			add(cboUnits);
+			//			lblISign.setBounds(0, 75, 80, 20);
+			//			add(lblISign);
+			//			lblUnits.setBounds(0, 100, 40, 21);
+			//			add(lblUnits);
+			//			cboISign.setBounds(80, 75, 100, 20);
+			//			add(cboISign);
+			//			cboUnits.setBounds(80, 100, 70, 21);
+			//			add(cboUnits);
 		}
-		
+
 		private String writeRegular() throws IncompleteOptionException {
 			if (txtN.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for N");
 			Double.parseDouble(txtN.getText());
-			PPP[] params = {k};
+			final PPP[] params = {k};
 			Back.checkAndParseD(params);
-			
+
 			String lines = Back.concatFields(params) + " ";
 			if (cboISign.getSelectedItem().equals("-"))
 				lines += "- ";
@@ -92,28 +91,28 @@ public class Torsion extends PotentialPanel implements Serializable {
 			return lines;
 		}
 	}
-	
+
 	private class Esff extends JPanel implements Serializable {
 		private static final long serialVersionUID = 5348506211167608829L;
 
 		G g = new G();
-		
-		private PPP k1 = new PPP(g.html("k<sub>1</sub> (eV)"));
-		private PPP k2 = new PPP(g.html("k<sub>2</sub> (eV)"));
-		
-		private JLabel lblISign = new JLabel("<html>isign</html>");
-		private JLabel lblN = new JLabel("n");
-		private JLabel lblUnits = new JLabel("units");
 
-		private JTextField txtN = new JTextField();
-		
-		private JComboBox cboISign = new JComboBox(new String[] { "+", "-" });
-		private JComboBox cboUnits = new JComboBox(new String[] {"kcal", "kjmol"});
+		private final PPP k1 = new PPP(g.html("k<sub>1</sub> (eV)"));
+		private final PPP k2 = new PPP(g.html("k<sub>2</sub> (eV)"));
+
+		private final JLabel lblISign = new JLabel("<html>isign</html>");
+		private final JLabel lblN = new JLabel("n");
+		private final JLabel lblUnits = new JLabel("units");
+
+		private final JTextField txtN = new JTextField();
+
+		private final JComboBox cboISign = new JComboBox(new String[] { "+", "-" });
+		private final JComboBox cboUnits = new JComboBox(new String[] {"kcal", "kjmol"});
 
 		private Esff() {
 			super();
 			setLayout(null);
-			
+
 			k1.setBounds(0, 0, 225, 25);
 			add(k1);
 			k2.setBounds(0, 25, 225, 25);
@@ -131,14 +130,14 @@ public class Torsion extends PotentialPanel implements Serializable {
 			cboUnits.setBounds(80, 100, 70, 21);
 			add(cboUnits);
 		}
-		
+
 		private String writeEsff() throws IncompleteOptionException {
 			if (txtN.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for N");
 			Double.parseDouble(txtN.getText());
-			PPP[] params = {k1, k2};
+			final PPP[] params = {k1, k2};
 			Back.checkAndParseD(params);
-			
+
 			String lines = Back.concatFields(params) + " ";
 			if (cboISign.getSelectedItem().equals("-"))
 				lines += "- ";
@@ -154,29 +153,29 @@ public class Torsion extends PotentialPanel implements Serializable {
 			return lines;
 		}
 	}
-	
+
 	private static final long serialVersionUID = 3434453072946291408L;
 
-	private JComboBox cbormax41 = new JComboBox(new String[] { "", "infinity" });
-	private G g = new G();
+	private final JComboBox cbormax41 = new JComboBox(new String[] { "", "infinity" });
+	private final G g = new G();
 
-	private String strreg = g.html("E = k (1 + isign cos(n " + g.phi + " - " + g.phi + "<sub>0</sub>))");
-	private String stresff = g.html("E = k<sub>1</sub> sin<sup>2</sup>" + g.theta
+	private final String strreg = g.html("E = k (1 + isign cos(n " + g.phi + " - " + g.phi + "<sub>0</sub>))");
+	private final String stresff = g.html("E = k<sub>1</sub> sin<sup>2</sup>" + g.theta
 			+ "<sub>123</sub> sin<sup>2</sup>" + g.theta
 			+ "<sub>234</sub> + isign k<sub>2</sub> sin<sup>n</sup>"
 			+ g.theta + "<sub>123</sub> sin<sup>n</sup>" + g.theta
 			+ "<sub>234</sub> cos(n " + g.phi + ")");
-	
-	private JLabel lblFourBodyEq = new JLabel(strreg);
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
-	private JLabel lblrmax41 = new JLabel("<html>r<sub>41</sub>max</html>");
 
-	private Regular r = new Regular();
-	private Esff esff = new Esff();
-	
-	private JCheckBox chkEsff = new JCheckBox("esff");
-	private JCheckBox chkDreiding = new JCheckBox("dreiding");
-	
+	private final JLabel lblFourBodyEq = new JLabel(strreg);
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
+	private final JLabel lblrmax41 = new JLabel("<html>r<sub>41</sub>max</html>");
+
+	private final Regular r = new Regular();
+	private final Esff esff = new Esff();
+
+	private final JCheckBox chkEsff = new JCheckBox("esff");
+	private final JCheckBox chkDreiding = new JCheckBox("dreiding");
+
 	private class SerialListener implements ActionListener, Serializable {
 		private static final long serialVersionUID = 932410562178213543L;
 
@@ -192,8 +191,8 @@ public class Torsion extends PotentialPanel implements Serializable {
 			}
 		}
 	}
-	private SerialListener keyEsff = new SerialListener();
-	
+	private final SerialListener keyEsff = new SerialListener();
+
 	public Torsion() {
 		super(4);
 		setTitle("torsion");
@@ -227,7 +226,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "";
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			if (cbormax41.getSelectedItem() == null
 					|| cbormax41.getSelectedItem().equals(""))
@@ -236,7 +235,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 			if (cbormax41.getSelectedIndex() != 1)
 				Double.parseDouble((String) cbormax41.getSelectedItem());
 		}
-		
+
 		String esffDreiding = "";
 		if (chkEsff.isSelected())
 			esffDreiding += "esff ";
@@ -263,25 +262,25 @@ public class Torsion extends PotentialPanel implements Serializable {
 		radii.setRadiiEnabled(flag);
 		cbormax41.setEnabled(flag);
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Torsion t = new Torsion();
-//		t.cbormax41.setSelectedIndex(this.cbormax41.getSelectedIndex());
-//		t.chkDreiding.setSelected(this.chkDreiding.isSelected());
-//		t.chkEsff.setSelected(this.chkEsff.isSelected());
-//		
-//		t.esff.txtN.setText(this.esff.txtN.getText());
-//		t.esff.cboISign.setSelectedIndex(this.esff.cboISign.getSelectedIndex());
-//		t.esff.cboUnits.setSelectedIndex(this.esff.cboUnits.getSelectedIndex());
-//		
-//		t.r.txtPhi0.setText(this.r.txtPhi0.getText());
-//		t.r.txtN.setText(this.r.txtN.getText());
-//		t.r.cboISign.setSelectedIndex(this.r.cboISign.getSelectedIndex());
-//		t.r.cboUnits.setSelectedIndex(this.r.cboUnits.getSelectedIndex());
+		final Torsion t = new Torsion();
+		//		t.cbormax41.setSelectedIndex(this.cbormax41.getSelectedIndex());
+		//		t.chkDreiding.setSelected(this.chkDreiding.isSelected());
+		//		t.chkEsff.setSelected(this.chkEsff.isSelected());
+		//
+		//		t.esff.txtN.setText(this.esff.txtN.getText());
+		//		t.esff.cboISign.setSelectedIndex(this.esff.cboISign.getSelectedIndex());
+		//		t.esff.cboUnits.setSelectedIndex(this.esff.cboUnits.getSelectedIndex());
+		//
+		//		t.r.txtPhi0.setText(this.r.txtPhi0.getText());
+		//		t.r.txtN.setText(this.r.txtN.getText());
+		//		t.r.cboISign.setSelectedIndex(this.r.cboISign.getSelectedIndex());
+		//		t.r.cboUnits.setSelectedIndex(this.r.cboUnits.getSelectedIndex());
 		return super.clone(t);
 	}
-	
+
 	@Override
 	public int currentParameterCount() {
 		PPP[] fields = null;
@@ -289,9 +288,9 @@ public class Torsion extends PotentialPanel implements Serializable {
 			fields = new PPP[] {esff.k1, esff.k2};
 		else
 			fields = new PPP[] {r.k};
-		
+
 		int count = 0;
-		for (PPP p: fields)
+		for (final PPP p: fields)
 			if (p.chk.isSelected())
 				count++;
 		return count;
@@ -303,7 +302,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 			params = new PPP[] {esff.k1, esff.k2};
 		else
 			params = new PPP[] {r.k};
-		
+
 		super.setParameter(i, value);
 	}
 }

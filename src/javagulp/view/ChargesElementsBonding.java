@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.GenericTableModel;
+import javagulp.model.SerialListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,54 +18,49 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-//import utility.function.Atom;
-//import utility.function.Value;
-import javagulp.model.SerialListener;
-//import utility.parsers.WorkspaceParser;
-
 public class ChargesElementsBonding extends JPanel implements Serializable {
 
-	private JCheckBox chkPrintBondLengthAnalysis;
+	//private final JCheckBox chkPrintBondLengthAnalysis;
 	private static final long serialVersionUID = -8200954639125886210L;
 
 	private class BondLengthAnalysis extends JPanel {
 
 		private static final long serialVersionUID = 3242056442664144666L;
 
-		private JComboBox cboMaxForceBonds = new JComboBox();
-		private JComboBox cboMinExcludeBond = new JComboBox();
-		private JComboBox cboMinForceBond = new JComboBox();
-		private JComboBox cboMaxExcludeBond = new JComboBox();
+		private final JComboBox cboMaxForceBonds = new JComboBox();
+		private final JComboBox cboMinExcludeBond = new JComboBox();
+		private final JComboBox cboMinForceBond = new JComboBox();
+		private final JComboBox cboMaxExcludeBond = new JComboBox();
 
-		private JCheckBox chkPrintBondLength = new JCheckBox("print bond length analysis at beginning and end of run");
-		private JCheckBox chkPrintAverageBondLengths = new JCheckBox("print average bond lengths between pairs of species");
-		private JCheckBox chkExcludeBondsBetween = new JCheckBox("exclude bonds between");
-		private JCheckBox chkForceBondFormation = new JCheckBox("force bond formation between");
+		private final JCheckBox chkPrintBondLength = new JCheckBox("print bond length analysis at beginning and end of run");
+		private final JCheckBox chkPrintAverageBondLengths = new JCheckBox("print average bond lengths between pairs of species");
+		private final JCheckBox chkExcludeBondsBetween = new JCheckBox("exclude bonds between");
+		private final JCheckBox chkForceBondFormation = new JCheckBox("force bond formation between");
 
-		private JLabel lblAnd = new JLabel("and");
-		private JLabel lblAnd_2 = new JLabel("and");
+		private final JLabel lblAnd = new JLabel("and");
+		private final JLabel lblAnd_2 = new JLabel("and");
 
-		private JButton btnAddExcludeBonds = new JButton("add");
-		private JButton btnAddForceBonds = new JButton("add");
-		
-		private KeywordListener keyPrintBondLength = new KeywordListener(chkPrintBondLength, "bond");
-		private KeywordListener keyPrintAverageBondLengths = new KeywordListener(chkPrintAverageBondLengths, "average");
-		private KeywordListener keyExcludeBondsBetween = new KeywordListener(chkExcludeBondsBetween, "nobond");
-		private KeywordListener keyForceBondFormation = new KeywordListener(chkForceBondFormation, "connect");
+		private final JButton btnAddExcludeBonds = new JButton("add");
+		private final JButton btnAddForceBonds = new JButton("add");
 
-		private SerialListener keyAddExcludeBonds = new SerialListener() {
+		private final KeywordListener keyPrintBondLength = new KeywordListener(chkPrintBondLength, "bond");
+		private final KeywordListener keyPrintAverageBondLengths = new KeywordListener(chkPrintAverageBondLengths, "average");
+		private final KeywordListener keyExcludeBondsBetween = new KeywordListener(chkExcludeBondsBetween, "nobond");
+		private final KeywordListener keyForceBondFormation = new KeywordListener(chkForceBondFormation, "connect");
+
+		private final SerialListener keyAddExcludeBonds = new SerialListener() {
 			private static final long serialVersionUID = 5615035249529681764L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] entry = new String[] {
+				final String[] entry = new String[] {
 						(String) cboMinExcludeBond.getSelectedItem(),
 						(String) cboMaxExcludeBond.getSelectedItem() };
 				nobond.add(entry);
 			}
 		};
-		
-		private TreeSet<String[]> nobond = new TreeSet<String[]>();
+
+		private final TreeSet<String[]> nobond = new TreeSet<String[]>();
 
 
 		private BondLengthAnalysis() {
@@ -107,67 +103,67 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 
 		private String writeNoBond() {
 			String lines = "";
-			for (String[] pair: nobond)
+			for (final String[] pair: nobond)
 				lines += "nobond " + pair[0] + " " + pair[1] + Back.newLine;
 			return lines;
 		}
 	}
 
-	private JScrollPane speciesScrollpane = new JScrollPane();
-	private JTable speciesTable = new JTable();
+	private final JScrollPane speciesScrollpane = new JScrollPane();
+	private final JTable speciesTable = new JTable();
 	public GenericTableModel speciesTableModel = new GenericTableModel(new String[] { "atom types", "charges" }, 0);
-	private GenericTableModel elementsTableModel = new GenericTableModel();
-	private JTextField txtBondLengthTolerance = new JTextField();
+	private final GenericTableModel elementsTableModel = new GenericTableModel();
+	private final JTextField txtBondLengthTolerance = new JTextField();
 
-	private BondLengthAnalysis pnlBondLengthAnalysis = new BondLengthAnalysis();
+	private final BondLengthAnalysis pnlBondLengthAnalysis = new BondLengthAnalysis();
 
-	private JCheckBox chkPrintDistanceAnalysis = new JCheckBox("print distance analysis at the beginning and end of a run");
-	private JCheckBox chkApplyUniformNeutralizing = new JCheckBox("apply uniform neutralizing background charge");
+	private final JCheckBox chkPrintDistanceAnalysis = new JCheckBox("print distance analysis at the beginning and end of a run");
+	private final JCheckBox chkApplyUniformNeutralizing = new JCheckBox("apply uniform neutralizing background charge");
 
-	private KeywordListener keyPrintDistanceAnalysis = new KeywordListener(chkPrintDistanceAnalysis, "distance");
-	private KeywordListener keyPrintBondLengthAnalysis = new KeywordListener(chkPrintBondLengthAnalysis, "bond");
-	private KeywordListener keyApplyUniformNeutralizing = new KeywordListener(chkApplyUniformNeutralizing, "qok");
+	private final KeywordListener keyPrintDistanceAnalysis = new KeywordListener(chkPrintDistanceAnalysis, "distance");
+	//private final KeywordListener keyPrintBondLengthAnalysis = new KeywordListener(chkPrintBondLengthAnalysis, "bond");
+	private final KeywordListener keyApplyUniformNeutralizing = new KeywordListener(chkApplyUniformNeutralizing, "qok");
 
-	private JButton btnImportCharges = new JButton("Import Charges");
-	
-//	private SerialListener keyImportCharges = new SerialListener() {
-//		private static final long serialVersionUID = -2724023630471511865L;
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			JFileChooser fileDialog = new JFileChooser();
-//			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
-//			
-//			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-//				WorkspaceParser wp = new WorkspaceParser(fileDialog.getSelectedFile().getParentFile());
-//				ArrayList<Value> netCharges = wp.parseNetCharges();
-//				ArrayList<Atom> atoms = wp.readPositions().get(0);
-//				
-//				//average charges over all timesteps and atom types
-//				for (int i=0; i < speciesTableModel.getRowCount(); i++) {
-//					double charge = 0, numAtoms = 0;
-//					String element = (String) speciesTableModel.getValueAt(i, 0);
-//					for (int j=0; j < netCharges.size(); j++) {
-//						Value v = netCharges.get(j);
-//						for (int k=0; k < v.y.length; k++) {
-//							if (atoms.get(k).symbol.equals(element)) {
-//								charge += v.y[k];
-//								numAtoms++;
-//							}
-//						}
-//					}
-//					speciesTableModel.setValueAt((charge/numAtoms)+"", i, 1);
-//				}
-//			}
-//		}
-//	};
-	
+	private final JButton btnImportCharges = new JButton("Import Charges");
+
+	//	private SerialListener keyImportCharges = new SerialListener() {
+	//		private static final long serialVersionUID = -2724023630471511865L;
+	//		@Override
+	//		public void actionPerformed(ActionEvent e) {
+	//			JFileChooser fileDialog = new JFileChooser();
+	//			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	//			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+	//
+	//			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+	//				WorkspaceParser wp = new WorkspaceParser(fileDialog.getSelectedFile().getParentFile());
+	//				ArrayList<Value> netCharges = wp.parseNetCharges();
+	//				ArrayList<Atom> atoms = wp.readPositions().get(0);
+	//
+	//				//average charges over all timesteps and atom types
+	//				for (int i=0; i < speciesTableModel.getRowCount(); i++) {
+	//					double charge = 0, numAtoms = 0;
+	//					String element = (String) speciesTableModel.getValueAt(i, 0);
+	//					for (int j=0; j < netCharges.size(); j++) {
+	//						Value v = netCharges.get(j);
+	//						for (int k=0; k < v.y.length; k++) {
+	//							if (atoms.get(k).symbol.equals(element)) {
+	//								charge += v.y[k];
+	//								numAtoms++;
+	//							}
+	//						}
+	//					}
+	//					speciesTableModel.setValueAt((charge/numAtoms)+"", i, 1);
+	//				}
+	//			}
+	//		}
+	//	};
+
 	public ChargesElementsBonding() {
 		super();
 		setLayout(null);
 		this.setPreferredSize(new java.awt.Dimension(1008, 392));
 
-		JLabel lblChangeSymbolMass = new JLabel("change elemental information:");
+		final JLabel lblChangeSymbolMass = new JLabel("change elemental information:");
 		lblChangeSymbolMass.setBounds(632, 8, 366, 20);
 		add(lblChangeSymbolMass);
 		final JScrollPane scrollPane = new JScrollPane();
@@ -178,7 +174,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		table.setCellSelectionEnabled(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scrollPane.setViewportView(table);
-		JLabel lblAtomicCharges = new JLabel("set atomic charges:");
+		final JLabel lblAtomicCharges = new JLabel("set atomic charges:");
 		lblAtomicCharges.setBounds(457, 8, 169, 20);
 		add(lblAtomicCharges);
 		lblAtomicCharges.setToolTipText(
@@ -208,29 +204,29 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		add(pnlbondLengthTolerance);
 		txtBondLengthTolerance.setBounds(362, 23, 75, 18);
 		pnlbondLengthTolerance.add(txtBondLengthTolerance);
-		JLabel lblBondLengthTolerance = new JLabel("scale factor multiplying sum of covalent radii");
+		final JLabel lblBondLengthTolerance = new JLabel("scale factor multiplying sum of covalent radii");
 		lblBondLengthTolerance.setBounds(10, 25, 346, 16);
 		pnlbondLengthTolerance.add(lblBondLengthTolerance);
 		lblBondLengthTolerance.setToolTipText("Bond length tolerance when deciding if two atoms are bonded. Number multiplies the sum of the covalent radii.");
 
-		chkPrintBondLengthAnalysis = new JCheckBox();
-		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);
-		chkPrintBondLengthAnalysis.setText("print bond length analysis at the beginning and end of a run");
-		chkPrintBondLengthAnalysis.setBounds(5, 99, 446, 25);
-		add(chkPrintBondLengthAnalysis);
+//		chkPrintBondLengthAnalysis = new JCheckBox();
+//		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);
+//		chkPrintBondLengthAnalysis.setText("print bond length analysis at the beginning and end of a run");
+//		chkPrintBondLengthAnalysis.setBounds(5, 99, 446, 25);
+//		add(chkPrintBondLengthAnalysis);
 		pnlBondLengthAnalysis.setBounds(5, 135, 621, 107);
 		// TODO fix this and reinstate
 		// add(pnlBondLengthAnalysis);
 	}
 
 	public String writeChargesElementsBonding()
-			throws IncompleteOptionException {
+	throws IncompleteOptionException {
 		return writeSpecies() + writeElement()
-				+ pnlBondLengthAnalysis.writeNoBond() + writeRtol();
+		+ pnlBondLengthAnalysis.writeNoBond() + writeRtol();
 	}
 
 	private String writeSpecies() {
-		String s = speciesTableModel.writeTable("");
+		final String s = speciesTableModel.writeTable("");
 		if (!s.equals("")) {
 			return "species " + s.split(Back.newLine).length + Back.newLine + s;
 		} else
@@ -241,7 +237,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		String lines = "";
 		for (int i = 0; i < elementsTableModel.getRowCount(); i++) {
 			Object value;
-			String symbol = (String) elementsTableModel.getValueAt(i, 0);
+			final String symbol = (String) elementsTableModel.getValueAt(i, 0);
 			if (!symbol.equals(data[i][0]))
 				lines += "symbol " + (i + 1) + " " + symbol + Back.newLine;
 			value = elementsTableModel.getValueAt(i, 1);

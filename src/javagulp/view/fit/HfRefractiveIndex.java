@@ -12,13 +12,13 @@ public class HfRefractiveIndex extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -4747054786357938059L;
 
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtiValue = new JTextField();
-	private JTextField txtWeight = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtiValue = new JTextField();
+	private final JTextField txtWeight = new JTextField();
 
-	private JLabel lblConstant = new JLabel("high frequency refractive index");
-	private JLabel lbli = new JLabel("i");
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblConstant = new JLabel("high frequency refractive index");
+	private final JLabel lbli = new JLabel("i");
+	private final JLabel lblWeight = new JLabel("weight");
 
 	//public String gulpFileLines;
 
@@ -49,8 +49,8 @@ public class HfRefractiveIndex extends AbstractFit implements Serializable {
 	// TODO check format
 	@Override
 	public String writeFitPanel() throws IncompleteOptionException {
-		JTextField[] fields = { txtiValue, txtConstant };
-		String[] descriptions = { "i", "the refractive index" };
+		final JTextField[] fields = { txtiValue, txtConstant };
+		final String[] descriptions = { "i", "the refractive index" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		gulpFileLines = Back.concatFields(fields);
 		if (!txtWeight.getText().equals(""))
@@ -58,5 +58,5 @@ public class HfRefractiveIndex extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

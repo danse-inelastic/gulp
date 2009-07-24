@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -13,32 +14,30 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class GeneralPotential extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 501308416265295195L;
 
-	private JComboBox cboSetTo0 = new JComboBox(new String[] { " ", "energy",
-			"energy gradient" });
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final JComboBox cboSetTo0 = new JComboBox(new String[] { " ", "energy",
+	"energy gradient" });
 
-	private G g = new G();
-	
-	private PPP A = new PPP("<html>A (eV/&Aring;<sup>m</sup>)</html>");
-	private PPP Rho = new PPP("<html>&#961; (&Aring;)</html>");
-	private PPP C = new PPP("<html>C (eV/&Aring;<sup>n</sup>)</html>");
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
-	private JTextField txtM = new JTextField("0");
-	private JTextField txtN = new JTextField("6");
+	private final G g = new G();
 
-	private JLabel lblM = new JLabel("m");
-	private JLabel lblN = new JLabel("n");
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblSetTo0 = new JLabel("Set to 0 at cutoff:");
-	private JLabel lblGeneralPotentialEq = new JLabel("<html>E = A exp(-r/&#961;) r<sup>-m</sup> - C r<sup>-n</sup></html>");
+	private final PPP A = new PPP("<html>A (eV/&Aring;<sup>m</sup>)</html>");
+	private final PPP Rho = new PPP("<html>&#961; (&Aring;)</html>");
+	private final PPP C = new PPP("<html>C (eV/&Aring;<sup>n</sup>)</html>");
+
+	private final JTextField txtM = new JTextField("0");
+	private final JTextField txtN = new JTextField("6");
+
+	private final JLabel lblM = new JLabel("m");
+	private final JLabel lblN = new JLabel("n");
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblSetTo0 = new JLabel("Set to 0 at cutoff:");
+	private final JLabel lblGeneralPotentialEq = new JLabel("<html>E = A exp(-r/&#961;) r<sup>-m</sup> - C r<sup>-n</sup></html>");
 
 	public GeneralPotential() {
 		super(2);
@@ -75,7 +74,7 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 55, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{A, Rho, C};
 		Rho.min = 0;
 		Rho.max = 1;
@@ -84,7 +83,7 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		
+
 		String lines = "general ";
 		if (!txtM.getText().equals("") && !txtM.getText().equals("0")) {
 			Double.parseDouble(txtM.getText());
@@ -100,10 +99,10 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 			lines += "grad ";
 		//TODO The gulp documentation has abbreviated bonding options for this
 		// potential, but it is surely a typo. test to make sure.
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
-			lines += cboUnits.getSelectedItem() + " "; 
+			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine;
 		lines += pot.getAtomCombos() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
@@ -111,10 +110,10 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 		}
 		return lines + Back.writeFits(params) + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		GeneralPotential g = new GeneralPotential();
+		final GeneralPotential g = new GeneralPotential();
 		g.txtM.setText(this.txtM.getText());
 		g.txtN.setText(this.txtN.getText());
 		g.cboSetTo0.setSelectedIndex(this.cboSetTo0.getSelectedIndex());

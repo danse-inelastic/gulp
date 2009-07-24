@@ -18,7 +18,7 @@ public class IconHeaderRenderer extends DefaultTableCellRenderer implements Seri
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		// Inherit the colors and font from the header component
 		if (table != null) {
-			JTableHeader header = table.getTableHeader();
+			final JTableHeader header = table.getTableHeader();
 			if (header != null) {
 				setForeground(header.getForeground());
 				setBackground(header.getBackground());

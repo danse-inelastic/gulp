@@ -14,7 +14,9 @@ import javagulp.model.ContentsTable;
 import javagulp.model.CoordinateTable;
 import javagulp.model.CoordinatesTableModel;
 import javagulp.model.Fractional3dTable;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -25,106 +27,103 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import javagulp.model.SerialListener;
-//import cseo.jodaf.client.FilePackage;
-
 public class AtomicCoordinates extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7252161274170437579L;
 
 
-	
-	private String coordinateTypes[] =
-		{"3d fractional", "cartesian", "contents", "2d fractional", "1d fractional"};
-	private JComboBox cboCoordinateType = new JComboBox(coordinateTypes);
 
-	private Fractional3dTable fractional3dTable = new Fractional3dTable();
-	private CartesianTable cartesianTable = new CartesianTable();
-	private ContentsTable contentsTable = new ContentsTable();
+	private final String coordinateTypes[] =
+	{"3d fractional", "cartesian", "contents", "2d fractional", "1d fractional"};
+	private final JComboBox cboCoordinateType = new JComboBox(coordinateTypes);
 
-	private JTextField txtNumberOfAtoms = new JTextField("0");
+	private final Fractional3dTable fractional3dTable = new Fractional3dTable();
+	private final CartesianTable cartesianTable = new CartesianTable();
+	private final ContentsTable contentsTable = new ContentsTable();
 
-	private JLabel lblNumberOfAtoms = new JLabel("number of atoms");
-	private JLabel lblCoordinateType = new JLabel("coordinate type");
+	private final JTextField txtNumberOfAtoms = new JTextField("0");
 
-	private JButton btnSet = new JButton("set");
-	private JButton btnImportCoordinates = new JButton("import coordinates");
-	private JButton btnSaveCoordinates = new JButton("save coordinates");
+	private final JLabel lblNumberOfAtoms = new JLabel("number of atoms");
+	private final JLabel lblCoordinateType = new JLabel("coordinate type");
 
-	private JScrollPane scrollPane = new JScrollPane();
+	private final JButton btnSet = new JButton("set");
+	private final JButton btnImportCoordinates = new JButton("import coordinates");
+	private final JButton btnSaveCoordinates = new JButton("save coordinates");
+
+	private final JScrollPane scrollPane = new JScrollPane();
 
 	public JTextField txtName = new JTextField();
-	private JLabel lblName = new JLabel("structure name (if high-throughput)");
-	private JButton btnSetValue = new JButton("Set selected cells to current value");
-	private JButton btnSelectValue = new JButton("Select cells with current value");
-	private JButton btnInvertSelection = new JButton("Invert Selection");
-	private JButton btnClearSelection = new JButton("Clear Selection");
-	private JTextField txtValue = new JTextField();
-	private JLabel lblValue = new JLabel("quick fill");
-	private JPanel pnlMassSelect = new JPanel();
-	
-	private Translation pnlTranslation = new Translation();
-	
-	private SerialListener keySet = new SerialListener() {
+	private final JLabel lblName = new JLabel("structure name (if high-throughput)");
+	private final JButton btnSetValue = new JButton("Set selected cells to current value");
+	private final JButton btnSelectValue = new JButton("Select cells with current value");
+	private final JButton btnInvertSelection = new JButton("Invert Selection");
+	private final JButton btnClearSelection = new JButton("Clear Selection");
+	private final JTextField txtValue = new JTextField();
+	private final JLabel lblValue = new JLabel("quick fill");
+	private final JPanel pnlMassSelect = new JPanel();
+
+	private final Translation pnlTranslation = new Translation();
+
+	private final SerialListener keySet = new SerialListener() {
 		private static final long serialVersionUID = 629883991482096848L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				int rows = Integer.parseInt(txtNumberOfAtoms.getText());
+				final int rows = Integer.parseInt(txtNumberOfAtoms.getText());
 				if (rows >= 0) {
 					getTableModel().updateRows(rows);
 				}
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(null,
-					"Please enter a positive integer for the number of atoms.");
+						"Please enter a positive integer for the number of atoms.");
 			}
 		}
 	};
-	private SerialListener keyCoordinateType = new SerialListener() {
+	private final SerialListener keyCoordinateType = new SerialListener() {
 		private static final long serialVersionUID = 4015131483745640916L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			pnlTranslation.lblFractionalCoordinates.setText("Use fractional coordinates.");
-			CoordinateTable t = getTable();
+			final CoordinateTable t = getTable();
 			scrollPane.setViewportView(t);
 			if (t == cartesianTable)
 				pnlTranslation.lblFractionalCoordinates.setText("Use cartesian coordinates.");
 			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
 		}
 	};
-//	private SerialListener keyImportCoordinates = new SerialListener() {
-//		private static final long serialVersionUID = -8627501403384935426L;
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//				JFileChooser fileDialog = new JFileChooser();
-//				fileDialog.setMultiSelectionEnabled(true);
-//				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
-//				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-//					File[] files = fileDialog.getSelectedFiles();
-//					Back.getPanel().getStructures().importStructures(files);
-//				}
-//		}
-//	};
-	private SerialListener keySaveCoordinates = new SerialListener() {
+	//	private SerialListener keyImportCoordinates = new SerialListener() {
+	//		private static final long serialVersionUID = -8627501403384935426L;
+	//		@Override
+	//		public void actionPerformed(ActionEvent e) {
+	//				JFileChooser fileDialog = new JFileChooser();
+	//				fileDialog.setMultiSelectionEnabled(true);
+	//				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+	//				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+	//					File[] files = fileDialog.getSelectedFiles();
+	//					Back.getPanel().getStructures().importStructures(files);
+	//				}
+	//		}
+	//	};
+	private final SerialListener keySaveCoordinates = new SerialListener() {
 		private static final long serialVersionUID = -2238532372348902025L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-				JFileChooser fileDialog = new JFileChooser();
-				fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
-				if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
-					String data = getTable().getData();
-					try {
-						BufferedWriter out = new BufferedWriter(new FileWriter(fileDialog.getSelectedFile()));
-						out.write(data);
-						out.close();
-					} catch (IOException ioe) {
-						ioe.printStackTrace();
-					}
+			final JFileChooser fileDialog = new JFileChooser();
+			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
+			if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
+				final String data = getTable().getData();
+				try {
+					final BufferedWriter out = new BufferedWriter(new FileWriter(fileDialog.getSelectedFile()));
+					out.write(data);
+					out.close();
+				} catch (final IOException ioe) {
+					ioe.printStackTrace();
 				}
+			}
 		}
 	};
-	
-	private SerialListener keySelect = new SerialListener() {
+
+	private final SerialListener keySelect = new SerialListener() {
 		private static final long serialVersionUID = -9031521764407465530L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -136,7 +135,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			}
 		}
 	};
-	private SerialListener keySelectRows = new SerialListener() {
+	private final SerialListener keySelectRows = new SerialListener() {
 		private static final long serialVersionUID = 7531889272969288457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -150,14 +149,14 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			getTable().repaint();
 		}
 	};
-	private SerialListener keyInvertSelection = new SerialListener() {
+	private final SerialListener keyInvertSelection = new SerialListener() {
 		private static final long serialVersionUID = 7531889272969288457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			getTable().invertSelection();
 		}
 	};
-	private SerialListener keyClearSelection = new SerialListener() {
+	private final SerialListener keyClearSelection = new SerialListener() {
 		private static final long serialVersionUID = 7531889272969288457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -199,7 +198,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		pnlTranslation.setBounds(0, 362, 920, 82);
 		// removed for paper
 		add(pnlTranslation);
-		
+
 		//add(pnlMassSelect);
 		pnlMassSelect.setLayout(null);
 		pnlMassSelect.setBounds(10, 452, 970, 89);
@@ -230,9 +229,9 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	public CoordinatesTableModel getTableModel() {
 		return getTable().getTableModel();
 	}
-	
+
 	public CoordinateTable getTable() {
-		String s = (String) cboCoordinateType.getSelectedItem();
+		final String s = (String) cboCoordinateType.getSelectedItem();
 		if (s.equals(coordinateTypes[0])) {
 			return fractional3dTable;
 		} else if (s.equals(coordinateTypes[1])) {
@@ -247,7 +246,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			return fractional3dTable;
 		}
 	}
-	
+
 	public void setTable(String s) {
 		cboCoordinateType.setSelectedItem(s);
 	}
@@ -259,7 +258,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	public String writeTranslate() throws IncompleteOptionException {
 		return pnlTranslation.writeTranslate();
 	}
-	
+
 	public void setValue(int row, int column, String value) {
 		txtValue.setText(value);
 	}

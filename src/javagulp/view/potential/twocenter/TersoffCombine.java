@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
@@ -11,39 +12,37 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class TersoffCombine extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 7066205879433087197L;
 
-	private TersoffBondOrder pnlBOa = new TersoffBondOrder("BOa");
-	private TersoffBondOrder pnlBOr = new TersoffBondOrder("BOr");
+	private final TersoffBondOrder pnlBOa = new TersoffBondOrder("BOa");
+	private final TersoffBondOrder pnlBOr = new TersoffBondOrder("BOr");
 
-	private JCheckBox chkChia = new JCheckBox("fit");
-	private JCheckBox chkChir = new JCheckBox("fit");
+	private final JCheckBox chkChia = new JCheckBox("fit");
+	private final JCheckBox chkChir = new JCheckBox("fit");
 
-	private JTextField txtRmax = new JTextField("generated");
-	private JTextField txtRTaper = new JTextField("generated");
-	private JTextField txtZA = new JTextField("generated");
-	private JTextField txtZB = new JTextField("generated");
-	private JTextField txtA = new JTextField("generated");
-	private JTextField txtB = new JTextField("generated");
-	private JTextField txtChia = new JTextField();
-	private JTextField txtChir = new JTextField();
+	private final JTextField txtRmax = new JTextField("generated");
+	private final JTextField txtRTaper = new JTextField("generated");
+	private final JTextField txtZA = new JTextField("generated");
+	private final JTextField txtZB = new JTextField("generated");
+	private final JTextField txtA = new JTextField("generated");
+	private final JTextField txtB = new JTextField("generated");
+	private final JTextField txtChia = new JTextField();
+	private final JTextField txtChir = new JTextField();
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblChir = new JLabel(g.html(g.chi + "<sub>r</sub>"));
-	private JLabel lblChia = new JLabel("<html>&#967;<sub>a</sub></html>");
-	private JLabel lblRmax = new JLabel(g.html("r<sub>max</sub> (&Aring;)"));
-	private JLabel lblRTaper = new JLabel(g.html("r<sub>taper</sub> (&Aring;)"));
-	private JLabel lblZB = new JLabel(g.html("z<sub>b</sub> (&Aring;<sup>-1</sup>)"));
-	private JLabel lblZA = new JLabel(g.html("z<sub>a</sub> (&Aring;<sup>-1</sup>)"));
-	private JLabel lblBev = new JLabel("B (eV)");
-	private JLabel lblAev = new JLabel("A (eV)");
+	private final JLabel lblChir = new JLabel(g.html(g.chi + "<sub>r</sub>"));
+	private final JLabel lblChia = new JLabel("<html>&#967;<sub>a</sub></html>");
+	private final JLabel lblRmax = new JLabel(g.html("r<sub>max</sub> (&Aring;)"));
+	private final JLabel lblRTaper = new JLabel(g.html("r<sub>taper</sub> (&Aring;)"));
+	private final JLabel lblZB = new JLabel(g.html("z<sub>b</sub> (&Aring;<sup>-1</sup>)"));
+	private final JLabel lblZA = new JLabel(g.html("z<sub>a</sub> (&Aring;<sup>-1</sup>)"));
+	private final JLabel lblBev = new JLabel("B (eV)");
+	private final JLabel lblAev = new JLabel("A (eV)");
 
-	private JLabel lblTersoffEq = new JLabel(g.html("E = f(r)[" + g.chi
+	private final JLabel lblTersoffEq = new JLabel(g.html("E = f(r)[" + g.chi
 			+ "<sub>r</sub> A exp(-z<sub>a</sub> r)BO<sub>r</sub> - "
 			+ g.chi + "<sub>a</sub> B exp(-z<sub>b</sub> r)BO<sub>a</sub>]"
 			+ "<br>where<br>BO<sub>r</sub>=(1 + (" + g.alpha + " " + g.zeta
@@ -116,19 +115,19 @@ public class TersoffCombine extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		JTextField[] fields = { txtChir, txtChia };
-		String[] descriptions = { "Chir", "Chia" };
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final JTextField[] fields = { txtChir, txtChia };
+		final String[] descriptions = { "Chir", "Chia" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
-		JCheckBox[] boxes = { chkChir, chkChia };
-		String lines = "botwobody combine" + Back.newLine + pot.getAtomCombos()
-				+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
+		final JCheckBox[] boxes = { chkChir, chkChia };
+		final String lines = "botwobody combine" + Back.newLine + pot.getAtomCombos()
+		+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
 		return lines + "boattractive" + pnlBOa.writeBondOrder()
-					  + "borepulsive" + pnlBOr.writeBondOrder();
+		+ "borepulsive" + pnlBOr.writeBondOrder();
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
 		return super.clone(new TersoffCombine());

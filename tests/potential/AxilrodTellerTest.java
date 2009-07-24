@@ -13,35 +13,35 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class AxilrodTellerTest extends 
- {
-	
-	private AxilrodTeller a = new AxilrodTeller();
+public class AxilrodTellerTest extends
+{
+
+	private final AxilrodTeller a = new AxilrodTeller();
 	private PPP k;
-	
-	private String[] testValuesK = {"", "A", "0", "1"};
-	
-	private boolean[] result = {false, false, true, true};
+
+	private final String[] testValuesK = {"", "A", "0", "1"};
+
+	private final boolean[] result = {false, false, true, true};
 
 
 	protected void setUp() throws Exception {
-		Potential pot = Back.getPanel().getPotential();
+		final Potential pot = Back.getPanel().getPotential();
 		pot.potentialNumber = 3;
 		pot.pnlAtom.cboAtom[0].addItem("C");
 		pot.pnlAtom.cboAtom[1].addItem("H");
 		pot.pnlAtom.cboAtom[2].addItem("B");
-		PotentialPanel[][] pnl = (PotentialPanel[][]) PotTest.getField("potentials", pot);
+		final PotentialPanel[][] pnl = (PotentialPanel[][]) PotTest.getField("potentials", pot);
 		pnl[2][7] = a;
 		k = a.params[0];
 	}
 
 	@Test
 	public void testWritePotential() {
-		String t = "^" + "axilrod-teller " + PotTest.genBondingOptions() + Back.newLine;
-		String b = PotTest.genAtoms(3) + PotTest.genFloats(4, 7)
-				+ PotTest.genFlags(1, 1) + Back.newLine + "$";
-		Pattern p = Pattern.compile(t+b);
-		
+		final String t = "^" + "axilrod-teller " + PotTest.genBondingOptions() + Back.newLine;
+		final String b = PotTest.genAtoms(3) + PotTest.genFloats(4, 7)
+		+ PotTest.genFlags(1, 1) + Back.newLine + "$";
+		final Pattern p = Pattern.compile(t+b);
+
 		boolean fail = false;
 		System.out.println("Axilrod-teller testWritePotential");
 		System.out.println(t+b);
@@ -50,34 +50,34 @@ public class AxilrodTellerTest extends
 			System.out.println("index " + i);
 			//set options in the GUI
 			k.txt.setText(testValuesK[i]);
-			
+
 			a.radii.txtrmin[0].setText(PotTest.getRandomFloat(0, 1));
 			a.radii.txtrmin[1].setText(PotTest.getRandomFloat(0, 1));
 			a.radii.txtrmin[2].setText(PotTest.getRandomFloat(0, 1));
 			a.radii.txtrmax[0].setText(PotTest.getRandomFloat(0, 10));
 			a.radii.txtrmax[1].setText(PotTest.getRandomFloat(0, 10));
 			a.radii.txtrmax[2].setText(PotTest.getRandomFloat(0, 10));
-			
-			
+
+
 			boolean good = false;
 			String s = null;
 			try {
 				s = a.writePotential();
 				//parse output string for correct format
-				Matcher m = p.matcher(s);
+				final Matcher m = p.matcher(s);
 				if (m.matches()) {
 					System.out.println("match");
 					//perform more error checking
 					for (int j=0; j<m.groupCount(); j++) {
 						System.out.println("group " + j + " " + m.group(j));
 					}
-					boolean elements = PotTest.areElements(new String[]{
+					final boolean elements = PotTest.areElements(new String[]{
 							m.group(4), m.group(5), m.group(6)});
 					boolean numbers = true;
 					for (int j=0; j < 7; j++) {
 						try {
 							Double.parseDouble(m.group(2*i+7));
-						} catch (NumberFormatException nfe) {
+						} catch (final NumberFormatException nfe) {
 							nfe.printStackTrace();
 							numbers = false;
 							System.out.println(m.group(2*i+7) + " is not a double.");
@@ -86,12 +86,12 @@ public class AxilrodTellerTest extends
 						}
 					}
 					if (elements && numbers);
-						good = true;
+					good = true;
 				}
-			} catch (IncompleteOptionException e) {
+			} catch (final IncompleteOptionException e) {
 				if (result[i])
 					e.printStackTrace();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				if (result[i])
 					e.printStackTrace();
 			}

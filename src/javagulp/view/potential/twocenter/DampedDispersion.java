@@ -16,28 +16,28 @@ import javax.swing.JLabel;
 public class DampedDispersion extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 5997431758239364163L;
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblEquation = new JLabel(
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEquation = new JLabel(
 			"<html>E = -(C<sub>6</sub> / r<sup>6</sup>)f<sub>6</sub>(r) - " +
 			"(C<sub>8</sub> / r<sup>8</sup>)f<sub>8</sub>(r) - " +
 			"(C<sub>10</sub> / r<sup>10</sup>)f<sub>10</sub>(r)" + Back.newLine + "where " +
 			"f<sub>2n</sub>(r) is given by:" + Back.newLine + "f<sub>2n</sub>(r) = 1 - " +
-			"{sum(k=0 -> 2n)[(b * r)<sup>k</sup>] / k!} * exp(-b * r)</html>");
-	
-	private PPP c6 = new PPP("C6");
-	private PPP c8 = new PPP("C8");
-	private PPP c10 = new PPP("C10");
-	private PPP b6 = new PPP("B6");
-	private PPP b8 = new PPP("B8");
-	private PPP b10 = new PPP("B10");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	"{sum(k=0 -> 2n)[(b * r)<sup>k</sup>] / k!} * exp(-b * r)</html>");
+
+	private final PPP c6 = new PPP("C6");
+	private final PPP c8 = new PPP("C8");
+	private final PPP c10 = new PPP("C10");
+	private final PPP b6 = new PPP("B6");
+	private final PPP b8 = new PPP("B8");
+	private final PPP b10 = new PPP("B10");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
 	public DampedDispersion() {
 		super(2);
 		enabled = new boolean[] { true, true, true, true, true, true };
-		
+
 		setTitle("damped_dispersion");
 		add(lblEquation);
 		lblEquation.setBounds(10, 20, 450, 50);
@@ -65,13 +65,13 @@ public class DampedDispersion extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 170, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{c6, c8, c10, b6, b8, b10};
 	}
 
 	@Override
 	public PotentialPanel clone() {
-		DampedDispersion dd = new DampedDispersion();
+		final DampedDispersion dd = new DampedDispersion();
 		dd.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(dd);
 	}
@@ -80,15 +80,15 @@ public class DampedDispersion extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		// TODO documentation is ambiguous. It claims defaults for everything
 		// except c6, but also claims c6, c8, and c10 must be specified.
-		PPP[] fields = {c6, c8, c10};
+		final PPP[] fields = {c6, c8, c10};
 		Back.checkAndParseD(fields);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "damped " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine 
-				+ pot.getAtomCombos() + Back.concatFields(fields);
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine
+		+ pot.getAtomCombos() + Back.concatFields(fields);
 		if (!b6.txt.getText().equals("") && !b6.txt.getText().equals("0")){
 			Double.parseDouble(b6.txt.getText());
 			lines += " " + b6.txt.getText();

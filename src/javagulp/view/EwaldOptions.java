@@ -3,6 +3,7 @@ package javagulp.view;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -10,49 +11,47 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class EwaldOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -3361062355703375625L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JComboBox cboMultipole = new JComboBox(new String[] { "monopole",
+	private final JComboBox cboMultipole = new JComboBox(new String[] { "monopole",
 			"dipole", "quadrupole", "octopole" });
-	private JCheckBox chkCellMultipole = new JCheckBox("use cell multipole method for long-range interactions");
-	private JCheckBox chkDipoleCorrection = new JCheckBox("add surface dependent dipole correction");
-	private JCheckBox chkNoElectrostatics = new JCheckBox("<html>turn off Ewald summation/Coulomb interaction even when charges are present in the input</html>");
-	private JCheckBox chkUseTheWolf = new JCheckBox("use the Wolf approximation to the Ewald sum (J.Chem.Phys. 110, 8254, '99)");
-	private JCheckBox chkUseEwaldlikeMethod = new JCheckBox("use ewald-like method on dispersion terms");
-	
-	private JLabel lblCellSize = new JLabel("cell size (determined by short potentials)");
-	private JLabel lblDipoleUnitCell = new JLabel("<html>2/3 " + g.pi
+	private final JCheckBox chkCellMultipole = new JCheckBox("use cell multipole method for long-range interactions");
+	private final JCheckBox chkDipoleCorrection = new JCheckBox("add surface dependent dipole correction");
+	private final JCheckBox chkNoElectrostatics = new JCheckBox("<html>turn off Ewald summation/Coulomb interaction even when charges are present in the input</html>");
+	private final JCheckBox chkUseTheWolf = new JCheckBox("use the Wolf approximation to the Ewald sum (J.Chem.Phys. 110, 8254, '99)");
+	private final JCheckBox chkUseEwaldlikeMethod = new JCheckBox("use ewald-like method on dispersion terms");
+
+	private final JLabel lblCellSize = new JLabel("cell size (determined by short potentials)");
+	private final JLabel lblDipoleUnitCell = new JLabel("<html>2/3 " + g.pi
 			+ " D<sup>2</sup> V  where D is dipole/unit cell</html>");
-	private JLabel lblEta = new JLabel(g.html(g.eta + " (" + g.ang
+	private final JLabel lblEta = new JLabel(g.html(g.eta + " (" + g.ang
 			+ "<sup>-1</sup>)"));
-	private JLabel lblHtml = new JLabel("<html>E<sub>i</sub><sub>j</sub> = q<sub>i</sub>q<sub>j</sub>/r"
-					+ " erfc(&#951; r) - lim<sub>r->r<sub>max</sub></sub>q<sub>i</sub>q<sub>j</sub>/r<sub>max</sub> erfc(&#951; r<sub>max</sub>)<br>"
-					+ "E<sub>i</sub> = - (erfc(&#951; r<sub>max</sub>)/(2 r<sub>max</sub>) + &#951;/(&#8730;&#960;)) q<sub>i</sub><sup>2</sup> </html>");
-	private JLabel lblMultipole = new JLabel("highest multipole");
-	private JLabel lblrmax = new JLabel(g.html("r<sub>max</sub> (" + g.ang
+	private final JLabel lblHtml = new JLabel("<html>E<sub>i</sub><sub>j</sub> = q<sub>i</sub>q<sub>j</sub>/r"
+			+ " erfc(&#951; r) - lim<sub>r->r<sub>max</sub></sub>q<sub>i</sub>q<sub>j</sub>/r<sub>max</sub> erfc(&#951; r<sub>max</sub>)<br>"
+			+ "E<sub>i</sub> = - (erfc(&#951; r<sub>max</sub>)/(2 r<sub>max</sub>) + &#951;/(&#8730;&#960;)) q<sub>i</sub><sup>2</sup> </html>");
+	private final JLabel lblMultipole = new JLabel("highest multipole");
+	private final JLabel lblrmax = new JLabel(g.html("r<sub>max</sub> (" + g.ang
 			+ ")"));
 
-	private TitledPanel pnlCellMultipole = new TitledPanel();
-	private TitledPanel pnlConvergenceSpeed = new TitledPanel();
-	private TitledPanel pnlDipoleCorrection = new TitledPanel();
-	private TitledPanel pnlqWolf = new TitledPanel();
-	private TitledPanel pnlSpaceCutoff = new TitledPanel();
+	private final TitledPanel pnlCellMultipole = new TitledPanel();
+	private final TitledPanel pnlConvergenceSpeed = new TitledPanel();
+	private final TitledPanel pnlDipoleCorrection = new TitledPanel();
+	private final TitledPanel pnlqWolf = new TitledPanel();
+	private final TitledPanel pnlSpaceCutoff = new TitledPanel();
 
-	private JTextField txtCellSize = new JTextField();
-	private JTextField txtqWolfEta = new JTextField();
-	private JTextField txtqWolfRmax = new JTextField();
-	private JTextField txtrspeed = new JTextField("1.0");
-	private JTextField txtewaldrealradius = new JTextField();
+	private final JTextField txtCellSize = new JTextField();
+	private final JTextField txtqWolfEta = new JTextField();
+	private final JTextField txtqWolfRmax = new JTextField();
+	private final JTextField txtrspeed = new JTextField("1.0");
+	private final JTextField txtewaldrealradius = new JTextField();
 
-	private KeywordListener keyUseEwaldlikeMethod = new KeywordListener(chkUseEwaldlikeMethod, "c6");	
-	private KeywordListener keyDipoleCorrection = new KeywordListener(chkDipoleCorrection, "dipole");
-	private KeywordListener keyNoElectrostatics = new KeywordListener(chkNoElectrostatics, "noelectrostatics");
+	private final KeywordListener keyUseEwaldlikeMethod = new KeywordListener(chkUseEwaldlikeMethod, "c6");
+	private final KeywordListener keyDipoleCorrection = new KeywordListener(chkDipoleCorrection, "dipole");
+	private final KeywordListener keyNoElectrostatics = new KeywordListener(chkNoElectrostatics, "noelectrostatics");
 
 	public EwaldOptions() {
 		super();
@@ -63,14 +62,14 @@ public class EwaldOptions extends JPanel implements Serializable {
 		chkUseEwaldlikeMethod.setBounds(0, 31, 435, 25);
 		add(chkUseEwaldlikeMethod);
 		chkUseEwaldlikeMethod.addActionListener(keyUseEwaldlikeMethod);
-		
+
 		pnlConvergenceSpeed.setBounds(314, 66, 407, 50);
 		pnlConvergenceSpeed.setTitle("real/reciprocal space relative convergence speed");
 		pnlConvergenceSpeed.setToolTipText("<html>Relative speed for reciprocal and real space terms<br>"
-						+ " to be calculated. Formulae for determining optimum eta value <br>"
-						+ "assume rspeed=1.0, however calculations can be speeded up by using<br>"
-						+ " larger values for small systems (e.g. 2.0) or small values for large<br>"
-						+ " systems (0.25) as reciprocal space calculation is generally faster.");
+				+ " to be calculated. Formulae for determining optimum eta value <br>"
+				+ "assume rspeed=1.0, however calculations can be speeded up by using<br>"
+				+ " larger values for small systems (e.g. 2.0) or small values for large<br>"
+				+ " systems (0.25) as reciprocal space calculation is generally faster.");
 		add(pnlConvergenceSpeed);
 		txtrspeed.setBounds(26, 20, 71, 23);
 		pnlConvergenceSpeed.add(txtrspeed);
@@ -138,7 +137,7 @@ public class EwaldOptions extends JPanel implements Serializable {
 			if (txtCellSize.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for cell multipole method (cmm) cell size");
 			lines += cboMultipole.getSelectedItem() + " "
-					+ txtCellSize.getText() + Back.newLine;
+			+ txtCellSize.getText() + Back.newLine;
 		}
 		return lines;
 	}

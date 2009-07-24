@@ -16,17 +16,17 @@ import javax.swing.JLabel;
 public class CovExp extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 3996470017561018146L;
-	
-	private JLabel lblUnits = new JLabel ("units");
-	private JLabel lblEquation = new JLabel(
-			"<html>E = -D * exp(-a(r - r<sub>0</sub>)<sup>2</sup> / (2r))</html>");
-	
-	private PPP d = new PPP("D");
-	private PPP a = new PPP("a");
-	private PPP r0 = new PPP("r0");
-	
-	private JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final JLabel lblUnits = new JLabel ("units");
+	private final JLabel lblEquation = new JLabel(
+	"<html>E = -D * exp(-a(r - r<sub>0</sub>)<sup>2</sup> / (2r))</html>");
+
+	private final PPP d = new PPP("D");
+	private final PPP a = new PPP("a");
+	private final PPP r0 = new PPP("r0");
+
+	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
 	public CovExp() {
 		super(2);
@@ -50,13 +50,13 @@ public class CovExp extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 90, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{d, a, r0};
 	}
 
 	@Override
 	public PotentialPanel clone() {
-		CovExp co  = new CovExp();
+		final CovExp co  = new CovExp();
 		co.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		co.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
 		return super.clone(co);
@@ -65,8 +65,8 @@ public class CovExp extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException, InvalidOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "covexp " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
@@ -75,7 +75,7 @@ public class CovExp extends PotentialPanel implements Serializable {
 		else
 			lines += "ener ";
 		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
-				+ Back.concatFields(params);
+		+ Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += radii.writeRadii();
 		}

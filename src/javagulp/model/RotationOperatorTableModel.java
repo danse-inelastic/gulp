@@ -7,7 +7,7 @@ import javagulp.view.Back;
 import javax.swing.table.AbstractTableModel;
 
 public class RotationOperatorTableModel extends AbstractTableModel implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = -2311186260198580908L;
 

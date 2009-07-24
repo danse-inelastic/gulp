@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -14,22 +15,20 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class OutofPlane extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -5227769822538560738L;
 
-	private G g = new G();
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblEq = new JLabel(g.html("E = kd<sup>2</sup> + k<sub>4</sub>d<sup>4</sup> where d represents the distance of atom 1 out of the plane of atoms 2-3-4"));
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
-	
-	private PPP K = new PPP(g.html("k (eV/" + g.ang + "<sup>2</sup>)"));
-	private PPP K4 = new PPP(g.html("k<sub>4</sub> (eV/" + g.ang + "<sup>4</sup>)"));
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final G g = new G();
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEq = new JLabel(g.html("E = kd<sup>2</sup> + k<sub>4</sub>d<sup>4</sup> where d represents the distance of atom 1 out of the plane of atoms 2-3-4"));
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
+
+	private final PPP K = new PPP(g.html("k (eV/" + g.ang + "<sup>2</sup>)"));
+	private final PPP K4 = new PPP(g.html("k<sub>4</sub> (eV/" + g.ang + "<sup>4</sup>)"));
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
 	public OutofPlane() {
 		super(4);
@@ -53,7 +52,7 @@ public class OutofPlane extends PotentialPanel implements Serializable {
 		radii = new Radii(new String[] {"12", "13", "14"});
 		radii.setBounds(240, 70, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{K, K4};
 	}
 
@@ -61,7 +60,7 @@ public class OutofPlane extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String lines = "outofplane " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
@@ -75,10 +74,10 @@ public class OutofPlane extends PotentialPanel implements Serializable {
 			lines += Back.writeFits(new PPP[]{K4});
 		return lines + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		OutofPlane o = new OutofPlane();
+		final OutofPlane o = new OutofPlane();
 		o.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(o);
 	}

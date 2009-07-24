@@ -3,6 +3,7 @@ package javagulp.view.potential.threecenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -14,38 +15,36 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class HydrogenBond extends PotentialPanel implements Serializable {
 	private static final long serialVersionUID = 7011842152178311038L;
 
-	private G g = new G();
-	
-	private PPP A = new PPP(g.html("A (eV * " + g.ang + "<sup>m</sup>)"));
-	private PPP B = new PPP(g.html("B (eV * " + g.ang + "<sup>n</sup>)"));
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblM = new JLabel("m");
-	private JLabel lblN = new JLabel("n");
-	private JLabel lblP = new JLabel("p");
-	private JLabel lblThetaMin = new JLabel(g.html(g.theta + "min"));
-	private JLabel lblThetaMax = new JLabel(g.html(g.theta + "max"));
-	private JLabel lblEquation = new JLabel(g.html("E = (A/(r<sup>m</sup>) - B/(r<sup>n</sup>))*(cos " + g.theta + ")<sup>p</sup><br>If " + g.theta + " > 90 degrees, else 0"));
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
-	
-	private JTextField txtM = new JTextField("12");
-	private JTextField txtN = new JTextField("10");
-	private JTextField txtP = new JTextField("4");
-	private JTextField txtThetaMin = new JTextField();
-	private JTextField txtThetaMax = new JTextField();
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
+	private final G g = new G();
+
+	private final PPP A = new PPP(g.html("A (eV * " + g.ang + "<sup>m</sup>)"));
+	private final PPP B = new PPP(g.html("B (eV * " + g.ang + "<sup>n</sup>)"));
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblM = new JLabel("m");
+	private final JLabel lblN = new JLabel("n");
+	private final JLabel lblP = new JLabel("p");
+	private final JLabel lblThetaMin = new JLabel(g.html(g.theta + "min"));
+	private final JLabel lblThetaMax = new JLabel(g.html(g.theta + "max"));
+	private final JLabel lblEquation = new JLabel(g.html("E = (A/(r<sup>m</sup>) - B/(r<sup>n</sup>))*(cos " + g.theta + ")<sup>p</sup><br>If " + g.theta + " > 90 degrees, else 0"));
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
+
+	private final JTextField txtM = new JTextField("12");
+	private final JTextField txtN = new JTextField("10");
+	private final JTextField txtP = new JTextField("4");
+	private final JTextField txtThetaMin = new JTextField();
+	private final JTextField txtThetaMax = new JTextField();
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
 	public HydrogenBond() {
 		super(3);
 		setTitle("hydrogen-bond");
 		enabled = new boolean[] {true, true, false};
-		
+
 		lblEquation.setBounds(10, 25, 400, 40);
 		add(lblEquation);
 		A.setBounds(10, 70, 225, 25);
@@ -86,13 +85,13 @@ public class HydrogenBond extends PotentialPanel implements Serializable {
 		add(radii);
 		lblImage.setBounds(419, 11, 122, 80);
 		add(lblImage);
-		
+
 		params = new PPP[] {A, B};
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		HydrogenBond h = new HydrogenBond();
+		final HydrogenBond h = new HydrogenBond();
 		h.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		h.txtM.setText(this.txtM.getText());
 		h.txtN.setText(this.txtN.getText());
@@ -105,10 +104,10 @@ public class HydrogenBond extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		String m = txtM.getText(), n = txtN.getText(), p = txtP.getText(),
-			min = txtThetaMin.getText(), max = txtThetaMax.getText();
-		
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final String m = txtM.getText(), n = txtN.getText(), p = txtP.getText(),
+		min = txtThetaMin.getText(), max = txtThetaMax.getText();
+
 		String lines = "hydrogen-bond " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";

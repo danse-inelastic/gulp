@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
@@ -11,48 +12,46 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Tersoff extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -2090546744906031541L;
 
-	private TersoffBondOrder BOa = new TersoffBondOrder("BOa");
-	private TersoffBondOrder BOr = new TersoffBondOrder("BOr");
+	private final TersoffBondOrder BOa = new TersoffBondOrder("BOa");
+	private final TersoffBondOrder BOr = new TersoffBondOrder("BOr");
 
-	private JTextField txtrmax = new JTextField();
-	private JTextField txtRTaper = new JTextField();
-	private JTextField txtZa = new JTextField();
-	private JTextField txtZb = new JTextField();
-	private JTextField txtA = new JTextField();
-	private JTextField txtB = new JTextField();
+	private final JTextField txtrmax = new JTextField();
+	private final JTextField txtRTaper = new JTextField();
+	private final JTextField txtZa = new JTextField();
+	private final JTextField txtZb = new JTextField();
+	private final JTextField txtA = new JTextField();
+	private final JTextField txtB = new JTextField();
 
-	private JCheckBox chkZa = new JCheckBox("fit");
-	private JCheckBox chkZb = new JCheckBox("fit");
-	private JCheckBox chkA = new JCheckBox("fit");
-	private JCheckBox chkB = new JCheckBox("fit");
+	private final JCheckBox chkZa = new JCheckBox("fit");
+	private final JCheckBox chkZb = new JCheckBox("fit");
+	private final JCheckBox chkA = new JCheckBox("fit");
+	private final JCheckBox chkB = new JCheckBox("fit");
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblAev = new JLabel("A (eV)");
-	private JLabel lblBev = new JLabel("B (eV)");
-	private JLabel lblZa = new JLabel("<html>z<sub>a</sub> (&Aring;<sup>-1</sup>)</html>");
-	private JLabel lblZb = new JLabel("<html>z<sub>b</sub> (&Aring;<sup>-1</sup>)</html>");
+	private final JLabel lblAev = new JLabel("A (eV)");
+	private final JLabel lblBev = new JLabel("B (eV)");
+	private final JLabel lblZa = new JLabel("<html>z<sub>a</sub> (&Aring;<sup>-1</sup>)</html>");
+	private final JLabel lblZb = new JLabel("<html>z<sub>b</sub> (&Aring;<sup>-1</sup>)</html>");
 
-	private JLabel lblRTaper = new JLabel(g.html("r<sub>taper</sub> (&Aring;)"));
-	private JLabel lblrmax = new JLabel(g.html("r<sub>max</sub> (&Aring;)"));
-	private JLabel lblTersoffEq = new JLabel(g.html("E = f(r)[A exp(-z<sub>a</sub> r)BO<sub>r</sub> - B exp(-z<sub>b</sub> r)BO<sub>a</sub>]"
-					+ "<br>" + "where" + "<br>" + "BO<sub>r</sub>=(1 + (" + g.alpha + " " + g.zeta
-					+ ")<sup>n</sup>)<sup>(-1/2n)</sup><br>BO<sub>a</sub>=(1 + (" + g.alpha + " "
-					+ g.zeta + ")<sup>n</sup>)<sup>(-1/2n)</sup><br>where<br>" + g.zeta
-					+ " = sum (r<sub>ik</sub>) [f(r<sub>ik</sub>) exp("
-					+ g.lambda + "<sup>m</sup>(r<sub>ij</sub> - r<sub>ik</sub>)<sup>m</sup>)]"
-					+ "<br>or<br>" + g.zeta + " = sum (r<sub>ik</sub>) [f(r<sub>ik</sub>)g("
-					+ g.theta + ")exp(" + g.lambda
-					+ "<sup>m</sup>(r<sub>ij</sub> - r<sub>ik</sub>)<sup>m</sup>)]<br>"
-					+ "where f(r<sub>ik</sub>) = cosine taper function" + "<br>and<br>g(" + g.theta
-					+ ") = 1 + (c/d)<sup>2</sup> - c<sup>2</sup>/[d<sup>2</sup> + (h - cos("
-					+ g.theta + "))<sup>2</sup>]"));
+	private final JLabel lblRTaper = new JLabel(g.html("r<sub>taper</sub> (&Aring;)"));
+	private final JLabel lblrmax = new JLabel(g.html("r<sub>max</sub> (&Aring;)"));
+	private final JLabel lblTersoffEq = new JLabel(g.html("E = f(r)[A exp(-z<sub>a</sub> r)BO<sub>r</sub> - B exp(-z<sub>b</sub> r)BO<sub>a</sub>]"
+			+ "<br>" + "where" + "<br>" + "BO<sub>r</sub>=(1 + (" + g.alpha + " " + g.zeta
+			+ ")<sup>n</sup>)<sup>(-1/2n)</sup><br>BO<sub>a</sub>=(1 + (" + g.alpha + " "
+			+ g.zeta + ")<sup>n</sup>)<sup>(-1/2n)</sup><br>where<br>" + g.zeta
+			+ " = sum (r<sub>ik</sub>) [f(r<sub>ik</sub>) exp("
+			+ g.lambda + "<sup>m</sup>(r<sub>ij</sub> - r<sub>ik</sub>)<sup>m</sup>)]"
+			+ "<br>or<br>" + g.zeta + " = sum (r<sub>ik</sub>) [f(r<sub>ik</sub>)g("
+			+ g.theta + ")exp(" + g.lambda
+			+ "<sup>m</sup>(r<sub>ij</sub> - r<sub>ik</sub>)<sup>m</sup>)]<br>"
+			+ "where f(r<sub>ik</sub>) = cosine taper function" + "<br>and<br>g(" + g.theta
+			+ ") = 1 + (c/d)<sup>2</sup> - c<sup>2</sup>/[d<sup>2</sup> + (h - cos("
+			+ g.theta + "))<sup>2</sup>]"));
 
 	public Tersoff() {
 		super(2);
@@ -101,19 +100,19 @@ public class Tersoff extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		JTextField[] fields = { txtA, txtB, txtZa, txtZb, txtRTaper, txtrmax };
-		String[] descriptions = { "A", "B", "za", "zb", "rtaper", "rmax" };
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final JTextField[] fields = { txtA, txtB, txtZa, txtZb, txtRTaper, txtrmax };
+		final String[] descriptions = { "A", "B", "za", "zb", "rtaper", "rmax" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
-		JCheckBox[] boxes = { chkA, chkB, chkZa, chkZb };
-		String lines = "botwobody" + Back.newLine + pot.getAtomCombos()
-				+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
+		final JCheckBox[] boxes = { chkA, chkB, chkZa, chkZb };
+		final String lines = "botwobody" + Back.newLine + pot.getAtomCombos()
+		+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
 		return lines + "boattractive" + BOa.writeBondOrder()
-					  + "borepulsive" + BOr.writeBondOrder();
+		+ "borepulsive" + BOr.writeBondOrder();
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
 		return super.clone(new Tersoff());

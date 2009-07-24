@@ -7,26 +7,26 @@ import javagulp.view.Back;
 
 public class Keywords implements Serializable {
 	private static final long serialVersionUID = -7544313514620261471L;
-	
-	private TreeSet<String> keywords = new TreeSet<String>();
-	
+
+	private final TreeSet<String> keywords = new TreeSet<String>();
+
 	public void putOrRemoveKeyword(final boolean discern, final String keyword) {
 		if (discern)
 			keywords.add(keyword);
 		else
 			keywords.remove(keyword);
 	}
-	
+
 	public boolean containsKeyword(String keyword) {
 		if (keywords.contains(keyword))
 			return true;
 		else
 			return false;
 	}
-	
+
 	public String writeKeywords() {
 		String lines = "";
-		for (String word: keywords)
+		for (final String word: keywords)
 			lines += word + " ";
 		return lines + Back.newLine;
 	}

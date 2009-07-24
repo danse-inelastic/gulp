@@ -15,18 +15,18 @@ public class OutputFormats extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -1455606819678907706L;
 
-	private JTextField txtOutputFilename = new JTextField("output");
+	private final JTextField txtOutputFilename = new JTextField("output");
 
-	private String[] labels = { "THBREL/THBPHON", "BIOSYM (.xtl)",
+	private final String[] labels = { "THBREL/THBPHON", "BIOSYM (.xtl)",
 			"BIOSYM (.car)", "movie format", "trajectory (.trj)",
 			"SIESTA (.fdf)", "CRYSTAL98 (.str)", "Crystal (.cif)", "MARVIN (.mvn)",
 			"CRYSALIS (.xr)", "CERIUS2 (.cssr)", "(.xyz)", "movie format",
 			"DLPOLY history", "derivatives (.drv)", "forces (.frc)",
 			"frequency", "Pressure (.pre)" };
-	private String[] formats = { "thbrel", "xtl", "arc",
+	private final String[] formats = { "thbrel", "xtl", "arc",
 			"movie arc", "trajectory", "fdf", "str", "cif", "marvin", "xr",
 			"cssr", "xyz", "movie xyz", "history", "drv", "frc", "freq", "pre" };
-	private String[] extensions = { ".thbrel", ".xtl", "", "movie",
+	private final String[] extensions = { ".thbrel", ".xtl", "", "movie",
 			"", ".fdf", "", ".phonon", "", "", "", "", ".xyz",
 			"movie.xyz", ".history", ".drv", ".frc", ".freq", ".pre" };
 	// TODO add trajectory ascii and equil options, frequency text option, and osc format
@@ -42,7 +42,8 @@ public class OutputFormats extends JPanel implements Serializable {
 		setLayout(null);
 
 		JCheckBox box;
-		int x = 10, y = 50, width = 150, height = 20, hSpacing = 0, vSpacing = 5;
+		int x = 10, y = 50;
+		final int width = 150, height = 20, hSpacing = 0, vSpacing = 5;
 		for (int i = 0; i < labels.length; i++) {
 			if (i == 9) {
 				x += width + hSpacing;
@@ -52,8 +53,8 @@ public class OutputFormats extends JPanel implements Serializable {
 			if (i == 3 || i == 13) {
 				box.setBounds(x + 40, y, width - 40, height);
 				box.setFont(new Font("Dialog", Font.PLAIN, 10));
-//				if (i == 13)
-//					box.setSelected(true);
+				//				if (i == 13)
+				//					box.setSelected(true);
 			} else
 				box.setBounds(x, y, width, height);
 			add(box);
@@ -77,7 +78,7 @@ public class OutputFormats extends JPanel implements Serializable {
 		for (int i = 0; i < labels.length; i++) {
 			if (((JCheckBox) getComponent(i)).isSelected()) {
 				line += "output " + formats[i] + " "
-						+ txtOutputFilename.getText() + extensions[i] + Back.newLine;
+				+ txtOutputFilename.getText() + extensions[i] + Back.newLine;
 			}
 		}
 		return line;

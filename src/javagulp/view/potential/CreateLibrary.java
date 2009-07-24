@@ -15,8 +15,10 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.potential.threecenter.ThreeAtomBondingOptions;
 import javagulp.view.potential.twocenter.Lennard;
@@ -35,225 +37,223 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import javagulp.model.SerialListener;
-
 public class CreateLibrary extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7048421934237887044L;
 
-	private String[] oneAtomPotentialList = { "", "spring",
+	private final String[] oneAtomPotentialList = { "", "spring",
 			"EAM functional", "EAM density", "bond order self energy", "bsm", "cosh-spring" };
-	private String[] twoAtomPotentialList = { "", "general potential",
+	private final String[] twoAtomPotentialList = { "", "general potential",
 			"buckingham", "lennard-jones", "morse", "harmonic", "rydberg",
 			"tsuneyuki", "squared harmonic", "tersoff", "tersoff combined",
 			"stillinger-weber two body", "many body", "EAM potential shift",
 			"brenner", "spline", "qtaper", "qerfc", "Bond Order Charge",
 			"Polynomial", "swjb2", "coulomb", "igauss", "covexp", "fermi-dirac",
 			"ljbuffered", "qoverr2", "damped_dispersion" };
-	private String[] threeAtomPotentialList = { "", "three body",
+	private final String[] threeAtomPotentialList = { "", "three body",
 			"three body exponential harmonic", "vessal", "cosine harmonic",
 			"urey-bradley", "murrell-mottram", "linear three body",
 			"axilrod-teller", "exponential", "stillinger-weber three body",
 			"stillinger-weber three body (JB)",
 			"bond-bond-cosine(angle) cross term", "bond-bond cross term",
 			"bond-bond-angle cross term", "hydrogen-bond", "equatorial" };
-	private String[] fourAtomPotentialList = { "", "torsion", "out of plane",
+	private final String[] fourAtomPotentialList = { "", "torsion", "out of plane",
 			"ryckaert", "torsion-angle cross potential",
 			"harmonic torsional potential",
 			"exponentially decaying torsional potential",
 			"torsional potential with cutoff tapering",
 			"ESFF torsional potential with cutoff tapering", "Inversion" };
 
-	private String[][] potentialAbbreviations = {
+	private final String[][] potentialAbbreviations = {
 			{ "", "spring", "eam_functional", "eam_density", "BOSelfEnergy", "bsm", "cosh-spring" },
 			{ "", "general", "buckingham", "lennard", "morse", "harmonic",
-					"rydberg", "tsuneyuki", "squaredHarmonic", "tersoff",
-					"tersoffCombine", "sw2", "manybody", "eamShift", "brenner",
-					"spline", "qtaper", "qerfc", "BOCharge", "polynomial",
-					"swjb2", "coulomb", "igauss", "covexp", "fermi-dirac",
-					"ljbuffered", "qoverr2", "damped_dispersion" },
-			{ "", "threebody", "threebodyExponentialHarmonic", "vessal", "cosine",
+				"rydberg", "tsuneyuki", "squaredHarmonic", "tersoff",
+				"tersoffCombine", "sw2", "manybody", "eamShift", "brenner",
+				"spline", "qtaper", "qerfc", "BOCharge", "polynomial",
+				"swjb2", "coulomb", "igauss", "covexp", "fermi-dirac",
+				"ljbuffered", "qoverr2", "damped_dispersion" },
+				{ "", "threebody", "threebodyExponentialHarmonic", "vessal", "cosine",
 					"ureybradley", "murrellMottram", "lin3", "axilrodTeller",
 					"exponential", "sw3", "sw3jb", "bcoscross", "bcross",
 					"bacross", "hydrogen-bond", "equatorial" },
-			{ "", "torsion", "outofPlane", "ryckaert", "torangle",
-					"torharm", "torexp", "tortaper",
-					"tortaperEsff", "inversion" } };
+					{ "", "torsion", "outofPlane", "ryckaert", "torangle",
+						"torharm", "torexp", "tortaper",
+						"tortaperEsff", "inversion" } };
 
-	private JLabel lbl1 = new JLabel("1");
-	private JLabel lbl2 = new JLabel("2");
-	private JLabel lbl3 = new JLabel("3");
-	private JLabel lbl4 = new JLabel("4");
+	private final JLabel lbl1 = new JLabel("1");
+	private final JLabel lbl2 = new JLabel("2");
+	private final JLabel lbl3 = new JLabel("3");
+	private final JLabel lbl4 = new JLabel("4");
 
 	public JComboBox cboOneBodyPotential = new JComboBox(oneAtomPotentialList);
 	public JComboBox cboTwoBodyPotential = new JComboBox(twoAtomPotentialList);
 	public JComboBox cboThreeBodyPotential = new JComboBox(threeAtomPotentialList);
 	public JComboBox cboFourBodyPotential = new JComboBox(fourAtomPotentialList);
 
-	private JButton btnCombinations = new JButton("generate combinations");
-	private JButton btnSavePotentials = new JButton("export potentials");
-	private JButton btnRestorePotentials = new JButton("import potentials");
-	private JButton btnAddPotential = new JButton("add potential to gulp run");
-	private DefaultListModel potentialListModel = new DefaultListModel();
+	private final JButton btnCombinations = new JButton("generate combinations");
+	private final JButton btnSavePotentials = new JButton("export potentials");
+	private final JButton btnRestorePotentials = new JButton("import potentials");
+	private final JButton btnAddPotential = new JButton("add potential to gulp run");
+	private final DefaultListModel potentialListModel = new DefaultListModel();
 	public JList potentialList = new JList(potentialListModel);
-	private JScrollPane listScroll = new JScrollPane(potentialList);
+	private final JScrollPane listScroll = new JScrollPane(potentialList);
 	public ArrayList<PotentialPanel> potentialPanels = new ArrayList<PotentialPanel>();
 
-	private JPanel oneAtomBondingOptions = new JPanel();
+	private final JPanel oneAtomBondingOptions = new JPanel();
 	public TwoAtomBondingOptions twoAtomBondingOptions = new TwoAtomBondingOptions();
 	public ThreeAtomBondingOptions threeAtomBondingOptions = new ThreeAtomBondingOptions();
 
-	private JButton btnCreateLibrary = new JButton("export library");
-	private JPanel pnlPotential = new JPanel();
+	private final JButton btnCreateLibrary = new JButton("export library");
+	private final JPanel pnlPotential = new JPanel();
 
 	public AtomCombos pnlAtom = new AtomCombos();
 
 	public JScrollPane potentialBackdrop = new JScrollPane();
-	private JScrollPane scrollBonding = new JScrollPane();
+	private final JScrollPane scrollBonding = new JScrollPane();
 
-	private PotentialPanel[][] potentials = {
+	private final PotentialPanel[][] potentials = {
 			{ null, null, null, null, null, null },
 			{ null, null, null, null, null, null, null, null, null, null, null,
-					null, null, null, null, null, null, null, null, null, null,
-					null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null,
+				null, null, null, null, null, null, null, null, null, null,
+				null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null, null, null, null,
 					null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null } };
+					{ null, null, null, null, null, null, null, null, null } };
 
 	public int potentialNumber;
 
 
-	private SerialListener keyCreateLibrary = new SerialListener() {
+	private final SerialListener keyCreateLibrary = new SerialListener() {
 		private static final long serialVersionUID = 6309224298033486625L;
 
 		public void actionPerformed(ActionEvent e){
 			if (potentialListModel.getSize() == 0) {
 				JOptionPane.showMessageDialog(Back.frame,
-						"You have not added any potentials to save.");
+				"You have not added any potentials to save.");
 				return;
 			}
-			JFileChooser findLibrary = new JFileChooser();
+			final JFileChooser findLibrary = new JFileChooser();
 			if (JFileChooser.APPROVE_OPTION == findLibrary.showSaveDialog(getParent())) {
 				try {
-					FileWriter f = new FileWriter(findLibrary.getSelectedFile());
+					final FileWriter f = new FileWriter(findLibrary.getSelectedFile());
 					f.write(writePotentials());
 					f.close();
-				} catch (IOException e1) {
+				} catch (final IOException e1) {
 					e1.printStackTrace();
 				}
 			}
 		}
 	};
-//	private SerialListener keyCombinations = new SerialListener() {
-//		private static final long serialVersionUID = 222500108052711638L;
-//		
-//		public void actionPerformed(ActionEvent e) {
-//			PotentialPanel p = getCurrentPotential();
-//			TreeSet<String> temp = Back.getStructure().atomicCoordinates.getTableModel().getAtoms();
-//			Object[] atoms = temp.toArray();
-//			ArrayList<ArrayList<Integer>> test = combinations(atoms.length, p.potentialNumber);
-//			for (int j=0; j < test.size(); j++) {
-//				PotentialPanel q = p.clone();
-//				for (int i=0; i < test.get(j).size(); i++) {
-//					q.atom[i] = (String) atoms[test.get(j).get(i)];
-//				}
-//				Random r = new Random();
-//				for (PPP ppp: q.params) {
-//					if (Back.getPanel().getXyzfit().chkInitialize.isSelected())
-//						ppp.txt.setText("" + (r.nextFloat() * (ppp.max - ppp.min) + ppp.min));
-//					//TODO if using lennard-jones, initialize values using geometric combination rules
-//				}
-//				String temp2 = potentialAbbreviations[q.potentialNumber - 1][getIndex()];
-//				potentialListModel.addElement(temp2);
-//				potentialPanels.add(q);
-//			}
-//		}
-//		
-//		/**
-//		 * This method will find all combinations of symbols and digits. For example,
-//		 * if 3 and 2 are used a parameters, the method will return the values
-//		 * [[0,0], [0,1], [0,2]]
-//		 * [[1,0], [1,1], [1,2]]
-//		 * [[2,0], [2,1], [2,2]]
-//		 * 
-//		 * @param symbols
-//		 * @param digits
-//		 * @return a list of the symbols^digits different combinations
-//		 */
-//		private ArrayList<ArrayList<Integer>> combinations(int symbols, int digits) {
-//			return combinations(symbols, new ArrayList<Integer>(), digits);
-//		}
-//		
-//		private ArrayList<ArrayList<Integer>> combinations(int symbols, ArrayList<Integer> number, int digits) {
-//			ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
-//			if (number.size() == digits) {
-//					temp.add(number);
-//			} else {
-//				for (int j=0; j < symbols; j++) {
-//					ArrayList<Integer> temp2 = new ArrayList<Integer>(number);
-//					temp2.add(j);
-//					temp.addAll(combinations(symbols, temp2, digits));
-//				}
-//			}
-//			return temp;
-//		}
-//	};
-	private SerialListener keySavePotentials = new SerialListener() {
+	//	private SerialListener keyCombinations = new SerialListener() {
+	//		private static final long serialVersionUID = 222500108052711638L;
+	//
+	//		public void actionPerformed(ActionEvent e) {
+	//			PotentialPanel p = getCurrentPotential();
+	//			TreeSet<String> temp = Back.getStructure().atomicCoordinates.getTableModel().getAtoms();
+	//			Object[] atoms = temp.toArray();
+	//			ArrayList<ArrayList<Integer>> test = combinations(atoms.length, p.potentialNumber);
+	//			for (int j=0; j < test.size(); j++) {
+	//				PotentialPanel q = p.clone();
+	//				for (int i=0; i < test.get(j).size(); i++) {
+	//					q.atom[i] = (String) atoms[test.get(j).get(i)];
+	//				}
+	//				Random r = new Random();
+	//				for (PPP ppp: q.params) {
+	//					if (Back.getPanel().getXyzfit().chkInitialize.isSelected())
+	//						ppp.txt.setText("" + (r.nextFloat() * (ppp.max - ppp.min) + ppp.min));
+	//					//TODO if using lennard-jones, initialize values using geometric combination rules
+	//				}
+	//				String temp2 = potentialAbbreviations[q.potentialNumber - 1][getIndex()];
+	//				potentialListModel.addElement(temp2);
+	//				potentialPanels.add(q);
+	//			}
+	//		}
+	//
+	//		/**
+	//		 * This method will find all combinations of symbols and digits. For example,
+	//		 * if 3 and 2 are used a parameters, the method will return the values
+	//		 * [[0,0], [0,1], [0,2]]
+	//		 * [[1,0], [1,1], [1,2]]
+	//		 * [[2,0], [2,1], [2,2]]
+	//		 *
+	//		 * @param symbols
+	//		 * @param digits
+	//		 * @return a list of the symbols^digits different combinations
+	//		 */
+	//		private ArrayList<ArrayList<Integer>> combinations(int symbols, int digits) {
+	//			return combinations(symbols, new ArrayList<Integer>(), digits);
+	//		}
+	//
+	//		private ArrayList<ArrayList<Integer>> combinations(int symbols, ArrayList<Integer> number, int digits) {
+	//			ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
+	//			if (number.size() == digits) {
+	//					temp.add(number);
+	//			} else {
+	//				for (int j=0; j < symbols; j++) {
+	//					ArrayList<Integer> temp2 = new ArrayList<Integer>(number);
+	//					temp2.add(j);
+	//					temp.addAll(combinations(symbols, temp2, digits));
+	//				}
+	//			}
+	//			return temp;
+	//		}
+	//	};
+	private final SerialListener keySavePotentials = new SerialListener() {
 		private static final long serialVersionUID = 222500108052711638L;
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fileDialog = new JFileChooser();
+			final JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
 				try {
-					ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(fileDialog.getSelectedFile()));
-					int index = potentialPanels.size();
+					final ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(fileDialog.getSelectedFile()));
+					final int index = potentialPanels.size();
 					oo.writeInt(index);
 					for (int i = 0; i < index; i++) {
 						oo.writeObject(potentialPanels.get(i));
 						oo.writeObject((String) potentialListModel.get(i));
 					}
 					oo.close();
-				} catch (IOException ioe) {
+				} catch (final IOException ioe) {
 					ioe.printStackTrace();
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 		}
 	};
-	private SerialListener keyRestorePotentials = new SerialListener() {
+	private final SerialListener keyRestorePotentials = new SerialListener() {
 		private static final long serialVersionUID = 222500108052711638L;
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fileDialog = new JFileChooser();
+			final JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 				try {
-					ObjectInput oi = new ObjectInputStream(new FileInputStream(fileDialog.getSelectedFile()));
-					int index = oi.readInt();
+					final ObjectInput oi = new ObjectInputStream(new FileInputStream(fileDialog.getSelectedFile()));
+					final int index = oi.readInt();
 					for (int i = 0; i < index; i++) {
 						potentialPanels.add((PotentialPanel) oi.readObject());
 						potentialListModel.addElement((String) oi.readObject());
 					}
 					oi.close();
-				} catch (FileNotFoundException fnfe) {
+				} catch (final FileNotFoundException fnfe) {
 					fnfe.printStackTrace();
-				} catch (IOException ioe) {
+				} catch (final IOException ioe) {
 					ioe.printStackTrace();
-				} catch (ClassNotFoundException cnfe) {
+				} catch (final ClassNotFoundException cnfe) {
 					cnfe.printStackTrace();
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 		}
 	};
-	private SerialListener keyAddPotential = new SerialListener() {
+	private final SerialListener keyAddPotential = new SerialListener() {
 		private static final long serialVersionUID = 222500108052711638L;
-		
+
 		public void actionPerformed(ActionEvent e) {
-			PotentialPanel p = getCurrentPotential();
-			boolean lennard = p.getClass().getName().equals("javagulp.view.potential.twocenter.Lennard");
-			
+			final PotentialPanel p = getCurrentPotential();
+			final boolean lennard = p.getClass().getName().equals("javagulp.view.potential.twocenter.Lennard");
+
 			if (lennard && !((Lennard) p).chkAll.isSelected())
 				if (checkAtoms(p))
 					return;
@@ -262,17 +262,17 @@ public class CreateLibrary extends JPanel implements Serializable {
 					return;
 			try {
 				p.writePotential();
-				String temp2 = potentialAbbreviations[p.potentialNumber - 1][getIndex()];
+				final String temp2 = potentialAbbreviations[p.potentialNumber - 1][getIndex()];
 				potentialListModel.addElement(temp2);
 				potentialPanels.add(p);
-				PotentialPanel q = p.clone();
+				final PotentialPanel q = p.clone();
 				potentials[p.potentialNumber - 1][getIndex()] = q;
 				performSwitch(q);
-			} catch (IncompleteOptionException ioe) {
+			} catch (final IncompleteOptionException ioe) {
 				ioe.displayErrorAsPopup();
-			} catch (InvalidOptionException ioe) {
+			} catch (final InvalidOptionException ioe) {
 				ioe.displayErrorAsPopup();
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				if (nfe.getMessage().startsWith("Please enter a numeric value for "))
 					JOptionPane.showMessageDialog(null, nfe.getMessage());
 				else
@@ -312,12 +312,12 @@ public class CreateLibrary extends JPanel implements Serializable {
 	};
 	private void performSwitch(PotentialPanel p) {
 		potentialBackdrop.setViewportView(p);
-//		for (int i=0; i < 4; i++)
-//			pnlAtom.cboAtom[i].setEnabled(false);
-//		for (int i=0; i < p.potentialNumber; i++) {
-//			pnlAtom.cboAtom[i].setEnabled(true);
-//			pnlAtom.cboAtom[i].setSelectedItem(p.atom[i]);
-//		}
+		//		for (int i=0; i < 4; i++)
+		//			pnlAtom.cboAtom[i].setEnabled(false);
+		//		for (int i=0; i < p.potentialNumber; i++) {
+		//			pnlAtom.cboAtom[i].setEnabled(true);
+		//			pnlAtom.cboAtom[i].setSelectedItem(p.atom[i]);
+		//		}
 		if (p.potentialNumber == 1) {
 			scrollBonding.setViewportView(oneAtomBondingOptions);
 		} else if (p.potentialNumber == 2) {
@@ -332,35 +332,35 @@ public class CreateLibrary extends JPanel implements Serializable {
 			threeAtomBondingOptions.setEnabled(p.enabled);
 		}
 	}
-	private SerialListener keyOne = new SerialListener() {
+	private final SerialListener keyOne = new SerialListener() {
 		private static final long serialVersionUID = -4007844896838907666L;
 		public void actionPerformed(ActionEvent e) {
 			potentialNumber = 1;
 			performSwitch(getCurrentPotential());
 		}
 	};
-	private SerialListener keyTwo = new SerialListener() {
+	private final SerialListener keyTwo = new SerialListener() {
 		private static final long serialVersionUID = 7968791753203371347L;
 		public void actionPerformed(ActionEvent e) {
 			potentialNumber = 2;
 			performSwitch(getCurrentPotential());
 		}
 	};
-	private SerialListener keyThree = new SerialListener() {
+	private final SerialListener keyThree = new SerialListener() {
 		private static final long serialVersionUID = 6090705018849026165L;
 		public void actionPerformed(ActionEvent e) {
 			potentialNumber = 3;
 			performSwitch(getCurrentPotential());
 		}
 	};
-	private SerialListener keyFour = new SerialListener() {
+	private final SerialListener keyFour = new SerialListener() {
 		private static final long serialVersionUID = 2114110958141112816L;
 		public void actionPerformed(ActionEvent e) {
 			potentialNumber = 4;
 			performSwitch(getCurrentPotential());
 		}
 	};
-	
+
 	private class ListKeyListener extends KeyAdapter implements Serializable {
 		private static final long serialVersionUID = 2578376394974273341L;
 
@@ -370,7 +370,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 				if (JOptionPane.showConfirmDialog(null,
 						"Are you sure you want to remove the selected potentials?") == JOptionPane.YES_OPTION) {
 					if (potentialListModel.getSize() > 0) {
-						int[] indices = potentialList.getSelectedIndices();
+						final int[] indices = potentialList.getSelectedIndices();
 						for (int i=indices.length-1; i >= 0 ; i--) {
 							potentialListModel.remove(indices[i]);
 							potentialPanels.remove(indices[i]);
@@ -380,20 +380,20 @@ public class CreateLibrary extends JPanel implements Serializable {
 			}
 		}
 	};
-	private ListKeyListener listKeyListener = new ListKeyListener();
+	private final ListKeyListener listKeyListener = new ListKeyListener();
 
 	private class PotentialListener implements
-		ListSelectionListener, Serializable {
+	ListSelectionListener, Serializable {
 		private static final long serialVersionUID = -2720144256318780471L;
 
 		public void valueChanged(ListSelectionEvent e) {
-			int index = potentialList.getSelectedIndex();
+			final int index = potentialList.getSelectedIndex();
 			if (potentialListModel.getSize() > 0 && index != -1) {
 				performSwitch(potentialPanels.get(index));
 			}
 		}
 	};
-	private PotentialListener listMouseListener = new PotentialListener();
+	private final PotentialListener listMouseListener = new PotentialListener();
 
 	public CreateLibrary() {
 		super();
@@ -425,7 +425,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		add(btnCombinations);
 		btnCombinations.setBounds(1010, 7, 235, 42);
 		btnCombinations.setEnabled(false);
-//		btnCombinations.addActionListener(keyCombinations);
+		//		btnCombinations.addActionListener(keyCombinations);
 		add(btnSavePotentials);
 		btnSavePotentials.setBounds(10, 386, 179, 25);
 		btnSavePotentials.addActionListener(keySavePotentials);
@@ -462,11 +462,11 @@ public class CreateLibrary extends JPanel implements Serializable {
 	}
 
 	public String writePotentials() {
-		StringBuffer lines = new StringBuffer();
+		final StringBuffer lines = new StringBuffer();
 		try {
-			PotentialPanel q = (PotentialPanel) potentialBackdrop.getViewport().getView();
+			final PotentialPanel q = (PotentialPanel) potentialBackdrop.getViewport().getView();
 			for (int i = 0; i < potentialPanels.size(); i++) {
-				PotentialPanel p = potentialPanels.get(i);
+				final PotentialPanel p = potentialPanels.get(i);
 				potentialNumber = p.potentialNumber;
 				potentialBackdrop.setViewportView(p);
 				performSwitch(p);
@@ -474,9 +474,9 @@ public class CreateLibrary extends JPanel implements Serializable {
 			}
 			potentialBackdrop.setViewportView(q);
 			performSwitch(q);
-		} catch (IncompleteOptionException e) {
+		} catch (final IncompleteOptionException e) {
 			e.displayErrorAsPopup();
-		} catch (InvalidOptionException e) {
+		} catch (final InvalidOptionException e) {
 			e.displayErrorAsPopup();
 		}
 		return lines.toString();
@@ -496,7 +496,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 			line += pnlAtom.cboAtom[i].getSelectedItem() + " ";
 		return line;
 	}
-	
+
 	private int getIndex() {
 		int index = 0;
 		if (potentialNumber == 1) {
@@ -511,7 +511,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 			;// error
 		return index;
 	}
-	
+
 	//TODO There shouldn't be any difference between this and getCurrentPotential.
 	public PotentialPanel getVisiblePotential() {
 		//return (PotentialPanel) Back.getPanel().getPotential().
@@ -526,36 +526,36 @@ public class CreateLibrary extends JPanel implements Serializable {
 			pkg += "threecenter.";
 		else if (potentialNumber == 4)
 			pkg += "fourcenter.";
-		
+
 		if (potentials[potentialNumber - 1][getIndex()] == null) {
 			try {
-				Class c = Class.forName(pkg + classNames[potentialNumber - 1][getIndex()]);
-               				potentials[potentialNumber - 1][getIndex()] = (PotentialPanel) c.newInstance();
-			} catch (ClassNotFoundException e) {
+				final Class c = Class.forName(pkg + classNames[potentialNumber - 1][getIndex()]);
+				potentials[potentialNumber - 1][getIndex()] = (PotentialPanel) c.newInstance();
+			} catch (final ClassNotFoundException e) {
 				e.printStackTrace();
-			} catch (InstantiationException e) {
+			} catch (final InstantiationException e) {
 				e.printStackTrace();
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
 		return potentials[potentialNumber - 1][getIndex()];
 	}
-	
-	private String[][] classNames = {
+
+	private final String[][] classNames = {
 			{ "NoPotential", "Spring", "EAMFunctional", "EAMDensity", "BondOrderSelfEnergy",
-					"BSM", "CoshSpring" },
-			{ "NoPotential", "GeneralPotential", "Buckingham", "Lennard", "Morse", "Harmonic",
+				"BSM", "CoshSpring" },
+				{ "NoPotential", "GeneralPotential", "Buckingham", "Lennard", "Morse", "Harmonic",
 					"Rydberg", "Tsuneyuki", "SquaredHarmonic", "Tersoff",
 					"TersoffCombine", "SW2", "Manybody", "EAMPotentialShift",
 					"Brenner", "Spline", "Qtaper", "Qerfc", "BOCharge",
 					"Polynomial", "SWJB2", "Coulomb", "Igauss", "CovExp",
 					"FermiDirac", "LJBuffered", "QOVerr2", "DampedDispersion", },
-			{ "NoPotential", "ThreeBody", "ThreeBodyExponentialHarmonic", "Vessal",
-					"CosineHarmonic", "UreyBradley", "MurrellMottram",
-					"Linear3", "AxilrodTeller", "Exponential", "Sw3", "Sw3jb",
-					"Bcoscross", "Bcross", "Bacross", "HydrogenBond",
-					"Equatorial", },
-			{ "NoPotential", "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
-					"Torexp", "Tortaper", "TortaperEsff", "Inversion" } };
+					{ "NoPotential", "ThreeBody", "ThreeBodyExponentialHarmonic", "Vessal",
+						"CosineHarmonic", "UreyBradley", "MurrellMottram",
+						"Linear3", "AxilrodTeller", "Exponential", "Sw3", "Sw3jb",
+						"Bcoscross", "Bcross", "Bacross", "HydrogenBond",
+						"Equatorial", },
+						{ "NoPotential", "Torsion", "OutofPlane", "Ryckaert", "Torangle", "Torharm",
+							"Torexp", "Tortaper", "TortaperEsff", "Inversion" } };
 }

@@ -17,27 +17,27 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 public class GeneralTest extends TestCase {
-	
-	private GeneralPotential g = new GeneralPotential();
+
+	private final GeneralPotential g = new GeneralPotential();
 	private PPP a;
 	private PPP rho;
 	private PPP c;
 	private JTextField txtrmin;
 	private JTextField txtrmax;
-	
-	private String[] testValuesA = {"", "A", "0", "1"};
-	private String[] testValuesRho = {"", "B", "2", "3"};
-	private String[] testValuesC = {"", "C", "4", "5"};
-	
-	private boolean[] result = {false, false, true, true};
+
+	private final String[] testValuesA = {"", "A", "0", "1"};
+	private final String[] testValuesRho = {"", "B", "2", "3"};
+	private final String[] testValuesC = {"", "C", "4", "5"};
+
+	private final boolean[] result = {false, false, true, true};
 
 	@Override
 	protected void setUp() throws Exception {
-		CreateLibrary pot = Back.getCurrentRun().getPotential();
+		final CreateLibrary pot = Back.getCurrentRun().getPotential();
 		pot.potentialNumber = 2;
 		pot.pnlAtom.cboAtom[0].addItem("H");
 		pot.pnlAtom.cboAtom[1].addItem("N");
-		PotentialPanel[][] pnl = (PotentialPanel[][]) PotTest.getField("potentials", pot);
+		final PotentialPanel[][] pnl = (PotentialPanel[][]) PotTest.getField("potentials", pot);
 		pnl[1][0] = g;
 		a = g.params[0];
 		rho = g.params[1];
@@ -48,11 +48,11 @@ public class GeneralTest extends TestCase {
 
 	@Test
 	public void testWritePotential() {
-		String t = "^" + "general " + PotTest.genBondingOptions() + Back.newLine;
-		String b = PotTest.genAtoms(2) + PotTest.genFloats(4, 5)
-				+ PotTest.genFlags(3, 3) + Back.newLine + "$";
-		Pattern p = Pattern.compile(t+b);
-		
+		final String t = "^" + "general " + PotTest.genBondingOptions() + Back.newLine;
+		final String b = PotTest.genAtoms(2) + PotTest.genFloats(4, 5)
+		+ PotTest.genFlags(3, 3) + Back.newLine + "$";
+		final Pattern p = Pattern.compile(t+b);
+
 		boolean fail = false;
 		System.out.println("General testWritePotential");
 		System.out.println(t+b);
@@ -63,30 +63,30 @@ public class GeneralTest extends TestCase {
 			a.txt.setText(testValuesA[i]);
 			rho.txt.setText(testValuesRho[i]);
 			c.txt.setText(testValuesC[i]);
-			
+
 			txtrmin.setText(PotTest.getRandomFloat(0, 1));
 			txtrmax.setText(PotTest.getRandomFloat(0, 10));
-			
-			
+
+
 			boolean good = false;
 			String s = null;
 			try {
 				s = g.writePotential();
 				//parse output string for correct format
-				Matcher m = p.matcher(s);
+				final Matcher m = p.matcher(s);
 				if (m.matches()) {
 					System.out.println("match");
 					//perform more error checking
 					for (int j=0; j<m.groupCount(); j++) {
 						System.out.println("group " + j + " " + m.group(j));
 					}
-					boolean elements = PotTest.areElements(new String[]{
+					final boolean elements = PotTest.areElements(new String[]{
 							m.group(4), m.group(5)});
 					boolean numbers = true;
 					for (int j=0; j < 5; j++) {
 						try {
 							Double.parseDouble(m.group(2*i+6));
-						} catch (NumberFormatException nfe) {
+						} catch (final NumberFormatException nfe) {
 							nfe.printStackTrace();
 							numbers = false;
 							System.out.println(m.group(2*i+7) + " is not a double.");
@@ -95,12 +95,12 @@ public class GeneralTest extends TestCase {
 						}
 					}
 					if (elements && numbers);
-						good = true;
+					good = true;
 				}
-			} catch (IncompleteOptionException e) {
+			} catch (final IncompleteOptionException e) {
 				if (result[i])
 					e.printStackTrace();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				if (result[i])
 					e.printStackTrace();
 			}

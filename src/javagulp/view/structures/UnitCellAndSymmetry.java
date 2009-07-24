@@ -19,21 +19,21 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 5665294447343395650L;
 
-	private RotationOperatorTableModel rModel = new RotationOperatorTableModel();
-	private TranslationOperatorTableModel tModel = new TranslationOperatorTableModel();
+	private final RotationOperatorTableModel rModel = new RotationOperatorTableModel();
+	private final TranslationOperatorTableModel tModel = new TranslationOperatorTableModel();
 
 	public UnitCellPanel unitCellPanel = new UnitCellPanel();
 
 
 	public SpaceGroup spaceGroup = new SpaceGroup();
 
-	private JComboBox cboSetSymmetry = new JComboBox(new String[] {
+	private final JComboBox cboSetSymmetry = new JComboBox(new String[] {
 			"triclinic", "monoclinic", "orthorhombic", "tetragonal",
 			"hexagonal", "rhombohedral", "cubic" });
 
-	private JTextField txtSuperCellX = new JTextField("1");
-	private JTextField txtSuperCellY = new JTextField("1");
-	private JTextField txtSuperCellZ = new JTextField("1");
+	private final JTextField txtSuperCellX = new JTextField("1");
+	private final JTextField txtSuperCellY = new JTextField("1");
+	private final JTextField txtSuperCellZ = new JTextField("1");
 
 	public UnitCellAndSymmetry() {
 		super();
@@ -44,7 +44,7 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 		//unitCellPanel.setLayout(new BorderLayout());
 		add(unitCellPanel);
 
-		TitledPanel pnlSuperCell = new TitledPanel();
+		final TitledPanel pnlSuperCell = new TitledPanel();
 		pnlSuperCell.setBounds(0, 338, 316, 48);
 		add(pnlSuperCell);
 		pnlSuperCell.setTitle("extend unit cell to supercell");
@@ -79,10 +79,10 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 		pnlSymmetryOper.add(tableTranslationOper);
 		tableTranslationOper.setModel(tModel);
 		tableTranslationOper.setBounds(285, 20, 225, 80);
-		JLabel lblRotationOper = new JLabel("rotation operator");
+		final JLabel lblRotationOper = new JLabel("rotation operator");
 		pnlSymmetryOper.add(lblRotationOper);
 		lblRotationOper.setBounds(102, 103, 107, 15);
-		JLabel lblTranslationOper = new JLabel("translation operator");
+		final JLabel lblTranslationOper = new JLabel("translation operator");
 		pnlSymmetryOper.add(lblTranslationOper);
 		lblTranslationOper.setBounds(327, 103, 125, 15);
 
@@ -92,13 +92,14 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 		add(pnlSetSymmetry);
 		cboSetSymmetry.setBounds(7, 19, 130, 25);
 		pnlSetSymmetry.add(cboSetSymmetry);
-		UnitCellOptions pnlOptions = new UnitCellOptions();
+		final UnitCellOptions pnlOptions = new UnitCellOptions();
 		pnlOptions.setBounds(322, 191, 682, 195);
 		add(pnlOptions);
 	}
 
 	private String writeSupercell() throws IncompleteOptionException {
-		String lines = "", x = txtSuperCellX.getText(), y = txtSuperCellY.getText(), z = txtSuperCellZ.getText();
+		String lines = "";
+		final String x = txtSuperCellX.getText(), y = txtSuperCellY.getText(), z = txtSuperCellZ.getText();
 		if ((!x.equals("") && !x.equals("1"))
 				|| (!y.equals("") && !y.equals("1"))
 				|| (!z.equals("") && !z.equals("1"))) {
@@ -122,6 +123,6 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 
 	public String writeUnitCellAndSymmetry() throws IncompleteOptionException {
 		return writeSymmetryCell() + rModel.writeSymOpOption(tModel)
-				+ unitCellPanel.writeUnitCell() + writeSupercell();
+		+ unitCellPanel.writeUnitCell() + writeSupercell();
 	}
 }

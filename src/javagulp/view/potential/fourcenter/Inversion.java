@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -16,30 +18,27 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Inversion extends PotentialPanel implements Serializable {
 	private static final long serialVersionUID = -2291778583428349603L;
 
 	G g = new G();
-	
-	private String text = g.html("E = k * (1 - cos " + g.phi + ")");
-	private String squared = g.html("E = 1/2 (k/sin(k0)" + g.sup("2") + ") * (cos " + g.phi + " - cos k0)" + g.sup("2"));
-	
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblEq = new JLabel();
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
-	private JLabel lblK0 = new JLabel("k0");
-	
-	private JTextField txtK0 = new JTextField();
-	
-	private JCheckBox chkSquared = new JCheckBox("squared");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
-	private PPP K = new PPP("k");
-	
+
+	private final String text = g.html("E = k * (1 - cos " + g.phi + ")");
+	private final String squared = g.html("E = 1/2 (k/sin(k0)" + g.sup("2") + ") * (cos " + g.phi + " - cos k0)" + g.sup("2"));
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEq = new JLabel();
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
+	private final JLabel lblK0 = new JLabel("k0");
+
+	private final JTextField txtK0 = new JTextField();
+
+	private final JCheckBox chkSquared = new JCheckBox("squared");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
+	private final PPP K = new PPP("k");
+
 	SerialListener keySquared = new SerialListener() {
 		private static final long serialVersionUID = -2516546900856198341L;
 		@Override
@@ -55,11 +54,11 @@ public class Inversion extends PotentialPanel implements Serializable {
 			}
 		}
 	};
-	
+
 	public Inversion() {
 		super(4);
 		setTitle("inversion");
-		
+
 		lblEq.setBounds(10, 25, 640, 25);
 		add(lblEq);
 		lblImage.setBounds(518, 24, 190, 75);
@@ -80,15 +79,15 @@ public class Inversion extends PotentialPanel implements Serializable {
 		add(lblK0);
 		txtK0.setBounds(90, 100, 100, 20);
 		add(txtK0);
-		
+
 		keySquared.actionPerformed(null);
-		
+
 		params = new PPP[]{K};
 	}
 
 	@Override
 	public PotentialPanel clone() {
-		Inversion i = new Inversion();
+		final Inversion i = new Inversion();
 		i.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		i.chkSquared.setSelected(this.chkSquared.isSelected());
 		i.txtK0.setText(this.txtK0.getText());
@@ -98,11 +97,11 @@ public class Inversion extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		
+
 		String lines = "inversion ";
 		if (chkSquared.isSelected())
 			lines += "squared ";
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		lines += pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();

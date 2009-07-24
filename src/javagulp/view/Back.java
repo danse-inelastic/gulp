@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Scanner;
+
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Keywords;
@@ -38,27 +39,27 @@ public class Back {
 
 	public Back() {
 		initializeFrame(null);
-		
+
 		//default configuration
 		// Hack--until we can rip out multiple gulp runs
 		Back.getTaskKeywords().putTaskKeywords("md");
 	}
-	
+
 	public Back(String[] simulationParams) {
 		initializeFrame(simulationParams);
-		
+
 		//default configuration
 		// Hack--until we can rip out multiple gulp runs
 		Back.getTaskKeywords().putTaskKeywords("md");
 	}
-	
+
 	private void initializeFrame(String[] simulationParams){
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(pcmenu);
 
 		frame.setSize(1280, 700);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension frameSize = frame.getSize();
+		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		final Dimension frameSize = frame.getSize();
 		if (frameSize.height > screenSize.height) {
 			frameSize.height = screenSize.height;
 		}
@@ -76,7 +77,7 @@ public class Back {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					if (JOptionPane.showConfirmDialog(null,
-							"Are you sure you want to delete this node?") == JOptionPane.YES_OPTION) {
+					"Are you sure you want to delete this node?") == JOptionPane.YES_OPTION) {
 						tabs.remove(tabs.getSelectedIndex());
 					}
 				}
@@ -94,7 +95,7 @@ public class Back {
 	}
 
 	public void addTab(String[] simulationParams) {
-		GulpRun gulpRun = new GulpRun(simulationParams);
+		final GulpRun gulpRun = new GulpRun(simulationParams);
 		tabs.add("" + (tabs.getTabCount() + 1), gulpRun);
 		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 		tabs.setSelectedIndex(tabs.getTabCount() - 1);
@@ -102,9 +103,9 @@ public class Back {
 		gulpRun.getPotential().populatePotentialList();
 	}
 
-	
+
 	public static String getFileContents(File file) {
-		StringBuffer contents = new StringBuffer();
+		final StringBuffer contents = new StringBuffer();
 		Scanner in = null;
 		try {
 			in = new Scanner(file);
@@ -112,7 +113,7 @@ public class Back {
 				contents.append(in.nextLine());
 				contents.append(newLine);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		in.close();
@@ -127,15 +128,15 @@ public class Back {
 	public static GulpRun getCurrentRun() {
 		return (GulpRun) tabs.getComponent(tabs.getSelectedIndex());
 	}
-	
+
 	public static String getRunTypeKeyword() {
 		return getCurrentRun().getRunTypeKeyword();
 	}
-	
+
 	public static JPanel getSelectedRunTypePanel(String type) {
 		return getCurrentRun().getSelectedRunTypePanel(type);
 	}
-	
+
 	public static Structure getStructure() {
 		return (Structure) getCurrentRun().getStructures().tabs.getSelectedComponent();
 	}
@@ -148,11 +149,11 @@ public class Back {
 	public static Keywords getKeys() {
 		return getCurrentRun().getKeywords();
 	}
-	
+
 	public static TaskKeywords getTaskKeywords() {
 		return getCurrentRun().getTaskKeywords();
 	}
-	
+
 	/**
 	 * This method replaces the current tab and Keywords with new instances.
 	 */
@@ -160,7 +161,7 @@ public class Back {
 		tabs.setComponentAt(Back.tabs.getSelectedIndex(), new GulpRun(new String[]{}));
 		getCurrentRun().getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(0);
 	}
-	
+
 	/**
 	 * This method returns true if any of the JTextFields are non-empty, else false.
 	 * 
@@ -169,12 +170,12 @@ public class Back {
 	 */
 	@Deprecated
 	public static boolean checkAnyNonEmpty(JTextField[] fields) {
-		for (JTextField field: fields)
+		for (final JTextField field: fields)
 			if (!field.getText().equals(""))
 				return true;
 		return false;
 	}
-	
+
 	/**
 	 * This method returns true if any of the JTextFields are non-empty, else false.
 	 * 
@@ -182,12 +183,12 @@ public class Back {
 	 * @return	false if all are empty, else true
 	 */
 	public static boolean checkAnyNonEmpty(PPP[] fields) {
-		for (PPP field: fields)
+		for (final PPP field: fields)
 			if (!field.txt.getText().equals(""))
 				return true;
 		return false;
 	}
-	
+
 	/**
 	 * This method checks that every JTextField contains something, else it
 	 * throws an exception with the associated description.
@@ -198,13 +199,13 @@ public class Back {
 	 */
 	@Deprecated
 	public static void checkAllNonEmpty(JTextField[] fields, String[] descriptions)
-			throws IncompleteOptionException {
+	throws IncompleteOptionException {
 		for (int i = 0; i < fields.length; i++) {
 			if (fields[i].getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for " + descriptions[i]);
 		}
 	}
-	
+
 	/**
 	 * This method checks that every JTextField contains something, else it
 	 * throws an exception with the associated JLabel text.
@@ -213,13 +214,13 @@ public class Back {
 	 * @throws IncompleteOptionException
 	 */
 	public static void checkAllNonEmpty(PPP[] fields)
-			throws IncompleteOptionException {
-		for (PPP field: fields) {
+	throws IncompleteOptionException {
+		for (final PPP field: fields) {
 			if (field.txt.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for " + field.lbl.getText());
 		}
 	}
-	
+
 	/**
 	 * This method simply calls checkAllNonEmpty and parseFieldsD
 	 * 
@@ -243,19 +244,19 @@ public class Back {
 	 */
 	@Deprecated
 	public static double[] parseFieldsD(JTextField[] fields, String[] descriptions) {
-		double[] values = new double[fields.length];
+		final double[] values = new double[fields.length];
 		for (int i = 0; i < fields.length; i++) {
 			try {
 				if (!fields[i].getText().equals("")) {
 					values[i] = Double.parseDouble(fields[i].getText());
 				}
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				throw new NumberFormatException("Please enter a numeric value for " + descriptions[i]);
 			}
 		}
 		return values;
 	}
-	
+
 	/**
 	 * This method will parse the contents of an array of JTextFields and return
 	 * an array of doubles.
@@ -265,19 +266,19 @@ public class Back {
 	 * @return an array of parsed double values
 	 */
 	public static double[] parseFieldsD(PPP[] fields) {
-		double[] values = new double[fields.length];
+		final double[] values = new double[fields.length];
 		for (int i = 0; i < fields.length; i++) {
 			try {
 				if (!fields[i].txt.getText().equals("")) {
 					values[i] = Double.parseDouble(fields[i].txt.getText());
 				}
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				throw new NumberFormatException("Please enter a numeric value for " + fields[i].lbl.getText());
 			}
 		}
 		return values;
 	}
-	
+
 	/**
 	 * This method will parse the contents of an array of JTextFields and return
 	 * an array of ints.
@@ -289,13 +290,13 @@ public class Back {
 	 */
 	@Deprecated
 	public static int[] parseFieldsI(JTextField[] fields, String[] descriptions) {
-		int[] values = new int[fields.length];
+		final int[] values = new int[fields.length];
 		for (int i = 0; i < fields.length; i++) {
 			try {
 				if (!fields[i].getText().equals("")) {
 					values[i] = Integer.parseInt(fields[i].getText());
 				}
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				throw new NumberFormatException("Please enter an integer value for " + descriptions[i]);
 			}
 		}
@@ -311,14 +312,14 @@ public class Back {
 	 */
 	public static String concatFields(JTextField[] fields) {
 		String lines = "";
-		for (int i = 0; i < fields.length; i++) {
-			lines += fields[i].getText() + " ";
+		for (final JTextField field : fields) {
+			lines += field.getText() + " ";
 		}
 		return lines.trim();
 	}
-	
-	
-	
+
+
+
 	/**
 	 * This method concatenates the contents of an array of JTextFields.
 	 * The contents are separated by spaces.
@@ -328,12 +329,12 @@ public class Back {
 	 */
 	public static String concatFields(PPP[] fields) {
 		String lines = "";
-		for (int i = 0; i < fields.length; i++) {
-			lines += fields[i].txt.getText() + " ";
+		for (final PPP field : fields) {
+			lines += field.txt.getText() + " ";
 		}
 		return lines.trim();
 	}
-	
+
 	/**
 	 * This method simply calls concatFields and writeFits
 	 * 
@@ -356,9 +357,9 @@ public class Back {
 	public static String writeFits(JCheckBox[] boxes) {
 		String lines = "";
 		if (Back.getKeys().containsKeyword("fit")) {
-			for (int i = 0; i < boxes.length; i++) {
-				if (boxes[i].isVisible()) {
-					if (boxes[i].isSelected())
+			for (final JCheckBox boxe : boxes) {
+				if (boxe.isVisible()) {
+					if (boxe.isSelected())
 						lines += " 1";
 					else
 						lines += " 0";
@@ -375,40 +376,40 @@ public class Back {
 	 * 
 	 * @param boxes an array of JCheckBoxes
 	 * @return a string of 1s and 0s representing the state of JCheckBoxes
-	 * @throws IncompleteOptionException 
+	 * @throws IncompleteOptionException
 	 */
 	@Deprecated
 	public static String writeFlags(JComboBox[] boxes) throws IncompleteOptionException {
 		//error checking
-//		boolean noneSelected = true;
-//		boolean atLeastOneUnselected = true;
-//		boolean someSelectedSomeUnselected = false;
-//		for (JComboBox box: boxes){
-//			if(!box.getSelectedItem().equals(""))
-//				noneSelected = false;
-//		}
-//		for (JComboBox box: boxes){
-//			if(box.getSelectedItem().equals(""))
-//				atLeastOneUnselected = true;break;
-//		}
-//		if (noneSelected==false && atLeastOneUnselected==true) someSelectedSomeUnselected = true;
-//		if(someSelectedSomeUnselected)
-//			throw new IncompleteOptionException("Must indicate fitting/optimization status of either all cell parameters / atomic positions or none of them.");
+		//		boolean noneSelected = true;
+		//		boolean atLeastOneUnselected = true;
+		//		boolean someSelectedSomeUnselected = false;
+		//		for (JComboBox box: boxes){
+		//			if(!box.getSelectedItem().equals(""))
+		//				noneSelected = false;
+		//		}
+		//		for (JComboBox box: boxes){
+		//			if(box.getSelectedItem().equals(""))
+		//				atLeastOneUnselected = true;break;
+		//		}
+		//		if (noneSelected==false && atLeastOneUnselected==true) someSelectedSomeUnselected = true;
+		//		if(someSelectedSomeUnselected)
+		//			throw new IncompleteOptionException("Must indicate fitting/optimization status of either all cell parameters / atomic positions or none of them.");
 		//write out flags
 		String lines = "";
-		for (JComboBox box: boxes){
+		for (final JComboBox box: boxes){
 			if (box.isVisible()) {
-			if(box.getSelectedItem().equals("fit reference") || box.getSelectedItem().equals("optimise"))
-				lines += " 1";
-			else
-				lines += " 0";
+				if(box.getSelectedItem().equals("fit reference") || box.getSelectedItem().equals("optimise"))
+					lines += " 1";
+				else
+					lines += " 0";
 			}
-		}		
+		}
 		//if (Back.getKeys().containsKeyword("fit")) {
 		//}
 		return lines;
 	}
-	
+
 	/**
 	 * This method produces a string of 1s and 0s (separated by spaces)
 	 * corresponding the state of a JCheckBox, with a leading space. The string
@@ -420,9 +421,9 @@ public class Back {
 	public static String writeFits(PPP[] boxes) {
 		String lines = "";
 		if (Back.getKeys().containsKeyword("fit")) {
-			for (int i = 0; i < boxes.length; i++) {
-				if (boxes[i].chk.isVisible()) {
-					if (boxes[i].chk.isSelected())
+			for (final PPP boxe : boxes) {
+				if (boxe.chk.isVisible()) {
+					if (boxe.chk.isSelected())
 						lines += " 1";
 					else
 						lines += " 0";
@@ -431,15 +432,15 @@ public class Back {
 		}
 		return lines;
 	}
-	
+
 	public static boolean deleteDirectory(File path) {
 		if (path.isDirectory()) {
-			File[] files = path.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isDirectory()) {
-					deleteDirectory(files[i]);
+			final File[] files = path.listFiles();
+			for (final File file : files) {
+				if (file.isDirectory()) {
+					deleteDirectory(file);
 				} else {
-					files[i].delete();
+					file.delete();
 				}
 			}
 		}

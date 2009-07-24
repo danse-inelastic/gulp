@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.model.GenericTableModel;
+import javagulp.model.SerialListener;
 import javagulp.view.potential.IconHeaderRenderer;
 
 import javax.swing.ButtonGroup;
@@ -18,38 +20,35 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class PotentialOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -2476083163680364699L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
-	private JCheckBox chkNoListBased = new JCheckBox("no list-based methods for three-/four-body potentials");
+	private final JCheckBox chkNoListBased = new JCheckBox("no list-based methods for three-/four-body potentials");
 
 	public GenericTableModel polarisabilityTableModel = new GenericTableModel(new String[] {"atom", g.html("dipolar polarisibility (" + g.ang + g.sup("3") + ")") }, 0);
-	private JTable table = new JTable(polarisabilityTableModel);
-	private JScrollPane scrollPane = new JScrollPane(table);
+	private final JTable table = new JTable(polarisabilityTableModel);
+	private final JScrollPane scrollPane = new JScrollPane(table);
 
 	public JComboBox cboSpecies = new JComboBox();
 
-	private ResetPotentials pnlResetInteratomic = new ResetPotentials();
+	private final ResetPotentials pnlResetInteratomic = new ResetPotentials();
 
 	private class ResetPotentials extends TitledPanel {
 
 		private static final long serialVersionUID = 3973999468513730548L;
 
-		private JLabel lblNewMaxCutoff = new JLabel(g.html("new max cutoff (must be less than normal cutoff) (" + g.ang + ")"));
-		private JLabel lblTaperForm = new JLabel("taper form");
-		private JLabel lblTaperRange = new JLabel(g.html("taper range (" + g.ang + ")"));
-		private JTextField txtNewMaxCutoff = new JTextField();
-		private JTextField txtTaperRange = new JTextField();
-		private String[] taperForms = { "polynomial", "cosine", "voter" };
-		private JComboBox cboTaperForm = new JComboBox(taperForms);
+		private final JLabel lblNewMaxCutoff = new JLabel(g.html("new max cutoff (must be less than normal cutoff) (" + g.ang + ")"));
+		private final JLabel lblTaperForm = new JLabel("taper form");
+		private final JLabel lblTaperRange = new JLabel(g.html("taper range (" + g.ang + ")"));
+		private final JTextField txtNewMaxCutoff = new JTextField();
+		private final JTextField txtTaperRange = new JTextField();
+		private final String[] taperForms = { "polynomial", "cosine", "voter" };
+		private final JComboBox cboTaperForm = new JComboBox(taperForms);
 
 		public ResetPotentials() {
 			super();
@@ -76,7 +75,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 			if (!txtNewMaxCutoff.getText().equals("")) {
 				Double.parseDouble(txtNewMaxCutoff.getText());
 				lines += "cutp " + txtNewMaxCutoff.getText() + " "
-						+ cboTaperForm.getSelectedItem();
+				+ cboTaperForm.getSelectedItem();
 				if (!txtTaperRange.getText().equals("")) {
 					lines += " " + txtTaperRange.getText();
 				}
@@ -86,33 +85,33 @@ public class PotentialOptions extends JPanel implements Serializable {
 		}
 	}
 
-	private JTextField txtCutoffBondLength = new JTextField();
-	private JTextField txtScale = new JTextField();
+	private final JTextField txtCutoffBondLength = new JTextField();
+	private final JTextField txtScale = new JTextField();
 
-	private JRadioButton radRetainColoumbic = new JRadioButton("retain the coloumbic interaction between its atoms");
-	private JRadioButton radRemoveColoumbic = new JRadioButton("remove the coloumbic interaction between its atoms");
+	private final JRadioButton radRetainColoumbic = new JRadioButton("retain the coloumbic interaction between its atoms");
+	private final JRadioButton radRemoveColoumbic = new JRadioButton("remove the coloumbic interaction between its atoms");
 
-	
-	private JCheckBox chkSetAveragePotential = new JCheckBox("<html>set average potential across lattice sites to 0 (for surface/bulk comparisons)</html>");
-	private JCheckBox chkDoNotUseCutoff = new JCheckBox("<html>do not use a cutoff for exponential repulsive terms when they become less than the accuracy factor (default=10<sup>-8</sup>) to save computer time but use cutoff given in the input file</html>");
-	private JCheckBox chkRemoveColoumbic = new JCheckBox("remove the coloumbic interaction between bonded atoms and atoms with a bonded atom in common");
-	private JCheckBox chkDoNotStop = new JCheckBox("do not stop execution if molecule becomes unbonded");
-	private JCheckBox chkPrintThreeBody = new JCheckBox("print three-body angles found for three-body potentials");
-	private JCheckBox chkOutputList = new JCheckBox("output list of valid torsional terms before and after a calculation");
+
+	private final JCheckBox chkSetAveragePotential = new JCheckBox("<html>set average potential across lattice sites to 0 (for surface/bulk comparisons)</html>");
+	private final JCheckBox chkDoNotUseCutoff = new JCheckBox("<html>do not use a cutoff for exponential repulsive terms when they become less than the accuracy factor (default=10<sup>-8</sup>) to save computer time but use cutoff given in the input file</html>");
+	private final JCheckBox chkRemoveColoumbic = new JCheckBox("remove the coloumbic interaction between bonded atoms and atoms with a bonded atom in common");
+	private final JCheckBox chkDoNotStop = new JCheckBox("do not stop execution if molecule becomes unbonded");
+	private final JCheckBox chkPrintThreeBody = new JCheckBox("print three-body angles found for three-body potentials");
+	private final JCheckBox chkOutputList = new JCheckBox("output list of valid torsional terms before and after a calculation");
 	public JCheckBox chkDoNotInclude = new JCheckBox("do not include library potentials in gulp output");
 	final JCheckBox chkFit = new JCheckBox("fit");
 
-	private KeywordListener keySetAveragePotential = new KeywordListener(chkSetAveragePotential, "zero_potential");
-	private KeywordListener keyDoNotUseCutoff = new KeywordListener(chkDoNotUseCutoff, "norepulsive_cutoff");
-	private KeywordListener keyChkRemoveColoumbic = new KeywordListener(chkRemoveColoumbic, "molmec");
-	private KeywordListener keyDoNotStop = new KeywordListener(chkDoNotStop,
-			"fix_molecule");
-	private KeywordListener keyPrintThreeBody = new KeywordListener(chkPrintThreeBody, "angle");
-	private KeywordListener keyOutputList = new KeywordListener(chkOutputList,
-			"torsion");
-	private KeywordListener keyNoListBased = new KeywordListener(chkNoListBased, "nolist_md");
+	private final KeywordListener keySetAveragePotential = new KeywordListener(chkSetAveragePotential, "zero_potential");
+	private final KeywordListener keyDoNotUseCutoff = new KeywordListener(chkDoNotUseCutoff, "norepulsive_cutoff");
+	private final KeywordListener keyChkRemoveColoumbic = new KeywordListener(chkRemoveColoumbic, "molmec");
+	private final KeywordListener keyDoNotStop = new KeywordListener(chkDoNotStop,
+	"fix_molecule");
+	private final KeywordListener keyPrintThreeBody = new KeywordListener(chkPrintThreeBody, "angle");
+	private final KeywordListener keyOutputList = new KeywordListener(chkOutputList,
+	"torsion");
+	private final KeywordListener keyNoListBased = new KeywordListener(chkNoListBased, "nolist_md");
 
-	private SerialListener keyCoulombGroup = new SerialListener() {
+	private final SerialListener keyCoulombGroup = new SerialListener() {
 		private static final long serialVersionUID = -1256050152081117096L;
 
 		@Override
@@ -122,7 +121,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 		}
 	};
 
-	
+
 	public PotentialOptions() {
 		super();
 		setLayout(null);
@@ -134,7 +133,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 		add(pnlCutoffBondLength);
 		txtCutoffBondLength.setBounds(15, 22, 84, 20);
 		pnlCutoffBondLength.add(txtCutoffBondLength);
-		JLabel angLabel = new JLabel(g.html("(" + g.ang + ")"));
+		final JLabel angLabel = new JLabel(g.html("(" + g.ang + ")"));
 		angLabel.setBounds(105, 24, 20, 15);
 		pnlCutoffBondLength.add(angLabel);
 
@@ -152,7 +151,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		polarisabilityTableModel.uneditableColumns = new int[] { 0 };
 		polarisabilityTableModel.requiredColumns = new int[] { 1 };
-		IconHeaderRenderer iconHeaderRenderer = new IconHeaderRenderer();
+		final IconHeaderRenderer iconHeaderRenderer = new IconHeaderRenderer();
 		table.getColumnModel().getColumn(1).setHeaderRenderer(iconHeaderRenderer);
 
 		chkDoNotUseCutoff.addActionListener(keyDoNotUseCutoff);
@@ -185,17 +184,17 @@ public class PotentialOptions extends JPanel implements Serializable {
 		add(pnlScalingTransformation);
 		txtScale.setBounds(185, 66, 69, 20);
 		pnlScalingTransformation.add(txtScale);
-		JLabel lblEquations = new JLabel("<html>f'(sum(" + g.rho
+		final JLabel lblEquations = new JLabel("<html>f'(sum(" + g.rho
 				+ "<sub>i</sub>)) = f(sum(" + g.rho
 				+ "<sub>i</sub>)/scale<sub>i</sub>)<br> " + g.rho
 				+ "'<sub>i</sub> = scale<sub>i</sub> " + g.rho
 				+ "<sub>i</sub></html>");
 		lblEquations.setBounds(8, 17, 270, 45);
 		pnlScalingTransformation.add(lblEquations);
-		JLabel lblSpecies = new JLabel("species");
+		final JLabel lblSpecies = new JLabel("species");
 		lblSpecies.setBounds(8, 68, 50, 15);
 		pnlScalingTransformation.add(lblSpecies);
-		JLabel lblScale = new JLabel("scale");
+		final JLabel lblScale = new JLabel("scale");
 		lblScale.setBounds(144, 65, 35, 20);
 		pnlScalingTransformation.add(lblScale);
 		chkFit.setBounds(256, 63, 40, 25);
@@ -229,7 +228,8 @@ public class PotentialOptions extends JPanel implements Serializable {
 	}
 
 	private String writeCutd() {
-		String lines = "", length = txtCutoffBondLength.getText();
+		String lines = "";
+		final String length = txtCutoffBondLength.getText();
 		if (!length.equals("")) {
 			Double.parseDouble(length);
 			lines = "cutd " + length + Back.newLine;
@@ -239,7 +239,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 	public String writePotentialOptions() throws IncompleteOptionException {
 		return polarisabilityTableModel.writeTable("polarisability ")
-				+ writeEamAlloy() + writeCutd()
-				+ pnlResetInteratomic.writeCutp();
+		+ writeEamAlloy() + writeCutd()
+		+ pnlResetInteratomic.writeCutp();
 	}
 }

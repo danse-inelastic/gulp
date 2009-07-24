@@ -14,15 +14,13 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
 import javagulp.model.SerialListener;
 import javagulp.view.potential.CreateLibrary;
-import javagulp.view.potential.libs.PotentialLibs;
 import javagulp.view.potential.PotentialUploadDialog;
-
-import javax.swing.JButton;
-
-import javax.swing.JList;
+import javagulp.view.potential.libs.PotentialLibs;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -39,8 +37,8 @@ public class Potential extends JPanel {
 	private static final long serialVersionUID = 4991943378742898078L;
 	//private String libraryPath = "src/javagulp/view/potentialLibraries";
 	//	private String libraryPath = "";
-	private JList libraryList;
-	private DefaultListModel potentialListModel = new DefaultListModel();
+	private final JList libraryList;
+	private final DefaultListModel potentialListModel = new DefaultListModel();
 	ListSelectionModel listSelectionModel;
 	public String potentialSelected = "none";
 	public String libraryContents = "";
@@ -48,7 +46,7 @@ public class Potential extends JPanel {
 	public JPanel useLibrary = new JPanel();
 	final JScrollPane scrollPane = new JScrollPane();
 	public JTextPane libraryDisplay = new JTextPane();
-	private PotentialLibs potentialLibs = new PotentialLibs();
+	private final PotentialLibs potentialLibs = new PotentialLibs();
 
 	public Potential() {
 		super();
@@ -63,7 +61,7 @@ public class Potential extends JPanel {
 
 		final JSplitPane splitPane = new JSplitPane();
 		useLibrary.add(splitPane);
-		
+
 		splitPane.setRightComponent(scrollPane);
 		scrollPane.setViewportView(libraryDisplay);
 
@@ -84,29 +82,29 @@ public class Potential extends JPanel {
 		libraryList = new JList();
 		panel.add(libraryList);
 	}
-	
+
 	public void populatePotentialList(){
 		//remove any previous entries--start from scratch
 		this.potentialListModel.clear();
 		potentialListModel.addElement("none");
 		//get the potential names from the db
-		Object[] potentialNames = getPotentialNamesFromDb();
-		for (int i=0; i<potentialNames.length; i++) {
+		final Object[] potentialNames = getPotentialNamesFromDb();
+		for (final Object potentialName : potentialNames) {
 			// Get filename of file or directory
-			potentialListModel.addElement(potentialNames[i]);
+			potentialListModel.addElement(potentialName);
 		}
 		libraryList.setModel(potentialListModel);
 		listSelectionModel = libraryList.getSelectionModel();
 		listSelectionModel.addListSelectionListener(new LibraryListener());
 		libraryList.setSelectedValue("none", true);
 	}
-	
+
 	private Object[] getPotentialNamesFromDb(){ //ArrayList<String>
-		Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
-		String cgihome = cgiMap.get("cgihome");
-		CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-		
-		Map<String, String> getPotentialNamesQuery = new HashMap<String, String>();
+		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		final String cgihome = cgiMap.get("cgihome");
+		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+
+		final Map<String, String> getPotentialNamesQuery = new HashMap<String, String>();
 		Back.getCurrentRun().putInAuthenticationInfo(getPotentialNamesQuery);
 		getPotentialNamesQuery.put("actor", "directdb");
 		getPotentialNamesQuery.put("routine", "get");
@@ -114,7 +112,7 @@ public class Potential extends JPanel {
 		getPotentialNamesQuery.put("directdb.columns", "id");
 		getPotentialNamesQuery.put("directdb.creator", "everyone");
 		cgiCom.setCgiParams(getPotentialNamesQuery);
-		JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();	
+		final JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();
 		return potentialNamesAsJSONArray.getArrayList();
 	}
 
@@ -135,14 +133,14 @@ public class Potential extends JPanel {
 		}
 	};
 
-	private LibraryListener listMouseListener = new LibraryListener();
+	private final LibraryListener listMouseListener = new LibraryListener();
 
-	private SerialListener keyLibrary = new SerialListener() {
+	private final SerialListener keyLibrary = new SerialListener() {
 		private static final long serialVersionUID = 8698926269816312994L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser findLibrary = new JFileChooser();
+			final JFileChooser findLibrary = new JFileChooser();
 			findLibrary.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 			if (JFileChooser.APPROVE_OPTION == findLibrary.showOpenDialog(getParent())) {
 				final File newLocation = new File(Back.getCurrentRun().getWD() + "/"
@@ -156,7 +154,7 @@ public class Potential extends JPanel {
 			}
 		}
 	};
-	
+
 	private String removeDotSomething(final String name) {
 		final String[] newName = name.split("\\.");
 		return newName[0];

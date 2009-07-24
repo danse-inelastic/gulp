@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -16,50 +18,47 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Torexp extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 7849238242046889539L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblN = new JLabel(g.html("n"));
-	private JLabel lblPhi0 = new JLabel(g.html(g.phi + g.sub("0") + " (deg)<"));
-	private JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
-	private JLabel lblFourBodyEq = new JLabel();
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblN = new JLabel(g.html("n"));
+	private final JLabel lblPhi0 = new JLabel(g.html(g.phi + g.sub("0") + " (deg)<"));
+	private final JLabel lblImage = new JLabel(new CreateIcon().createIcon("torsionNum.png"));
+	private final JLabel lblFourBodyEq = new JLabel();
 
-	
-	private JTextField txtN = new JTextField();
-	private JTextField txtPhi0 = new JTextField("0.0");
-	
-	private PPP KeV =   new PPP(g.html("k (eV)"));
-	private PPP K1 =   new PPP(g.html("k<sub>1</sub (eV)"));
-	private PPP K2 =   new PPP(g.html("k<sub>2</sub (eV)"));
-	
-	private PPP Rho12 = new PPP(g.html(g.rho + g.sub("12") + " (" + g.ang + ")"));
-	private PPP Rho23 = new PPP(g.html(g.rho + g.sub("23") + " (" + g.ang + ")"));
-	private PPP Rho34 = new PPP(g.html(g.rho + g.sub("34") + " (" + g.ang + ")"));
 
-	private JCheckBox chkEsff = new JCheckBox("esff");
-	private JCheckBox chkDreiding = new JCheckBox("dreiding");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	private String strreg = g.html("E = k (1 + cos(n "
+	private final JTextField txtN = new JTextField();
+	private final JTextField txtPhi0 = new JTextField("0.0");
+
+	private final PPP KeV =   new PPP(g.html("k (eV)"));
+	private final PPP K1 =   new PPP(g.html("k<sub>1</sub (eV)"));
+	private final PPP K2 =   new PPP(g.html("k<sub>2</sub (eV)"));
+
+	private final PPP Rho12 = new PPP(g.html(g.rho + g.sub("12") + " (" + g.ang + ")"));
+	private final PPP Rho23 = new PPP(g.html(g.rho + g.sub("23") + " (" + g.ang + ")"));
+	private final PPP Rho34 = new PPP(g.html(g.rho + g.sub("34") + " (" + g.ang + ")"));
+
+	private final JCheckBox chkEsff = new JCheckBox("esff");
+	private final JCheckBox chkDreiding = new JCheckBox("dreiding");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final String strreg = g.html("E = k (1 + cos(n "
 			+ g.phi + " - " + g.phi + "<sub>0</sub>)) exp(-r<sub>12</sub>/"
 			+ g.rho + "<sub>12</sub>) " + "exp(-r<sub>23</sub>/" + g.rho
 			+ "<sub>23</sub>) exp(-r<sub>34</sub>/" + g.rho + "<sub>34</sub>)");
-	private String strEsff = g.html("E = [k<sub>1</sub> sin<sup>2</sup>" + g.theta
+	private final String strEsff = g.html("E = [k<sub>1</sub> sin<sup>2</sup>" + g.theta
 			+ "<sub>123</sub> sin<sup>2</sup>" + g.theta
 			+ "<sub>234</sub> + k<sub>2</sub> sin<sup>n</sup>"
 			+ g.theta + "<sub>123</sub> sin<sup>n</sup>" + g.theta
 			+ "<sub>234</sub> cos(n " + g.phi + ")]exp(-r<sub>12</sub>/" + g.rho
 			+ "<sub>12</sub>) exp(-r<sub>23</sub>/" + g.rho
 			+ "<sub>23</sub>) exp(-r<sub>34</sub>/" + g.rho + "<sub>34</sub>)");
-	
-	private SerialListener keyEsff = new SerialListener() {
+
+	private final SerialListener keyEsff = new SerialListener() {
 		private static final long serialVersionUID = 932410562178213543L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -82,7 +81,7 @@ public class Torexp extends PotentialPanel implements Serializable {
 			}
 		}
 	};
-	
+
 	public Torexp() {
 		super(4);
 		setTitle("exponentially-decaying torsional potential");
@@ -130,11 +129,11 @@ public class Torexp extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		if (txtN.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a value for n");
 		Double.parseDouble(txtN.getText());
-		
+
 		String esffDreiding = "";
 		if (chkEsff.isSelected())
 			esffDreiding += "esff";
@@ -151,34 +150,34 @@ public class Torexp extends PotentialPanel implements Serializable {
 		}
 		return lines + Back.newLine;
 	}
-	
+
 	private String writeRegular() throws IncompleteOptionException {
-		PPP[] k = {KeV};
+		final PPP[] k = {KeV};
 		Back.checkAndParseD(k);
-		
+
 		String lines = KeV.txt.getText() + " " + txtN.getText() + " ";
 		if (!txtPhi0.getText().equals("") && !txtPhi0.getText().equals("0.0")) {
 			Double.parseDouble(txtPhi0.getText());
 			lines += txtPhi0.getText() + " ";
 		}
-		PPP[] rho = { Rho12, Rho23, Rho34  };
+		final PPP[] rho = { Rho12, Rho23, Rho34  };
 		lines +=  Back.concatFields(rho) + " " + radii.writeRadii() + Back.writeFits(k) + Back.writeFits(rho);
 		return lines;
 	}
-	
+
 	private String writeEsff() throws IncompleteOptionException {
-		PPP[] params = {K1, K2};
+		final PPP[] params = {K1, K2};
 		Back.checkAndParseD(params);
-		
+
 		String lines = Back.concatFields(params) + " " + txtN.getText() + " ";
-		PPP[] rho = { Rho12, Rho23, Rho34  };
+		final PPP[] rho = { Rho12, Rho23, Rho34  };
 		lines +=  Back.concatFields(rho) + " " + radii.writeRadii() + Back.writeFits(params) + Back.writeFits(rho);
 		return lines;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Torexp t = new Torexp();
+		final Torexp t = new Torexp();
 		t.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		t.chkDreiding.setSelected(this.chkDreiding.isSelected());
 		t.chkEsff.setSelected(this.chkEsff.isSelected());

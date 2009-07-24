@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ButtonGroupTransitional;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 
 import javax.swing.JComponent;
@@ -14,14 +15,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.SerialListener;
-
 public class TwoAtomBondingOptions extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 5240761929430216593L;
 
-	private ButtonGroupTransitional btnGroupBonds = new ButtonGroupTransitional();
-	private ButtonGroupTransitional btnGroupInterIntra = new ButtonGroupTransitional();
+	private final ButtonGroupTransitional btnGroupBonds = new ButtonGroupTransitional();
+	private final ButtonGroupTransitional btnGroupInterIntra = new ButtonGroupTransitional();
 
 	public JRadioButton radInter;
 	public JRadioButton radIntra;
@@ -32,7 +31,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 
 	public JTextField txtScale14;
 
-	private SerialListener keyInter = new SerialListener() {
+	private final SerialListener keyInter = new SerialListener() {
 		private static final long serialVersionUID = 2388442277166262098L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -41,7 +40,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 			updateBooleans();
 		}
 	};
-	private SerialListener keyIntra = new SerialListener() {
+	private final SerialListener keyIntra = new SerialListener() {
 		private static final long serialVersionUID = -1911843871257516353L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -50,19 +49,19 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 			updateBooleans();
 		}
 	};
-	private SerialListener keyBond = new SerialListener() {
+	private final SerialListener keyBond = new SerialListener() {
 		private static final long serialVersionUID = 8520737063642238323L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().selected[2])
 				btnGroupBonds.clearSelection();
 			Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().setRadiiEnabled(!radBond.isSelected());
-			txtScale14.setEnabled(false);			
+			txtScale14.setEnabled(false);
 			Back.getCurrentRun().getPotential().createLibrary.getVisiblePotential().enableScale14 = false;
 			updateBooleans();
 		}
 	};
-	private SerialListener keyNotBond = new SerialListener() {
+	private final SerialListener keyNotBond = new SerialListener() {
 		private static final long serialVersionUID = 6737883603876339735L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -73,7 +72,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 			updateBooleans();
 		}
 	};
-	private SerialListener keyNotBondOrTwoBonds = new SerialListener() {
+	private final SerialListener keyNotBondOrTwoBonds = new SerialListener() {
 		private static final long serialVersionUID = -7675603117130093609L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -84,7 +83,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 			updateBooleans();
 		}
 	};
-	private SerialListener keyThreeBonds = new SerialListener() {
+	private final SerialListener keyThreeBonds = new SerialListener() {
 		private static final long serialVersionUID = 8049855880264970278L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -160,7 +159,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		if (bools.length != 6) {
 			try {
 				throw new Exception("Boolean array must be of length 6.");
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}
 			return;
@@ -178,7 +177,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		if (bools.length != 6) {
 			try {
 				throw new Exception("Boolean array must be of length 6 for selection.");
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}
 			return;
@@ -225,7 +224,7 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		if (radBond.isSelected()) {
 			if (radInter.isSelected() || radIntra.isSelected())
 				line += "bond ";
-			else 
+			else
 				throw  new IncompleteOptionException("Please check either intermolecular or intramolecular");
 		}
 		if (radNotBond.isSelected())

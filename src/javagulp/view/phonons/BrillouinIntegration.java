@@ -8,8 +8,8 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.TitledPanel;
-import javax.swing.ButtonGroup;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -17,7 +17,7 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 
 	private JPanel pnlNone;
 	private JRadioButton noneRadioButton;
-	private ButtonGroup kptButtonGroup = new ButtonGroup();
+	private final ButtonGroup kptButtonGroup = new ButtonGroup();
 	private JRadioButton explicitKpointsRadioButton;
 	private JRadioButton kpointMeshRadioButton;
 	private TitledPanel pnlKpointChoose;
@@ -26,8 +26,8 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 
 
 
-	private KpointsMesh pnlKpointsMesh = new KpointsMesh();
-	private ExplicitKpoints pnlExplicitKpoints = new ExplicitKpoints();
+	private final KpointsMesh pnlKpointsMesh = new KpointsMesh();
+	private final ExplicitKpoints pnlExplicitKpoints = new ExplicitKpoints();
 
 	public BrillouinIntegration() {
 		super();
@@ -36,7 +36,7 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 	}
 
 	public String write() throws IncompleteOptionException,
-			InvalidOptionException {
+	InvalidOptionException {
 		return pnlExplicitKpoints.writeKpoints() + pnlKpointsMesh.writeShrink();
 	}
 	/**
@@ -80,7 +80,7 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 			kpointMeshRadioButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
 					if (kpointMeshRadioButton.isSelected()){
-						CardLayout cl = (CardLayout)(getPnlBackdrop().getLayout());
+						final CardLayout cl = (CardLayout)(getPnlBackdrop().getLayout());
 						cl.show(getPnlBackdrop(), pnlKpointsMesh.getName());
 					}
 				}
@@ -113,7 +113,7 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 			noneRadioButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
 					if (noneRadioButton.isSelected()){
-						CardLayout cl = (CardLayout)(getPnlBackdrop().getLayout());
+						final CardLayout cl = (CardLayout)(getPnlBackdrop().getLayout());
 						cl.show(getPnlBackdrop(), getPnlNone().getName());
 					}
 				}

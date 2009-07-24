@@ -3,14 +3,13 @@ package javagulp.view;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import javagulp.model.G;
 
 public class Defect extends JPanel implements Serializable {
 
@@ -20,12 +19,12 @@ public class Defect extends JPanel implements Serializable {
 
 		private static final long serialVersionUID = -5826957211539162956L;
 
-		private JComboBox cboType = new JComboBox(new String[] {
+		private final JComboBox cboType = new JComboBox(new String[] {
 				"fractional coordinates", "cartesian coordinates" });
 
-		private JTextField txtX = new JTextField();
-		private JTextField txtY = new JTextField();
-		private JTextField txtZ = new JTextField();
+		private final JTextField txtX = new JTextField();
+		private final JTextField txtY = new JTextField();
+		private final JTextField txtZ = new JTextField();
 
 		private Coordinate() {
 			super();
@@ -47,14 +46,14 @@ public class Defect extends JPanel implements Serializable {
 
 		private static final long serialVersionUID = -2581514881672485855L;
 
-		private Coordinate c = new Coordinate();
+		private final Coordinate c = new Coordinate();
 
-		private JComboBox cboCoreShell = new JComboBox(new String[] { "both",
+		private final JComboBox cboCoreShell = new JComboBox(new String[] { "both",
 				"core", "shell" });
-		private JComboBox cboAxes = new JComboBox(new String[] { "none", "xyz",
+		private final JComboBox cboAxes = new JComboBox(new String[] { "none", "xyz",
 				"xy", "xz", "yz", "x", "y", "z" });
 
-		private JLabel lblFix = new JLabel("fix interstitial along:");
+		private final JLabel lblFix = new JLabel("fix interstitial along:");
 
 		private FixCoordinate() {
 			super();
@@ -71,48 +70,48 @@ public class Defect extends JPanel implements Serializable {
 		}
 	}
 
-	private G g = new G();
+	private final G g = new G();
 
-	private String[] forceOpts = {
+	private final String[] forceOpts = {
 			"none",
 			"<html>use electrostatic force of region 1 screened by dielectric constant</html>",
 			"<html>use electrostatic force of region 1 screened by dielectric constant, but neglecting contribution to derivatives of region 1</html>",
 			"<html>use electrostatic force of defects screened by dielectric constant</html>",
 			"<html>use electrostatic force of defects screened by dielectric constant, but neglecting contribution to derivatives of region 1</html>",
-			"<html>consider interaction of region 2a only with defects</html>" };
+	"<html>consider interaction of region 2a only with defects</html>" };
 
-	private JComboBox cboForces = new JComboBox(forceOpts);
-	private JComboBox cboRestart = new JComboBox(new String[] { "<number>",
-			"all" });
+	private final JComboBox cboForces = new JComboBox(forceOpts);
+	private final JComboBox cboRestart = new JComboBox(new String[] { "<number>",
+	"all" });
 
-	private TitledPanel pnlDefect = new TitledPanel();
-	private Coordinate pnlDefectC = new Coordinate();
-	private TitledPanel pnlVacancy = new TitledPanel();
-	private Coordinate pnlVacancyC = new Coordinate();
-	private FixCoordinate pnlInterstitial = new FixCoordinate();
-	private FixCoordinate pnlImpurity = new FixCoordinate();
+	private final TitledPanel pnlDefect = new TitledPanel();
+	private final Coordinate pnlDefectC = new Coordinate();
+	private final TitledPanel pnlVacancy = new TitledPanel();
+	private final Coordinate pnlVacancyC = new Coordinate();
+	private final FixCoordinate pnlInterstitial = new FixCoordinate();
+	private final FixCoordinate pnlImpurity = new FixCoordinate();
 
-	private JTextField txtRadiusOfRegion1 = new JTextField();
-	private JTextField txtRadiusOfRegion2 = new JTextField();
-	private JTextField txtRadiusOfOldRegion1 = new JTextField();
+	private final JTextField txtRadiusOfRegion1 = new JTextField();
+	private final JTextField txtRadiusOfRegion2 = new JTextField();
+	private final JTextField txtRadiusOfOldRegion1 = new JTextField();
 
-	private JCheckBox chkOutputRegion = new JCheckBox("output region 1 before calculation");
-	private JCheckBox chkNoOptimisationsDuring = new JCheckBox("no optimizations during the bulk run");
-	private JCheckBox chkSaveRegion2Information = new JCheckBox("save region2 information for restart");
-	private JCheckBox chkRestartFromSaved = new JCheckBox("restart from saved region 2 information");
-	private JCheckBox chkSymmetryCalculations = new JCheckBox("do not use symmetry in defect calculations");
-	private JCheckBox chkSitePotentials = new JCheckBox("<html>when calculating site potentials in region 1, output values for all sites instead of just those in asymmetric unit</html>");
-	private JCheckBox chkStoreAllIons = new JCheckBox("store all ions in region 2 that interact with region 1");
-	private JCheckBox chkDefect = new JCheckBox("perform an embedded cluster defect calculation at the end of bulk calculation");
+	private final JCheckBox chkOutputRegion = new JCheckBox("output region 1 before calculation");
+	private final JCheckBox chkNoOptimisationsDuring = new JCheckBox("no optimizations during the bulk run");
+	private final JCheckBox chkSaveRegion2Information = new JCheckBox("save region2 information for restart");
+	private final JCheckBox chkRestartFromSaved = new JCheckBox("restart from saved region 2 information");
+	private final JCheckBox chkSymmetryCalculations = new JCheckBox("do not use symmetry in defect calculations");
+	private final JCheckBox chkSitePotentials = new JCheckBox("<html>when calculating site potentials in region 1, output values for all sites instead of just those in asymmetric unit</html>");
+	private final JCheckBox chkStoreAllIons = new JCheckBox("store all ions in region 2 that interact with region 1");
+	private final JCheckBox chkDefect = new JCheckBox("perform an embedded cluster defect calculation at the end of bulk calculation");
 
-	private KeywordListener keyOutputRegion = new KeywordListener(chkOutputRegion, "regi_before");
-	private KeywordListener keyNoOptimisationsDuring = new KeywordListener(chkNoOptimisationsDuring, "bulk_noopt");
-	private KeywordListener keySaveRegion2Information = new KeywordListener(chkSaveRegion2Information, "save");
-	private KeywordListener keyRestartFromSaved = new KeywordListener(chkRestartFromSaved, "restore");
-	private KeywordListener keySymmetryCalculations = new KeywordListener(chkSymmetryCalculations, "nodsymmetry");
-	private KeywordListener keySitePotentials = new KeywordListener(chkSitePotentials, "nodpsym");
-	private KeywordListener keyStoreAllIons = new KeywordListener(chkStoreAllIons, "newda");
-	private KeywordListener keyDefect = new KeywordListener(chkDefect, "defect");
+	private final KeywordListener keyOutputRegion = new KeywordListener(chkOutputRegion, "regi_before");
+	private final KeywordListener keyNoOptimisationsDuring = new KeywordListener(chkNoOptimisationsDuring, "bulk_noopt");
+	private final KeywordListener keySaveRegion2Information = new KeywordListener(chkSaveRegion2Information, "save");
+	private final KeywordListener keyRestartFromSaved = new KeywordListener(chkRestartFromSaved, "restore");
+	private final KeywordListener keySymmetryCalculations = new KeywordListener(chkSymmetryCalculations, "nodsymmetry");
+	private final KeywordListener keySitePotentials = new KeywordListener(chkSitePotentials, "nodpsym");
+	private final KeywordListener keyStoreAllIons = new KeywordListener(chkStoreAllIons, "newda");
+	private final KeywordListener keyDefect = new KeywordListener(chkDefect, "defect");
 
 	public Defect() {
 		super();
@@ -171,7 +170,7 @@ public class Defect extends JPanel implements Serializable {
 		pnlRestart.setTitle("restart with larger region 1");
 		pnlRestart.setBounds(679, 0, 273, 91);
 		add(pnlRestart);
-		JLabel lblMoveAllRegion = new JLabel("<html>move all region 2 ions within radius (&Aring;) to region 1 after restart</html>");
+		final JLabel lblMoveAllRegion = new JLabel("<html>move all region 2 ions within radius (&Aring;) to region 1 after restart</html>");
 		lblMoveAllRegion.setBounds(10, 22, 151, 63);
 		pnlRestart.add(lblMoveAllRegion);
 		cboRestart.setEditable(true);
@@ -189,13 +188,13 @@ public class Defect extends JPanel implements Serializable {
 		pnlRadii.setTitle("radii of defect regions");
 		pnlRadii.setBounds(728, 91, 224, 84);
 		add(pnlRadii);
-		JLabel lblRadiusOfRegion1 = new JLabel("Radius of region 1");
+		final JLabel lblRadiusOfRegion1 = new JLabel("Radius of region 1");
 		lblRadiusOfRegion1.setBounds(7, 21, 154, 14);
 		pnlRadii.add(lblRadiusOfRegion1);
-		JLabel lblRadiusOfRegion2 = new JLabel("Radius of region 2");
+		final JLabel lblRadiusOfRegion2 = new JLabel("Radius of region 2");
 		lblRadiusOfRegion2.setBounds(7, 42, 154, 14);
 		pnlRadii.add(lblRadiusOfRegion2);
-		JLabel lblRadiusOfOldRegion1 = new JLabel("Radius of old region 1");
+		final JLabel lblRadiusOfOldRegion1 = new JLabel("Radius of old region 1");
 		lblRadiusOfOldRegion1.setBounds(7, 63, 154, 14);
 		pnlRadii.add(lblRadiusOfOldRegion1);
 		txtRadiusOfRegion1.setBounds(168, 14, 49, 21);
@@ -211,27 +210,27 @@ public class Defect extends JPanel implements Serializable {
 
 	public String writeDefect() throws IncompleteOptionException {
 		return writeInterstitial() + writeImpurity() + writeCentre()
-				+ writeVacancy() + move2aTo1() + writeMode2a() + writeSize();
+		+ writeVacancy() + move2aTo1() + writeMode2a() + writeSize();
 	}
 
 	// TODO write these methods; GUI may need some additional items
 	private String writeInterstitial() throws IncompleteOptionException {
-		String lines = "";
+		final String lines = "";
 		return lines;
 	}
 
 	private String writeImpurity() throws IncompleteOptionException {
-		String lines = "";
+		final String lines = "";
 		return lines;
 	}
 
 	private String writeCentre() {
-		String lines = "";
+		final String lines = "";
 		return lines;
 	}
 
 	private String writeVacancy() {
-		String lines = "";
+		final String lines = "";
 		return lines;
 	}
 

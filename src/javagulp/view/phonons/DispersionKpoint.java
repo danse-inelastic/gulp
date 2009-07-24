@@ -19,16 +19,16 @@ public class DispersionKpoint extends JPanel implements Serializable {
 	public JTextField txtBoundY = new JTextField("0.0");
 	public JTextField txtBoundZ = new JTextField("0.0");
 
-	private JLabel lblTo = new JLabel("to");
+	private final JLabel lblTo = new JLabel("to");
 
-	private SerialKeyAdapter pointKeyListener = new SerialKeyAdapter() {
+	private final SerialKeyAdapter pointKeyListener = new SerialKeyAdapter() {
 		private static final long serialVersionUID = 1268594961778847795L;
 		@Override
 		public void keyReleased(KeyEvent e) {
 			((Phonons)Back.getCurrentRun().getSelectedRunTypePanel("phonons")).pnlDispersion.dispersionModified = true;
 		}
 	};
-	
+
 	public DispersionKpoint() {
 		setLayout(null);
 

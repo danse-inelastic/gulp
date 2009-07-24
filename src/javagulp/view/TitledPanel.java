@@ -17,7 +17,7 @@ public class TitledPanel extends JPanel implements Serializable {
 		setBorder(border);
 		setLayout(null);
 	}
-	
+
 	public TitledPanel(final String title) {
 		super();
 		setBorder(border);

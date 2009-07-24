@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
 import javagulp.view.Back;
 
 import javax.swing.JComboBox;
@@ -12,47 +14,44 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Piezoelectric extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = -1658508382738062180L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JTextField txtdValue = new JTextField();;
-	private JTextField txtWeight = new JTextField();;
+	private final JTextField txtdValue = new JTextField();;
+	private final JTextField txtWeight = new JTextField();;
 
-	private JComboBox cboiValue = new JComboBox(new String[] { "1", "2", "3",
+	private final JComboBox cboiValue = new JComboBox(new String[] { "1", "2", "3",
 			"4", "5", "6" });
-	private JComboBox cboStressStrain = new JComboBox(new String[] { "stress",
-			"strain" });
-	private JComboBox cboXyz = new JComboBox(new String[] { "x", "y", "z" });
+	private final JComboBox cboStressStrain = new JComboBox(new String[] { "stress",
+	"strain" });
+	private final JComboBox cboXyz = new JComboBox(new String[] { "x", "y", "z" });
 
-	private JPanel pnlEquationBackdrop = new JPanel();
-	private JPanel pnlStressType = new JPanel();
-	private JPanel pnlStrainType = new JPanel();
-	private JPanel pnlLabelBackdrop = new JPanel();
-	private JPanel pnlStrainTypeLabel = new JPanel();
-	private JPanel pnlStressTypeLabel = new JPanel();
+	private final JPanel pnlEquationBackdrop = new JPanel();
+	private final JPanel pnlStressType = new JPanel();
+	private final JPanel pnlStrainType = new JPanel();
+	private final JPanel pnlLabelBackdrop = new JPanel();
+	private final JPanel pnlStrainTypeLabel = new JPanel();
+	private final JPanel pnlStressTypeLabel = new JPanel();
 
-	private JLabel lbleEquation = new JLabel("<html>e<sub>&#945;i</sub> = &#8706;P<sub>&#945;</sub>/&#8706;"
-					+ g.epsilon + "<sub>i</sub></html>");
-	private JLabel lbldValue = new JLabel("<html>d<sub>&#945;i</sub></html>");
-	private JLabel lbleValue = new JLabel("<html>e<sub>&#945;i</sub></html>");
-	private JLabel lbldEquation = new JLabel(g.html("d<sub>" + g.alpha
+	private final JLabel lbleEquation = new JLabel("<html>e<sub>&#945;i</sub> = &#8706;P<sub>&#945;</sub>/&#8706;"
+			+ g.epsilon + "<sub>i</sub></html>");
+	private final JLabel lbldValue = new JLabel("<html>d<sub>&#945;i</sub></html>");
+	private final JLabel lbleValue = new JLabel("<html>e<sub>&#945;i</sub></html>");
+	private final JLabel lbldEquation = new JLabel(g.html("d<sub>" + g.alpha
 			+ "i</sub> = " + g.part + "P<sub>" + g.alpha + "</sub>/" + g.part
 			+ g.sigma + "<sub>i</sub>"));
-	private JLabel lblConstant = new JLabel();
-	private JLabel lbliValue = new JLabel("i");
-	private JLabel lblWeight = new JLabel("weight");
-	private JLabel lblAlpha = new JLabel(g.html(g.alpha));
-	
-	private SerialListener keyCombo = new SerialListener() {
-				private static final long serialVersionUID = -7564113212285211444L;
+	private final JLabel lblConstant = new JLabel();
+	private final JLabel lbliValue = new JLabel("i");
+	private final JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblAlpha = new JLabel(g.html(g.alpha));
 
-				@Override
+	private final SerialListener keyCombo = new SerialListener() {
+		private static final long serialVersionUID = -7564113212285211444L;
+
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (cboStressStrain.getSelectedItem().equals("stress")) {
 				((CardLayout) pnlEquationBackdrop.getLayout()).show(pnlEquationBackdrop, pnlStressType.getName());
@@ -141,5 +140,5 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

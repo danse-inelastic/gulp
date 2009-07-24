@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
+import javagulp.model.SerialListener;
 import javagulp.view.TitledPanel;
 
 import javax.swing.JButton;
@@ -18,64 +19,62 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
-import javagulp.model.SerialListener;
-
 public class Pending extends JPanel implements Serializable {
 	// TODO figure out why this is never used
 
 	private static final long serialVersionUID = 9096178703227311547L;
 
-	private JButton btnAdd = new JButton("Add");
-	private JButton btnRemove = new JButton("Remove");
+	private final JButton btnAdd = new JButton("Add");
+	private final JButton btnRemove = new JButton("Remove");
 
-	private JLabel label = new JLabel("i");
-	private JLabel label2 = new JLabel("j");
-	private JLabel lblDielectricConstant = new JLabel("Dielectric Constant:");
-	private JLabel lblElasticConstant = new JLabel("Elastic Constant:");
-	private JLabel lblI = new JLabel("i");
-	private JLabel lblJ = new JLabel("j");
-	private JLabel lblNumber = new JLabel("Number:");
-	private JLabel lblSelect = new JLabel("Select:");
-	private JLabel lblWeight = new JLabel("Weight:");
-	private JLabel numberLabel = new JLabel("Number:");
-	private JLabel weightLabel = new JLabel("Weight:");
-	private JLabel weightLabel_1 = new JLabel("Weight:");
+	private final JLabel label = new JLabel("i");
+	private final JLabel label2 = new JLabel("j");
+	private final JLabel lblDielectricConstant = new JLabel("Dielectric Constant:");
+	private final JLabel lblElasticConstant = new JLabel("Elastic Constant:");
+	private final JLabel lblI = new JLabel("i");
+	private final JLabel lblJ = new JLabel("j");
+	private final JLabel lblNumber = new JLabel("Number:");
+	private final JLabel lblSelect = new JLabel("Select:");
+	private final JLabel lblWeight = new JLabel("Weight:");
+	private final JLabel numberLabel = new JLabel("Number:");
+	private final JLabel weightLabel = new JLabel("Weight:");
+	private final JLabel weightLabel_1 = new JLabel("Weight:");
 
-	private CardLayout observableTypes = new CardLayout();
+	private final CardLayout observableTypes = new CardLayout();
 
-	private String[] observeItems = { "elastic", "hfdlc", "sdlc", "energy",
+	private final String[] observeItems = { "elastic", "hfdlc", "sdlc", "energy",
 			"gradients", "static refractive index", "bulk modulus",
 			"shear modulus", "weight", "piezoelectric", "monopole charges",
 			"entropy", "high frequency refractive index", "phonon frequencies",
-			"<html>heat capacity C<sub>V</sub></html>" };
-	private JComboBox cboObservables = new JComboBox(observeItems);
+	"<html>heat capacity C<sub>V</sub></html>" };
+	private final JComboBox cboObservables = new JComboBox(observeItems);
 
-	private JPanel panel_1 = new JPanel();
-	private JPanel panel_2_1 = new JPanel();
-	private JPanel panel_4 = new JPanel();
-	private JPanel pnlOptions = new JPanel();
+	private final JPanel panel_1 = new JPanel();
+	private final JPanel panel_2_1 = new JPanel();
+	private final JPanel panel_4 = new JPanel();
+	private final JPanel pnlOptions = new JPanel();
 
-	private TitledPanel pnlObservables = new TitledPanel();
-	private JScrollPane scrollPane = new JScrollPane();
+	private final TitledPanel pnlObservables = new TitledPanel();
+	private final JScrollPane scrollPane = new JScrollPane();
 
-	private JTextField textField = new JTextField();
-	private JTextField txt4 = new JTextField();
-	private JTextField txt5 = new JTextField();
-	private JTextField txt6 = new JTextField();
-	private JTextField txt7 = new JTextField();
-	private JTextField txt8 = new JTextField();
-	private JTextField txt9 = new JTextField();
-	private JTextField txtI = new JTextField();
-	private JTextField txtJ = new JTextField();
+	private final JTextField textField = new JTextField();
+	private final JTextField txt4 = new JTextField();
+	private final JTextField txt5 = new JTextField();
+	private final JTextField txt6 = new JTextField();
+	private final JTextField txt7 = new JTextField();
+	private final JTextField txt8 = new JTextField();
+	private final JTextField txt9 = new JTextField();
+	private final JTextField txtI = new JTextField();
+	private final JTextField txtJ = new JTextField();
 
-	private JList list = new JList();
-	
-	private SerialListener keyObservables = new SerialListener() {
-				private static final long serialVersionUID = 6868547295766778705L;
+	private final JList list = new JList();
 
-				@Override
+	private final SerialListener keyObservables = new SerialListener() {
+		private static final long serialVersionUID = 6868547295766778705L;
+
+		@Override
 		public void actionPerformed(ActionEvent e) {
-			String selected = cboObservables.getSelectedItem().toString();
+			final String selected = cboObservables.getSelectedItem().toString();
 			if (selected.equals("elastic"))
 				observableTypes.show(panel_1, "panel_2");
 			if (selected.equals("hfdlc") || selected.equals("sdlc"))

@@ -7,9 +7,11 @@
 package potential;
 
 
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.event.*;
+import java.awt.ItemSelectable;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+
+import javax.swing.event.ChangeListener;
 
 /**
  * State model for buttons.
@@ -57,169 +59,169 @@ import javax.swing.event.*;
  * @author Jeff Dinkins
  */
 public interface ButtonModel6 extends ItemSelectable {
-    
-    /**
-     * Indicates partial commitment towards triggering the
-     * button.
-     *
-     * @return <code>true</code> if the button is armed,
-     *         and ready to be triggered
-     * @see #setArmed
-     */
-    boolean isArmed();     
-        
-    /**
-     * Indicates if the button has been selected. Only needed for
-     * certain types of buttons - such as radio buttons and check boxes.
-     *
-     * @return <code>true</code> if the button is selected
-     */
-    boolean isSelected();
-        
-    /**
-     * Indicates if the button can be selected or triggered by
-     * an input device, such as a mouse pointer.
-     *
-     * @return <code>true</code> if the button is enabled
-     */
-    boolean isEnabled();
-        
-    /**
-     * Indicates if the button is pressed.
-     *
-     * @return <code>true</code> if the button is pressed
-     */
-    boolean isPressed();
 
-    /**
-     * Indicates that the mouse is over the button.
-     *
-     * @return <code>true</code> if the mouse is over the button
-     */
-    boolean isRollover();
+	/**
+	 * Indicates partial commitment towards triggering the
+	 * button.
+	 *
+	 * @return <code>true</code> if the button is armed,
+	 *         and ready to be triggered
+	 * @see #setArmed
+	 */
+	boolean isArmed();
 
-    /**
-     * Marks the button as armed or unarmed.
-     * 
-     * @param b whether or not the button should be armed
-     */
-    public void setArmed(boolean b);
+	/**
+	 * Indicates if the button has been selected. Only needed for
+	 * certain types of buttons - such as radio buttons and check boxes.
+	 *
+	 * @return <code>true</code> if the button is selected
+	 */
+	boolean isSelected();
 
-    /**
-     * Selects or deselects the button.
-     *
-     * @param b <code>true</code> selects the button,
-     *          <code>false</code> deselects the button
-     */
-    public void setSelected(boolean b);
+	/**
+	 * Indicates if the button can be selected or triggered by
+	 * an input device, such as a mouse pointer.
+	 *
+	 * @return <code>true</code> if the button is enabled
+	 */
+	boolean isEnabled();
 
-    /**
-     * Enables or disables the button.
-     * 
-     * @param b whether or not the button should be enabled
-     * @see #isEnabled
-     */
-    public void setEnabled(boolean b);
+	/**
+	 * Indicates if the button is pressed.
+	 *
+	 * @return <code>true</code> if the button is pressed
+	 */
+	boolean isPressed();
 
-    /**
-     * Sets the button to pressed or unpressed.
-     * 
-     * @param b whether or not the button should be pressed
-     * @see #isPressed
-     */
-    public void setPressed(boolean b);
+	/**
+	 * Indicates that the mouse is over the button.
+	 *
+	 * @return <code>true</code> if the mouse is over the button
+	 */
+	boolean isRollover();
 
-    /**
-     * Sets or clears the button's rollover state
-     * 
-     * @param b whether or not the button is in the rollover state
-     * @see #isRollover
-     */
-    public void setRollover(boolean b);
+	/**
+	 * Marks the button as armed or unarmed.
+	 * 
+	 * @param b whether or not the button should be armed
+	 */
+	public void setArmed(boolean b);
 
-    /**
-     * Sets the keyboard mnemonic (shortcut key or
-     * accelerator key) for the button.
-     *
-     * @param key an int specifying the accelerator key
-     */
-    public void setMnemonic(int key);
+	/**
+	 * Selects or deselects the button.
+	 *
+	 * @param b <code>true</code> selects the button,
+	 *          <code>false</code> deselects the button
+	 */
+	public void setSelected(boolean b);
 
-    /**
-     * Gets the keyboard mnemonic for the button.
-     *
-     * @return an int specifying the accelerator key
-     * @see #setMnemonic
-     */
-    public int  getMnemonic();
+	/**
+	 * Enables or disables the button.
+	 * 
+	 * @param b whether or not the button should be enabled
+	 * @see #isEnabled
+	 */
+	public void setEnabled(boolean b);
 
-    /**
-     * Sets the action command string that gets sent as part of the
-     * <code>ActionEvent</code> when the button is triggered.
-     *
-     * @param s the <code>String</code> that identifies the generated event
-     * @see #getActionCommand
-     * @see java.awt.event.ActionEvent#getActionCommand
-     */
-    public void setActionCommand(String s);
+	/**
+	 * Sets the button to pressed or unpressed.
+	 * 
+	 * @param b whether or not the button should be pressed
+	 * @see #isPressed
+	 */
+	public void setPressed(boolean b);
 
-    /**
-     * Returns the action command string for the button.
-     *
-     * @return the <code>String</code> that identifies the generated event
-     * @see #setActionCommand
-     */
-    public String getActionCommand();
+	/**
+	 * Sets or clears the button's rollover state
+	 * 
+	 * @param b whether or not the button is in the rollover state
+	 * @see #isRollover
+	 */
+	public void setRollover(boolean b);
 
-    /**
-     * Identifies the group the button belongs to --
-     * needed for radio buttons, which are mutually
-     * exclusive within their group.
-     *
-     * @param group the <code>ButtonGroup</code> the button belongs to
-     */
-    public void setGroup(ButtonGroup6 group);
-    
-    /**
-     * Adds an <code>ActionListener</code> to the model.
-     *
-     * @param l the listener to add
-     */
-    void addActionListener(ActionListener l);
+	/**
+	 * Sets the keyboard mnemonic (shortcut key or
+	 * accelerator key) for the button.
+	 *
+	 * @param key an int specifying the accelerator key
+	 */
+	public void setMnemonic(int key);
 
-    /**
-     * Removes an <code>ActionListener</code> from the model.
-     *
-     * @param l the listener to remove
-     */
-    void removeActionListener(ActionListener l);
+	/**
+	 * Gets the keyboard mnemonic for the button.
+	 *
+	 * @return an int specifying the accelerator key
+	 * @see #setMnemonic
+	 */
+	public int  getMnemonic();
 
-    /**
-     * Adds an <code>ItemListener</code> to the model.
-     *
-     * @param l the listener to add
-     */
-    void addItemListener(ItemListener l);
+	/**
+	 * Sets the action command string that gets sent as part of the
+	 * <code>ActionEvent</code> when the button is triggered.
+	 *
+	 * @param s the <code>String</code> that identifies the generated event
+	 * @see #getActionCommand
+	 * @see java.awt.event.ActionEvent#getActionCommand
+	 */
+	public void setActionCommand(String s);
 
-    /**
-     * Removes an <code>ItemListener</code> from the model.
-     *
-     * @param l the listener to remove
-     */
-    void removeItemListener(ItemListener l);
+	/**
+	 * Returns the action command string for the button.
+	 *
+	 * @return the <code>String</code> that identifies the generated event
+	 * @see #setActionCommand
+	 */
+	public String getActionCommand();
 
-    /**
-     * Adds a <code>ChangeListener</code> to the model.
-     *
-     * @param l the listener to add
-     */
-    void addChangeListener(ChangeListener l);
+	/**
+	 * Identifies the group the button belongs to --
+	 * needed for radio buttons, which are mutually
+	 * exclusive within their group.
+	 *
+	 * @param group the <code>ButtonGroup</code> the button belongs to
+	 */
+	public void setGroup(ButtonGroup6 group);
 
-    /**
-     * Removes a <code>ChangeListener</code> from the model.
-     *
-     * @param l the listener to remove
-     */
-    void removeChangeListener(ChangeListener l);
+	/**
+	 * Adds an <code>ActionListener</code> to the model.
+	 *
+	 * @param l the listener to add
+	 */
+	void addActionListener(ActionListener l);
+
+	/**
+	 * Removes an <code>ActionListener</code> from the model.
+	 *
+	 * @param l the listener to remove
+	 */
+	void removeActionListener(ActionListener l);
+
+	/**
+	 * Adds an <code>ItemListener</code> to the model.
+	 *
+	 * @param l the listener to add
+	 */
+	void addItemListener(ItemListener l);
+
+	/**
+	 * Removes an <code>ItemListener</code> from the model.
+	 *
+	 * @param l the listener to remove
+	 */
+	void removeItemListener(ItemListener l);
+
+	/**
+	 * Adds a <code>ChangeListener</code> to the model.
+	 *
+	 * @param l the listener to add
+	 */
+	void addChangeListener(ChangeListener l);
+
+	/**
+	 * Removes a <code>ChangeListener</code> from the model.
+	 *
+	 * @param l the listener to remove
+	 */
+	void removeChangeListener(ChangeListener l);
 
 }

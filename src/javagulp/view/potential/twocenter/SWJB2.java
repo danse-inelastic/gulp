@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -13,28 +14,26 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-
 public class SWJB2 extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -5713798782373640010L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblEq = new JLabel(g.html("E = A exp(" + g.rho
-		+ "/(r - r<sub>cutoff</sub>))(B/r<sup>4</sup> - 1)*F(q<sub>i</sub>,q<sub>j</sub>)<br>"
-		+ "F(q<sub>i</sub>,q<sub>j</sub>) = e<sup>1/Q</sup>e<sup>1/(q<sub>i<sub>+q<sub>j<sub>-Q)</sup> if q<sub>i</sub>+q<sub>j</sub> < Q F(q<sub>i</sub>,q<sub>j</sub>) = 0 if q<sub>i</sub>+q<sub>j</sub> > Q<br>"
-		+ "See Chem. Eng. Sci., 49, 2991 (2000) for more details."));
+	private final JLabel lblEq = new JLabel(g.html("E = A exp(" + g.rho
+			+ "/(r - r<sub>cutoff</sub>))(B/r<sup>4</sup> - 1)*F(q<sub>i</sub>,q<sub>j</sub>)<br>"
+			+ "F(q<sub>i</sub>,q<sub>j</sub>) = e<sup>1/Q</sup>e<sup>1/(q<sub>i<sub>+q<sub>j<sub>-Q)</sup> if q<sub>i</sub>+q<sub>j</sub> < Q F(q<sub>i</sub>,q<sub>j</sub>) = 0 if q<sub>i</sub>+q<sub>j</sub> > Q<br>"
+			+ "See Chem. Eng. Sci., 49, 2991 (2000) for more details."));
 
-	private PPP A = new PPP("A (eV)");
-	private PPP rho = new PPP(g.html("rho (" + g.ang + ")"));
-	private PPP B = new PPP(g.html("B (" + g.ang + "^4)"));
-	private PPP Q = new PPP("Q (au)");
-	
-	private JLabel lblUnits = new JLabel("units");
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
+	private final PPP A = new PPP("A (eV)");
+	private final PPP rho = new PPP(g.html("rho (" + g.ang + ")"));
+	private final PPP B = new PPP(g.html("B (" + g.ang + "^4)"));
+	private final PPP Q = new PPP("Q (au)");
+
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
 	public SWJB2() {
 		super(2);
 		setBorder(new TitledBorder(null,
@@ -62,27 +61,27 @@ public class SWJB2 extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240,80, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{ A, rho, B, Q };
 	}
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
-		
+
 		String lines = "sw2jb " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
-				+ Back.concatFields(params) + " " + radii.writeRadii()
-				+ Back.writeFits(params) + Back.newLine;
+		+ Back.concatFields(params) + " " + radii.writeRadii()
+		+ Back.writeFits(params) + Back.newLine;
 		return lines;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		SWJB2 sw = new SWJB2();
+		final SWJB2 sw = new SWJB2();
 		sw.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(sw);
 	}

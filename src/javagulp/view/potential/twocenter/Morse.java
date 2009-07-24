@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -13,27 +14,25 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Morse extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -1955767596650215691L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JTextField txtC = new JTextField("1.0");
-	
-	private JLabel lblMorseEq = new JLabel(g.html("E = D{[1 - exp(-a(r - r<sub>0</sub>))]<sup>2</sup> - 1} - C q<sub>i</sub>q<sub>j</sub>/r"));
-	private JLabel lblC = new JLabel("Coul");
-	private JLabel lblUnits = new JLabel("units");
+	private final JTextField txtC = new JTextField("1.0");
 
-	private PPP D = new PPP("D (eV)");
-	private PPP A = new PPP(g.html("a (&Aring;<sup>-1</sup>)"));
-	private PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"ev", "kjmol", "kcal"});
-	private JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
-	
+	private final JLabel lblMorseEq = new JLabel(g.html("E = D{[1 - exp(-a(r - r<sub>0</sub>))]<sup>2</sup> - 1} - C q<sub>i</sub>q<sub>j</sub>/r"));
+	private final JLabel lblC = new JLabel("Coul");
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final PPP D = new PPP("D (eV)");
+	private final PPP A = new PPP(g.html("a (&Aring;<sup>-1</sup>)"));
+	private final PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"ev", "kjmol", "kcal"});
+	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
+
 	public Morse() {
 		super(2);
 		setTitle("morse");
@@ -62,13 +61,13 @@ public class Morse extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 60, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{D, A, r0};
 	}
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
 
 		String lines = "morse " + pot.twoAtomBondingOptions.getInterIntraBond();
@@ -89,10 +88,10 @@ public class Morse extends PotentialPanel implements Serializable {
 		}
 		return lines + Back.writeFits(params) + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Morse m = new Morse();
+		final Morse m = new Morse();
 		//m.txtC.setText(this.txtC.getText());
 		//m.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
 		//m.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());

@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
@@ -13,22 +14,20 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-
 public class BOCharge extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -7623048176589167154L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JComboBox cboFunction = new JComboBox(new String[] {
+	private final JComboBox cboFunction = new JComboBox(new String[] {
 			"cosine taper function", "sine taper function" });
 
-	private JTextField txtDelta = new JTextField();
+	private final JTextField txtDelta = new JTextField();
 
-	private JLabel lblDelta = new JLabel(g.html(g.delta + "<sub>Q</sub> (au)"));
-	private JLabel lblFunction = new JLabel("H(r)");
-	private JLabel lblEquations = new JLabel(g.html("atom 1: Q = sum [ - "
+	private final JLabel lblDelta = new JLabel(g.html(g.delta + "<sub>Q</sub> (au)"));
+	private final JLabel lblFunction = new JLabel("H(r)");
+	private final JLabel lblEquations = new JLabel(g.html("atom 1: Q = sum [ - "
 			+ g.delta + "<sub>Q</sub> H(r) ]<br>atom 2: Q = sum [ + " + g.delta
 			+ "<sub>Q</sub> H(r) ]"));
 
@@ -56,9 +55,9 @@ public class BOCharge extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		JTextField[] fields = { txtDelta };
-		String[] descriptions = { "delta" };
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final JTextField[] fields = { txtDelta };
+		final String[] descriptions = { "delta" };
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
@@ -66,12 +65,12 @@ public class BOCharge extends PotentialPanel implements Serializable {
 		if (cboFunction.getSelectedIndex() == 1)
 			lines += " staper";
 		return lines + Back.newLine + pot.getAtomCombos()
-				+ Back.concatFields(fields) + " " + radii.writeRadii() + Back.newLine;
+		+ Back.concatFields(fields) + " " + radii.writeRadii() + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		BOCharge bo = new BOCharge();
+		final BOCharge bo = new BOCharge();
 		bo.txtDelta.setText(this.txtDelta.getText());
 		return super.clone(bo);
 	}

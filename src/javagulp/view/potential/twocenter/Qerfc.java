@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -13,21 +14,19 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class Qerfc extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 6970835068233843810L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private PPP rho = new PPP(g.html(g.rho + " (&Aring;)"));
-	
-	private JComboBox cboUnits = new JComboBox(new String[] { "au", "nm", "pm" });
-	private JComboBox cboEnerGra = new JComboBox(new String[] { "energy", "gradient" });
+	private final PPP rho = new PPP(g.html(g.rho + " (&Aring;)"));
 
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblEq = new JLabel("<html>E = q<sub>i</sub>q<sub>j</sub>/r erfc(r/" + g.rho + ")</html>");
+	private final JComboBox cboUnits = new JComboBox(new String[] { "au", "nm", "pm" });
+	private final JComboBox cboEnerGra = new JComboBox(new String[] { "energy", "gradient" });
+
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEq = new JLabel("<html>E = q<sub>i</sub>q<sub>j</sub>/r erfc(r/" + g.rho + ")</html>");
 
 	public Qerfc() {
 		super(2);
@@ -49,7 +48,7 @@ public class Qerfc extends PotentialPanel implements Serializable {
 		radii = new Radii(false);
 		radii.setBounds(240, 60, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{rho};
 	}
 
@@ -62,7 +61,7 @@ public class Qerfc extends PotentialPanel implements Serializable {
 
 		Back.checkAndParseD(params);
 
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String line = "qerfc " + pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			line += cboUnits.getSelectedItem() + " ";
@@ -76,10 +75,10 @@ public class Qerfc extends PotentialPanel implements Serializable {
 		}
 		return line + Back.writeFits(params) + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Qerfc q = new Qerfc();
+		final Qerfc q = new Qerfc();
 		q.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
 		q.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(q);

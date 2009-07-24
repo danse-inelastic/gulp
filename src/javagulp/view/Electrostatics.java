@@ -6,7 +6,12 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.model.G;
 import javagulp.model.GenericTableModel;
+import javagulp.model.SerialListener;
+import javagulp.view.potentialOptions.Mortiers;
+import javagulp.view.potentialOptions.Qeq;
+import javagulp.view.potentialOptions.SnM;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,12 +25,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-import javagulp.view.potentialOptions.Mortiers;
-import javagulp.view.potentialOptions.Qeq;
-import javagulp.view.potentialOptions.SnM;
-
 public class Electrostatics extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -1049388362113135590L;
@@ -34,25 +33,25 @@ public class Electrostatics extends JPanel implements Serializable {
 
 		private static final long serialVersionUID = -8320177136881534497L;
 
-		private JLabel lblxMinMax = new JLabel("xmin, xmax");
-		private JLabel lblyMinMax = new JLabel("ymin, ymax");
-		private JLabel lblzMinMax = new JLabel("zmin, zmax");
+		private final JLabel lblxMinMax = new JLabel("xmin, xmax");
+		private final JLabel lblyMinMax = new JLabel("ymin, ymax");
+		private final JLabel lblzMinMax = new JLabel("zmin, zmax");
 
-		private JLabel lblxPoints = new JLabel("number of x points");
-		private JLabel lblyPoints = new JLabel("number of y points");
-		private JLabel lblzPoints = new JLabel("number of z points");
+		private final JLabel lblxPoints = new JLabel("number of x points");
+		private final JLabel lblyPoints = new JLabel("number of y points");
+		private final JLabel lblzPoints = new JLabel("number of z points");
 
-		private JTextField txtx = new JTextField();
-		private JTextField txtxmin = new JTextField("0");
-		private JTextField txtxmax = new JTextField("1");
+		private final JTextField txtx = new JTextField();
+		private final JTextField txtxmin = new JTextField("0");
+		private final JTextField txtxmax = new JTextField("1");
 
-		private JTextField txty = new JTextField();
-		private JTextField txtymin = new JTextField("0");
-		private JTextField txtymax = new JTextField("1");
+		private final JTextField txty = new JTextField();
+		private final JTextField txtymin = new JTextField("0");
+		private final JTextField txtymax = new JTextField("1");
 
-		private JTextField txtz = new JTextField();
-		private JTextField txtzmin = new JTextField("0");
-		private JTextField txtzmax = new JTextField("1");
+		private final JTextField txtz = new JTextField();
+		private final JTextField txtzmin = new JTextField("0");
+		private final JTextField txtzmax = new JTextField("1");
 
 		private CalculatePotential() {
 			super();
@@ -99,19 +98,19 @@ public class Electrostatics extends JPanel implements Serializable {
 
 		private String writePotgrid() throws IncompleteOptionException {
 			String lines = "";
-			JTextField[] fields = {txtx, txty, txtz};
+			final JTextField[] fields = {txtx, txty, txtz};
 			if (Back.checkAnyNonEmpty(fields)) {
-				String[] descriptions = {"potential grid x", "potential grid y", "potential grid z"};
+				final String[] descriptions = {"potential grid x", "potential grid y", "potential grid z"};
 				Back.checkAllNonEmpty(fields, descriptions);
 				Back.parseFieldsI(fields, descriptions);
 				lines = "potgrid ";
-				JTextField[] minmax = {txtxmin, txtxmax, txtymin, txtymax, txtzmin, txtzmax};
+				final JTextField[] minmax = {txtxmin, txtxmax, txtymin, txtymax, txtzmin, txtzmax};
 				// TODO this is not correct.  Cannot use check functions.
 				if (Back.checkAnyNonEmpty(minmax)) {
-					String[] minmaxDescs = {"potential grid xmin", "potential grid xmax", "potential grid ymin",
+					final String[] minmaxDescs = {"potential grid xmin", "potential grid xmax", "potential grid ymin",
 							"potential grid ymax", "potential grid zmin", "potential grid zmax"};
 					Back.checkAllNonEmpty(minmax, minmaxDescs);
-					double[] minmaxd = Back.parseFieldsD(minmax, minmaxDescs);
+					final double[] minmaxd = Back.parseFieldsD(minmax, minmaxDescs);
 					// TODO check if numbers are valid?
 					lines += Back.concatFields(minmax);
 				}
@@ -121,55 +120,55 @@ public class Electrostatics extends JPanel implements Serializable {
 		}
 	}
 
-	private JButton btnSet = new JButton("set");
+	private final JButton btnSet = new JButton("set");
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JComboBox cboCoordinates = new JComboBox(new String[] {
+	private final JComboBox cboCoordinates = new JComboBox(new String[] {
 			"fractional", g.html("cartesian (" + g.ang + ")") });
 
-	private JCheckBox chkElectrostaticSitePotentials = new JCheckBox("print electrostatic site potentials and their first derivatives");
-	private JCheckBox chkFirstDerivative = new JCheckBox("<html>calculate first derivatives of atomic charges with respect to atomic coordinates and strain as calculated by  EEM or QEq</html>");
-	
-	private JLabel lblConvergedFigures = new JLabel("target number of converged significant figures");
-	private JLabel lblNumberOfPoints = new JLabel("<html>number of points</html>");
-	private JLabel lblOrderOfSeries = new JLabel("order of series in numerical integrals");
-	private JLabel lblUpperBound = new JLabel("upper bound in real space sum");
+	private final JCheckBox chkElectrostaticSitePotentials = new JCheckBox("print electrostatic site potentials and their first derivatives");
+	private final JCheckBox chkFirstDerivative = new JCheckBox("<html>calculate first derivatives of atomic charges with respect to atomic coordinates and strain as calculated by  EEM or QEq</html>");
+
+	private final JLabel lblConvergedFigures = new JLabel("target number of converged significant figures");
+	private final JLabel lblNumberOfPoints = new JLabel("<html>number of points</html>");
+	private final JLabel lblOrderOfSeries = new JLabel("order of series in numerical integrals");
+	private final JLabel lblUpperBound = new JLabel("upper bound in real space sum");
 
 	public Mortiers pnlMortiers = new Mortiers();
 	public Qeq pnlqeq = new Qeq();
 	public SnM snm = new SnM();
 
-	private TitledPanel pnlAccuracy = new TitledPanel();
-	private CalculatePotential pnlCalculatePotential = new CalculatePotential();
-	private TitledPanel pnlSpecifyPoints = new TitledPanel();
-	private JPanel pnlOneDimensional = new JPanel();
-	private JCheckBox radPrintOutElectric = new JCheckBox(g.html("print electric field gradient tensor and asymmetry parameter at the atomic sites"));
-	private JScrollPane scrollPane = new JScrollPane();
-	private JTable table = new JTable();
-	private JTabbedPane eeChoice = new JTabbedPane();
-	private GenericTableModel electrostaticsTableModel = new GenericTableModel(new String[] { "x", "y", "z" }, 0);
+	private final TitledPanel pnlAccuracy = new TitledPanel();
+	private final CalculatePotential pnlCalculatePotential = new CalculatePotential();
+	private final TitledPanel pnlSpecifyPoints = new TitledPanel();
+	private final JPanel pnlOneDimensional = new JPanel();
+	private final JCheckBox radPrintOutElectric = new JCheckBox(g.html("print electric field gradient tensor and asymmetry parameter at the atomic sites"));
+	private final JScrollPane scrollPane = new JScrollPane();
+	private final JTable table = new JTable();
+	private final JTabbedPane eeChoice = new JTabbedPane();
+	private final GenericTableModel electrostaticsTableModel = new GenericTableModel(new String[] { "x", "y", "z" }, 0);
 
 	// private JTextField smAtomTextField = new JTextField();
 	// private JTextField qeqAtomTextField = new JTextField();
 	// private JTextField eemAtomTextField = new JTextField();
 	// this textfield is never read
-	private JTextField txtConvergedFigures = new JTextField("8");
-	private JTextField txtUpperBound = new JTextField("4");
-	private JTextField txtOrderOfSeries = new JTextField("20");
-	private JTextField txtNumberOfPoints = new JTextField();
+	private final JTextField txtConvergedFigures = new JTextField("8");
+	private final JTextField txtUpperBound = new JTextField("4");
+	private final JTextField txtOrderOfSeries = new JTextField("20");
+	private final JTextField txtNumberOfPoints = new JTextField();
 
-	private SerialListener keySet = new SerialListener() {
+	private final SerialListener keySet = new SerialListener() {
 		private static final long serialVersionUID = -705014700308507226L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			electrostaticsTableModel.setRowCount(Integer.parseInt(txtNumberOfPoints.getText()));
 		}
 	};
-	
-	private KeywordListener keyPrintOutElectric = new KeywordListener(radPrintOutElectric, "efg");
-	private KeywordListener keyFirstDerivative = new KeywordListener(chkFirstDerivative, "dcharge");
-	private KeywordListener keyElectrostaticSitePotentials = new KeywordListener(chkElectrostaticSitePotentials, "pot");
+
+	private final KeywordListener keyPrintOutElectric = new KeywordListener(radPrintOutElectric, "efg");
+	private final KeywordListener keyFirstDerivative = new KeywordListener(chkFirstDerivative, "dcharge");
+	private final KeywordListener keyElectrostaticSitePotentials = new KeywordListener(chkElectrostaticSitePotentials, "pot");
 	// TODO add accuracy keyword
 	public Electrostatics() {
 		super();

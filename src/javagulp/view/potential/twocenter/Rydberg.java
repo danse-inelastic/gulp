@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -12,23 +13,21 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class Rydberg extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -7705418488227439909L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblEq = new JLabel(g.html("E = -A [1 + B(r/r<sub>0</sub> - 1)]exp(-B(r/r<sub>0</sub> - 1))"));
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblEq = new JLabel(g.html("E = -A [1 + B(r/r<sub>0</sub> - 1)]exp(-B(r/r<sub>0</sub> - 1))"));
 
-	private PPP A = new PPP("A (eV)");
-	private PPP B = new PPP("B");
-	private PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
+	private final PPP A = new PPP("A (eV)");
+	private final PPP B = new PPP("B");
+	private final PPP r0 = new PPP(g.html("r<sub>0</sub> (&Aring;)"));
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
 	public Rydberg() {
 		super(2);
 		setTitle("rydberg");
@@ -50,26 +49,26 @@ public class Rydberg extends PotentialPanel implements Serializable {
 		radii = new Radii(true);
 		radii.setBounds(240, 55, radii.getWidth(), radii.getHeight());
 		add(radii);
-		
+
 		params = new PPP[]{A, B, r0};
 	}
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
-		
+
 		String lines = "rydberg " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos() 
-						+ Back.concatFields(params) + " " + radii.writeRadii() + Back.writeFits(params);
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		+ Back.concatFields(params) + " " + radii.writeRadii() + Back.writeFits(params);
 		return lines + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Rydberg r = new Rydberg();
+		final Rydberg r = new Rydberg();
 		r.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(r);
 	}

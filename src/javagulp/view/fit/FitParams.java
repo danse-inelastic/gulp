@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javagulp.model.SerialListener;
 import javagulp.view.potential.PPP;
 
 import javax.swing.JButton;
@@ -16,85 +17,83 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import javagulp.model.SerialListener;
-
 public class FitParams extends JFrame implements Serializable {
 	private static final long serialVersionUID = 6614798981469880622L;
-	
+
 	public JButton btnUpdate = new JButton("Update Parameters");
-	
+
 	private final String[] colsParam = new String[] { "Parameter Type",
 			"Initial Value", "Final Value", "% Change"};
 	private final String[] colsError = new String[] { "Observable", "Calculated",
 			"Residual", "Error %" };
-	
-	private JScrollPane scrollParam = new JScrollPane();
+
+	private final JScrollPane scrollParam = new JScrollPane();
 	public DefaultTableModel dtmParam;
-	private JTable tableParam;
-	
-	private JScrollPane scrollError = new JScrollPane();
+	private final JTable tableParam;
+
+	private final JScrollPane scrollError = new JScrollPane();
 	public DefaultTableModel dtmError;
-	private JTable tableError;
-	
-	private JTextField txtAvgError = new JTextField();
-	private JTextField txtAvgResidual = new JTextField();
-	
-	private JLabel lblAvgError = new JLabel("Average % Error");
-	private JLabel lblAvgResidual = new JLabel("Average Residual");
-	
+	private final JTable tableError;
+
+	private final JTextField txtAvgError = new JTextField();
+	private final JTextField txtAvgResidual = new JTextField();
+
+	private final JLabel lblAvgError = new JLabel("Average % Error");
+	private final JLabel lblAvgResidual = new JLabel("Average Residual");
+
 	public double[] params;
-	
-	private ArrayList<PPP> ppps;
-	
+
+	private final ArrayList<PPP> ppps;
+
 	public FitParams(ArrayList<PPP> ppps, ArrayList<String> oldParams, ArrayList<String> newParams,
 			ArrayList<String> error) {
 		super();
 		setLayout(null);
 		setSize(800, 600);
-		
+
 		this.ppps = ppps;
-		
+
 		dtmParam = new DefaultTableModel(colsParam, newParams.size());
 		tableParam = new JTable(dtmParam);
 		dtmError = new DefaultTableModel(colsError, error.size());
 		tableError = new JTable(dtmError);
-		
-		DecimalFormat df = new DecimalFormat();
+
+		final DecimalFormat df = new DecimalFormat();
 		df.setMinimumFractionDigits(15);
 		params = new double[newParams.size()];
 		for (int i=0; i < oldParams.size(); i++) {
 			Scanner sc = new Scanner(oldParams.get(i));
 			sc.next();
-			String oldValue = sc.next();
-			String type = sc.nextLine();
+			final String oldValue = sc.next();
+			final String type = sc.nextLine();
 			sc.close();
 			sc = new Scanner(newParams.get(i));
 			sc.next();
-			String newValue = sc.next();
+			final String newValue = sc.next();
 			params[i] = Double.parseDouble(newValue);
-			
+
 			dtmParam.setValueAt(type, i, 0);
 			dtmParam.setValueAt(oldValue, i, 1);
 			dtmParam.setValueAt(newValue, i, 2);
-			double a = Math.abs(Double.parseDouble(oldValue));
-			double b = Math.abs(Double.parseDouble(newValue));
+			final double a = Math.abs(Double.parseDouble(oldValue));
+			final double b = Math.abs(Double.parseDouble(newValue));
 			dtmParam.setValueAt(Math.abs((a-b)/a) * 100.0, i, 3);
 			//TODO check % change formula
 		}
 		double residualTotal = 0, errorTotal = 0;
 		for (int i=0; i < error.size(); i++) {
-			Scanner scan = new Scanner(error.get(i));
+			final Scanner scan = new Scanner(error.get(i));
 			scan.next();
 			scan.next();
-			double observable = scan.nextDouble();
-			double calculated = scan.nextDouble();
+			final double observable = scan.nextDouble();
+			final double calculated = scan.nextDouble();
 			scan.close();
-			double difference = calculated-observable;
+			final double difference = calculated-observable;
 			dtmError.setValueAt(observable, i, 0);
 			dtmError.setValueAt(calculated, i, 1);
 			//Calculate (rather than use gulp's output) residual and error % for more accuracy.
-			double residual = difference*difference;
-			double errorPercent = difference/observable;
+			final double residual = difference*difference;
+			final double errorPercent = difference/observable;
 			residualTotal += residual;
 			errorTotal += Math.abs(errorPercent);
 			dtmError.setValueAt(df.format(residual), i, 2);
@@ -102,8 +101,8 @@ public class FitParams extends JFrame implements Serializable {
 		}
 		txtAvgResidual.setText(df.format(residualTotal / error.size()));
 		txtAvgError.setText(df.format(errorTotal / error.size()));
-		
-		
+
+
 		add(btnUpdate);
 		btnUpdate.setBounds(7, 7, 154, 28);
 		btnUpdate.addActionListener(keyUpdate);
@@ -123,15 +122,15 @@ public class FitParams extends JFrame implements Serializable {
 		add(txtAvgError);
 		txtAvgError.setBounds(637, 7, 147, 28);
 	}
-	
-	private SerialListener keyUpdate = new SerialListener() {
+
+	private final SerialListener keyUpdate = new SerialListener() {
 		private static final long serialVersionUID = 3809688819591367994L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (tableParam.getSelectedRow() != -1) {
-				int[] indices = tableParam.getSelectedRows();
-				for (int i=0; i < indices.length; i++)
-					ppps.get(indices[i]).txt.setText((String) dtmParam.getValueAt(indices[i], 2));
+				final int[] indices = tableParam.getSelectedRows();
+				for (final int indice : indices)
+					ppps.get(indice).txt.setText((String) dtmParam.getValueAt(indice, 2));
 			} else {
 				for (int i=0; i < dtmParam.getRowCount(); i++)
 					ppps.get(i).txt.setText((String) dtmParam.getValueAt(i, 2));

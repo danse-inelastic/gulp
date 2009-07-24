@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PotentialPanel;
@@ -13,28 +14,26 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Tsuneyuki extends PotentialPanel implements Serializable {
 	private static final long serialVersionUID = 5942765183989223713L;
 
-	private JComboBox cboGForm = new JComboBox(new String[] { "1", "2" });
-	private JCheckBox chkZeta = new JCheckBox("fit");
-	private G g = new G();
+	private final JComboBox cboGForm = new JComboBox(new String[] { "1", "2" });
+	private final JCheckBox chkZeta = new JCheckBox("fit");
+	private final G g = new G();
 
-	private JTextField txtQ1 = new JTextField();
-	private JTextField txtQ2 = new JTextField();
-	private JTextField txtZeta = new JTextField();
+	private final JTextField txtQ1 = new JTextField();
+	private final JTextField txtQ2 = new JTextField();
+	private final JTextField txtZeta = new JTextField();
 
-	private JLabel lblGForm = new JLabel("g(r) form");
-	private JLabel lblZeta = new JLabel(g.html(g.zeta + " (1/&Aring;)"));
-	private JLabel lblQ2 = new JLabel(g.html("Q<sub>2</sub> (au)"));
-	private JLabel lblQ1 = new JLabel(g.html("Q<sub>1</sub> (au)"));
-	private JLabel lblEq = new JLabel(g.html("E = [Q<sub>1</sub>Q<sub>2</sub> - q<sub>1</sub>q<sub>2</sub>]g(r)/r<br>"
-		+ "where <br>1) g(r) = (1 + " + g.zeta + " r)exp(-2 " + g.zeta
-		+ " r) or<br>2) g(r) = (1 + 11(" + g.zeta + " r)/8 + 3(" + g.zeta
-		+ " r)<sup>2</sup>/4 + (" + g.zeta + " r)<sup>3</sup>/6)exp(-2 "
-		+ g.zeta + " r)<br>"));
+	private final JLabel lblGForm = new JLabel("g(r) form");
+	private final JLabel lblZeta = new JLabel(g.html(g.zeta + " (1/&Aring;)"));
+	private final JLabel lblQ2 = new JLabel(g.html("Q<sub>2</sub> (au)"));
+	private final JLabel lblQ1 = new JLabel(g.html("Q<sub>1</sub> (au)"));
+	private final JLabel lblEq = new JLabel(g.html("E = [Q<sub>1</sub>Q<sub>2</sub> - q<sub>1</sub>q<sub>2</sub>]g(r)/r<br>"
+			+ "where <br>1) g(r) = (1 + " + g.zeta + " r)exp(-2 " + g.zeta
+			+ " r) or<br>2) g(r) = (1 + 11(" + g.zeta + " r)/8 + 3(" + g.zeta
+			+ " r)<sup>2</sup>/4 + (" + g.zeta + " r)<sup>3</sup>/6)exp(-2 "
+			+ g.zeta + " r)<br>"));
 
 	public Tsuneyuki() {
 		super(2);
@@ -68,9 +67,9 @@ public class Tsuneyuki extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		JTextField[] fields = { txtQ1, txtQ2, txtZeta };
-		String[] descriptions = { "Q1", "Q2", "zeta" };
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final JTextField[] fields = { txtQ1, txtQ2, txtZeta };
+		final String[] descriptions = { "Q1", "Q2", "zeta" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
@@ -78,15 +77,15 @@ public class Tsuneyuki extends PotentialPanel implements Serializable {
 		if (cboGForm.getSelectedIndex() == 1)
 			lines += " form2";
 		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(fields)
-				+ " " + radii.writeRadii();
+		+ " " + radii.writeRadii();
 		if (chkZeta.isSelected())
 			lines += " 1";
 		return lines + Back.newLine;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		Tsuneyuki ts = new Tsuneyuki();
+		final Tsuneyuki ts = new Tsuneyuki();
 		ts.cboGForm.setSelectedIndex(this.cboGForm.getSelectedIndex());
 		ts.chkZeta.setSelected(this.chkZeta.isSelected());
 		ts.txtQ1.setText(this.txtQ1.getText());

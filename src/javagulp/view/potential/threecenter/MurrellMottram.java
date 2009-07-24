@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.images.CreateIcon;
 import javagulp.view.potential.CreateLibrary;
@@ -15,28 +16,26 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-
 public class MurrellMottram extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 5839651410432317511L;
 
-	private G g = new G();
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final G g = new G();
 
-	private JLabel eq = new JLabel();
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 
-	private JLabel lblUnits = new JLabel("units");
-	
-	private PPP[] c = new PPP[11];
-	
-	private PPP r12 = new PPP(g.html("r<sub>12</sub><sup>0</sup> (" + g.ang + ")"), 50, 90, 40);
-	private PPP r13 = new PPP(g.html("r<sub>12</sub><sup>0</sup> (" + g.ang + ")"), 50, 90, 40);
-	private PPP r23 = new PPP(g.html("r<sub>12</sub><sup>0</sup> (" + g.ang + ")"), 50, 90, 40);
-	private PPP k = new PPP("k (eV)", 35, 90, 40);
-	private PPP rho = new PPP(g.html(g.rho), 35, 90, 40);
-	
+	private final JLabel eq = new JLabel();
+
+	private final JLabel lblUnits = new JLabel("units");
+
+	private final PPP[] c = new PPP[11];
+
+	private final PPP r12 = new PPP(g.html("r<sub>12</sub><sup>0</sup> (" + g.ang + ")"), 50, 90, 40);
+	private final PPP r13 = new PPP(g.html("r<sub>12</sub><sup>0</sup> (" + g.ang + ")"), 50, 90, 40);
+	private final PPP r23 = new PPP(g.html("r<sub>12</sub><sup>0</sup> (" + g.ang + ")"), 50, 90, 40);
+	private final PPP k = new PPP("k (eV)", 35, 90, 40);
+	private final PPP rho = new PPP(g.html(g.rho), 35, 90, 40);
+
 	public MurrellMottram() {
 		super(3);
 
@@ -49,7 +48,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 		add(lblUnits);
 		cboUnits.setBounds(620, 260, 70, 21);
 		add(cboUnits);
-		
+
 		//add Cs
 		int x=10, y = 160;
 		for (int i=0; i <= 10; i++) {
@@ -65,7 +64,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 			add(c[i]);
 			y += 25;
 		}
-		
+
 		r12.setBounds(350, 160, 190, 25);
 		add(r12);
 		r13.setBounds(350, 185, 190, 25);
@@ -76,14 +75,14 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 		add(k);
 		rho.setBounds(540, 185, 175, 25);
 		add(rho);
-		
+
 		radii = new Radii(true, new String[] {"12", "13", "23"});
 		radii.setBounds(350, 235, radii.getWidth(), radii.getHeight());
 		add(radii);
 
 		eq.setBounds(7, 18, 581, 117);
 		add(eq);
-		String sub1 = g.sub("1"), sub2 = g.sub("2"), sub3 = g.sub("3"), sup2 = g.sup("2");
+		final String sub1 = g.sub("1"), sub2 = g.sub("2"), sub3 = g.sub("3"), sup2 = g.sup("2");
 		eq.setText(g.html("E = k exp(-" + g.rho + "Q" + sub1 + ")f<sub>MM</sub>(Q" + sub1 + "Q" + sub2 + "Q" + sub3
 				+ ")<br>f<sub>MM</sub> = c<sub>0</sub> + c" + sub1 + "Q" + sub1 + " + c" + sub2 + "Q" + sub1 + sup2 + " + c" + sub3
 				+ "(Q" + sub2 + sup2 + " + Q" + sub3 + sup2 + ") + c<sub>4</sub>Q" + sub1 + "<sup>3</sup> + c<sub>5</sub>Q"
@@ -99,7 +98,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 				+ "R" + sub3 + "=(r<sub>23</sub> - r<sub>23</sub><sup>0</sup>)/r<sub>23</sub><sup>0</sup><br>"));
 		eq.setBackground(Color.white);
 
-		JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
+		final JLabel lblImage = new JLabel(new CreateIcon().createIcon("angleNum.png"));
 		lblImage.setBounds(588, 35, 119, 77);
 		add(lblImage);
 
@@ -115,12 +114,12 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		PPP[] p = {k, rho, r12, r13, r23};
+		final PPP[] p = {k, rho, r12, r13, r23};
 		Back.checkAndParseD(p);
 		Back.checkAndParseD(c);
-		
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		
+
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+
 		String lines = "murrell-mottram " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
@@ -128,17 +127,17 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 		if (!pot.threeAtomBondingOptions.Bond())
 			lines += " " + radii.writeRadii();
 		return lines + Back.writeFits(p) + " " + Back.concatFields(c)
-				+ Back.writeFits(c) + Back.newLine;
+		+ Back.writeFits(c) + Back.newLine;
 	}
 
 	@Override
 	public void setRadiiEnabled(boolean flag) {
 		radii.setRadiiEnabled(flag);
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		MurrellMottram m = new MurrellMottram();
+		final MurrellMottram m = new MurrellMottram();
 		m.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(m);
 	}

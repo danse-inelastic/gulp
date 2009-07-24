@@ -22,9 +22,9 @@ public class JCopy implements Serializable {
 			}
 			fis.close();
 			fos.close();
-		} catch (FileNotFoundException e) {
+		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -12,13 +12,13 @@ public class Monopole extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = 2328871287402381280L;
 
-	private JTextField txtAtomNumber = new JTextField();
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtWeight = new JTextField();
+	private final JTextField txtAtomNumber = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtWeight = new JTextField();
 
-	private JLabel lblConstant = new JLabel("monopole charge (au)");
-	private JLabel lblAtomNumber = new JLabel("atom number");
-	private JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblConstant = new JLabel("monopole charge (au)");
+	private final JLabel lblAtomNumber = new JLabel("atom number");
+	private final JLabel lblWeight = new JLabel("weight");
 
 	public String gulpFileLines;
 
@@ -42,8 +42,8 @@ public class Monopole extends AbstractFit implements Serializable {
 
 	@Override
 	public String writeFitPanel() throws IncompleteOptionException {
-		JTextField[] fields = { txtAtomNumber, txtConstant };
-		String[] descriptions = { "the atom number", "the monopole charge" };
+		final JTextField[] fields = { txtAtomNumber, txtConstant };
+		final String[] descriptions = { "the atom number", "the monopole charge" };
 		Back.checkAllNonEmpty(fields, descriptions);
 		gulpFileLines = "monopoleq " + Back.concatFields(fields);
 		if (!txtWeight.getText().equals(""))
@@ -51,5 +51,5 @@ public class Monopole extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

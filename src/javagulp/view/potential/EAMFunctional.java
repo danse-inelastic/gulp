@@ -3,6 +3,7 @@ package javagulp.view.potential;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JCheckBox;
@@ -11,34 +12,32 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class EAMFunctional extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -2833967923111767868L;
 
-	private JTextField txtBSmithF1 = new JTextField();
-	private JTextField txtBSmithRho = new JTextField();
-	private JTextField txtBSmithF0 = new JTextField();
-	private JTextField txtBSmithN = new JTextField();
-	private JTextField txtPowerA = new JTextField();
-	private JTextField txtPowerN = new JTextField();
-	private JTextField txtSqA = new JTextField();
-	
-	private JCheckBox chkFitSqA = new JCheckBox();
-	private JCheckBox chkFitPowerN = new JCheckBox();
-	private JCheckBox chkFitPowerA = new JCheckBox();
-	private JCheckBox chkFitBSmithN = new JCheckBox();
-	private JCheckBox chkFitBSmithF0 = new JCheckBox();
-	private JCheckBox chkFitBSmithF1 = new JCheckBox();
-	private JCheckBox chkFitRHo = new JCheckBox();
-	
-	private JTabbedPane pane = new JTabbedPane();
-	private G g = new G();
+	private final JTextField txtBSmithF1 = new JTextField();
+	private final JTextField txtBSmithRho = new JTextField();
+	private final JTextField txtBSmithF0 = new JTextField();
+	private final JTextField txtBSmithN = new JTextField();
+	private final JTextField txtPowerA = new JTextField();
+	private final JTextField txtPowerN = new JTextField();
+	private final JTextField txtSqA = new JTextField();
 
-	private JPanel pnlSquareRoot = new JPanel();
-	private JPanel pnlPower = new JPanel();
-	private JPanel pnlBanerjeaSmith = new JPanel();
+	private final JCheckBox chkFitSqA = new JCheckBox();
+	private final JCheckBox chkFitPowerN = new JCheckBox();
+	private final JCheckBox chkFitPowerA = new JCheckBox();
+	private final JCheckBox chkFitBSmithN = new JCheckBox();
+	private final JCheckBox chkFitBSmithF0 = new JCheckBox();
+	private final JCheckBox chkFitBSmithF1 = new JCheckBox();
+	private final JCheckBox chkFitRHo = new JCheckBox();
+
+	private final JTabbedPane pane = new JTabbedPane();
+	private final G g = new G();
+
+	private final JPanel pnlSquareRoot = new JPanel();
+	private final JPanel pnlPower = new JPanel();
+	private final JPanel pnlBanerjeaSmith = new JPanel();
 
 	public EAMFunctional() {
 		super(1);
@@ -48,11 +47,11 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 
 		pnlSquareRoot.setLayout(null);
 		pane.add(pnlSquareRoot, "Square Root");
-		JLabel lblSquareRootEquation = new JLabel("<html>E = -sum<sub>i</sub> A<sub>i</sub> &#961;<sub>i</sub><sup>1/2</sup></html>");
+		final JLabel lblSquareRootEquation = new JLabel("<html>E = -sum<sub>i</sub> A<sub>i</sub> &#961;<sub>i</sub><sup>1/2</sup></html>");
 		pnlSquareRoot.add(lblSquareRootEquation);
 		lblSquareRootEquation.setBounds(8, 13, 300, 38);
 		lblSquareRootEquation.setOpaque(false);
-		JLabel lblSqA = new JLabel("A (eV)");
+		final JLabel lblSqA = new JLabel("A (eV)");
 		lblSqA.setBounds(17, 81, 40, 20);
 		pnlSquareRoot.add(lblSqA);
 		pnlSquareRoot.add(chkFitSqA);
@@ -61,19 +60,19 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 		pnlSquareRoot.add(txtSqA);
 		pnlPower.setLayout(null);
 		pane.add(pnlPower, "Power");
-		JLabel lblPowerEquation = new JLabel(g.html("E = -sum<sub>i</sub> A<sub>i</sub> " + g.rho
-						+ "<sub>i</sub><sup>1/n</sup> "));
+		final JLabel lblPowerEquation = new JLabel(g.html("E = -sum<sub>i</sub> A<sub>i</sub> " + g.rho
+				+ "<sub>i</sub><sup>1/n</sup> "));
 		pnlPower.add(lblPowerEquation);
 		lblPowerEquation.setBounds(8, 13, 300, 38);
 		lblPowerEquation.setOpaque(false);
-		JLabel lblPowerN = new JLabel("n");
+		final JLabel lblPowerN = new JLabel("n");
 		lblPowerN.setBounds(17, 70, 29, 28);
 		pnlPower.add(lblPowerN);
 		txtPowerN.setBounds(63, 75, 83, 20);
 		chkFitPowerN.setBounds(151, 75, 20, 21);
 		pnlPower.add(chkFitPowerN);
 		pnlPower.add(txtPowerN);
-		JLabel lblPowerA = new JLabel("A (eV)");
+		final JLabel lblPowerA = new JLabel("A (eV)");
 		lblPowerA.setBounds(17, 111, 40, 15);
 		pnlPower.add(lblPowerA);
 		txtPowerA.setBounds(63, 109, 83, 20);
@@ -82,12 +81,12 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 		pnlPower.add(txtPowerA);
 		pnlBanerjeaSmith.setLayout(null);
 		pane.add(pnlBanerjeaSmith, "Banerjea Smith");
-		JLabel lblBSmithEquation = new JLabel(g.html("E = -sum<sub>i</sub> F<sub>0</sub> [1 - 1/n ln(r)] r<sup>1/n</sup> + F<sub>1</sub>r &nbsp; &nbsp; where r = "
-			+ g.rho + "<sub>i</sub>/" + g.rho + "<sub>i</sub><sup>0</sup>"));
+		final JLabel lblBSmithEquation = new JLabel(g.html("E = -sum<sub>i</sub> F<sub>0</sub> [1 - 1/n ln(r)] r<sup>1/n</sup> + F<sub>1</sub>r &nbsp; &nbsp; where r = "
+				+ g.rho + "<sub>i</sub>/" + g.rho + "<sub>i</sub><sup>0</sup>"));
 		pnlBanerjeaSmith.add(lblBSmithEquation);
 		lblBSmithEquation.setBounds(7, 14, 469, 35);
 		lblBSmithEquation.setOpaque(false);
-		JLabel bsNLabel = new JLabel("n");
+		final JLabel bsNLabel = new JLabel("n");
 		bsNLabel.setBounds(8, 70, 29, 28);
 		pnlBanerjeaSmith.add(bsNLabel);
 		txtBSmithN.setBounds(59, 75, 83, 20);
@@ -98,10 +97,10 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 		chkFitBSmithF0.setBounds(147, 115, 20, 21);
 		pnlBanerjeaSmith.add(chkFitBSmithF0);
 		pnlBanerjeaSmith.add(txtBSmithF0);
-		JLabel lblBSmithF0 = new JLabel(g.html("F<sub>0</sub> (eV)"));
+		final JLabel lblBSmithF0 = new JLabel(g.html("F<sub>0</sub> (eV)"));
 		lblBSmithF0.setBounds(8, 122, 40, 15);
 		pnlBanerjeaSmith.add(lblBSmithF0);
-		JLabel lblBSmithF1 = new JLabel(g.html("F<sub>1</sub> (eV)"));
+		final JLabel lblBSmithF1 = new JLabel(g.html("F<sub>1</sub> (eV)"));
 		lblBSmithF1.setBounds(190, 80, 50, 15);
 		pnlBanerjeaSmith.add(lblBSmithF1);
 		txtBSmithF1.setBounds(241, 75, 83, 20);
@@ -112,7 +111,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 		chkFitRHo.setBounds(329, 115, 20, 21);
 		pnlBanerjeaSmith.add(chkFitRHo);
 		pnlBanerjeaSmith.add(txtBSmithRho);
-		JLabel lblBSmithRho = new JLabel(g.html(g.rho + "<sub>i</sub><sup>0</sup>"));
+		final JLabel lblBSmithRho = new JLabel(g.html(g.rho + "<sub>i</sub><sup>0</sup>"));
 		lblBSmithRho.setBounds(190, 115, 36, 28);
 		pnlBanerjeaSmith.add(lblBSmithRho);
 	}
@@ -120,7 +119,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "eam_functional ";
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		// TODO Documentation allows for multiple atoms / values where we only
 		// allow for one. As a workaround, the user may simply enter this
 		// potential any number of times.
@@ -129,7 +128,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 				throw new IncompleteOptionException("Please enter a value for A");
 			Double.parseDouble(txtSqA.getText());
 			lines += "square_root" + Back.newLine + pot.getAtomCombos()
-					+ txtSqA.getText();
+			+ txtSqA.getText();
 			if (chkFitSqA.isSelected())
 				lines += " 1";
 		} else if (pane.getSelectedIndex() == 1) {
@@ -140,32 +139,32 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 			Double.parseDouble(txtPowerN.getText());
 			Double.parseDouble(txtPowerA.getText());
 			lines += "power " + txtPowerN.getText() + Back.newLine
-					+ pot.getAtomCombos() + txtPowerA.getText();
+			+ pot.getAtomCombos() + txtPowerA.getText();
 			if (chkFitPowerA.isSelected() || chkFitPowerN.isSelected())
 				lines += " " + chkSelected(chkFitPowerA) + " " + chkSelected(chkFitPowerN);
 		} else if (pane.getSelectedIndex() == 2) {
 			if (txtBSmithN.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for n");
 			Double.parseDouble(txtBSmithN.getText());
-			JTextField[] fields3 = { txtBSmithF0, txtBSmithF1, txtBSmithRho };
-			String[] descriptions3 = { "F0", "F1", "Rho0" };
+			final JTextField[] fields3 = { txtBSmithF0, txtBSmithF1, txtBSmithRho };
+			final String[] descriptions3 = { "F0", "F1", "Rho0" };
 			Back.checkAllNonEmpty(fields3, descriptions3);
 			Back.parseFieldsD(fields3, descriptions3);
 			lines += "banerjea_smith " + txtBSmithN.getText() + Back.newLine
-					+ pot.getAtomCombos() + Back.concatFields(fields3);
+			+ pot.getAtomCombos() + Back.concatFields(fields3);
 			if (chkFitBSmithF0.isSelected() || chkFitBSmithF1.isSelected() || chkFitBSmithN.isSelected()
-					 || chkFitRHo.isSelected())
+					|| chkFitRHo.isSelected())
 				lines += " " + chkSelected(chkFitBSmithF0) + " " + chkSelected(chkFitBSmithF1) + " " +
-					chkSelected(chkFitRHo) + " " + chkSelected(chkFitBSmithN);
+				chkSelected(chkFitRHo) + " " + chkSelected(chkFitBSmithN);
 		}
 		return lines + Back.newLine;
 	}
-	
+
 	private int chkSelected(JCheckBox chkFit)
 	{
 		int value = 0;
 		if (chkFit.isSelected())
-			value = 1; 
+			value = 1;
 		return value;
 	}
 

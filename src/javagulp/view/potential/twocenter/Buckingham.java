@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -11,31 +12,27 @@ import javagulp.view.potential.PotentialPanel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-//import utility.function.AbstractFunction;
-//import utility.function.Value;
-//import utility.function.twocenter.BuckinghamFunction;
-import javagulp.model.G;
 
 public class Buckingham extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 4469214289057439073L;
 
-	private PPP A = new PPP("A (eV)");
-	private PPP Rho = new PPP("<html>&#961; (&Aring;)</html>");
-	private PPP C = new PPP("<html>C (eV/&Aring;<sup>6</sup>)</html>");
+	private final PPP A = new PPP("A (eV)");
+	private final PPP Rho = new PPP("<html>&#961; (&Aring;)</html>");
+	private final PPP C = new PPP("<html>C (eV/&Aring;<sup>6</sup>)</html>");
 
-	private JFormattedTextField txtrmin = new JFormattedTextField(new Double(0.5));
-	private JFormattedTextField txtrmax = new JFormattedTextField(new Double(10.0));
+	private final JFormattedTextField txtrmin = new JFormattedTextField(new Double(0.5));
+	private final JFormattedTextField txtrmax = new JFormattedTextField(new Double(10.0));
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	private JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
 
-	private JLabel lblUnits = new JLabel("units");
-	private JLabel lblInnerCutoff = new JLabel(g.html("inner cutoff (&Aring;)"));
-	private JLabel lblOuterCutoff = new JLabel(g.html("outer cutoff (&Aring;)"));
-	private JLabel lblBuckinghamEq = new JLabel("<html>E = A exp(-r/&#961;) - C r<sup>-6</sup></html>");
+	private final JLabel lblUnits = new JLabel("units");
+	private final JLabel lblInnerCutoff = new JLabel(g.html("inner cutoff (&Aring;)"));
+	private final JLabel lblOuterCutoff = new JLabel(g.html("outer cutoff (&Aring;)"));
+	private final JLabel lblBuckinghamEq = new JLabel("<html>E = A exp(-r/&#961;) - C r<sup>-6</sup></html>");
 
 	//private Graph graph = new Graph();
 	//JTabbedPane pane = new JTabbedPane();
@@ -89,31 +86,31 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		A.max = 25000;
 	}
 
-//	private class DocumentAdapter implements DocumentListener, Serializable {
-//		private static final long serialVersionUID = 8888791144962018223L;
-//		public void insertUpdate(DocumentEvent e) {
-//			regraph();
-//		}
-//		public void removeUpdate(DocumentEvent e) {
-//			regraph();
-//		}
-//		public void changedUpdate(DocumentEvent e) {}
-//	}
-//	private DocumentAdapter da = new DocumentAdapter();
+	//	private class DocumentAdapter implements DocumentListener, Serializable {
+	//		private static final long serialVersionUID = 8888791144962018223L;
+	//		public void insertUpdate(DocumentEvent e) {
+	//			regraph();
+	//		}
+	//		public void removeUpdate(DocumentEvent e) {
+	//			regraph();
+	//		}
+	//		public void changedUpdate(DocumentEvent e) {}
+	//	}
+	//	private DocumentAdapter da = new DocumentAdapter();
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		Back.checkAndParseD(params);
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "buckingham " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
-			lines += cboUnits.getSelectedItem() + " "; 
+			lines += cboUnits.getSelectedItem() + " ";
 		if (cboEnerGra.getSelectedIndex() == 1)
 			lines += "grad";
 		else
 			lines += "ener";
-		lines += " " + pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos() 
+		lines += " " + pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
 		+ Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			if (txtrmax.getText().equals(""))
@@ -135,54 +132,54 @@ public class Buckingham extends PotentialPanel implements Serializable {
 				+ Math.pow(d1[2]-d2[2], 2));
 	}
 
-//	private void regraph() {
-//		//update params
-//		AbstractFunction f = graph.getFunction(0);
-//		for (int i=0; i < params.length; i++) {
-//			try {
-//				double d = Double.parseDouble(params[i].txt.getText());
-//				f.setParam(i+1, d);
-//			} catch (NumberFormatException nfe) {}
-//		}
-//		double xmin=0.5, xmax=10;
-//		try {
-//			xmin = Double.parseDouble(txtrmin.getText());
-//			xmax = Double.parseDouble(txtrmax.getText());
-//		} catch (NumberFormatException nfe) {}
-//		graph.setWindow(xmin, xmax, -10, 10);
-//
-//		//calculate bond lengths
-//		ArrayList<double[]> xyz = Back.getStructure().atomicCoordinates.getTableModel().getCoordinates();
-//		double[][] lengths = new double[xyz.size()][xyz.size()];
-//		for (int j=0; j < xyz.size(); j++) 
-//			for (int k=0; k < xyz.size(); k++) {
-//				lengths[j][k] = distance(xyz.get(j), xyz.get(k));
-//			}
-//
-//		//calculate point on curve
-//		String atom1 = (String) Back.getPanel().getPotential().pnlAtom.cboAtom[0].getSelectedItem(),
-//		atom2 = (String) Back.getPanel().getPotential().pnlAtom.cboAtom[1].getSelectedItem();
-//		ArrayList<String> atoms = Back.getStructure().atomicCoordinates.getTableModel().getAllAtoms();
-//		ArrayList<Value> bonds = new ArrayList<Value>();
-//		for (int i=0; i < atoms.size(); i++) {
-//			if (atoms.get(i).equals(atom1)) {
-//				for (int j=0; j < atoms.size(); j++) {
-//					if (i != j && atoms.get(j).equals(atom2)) {
-//						Value v = new Value();
-//						f.setParam(0, lengths[i][j]);
-//						v.x = lengths[i][j];
-//						v.y[0] = f.evaluate();
-//						bonds.add(v);
-//					}
-//				}
-//			}
-//		}
-//		graph.removeAllData();
-//		graph.addData(bonds);
-//
-//		graph.autoAdjustWindowSettings();
-//		graph.repaint();
-//	}
+	//	private void regraph() {
+	//		//update params
+	//		AbstractFunction f = graph.getFunction(0);
+	//		for (int i=0; i < params.length; i++) {
+	//			try {
+	//				double d = Double.parseDouble(params[i].txt.getText());
+	//				f.setParam(i+1, d);
+	//			} catch (NumberFormatException nfe) {}
+	//		}
+	//		double xmin=0.5, xmax=10;
+	//		try {
+	//			xmin = Double.parseDouble(txtrmin.getText());
+	//			xmax = Double.parseDouble(txtrmax.getText());
+	//		} catch (NumberFormatException nfe) {}
+	//		graph.setWindow(xmin, xmax, -10, 10);
+	//
+	//		//calculate bond lengths
+	//		ArrayList<double[]> xyz = Back.getStructure().atomicCoordinates.getTableModel().getCoordinates();
+	//		double[][] lengths = new double[xyz.size()][xyz.size()];
+	//		for (int j=0; j < xyz.size(); j++)
+	//			for (int k=0; k < xyz.size(); k++) {
+	//				lengths[j][k] = distance(xyz.get(j), xyz.get(k));
+	//			}
+	//
+	//		//calculate point on curve
+	//		String atom1 = (String) Back.getPanel().getPotential().pnlAtom.cboAtom[0].getSelectedItem(),
+	//		atom2 = (String) Back.getPanel().getPotential().pnlAtom.cboAtom[1].getSelectedItem();
+	//		ArrayList<String> atoms = Back.getStructure().atomicCoordinates.getTableModel().getAllAtoms();
+	//		ArrayList<Value> bonds = new ArrayList<Value>();
+	//		for (int i=0; i < atoms.size(); i++) {
+	//			if (atoms.get(i).equals(atom1)) {
+	//				for (int j=0; j < atoms.size(); j++) {
+	//					if (i != j && atoms.get(j).equals(atom2)) {
+	//						Value v = new Value();
+	//						f.setParam(0, lengths[i][j]);
+	//						v.x = lengths[i][j];
+	//						v.y[0] = f.evaluate();
+	//						bonds.add(v);
+	//					}
+	//				}
+	//			}
+	//		}
+	//		graph.removeAllData();
+	//		graph.addData(bonds);
+	//
+	//		graph.autoAdjustWindowSettings();
+	//		graph.repaint();
+	//	}
 
 	@Override
 	public void setRadiiEnabled(boolean b) {
@@ -192,7 +189,7 @@ public class Buckingham extends PotentialPanel implements Serializable {
 
 	@Override
 	public PotentialPanel clone() {
-		Buckingham b = new Buckingham();
+		final Buckingham b = new Buckingham();
 		b.txtrmin.setText(this.txtrmin.getText());
 		b.txtrmax.setText(this.txtrmax.getText());
 		b.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());

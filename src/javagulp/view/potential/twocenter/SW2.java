@@ -3,6 +3,7 @@ package javagulp.view.potential.twocenter;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.potential.CreateLibrary;
 import javagulp.view.potential.PPP;
@@ -12,24 +13,22 @@ import javagulp.view.potential.Radii;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import javagulp.model.G;
-
 public class SW2 extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = 7171895788167028302L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JLabel lblEq = new JLabel(g.html("E = A exp(" + g.rho
+	private final JLabel lblEq = new JLabel(g.html("E = A exp(" + g.rho
 			+ "/(r - r<sub>cutoff</sub>))(B/r<sup>4</sup> - 1)"));
-	private JLabel lblUnits = new JLabel("units");
+	private final JLabel lblUnits = new JLabel("units");
 
-	private PPP A = new PPP("A (eV)");
-	private PPP B = new PPP(g.html("B (&Aring;<sup>4</sup>)"));
-	private PPP rho = new PPP(g.html(g.rho + " (&Aring;)"));
-	
-	private JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
-	
+	private final PPP A = new PPP("A (eV)");
+	private final PPP B = new PPP(g.html("B (&Aring;<sup>4</sup>)"));
+	private final PPP rho = new PPP(g.html(g.rho + " (&Aring;)"));
+
+	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+
 	public SW2() {
 		super(2);
 		setTitle("stillinger-weber two body");
@@ -55,21 +54,21 @@ public class SW2 extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws IncompleteOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAndParseD(params);
-		
+
 		String lines = "sw2 " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
-				+ Back.concatFields(params) + " " + radii.writeRadii()
-				+ Back.writeFits(params) + Back.newLine;
+		+ Back.concatFields(params) + " " + radii.writeRadii()
+		+ Back.writeFits(params) + Back.newLine;
 		return lines;
 	}
-	
+
 	@Override
 	public PotentialPanel clone() {
-		SW2 sw = new SW2();
+		final SW2 sw = new SW2();
 		sw.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(sw);
 	}

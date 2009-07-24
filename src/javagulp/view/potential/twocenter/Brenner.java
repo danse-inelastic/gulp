@@ -15,10 +15,10 @@ public class Brenner extends PotentialPanel implements Serializable {
 
 	private static final long serialVersionUID = -4587031590876298044L;
 
-	private JLabel lbl = new JLabel("Applicable to C, H, and O.  No options necessary.");
+	private final JLabel lbl = new JLabel("Applicable to C, H, and O.  No options necessary.");
 
-	private JCheckBox chkOne = new JCheckBox("Use brenner potential for C, H, and Si instead.");
-	
+	private final JCheckBox chkOne = new JCheckBox("Use brenner potential for C, H, and Si instead.");
+
 	// TODO change writePotential so it checks for ANY non-supported atoms,
 	// not just the first structure
 	public Brenner() {
@@ -36,7 +36,7 @@ public class Brenner extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws InvalidOptionException {
-		CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String one = (String) pot.pnlAtom.cboAtom[0].getSelectedItem();
 		String two = (String) pot.pnlAtom.cboAtom[1].getSelectedItem();
 		if (one.endsWith(" core"))
@@ -61,7 +61,7 @@ public class Brenner extends PotentialPanel implements Serializable {
 
 	@Override
 	public PotentialPanel clone() {
-		Brenner b = new Brenner();
+		final Brenner b = new Brenner();
 		b.chkOne.setSelected(this.chkOne.isSelected());
 		return super.clone(b);
 	}

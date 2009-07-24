@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
+import javagulp.model.SerialListener;
+import javagulp.view.constraints.ExternalFieldConstraints;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -12,32 +15,29 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import javagulp.model.G;
-import javagulp.model.SerialListener;
-
 public class Optimization extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7736128778704157390L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private String[] optimizationChoicesDefault = { "bfgs (broyden)",
+	private final String[] optimizationChoicesDefault = { "bfgs (broyden)",
 			"limited memory bfgs", "Davidon-Fletcher-Powell",
-			"conjugate gradient" };
-	private String[] stoppingCriterion = { "cycles", "gradient norm" };
-	private String[] stoppingCriterionChoices = { "cycle", "gnorm" };
-	private String[] optimizationChoices = { "bfgs (broyden)",
+	"conjugate gradient" };
+	private final String[] stoppingCriterion = { "cycles", "gradient norm" };
+	private final String[] stoppingCriterionChoices = { "cycle", "gnorm" };
+	private final String[] optimizationChoices = { "bfgs (broyden)",
 			"rational function optimization", "bfgs start w/unit Hessian",
 			"bfgs start w/numerical diagonal Hessian", "conjugate gradient" };
-	private String[] optimizationChoiceValues = { "bfgs", "rfo", "unit",
+	private final String[] optimizationChoiceValues = { "bfgs", "rfo", "unit",
 			"nume", "conj" };
-	
-	private JComboBox cboOptimization = new JComboBox(optimizationChoicesDefault);
-	private JComboBox cboSwitch_minimiserStoppingCriterion = new JComboBox(stoppingCriterion);
-	private JComboBox cboSwitchOptimization = new JComboBox(optimizationChoices);
 
-	private SerialListener keyOptimization = new SerialListener() {
-		
+	private final JComboBox cboOptimization = new JComboBox(optimizationChoicesDefault);
+	private final JComboBox cboSwitch_minimiserStoppingCriterion = new JComboBox(stoppingCriterion);
+	private final JComboBox cboSwitchOptimization = new JComboBox(optimizationChoices);
+
+	private final SerialListener keyOptimization = new SerialListener() {
+
 		private static final long serialVersionUID = -6450781303665298416L;
 
 		@Override
@@ -51,77 +51,78 @@ public class Optimization extends JPanel implements Serializable {
 		}
 	};
 
-	private JCheckBox chkAllowOnlyIsotropicRadioButton = new JCheckBox("allow only isotropic expansion/contraction");
-	private JCheckBox chkUseNumerical = new JCheckBox("use numerical estimates of the diagonal elements as a starting point for the Hessian");
-	private JCheckBox chkUseUnit = new JCheckBox("use unit diagonal matrix as starting point for hessian");
-	private JCheckBox chklinmin = new JCheckBox("print details of line minimization");
+	private final JCheckBox chkAllowOnlyIsotropicRadioButton = new JCheckBox("allow only isotropic expansion/contraction");
+	private final JCheckBox chkUseNumerical = new JCheckBox("use numerical estimates of the diagonal elements as a starting point for the Hessian");
+	private final JCheckBox chkUseUnit = new JCheckBox("use unit diagonal matrix as starting point for hessian");
+	private final JCheckBox chklinmin = new JCheckBox("print details of line minimization");
 	//private JCheckBox chkopti = new JCheckBox("perform an optimization with an exact Hessian (default)");
-	private JCheckBox chkoptimisefitShells = new JCheckBox("optimize only shells (optical calculation)");
-	private JCheckBox chkOptimizeCellRadii = new JCheckBox("optimize only shell radii");
-	private JCheckBox chkoutputDetailsOf = new JCheckBox("output details of the Hessian matrix");
-	private JCheckBox chkpositive = new JCheckBox(g.html("ensure that the Hessian always behaves as positive definite during Newton-Raphson <br>by ensuring the search vector has the same sign as the gradient vector"));
-	private JCheckBox chkuseImaginaryPhonon = new JCheckBox("use imaginary phonon modes to lower structural symmetry");
-	private JCheckBox chkExcludeShellRadii = new JCheckBox("exclude shell radii from the fitting/optimization");
-	private JCheckBox chkOptimizeUnitCell = new JCheckBox("optimize/fit unit cell coordinates but leave internal atomic coordinates fixed");
+	private final JCheckBox chkoptimisefitShells = new JCheckBox("optimize only shells (optical calculation)");
+	private final JCheckBox chkOptimizeCellRadii = new JCheckBox("optimize only shell radii");
+	private final JCheckBox chkoutputDetailsOf = new JCheckBox("output details of the Hessian matrix");
+	private final JCheckBox chkpositive = new JCheckBox(g.html("ensure that the Hessian always behaves as positive definite during Newton-Raphson <br>by ensuring the search vector has the same sign as the gradient vector"));
+	private final JCheckBox chkuseImaginaryPhonon = new JCheckBox("use imaginary phonon modes to lower structural symmetry");
+	private final JCheckBox chkExcludeShellRadii = new JCheckBox("exclude shell radii from the fitting/optimization");
+	private final JCheckBox chkOptimizeUnitCell = new JCheckBox("optimize/fit unit cell coordinates but leave internal atomic coordinates fixed");
 
 
-	private KeywordListener keyuseImaginaryPhonon = new KeywordListener(chkuseImaginaryPhonon, "lower_symmetry");
-	private KeywordListener keyAllowOnlyIsotropicRadioButton = new KeywordListener(chkAllowOnlyIsotropicRadioButton, "isotropic");
-	private KeywordListener keyUseNumerical = new KeywordListener(chkUseNumerical, "numdiag");
-	private KeywordListener keyUseUnit = new KeywordListener(chkUseUnit, "unit");
-	private KeywordListener keyoutputDetailsOf = new KeywordListener(chkoutputDetailsOf, "hessian");
-	private KeywordListener keypositive = new KeywordListener(chkpositive,
-			"positive");
+	private final KeywordListener keyuseImaginaryPhonon = new KeywordListener(chkuseImaginaryPhonon, "lower_symmetry");
+	private final KeywordListener keyAllowOnlyIsotropicRadioButton = new KeywordListener(chkAllowOnlyIsotropicRadioButton, "isotropic");
+	private final KeywordListener keyUseNumerical = new KeywordListener(chkUseNumerical, "numdiag");
+	private final KeywordListener keyUseUnit = new KeywordListener(chkUseUnit, "unit");
+	private final KeywordListener keyoutputDetailsOf = new KeywordListener(chkoutputDetailsOf, "hessian");
+	private final KeywordListener keypositive = new KeywordListener(chkpositive,
+	"positive");
 	//private TaskKeywordListener keyopti = new TaskKeywordListener(chkopti, "optimise");
-	private KeywordListener keylinmin = new KeywordListener(chklinmin, "linmin");
-	private KeywordListener keyoptimisefitShells = new KeywordListener(chkoptimisefitShells, "shell");
-	private KeywordListener keyOptimizeCellRadii = new KeywordListener(chkOptimizeCellRadii, "breathe");
-	private KeywordListener keyExcludeShellRadii = new KeywordListener(chkExcludeShellRadii, "nobreathe");
-	private KeywordListener keyOptimizeUnitCell = new KeywordListener(chkOptimizeUnitCell, "cellonly");
-	
+	private final KeywordListener keylinmin = new KeywordListener(chklinmin, "linmin");
+	private final KeywordListener keyoptimisefitShells = new KeywordListener(chkoptimisefitShells, "shell");
+	private final KeywordListener keyOptimizeCellRadii = new KeywordListener(chkOptimizeCellRadii, "breathe");
+	private final KeywordListener keyExcludeShellRadii = new KeywordListener(chkExcludeShellRadii, "nobreathe");
+	private final KeywordListener keyOptimizeUnitCell = new KeywordListener(chkOptimizeUnitCell, "cellonly");
 
-	private JLabel lblAfter = new JLabel("after");
-	private JLabel lblmaximumNumberOf = new JLabel("maximum number of points");
-	private JLabel lblMaximumFunctionalChange = new JLabel("<html>maximum functional change per minimisation step before Hessian is recalculated (eV)</html>");
-	private JLabel lblMaximumNumberOf = new JLabel("<html>maximum number of cycles of Hessian updating before exact calculation is performed</html>");
-	private JLabel lblScaleImaginaryMode = new JLabel("scale imaginary mode eigenvectors by");
-	private JLabel lblStopIfCell = new JLabel(g.html("stop optimization if cell parameter falls below (&Aring;)"));
 
-	private TitledPanel pnlParameterTolerance = new TitledPanel();
-	private TitledPanel pnlMaxStepSize = new TitledPanel();
-	private TitledPanel pnlMaxIndividualGradient = new TitledPanel();
-	private TitledPanel pnlBFGS = new TitledPanel();
-	private TitledPanel pnleigenvector = new TitledPanel();
-	private TitledPanel pnlfunctiontolerance = new TitledPanel();
-	private TitledPanel pnlgradienttolerance = new TitledPanel();
-	private TitledPanel pnlLineMinimisationOptions = new TitledPanel();
-	private TitledPanel pnlmaximumcycles = new TitledPanel();
-	private TitledPanel pnlotheroptions = new TitledPanel();
-	private TitledPanel pnlprimaryoptimizer = new TitledPanel();
-	private TitledPanel pnlswitchoptimizer = new TitledPanel();
-	private TitledPanel pnlunitcelloptions = new TitledPanel();
+	private final JLabel lblAfter = new JLabel("after");
+	private final JLabel lblmaximumNumberOf = new JLabel("maximum number of points");
+	private final JLabel lblMaximumFunctionalChange = new JLabel("<html>maximum functional change per minimisation step before Hessian is recalculated (eV)</html>");
+	private final JLabel lblMaximumNumberOf = new JLabel("<html>maximum number of cycles of Hessian updating before exact calculation is performed</html>");
+	private final JLabel lblScaleImaginaryMode = new JLabel("scale imaginary mode eigenvectors by");
+	private final JLabel lblStopIfCell = new JLabel(g.html("stop optimization if cell parameter falls below (&Aring;)"));
 
-	private JPanel pnlHessianOptions = new JPanel();
+	private final TitledPanel pnlParameterTolerance = new TitledPanel();
+	private final TitledPanel pnlMaxStepSize = new TitledPanel();
+	private final TitledPanel pnlMaxIndividualGradient = new TitledPanel();
+	private final TitledPanel pnlBFGS = new TitledPanel();
+	private final TitledPanel pnleigenvector = new TitledPanel();
+	private final TitledPanel pnlfunctiontolerance = new TitledPanel();
+	private final TitledPanel pnlgradienttolerance = new TitledPanel();
+	private final TitledPanel pnlLineMinimisationOptions = new TitledPanel();
+	private final TitledPanel pnlmaximumcycles = new TitledPanel();
+	private final TitledPanel pnlotheroptions = new TitledPanel();
+	private final TitledPanel pnlprimaryoptimizer = new TitledPanel();
+	private final TitledPanel pnlswitchoptimizer = new TitledPanel();
+	private final TitledPanel pnlunitcelloptions = new TitledPanel();
 
-	private JTextField txtdelf = new JTextField();
-	private JTextField txtftol = new JTextField("0.00001");
-	private JTextField txtgmax = new JTextField("0.001");
-	private JTextField txtgtol = new JTextField("0.0001");
-	private JTextField txtlbfgs_order = new JTextField("10");
+	private final JPanel pnlHessianOptions = new JPanel();
+	private final ExternalFieldConstraints pnlExternalField = new ExternalFieldConstraints();
+
+	private final JTextField txtdelf = new JTextField();
+	private final JTextField txtftol = new JTextField("0.00001");
+	private final JTextField txtgmax = new JTextField("0.001");
+	private final JTextField txtgtol = new JTextField("0.0001");
+	private final JTextField txtlbfgs_order = new JTextField("10");
 	private final String TXT_LINE = "10";
-	private JTextField txtline = new JTextField(TXT_LINE);
+	private final JTextField txtline = new JTextField(TXT_LINE);
 	private final String TXT_MAX_CYCOPT = "1000";
-	private JTextField txtmaxcycopt = new JTextField(TXT_MAX_CYCOPT);
+	private final JTextField txtmaxcycopt = new JTextField(TXT_MAX_CYCOPT);
 	private final String TXT_MIN_CELL = "0.5";
-	private JTextField txtmincell = new JTextField(TXT_MIN_CELL);
+	private final JTextField txtmincell = new JTextField(TXT_MIN_CELL);
 	private final String TXT_SLOWER = "0.001";
-	private JTextField txtslower = new JTextField(TXT_SLOWER);
+	private final JTextField txtslower = new JTextField(TXT_SLOWER);
 	private final String TXT_STEP_MXOPT = "1.0";
-	private JTextField txtstepmxopt = new JTextField(TXT_STEP_MXOPT);
-	private JTextField txtSwitch_minimiserStoppingCriterionNum = new JTextField();
+	private final JTextField txtstepmxopt = new JTextField(TXT_STEP_MXOPT);
+	private final JTextField txtSwitch_minimiserStoppingCriterionNum = new JTextField();
 	private final String TXT_UPDATE = "10";
-	private JTextField txtupdate = new JTextField(TXT_UPDATE);
-	private JTextField txtxtolopt = new JTextField("0.00001");
+	private final JTextField txtupdate = new JTextField(TXT_UPDATE);
+	private final JTextField txtxtolopt = new JTextField("0.00001");
 
 	public Optimization() {
 		super();
@@ -135,7 +136,7 @@ public class Optimization extends JPanel implements Serializable {
 		add(pnlParameterTolerance);
 		txtxtolopt.setBounds(9, 18, 80, 21);
 		pnlParameterTolerance.add(txtxtolopt);
-		
+
 		pnlunitcelloptions.setTitle("unit cell options");
 		pnlunitcelloptions.setBounds(660, 384, 452, 117);
 		add(pnlunitcelloptions);
@@ -179,9 +180,9 @@ public class Optimization extends JPanel implements Serializable {
 		chkAllowOnlyIsotropicRadioButton.addActionListener(keyAllowOnlyIsotropicRadioButton);
 		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 385, 25);
 		pnlotheroptions.add(chkAllowOnlyIsotropicRadioButton);
-		
-		
-		
+
+
+
 
 		pnlmaximumcycles.setTitle("maximum number of cycles");
 		pnlmaximumcycles.setBounds(660, 277, 215, 51);
@@ -259,12 +260,12 @@ public class Optimization extends JPanel implements Serializable {
 		txtdelf.setBounds(564, 191, 80, 21);
 		pnlHessianOptions.add(txtdelf);
 
-//		chkopti.setName("optOrNot");
-//		chkopti.setBounds(0, 1, 654, 25);
-//		add(chkopti);
-//		chkopti.addActionListener(keyopti);
-//		chkopti.setActionCommand("CALTYP_OPT");
-//		chkopti.setToolTipText("Minimize the energy with respect to geometrical variables");
+		//		chkopti.setName("optOrNot");
+		//		chkopti.setBounds(0, 1, 654, 25);
+		//		add(chkopti);
+		//		chkopti.addActionListener(keyopti);
+		//		chkopti.setActionCommand("CALTYP_OPT");
+		//		chkopti.setToolTipText("Minimize the energy with respect to geometrical variables");
 
 		pnlLineMinimisationOptions.setTitle("line minimisation options");
 		pnlLineMinimisationOptions.setBounds(660, 1, 295, 98);
@@ -273,10 +274,15 @@ public class Optimization extends JPanel implements Serializable {
 		pnlLineMinimisationOptions.add(txtline);
 		lblmaximumNumberOf.setBounds(10, 26, 219, 15);
 		pnlLineMinimisationOptions.add(lblmaximumNumberOf);
-				chklinmin.setBounds(10, 61, 269, 25);
-				pnlLineMinimisationOptions.add(chklinmin);
-		
-				chklinmin.addActionListener(keylinmin);
+		chklinmin.setBounds(10, 61, 269, 25);
+		pnlLineMinimisationOptions.add(chklinmin);
+
+		chklinmin.addActionListener(keylinmin);
+
+
+		pnlExternalField.setBounds(0, 0, 860, 148);
+		add(pnlExternalField);
+
 	}
 
 	private String writeDelf() {
@@ -289,7 +295,7 @@ public class Optimization extends JPanel implements Serializable {
 
 	private String writeLbfgs_order() {
 		String lines = "";
-		String s = txtlbfgs_order.getText();
+		final String s = txtlbfgs_order.getText();
 		if (!s.equals("") && !s.equals("10")) {
 			Integer.parseInt(s);
 			lines = "lbfgs_order " + s + Back.newLine;
@@ -347,9 +353,9 @@ public class Optimization extends JPanel implements Serializable {
 
 	public String writeOptimization() throws IncompleteOptionException {
 		return writeUpdate() + writeSlower() + writeSwitch_minimiser()
-				+ writeStepMaxOpt() + writeMincell() + writeTolerance()
-				+ writeLine() + writeLbfgs_order() + writeTol() + writeDelf()
-				+ writeMaxcyc();
+		+ writeStepMaxOpt() + writeMincell() + writeTolerance()
+		+ writeLine() + writeLbfgs_order() + writeTol() + writeDelf()
+		+ writeMaxcyc();
 	}
 
 	private String writeSlower() {
@@ -372,19 +378,20 @@ public class Optimization extends JPanel implements Serializable {
 
 	private String writeSwitch_minimiser() {
 		String lines = "";
-		String s = txtSwitch_minimiserStoppingCriterionNum.getText();
+		final String s = txtSwitch_minimiserStoppingCriterionNum.getText();
 		if (!s.equals("")) {
 			Double.parseDouble(s);
 			lines = "switch_minimiser "
-					+ optimizationChoiceValues[cboSwitchOptimization.getSelectedIndex()] + " "
-					+ stoppingCriterionChoices[cboSwitch_minimiserStoppingCriterion.getSelectedIndex()] + " "
-					+ s + Back.newLine;
+				+ optimizationChoiceValues[cboSwitchOptimization.getSelectedIndex()] + " "
+				+ stoppingCriterionChoices[cboSwitch_minimiserStoppingCriterion.getSelectedIndex()] + " "
+				+ s + Back.newLine;
 		}
 		return lines;
 	}
 
 	private String writeTolerance() {
-		String lines = "", xtol = txtxtolopt.getText();
+		String lines = "";
+		final String xtol = txtxtolopt.getText();
 		if (!xtol.equals("") && !xtol.equals("0.00001")) {
 			Double.parseDouble(xtol);
 			lines += "xtol opt " + xtol + Back.newLine;

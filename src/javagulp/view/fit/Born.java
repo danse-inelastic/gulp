@@ -3,32 +3,31 @@ package javagulp.view.fit;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.G;
 import javagulp.view.Back;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import javagulp.model.G;
-
 public class Born extends AbstractFit implements Serializable {
 
 	private static final long serialVersionUID = 3420150316171297777L;
 
-	private G g = new G();
+	private final G g = new G();
 
-	private JComboBox cboTensorComponent = new JComboBox(new String[] { "",
+	private final JComboBox cboTensorComponent = new JComboBox(new String[] { "",
 			"xx", "yy", "zz", "xy", "xz", "yz" });
 
-	private JTextField txtAtomNum = new JTextField();
-	private JTextField txtConstant = new JTextField();
-	private JTextField txtWeight = new JTextField();
+	private final JTextField txtAtomNum = new JTextField();
+	private final JTextField txtConstant = new JTextField();
+	private final JTextField txtWeight = new JTextField();
 
-	private JLabel lblConstant = new JLabel(g.html("Z<sub>eff</sub> (au)"));
-	private JLabel lblTensorComponent = new JLabel("tensor component");
-	private JLabel lblWeight = new JLabel("weight");
-	private JLabel lblAtomNum = new JLabel("atom number");
-	private JLabel lblEquation = new JLabel(g.html("q<sup>Born</sup> = "
+	private final JLabel lblConstant = new JLabel(g.html("Z<sub>eff</sub> (au)"));
+	private final JLabel lblTensorComponent = new JLabel("tensor component");
+	private final JLabel lblWeight = new JLabel("weight");
+	private final JLabel lblAtomNum = new JLabel("atom number");
+	private final JLabel lblEquation = new JLabel(g.html("q<sup>Born</sup> = "
 			+ g.part + g.mu + "<sub>" + g.alpha + "</sub>/" + g.part + g.beta
 			+ " &nbsp&nbsp " + g.alpha + ", " + g.beta + g.in + " x, y, z"));
 
@@ -79,5 +78,5 @@ public class Born extends AbstractFit implements Serializable {
 		gulpFileLines += Back.newLine;
 		return gulpFileLines;
 	}
-	
+
 }

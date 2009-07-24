@@ -8,6 +8,10 @@ import javax.swing.border.TitledBorder;
 
 public abstract class PotentialPanel extends JPanel implements Cloneable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9099139495758177415L;
 	public int potentialNumber;
 	public String[] atom;
 	public boolean[] selected;
@@ -40,10 +44,10 @@ public abstract class PotentialPanel extends JPanel implements Cloneable {
 	}
 
 	abstract public String writePotential() throws IncompleteOptionException, InvalidOptionException;
-	
+
 	@Override
 	public abstract PotentialPanel clone();
-	
+
 	public PotentialPanel clone(PotentialPanel b) {
 		if (this.params != null && b.params != null
 				&& this.params.length == b.params.length) {
@@ -73,7 +77,7 @@ public abstract class PotentialPanel extends JPanel implements Cloneable {
 	public int currentParameterCount() {
 		int count = 0;
 		if (params != null) {
-			for (PPP p: params)
+			for (final PPP p: params)
 				if (p.chk.isSelected())
 					count++;
 		}
@@ -87,7 +91,7 @@ public abstract class PotentialPanel extends JPanel implements Cloneable {
 	public void setParameter(int i, String value) {
 		int count = 0;
 		if (params != null) {
-			for (PPP p: params)
+			for (final PPP p: params)
 				if (p.chk.isSelected()) {
 					count++;
 					if (i == count)
