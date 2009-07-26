@@ -12,7 +12,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.Nutpad;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
-import javagulp.view.optimization.OutputFormats;
+import javagulp.view.output.OutputFormats;
 import javagulp.view.output.Terse;
 
 import javax.swing.DefaultListModel;

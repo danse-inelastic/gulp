@@ -19,9 +19,9 @@ public class OutputFormats extends JPanel implements Serializable {
 
 	private final String[] labels = { "SIESTA (.fdf)", "CRYSTAL98 (.str)", "Crystal (.cif)", "MARVIN (.mvn)",
 			"derivatives (.drv)", "forces (.frc)", "frequency", "Pressure (.pre)" };
-	private final String[] formats = { "fdf", "cif", "marvin", "drv", "frc", "freq", "pre" };
-	private final String[] extensions = {".fdf", "", ".phonon", "", "", "", "", ".xyz",
-			"movie.xyz", ".history", ".drv", ".frc", ".freq", ".pre" };
+	private final String[] formats = { "fdf", "str", "cif", "marvin", "drv", "frc", "freq", "pre" };
+	//private final String[] extensions = {".fdf", "", ".phonon", "", "", "", "", ".xyz",
+	//		"movie.xyz", ".history", ".drv", ".frc", ".freq", ".pre" };
 	// TODO add trajectory ascii and equil options, frequency text option, and osc format
 	// It seems some of these formats don't work. I don't know if it is because
 	// of the type of calculation performed (md) or the
@@ -53,7 +53,7 @@ public class OutputFormats extends JPanel implements Serializable {
 			add(box);
 			y += height + vSpacing;
 		}
-		txtOutputFilename.setBounds(10, 25, 120, 20);
+		txtOutputFilename.setBounds(237, 22, 120, 20);
 		add(txtOutputFilename);
 	}
 
@@ -71,7 +71,7 @@ public class OutputFormats extends JPanel implements Serializable {
 		for (int i = 0; i < labels.length; i++) {
 			if (((JCheckBox) getComponent(i)).isSelected()) {
 				line += "output " + formats[i] + " "
-				+ txtOutputFilename.getText() + extensions[i] + Back.newLine;
+				+ txtOutputFilename.getText() + Back.newLine;
 			}
 		}
 		return line;
