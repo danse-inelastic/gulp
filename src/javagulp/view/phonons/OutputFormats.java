@@ -1,4 +1,4 @@
-package javagulp.view.md;
+package javagulp.view.phonons;
 
 import javagulp.view.Back;
 
@@ -57,9 +57,10 @@ public class OutputFormats extends JPanel {
 			add(textField_1);
 		}
 	}
+	
 
 	public String writeOutputFormats() {
-		String lines = "";
+		String lines = "output phonon dos.dens" + Back.newLine;
 		if (!txtWrite.getText().equals("")) {
 			if (cboUnits.getSelectedItem().equals("timesteps")) {
 				try {
@@ -78,7 +79,6 @@ public class OutputFormats extends JPanel {
 				+ cboUnits.getSelectedItem() + Back.newLine;
 			}
 		}
-		lines +=
 		return lines;
 	}
 

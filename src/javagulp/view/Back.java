@@ -28,7 +28,7 @@ import javax.swing.WindowConstants;
 
 public class Back {
 
-	public static final String version = "GulpUi 0.3";
+	public static final String version = "GulpUi 0.4";
 	public static final JFrame frame = new JFrame(version);
 	public static final GulpFileWriter writer = new GulpFileWriter();
 	//No access modifier (default access), so access is limited to the same package.
@@ -57,7 +57,7 @@ public class Back {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(pcmenu);
 
-		frame.setSize(1280, 700);
+		frame.setSize(1180, 750);
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension frameSize = frame.getSize();
 		if (frameSize.height > screenSize.height) {

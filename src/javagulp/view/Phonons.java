@@ -10,6 +10,7 @@ import javagulp.model.G;
 import javagulp.view.phonons.BrillouinIntegration;
 import javagulp.view.phonons.Dispersion;
 import javagulp.view.phonons.GammaPointCalculation;
+import javagulp.view.phonons.OutputFormats;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -55,6 +56,8 @@ public class Phonons extends TitledPanel implements Serializable {
 	public Dispersion pnlDispersion = new Dispersion();
 	private final BrillouinIntegration pnlBrillouinIntegration = new BrillouinIntegration();
 	private final GammaPointCalculation pnlGammaPoints = new GammaPointCalculation();
+	private final RestartFile pnlRestartFile = new RestartFile();
+	private final OutputFormats pnlOutputFormats = new OutputFormats();
 	//private GammaPointCorrection pnlGammaCorrection = new GammaPointCorrection();
 
 	//	/**
@@ -85,6 +88,9 @@ public class Phonons extends TitledPanel implements Serializable {
 		paneSpecifyKpoints.addTab("Gamma Point Calculation", pnlGammaPoints);
 		//paneSpecifyKpoints.addTab("Gamma Point Correction", pnlGammaCorrection);
 		add(getPanel());
+		
+		pnlRestartFile.setBounds(4, 418, 602, 118);
+		add(pnlRestartFile);
 	}
 
 	private String writeDosBox() throws IncompleteOptionException {
@@ -132,24 +138,20 @@ public class Phonons extends TitledPanel implements Serializable {
 		return line;
 	}
 
-	private String writeOutputDos() throws IncompleteOptionException,
-	InvalidOptionException {
-		final String line = "output phonon dos.dens" + Back.newLine;
-		return line;
-	}
-
 	public String writeDosOptions() throws IncompleteOptionException,
 	InvalidOptionException {
-		return writeDosBox() + writeBroaden() + writeOutputDos();
+		return writeDosBox() + writeBroaden();
 	}
 
 	public String writePhonon() throws IncompleteOptionException,
 	InvalidOptionException {
 		return writeDosOptions()
+		+ pnlOutputFormats.writeOutputFormats()
 		+ pnlDispersion.writeDispersion()
 		+ pnlGammaPoints.writeGammaPointCorrection()
 		+ pnlGammaPoints.writeGammaPointOptions()
-		+ pnlBrillouinIntegration.write();
+		+ pnlBrillouinIntegration.write()
+		+ pnlRestartFile.writeOption();
 	}
 
 	protected TitledPanel getPanel() {

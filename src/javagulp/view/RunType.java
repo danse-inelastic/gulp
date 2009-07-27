@@ -167,6 +167,7 @@ public class RunType extends JPanel implements Serializable {
 				else if (optionChosen.equals("molecular dynamics"))
 					runtypeLines = ((MolecularDynamics)getSelectedRunTypePanel("molecular dynamics")).writeMD();
 				//		getDefect().writeDefect();
+				
 				return runtypeLines;
 			}
 

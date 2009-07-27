@@ -80,7 +80,7 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		//MDRestartInit m;
 		//m = Back.getPanel().getMdRestartInit();
 		return pnlTimeLengths.writeTime()
-		+ pnlOutputFormats.writeMDWriteFrequency()
+		+ pnlOutputFormats.writeOutputFormats()
 		+ pnlMDmass.writeShellMassRatio()
 		+ pnlVectorTable.writeResetvectors()
 		+ pnlPressure.writePressure()
