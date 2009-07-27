@@ -57,7 +57,7 @@ public class Potential extends JPanel {
 
 		useLibrary.setLayout(new BorderLayout());
 		tabbedPane.addTab("use library", null, useLibrary, null);
-		tabbedPane.addTab("create library", null, createLibrary, null);
+		tabbedPane.addTab("create library (experimental)", null, createLibrary, null);
 
 		final JSplitPane splitPane = new JSplitPane();
 		useLibrary.add(splitPane);
@@ -125,7 +125,6 @@ public class Potential extends JPanel {
 			if(potentialSelected==null){
 				potentialSelected="none";
 			}
-
 			//String libraryContents = getURLContentAsString(libURL);
 			libraryContents = potentialLibs.getFileContents(potentialSelected);
 			potentialLibs.potentialContents.put(potentialSelected, libraryContents);
