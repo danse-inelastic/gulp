@@ -104,6 +104,9 @@
 		<copy todir="${trueblueDeploy}">
 			<fileset dir="deployable"/>
 		</copy>
+		<copy todir="${trueblueDeploy}">
+			<fileset dir="web"/>
+		</copy>
 	</target>
 
 	<!--<project name="Deploy From Eclipse to Tomcat" basedir=".">
