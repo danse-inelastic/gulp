@@ -79,7 +79,7 @@ public class PotentialLibs {
 		getPotentialContentsQuery.put("directdb.creator", "everyone");
 		getPotentialContentsQuery.put("directdb.where", "id='"+potentialName+"'");
 		//getPotentialContentsQuery.put("directdb.filename_variable", "id='"+potentialName+"'");
-		Back.getCurrentRun().putInAuthenticationInfo(getPotentialContentsQuery);
+		//Back.getCurrentRun().putInAuthenticationInfo(getPotentialContentsQuery);
 		cgiCom.setCgiParams(getPotentialContentsQuery);
 		final JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();
 		final Object[] potentialContentAsArray = potentialNamesAsJSONArray.getArrayList();
