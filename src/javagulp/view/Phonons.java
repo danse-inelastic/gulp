@@ -89,9 +89,9 @@ public class Phonons extends TitledPanel implements Serializable {
 		//paneSpecifyKpoints.addTab("Gamma Point Correction", pnlGammaCorrection);
 		add(getPanel());
 		
-		pnlRestartFile.setBounds(0, 454, 602, 118);
+		pnlRestartFile.setBounds(660, 457, 499, 145);
 		add(pnlRestartFile);
-		pnlOutputFormats.setBounds(608, 454, 551, 118);
+		pnlOutputFormats.setBounds(0, 457, 654, 145);
 		add(pnlOutputFormats);
 	}
 

@@ -13,6 +13,7 @@ import javagulp.model.Nutpad;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
 import javagulp.view.output.OutputFormats;
+import javagulp.view.output.OutputFormatsII;
 import javagulp.view.output.Terse;
 
 import javax.swing.DefaultListModel;
@@ -45,7 +46,7 @@ public class Output extends JPanel implements Serializable {
 	public String selectedInputFile = "input.gin";
 	//	private transient RBSubmitReturn submit;//inherit from this class to serialize?
 
-	private OutputFormats pnlOutputFormats = new OutputFormats();
+	private OutputFormatsII pnlOutputFormats = new OutputFormatsII();
 	private final Terse pnlTerse = new Terse();
 
 	private final JLabel lblOutputFile = new JLabel("gulp stdout file");

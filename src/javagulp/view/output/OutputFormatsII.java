@@ -12,16 +12,20 @@ import javax.swing.border.TitledBorder;
 
 public class OutputFormatsII extends JPanel {
 
-	private JTextField txtPressure;
+	private JCheckBox chckbxDerivatives;
+	private JTextField txtDerivatives;
+	private JTextField txtCif;
+	private JCheckBox chckbxCif;
+	private JTextField txtMarvin;
 	private static final long serialVersionUID = -8425306576850279775L;
 
 
 
-	private JTextField txtXyz;
-	private JTextField txtHis;
-	private JCheckBox chkXYZTrajectory = new JCheckBox("write SIESTA input file");
-	private JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write dlpoly history file");
-	private JCheckBox chckbxWritePressure = new JCheckBox();
+	private JTextField txtSiesta;
+	private JTextField txtCrystal98;
+	private JCheckBox chkSiesta = new JCheckBox("write SIESTA (.fdf) input file");
+	private JCheckBox chckbxCrystal98 = new JCheckBox("write CRYSTAL98 (.str) input file");
+	private JCheckBox chckbxMarvin = new JCheckBox();
 
 	public OutputFormatsII() {
 		setBorder(new TitledBorder(null, "output formats",
@@ -29,59 +33,87 @@ public class OutputFormatsII extends JPanel {
 				TitledBorder.DEFAULT_POSITION, null, null));
 		setLayout(null);
 		{
-			chkXYZTrajectory.setBounds(10, 24, 251, 22);
-			add(chkXYZTrajectory);
+			chkSiesta.setBounds(10, 24, 278, 22);
+			add(chkSiesta);
 		}
 		{
-			txtXyz = new JTextField();
-			txtXyz.setBounds(267, 25, 206, 21);
-			add(txtXyz);
-			txtXyz.setColumns(10);
+			txtSiesta = new JTextField();
+			txtSiesta.setBounds(333, 25, 206, 21);
+			add(txtSiesta);
+			txtSiesta.setColumns(10);
 		}
 		{
-			chckbxWriteDlpolyHistory.setBounds(10, 52, 198, 22);
-			add(chckbxWriteDlpolyHistory);
+			chckbxCrystal98.setBounds(10, 52, 278, 22);
+			add(chckbxCrystal98);
 		}
 		{
-			txtHis = new JTextField();
-			txtHis.setColumns(10);
-			txtHis.setBounds(267, 52, 206, 21);
-			add(txtHis);
-		}
-
-		{
-			chckbxWritePressure.setText("write pressure file");
-			chckbxWritePressure.setBounds(7, 115, 198, 22);
-			add(chckbxWritePressure);
+			txtCrystal98 = new JTextField();
+			txtCrystal98.setColumns(10);
+			txtCrystal98.setBounds(333, 52, 206, 21);
+			add(txtCrystal98);
 		}
 
 		{
-			txtPressure = new JTextField();
-			txtPressure.setColumns(10);
-			txtPressure.setBounds(216, 116, 260, 21);
-			add(txtPressure);
+			chckbxMarvin.setText("write Marvin input file");
+			chckbxMarvin.setBounds(10, 108, 198, 22);
+			add(chckbxMarvin);
+		}
+
+		{
+			txtMarvin = new JTextField();
+			txtMarvin.setColumns(10);
+			txtMarvin.setBounds(333, 109, 206, 21);
+			add(txtMarvin);
+		}
+
+		{
+			chckbxCif = new JCheckBox();
+			chckbxCif.setText("write cif file");
+			chckbxCif.setBounds(10, 80, 278, 22);
+			add(chckbxCif);
+		}
+
+		{
+			txtCif = new JTextField();
+			txtCif.setColumns(10);
+			txtCif.setBounds(333, 79, 206, 21);
+			add(txtCif);
+		}
+
+		{
+			txtDerivatives = new JTextField();
+			txtDerivatives.setColumns(10);
+			txtDerivatives.setBounds(333, 136, 206, 21);
+			add(txtDerivatives);
+		}
+
+		{
+			chckbxDerivatives = new JCheckBox();
+			chckbxDerivatives.setText("write energy and derivatives for QM/MM");
+			chckbxDerivatives.setBounds(10, 136, 278, 22);
+			add(chckbxDerivatives);
 		}
 	}
 
 	public String writeOutputFormats() throws IncompleteOptionException {
 		String lines = "";
-		if (chkXYZTrajectory.isSelected() && txtXyz.getText().equals(""))
+		if (chkSiesta.isSelected() && txtSiesta.getText().equals(""))
 			throw new IncompleteOptionException("Please enter an xyz output filename");
-		if (chkXYZTrajectory.isSelected()) {
+		if (chkSiesta.isSelected()) {
 			lines += "output movie xyz "
-			+ txtXyz.getText() + Back.newLine;
+			+ txtSiesta.getText() + Back.newLine;
 		}
-		if (chckbxWriteDlpolyHistory.isSelected() && txtHis.getText().equals(""))
+		if (chckbxCrystal98.isSelected() && txtCrystal98.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a history file name");
-		if (chckbxWriteDlpolyHistory.isSelected()) {
+		if (chckbxCrystal98.isSelected()) {
 			lines += "output his "
-			+ txtHis.getText() + Back.newLine;
+			+ txtCrystal98.getText() + Back.newLine;
 		}
-		if (chckbxWritePressure.isSelected() && txtPressure.getText().equals(""))
+		if (chckbxMarvin.isSelected() && txtMarvin.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a pressure file name");
-		if (chckbxWritePressure.isSelected()) {
+		if (chckbxMarvin.isSelected()) {
 			lines += "output pressure "
-			+ txtPressure.getText() + Back.newLine;
+			+ txtMarvin.getText() + Back.newLine;
 		}
 		return lines;
 	}
