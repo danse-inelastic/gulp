@@ -174,18 +174,18 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		table.setCellSelectionEnabled(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scrollPane.setViewportView(table);
-		final JLabel lblAtomicCharges = new JLabel("set atomic charges:");
+		final JLabel lblAtomicCharges = new JLabel("set atomic charges");
 		lblAtomicCharges.setBounds(457, 8, 169, 20);
 		add(lblAtomicCharges);
 		lblAtomicCharges.setToolTipText(
 				"<html>This table will set atomic charges for each type of atom.<br>"
 				+ "Charges for individual atoms can be entered in the table on the structures tab.<br>"
 				+ "Charges should sum to approximately zero.</html>");
-		btnImportCharges.setBounds(457, 130, 169, 25);
+		btnImportCharges.setBounds(457, 214, 169, 25);
 		add(btnImportCharges);
 		btnImportCharges.setEnabled(false);
 		//btnImportCharges.addActionListener(keyImportCharges);
-		speciesScrollpane.setBounds(457, 34, 169, 95);
+		speciesScrollpane.setBounds(457, 63, 169, 145);
 		add(speciesScrollpane);
 		speciesTableModel.uneditableColumns = new int[] { 0 };
 		speciesTableModel.requiredColumns = new int[] { 1 };
@@ -195,7 +195,7 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		chkPrintDistanceAnalysis.setBounds(5, 68, 446, 25);
 		add(chkPrintDistanceAnalysis);
 		chkApplyUniformNeutralizing.addActionListener(keyApplyUniformNeutralizing);
-		chkApplyUniformNeutralizing.setBounds(5, 130, 446, 25);
+		chkApplyUniformNeutralizing.setBounds(5, 99, 446, 25);
 		add(chkApplyUniformNeutralizing);
 
 		final TitledPanel pnlbondLengthTolerance = new TitledPanel();
@@ -208,6 +208,12 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		lblBondLengthTolerance.setBounds(10, 25, 346, 16);
 		pnlbondLengthTolerance.add(lblBondLengthTolerance);
 		lblBondLengthTolerance.setToolTipText("Bond length tolerance when deciding if two atoms are bonded. Number multiplies the sum of the covalent radii.");
+
+		final JLabel lblAtomicCharges_1 = new JLabel();
+		lblAtomicCharges_1.setToolTipText("<html>This table will set atomic charges for each type of atom.<br>Charges for individual atoms can be entered in the table on the structures tab.<br>Charges should sum to approximately zero.</html>");
+		lblAtomicCharges_1.setText("and create aliases:");
+		lblAtomicCharges_1.setBounds(455, 33, 169, 20);
+		add(lblAtomicCharges_1);
 
 //		chkPrintBondLengthAnalysis = new JCheckBox();
 //		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);

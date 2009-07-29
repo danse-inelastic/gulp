@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 
 //import cseo.RB.RBSubmit;
 //import cseo.RB.RBSubmitReturn;
-//import cseo.jodaf.client.FilePackage;
+//import cseo.jodaf.client.FilePkage;
 //import cseo.jodaf.client.JODAFException;
 
 public class Output extends JPanel implements Serializable {
@@ -141,9 +141,9 @@ public class Output extends JPanel implements Serializable {
 		btnViewInput.setBounds(151, 5, 93, 20);
 		add(btnViewInput);
 
-		pnlOutputFormats.setBounds(250, 7, 335, 239);
+		pnlOutputFormats.setBounds(250, 7, 589, 178);
 		add(pnlOutputFormats);
-		pnlTerse.setBounds(591, 7, 443, 239);
+		pnlTerse.setBounds(250, 191, 589, 227);
 		add(pnlTerse);
 		//txtInputFile.setBounds(180, 6, 152, 20);
 		//add(txtInputFile);
@@ -153,13 +153,13 @@ public class Output extends JPanel implements Serializable {
 		inputFileDisplayList.setSelectedIndex(0);
 		add(inputFileDisplayList);
 		add(getSavedInputFilesLabel());
-		pnlCalculationTitle.setBounds(9, 258, 443, 48);
+		pnlCalculationTitle.setBounds(9, 258, 235, 160);
 		add(pnlCalculationTitle);
 		pnlCalculationTitle.setLayout(null);
 		pnlCalculationTitle.setBorder(new TitledBorder(null,
-				"calculation title", TitledBorder.DEFAULT_JUSTIFICATION,
+				"calculation description", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		txtCalculationTitle.setBounds(9, 20, 422, 19);
+		txtCalculationTitle.setBounds(9, 20, 216, 130);
 		pnlCalculationTitle.add(txtCalculationTitle);
 
 		//add(pnlRestart);

@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 public class Dispersion extends TitledPanel implements Serializable {
 
 	private TitledPanel pnlOptions;
-	private JPanel panel;
 	private static final long serialVersionUID = -4898054157855983814L;
 
 
@@ -88,7 +87,7 @@ public class Dispersion extends TitledPanel implements Serializable {
 	public Dispersion() {
 		super();
 
-		btnVisualizeBrillouinZone.setBounds(382, 8, 183, 25);
+		btnVisualizeBrillouinZone.setBounds(382, 8, 237, 25);
 		btnVisualizeBrillouinZone.addActionListener(keyVisualizeBrillouinZone);
 		add(btnVisualizeBrillouinZone);
 		lblLines.setBounds(10, 10, 291, 20);
@@ -96,11 +95,10 @@ public class Dispersion extends TitledPanel implements Serializable {
 		txtLines.setBounds(296, 11, 53, 20);
 		add(txtLines);
 		add(paneDispersion);
-		paneDispersion.setBounds(10, 36, 230, 209);
+		paneDispersion.setBounds(10, 36, 274, 257);
 		for (int i = 0; i < Integer.parseInt(txtLines.getText()); i++)
 			paneDispersion.add("" + (paneDispersion.getComponentCount() + 1), new BoundsPanel());
 		txtLines.addKeyListener(linesKeyListener);
-		add(getPanel());
 		add(getPnlOptions());
 
 		//		do not delete these lines
@@ -134,27 +132,17 @@ public class Dispersion extends TitledPanel implements Serializable {
 	/**
 	 * @return
 	 */
-	protected JPanel getPanel() {
-		if (panel == null) {
-			panel = new JPanel();
-			panel.setBounds(246, 36, 319, 209);
-		}
-		return panel;
-	}
-	/**
-	 * @return
-	 */
 	protected TitledPanel getPnlOptions() {
 		if (pnlOptions == null) {
 			pnlOptions = new TitledPanel();
-			pnlOptions.setBounds(10, 251, 555, 80);
+			pnlOptions.setBounds(294, 39, 325, 138);
 			pnlOptions.setTitle("options");
 			lblFrequency.setBounds(10, 21, 311, 20);
 			pnlOptions.add(lblFrequency);
-			txtFrequency.setBounds(327, 22, 53, 20);
+			txtFrequency.setBounds(10, 47, 53, 20);
 			pnlOptions.add(txtFrequency);
 			chkKpointsAreFor.addActionListener(keyKpointsAreFor);
-			chkKpointsAreFor.setBounds(10, 45, 446, 25);
+			chkKpointsAreFor.setBounds(10, 73, 305, 55);
 			pnlOptions.add(chkKpointsAreFor);
 		}
 		return pnlOptions;

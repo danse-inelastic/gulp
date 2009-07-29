@@ -36,9 +36,9 @@ class BoundsPanel extends JPanel {
 		super();
 		setLayout(null);
 
-		lblPoints.setBounds(0, 0, 120, 40);
+		lblPoints.setBounds(0, 0, 174, 40);
 		add(lblPoints);
-		txtPoints.setBounds(130, 10, 39, 20);
+		txtPoints.setBounds(185, 15, 62, 20);
 		add(txtPoints);
 		txtPoints.addKeyListener(numPointsKeyListener);
 		updateBounds();
@@ -54,7 +54,7 @@ class BoundsPanel extends JPanel {
 		if (newNum > numHighSymPoints) {
 			for (int i = 0; i < newNum - numHighSymPoints; i++) {
 				final DispersionKpoint l = new DispersionKpoint();
-				l.setBounds(5, (numHighSymPoints + i) * 25 + 40, 150, 20);
+				l.setBounds(5, (numHighSymPoints + i) * 25 + 40, 300, 20);
 				add(l);
 			}
 			numHighSymPoints = newNum;
