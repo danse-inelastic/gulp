@@ -60,7 +60,7 @@ public class FreeEnergy extends JPanel implements Serializable {
 		//panel.add(chkRunStaticOptimisation);
 		chkRunStaticOptimisation.addActionListener(keyRunStaticOptimisation);
 
-		pnlTemperature.setBounds(461, 88, 398, 123);
+		pnlTemperature.setBounds(461, 88, 398, 193);
 		//panel.add(pnlTemperature);
 		add(pnlTemperature);
 
@@ -82,7 +82,7 @@ public class FreeEnergy extends JPanel implements Serializable {
 				+ "disallowed as being stupid!</html>");
 		txtscmaxsearch.setBounds(222, 92, 87, 20);
 		pnlMaxRange.add(txtscmaxsearch);
-		lblMaximumSearchRange.setBounds(10, 24, 328, 62);
+		lblMaximumSearchRange.setBounds(10, 24, 426, 62);
 		pnlMaxRange.add(lblMaximumSearchRange);
 		lblDensityCutoff.setBounds(10, 92, 209, 15);
 		pnlMaxRange.add(lblDensityCutoff);
