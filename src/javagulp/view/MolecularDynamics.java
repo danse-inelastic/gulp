@@ -68,9 +68,9 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		add(pnlIntegrator);
 		pnlTimeLengths.setBounds(4, 171, 309, 131);
 		add(pnlTimeLengths);
-		pnlOutputFormats.setBounds(4, 302, 602, 118);
+		pnlOutputFormats.setBounds(4, 302, 602, 153);
 		add(pnlOutputFormats);
-		pnlRestartFile.setBounds(4, 418, 602, 118);
+		pnlRestartFile.setBounds(618, 423, 503, 118);
 		add(pnlRestartFile);
 	}
 

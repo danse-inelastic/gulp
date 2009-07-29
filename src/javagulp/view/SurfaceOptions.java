@@ -37,10 +37,10 @@ public class SurfaceOptions extends JPanel implements Serializable {
 				TitledBorder.DEFAULT_POSITION, null, null));
 		pnlAttachmentEnergy.setBounds(14, 72, 381, 61);
 		add(pnlAttachmentEnergy);
-		txtWidth.setBounds(177, 22, 76, 19);
+		txtWidth.setBounds(229, 22, 76, 19);
 		pnlAttachmentEnergy.add(txtWidth);
 		final JLabel lblWidthOfGrowth = new JLabel(g.html("relaxation layer width (&Aring;)"));
-		lblWidthOfGrowth.setBounds(10, 24, 175, 15);
+		lblWidthOfGrowth.setBounds(10, 24, 213, 15);
 		pnlAttachmentEnergy.add(lblWidthOfGrowth);
 
 		final JPanel pnlBulkEnergy = new JPanel();

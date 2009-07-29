@@ -186,7 +186,7 @@ public class Optimization extends JPanel implements Serializable {
 		add(pnlotheroptions);
 		lblStopIfCell.setBounds(10, 23, 378, 15);
 		pnlotheroptions.add(lblStopIfCell);
-		txtmincell.setBounds(356, 20, 64, 20);
+		txtmincell.setBounds(370, 20, 64, 20);
 		pnlotheroptions.add(txtmincell);
 		chkAllowOnlyIsotropicRadioButton.addActionListener(keyAllowOnlyIsotropicRadioButton);
 		chkAllowOnlyIsotropicRadioButton.setBounds(10, 43, 385, 25);
