@@ -42,26 +42,26 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		setLayout(null);
 
 		pnlTSP.setTitle("tournament selection probability");
-		pnlTSP.setBounds(2, 166, 404, 93);
+		pnlTSP.setBounds(2, 166, 525, 93);
 		add(pnlTSP);
 		pnlGrid.setTitle("grid");
-		pnlGrid.setBounds(2, 4, 352, 76);
+		pnlGrid.setBounds(2, 4, 379, 76);
 		add(pnlGrid);
 		pnlCrossoverProbability.setTitle("crossover probability");
-		pnlCrossoverProbability.setBounds(360, 86, 284, 74);
+		pnlCrossoverProbability.setBounds(360, 86, 311, 74);
 		add(pnlCrossoverProbability);
 		pnlMutationProbability.setTitle("mutation probability");
 		pnlMutationProbability.setBounds(2, 86, 352, 74);
 		add(pnlMutationProbability);
 		pnlConfigurations.setTitle("configurations");
-		pnlConfigurations.setBounds(413, 168, 343, 91);
+		pnlConfigurations.setBounds(533, 166, 372, 91);
 		add(pnlConfigurations);
 		pnlOptimisation.setTitle("final candidate optimization");
-		pnlOptimisation.setBounds(2, 265, 756, 49);
+		pnlOptimisation.setBounds(2, 265, 903, 49);
 		add(pnlOptimisation);
 
 		final TitledPanel pnlRandomNumberSeed = new TitledPanel();
-		pnlRandomNumberSeed.setBounds(650, 86, 228, 74);
+		pnlRandomNumberSeed.setBounds(677, 86, 228, 74);
 		pnlRandomNumberSeed.setTitle("random number seed");
 		add(pnlRandomNumberSeed);
 		txtRandomNumberSeed.setBounds(11, 20, 67, 20);
@@ -69,7 +69,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 
 		final TitledPanel pnlFittingResolution = new TitledPanel();
 		pnlFittingResolution.setTitle("fitting resolution");
-		pnlFittingResolution.setBounds(360, 4, 518, 77);
+		pnlFittingResolution.setBounds(387, 4, 518, 77);
 		add(pnlFittingResolution);
 		lblTwo.setBounds(287, 22, 10, 20);
 		pnlFittingResolution.add(lblTwo);

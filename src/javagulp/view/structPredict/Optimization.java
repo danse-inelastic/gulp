@@ -26,17 +26,17 @@ public class Optimization extends TitledPanel implements Serializable {
 	Optimization() {
 		super();
 
-		lblSaveTheBest.setBounds(14, 24, 85, 15);
+		lblSaveTheBest.setBounds(14, 24, 112, 15);
 		add(lblSaveTheBest);
-		txtSaveTheBest.setBounds(105, 22, 32, 20);
+		txtSaveTheBest.setBounds(132, 22, 51, 20);
 		add(txtSaveTheBest);
-		lblIterationsInterval.setBounds(145, 24, 110, 15);
+		lblIterationsInterval.setBounds(189, 24, 125, 15);
 		add(lblIterationsInterval);
-		txtIterationsInterval.setBounds(260, 20, 33, 23);
+		txtIterationsInterval.setBounds(320, 20, 60, 23);
 		add(txtIterationsInterval);
-		lblComboIterations.setBounds(300, 24, 60, 15);
+		lblComboIterations.setBounds(386, 24, 60, 15);
 		add(lblComboIterations);
-		chkOnly.setBounds(365, 24, 350, 15);
+		chkOnly.setBounds(482, 24, 350, 15);
 		add(chkOnly);
 	}
 

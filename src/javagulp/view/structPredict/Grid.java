@@ -26,23 +26,23 @@ public class Grid extends TitledPanel implements Serializable {
 	Grid() {
 		super();
 
-		txtMin.setBounds(151, 43, 33, 19);
+		txtMin.setBounds(164, 43, 33, 19);
 		add(txtMin);
 		txtMax.setBackground(Back.grey);
-		txtMax.setBounds(285, 42, 33, 19);
+		txtMax.setBounds(313, 43, 33, 19);
 		add(txtMax);
-		lblNumber.setBounds(10, 21, 215, 15);
+		lblNumber.setBounds(10, 21, 233, 15);
 		add(lblNumber);
 		txtNumber.setBackground(Back.grey);
-		txtNumber.setBounds(231, 20, 33, 19);
+		txtNumber.setBounds(249, 19, 39, 19);
 		add(txtNumber);
-		lblMin.setBounds(10, 52, 140, 15);
+		lblMin.setBounds(10, 52, 148, 15);
 		add(lblMin);
-		lblMaxPower.setBounds(321, 46, 15, 20);
+		lblMaxPower.setBounds(357, 47, 33, 20);
 		add(lblMaxPower);
-		lblIterations.setBounds(270, 21, 60, 15);
+		lblIterations.setBounds(294, 21, 80, 15);
 		add(lblIterations);
-		lblMax.setBounds(188, 47, 95, 20);
+		lblMax.setBounds(203, 47, 112, 20);
 		add(lblMax);
 	}
 

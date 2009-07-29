@@ -24,18 +24,18 @@ public class MutationProbability extends TitledPanel implements Serializable {
 	MutationProbability() {
 		super();
 
-		txtInitial.setBounds(51, 25, 75, 19);
+		txtInitial.setBounds(76, 25, 75, 19);
 		add(txtInitial);
-		lblFinal.setBounds(157, 27, 30, 15);
+		lblFinal.setBounds(175, 27, 61, 15);
 		add(lblFinal);
 		txtFinal.setBackground(Back.grey);
-		txtFinal.setBounds(193, 25, 75, 20);
+		txtFinal.setBounds(242, 25, 75, 20);
 		add(txtFinal);
-		txtIncrease.setBounds(203, 48, 65, 20);
+		txtIncrease.setBounds(252, 48, 65, 20);
 		add(txtIncrease);
-		lblIncrease.setBounds(5, 50, 195, 15);
+		lblIncrease.setBounds(5, 50, 231, 15);
 		add(lblIncrease);
-		lblInitial.setBounds(5, 25, 40, 15);
+		lblInitial.setBounds(5, 25, 65, 15);
 		add(lblInitial);
 	}
 
