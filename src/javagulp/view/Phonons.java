@@ -91,6 +91,8 @@ public class Phonons extends TitledPanel implements Serializable {
 		
 		pnlRestartFile.setBounds(0, 454, 602, 118);
 		add(pnlRestartFile);
+		pnlOutputFormats.setBounds(608, 454, 551, 118);
+		add(pnlOutputFormats);
 	}
 
 	private String writeDosBox() throws IncompleteOptionException {

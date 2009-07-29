@@ -11,15 +11,12 @@ import javax.swing.border.TitledBorder;
 
 public class OutputFormats extends JPanel {
 
+	private JTextField txtDos_2;
+	private JTextField txtDos_1;
 	private static final long serialVersionUID = -8425306576850279775L;
 
-	private final JLabel lblWriteFrequencyps = new JLabel("write md status every");
 
-	private final JTextField txtWrite = new JTextField();
-
-	private final JComboBox cboUnits = new JComboBox(new String[] { "ps", "ns",
-			"fs", "s", "timesteps" });
-	private JTextField textField;
+	private JTextField txtDos;
 	private JTextField textField_1;
 
 	public OutputFormats() {
@@ -27,58 +24,80 @@ public class OutputFormats extends JPanel {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		setLayout(null);
-
-		lblWriteFrequencyps.setBounds(7, 21, 183, 14);
-		add(lblWriteFrequencyps);
-		txtWrite.setBounds(202, 18, 111, 21);
-		add(txtWrite);
-		cboUnits.setBounds(319, 18, 92, 21);
-		add(cboUnits);
 		{
-			final JCheckBox chkXYZTrajectory = new JCheckBox("write xyz trajectory");
-			chkXYZTrajectory.setBounds(7, 47, 163, 22);
-			add(chkXYZTrajectory);
+			final JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
+			chkDos.setBounds(10, 23, 335, 22);
+			add(chkDos);
 		}
 		{
-			textField = new JTextField();
-			textField.setBounds(182, 48, 294, 21);
-			add(textField);
-			textField.setColumns(10);
+			txtDos = new JTextField();
+			txtDos.setBounds(351, 24, 260, 21);
+			add(txtDos);
+			txtDos.setColumns(10);
 		}
 		{
-			final JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write dlpoly history file");
-			chckbxWriteDlpolyHistory.setBounds(7, 81, 198, 22);
+			final JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write energy and force constants for QM/MM");
+			chckbxWriteDlpolyHistory.setBounds(10, 107, 335, 22);
 			add(chckbxWriteDlpolyHistory);
 		}
 		{
 			textField_1 = new JTextField();
 			textField_1.setColumns(10);
-			textField_1.setBounds(217, 82, 260, 21);
+			textField_1.setBounds(351, 108, 260, 21);
 			add(textField_1);
+		}
+
+		{
+			final JCheckBox chkDos = new JCheckBox();
+			chkDos.setText("write frequencies for Gruneisen parameter");
+			chkDos.setBounds(10, 51, 335, 22);
+			add(chkDos);
+		}
+
+		{
+			txtDos_1 = new JTextField();
+			txtDos_1.setColumns(10);
+			txtDos_1.setBounds(351, 51, 260, 21);
+			add(txtDos_1);
+		}
+
+		{
+			final JCheckBox chkDos = new JCheckBox();
+			chkDos.setText("write oscillator strengths for phonon modes");
+			chkDos.setBounds(10, 79, 335, 22);
+			add(chkDos);
+		}
+
+		{
+			txtDos_2 = new JTextField();
+			txtDos_2.setColumns(10);
+			txtDos_2.setBounds(351, 78, 260, 21);
+			add(txtDos_2);
 		}
 	}
 	
 
 	public String writeOutputFormats() {
 		String lines = "output phonon dos.dens" + Back.newLine;
-		if (!txtWrite.getText().equals("")) {
-			if (cboUnits.getSelectedItem().equals("timesteps")) {
-				try {
-					Integer.parseInt(txtWrite.getText());
-				} catch (final NumberFormatException nfe) {
-					throw new NumberFormatException("Please enter an integer for MD status write frequency.");
-				}
-				lines = "write " + txtWrite.getText() + Back.newLine;
-			} else {
-				try {
-					Double.parseDouble(txtWrite.getText());
-				} catch (final NumberFormatException nfe) {
-					throw new NumberFormatException("Please enter a number for MD status write frequency.");
-				}
-				lines = "write " + txtWrite.getText() + " "
-				+ cboUnits.getSelectedItem() + Back.newLine;
-			}
-		}
+		
+//		if (!txtWrite.getText().equals("")) {
+//			if (cboUnits.getSelectedItem().equals("timesteps")) {
+//				try {
+//					Integer.parseInt(txtWrite.getText());
+//				} catch (final NumberFormatException nfe) {
+//					throw new NumberFormatException("Please enter an integer for MD status write frequency.");
+//				}
+//				lines = "write " + txtWrite.getText() + Back.newLine;
+//			} else {
+//				try {
+//					Double.parseDouble(txtWrite.getText());
+//				} catch (final NumberFormatException nfe) {
+//					throw new NumberFormatException("Please enter a number for MD status write frequency.");
+//				}
+//				lines = "write " + txtWrite.getText() + " "
+//				+ cboUnits.getSelectedItem() + Back.newLine;
+//			}
+//		}
 		return lines;
 	}
 

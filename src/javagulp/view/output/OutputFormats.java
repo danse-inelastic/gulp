@@ -18,8 +18,8 @@ public class OutputFormats extends JPanel implements Serializable {
 	private final JTextField txtOutputFilename = new JTextField("output");
 
 	private final String[] labels = { "SIESTA (.fdf)", "CRYSTAL98 (.str)", "Crystal (.cif)", "MARVIN (.mvn)",
-			"derivatives (.drv)", "forces (.frc)", "frequency", "Pressure (.pre)" };
-	private final String[] formats = { "fdf", "str", "cif", "marvin", "drv", "frc", "freq", "pre" };
+			"derivatives (.drv)", "forces (.frc)", "frequency"};
+	private final String[] formats = { "fdf", "str", "cif", "marvin", "drv", "frc", "freq"};
 	//private final String[] extensions = {".fdf", "", ".phonon", "", "", "", "", ".xyz",
 	//		"movie.xyz", ".history", ".drv", ".frc", ".freq", ".pre" };
 	// TODO add trajectory ascii and equil options, frequency text option, and osc format
