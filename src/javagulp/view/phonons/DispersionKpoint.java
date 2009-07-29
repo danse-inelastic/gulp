@@ -32,17 +32,17 @@ public class DispersionKpoint extends JPanel implements Serializable {
 	public DispersionKpoint() {
 		setLayout(null);
 
-		txtBoundX.setBounds(0, 0, 25, 20);
+		txtBoundX.setBounds(0, 0, 49, 20);
 		txtBoundX.addKeyListener(pointKeyListener);
 		add(txtBoundX);
-		txtBoundY.setBounds(30, 0, 25, 20);
+		txtBoundY.setBounds(55, 0, 49, 20);
 		txtBoundY.addKeyListener(pointKeyListener);
 		add(txtBoundY);
-		txtBoundZ.setBounds(60, 0, 25, 20);
+		txtBoundZ.setBounds(110, 0, 49, 20);
 		txtBoundZ.addKeyListener(pointKeyListener);
 		add(txtBoundZ);
 
-		lblTo.setBounds(90, 0, 30, 20);
+		lblTo.setBounds(170, 0, 30, 20);
 		add(lblTo);
 	}
 }

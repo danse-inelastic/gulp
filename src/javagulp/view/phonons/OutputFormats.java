@@ -26,52 +26,52 @@ public class OutputFormats extends JPanel {
 		setLayout(null);
 		{
 			final JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
-			chkDos.setBounds(10, 23, 335, 22);
+			chkDos.setBounds(10, 23, 395, 22);
 			add(chkDos);
 		}
 		{
 			txtDos = new JTextField();
-			txtDos.setBounds(351, 24, 260, 21);
+			txtDos.setBounds(411, 24, 260, 21);
 			add(txtDos);
 			txtDos.setColumns(10);
 		}
 		{
 			final JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write energy and force constants for QM/MM");
-			chckbxWriteDlpolyHistory.setBounds(10, 107, 335, 22);
+			chckbxWriteDlpolyHistory.setBounds(10, 107, 395, 22);
 			add(chckbxWriteDlpolyHistory);
 		}
 		{
 			textField_1 = new JTextField();
 			textField_1.setColumns(10);
-			textField_1.setBounds(351, 108, 260, 21);
+			textField_1.setBounds(411, 108, 260, 21);
 			add(textField_1);
 		}
 
 		{
 			final JCheckBox chkDos = new JCheckBox();
 			chkDos.setText("write frequencies for Gruneisen parameter");
-			chkDos.setBounds(10, 51, 335, 22);
+			chkDos.setBounds(10, 51, 395, 22);
 			add(chkDos);
 		}
 
 		{
 			txtDos_1 = new JTextField();
 			txtDos_1.setColumns(10);
-			txtDos_1.setBounds(351, 51, 260, 21);
+			txtDos_1.setBounds(411, 51, 260, 21);
 			add(txtDos_1);
 		}
 
 		{
 			final JCheckBox chkDos = new JCheckBox();
 			chkDos.setText("write oscillator strengths for phonon modes");
-			chkDos.setBounds(10, 79, 335, 22);
+			chkDos.setBounds(10, 79, 395, 22);
 			add(chkDos);
 		}
 
 		{
 			txtDos_2 = new JTextField();
 			txtDos_2.setColumns(10);
-			txtDos_2.setBounds(351, 78, 260, 21);
+			txtDos_2.setBounds(411, 78, 260, 21);
 			add(txtDos_2);
 		}
 	}
