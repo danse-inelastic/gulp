@@ -22,19 +22,19 @@ public class CrossoverProbability extends TitledPanel {
 	CrossoverProbability() {
 		super();
 
-		txtMin.setBounds(47, 45, 46, 20);
+		txtMin.setBounds(70, 46, 46, 20);
 		add(txtMin);
-		lblMin.setBounds(9, 48, 36, 15);
+		lblMin.setBounds(9, 48, 55, 15);
 		add(lblMin);
-		lblMax.setBounds(99, 48, 17, 15);
+		lblMax.setBounds(122, 47, 33, 15);
 		add(lblMax);
 		txtMax.setBackground(Back.grey);
-		txtMax.setBounds(126, 42, 49, 21);
+		txtMax.setBounds(161, 45, 49, 21);
 		add(txtMax);
 		txtIncrease.setBackground(Back.grey);
-		txtIncrease.setBounds(224, 21, 49, 21);
+		txtIncrease.setBounds(271, 19, 49, 21);
 		add(txtIncrease);
-		lblIncrease.setBounds(9, 22, 210, 15);
+		lblIncrease.setBounds(9, 22, 256, 15);
 		add(lblIncrease);
 	}
 
@@ -58,4 +58,7 @@ public class CrossoverProbability extends TitledPanel {
 		}
 		return lines;
 	}
+	/**
+	 * @return
+	 */
 }

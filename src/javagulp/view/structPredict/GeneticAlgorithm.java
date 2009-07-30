@@ -29,7 +29,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 	private final TournamentSelectionProbability pnlTSP = new TournamentSelectionProbability();
 	private final Optimization pnlOptimisation = new Optimization();
 
-	private final JLabel lblMinCostFunctionDifference = new JLabel("<html>any two candidates must have a cost function difference of at least</html>");
+	private final JLabel lblMinCostFunctionDifference = new JLabel("any two candidates must have a cost function difference of at least");
 	private final JLabel lblTwo = new JLabel("2");
 
 	private final JTextField txtDiscretizationIntervalPower = new JTextField("6");
@@ -42,26 +42,26 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		setLayout(null);
 
 		pnlTSP.setTitle("tournament selection probability");
-		pnlTSP.setBounds(2, 166, 525, 93);
+		pnlTSP.setBounds(2, 166, 494, 93);
 		add(pnlTSP);
 		pnlGrid.setTitle("grid");
 		pnlGrid.setBounds(2, 4, 379, 76);
 		add(pnlGrid);
 		pnlCrossoverProbability.setTitle("crossover probability");
-		pnlCrossoverProbability.setBounds(360, 86, 311, 74);
+		pnlCrossoverProbability.setBounds(360, 86, 350, 74);
 		add(pnlCrossoverProbability);
 		pnlMutationProbability.setTitle("mutation probability");
 		pnlMutationProbability.setBounds(2, 86, 352, 74);
 		add(pnlMutationProbability);
 		pnlConfigurations.setTitle("configurations");
-		pnlConfigurations.setBounds(533, 166, 372, 91);
+		pnlConfigurations.setBounds(502, 166, 442, 91);
 		add(pnlConfigurations);
 		pnlOptimisation.setTitle("final candidate optimization");
-		pnlOptimisation.setBounds(2, 265, 903, 49);
+		pnlOptimisation.setBounds(2, 265, 942, 49);
 		add(pnlOptimisation);
 
 		final TitledPanel pnlRandomNumberSeed = new TitledPanel();
-		pnlRandomNumberSeed.setBounds(677, 86, 228, 74);
+		pnlRandomNumberSeed.setBounds(716, 86, 228, 74);
 		pnlRandomNumberSeed.setTitle("random number seed");
 		add(pnlRandomNumberSeed);
 		txtRandomNumberSeed.setBounds(11, 20, 67, 20);
@@ -69,14 +69,14 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 
 		final TitledPanel pnlFittingResolution = new TitledPanel();
 		pnlFittingResolution.setTitle("fitting resolution");
-		pnlFittingResolution.setBounds(387, 4, 518, 77);
+		pnlFittingResolution.setBounds(387, 4, 557, 77);
 		add(pnlFittingResolution);
-		lblTwo.setBounds(287, 22, 10, 20);
+		lblTwo.setBounds(325, 20, 10, 20);
 		pnlFittingResolution.add(lblTwo);
-		txtDiscretizationIntervalPower.setBounds(298, 10, 26, 20);
+		txtDiscretizationIntervalPower.setBounds(340, 10, 26, 20);
 		pnlFittingResolution.add(txtDiscretizationIntervalPower);
-		final JLabel lblDiscretizationInterval = new JLabel("<html>discretization interval for a fitted variable</html>");
-		lblDiscretizationInterval.setBounds(10, 19, 271, 27);
+		final JLabel lblDiscretizationInterval = new JLabel("discretization interval for a fitted variable");
+		lblDiscretizationInterval.setBounds(10, 19, 309, 21);
 		pnlFittingResolution.add(lblDiscretizationInterval);
 		// JCheckBox25 = new JCheckBox();
 		// JCheckBox25.setText("two");
@@ -87,9 +87,9 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		// JCheckBox26.setText("exponential");
 		// JCheckBox26.setBounds(604, 206, 104, 25);
 		// add(JCheckBox26);
-		lblMinCostFunctionDifference.setBounds(10, 48, 423, 27);
+		lblMinCostFunctionDifference.setBounds(10, 46, 462, 20);
 		pnlFittingResolution.add(lblMinCostFunctionDifference);
-		txtMinCostFunctionDifference.setBounds(439, 51, 69, 20);
+		txtMinCostFunctionDifference.setBounds(478, 47, 69, 20);
 		pnlFittingResolution.add(txtMinCostFunctionDifference);
 	}
 

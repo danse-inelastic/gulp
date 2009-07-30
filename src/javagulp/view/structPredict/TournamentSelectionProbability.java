@@ -34,7 +34,7 @@ public class TournamentSelectionProbability extends TitledPanel implements
 		sldInitial.setMajorTickSpacing(20);
 		sldInitial.setPaintTicks(true);
 		sldInitial.setPaintLabels(true);
-		sldInitial.setBounds(7, 42, 126, 42);
+		sldInitial.setBounds(7, 42, 134, 42);
 		add(sldInitial);
 		lblInitial.setBounds(14, 21, 42, 14);
 		add(lblInitial);
@@ -46,9 +46,9 @@ public class TournamentSelectionProbability extends TitledPanel implements
 		add(sldFinal);
 		lblFinal.setBounds(159, 22, 44, 15);
 		add(lblFinal);
-		lblStepSize.setBounds(310, 22, 66, 15);
+		lblStepSize.setBounds(333, 21, 66, 15);
 		add(lblStepSize);
-		txtStepSize.setBounds(310, 46, 66, 22);
+		txtStepSize.setBounds(333, 42, 66, 22);
 		add(txtStepSize);
 	}
 

@@ -26,19 +26,19 @@ public class Configurations extends TitledPanel implements Serializable {
 	Configurations() {
 		super();
 
-		txtNumber.setBounds(275, 17, 54, 20);
+		txtNumber.setBounds(320, 17, 54, 20);
 		add(txtNumber);
-		lblNumber.setBounds(9, 19, 260, 15);
+		lblNumber.setBounds(9, 19, 305, 15);
 		add(lblNumber);
-		lblMax.setBounds(9, 37, 160, 15);
+		lblMax.setBounds(9, 40, 220, 15);
 		add(lblMax);
 		txtMax.setBackground(Back.grey);
-		txtMax.setBounds(275, 38, 54, 20);
+		txtMax.setBounds(320, 38, 54, 20);
 		add(txtMax);
 		cboStepSize.setSelectedItem("2");
-		cboStepSize.setBounds(275, 60, 54, 20);
+		cboStepSize.setBounds(320, 58, 54, 20);
 		add(cboStepSize);
-		lblCombo.setBounds(9, 58, 65, 15);
+		lblCombo.setBounds(9, 61, 96, 15);
 		add(lblCombo);
 	}
 
