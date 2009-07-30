@@ -45,8 +45,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 	private final JRadioButton radRetainColoumbic = new JRadioButton("retain the coloumbic interaction between its atoms");
 	private final JRadioButton radRemoveColoumbic = new JRadioButton("remove the coloumbic interaction between its atoms");
 
-
-	private final JCheckBox chkSetAveragePotential = new JCheckBox("<html>set average potential across lattice sites to 0 (for surface/bulk comparisons)</html>");
+	private final JCheckBox chkSetAveragePotential = new JCheckBox("set average potential across lattice sites to 0 (for surface/bulk comparisons)");
 	private final JCheckBox chkDoNotUseCutoff = new JCheckBox("<html>do not use a cutoff for exponential repulsive terms when they become less than the accuracy factor (default=10<sup>-8</sup>) to save computer time but use cutoff given in the input file</html>");
 	private final JCheckBox chkRemoveColoumbic = new JCheckBox("remove the coloumbic interaction between bonded atoms and atoms with a bonded atom in common");
 	private final JCheckBox chkDoNotStop = new JCheckBox("do not stop execution if molecule becomes unbonded");
@@ -83,7 +82,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		final TitledPanel pnlCutoffBondLength = new TitledPanel();
 		pnlCutoffBondLength.setTitle("cutoff bondlength search at");
-		pnlCutoffBondLength.setBounds(0, 0, 378, 49);
+		pnlCutoffBondLength.setBounds(0, 0, 404, 49);
 		add(pnlCutoffBondLength);
 		txtCutoffBondLength.setBounds(15, 22, 84, 20);
 		pnlCutoffBondLength.add(txtCutoffBondLength);
@@ -92,13 +91,14 @@ public class PotentialOptions extends JPanel implements Serializable {
 		pnlCutoffBondLength.add(angLabel);
 
 		add(pnlResetInteratomic);
+		pnlResetInteratomic.setBounds(0, 55, 404, 115);
 		chkSetAveragePotential.addActionListener(keySetAveragePotential);
-		chkSetAveragePotential.setBounds(381, 31, 520, 27);
+		chkSetAveragePotential.setBounds(409, 40, 520, 24);
 		add(chkSetAveragePotential);
 
 		final TitledPanel pnlSetDipole = new TitledPanel();
 		pnlSetDipole.setTitle("set dipole polarisability");
-		pnlSetDipole.setBounds(381, 127, 444, 103);
+		pnlSetDipole.setBounds(410, 129, 444, 103);
 		add(pnlSetDipole);
 		scrollPane.setBounds(10, 22, 421, 71);
 		pnlSetDipole.add(scrollPane);
@@ -110,50 +110,50 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		chkDoNotUseCutoff.addActionListener(keyDoNotUseCutoff);
 		chkDoNotUseCutoff.setAlignmentY(Component.TOP_ALIGNMENT);
-		chkDoNotUseCutoff.setBounds(381, 55, 601, 66);
+		chkDoNotUseCutoff.setBounds(409, 57, 709, 66);
 		add(chkDoNotUseCutoff);
 
 		final TitledPanel pnlIdentifyMolecules = new TitledPanel();
 		pnlIdentifyMolecules.setTitle("identify molecules based on covalent radii but");
-		pnlIdentifyMolecules.setBounds(378, 238, 709, 151);
+		pnlIdentifyMolecules.setBounds(411, 238, 709, 151);
 		add(pnlIdentifyMolecules);
 		buttonGroup.add(radRetainColoumbic);
 		radRetainColoumbic.addActionListener(keyCoulombGroup);
-		radRetainColoumbic.setBounds(10, 51, 345, 25);
+		radRetainColoumbic.setBounds(10, 51, 500, 25);
 		pnlIdentifyMolecules.add(radRetainColoumbic);
 		radRemoveColoumbic.addActionListener(keyCoulombGroup);
 		buttonGroup.add(radRemoveColoumbic);
-		radRemoveColoumbic.setBounds(10, 20, 355, 25);
+		radRemoveColoumbic.setBounds(10, 20, 500, 25);
 		pnlIdentifyMolecules.add(radRemoveColoumbic);
 		chkRemoveColoumbic.addActionListener(keyChkRemoveColoumbic);
-		chkRemoveColoumbic.setBounds(10, 82, 660, 25);
+		chkRemoveColoumbic.setBounds(10, 82, 689, 25);
 		pnlIdentifyMolecules.add(chkRemoveColoumbic);
 		chkDoNotStop.addActionListener(keyDoNotStop);
-		chkDoNotStop.setBounds(10, 113, 364, 28);
+		chkDoNotStop.setBounds(10, 113, 500, 28);
 		pnlIdentifyMolecules.add(chkDoNotStop);
 
 		final TitledPanel pnlScalingTransformation = new TitledPanel();
 		pnlScalingTransformation.setTitle("apply a scaling transformation to EAM");
-		pnlScalingTransformation.setBounds(0, 176, 375, 95);
+		pnlScalingTransformation.setBounds(0, 176, 404, 95);
 		add(pnlScalingTransformation);
-		txtScale.setBounds(185, 66, 69, 20);
+		txtScale.setBounds(233, 68, 69, 20);
 		pnlScalingTransformation.add(txtScale);
 		final JLabel lblEquations = new JLabel("<html>f'(sum(" + g.rho
 				+ "<sub>i</sub>)) = f(sum(" + g.rho
 				+ "<sub>i</sub>)/scale<sub>i</sub>)<br> " + g.rho
 				+ "'<sub>i</sub> = scale<sub>i</sub> " + g.rho
 				+ "<sub>i</sub></html>");
-		lblEquations.setBounds(8, 17, 270, 45);
+		lblEquations.setBounds(8, 17, 358, 45);
 		pnlScalingTransformation.add(lblEquations);
 		final JLabel lblSpecies = new JLabel("species");
-		lblSpecies.setBounds(8, 68, 50, 15);
+		lblSpecies.setBounds(8, 68, 63, 15);
 		pnlScalingTransformation.add(lblSpecies);
 		final JLabel lblScale = new JLabel("scale");
-		lblScale.setBounds(144, 65, 35, 20);
+		lblScale.setBounds(178, 67, 50, 20);
 		pnlScalingTransformation.add(lblScale);
-		chkFit.setBounds(256, 63, 40, 25);
+		chkFit.setBounds(316, 63, 50, 25);
 		pnlScalingTransformation.add(chkFit);
-		cboSpecies.setBounds(64, 65, 74, 20);
+		cboSpecies.setBounds(74, 67, 85, 20);
 		pnlScalingTransformation.add(cboSpecies);
 
 		chkPrintThreeBody.addActionListener(keyPrintThreeBody);
@@ -163,7 +163,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 		chkDoNotInclude.setBounds(0, 308, 320, 25);
 		add(chkDoNotInclude);
 		chkOutputList.addActionListener(keyOutputList);
-		chkOutputList.setBounds(381, 0, 430, 25);
+		chkOutputList.setBounds(409, 10, 556, 25);
 		add(chkOutputList);
 		chkNoListBased.addActionListener(keyNoListBased);
 		chkNoListBased.setBounds(0, 339, 375, 25);

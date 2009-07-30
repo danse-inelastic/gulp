@@ -86,7 +86,7 @@ public class StructurePrediction extends JPanel implements Serializable {
 			chkPredictCrystal.setBounds(10, 11, 255, 30);
 			add(chkPredictCrystal);
 
-			scrollPane.setBounds(10, 47, 987, 350);
+			scrollPane.setBounds(10, 47, 1032, 373);
 			add(scrollPane);
 			scrollPane.add(pnlGeneticAlgorithm);
 			scrollPane.add(pnlSimulatedAnnealing);

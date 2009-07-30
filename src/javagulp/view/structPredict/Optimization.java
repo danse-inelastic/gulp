@@ -34,7 +34,7 @@ public class Optimization extends TitledPanel implements Serializable {
 		add(lblIterationsInterval);
 		txtIterationsInterval.setBounds(320, 20, 60, 23);
 		add(txtIterationsInterval);
-		lblComboIterations.setBounds(386, 24, 60, 15);
+		lblComboIterations.setBounds(386, 24, 112, 15);
 		add(lblComboIterations);
 		chkOnly.setBounds(533, 24, 350, 15);
 		add(chkOnly);

@@ -42,26 +42,26 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		setLayout(null);
 
 		pnlTSP.setTitle("tournament selection probability");
-		pnlTSP.setBounds(2, 166, 494, 93);
+		pnlTSP.setBounds(2, 166, 526, 93);
 		add(pnlTSP);
 		pnlGrid.setTitle("grid");
-		pnlGrid.setBounds(2, 4, 379, 76);
+		pnlGrid.setBounds(2, 4, 407, 76);
 		add(pnlGrid);
 		pnlCrossoverProbability.setTitle("crossover probability");
-		pnlCrossoverProbability.setBounds(360, 86, 350, 74);
+		pnlCrossoverProbability.setBounds(379, 86, 379, 74);
 		add(pnlCrossoverProbability);
 		pnlMutationProbability.setTitle("mutation probability");
-		pnlMutationProbability.setBounds(2, 86, 352, 74);
+		pnlMutationProbability.setBounds(2, 86, 371, 74);
 		add(pnlMutationProbability);
 		pnlConfigurations.setTitle("configurations");
-		pnlConfigurations.setBounds(502, 166, 442, 91);
+		pnlConfigurations.setBounds(534, 166, 458, 91);
 		add(pnlConfigurations);
 		pnlOptimisation.setTitle("final candidate optimization");
-		pnlOptimisation.setBounds(2, 265, 942, 49);
+		pnlOptimisation.setBounds(2, 265, 990, 56);
 		add(pnlOptimisation);
 
 		final TitledPanel pnlRandomNumberSeed = new TitledPanel();
-		pnlRandomNumberSeed.setBounds(716, 86, 228, 74);
+		pnlRandomNumberSeed.setBounds(764, 86, 228, 74);
 		pnlRandomNumberSeed.setTitle("random number seed");
 		add(pnlRandomNumberSeed);
 		txtRandomNumberSeed.setBounds(11, 20, 67, 20);
@@ -69,7 +69,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 
 		final TitledPanel pnlFittingResolution = new TitledPanel();
 		pnlFittingResolution.setTitle("fitting resolution");
-		pnlFittingResolution.setBounds(387, 4, 557, 77);
+		pnlFittingResolution.setBounds(415, 4, 577, 77);
 		add(pnlFittingResolution);
 		lblTwo.setBounds(325, 20, 10, 20);
 		pnlFittingResolution.add(lblTwo);
@@ -89,7 +89,7 @@ public class GeneticAlgorithm extends JPanel implements Serializable {
 		// add(JCheckBox26);
 		lblMinCostFunctionDifference.setBounds(10, 46, 462, 20);
 		pnlFittingResolution.add(lblMinCostFunctionDifference);
-		txtMinCostFunctionDifference.setBounds(478, 47, 69, 20);
+		txtMinCostFunctionDifference.setBounds(498, 47, 69, 20);
 		pnlFittingResolution.add(txtMinCostFunctionDifference);
 	}
 

@@ -137,7 +137,7 @@ public class RunType extends JPanel implements Serializable {
 				lblRunType.setBounds(10, 11, 130, 20);
 				add(lblRunType);
 
-				scrollPane.setBounds(0, 39, 1282, 592);
+				scrollPane.setBounds(0, 39, 1216, 632);
 				add(scrollPane);
 				runTypes.put("molecular dynamics", new MolecularDynamics());
 				scrollPane.add(runTypes.get("molecular dynamics"));
