@@ -51,7 +51,7 @@ public class SnM extends JPanel implements Serializable {
 		chkStreitzAndMintmire.setBounds(5, 1, 562, 25);
 		add(chkStreitzAndMintmire);
 
-		cbosmatom.setBounds(56, 49, 66, 26);
+		cbosmatom.setBounds(56, 49, 78, 26);
 		add(cbosmatom);
 		lblzeta.setBounds(5, 126, 60, 15);
 		add(lblzeta);
@@ -69,13 +69,13 @@ public class SnM extends JPanel implements Serializable {
 		add(lblXev);
 		lblmuev.setBounds(246, 93, 78, 15);
 		add(lblmuev);
-		chkchi.setBounds(174, 88, 40, 25);
+		chkchi.setBounds(174, 88, 51, 25);
 		add(chkchi);
-		chkzeta.setBounds(174, 121, 40, 25);
+		chkzeta.setBounds(174, 121, 51, 25);
 		add(chkzeta);
-		chkmu.setBounds(414, 88, 40, 25);
+		chkmu.setBounds(414, 88, 51, 25);
 		add(chkmu);
-		chkZnuc.setBounds(414, 121, 40, 25);
+		chkZnuc.setBounds(414, 121, 51, 25);
 		add(chkZnuc);
 		lblAtom.setBounds(5, 55, 45, 15);
 		add(lblAtom);

@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 
 public class Electrostatics extends JPanel implements Serializable {
 
+	private JPanel panel;
 	private static final long serialVersionUID = -1049388362113135590L;
 
 	private final JButton btnSet = new JButton("set");
@@ -86,49 +87,43 @@ public class Electrostatics extends JPanel implements Serializable {
 		//this.setPreferredSize(new java.awt.Dimension(973, 336));
 
 		// set up tabbed pane and three sub panes
-		eeChoice.setBounds(0, 2, 487, 209);
+		eeChoice.setBounds(0, 2, 521, 209);
 		add(eeChoice);
 		eeChoice.add(pnlMortiers, "Mortiers");
 		eeChoice.add(pnlqeq, "QEq");
 		eeChoice.add(snm, "Streitz and Mintmire");
+		snm.cbosmatom.setBounds(56, 49, 79, 26);
 
 		pnlSpecifyPoints.setToolTipText("Allows the user to specify points in space at which the electrostatic potential should be calculated. Note that it is necessary to also specify the \"pot\" keyword to trigger the calculation of the potential.");
 		pnlSpecifyPoints.setTitle("specify points at which the electrostatic potential is calculated");
-		pnlSpecifyPoints.setBounds(504, 203, 462, 126);
+		pnlSpecifyPoints.setBounds(527, 267, 604, 126);
 		add(pnlSpecifyPoints);
 		lblNumberOfPoints.setVerticalAlignment(SwingConstants.TOP);
 		lblNumberOfPoints.setAlignmentY(Component.TOP_ALIGNMENT);
-		lblNumberOfPoints.setBounds(10, 19, 110, 15);
+		lblNumberOfPoints.setBounds(10, 19, 175, 15);
 		pnlSpecifyPoints.add(lblNumberOfPoints);
 		txtNumberOfPoints.setBounds(10, 40, 38, 20);
 		pnlSpecifyPoints.add(txtNumberOfPoints);
-		scrollPane.setBounds(154, 21, 301, 98);
+		scrollPane.setBounds(240, 18, 301, 98);
 		pnlSpecifyPoints.add(scrollPane);
 		table.setModel(electrostaticsTableModel);
 		scrollPane.setViewportView(table);
 		btnSet.addActionListener(keySet);
-		btnSet.setBounds(65, 40, 55, 20);
+		btnSet.setBounds(65, 40, 90, 20);
 		pnlSpecifyPoints.add(btnSet);
-		cboCoordinates.setBounds(10, 66, 132, 18);
+		cboCoordinates.setBounds(10, 66, 145, 24);
 		pnlSpecifyPoints.add(cboCoordinates);
 
-		pnlCalculatePotential.setBounds(504, 101, 466, 94);
+		pnlCalculatePotential.setBounds(527, 160, 604, 101);
 		add(pnlCalculatePotential);
 
-		radPrintOutElectric.addActionListener(keyPrintOutElectric);
-		radPrintOutElectric.setBounds(504, 63, 455, 35);
-		add(radPrintOutElectric);
-		chkFirstDerivative.addActionListener(keyFirstDerivative);
-		chkFirstDerivative.setBounds(504, 23, 460, 40);
-		add(chkFirstDerivative);
-
 		pnlAccuracy.setTitle("electrostatic summation accuracy");
-		pnlAccuracy.setBounds(0, 217, 487, 117);
+		pnlAccuracy.setBounds(0, 217, 521, 142);
 		add(pnlAccuracy);
-		lblConvergedFigures.setBounds(10, 21, 295, 15);
+		lblConvergedFigures.setBounds(10, 24, 331, 15);
 		pnlAccuracy.add(lblConvergedFigures);
 		txtConvergedFigures.setBackground(Back.grey);
-		txtConvergedFigures.setBounds(311, 19, 59, 20);
+		txtConvergedFigures.setBounds(347, 22, 59, 20);
 		pnlAccuracy.add(txtConvergedFigures);
 
 
@@ -136,22 +131,33 @@ public class Electrostatics extends JPanel implements Serializable {
 		pnlOneDimensional.setBorder(new TitledBorder(null, "1d systems",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		pnlOneDimensional.setBounds(5, 41, 365, 71);
+		pnlOneDimensional.setBounds(10, 61, 396, 71);
 		pnlAccuracy.add(pnlOneDimensional);
-		lblUpperBound.setBounds(9, 17, 195, 15);
+		lblUpperBound.setBounds(9, 17, 310, 15);
 		pnlOneDimensional.add(lblUpperBound);
 		txtUpperBound.setBackground(Back.grey);
-		txtUpperBound.setBounds(250, 15, 61, 20);
+		txtUpperBound.setBounds(325, 15, 61, 20);
 		pnlOneDimensional.add(txtUpperBound);
-		lblOrderOfSeries.setBounds(9, 41, 235, 15);
+		lblOrderOfSeries.setBounds(9, 41, 310, 15);
 		pnlOneDimensional.add(lblOrderOfSeries);
 		txtOrderOfSeries.setBackground(Back.grey);
-		txtOrderOfSeries.setBounds(250, 39, 61, 20);
+		txtOrderOfSeries.setBounds(325, 39, 61, 20);
 		pnlOneDimensional.add(txtOrderOfSeries);
+		TitledPanel pnlOptions = new TitledPanel();
+		pnlOptions.setBounds(527, 5, 604, 149);
+		pnlOptions.setTitle("options");
+		add(pnlOptions);
 
 		chkElectrostaticSitePotentials.addActionListener(keyElectrostaticSitePotentials);
-		chkElectrostaticSitePotentials.setBounds(504, 0, 398, 30);
-		add(chkElectrostaticSitePotentials);
+		chkElectrostaticSitePotentials.setBounds(10, 21, 398, 30);
+		pnlOptions.add(chkElectrostaticSitePotentials);
+		chkFirstDerivative.addActionListener(keyFirstDerivative);
+		chkFirstDerivative.setBounds(10, 49, 460, 40);
+		pnlOptions.add(chkFirstDerivative);
+
+		radPrintOutElectric.addActionListener(keyPrintOutElectric);
+		radPrintOutElectric.setBounds(10, 95, 549, 35);
+		pnlOptions.add(radPrintOutElectric);
 
 		// qeqAtomTextField.addKeyListener(new SerialKeyAdapter() {
 		// public void keyReleased(KeyEvent e) {
@@ -188,4 +194,6 @@ public class Electrostatics extends JPanel implements Serializable {
 		+ pnlMortiers.writeElectronegativity()
 		+ snm.writeSmelectronegativity();
 	}
+
+
 }

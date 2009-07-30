@@ -37,24 +37,24 @@ public class Mortiers extends JPanel implements Serializable {
 	public Mortiers() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(469, 105));
+		//this.setPreferredSize(new java.awt.Dimension(469, 105));
 
-		lblchiev.setBounds(141, 56, 35, 15);
+		lblchiev.setBounds(141, 56, 54, 15);
 		add(lblchiev);
-		txtchi.setBounds(183, 54, 61, 20);
+		txtchi.setBounds(201, 54, 61, 20);
 		add(txtchi);
-		lblmuev.setBounds(314, 56, 35, 15);
+		lblmuev.setBounds(336, 56, 52, 15);
 		add(lblmuev);
 		txtmu.setBackground(Back.grey);
-		txtmu.setBounds(355, 54, 61, 18);
+		txtmu.setBounds(394, 54, 61, 18);
 		add(txtmu);
-		chkchi.setBounds(249, 51, 40, 25);
+		chkchi.setBounds(268, 51, 40, 25);
 		add(chkchi);
-		chkmu.setBounds(423, 51, 40, 25);
+		chkmu.setBounds(461, 51, 52, 25);
 		add(chkmu);
 		lblAtom.setBounds(15, 56, 35, 15);
 		add(lblAtom);
-		cboeematom.setBounds(56, 50, 64, 26);
+		cboeematom.setBounds(56, 50, 79, 26);
 		add(cboeematom);
 
 		chkMortiers.addActionListener(keyMortiers);
