@@ -563,7 +563,7 @@ public class Execution extends JPanel implements Serializable {
 		btnSubmit.addActionListener(keySubmit);
 		btnSubmit.setBounds(7, 365, 136, 25);
 		add(btnSubmit);
-		scrollStatus.setBounds(489, 4, 579, 134);
+		scrollStatus.setBounds(517, 4, 640, 134);
 		btnPause.setBounds(149, 365, 80, 25);
 		btnPause.addActionListener(keyPause);
 		add(getPnlExecutionBackdrop());
@@ -836,7 +836,7 @@ public class Execution extends JPanel implements Serializable {
 	protected TitledPanel getHowExecute() {
 		if (howExecute == null) {
 			howExecute = new TitledPanel();
-			howExecute.setBounds(209, 4, 274, 134);
+			howExecute.setBounds(209, 4, 302, 134);
 			howExecute.setTitle("how to execute");
 			radDirect.setBounds(10, 26, 161, 21);
 			howExecute.add(radDirect);
@@ -845,7 +845,7 @@ public class Execution extends JPanel implements Serializable {
 			radPBS.setBounds(10, 87, 161, 21);
 			howExecute.add(radPBS);
 			grpMethod.add(radPBS);
-			chkCustom.setBounds(35, 53, 229, 28);
+			chkCustom.setBounds(35, 53, 257, 28);
 			howExecute.add(chkCustom);
 			chkCustom.addActionListener(keyCustom);
 		}
@@ -857,13 +857,13 @@ public class Execution extends JPanel implements Serializable {
 	protected TitledPanel getPnlHighThroughput() {
 		if (pnlHighThroughput == null) {
 			pnlHighThroughput = new TitledPanel();
-			pnlHighThroughput.setBounds(736, 144, 332, 215);
+			pnlHighThroughput.setBounds(736, 144, 421, 215);
 			pnlHighThroughput.setTitle("high throughput execution");
-			lblParallel.setBounds(10, 62, 312, 37);
+			lblParallel.setBounds(10, 62, 401, 37);
 			pnlHighThroughput.add(lblParallel);
 			txtMultiple.setBounds(54, 105, 49, 21);
 			pnlHighThroughput.add(txtMultiple);
-			chkSeparate.setBounds(10, 26, 314, 30);
+			chkSeparate.setBounds(10, 26, 401, 30);
 			pnlHighThroughput.add(chkSeparate);
 			chkSeparate.setSelected(true);
 			pnlHighThroughput.add(getNLabel());

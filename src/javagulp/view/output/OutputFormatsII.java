@@ -38,7 +38,7 @@ public class OutputFormatsII extends JPanel {
 		}
 		{
 			txtSiesta = new JTextField();
-			txtSiesta.setBounds(333, 25, 206, 21);
+			txtSiesta.setBounds(364, 25, 206, 21);
 			add(txtSiesta);
 			txtSiesta.setColumns(10);
 		}
@@ -49,20 +49,20 @@ public class OutputFormatsII extends JPanel {
 		{
 			txtCrystal98 = new JTextField();
 			txtCrystal98.setColumns(10);
-			txtCrystal98.setBounds(333, 52, 206, 21);
+			txtCrystal98.setBounds(364, 53, 206, 21);
 			add(txtCrystal98);
 		}
 
 		{
 			chckbxMarvin.setText("write Marvin input file");
-			chckbxMarvin.setBounds(10, 108, 198, 22);
+			chckbxMarvin.setBounds(10, 108, 278, 22);
 			add(chckbxMarvin);
 		}
 
 		{
 			txtMarvin = new JTextField();
 			txtMarvin.setColumns(10);
-			txtMarvin.setBounds(333, 109, 206, 21);
+			txtMarvin.setBounds(364, 109, 206, 21);
 			add(txtMarvin);
 		}
 
@@ -76,21 +76,21 @@ public class OutputFormatsII extends JPanel {
 		{
 			txtCif = new JTextField();
 			txtCif.setColumns(10);
-			txtCif.setBounds(333, 79, 206, 21);
+			txtCif.setBounds(364, 80, 206, 21);
 			add(txtCif);
 		}
 
 		{
 			txtDerivatives = new JTextField();
 			txtDerivatives.setColumns(10);
-			txtDerivatives.setBounds(333, 136, 206, 21);
+			txtDerivatives.setBounds(364, 136, 206, 21);
 			add(txtDerivatives);
 		}
 
 		{
 			chckbxDerivatives = new JCheckBox();
 			chckbxDerivatives.setText("write energy and derivatives for QM/MM");
-			chckbxDerivatives.setBounds(10, 136, 278, 22);
+			chckbxDerivatives.setBounds(10, 136, 348, 22);
 			add(chckbxDerivatives);
 		}
 	}

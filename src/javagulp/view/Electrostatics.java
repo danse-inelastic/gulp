@@ -96,7 +96,7 @@ public class Electrostatics extends JPanel implements Serializable {
 
 		pnlSpecifyPoints.setToolTipText("Allows the user to specify points in space at which the electrostatic potential should be calculated. Note that it is necessary to also specify the \"pot\" keyword to trigger the calculation of the potential.");
 		pnlSpecifyPoints.setTitle("specify points at which the electrostatic potential is calculated");
-		pnlSpecifyPoints.setBounds(527, 267, 604, 126);
+		pnlSpecifyPoints.setBounds(527, 279, 604, 126);
 		add(pnlSpecifyPoints);
 		lblNumberOfPoints.setVerticalAlignment(SwingConstants.TOP);
 		lblNumberOfPoints.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -114,7 +114,7 @@ public class Electrostatics extends JPanel implements Serializable {
 		cboCoordinates.setBounds(10, 66, 145, 24);
 		pnlSpecifyPoints.add(cboCoordinates);
 
-		pnlCalculatePotential.setBounds(527, 160, 604, 101);
+		pnlCalculatePotential.setBounds(527, 160, 604, 113);
 		add(pnlCalculatePotential);
 
 		pnlAccuracy.setTitle("electrostatic summation accuracy");
@@ -149,14 +149,14 @@ public class Electrostatics extends JPanel implements Serializable {
 		add(pnlOptions);
 
 		chkElectrostaticSitePotentials.addActionListener(keyElectrostaticSitePotentials);
-		chkElectrostaticSitePotentials.setBounds(10, 21, 398, 30);
+		chkElectrostaticSitePotentials.setBounds(10, 21, 584, 30);
 		pnlOptions.add(chkElectrostaticSitePotentials);
 		chkFirstDerivative.addActionListener(keyFirstDerivative);
-		chkFirstDerivative.setBounds(10, 49, 460, 40);
+		chkFirstDerivative.setBounds(10, 49, 584, 40);
 		pnlOptions.add(chkFirstDerivative);
 
 		radPrintOutElectric.addActionListener(keyPrintOutElectric);
-		radPrintOutElectric.setBounds(10, 95, 549, 35);
+		radPrintOutElectric.setBounds(10, 95, 584, 35);
 		pnlOptions.add(radPrintOutElectric);
 
 		// qeqAtomTextField.addKeyListener(new SerialKeyAdapter() {

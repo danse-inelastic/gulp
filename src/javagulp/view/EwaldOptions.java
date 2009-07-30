@@ -59,11 +59,11 @@ public class EwaldOptions extends JPanel implements Serializable {
 		//this.setPreferredSize(new java.awt.Dimension(700, 315));
 
 
-		chkUseEwaldlikeMethod.setBounds(0, 31, 435, 25);
+		chkUseEwaldlikeMethod.setBounds(0, 31, 820, 25);
 		add(chkUseEwaldlikeMethod);
 		chkUseEwaldlikeMethod.addActionListener(keyUseEwaldlikeMethod);
 
-		pnlConvergenceSpeed.setBounds(314, 66, 407, 50);
+		pnlConvergenceSpeed.setBounds(357, 62, 463, 50);
 		pnlConvergenceSpeed.setTitle("real/reciprocal space relative convergence speed");
 		pnlConvergenceSpeed.setToolTipText("<html>Relative speed for reciprocal and real space terms<br>"
 				+ " to be calculated. Formulae for determining optimum eta value <br>"
@@ -75,44 +75,44 @@ public class EwaldOptions extends JPanel implements Serializable {
 		pnlConvergenceSpeed.add(txtrspeed);
 
 		pnlSpaceCutoff.setTitle("real space cutoff of Ewald sum");
-		pnlSpaceCutoff.setBounds(0, 66, 308, 51);
+		pnlSpaceCutoff.setBounds(0, 62, 351, 51);
 		add(pnlSpaceCutoff);
 		txtewaldrealradius.setBounds(12, 22, 127, 23);
 		pnlSpaceCutoff.add(txtewaldrealradius);
 
 		pnlDipoleCorrection.setTitle("dipole correction");
-		pnlDipoleCorrection.setBounds(0, 123, 309, 103);
+		pnlDipoleCorrection.setBounds(0, 123, 351, 103);
 		add(pnlDipoleCorrection);
 		chkDipoleCorrection.addActionListener(keyDipoleCorrection);
-		chkDipoleCorrection.setBounds(12, 46, 280, 25);
+		chkDipoleCorrection.setBounds(12, 46, 329, 25);
 		pnlDipoleCorrection.add(chkDipoleCorrection);
-		lblDipoleUnitCell.setBounds(12, 20, 245, 20);
+		lblDipoleUnitCell.setBounds(12, 20, 329, 20);
 		pnlDipoleCorrection.add(lblDipoleUnitCell);
 
 		pnlCellMultipole.setTitle("cell multipole method (only clusters)");
-		pnlCellMultipole.setBounds(314, 122, 407, 103);
+		pnlCellMultipole.setBounds(357, 122, 463, 103);
 		add(pnlCellMultipole);
 		cboMultipole.setSelectedIndex(2);
-		cboMultipole.setBounds(143, 50, 105, 22);
+		cboMultipole.setBounds(170, 50, 152, 22);
 		pnlCellMultipole.add(cboMultipole);
-		lblMultipole.setBounds(5, 54, 132, 15);
+		lblMultipole.setBounds(5, 54, 159, 15);
 		pnlCellMultipole.add(lblMultipole);
-		lblCellSize.setBounds(5, 75, 280, 20);
+		lblCellSize.setBounds(5, 75, 339, 20);
 		pnlCellMultipole.add(lblCellSize);
-		txtCellSize.setBounds(290, 75, 50, 20);
+		txtCellSize.setBounds(350, 76, 50, 20);
 		pnlCellMultipole.add(txtCellSize);
-		chkCellMultipole.setBounds(10, 20, 387, 25);
+		chkCellMultipole.setBounds(10, 20, 443, 25);
 		pnlCellMultipole.add(chkCellMultipole);
 
 		chkNoElectrostatics.addActionListener(keyNoElectrostatics);
-		chkNoElectrostatics.setBounds(0, 0, 600, 25);
+		chkNoElectrostatics.setBounds(0, 0, 820, 25);
 		add(chkNoElectrostatics);
 
 		pnlqWolf.setToolTipText("Calculates the electrostatic energy using the approximation to the Ewald sum due to Wolf et al (J. Chem. Phys., 110, 8254, 1999). At present the Wolf sum cannot be used with a defect calculation.");
 		pnlqWolf.setTitle("Wolf approximation");
-		pnlqWolf.setBounds(0, 232, 721, 110);
+		pnlqWolf.setBounds(0, 232, 820, 110);
 		add(pnlqWolf);
-		lblHtml.setBounds(13, 50, 335, 53);
+		lblHtml.setBounds(13, 50, 395, 53);
 		pnlqWolf.add(lblHtml);
 		lblEta.setBounds(355, 50, 60, 25);
 		pnlqWolf.add(lblEta);
@@ -124,7 +124,7 @@ public class EwaldOptions extends JPanel implements Serializable {
 		txtqWolfRmax.setBackground(Back.grey);
 		txtqWolfRmax.setBounds(416, 78, 71, 20);
 		pnlqWolf.add(txtqWolfRmax);
-		chkUseTheWolf.setBounds(13, 21, 495, 25);
+		chkUseTheWolf.setBounds(13, 21, 699, 25);
 		pnlqWolf.add(chkUseTheWolf);
 	}
 
