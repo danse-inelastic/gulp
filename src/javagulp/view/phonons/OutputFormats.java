@@ -1,5 +1,6 @@
 package javagulp.view.phonons;
 
+import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 
 import javax.swing.JCheckBox;
@@ -11,13 +12,17 @@ import javax.swing.border.TitledBorder;
 
 public class OutputFormats extends JPanel {
 
-	private JTextField txtDos_2;
-	private JTextField txtDos_1;
+	private JTextField txtOsc;
+	private JTextField txtFreq;
 	private static final long serialVersionUID = -8425306576850279775L;
 
 
 	private JTextField txtDos;
-	private JTextField textField_1;
+	private JTextField txtForceConst;
+	private JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
+	private JCheckBox chkForceConst = new JCheckBox("write energy and force constants for QM/MM");
+	private JCheckBox chkFreq = new JCheckBox();
+	private JCheckBox chkOsc = new JCheckBox();
 
 	public OutputFormats() {
 		setBorder(new TitledBorder(null, "output formats",
@@ -25,7 +30,6 @@ public class OutputFormats extends JPanel {
 				TitledBorder.DEFAULT_POSITION, null, null));
 		setLayout(null);
 		{
-			final JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
 			chkDos.setBounds(10, 23, 352, 22);
 			add(chkDos);
 		}
@@ -36,50 +40,71 @@ public class OutputFormats extends JPanel {
 			txtDos.setColumns(10);
 		}
 		{
-			final JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write energy and force constants for QM/MM");
-			chckbxWriteDlpolyHistory.setBounds(10, 107, 352, 22);
-			add(chckbxWriteDlpolyHistory);
+			chkForceConst.setBounds(10, 107, 352, 22);
+			add(chkForceConst);
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setColumns(10);
-			textField_1.setBounds(368, 108, 260, 21);
-			add(textField_1);
-		}
-
-		{
-			final JCheckBox chkDos = new JCheckBox();
-			chkDos.setText("write frequencies for Gruneisen parameter");
-			chkDos.setBounds(10, 51, 352, 22);
-			add(chkDos);
+			txtForceConst = new JTextField();
+			txtForceConst.setColumns(10);
+			txtForceConst.setBounds(368, 108, 260, 21);
+			add(txtForceConst);
 		}
 
 		{
-			txtDos_1 = new JTextField();
-			txtDos_1.setColumns(10);
-			txtDos_1.setBounds(368, 52, 260, 21);
-			add(txtDos_1);
+			chkFreq.setText("write frequencies for Gruneisen parameter");
+			chkFreq.setBounds(10, 51, 352, 22);
+			add(chkFreq);
 		}
 
 		{
-			final JCheckBox chkDos = new JCheckBox();
-			chkDos.setText("write oscillator strengths for phonon modes");
-			chkDos.setBounds(10, 79, 352, 22);
-			add(chkDos);
+			txtFreq = new JTextField();
+			txtFreq.setColumns(10);
+			txtFreq.setBounds(368, 52, 260, 21);
+			add(txtFreq);
 		}
 
 		{
-			txtDos_2 = new JTextField();
-			txtDos_2.setColumns(10);
-			txtDos_2.setBounds(368, 81, 260, 21);
-			add(txtDos_2);
+			chkOsc.setText("write oscillator strengths for phonon modes");
+			chkOsc.setBounds(10, 79, 352, 22);
+			add(chkOsc);
+		}
+
+		{
+			txtOsc = new JTextField();
+			txtOsc.setColumns(10);
+			txtOsc.setBounds(368, 81, 260, 21);
+			add(txtOsc);
 		}
 	}
 	
 
-	public String writeOutputFormats() {
+	public String writeOutputFormats() throws IncompleteOptionException {
 		String lines = "output phonon dos.dens" + Back.newLine;
 		
+		if (chkDos.isSelected() && txtDos.getText().equals(""))
+			throw new IncompleteOptionException("Please enter a Dos/Dispersion output filename");
+		if (chkDos.isSelected()) {
+			lines += "output phonon "
+			+ txtDos.getText() + Back.newLine;
+		}
+		if (chkFreq.isSelected() && txtFreq.getText().equals(""))
+			throw new IncompleteOptionException("Please enter a phonon frequency file name");
+		if (chkFreq.isSelected()) {
+			lines += "output frequency "
+			+ txtFreq.getText() + Back.newLine;
+		}
+		if (chkOsc.isSelected() && txtOsc.getText().equals(""))
+			throw new IncompleteOptionException("Please enter an oscillator strength file name");
+		if (chkOsc.isSelected()) {
+			lines += "output osc "
+			+ txtOsc.getText() + Back.newLine;
+		}		
+		if (chkForceConst.isSelected() && txtForceConst.getText().equals(""))
+			throw new IncompleteOptionException("Please enter a force constant output file name");
+		if (chkForceConst.isSelected()) {
+			lines += "output frc "
+			+ txtForceConst.getText() + Back.newLine;
+		}
 //		if (!txtWrite.getText().equals("")) {
 //			if (cboUnits.getSelectedItem().equals("timesteps")) {
 //				try {

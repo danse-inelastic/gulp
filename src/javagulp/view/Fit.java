@@ -97,7 +97,7 @@ public class Fit extends JPanel implements Serializable {
 
 		final TitledPanel pnlParameterTolerance = new TitledPanel();
 		pnlParameterTolerance.setTitle("parameter tolerance");
-		pnlParameterTolerance.setBounds(716, 390, 246, 48);
+		pnlParameterTolerance.setBounds(716, 390, 246, 51);
 		add(pnlParameterTolerance);
 		txtXtolFit.setBounds(22, 23, 80, 21);
 		pnlParameterTolerance.add(txtXtolFit);
@@ -160,9 +160,9 @@ public class Fit extends JPanel implements Serializable {
 		pnlOutputFittingParam.setBounds(716, 124, 246, 51);
 		add(pnlOutputFittingParam);
 		final JLabel lblOutputFittingParameters = new JLabel("every (cycles)");
-		lblOutputFittingParameters.setBounds(10, 26, 161, 18);
+		lblOutputFittingParameters.setBounds(15, 25, 140, 18);
 		pnlOutputFittingParam.add(lblOutputFittingParameters);
-		txtOutputFittingParam.setBounds(161, 25, 78, 21);
+		txtOutputFittingParam.setBounds(158, 24, 78, 21);
 		pnlOutputFittingParam.add(txtOutputFittingParam);
 
 		final TitledPanel panel = new TitledPanel();
