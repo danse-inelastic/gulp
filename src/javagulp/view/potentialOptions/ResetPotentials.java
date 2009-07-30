@@ -29,18 +29,18 @@ public class ResetPotentials extends TitledPanel implements Serializable {
 		setTitle("reset interatomic potential cutoffs");
 		setBounds(0, 55, 375, 115);
 
-		txtNewMaxCutoff.setBounds(194, 28, 84, 20);
+		txtNewMaxCutoff.setBounds(281, 29, 84, 20);
 		add(txtNewMaxCutoff);
-		lblNewMaxCutoff.setBounds(7, 22, 182, 33);
+		lblNewMaxCutoff.setBounds(7, 22, 268, 33);
 		add(lblNewMaxCutoff);
-		lblTaperForm.setBounds(8, 57, 77, 23);
+		lblTaperForm.setBounds(8, 57, 110, 23);
 		add(lblTaperForm);
 		txtTaperRange.setBackground(Back.grey);
-		txtTaperRange.setBounds(117, 87, 84, 20);
+		txtTaperRange.setBounds(160, 87, 84, 20);
 		add(txtTaperRange);
-		lblTaperRange.setBounds(7, 89, 95, 15);
+		lblTaperRange.setBounds(7, 89, 147, 15);
 		add(lblTaperRange);
-		cboTaperForm.setBounds(81, 58, 120, 21);
+		cboTaperForm.setBounds(124, 58, 120, 21);
 		add(cboTaperForm);
 	}
 

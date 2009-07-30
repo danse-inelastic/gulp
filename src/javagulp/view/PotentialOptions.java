@@ -93,7 +93,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 		add(pnlResetInteratomic);
 		pnlResetInteratomic.setBounds(0, 55, 404, 115);
 		chkSetAveragePotential.addActionListener(keySetAveragePotential);
-		chkSetAveragePotential.setBounds(409, 40, 520, 24);
+		chkSetAveragePotential.setBounds(409, 40, 709, 24);
 		add(chkSetAveragePotential);
 
 		final TitledPanel pnlSetDipole = new TitledPanel();
@@ -115,7 +115,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		final TitledPanel pnlIdentifyMolecules = new TitledPanel();
 		pnlIdentifyMolecules.setTitle("identify molecules based on covalent radii but");
-		pnlIdentifyMolecules.setBounds(411, 238, 709, 151);
+		pnlIdentifyMolecules.setBounds(411, 238, 750, 151);
 		add(pnlIdentifyMolecules);
 		buttonGroup.add(radRetainColoumbic);
 		radRetainColoumbic.addActionListener(keyCoulombGroup);
@@ -126,7 +126,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 		radRemoveColoumbic.setBounds(10, 20, 500, 25);
 		pnlIdentifyMolecules.add(radRemoveColoumbic);
 		chkRemoveColoumbic.addActionListener(keyChkRemoveColoumbic);
-		chkRemoveColoumbic.setBounds(10, 82, 689, 25);
+		chkRemoveColoumbic.setBounds(10, 82, 730, 25);
 		pnlIdentifyMolecules.add(chkRemoveColoumbic);
 		chkDoNotStop.addActionListener(keyDoNotStop);
 		chkDoNotStop.setBounds(10, 113, 500, 28);
@@ -157,16 +157,16 @@ public class PotentialOptions extends JPanel implements Serializable {
 		pnlScalingTransformation.add(cboSpecies);
 
 		chkPrintThreeBody.addActionListener(keyPrintThreeBody);
-		chkPrintThreeBody.setBounds(0, 277, 380, 25);
+		chkPrintThreeBody.setBounds(0, 277, 404, 25);
 		add(chkPrintThreeBody);
 
-		chkDoNotInclude.setBounds(0, 308, 320, 25);
+		chkDoNotInclude.setBounds(0, 308, 404, 25);
 		add(chkDoNotInclude);
 		chkOutputList.addActionListener(keyOutputList);
 		chkOutputList.setBounds(409, 10, 556, 25);
 		add(chkOutputList);
 		chkNoListBased.addActionListener(keyNoListBased);
-		chkNoListBased.setBounds(0, 339, 375, 25);
+		chkNoListBased.setBounds(0, 339, 404, 25);
 		add(chkNoListBased);
 	}
 

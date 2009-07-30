@@ -162,45 +162,13 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		super();
 		setLayout(null);
 		this.setPreferredSize(new java.awt.Dimension(1008, 392));
-
-		final JLabel lblChangeSymbolMass = new JLabel("change elemental information:");
-		lblChangeSymbolMass.setBounds(632, 8, 366, 20);
-		add(lblChangeSymbolMass);
-		final JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(630, 35, 371, 350);
-		add(scrollPane);
 		elementsTableModel.setDataVector(data, COLUMN_NAMES);
-		final JTable table = new JTable(elementsTableModel);
-		table.setCellSelectionEnabled(true);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		scrollPane.setViewportView(table);
-		final JLabel lblAtomicCharges = new JLabel("set atomic charges");
-		lblAtomicCharges.setBounds(457, 8, 169, 20);
-		add(lblAtomicCharges);
-		lblAtomicCharges.setToolTipText(
-				"<html>This table will set atomic charges for each type of atom.<br>"
-				+ "Charges for individual atoms can be entered in the table on the structures tab.<br>"
-				+ "Charges should sum to approximately zero.</html>");
-		btnImportCharges.setBounds(457, 214, 169, 25);
-		add(btnImportCharges);
-		btnImportCharges.setEnabled(false);
-		//btnImportCharges.addActionListener(keyImportCharges);
-		speciesScrollpane.setBounds(457, 63, 169, 145);
-		add(speciesScrollpane);
 		speciesTableModel.uneditableColumns = new int[] { 0 };
 		speciesTableModel.requiredColumns = new int[] { 1 };
-		speciesTable.setModel(speciesTableModel);
-		speciesScrollpane.setViewportView(speciesTable);
-		chkPrintDistanceAnalysis.addActionListener(keyPrintDistanceAnalysis);
-		chkPrintDistanceAnalysis.setBounds(5, 68, 446, 25);
-		add(chkPrintDistanceAnalysis);
-		chkApplyUniformNeutralizing.addActionListener(keyApplyUniformNeutralizing);
-		chkApplyUniformNeutralizing.setBounds(5, 99, 446, 25);
-		add(chkApplyUniformNeutralizing);
 
 		final TitledPanel pnlbondLengthTolerance = new TitledPanel();
 		pnlbondLengthTolerance.setTitle("bond length tolerance when deciding if two atoms are bonded");
-		pnlbondLengthTolerance.setBounds(4, 9, 447, 53);
+		pnlbondLengthTolerance.setBounds(10, 110, 493, 53);
 		add(pnlbondLengthTolerance);
 		txtBondLengthTolerance.setBounds(362, 23, 75, 18);
 		pnlbondLengthTolerance.add(txtBondLengthTolerance);
@@ -209,11 +177,41 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		pnlbondLengthTolerance.add(lblBondLengthTolerance);
 		lblBondLengthTolerance.setToolTipText("Bond length tolerance when deciding if two atoms are bonded. Number multiplies the sum of the covalent radii.");
 
-		final JLabel lblAtomicCharges_1 = new JLabel();
-		lblAtomicCharges_1.setToolTipText("<html>This table will set atomic charges for each type of atom.<br>Charges for individual atoms can be entered in the table on the structures tab.<br>Charges should sum to approximately zero.</html>");
-		lblAtomicCharges_1.setText("and create aliases:");
-		lblAtomicCharges_1.setBounds(455, 33, 169, 20);
-		add(lblAtomicCharges_1);
+		final TitledPanel pnlCharges = new TitledPanel();
+		pnlCharges.setTitle("set atomic charges/aliases");
+		pnlCharges.setBounds(10, 169, 225, 210);
+		add(pnlCharges);
+		//btnImportCharges.addActionListener(keyImportCharges);
+		speciesScrollpane.setBounds(10, 21, 169, 145);
+		pnlCharges.add(speciesScrollpane);
+		speciesTable.setModel(speciesTableModel);
+		speciesScrollpane.setViewportView(speciesTable);
+		btnImportCharges.setBounds(10, 172, 169, 25);
+		pnlCharges.add(btnImportCharges);
+		btnImportCharges.setEnabled(false);
+
+		final TitledPanel pnlElements = new TitledPanel();
+		pnlElements.setBounds(509, 9, 467, 383);
+		pnlElements.setTitle("change elemental information");
+		add(pnlElements);
+		final JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 24, 447, 350);
+		pnlElements.add(scrollPane);
+		final JTable table = new JTable(elementsTableModel);
+		table.setCellSelectionEnabled(true);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		scrollPane.setViewportView(table);
+
+		final TitledPanel pnlOptions = new TitledPanel();
+		pnlOptions.setBounds(10, 9, 493, 95);
+		pnlOptions.setTitle("options");
+		add(pnlOptions);
+		chkPrintDistanceAnalysis.addActionListener(keyPrintDistanceAnalysis);
+		chkPrintDistanceAnalysis.setBounds(10, 25, 446, 25);
+		pnlOptions.add(chkPrintDistanceAnalysis);
+		chkApplyUniformNeutralizing.addActionListener(keyApplyUniformNeutralizing);
+		chkApplyUniformNeutralizing.setBounds(10, 56, 446, 25);
+		pnlOptions.add(chkApplyUniformNeutralizing);
 
 //		chkPrintBondLengthAnalysis = new JCheckBox();
 //		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);
