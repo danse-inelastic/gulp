@@ -41,17 +41,12 @@ public class Qeq extends JPanel implements Serializable {
 
 	private final JCheckBox chkchi = new JCheckBox("fit");
 	private final JCheckBox chkmu = new JCheckBox("fit");
-	private final JCheckBox chkqeq = new JCheckBox("use QEQ electronegativity equalization to determine charges");
 
-	private final KeywordListener keyqeq = new KeywordListener(chkqeq, "qeq");
 
 	public Qeq() {
 		super();
 		setLayout(null);
 
-		chkqeq.addActionListener(keyqeq);
-		chkqeq.setBounds(10, 10, 462, 25);
-		add(chkqeq);
 		lblToleranceOfCharge.setBounds(14, 89, 420, 15);
 		add(lblToleranceOfCharge);
 		txttol.setBounds(440, 87, 87, 20);
@@ -117,7 +112,7 @@ public class Qeq extends JPanel implements Serializable {
 
 	private String writeQelectronegativity() throws IncompleteOptionException {
 		String lines = "";
-		if (chkqeq.isSelected()) {
+		if (Back.getCurrentRun().getElectrostatics().chkqeq.isSelected()) {
 			if (cboatom.getSelectedItem() == null || cboatom.getSelectedItem() == "")
 				throw new IncompleteOptionException("Please enter an atom for qeq electrostatics.");
 			if (txtchi.getText().equals(""))

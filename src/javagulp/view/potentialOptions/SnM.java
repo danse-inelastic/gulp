@@ -20,8 +20,7 @@ public class SnM extends JPanel implements Serializable {
 
 	private final G g = new G();
 
-	private final JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization to determine charges");
-
+	
 	private final JCheckBox chkchi = new JCheckBox("fit");
 	private final JCheckBox chkmu = new JCheckBox("fit");
 	private final JCheckBox chkzeta = new JCheckBox("fit");
@@ -41,15 +40,11 @@ public class SnM extends JPanel implements Serializable {
 	private final DefaultComboBoxModel uniqueAtomListSM = new DefaultComboBoxModel();
 	public JComboBox cbosmatom = new JComboBox(uniqueAtomListSM);
 
-	private final KeywordListener keyStreitzAndMintmire = new KeywordListener(chkStreitzAndMintmire, "sm");
-
 	public SnM() {
 		super();
 		setLayout(null);
 
-		chkStreitzAndMintmire.addActionListener(keyStreitzAndMintmire);
-		chkStreitzAndMintmire.setBounds(5, 1, 562, 25);
-		add(chkStreitzAndMintmire);
+
 
 		cbosmatom.setBounds(56, 49, 78, 26);
 		add(cbosmatom);
@@ -83,7 +78,7 @@ public class SnM extends JPanel implements Serializable {
 
 	public String writeSmelectronegativity() throws IncompleteOptionException {
 		String lines = "";
-		if (chkStreitzAndMintmire.isSelected()) {
+		if (Back.getCurrentRun().getElectrostatics().chkStreitzAndMintmire.isSelected()) {
 			if (cbosmatom.getSelectedItem() == null || cbosmatom.getSelectedItem() == "")
 				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
 			final JTextField[] fields = {txtchi, txtmu, txtzeta, txtZnuc};

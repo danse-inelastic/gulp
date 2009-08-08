@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 
 public class Electrostatics extends JPanel implements Serializable {
 
+	private JPanel panel_1;
 	private JPanel panel;
 	private static final long serialVersionUID = -1049388362113135590L;
 
@@ -40,7 +41,12 @@ public class Electrostatics extends JPanel implements Serializable {
 
 	private final JCheckBox chkElectrostaticSitePotentials = new JCheckBox("print electrostatic site potentials and their first derivatives");
 	private final JCheckBox chkFirstDerivative = new JCheckBox("<html>calculate first derivatives of atomic charges with respect to atomic coordinates and strain as calculated by  EEM or QEq</html>");
+	public final JCheckBox chkMortiers = new JCheckBox("use Mortiers electronegativity equalization to determine charges");
+	public final JCheckBox chkqeq = new JCheckBox("use QEQ electronegativity equalization to determine charges");
+	public final JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization to determine charges");
 
+
+	
 	private final JLabel lblConvergedFigures = new JLabel("target number of converged significant figures");
 	private final JLabel lblNumberOfPoints = new JLabel("<html>number of points</html>");
 	private final JLabel lblOrderOfSeries = new JLabel("order of series in numerical integrals");
@@ -48,7 +54,7 @@ public class Electrostatics extends JPanel implements Serializable {
 
 	public Mortiers pnlMortiers = new Mortiers();
 	public Qeq pnlqeq = new Qeq();
-	public SnM snm = new SnM();
+	public SnM pnlSnm = new SnM();
 
 	private final TitledPanel pnlAccuracy = new TitledPanel();
 	private final CalculatePotential pnlCalculatePotential = new CalculatePotential();
@@ -80,6 +86,10 @@ public class Electrostatics extends JPanel implements Serializable {
 	private final KeywordListener keyPrintOutElectric = new KeywordListener(radPrintOutElectric, "efg");
 	private final KeywordListener keyFirstDerivative = new KeywordListener(chkFirstDerivative, "dcharge");
 	private final KeywordListener keyElectrostaticSitePotentials = new KeywordListener(chkElectrostaticSitePotentials, "pot");
+	private final KeywordListener keyMortiers = new KeywordListener(chkMortiers, "eem");
+	private final KeywordListener keyqeq = new KeywordListener(chkqeq, "qeq");
+	private final KeywordListener keyStreitzAndMintmire = new KeywordListener(chkStreitzAndMintmire, "sm");
+
 	// TODO add accuracy keyword
 	public Electrostatics() {
 		super();
@@ -91,8 +101,8 @@ public class Electrostatics extends JPanel implements Serializable {
 		add(eeChoice);
 		eeChoice.add(pnlMortiers, "Mortiers");
 		eeChoice.add(pnlqeq, "QEq");
-		eeChoice.add(snm, "Streitz and Mintmire");
-		snm.cbosmatom.setBounds(56, 49, 79, 26);
+		eeChoice.add(pnlSnm, "Streitz and Mintmire");
+		pnlSnm.cbosmatom.setBounds(56, 49, 79, 26);
 
 		pnlSpecifyPoints.setToolTipText("Allows the user to specify points in space at which the electrostatic potential should be calculated. Note that it is necessary to also specify the \"pot\" keyword to trigger the calculation of the potential.");
 		pnlSpecifyPoints.setTitle("specify points at which the electrostatic potential is calculated");
@@ -147,6 +157,20 @@ public class Electrostatics extends JPanel implements Serializable {
 		pnlOptions.setBounds(527, 5, 604, 149);
 		pnlOptions.setTitle("options");
 		add(pnlOptions);
+		
+		TitledPanel pnlCalculate = new TitledPanel();
+		pnlCalculate.setBounds(0, 380, 521, 104);
+		pnlCalculate.setTitle("calculate charges");
+		add(pnlCalculate);
+		chkMortiers.addActionListener(keyMortiers);
+		chkMortiers.setBounds(5, 1, 430, 25);
+		pnlCalculate.add(chkMortiers);
+		chkqeq.addActionListener(keyqeq);
+		chkqeq.setBounds(10, 10, 462, 25);
+		pnlCalculate.add(chkqeq);
+		chkStreitzAndMintmire.addActionListener(keyStreitzAndMintmire);
+		chkStreitzAndMintmire.setBounds(5, 1, 562, 25);
+		pnlCalculate.add(chkStreitzAndMintmire);
 
 		chkElectrostaticSitePotentials.addActionListener(keyElectrostaticSitePotentials);
 		chkElectrostaticSitePotentials.setBounds(10, 21, 584, 30);
@@ -192,8 +216,7 @@ public class Electrostatics extends JPanel implements Serializable {
 		return pnlqeq.writeQeq() + writeElectrostaticCalculationPoints()
 		+ pnlCalculatePotential.writePotgrid()
 		+ pnlMortiers.writeElectronegativity()
-		+ snm.writeSmelectronegativity();
+		+ pnlSnm.writeSmelectronegativity();
 	}
-
 
 }

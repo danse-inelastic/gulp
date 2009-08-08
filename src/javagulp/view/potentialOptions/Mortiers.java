@@ -28,11 +28,9 @@ public class Mortiers extends JPanel implements Serializable {
 
 	private final JCheckBox chkchi = new JCheckBox("fit");
 	private final JCheckBox chkmu = new JCheckBox("fit");
-	private final JCheckBox chkMortiers = new JCheckBox("use Mortiers electronegativity equalization to determine charges");
+	
 
 	public JComboBox cboeematom = new JComboBox();
-
-	private final KeywordListener keyMortiers = new KeywordListener(chkMortiers, "eem");
 
 	public Mortiers() {
 		super();
@@ -57,14 +55,12 @@ public class Mortiers extends JPanel implements Serializable {
 		cboeematom.setBounds(56, 50, 79, 26);
 		add(cboeematom);
 
-		chkMortiers.addActionListener(keyMortiers);
-		chkMortiers.setBounds(5, 1, 430, 25);
-		add(chkMortiers);
+
 	}
 
 	public String writeElectronegativity() throws IncompleteOptionException {
 		String lines = "";
-		if (chkMortiers.isSelected()) {
+		if (Back.getCurrentRun().getElectrostatics().chkMortiers.isSelected()) {
 			//			if (cboeematom.getSelectedItem() == null || cboeematom.getSelectedItem() == "")
 			//				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
 			//			if (txtchi.getText().equals(""))

@@ -205,7 +205,7 @@ Serializable {
 		((MolecularDynamics)gr.getSelectedRunTypePanel("molecular dynamics")).pnlMDmass.cboShellmassSpecies.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlMortiers.cboeematom.setModel(new DefaultComboBoxModel(v));
 		gr.getElectrostatics().pnlqeq.cboatom.setModel(new DefaultComboBoxModel(v));
-		gr.getElectrostatics().snm.cbosmatom.setModel(new DefaultComboBoxModel(v));
+		gr.getElectrostatics().pnlSnm.cbosmatom.setModel(new DefaultComboBoxModel(v));
 
 		// fire the selection changed
 		final int number = gr.getPotential().createLibrary.getCurrentPotential().potentialNumber;
