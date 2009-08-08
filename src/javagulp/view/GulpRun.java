@@ -30,9 +30,9 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4350272075095363083L;
 
-	private final String[] tabNames = { "RunType", "Structures", "Potential",
+	private final String[] tabNames = { "Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
-			"EwaldOptions", "ExternalForce", "Output", "Execution"  };
+			"EwaldOptions", "ExternalForce", "RunType", "Output", "Execution"  };
 
 	//private String[] bottomNames = {};
 
@@ -64,7 +64,6 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.addChangeListener(keyTop);
 
-		topPane.add(null, "run type");
 		//topPane.add(null, "constraints");
 		topPane.add(null, "structures");
 
@@ -74,6 +73,8 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "electrostatics");
 		topPane.add(null, "ewald options");
 		topPane.add(null, "external force");
+		
+		topPane.add(null, "run type");
 
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
@@ -229,51 +230,47 @@ public class GulpRun extends JPanel implements Serializable {
 			taskKeywords = new TaskKeywords();
 		return taskKeywords;
 	}
-
+	
 	public String getRunTypeKeyword() {
-		return (String) ((RunType) getTopPanel(0)).cboRunType.getSelectedItem();
+		return (String) getRunTypePanel().cboRunType.getSelectedItem();
 	}
-
-	//Top
-
-	public RunType getRunTypePanel() {
-		return (RunType) getTopPanel(0);
-	}
-
+	
 	public JPanel getSelectedRunTypePanel(String type) {
-		return ((RunType) getTopPanel(0)).getSelectedRunTypePanel(type);
+		return getRunTypePanel().getSelectedRunTypePanel(type);
 	}
-
-	//		public Constraints getConstraints() {
-	//			return (Constraints) getTopPanel(1);
-	//		}
+	
+	
 
 	public Structures getStructures() {
-		return (Structures) getTopPanel(1);
+		return (Structures) getTopPanel(0);
 	}
 
 	public Potential getPotential() {
-		return (Potential) getTopPanel(2);
+		return (Potential) getTopPanel(1);
 	}
 
 	public PotentialOptions getPotentialOptions() {
-		return (PotentialOptions) getTopPanel(3);
+		return (PotentialOptions) getTopPanel(2);
 	}
 
 	public ChargesElementsBonding getChargesElementsBonding() {
-		return (ChargesElementsBonding) getTopPanel(4);
+		return (ChargesElementsBonding) getTopPanel(3);
 	}
 
 	public Electrostatics getElectrostatics() {
-		return (Electrostatics) getTopPanel(5);
+		return (Electrostatics) getTopPanel(4);
 	}
 
 	public EwaldOptions getEwaldOptions() {
-		return (EwaldOptions) getTopPanel(6);
+		return (EwaldOptions) getTopPanel(5);
 	}
 
 	public ExternalForce getExternalForce() {
-		return (ExternalForce) getTopPanel(7);
+		return (ExternalForce) getTopPanel(6);
+	}
+	
+	public RunType getRunTypePanel() {
+		return (RunType) getTopPanel(7);
 	}
 
 	public Output getOutput() {
