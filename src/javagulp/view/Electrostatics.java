@@ -98,7 +98,7 @@ public class Electrostatics extends JPanel implements Serializable {
 
 		// set up tabbed pane and three sub panes
 		eeChoice.setBounds(0, 2, 521, 209);
-		add(eeChoice);
+		//add(eeChoice); // just don't let users alter this for now TODO: in future make this a set of panels where users can add charge calculation settings for a given atom
 		eeChoice.add(pnlMortiers, "Mortiers");
 		eeChoice.add(pnlqeq, "QEq");
 		eeChoice.add(pnlSnm, "Streitz and Mintmire");
@@ -128,7 +128,7 @@ public class Electrostatics extends JPanel implements Serializable {
 		add(pnlCalculatePotential);
 
 		pnlAccuracy.setTitle("electrostatic summation accuracy");
-		pnlAccuracy.setBounds(0, 217, 521, 142);
+		pnlAccuracy.setBounds(0, 137, 521, 142);
 		add(pnlAccuracy);
 		lblConvergedFigures.setBounds(10, 24, 331, 15);
 		pnlAccuracy.add(lblConvergedFigures);
@@ -159,17 +159,17 @@ public class Electrostatics extends JPanel implements Serializable {
 		add(pnlOptions);
 		
 		TitledPanel pnlCalculate = new TitledPanel();
-		pnlCalculate.setBounds(0, 380, 521, 104);
+		pnlCalculate.setBounds(0, 5, 521, 126);
 		pnlCalculate.setTitle("calculate charges");
 		add(pnlCalculate);
 		chkMortiers.addActionListener(keyMortiers);
-		chkMortiers.setBounds(5, 1, 430, 25);
+		chkMortiers.setBounds(10, 22, 430, 25);
 		pnlCalculate.add(chkMortiers);
 		chkqeq.addActionListener(keyqeq);
-		chkqeq.setBounds(10, 10, 462, 25);
+		chkqeq.setBounds(10, 53, 462, 25);
 		pnlCalculate.add(chkqeq);
 		chkStreitzAndMintmire.addActionListener(keyStreitzAndMintmire);
-		chkStreitzAndMintmire.setBounds(5, 1, 562, 25);
+		chkStreitzAndMintmire.setBounds(10, 84, 562, 25);
 		pnlCalculate.add(chkStreitzAndMintmire);
 
 		chkElectrostaticSitePotentials.addActionListener(keyElectrostaticSitePotentials);
