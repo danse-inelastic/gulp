@@ -8,6 +8,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.model.GenericTableModel;
 import javagulp.model.SerialListener;
+import javagulp.view.TitledPanel;
 import javagulp.view.potential.IconHeaderRenderer;
 import javagulp.view.potentialOptions.ResetPotentials;
 
@@ -82,7 +83,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		final TitledPanel pnlCutoffBondLength = new TitledPanel();
 		pnlCutoffBondLength.setTitle("cutoff bondlength search at");
-		pnlCutoffBondLength.setBounds(0, 0, 404, 49);
+		pnlCutoffBondLength.setBounds(0, 0, 383, 49);
 		add(pnlCutoffBondLength);
 		txtCutoffBondLength.setBounds(15, 22, 84, 20);
 		pnlCutoffBondLength.add(txtCutoffBondLength);
@@ -91,16 +92,13 @@ public class PotentialOptions extends JPanel implements Serializable {
 		pnlCutoffBondLength.add(angLabel);
 
 		add(pnlResetInteratomic);
-		pnlResetInteratomic.setBounds(0, 55, 404, 115);
-		chkSetAveragePotential.addActionListener(keySetAveragePotential);
-		chkSetAveragePotential.setBounds(409, 40, 709, 24);
-		add(chkSetAveragePotential);
+		pnlResetInteratomic.setBounds(0, 55, 383, 115);
 
 		final TitledPanel pnlSetDipole = new TitledPanel();
 		pnlSetDipole.setTitle("set dipole polarisability");
-		pnlSetDipole.setBounds(410, 129, 444, 103);
+		pnlSetDipole.setBounds(0, 277, 383, 103);
 		add(pnlSetDipole);
-		scrollPane.setBounds(10, 22, 421, 71);
+		scrollPane.setBounds(10, 22, 363, 71);
 		pnlSetDipole.add(scrollPane);
 
 		polarisabilityTableModel.uneditableColumns = new int[] { 0 };
@@ -108,14 +106,9 @@ public class PotentialOptions extends JPanel implements Serializable {
 		final IconHeaderRenderer iconHeaderRenderer = new IconHeaderRenderer();
 		table.getColumnModel().getColumn(1).setHeaderRenderer(iconHeaderRenderer);
 
-		chkDoNotUseCutoff.addActionListener(keyDoNotUseCutoff);
-		chkDoNotUseCutoff.setAlignmentY(Component.TOP_ALIGNMENT);
-		chkDoNotUseCutoff.setBounds(409, 57, 709, 66);
-		add(chkDoNotUseCutoff);
-
 		final TitledPanel pnlIdentifyMolecules = new TitledPanel();
 		pnlIdentifyMolecules.setTitle("identify molecules based on covalent radii but");
-		pnlIdentifyMolecules.setBounds(411, 238, 750, 151);
+		pnlIdentifyMolecules.setBounds(389, 250, 750, 151);
 		add(pnlIdentifyMolecules);
 		buttonGroup.add(radRetainColoumbic);
 		radRetainColoumbic.addActionListener(keyCoulombGroup);
@@ -134,7 +127,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		final TitledPanel pnlScalingTransformation = new TitledPanel();
 		pnlScalingTransformation.setTitle("apply a scaling transformation to EAM");
-		pnlScalingTransformation.setBounds(0, 176, 404, 95);
+		pnlScalingTransformation.setBounds(0, 176, 383, 95);
 		add(pnlScalingTransformation);
 		txtScale.setBounds(233, 68, 69, 20);
 		pnlScalingTransformation.add(txtScale);
@@ -156,18 +149,31 @@ public class PotentialOptions extends JPanel implements Serializable {
 		cboSpecies.setBounds(74, 67, 85, 20);
 		pnlScalingTransformation.add(cboSpecies);
 
-		chkPrintThreeBody.addActionListener(keyPrintThreeBody);
-		chkPrintThreeBody.setBounds(0, 277, 404, 25);
-		add(chkPrintThreeBody);
+		final TitledPanel pnlOptions = new TitledPanel();
+		pnlOptions.setTitle("options");
+		pnlOptions.setBounds(387, 0, 773, 244);
+		add(pnlOptions);
 
-		chkDoNotInclude.setBounds(0, 308, 404, 25);
-		add(chkDoNotInclude);
-		chkOutputList.addActionListener(keyOutputList);
-		chkOutputList.setBounds(409, 10, 556, 25);
-		add(chkOutputList);
+		chkPrintThreeBody.addActionListener(keyPrintThreeBody);
+		chkPrintThreeBody.setBounds(10, 22, 404, 25);
+		pnlOptions.add(chkPrintThreeBody);
+
+		chkDoNotInclude.setBounds(10, 53, 404, 25);
+		pnlOptions.add(chkDoNotInclude);
 		chkNoListBased.addActionListener(keyNoListBased);
-		chkNoListBased.setBounds(0, 339, 404, 25);
-		add(chkNoListBased);
+		chkNoListBased.setBounds(10, 84, 404, 25);
+		pnlOptions.add(chkNoListBased);
+		chkOutputList.addActionListener(keyOutputList);
+		chkOutputList.setBounds(10, 115, 556, 25);
+		pnlOptions.add(chkOutputList);
+		chkSetAveragePotential.addActionListener(keySetAveragePotential);
+		chkSetAveragePotential.setBounds(10, 146, 709, 24);
+		pnlOptions.add(chkSetAveragePotential);
+
+		chkDoNotUseCutoff.addActionListener(keyDoNotUseCutoff);
+		chkDoNotUseCutoff.setBounds(10, 176, 709, 66);
+		pnlOptions.add(chkDoNotUseCutoff);
+		chkDoNotUseCutoff.setAlignmentY(Component.TOP_ALIGNMENT);
 	}
 
 	private String writeEamAlloy() throws IncompleteOptionException {
