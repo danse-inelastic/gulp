@@ -93,7 +93,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 	private final JButton btnCombinations = new JButton("generate combinations");
 	private final JButton btnSavePotentials = new JButton("export potentials");
 	private final JButton btnRestorePotentials = new JButton("import potentials");
-	private final JButton btnAddPotential = new JButton("add potential to gulp run");
+	private final JButton btnAddPotential = new JButton("add potential");
 	private final DefaultListModel potentialListModel = new DefaultListModel();
 	public JList potentialList = new JList(potentialListModel);
 	private final JScrollPane listScroll = new JScrollPane(potentialList);
@@ -403,7 +403,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		pnlAtom.setBounds(10, 7, 476, 42);
 		add(pnlAtom);
 		potentialBackdrop.setBounds(195, 127, 721, 315);
-		scrollBonding.setBounds(922, 127, 329, 315);
+		scrollBonding.setBounds(10, 447, 399, 294);
 		add(scrollBonding);
 
 		btnCreateLibrary.setBounds(10, 417, 179, 25);
@@ -414,7 +414,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		pnlPotential.setLayout(null);
-		pnlPotential.setBounds(10, 55, 1235, 66);
+		pnlPotential.setBounds(10, 55, 1130, 66);
 		add(pnlPotential);
 		add(potentialBackdrop);
 		add(listScroll);
@@ -423,7 +423,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		btnAddPotential.setMargin(new Insets(2, 2, 2, 2));
 		btnAddPotential.setBounds(7, 127, 182, 25);
 		add(btnCombinations);
-		btnCombinations.setBounds(1010, 7, 235, 42);
+		btnCombinations.setBounds(905, 7, 235, 42);
 		btnCombinations.setEnabled(false);
 		//		btnCombinations.addActionListener(keyCombinations);
 		add(btnSavePotentials);

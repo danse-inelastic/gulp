@@ -67,7 +67,7 @@ class LennardAB extends PotentialPanel {
 		setLayout(null);
 		enabled = new boolean[] { true, true, true, false, false, false };
 
-		this.txtM = ((Lennard)Back.getCurrentRun().getPotential().createLibrary.potentialPanels.get(2)).txtM;
+		//this.txtM = ((Lennard)Back.getCurrentRun().getPotential().createLibrary.potentialPanels.get(2)).txtM;
 		//txtM;
 
 		jwAB.setBounds(12, 3, 118, 20);

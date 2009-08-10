@@ -2,6 +2,7 @@ package javagulp.view.potential.twocenter;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
@@ -10,6 +11,7 @@ import javagulp.model.SerialListener;
 import javagulp.view.Back;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -105,36 +107,41 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		radBond = new JRadioButton("potential only acts between bonded atoms");
 		btnGroupBonds.add(radBond);
 		radBond.addActionListener(keyBond);
-		radBond.setBounds(7, 91, 294, 28);
+		radBond.setBounds(10, 89, 489, 28);
 		add(radBond);
 		radInter = new JRadioButton("potential only between intermolecular atoms");
 		btnGroupInterIntra.add(radInter);
-		radInter.addActionListener(keyInter);
-		radInter.setBounds(5, 15, 310, 25);
+		radInter.setBounds(10, 21, 516, 28);
 		add(radInter);
 		radIntra = new JRadioButton("potential only between intramolecular atoms");
 		radIntra.addActionListener(keyIntra);
 		btnGroupInterIntra.add(radIntra);
-		radIntra.setBounds(7, 42, 308, 28);
+		radIntra.setBounds(10, 55, 449, 28);
 		add(radIntra);
 		radNotBond = new JRadioButton("potential does not act between bonded atoms");
 		btnGroupBonds.add(radNotBond);
 		radNotBond.addActionListener(keyNotBond);
-		radNotBond.setBounds(7, 119, 315, 28);
+		radNotBond.setBounds(10, 123, 535, 28);
 		add(radNotBond);
-		radNotBondOrTwoBonds = new JRadioButton("<html>potential does not act between bonded atoms<br> or atoms separated by two bonds</html>");
+		radNotBondOrTwoBonds = new JRadioButton("potential does not act between bonded atoms or atoms separated by two bonds");
 		btnGroupBonds.add(radNotBondOrTwoBonds);
 		radNotBondOrTwoBonds.addActionListener(keyNotBondOrTwoBonds);
-		radNotBondOrTwoBonds.setBounds(7, 154, 315, 35);
+		radNotBondOrTwoBonds.setBounds(10, 157, 701, 28);
 		add(radNotBondOrTwoBonds);
-		radThreeBonds = new JRadioButton("<html>potential only acts between atoms separated<br> by three bonds</html>");
+		radThreeBonds = new JRadioButton("potential only acts between atoms separated by three bonds");
 		btnGroupBonds.add(radThreeBonds);
 		radThreeBonds.addActionListener(keyThreeBonds);
-		radThreeBonds.setBounds(7, 196, 308, 28);
+		radThreeBonds.setBounds(10, 191, 725, 28);
 		add(radThreeBonds);
 		txtScale14 = new JTextField();
-		txtScale14.setBounds(15, 240, 50, 21);
+		txtScale14.setText("0.5");
+		txtScale14.setBounds(10, 225, 50, 21);
 		add(txtScale14);
+
+		final JLabel label = new JLabel();
+		label.setText("1-4 scaling");
+		label.setBounds(66, 225, 116, 21);
+		add(label);
 	}
 
 	public void clearBondingOpts() {
