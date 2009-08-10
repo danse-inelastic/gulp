@@ -107,40 +107,40 @@ public class TwoAtomBondingOptions extends JPanel implements Serializable {
 		radBond = new JRadioButton("potential only acts between bonded atoms");
 		btnGroupBonds.add(radBond);
 		radBond.addActionListener(keyBond);
-		radBond.setBounds(10, 89, 489, 28);
+		radBond.setBounds(454, 21, 438, 28);
 		add(radBond);
 		radInter = new JRadioButton("potential only between intermolecular atoms");
 		btnGroupInterIntra.add(radInter);
-		radInter.setBounds(10, 21, 516, 28);
+		radInter.setBounds(10, 21, 438, 28);
 		add(radInter);
 		radIntra = new JRadioButton("potential only between intramolecular atoms");
 		radIntra.addActionListener(keyIntra);
 		btnGroupInterIntra.add(radIntra);
-		radIntra.setBounds(10, 55, 449, 28);
+		radIntra.setBounds(10, 55, 438, 28);
 		add(radIntra);
 		radNotBond = new JRadioButton("potential does not act between bonded atoms");
 		btnGroupBonds.add(radNotBond);
 		radNotBond.addActionListener(keyNotBond);
-		radNotBond.setBounds(10, 123, 535, 28);
+		radNotBond.setBounds(454, 55, 438, 28);
 		add(radNotBond);
 		radNotBondOrTwoBonds = new JRadioButton("potential does not act between bonded atoms or atoms separated by two bonds");
 		btnGroupBonds.add(radNotBondOrTwoBonds);
 		radNotBondOrTwoBonds.addActionListener(keyNotBondOrTwoBonds);
-		radNotBondOrTwoBonds.setBounds(10, 157, 701, 28);
+		radNotBondOrTwoBonds.setBounds(10, 89, 701, 28);
 		add(radNotBondOrTwoBonds);
 		radThreeBonds = new JRadioButton("potential only acts between atoms separated by three bonds");
 		btnGroupBonds.add(radThreeBonds);
 		radThreeBonds.addActionListener(keyThreeBonds);
-		radThreeBonds.setBounds(10, 191, 725, 28);
+		radThreeBonds.setBounds(10, 123, 725, 28);
 		add(radThreeBonds);
 		txtScale14 = new JTextField();
 		txtScale14.setText("0.5");
-		txtScale14.setBounds(10, 225, 50, 21);
+		txtScale14.setBounds(10, 157, 50, 21);
 		add(txtScale14);
 
 		final JLabel label = new JLabel();
 		label.setText("1-4 scaling");
-		label.setBounds(66, 225, 116, 21);
+		label.setBounds(66, 157, 116, 21);
 		add(label);
 	}
 

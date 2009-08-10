@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 
 public class Buckingham extends PotentialPanel implements Serializable {
 
+	private JLabel setToZeroLabel;
 	private static final long serialVersionUID = 4469214289057439073L;
 
 	private final PPP A = new PPP("A (eV)");
@@ -26,10 +27,10 @@ public class Buckingham extends PotentialPanel implements Serializable {
 
 	private final G g = new G();
 
-	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+//	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
 
-	private final JLabel lblUnits = new JLabel("units");
+//	private final JLabel lblUnits = new JLabel("units");
 	private final JLabel lblInnerCutoff = new JLabel(g.html("inner cutoff (&Aring;)"));
 	private final JLabel lblOuterCutoff = new JLabel(g.html("outer cutoff (&Aring;)"));
 	private final JLabel lblBuckinghamEq = new JLabel("<html>E = A exp(-r/&#961;) - C r<sup>-6</sup></html>");
@@ -65,11 +66,11 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		txtrmax.setBounds(370, 91, 78, 20);
 		add(txtrmax);
 		//txtrmax.getDocument().addDocumentListener(da);
-		lblUnits.setBounds(255, 120, 70, 21);
-		add(lblUnits);
-		cboUnits.setBounds(370, 120, 85, 21);
-		add(cboUnits);
-		cboEnerGra.setBounds(10, 145, 85, 21);
+//		lblUnits.setBounds(255, 120, 70, 21);
+//		add(lblUnits);
+//		cboUnits.setBounds(370, 120, 85, 21);
+//		add(cboUnits);
+		cboEnerGra.setBounds(255, 152, 110, 21);
 		add(cboEnerGra);
 
 		//pane.setBounds(460, 10, 240, 250);
@@ -84,6 +85,7 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		Rho.max = 1;
 		A.min = 100;
 		A.max = 25000;
+		add(getSetToZeroLabel());
 	}
 
 	//	private class DocumentAdapter implements DocumentListener, Serializable {
@@ -104,8 +106,8 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "buckingham " + pot.twoAtomBondingOptions.getInterIntraBond();
-		if (cboUnits.getSelectedIndex() != 0)
-			lines += cboUnits.getSelectedItem() + " ";
+//		if (cboUnits.getSelectedIndex() != 0)
+//			lines += cboUnits.getSelectedItem() + " ";
 		if (cboEnerGra.getSelectedIndex() == 1)
 			lines += "grad";
 		else
@@ -193,7 +195,18 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		b.txtrmin.setText(this.txtrmin.getText());
 		b.txtrmax.setText(this.txtrmax.getText());
 		b.cboEnerGra.setSelectedIndex(this.cboEnerGra.getSelectedIndex());
-		b.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
+		//b.cboUnits.setSelectedIndex(this.cboUnits.getSelectedIndex());
 		return super.clone(b);
+	}
+	/**
+	 * @return
+	 */
+	protected JLabel getSetToZeroLabel() {
+		if (setToZeroLabel == null) {
+			setToZeroLabel = new JLabel();
+			setToZeroLabel.setText("set to zero at the cutoff");
+			setToZeroLabel.setBounds(10, 153, 225, 18);
+		}
+		return setToZeroLabel;
 	}
 }

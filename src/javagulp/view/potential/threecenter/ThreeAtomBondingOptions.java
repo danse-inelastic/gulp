@@ -72,17 +72,17 @@ public class ThreeAtomBondingOptions extends JPanel implements Serializable {
 		setName("bondingOptions");
 		chkBond = new JCheckBox(g.html("potential only acts between bonded atoms"));
 		chkBond.addActionListener(keyBond);
-		chkBond.setBounds(5, 77, 295, 25);
+		chkBond.setBounds(5, 77, 500, 25);
 		add(chkBond);
 		radInter = new JRadioButton("potential only between intermolecular atoms");
 		btnGroupInterIntra.add(radInter);
 		radInter.addActionListener(keyInter);
-		radInter.setBounds(5, 15, 310, 25);
+		radInter.setBounds(5, 15, 500, 25);
 		add(radInter);
 		radIntra = new JRadioButton("potential only between intramolecular atoms");
 		radIntra.addActionListener(keyIntra);
 		btnGroupInterIntra.add(radIntra);
-		radIntra.setBounds(5, 46, 310, 25);
+		radIntra.setBounds(5, 46, 500, 25);
 		add(radIntra);
 	}
 
