@@ -48,7 +48,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 	private final JCheckBox chkSetAveragePotential = new JCheckBox("set average potential across lattice sites to 0 (for surface/bulk comparisons)");
 	private final JCheckBox chkDoNotUseCutoff = new JCheckBox("<html>do not use a cutoff for exponential repulsive terms when they become less than the accuracy factor (default=10<sup>-8</sup>) to save computer time but use cutoff given in the input file</html>");
-	private final JCheckBox chkRemoveColoumbic = new JCheckBox("remove the coloumbic interaction between bonded atoms and atoms with a bonded atom in common");
+	private final JCheckBox chkRemoveColoumbic = new JCheckBox("<html>remove the coloumbic interaction between bonded atoms and atoms with a bonded atom in common</html>");
 	private final JCheckBox chkDoNotStop = new JCheckBox("do not stop execution if molecule becomes unbonded");
 	private final JCheckBox chkPrintThreeBody = new JCheckBox("print three-body angles found for three-body potentials");
 	private final JCheckBox chkOutputList = new JCheckBox("output list of valid torsional terms before and after a calculation");
@@ -92,13 +92,13 @@ public class PotentialOptions extends JPanel implements Serializable {
 		pnlCutoffBondLength.add(angLabel);
 
 		add(pnlResetInteratomic);
-		pnlResetInteratomic.setBounds(0, 55, 383, 115);
+		pnlResetInteratomic.setBounds(0, 55, 383, 127);
 
 		final TitledPanel pnlSetDipole = new TitledPanel();
 		pnlSetDipole.setTitle("set dipole polarisability");
-		pnlSetDipole.setBounds(0, 277, 383, 103);
+		pnlSetDipole.setBounds(0, 289, 383, 159);
 		add(pnlSetDipole);
-		scrollPane.setBounds(10, 22, 363, 71);
+		scrollPane.setBounds(10, 22, 363, 127);
 		pnlSetDipole.add(scrollPane);
 
 		polarisabilityTableModel.uneditableColumns = new int[] { 0 };
@@ -108,7 +108,7 @@ public class PotentialOptions extends JPanel implements Serializable {
 
 		final TitledPanel pnlIdentifyMolecules = new TitledPanel();
 		pnlIdentifyMolecules.setTitle("identify molecules based on covalent radii but");
-		pnlIdentifyMolecules.setBounds(389, 250, 750, 151);
+		pnlIdentifyMolecules.setBounds(389, 250, 771, 179);
 		add(pnlIdentifyMolecules);
 		buttonGroup.add(radRetainColoumbic);
 		radRetainColoumbic.addActionListener(keyCoulombGroup);
@@ -119,15 +119,15 @@ public class PotentialOptions extends JPanel implements Serializable {
 		radRemoveColoumbic.setBounds(10, 20, 500, 25);
 		pnlIdentifyMolecules.add(radRemoveColoumbic);
 		chkRemoveColoumbic.addActionListener(keyChkRemoveColoumbic);
-		chkRemoveColoumbic.setBounds(10, 82, 730, 25);
+		chkRemoveColoumbic.setBounds(10, 82, 681, 47);
 		pnlIdentifyMolecules.add(chkRemoveColoumbic);
 		chkDoNotStop.addActionListener(keyDoNotStop);
-		chkDoNotStop.setBounds(10, 113, 500, 28);
+		chkDoNotStop.setBounds(10, 135, 500, 28);
 		pnlIdentifyMolecules.add(chkDoNotStop);
 
 		final TitledPanel pnlScalingTransformation = new TitledPanel();
 		pnlScalingTransformation.setTitle("apply a scaling transformation to EAM");
-		pnlScalingTransformation.setBounds(0, 176, 383, 95);
+		pnlScalingTransformation.setBounds(0, 188, 383, 95);
 		add(pnlScalingTransformation);
 		txtScale.setBounds(233, 68, 69, 20);
 		pnlScalingTransformation.add(txtScale);
@@ -155,23 +155,23 @@ public class PotentialOptions extends JPanel implements Serializable {
 		add(pnlOptions);
 
 		chkPrintThreeBody.addActionListener(keyPrintThreeBody);
-		chkPrintThreeBody.setBounds(10, 22, 404, 25);
+		chkPrintThreeBody.setBounds(10, 22, 590, 25);
 		pnlOptions.add(chkPrintThreeBody);
 
-		chkDoNotInclude.setBounds(10, 53, 404, 25);
+		chkDoNotInclude.setBounds(10, 53, 590, 25);
 		pnlOptions.add(chkDoNotInclude);
 		chkNoListBased.addActionListener(keyNoListBased);
-		chkNoListBased.setBounds(10, 84, 404, 25);
+		chkNoListBased.setBounds(10, 84, 590, 25);
 		pnlOptions.add(chkNoListBased);
 		chkOutputList.addActionListener(keyOutputList);
-		chkOutputList.setBounds(10, 115, 556, 25);
+		chkOutputList.setBounds(10, 115, 638, 25);
 		pnlOptions.add(chkOutputList);
 		chkSetAveragePotential.addActionListener(keySetAveragePotential);
 		chkSetAveragePotential.setBounds(10, 146, 709, 24);
 		pnlOptions.add(chkSetAveragePotential);
 
 		chkDoNotUseCutoff.addActionListener(keyDoNotUseCutoff);
-		chkDoNotUseCutoff.setBounds(10, 176, 709, 66);
+		chkDoNotUseCutoff.setBounds(10, 176, 709, 58);
 		pnlOptions.add(chkDoNotUseCutoff);
 		chkDoNotUseCutoff.setAlignmentY(Component.TOP_ALIGNMENT);
 	}

@@ -169,33 +169,33 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		setLayout(null);
 		this.setPreferredSize(new java.awt.Dimension(1230, 500));
 
-		scrollPane.setBounds(0, 65, 920, 291);
+		scrollPane.setBounds(0, 65, 1055, 381);
 		add(scrollPane);
 		scrollPane.setViewportView(fractional3dTable);
 
-		lblNumberOfAtoms.setBounds(0, 37, 177, 15);
+		lblNumberOfAtoms.setBounds(10, 37, 177, 15);
 		add(lblNumberOfAtoms);
-		txtNumberOfAtoms.setBounds(185, 35, 60, 19);
+		txtNumberOfAtoms.setBounds(213, 35, 60, 19);
 		add(txtNumberOfAtoms);
-		btnSet.setBounds(251, 34, 98, 21);
+		btnSet.setBounds(279, 34, 98, 21);
 		btnSet.addActionListener(keySet);
 		add(btnSet);
-		lblCoordinateType.setBounds(0, 11, 136, 15);
+		lblCoordinateType.setBounds(10, 11, 136, 15);
 		add(lblCoordinateType);
-		cboCoordinateType.setBounds(140, 10, 209, 19);
+		cboCoordinateType.setBounds(168, 9, 209, 19);
 		add(cboCoordinateType);
 		cboCoordinateType.addActionListener(keyCoordinateType);
-		btnImportCoordinates.setBounds(550, 32, 178, 25);
+		btnImportCoordinates.setBounds(685, 34, 178, 25);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
 		//btnImportCoordinates.addActionListener(keyImportCoordinates);
-		btnSaveCoordinates.setBounds(734, 32, 186, 25);
+		btnSaveCoordinates.setBounds(869, 34, 186, 25);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
 
-		pnlTranslation.setBounds(0, 362, 920, 82);
+		pnlTranslation.setBounds(0, 452, 1055, 82);
 		// removed for paper
 		add(pnlTranslation);
 
@@ -203,9 +203,9 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		pnlMassSelect.setLayout(null);
 		pnlMassSelect.setBounds(10, 452, 970, 89);
 		add(lblName);
-		lblName.setBounds(416, 4, 259, 28);
+		lblName.setBounds(530, 4, 259, 28);
 		add(txtName);
-		txtName.setBounds(681, 9, 239, 19);
+		txtName.setBounds(816, 10, 239, 19);
 		pnlMassSelect.add(lblValue);
 		lblValue.setBounds(10, 12, 105, 28);
 		pnlMassSelect.add(txtValue);
