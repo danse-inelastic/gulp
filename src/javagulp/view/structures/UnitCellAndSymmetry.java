@@ -28,7 +28,7 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 	public SpaceGroup spaceGroup = new SpaceGroup();
 
 	private final JComboBox cboSetSymmetry = new JComboBox(new String[] {
-			"triclinic", "monoclinic", "orthorhombic", "tetragonal",
+			"", "triclinic", "monoclinic", "orthorhombic", "tetragonal",
 			"hexagonal", "rhombohedral", "cubic" });
 
 	private final JTextField txtSuperCellX = new JTextField("1");
