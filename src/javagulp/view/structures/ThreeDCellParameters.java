@@ -41,29 +41,29 @@ class ThreeDCellParameters extends JPanel {
 		super();
 		setLayout(null);
 
-		lblA.setBounds(20, 10, 45, 20);
+		lblA.setBounds(10, 10, 67, 20);
 		add(lblA);
-		lblB.setBounds(20, 36, 45, 20);
+		lblB.setBounds(10, 36, 67, 20);
 		add(lblB);
-		lblC.setBounds(20, 62, 45, 20);
+		lblC.setBounds(10, 62, 67, 20);
 		add(lblC);
-		lblAlpha.setBounds(20, 88, 45, 20);
+		lblAlpha.setBounds(10, 88, 67, 20);
 		add(lblAlpha);
-		lblBeta.setBounds(20, 114, 45, 20);
+		lblBeta.setBounds(10, 114, 67, 20);
 		add(lblBeta);
-		lblGamma.setBounds(20, 140, 45, 20);
+		lblGamma.setBounds(10, 140, 63, 20);
 		add(lblGamma);
-		txtA.setBounds(75, 11, 68, 20);
+		txtA.setBounds(83, 11, 79, 20);
 		add(txtA);
-		txtB.setBounds(75, 36, 68, 20);
+		txtB.setBounds(83, 37, 79, 20);
 		add(txtB);
-		txtC.setBounds(75, 63, 68, 20);
+		txtC.setBounds(83, 63, 79, 20);
 		add(txtC);
-		txtAlpha.setBounds(75, 89, 68, 20);
+		txtAlpha.setBounds(83, 89, 79, 20);
 		add(txtAlpha);
-		txtBeta.setBounds(75, 115, 68, 20);
+		txtBeta.setBounds(83, 115, 79, 20);
 		add(txtBeta);
-		txtGamma.setBounds(75, 141, 68, 20);
+		txtGamma.setBounds(83, 141, 79, 20);
 		add(txtGamma);
 		add(getCboA());
 		add(getCboB());
@@ -103,7 +103,7 @@ class ThreeDCellParameters extends JPanel {
 	protected JComboBox getCboA() {
 		if (cboA == null) {
 			cboA = new JComboBox(options);
-			cboA.setBounds(150, 8, 117, 24);
+			cboA.setBounds(168, 8, 117, 24);
 		}
 		return cboA;
 	}
@@ -113,7 +113,7 @@ class ThreeDCellParameters extends JPanel {
 	protected JComboBox getCboB() {
 		if (cboB == null) {
 			cboB = new JComboBox(options);
-			cboB.setBounds(150, 34, 117, 24);
+			cboB.setBounds(168, 34, 117, 24);
 		}
 		return cboB;
 	}
@@ -123,7 +123,7 @@ class ThreeDCellParameters extends JPanel {
 	protected JComboBox getCboC() {
 		if (cboC == null) {
 			cboC = new JComboBox(options);
-			cboC.setBounds(150, 60, 117, 24);
+			cboC.setBounds(168, 60, 117, 24);
 		}
 		return cboC;
 	}
@@ -133,7 +133,7 @@ class ThreeDCellParameters extends JPanel {
 	protected JComboBox getCboAlpha() {
 		if (cboAlpha == null) {
 			cboAlpha = new JComboBox(options);
-			cboAlpha.setBounds(150, 86, 117, 24);
+			cboAlpha.setBounds(168, 86, 117, 24);
 		}
 		return cboAlpha;
 	}
@@ -143,7 +143,7 @@ class ThreeDCellParameters extends JPanel {
 	protected JComboBox getCboBeta() {
 		if (cboBeta == null) {
 			cboBeta = new JComboBox(options);
-			cboBeta.setBounds(150, 112, 117, 24);
+			cboBeta.setBounds(168, 112, 117, 24);
 		}
 		return cboBeta;
 	}
@@ -153,7 +153,7 @@ class ThreeDCellParameters extends JPanel {
 	protected JComboBox getCboGamma() {
 		if (cboGamma == null) {
 			cboGamma = new JComboBox(options);
-			cboGamma.setBounds(150, 138, 117, 24);
+			cboGamma.setBounds(168, 138, 117, 24);
 		}
 		return cboGamma;
 	}
