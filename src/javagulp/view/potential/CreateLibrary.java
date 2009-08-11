@@ -402,8 +402,8 @@ public class CreateLibrary extends JPanel implements Serializable {
 
 		pnlAtom.setBounds(10, 7, 476, 42);
 		add(pnlAtom);
-		potentialBackdrop.setBounds(195, 127, 721, 315);
-		scrollBonding.setBounds(10, 447, 900, 192);
+		potentialBackdrop.setBounds(195, 127, 743, 315);
+		scrollBonding.setBounds(10, 447, 928, 192);
 		add(scrollBonding);
 
 		btnCreateLibrary.setBounds(10, 417, 179, 25);

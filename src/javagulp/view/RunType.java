@@ -20,10 +20,12 @@ public class RunType extends JPanel implements Serializable {
 
 	private final JLabel lblRunType = new JLabel("set run type:");
 
-	private final String[] runTypeLabels = {"molecular dynamics", "monte carlo",
-			"energetics and material properties", "optimization", "fit", "phonons",
-			"free energy calc/optimize", "surface calc/optimize", "transition state",
-	"structure prediction"};
+	private final String[] runTypeLabels = {"optimization", "fit", 
+		"phonons", "free energy calc/optimize", 
+		"molecular dynamics", "monte carlo",
+		"energetics and material properties",  
+		"structure prediction", "transition state",
+		"surface calc/optimize"};
 
 	//	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
 	//			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy",
@@ -143,6 +145,7 @@ public class RunType extends JPanel implements Serializable {
 				scrollPane.add(runTypes.get("molecular dynamics"));
 				scrollPane.setViewportView(runTypes.get("molecular dynamics"));
 
+				cboRunType.setMaximumRowCount(30);
 				cboRunType.addActionListener(keyRunType);
 				cboRunType.setBounds(146, 9, 340, 24);
 				add(cboRunType);
