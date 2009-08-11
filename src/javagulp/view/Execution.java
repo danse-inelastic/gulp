@@ -175,11 +175,11 @@ public class Execution extends JPanel implements Serializable {
 					}
 					final File f = new File(Back.getCurrentRun().getWD() + "/"
 							+ Back.getCurrentRun().getOutput().selectedInputFile);
-					if (!f.exists() || Back.getCurrentRun().getOutput().lastViewed == Long.MAX_VALUE) {
-						JOptionPane.showMessageDialog(null,
-						"Please view your input file first.");
-						return;
-					}
+//					if (!f.exists() || Back.getCurrentRun().getOutput().lastViewed == Long.MAX_VALUE) {
+//						JOptionPane.showMessageDialog(null,
+//						"Please view your input file first.");
+//						return;
+//					}
 					//					// if the user has viewed/edited their input file sooner than the last time it was written, use the viewed file
 					//					if (Back.getPanel().getOutput().lastViewed < f.lastModified()) {
 					//						contents = Back.getFileContents(f);
@@ -566,11 +566,49 @@ public class Execution extends JPanel implements Serializable {
 		scrollStatus.setBounds(517, 4, 640, 134);
 		btnPause.setBounds(149, 365, 80, 25);
 		btnPause.addActionListener(keyPause);
-		add(getPnlExecutionBackdrop());
-		add(getPlaceOfExecution());
+		
+		placeOfExecution = new TitledPanel();
+		placeOfExecution.setBounds(7, 4, 196, 134);
+		placeOfExecution.setTitle("where to execute");
+		radLocal.addActionListener(keyPlaceOfExecution);
+		radLocal.setBounds(10, 24, 161, 21);
+		placeOfExecution.add(getRadVnf());
+		grpExecute.add(getRadVnf());
+		getRadVnf().addActionListener(keyPlaceOfExecution);
+		placeOfExecution.add(radLocal);
+		grpExecute.add(radLocal);
+		radRemote.addActionListener(keyPlaceOfExecution);
+		radRemote.setBounds(10, 51, 161, 21);
+		placeOfExecution.add(radRemote);
+		grpExecute.add(radRemote);
+		//add(getPlaceOfExecution());
+		
+		pnlExecutionBackdrop = new JPanel();
+		//pnlExecutionBackdrop.setBounds(7, 144, 724, 192);
+		pnlExecutionBackdrop.setLayout(new CardLayout());
+		pnlExecutionBackdrop.setBounds(7, 144, 723, 215);
+		add(pnlExecutionBackdrop);
+		pnlExecutionBackdrop.add(getPnlLocalExecution(), getPnlLocalExecution().getName());
+		pnlExecutionBackdrop.add(getPnlRemoteExecution(), getPnlRemoteExecution().getName());
+		pnlExecutionBackdrop.add(getPnlVnfExecution(), getPnlVnfExecution().getName());
+		//add(getPnlExecutionBackdrop());
+		
 		add(getHowExecute());
 		add(getPnlHighThroughput());
+		
+		//if AtomSim has been launched with a username, make vnf the default submission cluster, else 
+		//make localhost the default execution machine
+		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		final String cgihome = cgiMap.get("cgihome");
+		if(cgiMap.containsKey("sentry.username")){
+			radLocal.setSelected(false);
+			radVnf.setSelected(true);
+		} else{
+			radLocal.setSelected(true);
+			radVnf.setSelected(false);
+		}
 	}
+
 	private final SerialMouseAdapter keyMouse = new SerialMouseAdapter() {
 		private static final long serialVersionUID = -3862775803812225199L;
 		@Override
@@ -596,13 +634,13 @@ public class Execution extends JPanel implements Serializable {
 		private static final long serialVersionUID = -6558056553136490457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			final CardLayout cl=(CardLayout) getPnlExecutionBackdrop().getLayout();
+			final CardLayout cl=(CardLayout) pnlExecutionBackdrop.getLayout();
 			if (radVnf.isSelected()) {
-				cl.show(getPnlExecutionBackdrop(), getPnlVnfExecution().getName());
+				cl.show(pnlExecutionBackdrop, getPnlVnfExecution().getName());
 			} else if(radLocal.isSelected()) {
-				cl.show(getPnlExecutionBackdrop(), getPnlLocalExecution().getName());
+				cl.show(pnlExecutionBackdrop, getPnlLocalExecution().getName());
 			} else if(radRemote.isSelected()) {
-				cl.show(getPnlExecutionBackdrop(), getPnlRemoteExecution().getName());
+				cl.show(pnlExecutionBackdrop, getPnlRemoteExecution().getName());
 			}
 
 			if (radLocal.isSelected()) {
@@ -708,48 +746,8 @@ public class Execution extends JPanel implements Serializable {
 			}
 		}
 	};
-	/**
-	 * @return
-	 */
-	protected JPanel getPnlExecutionBackdrop() {
-		if (pnlExecutionBackdrop == null) {
-			pnlExecutionBackdrop = new JPanel();
-			//pnlExecutionBackdrop.setBounds(7, 144, 724, 192);
-			pnlExecutionBackdrop.setLayout(new CardLayout());
-			pnlExecutionBackdrop.setBounds(7, 144, 723, 215);
-			add(pnlExecutionBackdrop);
-			pnlExecutionBackdrop.add(getPnlVnfExecution(), getPnlVnfExecution().getName());
-			pnlExecutionBackdrop.add(getPnlLocalExecution(), getPnlLocalExecution().getName());
-			pnlExecutionBackdrop.add(getPnlRemoteExecution(), getPnlRemoteExecution().getName());
-		}
-		return pnlExecutionBackdrop;
-	}
-	/**
-	 * @return
-	 */
-	protected TitledPanel getPlaceOfExecution() {
-		if (placeOfExecution == null) {
-			placeOfExecution = new TitledPanel();
-			placeOfExecution.setBounds(7, 4, 196, 134);
-			placeOfExecution.setTitle("where to execute");
 
-			radLocal.addActionListener(keyPlaceOfExecution);
-			radLocal.setBounds(10, 53, 161, 21);
-			placeOfExecution.add(getRadVnf());
-			grpExecute.add(getRadVnf());
-			getRadVnf().addActionListener(keyPlaceOfExecution);
-			placeOfExecution.add(radLocal);
 
-			grpExecute.add(radLocal);
-
-			radRemote.addActionListener(keyPlaceOfExecution);
-			radRemote.setBounds(10, 80, 161, 21);
-			placeOfExecution.add(radRemote);
-			grpExecute.add(radRemote);
-
-		}
-		return placeOfExecution;
-	}
 
 	protected TitledPanel getPnlVnfExecution() {
 		if (pnlVnfExecution == null) {
@@ -826,7 +824,7 @@ public class Execution extends JPanel implements Serializable {
 			radVnf = new JRadioButton();
 			radVnf.setSelected(true);
 			radVnf.setText("vnf");
-			radVnf.setBounds(10, 24, 138, 23);
+			radVnf.setBounds(10, 78, 138, 23);
 		}
 		return radVnf;
 	}

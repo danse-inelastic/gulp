@@ -79,7 +79,7 @@ public class OutputFormats extends JPanel {
 	
 
 	public String writeOutputFormats() throws IncompleteOptionException {
-		String lines = "output phonon dos.dens" + Back.newLine;
+		String lines = "";
 		
 		if (chkDos.isSelected() && txtDos.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a Dos/Dispersion output filename");

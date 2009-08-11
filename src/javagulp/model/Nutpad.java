@@ -157,7 +157,7 @@ public class Nutpad extends JFrame {
 			}
 		};
 
-		mSaveVnfAction = new AbstractAction("Save to vnf") {
+		mSaveVnfAction = new AbstractAction("Save to AtomSim") {
 			private static final long serialVersionUID = -3294324834199401502L;
 			public void actionPerformed(ActionEvent e) {
 				final String name = (String)JOptionPane.showInputDialog(

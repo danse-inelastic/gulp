@@ -141,9 +141,9 @@ public class RunType extends JPanel implements Serializable {
 
 				scrollPane.setBounds(0, 39, 1216, 632);
 				add(scrollPane);
-				runTypes.put("molecular dynamics", new MolecularDynamics());
-				scrollPane.add(runTypes.get("molecular dynamics"));
-				scrollPane.setViewportView(runTypes.get("molecular dynamics"));
+				runTypes.put("optimization", new Phonons());
+				scrollPane.add(runTypes.get("optimization"));
+				scrollPane.setViewportView(runTypes.get("optimization"));
 
 				cboRunType.setMaximumRowCount(30);
 				cboRunType.addActionListener(keyRunType);
