@@ -581,6 +581,7 @@ public class Execution extends JPanel implements Serializable {
 		radRemote.setBounds(10, 51, 161, 21);
 		placeOfExecution.add(radRemote);
 		grpExecute.add(radRemote);
+		add(placeOfExecution);
 		//add(getPlaceOfExecution());
 		
 		pnlExecutionBackdrop = new JPanel();
