@@ -107,11 +107,11 @@ public class CgiCommunicate {
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-		//since this is a python list (of one item), remove the outer brackets
-		response = response.deleteCharAt(response.length()-1);
-		response = response.deleteCharAt(0);
 		JSONObject obj = null;
 		try {
+			//since this is a python list (of one item), remove the outer brackets
+			response = response.deleteCharAt(response.length()-1);
+			response = response.deleteCharAt(0);
 			obj = new JSONObject(response.toString());
 		} catch (final JSONException e) {
 			JOptionPane.showMessageDialog(null, formatQuery(response.toString()));
