@@ -26,12 +26,6 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 
-
-//import cseo.RB.RBSubmit;
-//import cseo.RB.RBSubmitReturn;
-//import cseo.jodaf.client.FilePkage;
-//import cseo.jodaf.client.JODAFException;
-
 public class Output extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = -4891514818536259508L;
