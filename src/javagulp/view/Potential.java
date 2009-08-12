@@ -106,6 +106,7 @@ public class Potential extends JPanel {
 
 		final Map<String, String> getPotentialNamesQuery = new HashMap<String, String>();
 		//Back.getCurrentRun().putInAuthenticationInfo(getPotentialNamesQuery);
+		getPotentialNamesQuery.put("cgihome", cgihome);
 		getPotentialNamesQuery.put("actor", "directdb");
 		getPotentialNamesQuery.put("routine", "get");
 		getPotentialNamesQuery.put("directdb.tables", "gulppotential");
