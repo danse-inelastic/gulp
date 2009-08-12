@@ -105,13 +105,6 @@ public class Potential extends JPanel {
 		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 
 		final Map<String, String> getPotentialNamesQuery = new HashMap<String, String>();
-//		// this next if statement is a hack--don't know why it doesn't work with just cgihome...
-//		// even though i've removed security from getting potentials, vnf still throws a
-//		// security error...
-//		if(cgihome.equals("http://trueblue.caltech.edu/java/atomsim.html"))
-//			getPotentialNamesQuery.put("cgihome", cgihome);
-//		else
-//			Back.getCurrentRun().putInAuthenticationInfo(getPotentialNamesQuery);
 		getPotentialNamesQuery.put("cgihome", cgihome);
 		getPotentialNamesQuery.put("actor", "directdb");
 		getPotentialNamesQuery.put("routine", "get");

@@ -108,6 +108,7 @@ public class RunType extends JPanel implements Serializable {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					final String type = (String)cboRunType.getSelectedItem();
+					System.out.println(type);
 					scrollPane.add(getSelectedRunTypePanel(type));
 					scrollPane.setViewportView(getSelectedRunTypePanel(type));
 					Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));
@@ -142,7 +143,7 @@ public class RunType extends JPanel implements Serializable {
 
 				scrollPane.setBounds(0, 39, 1216, 632);
 				add(scrollPane);
-				runTypes.put("optimization", new Phonons());
+				runTypes.put("optimization", new Optimization());
 				scrollPane.add(runTypes.get("optimization"));
 				scrollPane.setViewportView(runTypes.get("optimization"));
 

@@ -604,9 +604,11 @@ public class Execution extends JPanel implements Serializable {
 		if(cgiMap.containsKey("sentry.username")){
 			radLocal.setSelected(false);
 			radVnf.setSelected(true);
+			rearrangePlaceOfExecutionBackdrops();
 		} else{
 			radLocal.setSelected(true);
 			radVnf.setSelected(false);
+			rearrangePlaceOfExecutionBackdrops();
 		}
 	}
 
@@ -635,24 +637,28 @@ public class Execution extends JPanel implements Serializable {
 		private static final long serialVersionUID = -6558056553136490457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			final CardLayout cl=(CardLayout) pnlExecutionBackdrop.getLayout();
-			if (radVnf.isSelected()) {
-				cl.show(pnlExecutionBackdrop, getPnlVnfExecution().getName());
-			} else if(radLocal.isSelected()) {
-				cl.show(pnlExecutionBackdrop, getPnlLocalExecution().getName());
-			} else if(radRemote.isSelected()) {
-				cl.show(pnlExecutionBackdrop, getPnlRemoteExecution().getName());
-			}
-
-			if (radLocal.isSelected()) {
-				txtWorkingDirectory.setEnabled(false);
-				txtGulpBinary.setEnabled(false);
-			} else {
-				txtWorkingDirectory.setEnabled(true);
-				txtGulpBinary.setEnabled(true);
-			}
+			rearrangePlaceOfExecutionBackdrops();
 		}
 	};
+	
+	private void rearrangePlaceOfExecutionBackdrops(){
+		final CardLayout cl=(CardLayout) pnlExecutionBackdrop.getLayout();
+		if (radVnf.isSelected()) {
+			cl.show(pnlExecutionBackdrop, getPnlVnfExecution().getName());
+		} else if(radLocal.isSelected()) {
+			cl.show(pnlExecutionBackdrop, getPnlLocalExecution().getName());
+		} else if(radRemote.isSelected()) {
+			cl.show(pnlExecutionBackdrop, getPnlRemoteExecution().getName());
+		}
+
+		if (radLocal.isSelected()) {
+			txtWorkingDirectory.setEnabled(false);
+			txtGulpBinary.setEnabled(false);
+		} else {
+			txtWorkingDirectory.setEnabled(true);
+			txtGulpBinary.setEnabled(true);
+		}
+	}
 
 	private final SerialListener keyWorkingDirectory = new SerialListener() {
 		private static final long serialVersionUID = -6558056553136490457L;
