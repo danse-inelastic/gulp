@@ -3,12 +3,15 @@ package javagulp.view;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.CoordinatesTableModel;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialMouseAdapter;
+import javagulp.model.Value;
 import javagulp.view.structures.AtomicCoordinates;
 import javagulp.view.structures.UnitCellAndSymmetry;
 
@@ -114,36 +117,37 @@ public class Structures extends JPanel implements Serializable {
 	//		}
 	//	}
 
-	//	public void importStructures(final File[] files) {
-	//		//tabs.removeAll();
-	//		int i=0;
-	//		for (; i < files.length; i++) {
-	//			try {
-	//				Structure s = new Structure();
-	//				s.atomicCoordinates.setTable("cartesian");
-	//				CoordinatesTableModel model = s.atomicCoordinates.getTableModel();
-	//				model.importCoordinates(Back.getFileContents(files[i]));
-	//				s.atomicCoordinates.txtName.setText(files[i].getName());//i
-	//				File allCharges = new File(files[i].getParent() + "/allCharges.txt");
-	////				WorkspaceParser wp = new WorkspaceParser(files[i].getParentFile());
-	//				//TODO Prompt user to import charges or create a specific button.
-	//				Value v = null;
-	//				if (allCharges.exists()) {
-	//					v = wp.parseDataFile(allCharges).get(0);
-	//					for (int j=0; j < v.y.length; j++)
-	//						model.setValueAt(v.y[j] + "", j, 8);
-	//				} else {
-	//					if (wp.logFile.exists() && wp.parseNetCharges().size() > 0) {
-	//						v = wp.parseNetCharges().get(0);
-	//						for (int j=0; j < v.y.length; j++)
-	//							model.setValueAt(v.y[j] + "", j, 8);
-	//					}
-	//				}
-	//				addTab(s);
-	//			} catch (RuntimeException e) {
-	//				System.out.println(files[i].getPath());
-	//				e.printStackTrace();
-	//			}
-	//		}
-	//	}
+		public void importStructures(final File[] files) {
+			//tabs.removeAll();
+			int i=0;
+			for (; i < files.length; i++) {
+				try {
+					Structure s = new Structure();
+					s.atomicCoordinates.setTable("cartesian");
+					CoordinatesTableModel model = s.atomicCoordinates.getTableModel();
+					model.importCoordinates(Back.getFileContents(files[i]));
+					s.atomicCoordinates.txtName.setText(files[i].getName());//i
+// ignore charges for now
+//					File allCharges = new File(files[i].getParent() + "/allCharges.txt");
+//					WorkspaceParser wp = new WorkspaceParser(files[i].getParentFile());
+//					//TODO Prompt user to import charges or create a specific button.
+//					Value v = null;
+//					if (allCharges.exists()) {
+//						v = wp.parseDataFile(allCharges).get(0);
+//						for (int j=0; j < v.y.length; j++)
+//							model.setValueAt(v.y[j] + "", j, 8);
+//					} else {
+//						if (wp.logFile.exists() && wp.parseNetCharges().size() > 0) {
+//							v = wp.parseNetCharges().get(0);
+//							for (int j=0; j < v.y.length; j++)
+//								model.setValueAt(v.y[j] + "", j, 8);
+//						}
+//					}
+					addTab(s);
+				} catch (RuntimeException e) {
+					System.out.println(files[i].getPath());
+					e.printStackTrace();
+				}
+			}
+		}
 }

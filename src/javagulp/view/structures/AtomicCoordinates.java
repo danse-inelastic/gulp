@@ -1,5 +1,6 @@
 package javagulp.view.structures;
 
+import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
@@ -47,13 +48,13 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private final JLabel lblCoordinateType = new JLabel("coordinate type");
 
 	private final JButton btnSet = new JButton("set");
-	private final JButton btnImportCoordinates = new JButton("import coordinates");
-	private final JButton btnSaveCoordinates = new JButton("save coordinates");
+	private final JButton btnImportCoordinates = new JButton("import xyz file");
+	private final JButton btnSaveCoordinates = new JButton("export as xyz file");
 
 	private final JScrollPane scrollPane = new JScrollPane();
 
 	public JTextField txtName = new JTextField();
-	private final JLabel lblName = new JLabel("structure name (if high-throughput)");
+	private final JLabel lblName = new JLabel("structure name");
 	private final JButton btnSetValue = new JButton("Set selected cells to current value");
 	private final JButton btnSelectValue = new JButton("Select cells with current value");
 	private final JButton btnInvertSelection = new JButton("Invert Selection");
@@ -91,19 +92,21 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
 		}
 	};
-	//	private SerialListener keyImportCoordinates = new SerialListener() {
-	//		private static final long serialVersionUID = -8627501403384935426L;
-	//		@Override
-	//		public void actionPerformed(ActionEvent e) {
-	//				JFileChooser fileDialog = new JFileChooser();
-	//				fileDialog.setMultiSelectionEnabled(true);
-	//				fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
-	//				if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-	//					File[] files = fileDialog.getSelectedFiles();
-	//					Back.getPanel().getStructures().importStructures(files);
-	//				}
-	//		}
-	//	};
+	
+		private SerialListener keyImportCoordinates = new SerialListener() {
+			private static final long serialVersionUID = -8627501403384935426L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					JFileChooser fileDialog = new JFileChooser();
+					fileDialog.setMultiSelectionEnabled(true);
+					fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
+					if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+						File[] files = fileDialog.getSelectedFiles();
+						Back.getCurrentRun().getStructures().importStructures(files);
+					}
+			}
+		};
+	
 	private final SerialListener keySaveCoordinates = new SerialListener() {
 		private static final long serialVersionUID = -2238532372348902025L;
 		@Override
@@ -185,12 +188,12 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		cboCoordinateType.setBounds(168, 9, 209, 19);
 		add(cboCoordinateType);
 		cboCoordinateType.addActionListener(keyCoordinateType);
-		btnImportCoordinates.setBounds(685, 34, 178, 25);
+		btnImportCoordinates.setBounds(599, 34, 225, 25);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
-		btnImportCoordinates.setEnabled(false);
+		//btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
-		//btnImportCoordinates.addActionListener(keyImportCoordinates);
-		btnSaveCoordinates.setBounds(869, 34, 186, 25);
+		btnImportCoordinates.addActionListener(keyImportCoordinates);
+		btnSaveCoordinates.setBounds(830, 34, 225, 25);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
@@ -203,9 +206,10 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		pnlMassSelect.setLayout(null);
 		pnlMassSelect.setBounds(10, 452, 970, 89);
 		add(lblName);
-		lblName.setBounds(530, 4, 259, 28);
+		lblName.setBounds(599, 4, 148, 28);
 		add(txtName);
-		txtName.setBounds(816, 10, 239, 19);
+		txtName.setBackground(Back.grey);
+		txtName.setBounds(753, 10, 302, 19);
 		pnlMassSelect.add(lblValue);
 		lblValue.setBounds(10, 12, 105, 28);
 		pnlMassSelect.add(txtValue);
