@@ -209,7 +209,8 @@ public class RunType extends JPanel implements Serializable {
 	protected JList getList() {
 		if (list == null) {
 			list = new JList();
-			list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+			list.setVisibleRowCount(1);
+			list.setLayoutOrientation(JList.VERTICAL_WRAP);
 			list.setModel(listModel);
 		}
 		return list;
