@@ -1,6 +1,7 @@
 package javagulp.view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,17 +9,23 @@ import java.util.Map;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.SerialListener;
+import javax.swing.JButton;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class RunType extends JPanel implements Serializable {
 
+	private JScrollPane scrollPane_1;
+	private JList list;
+	private JButton addButton;
 	private static final long serialVersionUID = 7887034029631999478L;
 
-	private final JLabel lblRunType = new JLabel("set run type:");
+	private final JLabel lblRunType = new JLabel("run type:");
 
 	private final String[] runTypeLabels = {"optimization", "fit", 
 		"phonons", "free energy calc/optimize", 
@@ -114,6 +121,7 @@ public class RunType extends JPanel implements Serializable {
 					Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));
 				}
 			};
+			private DefaultListModel listModel = new DefaultListModel();
 
 			protected JPanel getSelectedRunTypePanel(String type){
 				if (runTypes.get(type) == null) {
@@ -138,10 +146,10 @@ public class RunType extends JPanel implements Serializable {
 
 				//		chkPredictCrystal.addActionListener(keyPredictCrystal);
 				//		chkPredictCrystal.setToolTipText("Performs structure prediction calculations");
-				lblRunType.setBounds(10, 11, 130, 20);
+				lblRunType.setBounds(10, 11, 95, 20);
 				add(lblRunType);
 
-				scrollPane.setBounds(0, 39, 1216, 632);
+				scrollPane.setBounds(0, 39, 1154, 646);
 				add(scrollPane);
 				runTypes.put("optimization", new Optimization());
 				scrollPane.add(runTypes.get("optimization"));
@@ -149,8 +157,10 @@ public class RunType extends JPanel implements Serializable {
 
 				cboRunType.setMaximumRowCount(30);
 				cboRunType.addActionListener(keyRunType);
-				cboRunType.setBounds(146, 9, 340, 24);
+				cboRunType.setBounds(111, 9, 340, 24);
 				add(cboRunType);
+				add(getAddButton());
+				add(getScrollPane_1());
 			}
 
 			public String writeRuntype() throws IncompleteOptionException, InvalidOptionException {
@@ -175,6 +185,49 @@ public class RunType extends JPanel implements Serializable {
 				
 				return runtypeLines;
 			}
+	/**
+	 * @return
+	 */
+	protected JButton getAddButton() {
+		if (addButton == null) {
+			addButton = new JButton();
+			addButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					final String optionChosen = (String)cboRunType.getSelectedItem();
+					listModel.addElement(optionChosen);
+					//getList().repaint();
+				}
+			});
+			addButton.setText("add");
+			addButton.setBounds(485, 10, 95, 22);
+		}
+		return addButton;
+	}
+	/**
+	 * @return
+	 */
+	protected JList getList() {
+		if (list == null) {
+			list = new JList();
+			list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+			list.setModel(listModel);
+		}
+		return list;
+	}
+	/**
+	 * @return
+	 */
+	protected JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(586, 9, 568, 26);
+			scrollPane_1.setViewportView(getList());
+		}
+		return scrollPane_1;
+	}
+	/**
+	 * @return
+	 */
 
 			//	public MolecularDynamics getMd() {
 			//		return (MolecularDynamics) getRunType(0);
