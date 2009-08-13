@@ -71,7 +71,7 @@ public class Potential extends JPanel {
 		panel.setPreferredSize(new Dimension(0, 40));
 
 		final JButton importButton = new JButton();
-		importButton.setText("import");
+		importButton.setText("upload");
 		//importButton.setEnabled(false);
 		panel.add(importButton, BorderLayout.SOUTH);
 		importButton.addActionListener(new ActionListener() {
