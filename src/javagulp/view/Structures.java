@@ -118,7 +118,7 @@ public class Structures extends JPanel implements Serializable {
 	//	}
 
 		public void importStructures(final File[] files) {
-			//tabs.removeAll();
+			tabs.removeAll();
 			int i=0;
 			for (; i < files.length; i++) {
 				try {
