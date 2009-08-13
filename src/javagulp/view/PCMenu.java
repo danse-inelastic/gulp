@@ -157,9 +157,9 @@ public class PCMenu extends JMenuBar implements Serializable {
 		this.frame = frame;
 
 		openGUI.addActionListener(keyOpenGUI);
-		FileMenu.add(openGUI);
+		//FileMenu.add(openGUI);
 		saveGUI.addActionListener(keySaveGUI);
-		FileMenu.add(saveGUI);
+		//FileMenu.add(saveGUI);
 		clearGUI.addActionListener(keyClearGUI);
 		FileMenu.add(clearGUI);
 		add(FileMenu);
@@ -168,6 +168,6 @@ public class PCMenu extends JMenuBar implements Serializable {
 		About.addActionListener(keyAbout);
 		add(HelpMenu);
 		HelpMenu.add(QuickGuide);
-		HelpMenu.add(About);
+		//HelpMenu.add(About);
 	}
 }

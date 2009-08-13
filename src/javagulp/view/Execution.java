@@ -800,7 +800,7 @@ public class Execution extends JPanel implements Serializable {
 			pnlRemoteExecution = new TitledPanel();
 			pnlRemoteExecution.setLayout(null);
 			pnlRemoteExecution.setName("remoteExecution");
-			pnlRemoteExecution.setTitle("remote submission");
+			pnlRemoteExecution.setTitle("remote submission (experimental)");
 			lblHosts.setBounds(10, 25, 154, 28);
 			pnlRemoteExecution.add(lblHosts);
 			scrollHosts.setBounds(10, 66, 154, 138);
@@ -863,7 +863,7 @@ public class Execution extends JPanel implements Serializable {
 		if (pnlHighThroughput == null) {
 			pnlHighThroughput = new TitledPanel();
 			pnlHighThroughput.setBounds(736, 144, 421, 215);
-			pnlHighThroughput.setTitle("high throughput execution");
+			pnlHighThroughput.setTitle("high throughput execution (experimental)");
 			lblParallel.setBounds(10, 62, 401, 37);
 			pnlHighThroughput.add(lblParallel);
 			txtMultiple.setBounds(54, 105, 49, 21);
