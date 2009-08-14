@@ -146,10 +146,10 @@ public class RunType extends JPanel implements Serializable {
 
 				//		chkPredictCrystal.addActionListener(keyPredictCrystal);
 				//		chkPredictCrystal.setToolTipText("Performs structure prediction calculations");
-				lblRunType.setBounds(10, 11, 95, 20);
+				lblRunType.setBounds(10, 20, 95, 20);
 				add(lblRunType);
 
-				scrollPane.setBounds(0, 39, 1154, 646);
+				scrollPane.setBounds(0, 56, 1154, 629);
 				add(scrollPane);
 				runTypes.put("optimization", new Optimization());
 				scrollPane.add(runTypes.get("optimization"));
@@ -157,7 +157,7 @@ public class RunType extends JPanel implements Serializable {
 
 				cboRunType.setMaximumRowCount(30);
 				cboRunType.addActionListener(keyRunType);
-				cboRunType.setBounds(111, 9, 340, 24);
+				cboRunType.setBounds(111, 18, 340, 24);
 				add(cboRunType);
 				add(getAddButton());
 				add(getScrollPane_1());
@@ -165,24 +165,26 @@ public class RunType extends JPanel implements Serializable {
 
 			public String writeRuntype() throws IncompleteOptionException, InvalidOptionException {
 				String runtypeLines="";
-				final String optionChosen = (String)cboRunType.getSelectedItem();
-				if (optionChosen.equals("optimization"))
-					runtypeLines = ((Optimization)getSelectedRunTypePanel("optimization")).writeOptimization();
-				else if (optionChosen.equals("structure prediction"))
-					runtypeLines = ((StructurePrediction)getSelectedRunTypePanel("structure prediction")).writeStructurePrediction();
-				else if (optionChosen.equals("phonons"))
-					runtypeLines = ((Phonons)getSelectedRunTypePanel("phonons")).writePhonon();
-				else if (optionChosen.equals("free energy calc/optimize"))
-					runtypeLines = ((FreeEnergy)getSelectedRunTypePanel("free energy calc/optimize")).writeFreeEnergy();
-				else if (optionChosen.equals("fit")) {
-					runtypeLines = ((Fit)getSelectedRunTypePanel("fit")).writeFitOptions() +
-					((Fit)getSelectedRunTypePanel("fit")).fitPanelHolder.writeFitPanels();
-				} else if (optionChosen.equals("monte carlo"))
-					runtypeLines = ((MonteCarlo)getSelectedRunTypePanel("monte carlo")).writeMonteCarlo();
-				else if (optionChosen.equals("molecular dynamics"))
-					runtypeLines = ((MolecularDynamics)getSelectedRunTypePanel("molecular dynamics")).writeMD();
-				//		getDefect().writeDefect();
-				
+				//final String optionChosen = (String)cboRunType.getSelectedItem();
+				for (String optionChosen: (String[])listModel.toArray()){
+					if (optionChosen.equals("optimization"))
+						runtypeLines += ((Optimization)getSelectedRunTypePanel("optimization")).writeOptimization();
+					else if (optionChosen.equals("structure prediction"))
+						runtypeLines += ((StructurePrediction)getSelectedRunTypePanel("structure prediction")).writeStructurePrediction();
+					else if (optionChosen.equals("phonons"))
+						runtypeLines += ((Phonons)getSelectedRunTypePanel("phonons")).writePhonon();
+					else if (optionChosen.equals("free energy calc/optimize"))
+						runtypeLines += ((FreeEnergy)getSelectedRunTypePanel("free energy calc/optimize")).writeFreeEnergy();
+					else if (optionChosen.equals("fit")) {
+						runtypeLines += ((Fit)getSelectedRunTypePanel("fit")).writeFitOptions() +
+						((Fit)getSelectedRunTypePanel("fit")).fitPanelHolder.writeFitPanels();
+					} else if (optionChosen.equals("monte carlo"))
+						runtypeLines += ((MonteCarlo)getSelectedRunTypePanel("monte carlo")).writeMonteCarlo();
+					else if (optionChosen.equals("molecular dynamics"))
+						runtypeLines += ((MolecularDynamics)getSelectedRunTypePanel("molecular dynamics")).writeMD();
+					//		getDefect().writeDefect();
+				}
+
 				return runtypeLines;
 			}
 	/**
@@ -199,7 +201,7 @@ public class RunType extends JPanel implements Serializable {
 				}
 			});
 			addButton.setText("add");
-			addButton.setBounds(485, 10, 95, 22);
+			addButton.setBounds(484, 19, 95, 22);
 		}
 		return addButton;
 	}
@@ -221,7 +223,7 @@ public class RunType extends JPanel implements Serializable {
 	protected JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(586, 9, 568, 26);
+			scrollPane_1.setBounds(586, 9, 568, 41);
 			scrollPane_1.setViewportView(getList());
 		}
 		return scrollPane_1;
