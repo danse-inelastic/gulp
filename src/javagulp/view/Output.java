@@ -134,9 +134,9 @@ public class Output extends JPanel implements Serializable {
 		btnViewInput.setBounds(151, 5, 93, 20);
 		add(btnViewInput);
 
-		pnlOutputFormats.setBounds(250, 7, 589, 178);
+		pnlOutputFormats.setBounds(250, 7, 589, 214);
 		add(pnlOutputFormats);
-		pnlTerse.setBounds(250, 191, 589, 227);
+		pnlTerse.setBounds(250, 227, 589, 227);
 		add(pnlTerse);
 		//txtInputFile.setBounds(180, 6, 152, 20);
 		//add(txtInputFile);
@@ -146,13 +146,13 @@ public class Output extends JPanel implements Serializable {
 		inputFileDisplayList.setSelectedIndex(0);
 		add(inputFileDisplayList);
 		add(getSavedInputFilesLabel());
-		pnlCalculationTitle.setBounds(9, 258, 235, 160);
+		pnlCalculationTitle.setBounds(9, 258, 235, 196);
 		add(pnlCalculationTitle);
 		pnlCalculationTitle.setLayout(null);
 		pnlCalculationTitle.setBorder(new TitledBorder(null,
 				"calculation description", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		txtCalculationTitle.setBounds(9, 20, 216, 130);
+		txtCalculationTitle.setBounds(9, 20, 216, 166);
 		pnlCalculationTitle.add(txtCalculationTitle);
 
 		//add(pnlRestart);

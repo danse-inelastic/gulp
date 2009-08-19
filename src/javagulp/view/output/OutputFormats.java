@@ -12,6 +12,8 @@ import javax.swing.border.TitledBorder;
 
 public class OutputFormats extends JPanel {
 
+	private JTextField txtXyzFile;
+	private JCheckBox chckbxXyzFile;
 	private JCheckBox chckbxDerivatives;
 	private JTextField txtDerivatives;
 	private JTextField txtCif;
@@ -93,36 +95,66 @@ public class OutputFormats extends JPanel {
 			chckbxDerivatives.setBounds(10, 136, 348, 22);
 			add(chckbxDerivatives);
 		}
+
+		{
+			chckbxXyzFile = new JCheckBox();
+			chckbxXyzFile.setText("write final configuration file in xyz format");
+			chckbxXyzFile.setBounds(10, 164, 348, 22);
+			add(chckbxXyzFile);
+		}
+
+		{
+			txtXyzFile = new JTextField();
+			txtXyzFile.setColumns(10);
+			txtXyzFile.setBounds(364, 163, 206, 21);
+			add(txtXyzFile);
+		}
 	}
 
 	public String writeOutputFormats() throws IncompleteOptionException {
 		String lines = "";
-		if (chkSiesta.isSelected() && txtSiesta.getText().equals(""))
-			throw new IncompleteOptionException("Please enter an xyz output filename");
-		if (chkSiesta.isSelected()) {
-			lines += "output movie xyz "
-			+ txtSiesta.getText() + Back.newLine;
-		}
-		if (chckbxCrystal98.isSelected() && txtCrystal98.getText().equals(""))
-			throw new IncompleteOptionException("Please enter a history file name");
-		if (chckbxCrystal98.isSelected()) {
-			lines += "output his "
-			+ txtCrystal98.getText() + Back.newLine;
-		}
-		if (chckbxMarvin.isSelected() && txtMarvin.getText().equals(""))
-			throw new IncompleteOptionException("Please enter a pressure file name");
-		if (chckbxMarvin.isSelected()) {
-			lines += "output pressure "
-			+ txtMarvin.getText() + Back.newLine;
-		}
+		lines += writeLabeledCheckbox(chkSiesta, txtSiesta, "fdf", "Please enter a Siesta input filename");
+		lines += writeLabeledCheckbox(chckbxCrystal98, txtCrystal98, "str", "Please enter a crystal 98 input filename");
+		lines += writeLabeledCheckbox(chckbxCif, txtCif, "cif", "Please enter a cif filename");
+		lines += writeLabeledCheckbox(chckbxMarvin, txtMarvin, "marvin", "Please enter a Marvin filename");
+		lines += writeLabeledCheckbox(chckbxDerivatives, txtDerivatives, "drv", "Please enter a QM/MM energy and derivatives filename");
+		lines += writeLabeledCheckbox(chckbxXyzFile, txtXyzFile, "xyz", "Please enter an xyz configuration filename");
+//		if (chkSiesta.isSelected() && txtSiesta.getText().equals(""))
+//			throw new IncompleteOptionException("Please enter a Siesta input filename");
+//		if (chkSiesta.isSelected()) {
+//			lines += "output fdf "
+//			+ txtSiesta.getText() + Back.newLine;
+//		}
+//		if (chckbxCrystal98.isSelected() && txtCrystal98.getText().equals(""))
+//			throw new IncompleteOptionException("Please enter a crystal 98 input file name");
+//		if (chckbxCrystal98.isSelected()) {
+//			lines += "output str "
+//			+ txtCrystal98.getText() + Back.newLine;
+//		}
+//		if (chckbxCif.isSelected() && txtCif.getText().equals(""))
+//			throw new IncompleteOptionException("Please enter a cif file name");
+//		if (chckbxMarvin.isSelected()) {
+//			lines += "output cif "
+//			+ txtMarvin.getText() + Back.newLine;
+//		}
+//		if (chckbxMarvin.isSelected() && txtMarvin.getText().equals(""))
+//			throw new IncompleteOptionException("Please enter a Marvin file name");
+//		if (chckbxMarvin.isSelected()) {
+//			lines += "output marvin "
+//			+ txtMarvin.getText() + Back.newLine;
+//		}
 		return lines;
 	}
+	
+	private String writeLabeledCheckbox(JCheckBox jCheckBox, JTextField jTextField, String format, String warning) throws IncompleteOptionException {
+		String line = "";
+		if (jCheckBox.isSelected() && jTextField.getText().equals(""))
+			throw new IncompleteOptionException(warning);
+		if (jCheckBox.isSelected()) {
+			line = "output "+format+" "
+			+ jTextField.getText() + Back.newLine;
+		}
+		return line;
+	}
 
-	//		public String writeMDarchive() {
-	//			String lines = "";
-	//			if (!txtMdarchive.getText().equals("")) {
-	//				lines = "mdarchive " + txtMdarchive.getText() + Back.newLine;
-	//			}
-	//			return lines;
-	//		}
 }

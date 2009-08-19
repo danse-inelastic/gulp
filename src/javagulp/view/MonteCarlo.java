@@ -27,6 +27,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final JTextArea txtareaSymbol = new JTextArea("symbol");
 
 	private final JCheckBox chkMonteCarlo = new JCheckBox("perform a monte carlo calculation");
+//	private final JCheckBox chkXYZTrajectory = new JCheckBox("write series of xyz configurations for moves");
 
 	//private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
 	//		"montecarlo");
@@ -44,6 +45,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final TitledPanel pnlTrialMoves = new TitledPanel();
 	private final TitledPanel pnlInsertedMolecules = new TitledPanel();
 	private final TitledPanel pnlOutputFrequency = new TitledPanel();
+//	private final TitledPanel pnloutputoptions = new TitledPanel();
 
 	private final TitledPanel pnlAtomInsertion = new TitledPanel();
 
@@ -94,6 +96,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final String TXT_MC_TRIAL = "0";
 	private final JTextField txtmctrial = new JTextField(TXT_MC_TRIAL);
 	private final JTextField txtmcvolume = new JTextField();
+//	private final JTextField txtxyz = new JTextField();
 
 	// TODO fix atoms to be inserted to allow more than one atom since we
 	// eliminated AddPanel
@@ -299,6 +302,15 @@ public class MonteCarlo extends JPanel implements Serializable {
 		txtareaSymbol.setBounds(10, 21, 55, 20);
 		pnlAtomInsertion.add(txtareaSymbol);
 		// TODO txtareaSymbol does not appear in the GUI
+	
+		//don't think this works in all versions of gulp yet
+//		pnloutputoptions.setBounds(660, 382, 468, 69);
+//		add(pnloutputoptions);
+//		pnloutputoptions.setTitle("output formats");
+//		chkXYZTrajectory.setBounds(7, 21, 163, 22);
+//		pnloutputoptions.add(chkXYZTrajectory);
+//		txtxyz.setBounds(182, 22, 267, 21);
+//		pnloutputoptions.add(txtxyz);
 	}
 
 	private String writeMCChemicalPotential() {
