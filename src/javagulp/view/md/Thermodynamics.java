@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
+import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
 
 import javax.swing.ButtonGroup;
@@ -33,6 +34,8 @@ public class Thermodynamics extends TitledPanel {
 	private final JRadioButton radEnsembleNVT = new JRadioButton(g.html("NVT ensemble, q<sub>nose</sub>"));
 	private final ButtonGroup ensemble = new ButtonGroup();
 
+	private final KeywordListener keyChkConserved = new KeywordListener(chkConserved, "conserved");
+	
 	public Thermodynamics() {
 		setTitle("thermodynamic ensembles");
 		ensemble.add(radNone);
@@ -60,6 +63,7 @@ public class Thermodynamics extends TitledPanel {
 		radEnsembleNPT.setBounds(5, 114, 187, 25);
 		add(radEnsembleNPT);
 		chkConserved.setBounds(5, 182, 294, 25);
+		chkConserved.addActionListener(keyChkConserved);
 		add(chkConserved);
 		txtQnose.setBounds(198, 83, 63, 20);
 		add(txtQnose);
@@ -86,8 +90,6 @@ public class Thermodynamics extends TitledPanel {
 			} else
 				throw new IncompleteOptionException("Missing npt qnose or qpress in Molecular Dynamics");
 		}
-		if (chkConserved.isSelected())
-			lines += "conserved" + Back.newLine;
 		return lines;
 	}
 }
