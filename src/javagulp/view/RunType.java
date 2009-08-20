@@ -89,7 +89,7 @@ public class RunType extends JPanel implements Serializable {
 			//Anonymous Inner class
 			{
 				put("molecular dynamics", "md");
-				put("monte carlo", "montecarlo");
+				put("monte carlo", "montecarlo conv");
 				put("energetics and material properties", "energy");
 				put("optimization", "optimise");
 				put("fit", "fit");
