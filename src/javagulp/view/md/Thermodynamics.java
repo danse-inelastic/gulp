@@ -40,34 +40,34 @@ public class Thermodynamics extends TitledPanel {
 		ensemble.add(radEnsembleNVE);
 		ensemble.add(radEnsembleNVT);
 		ensemble.add(radEnsembleNPT);
-		radNone.setBounds(5, 15, 121, 17);
+		radNone.setBounds(5, 21, 121, 25);
 		add(radNone);
 		radNone.setSelected(true);
-		radEnsembleNVE.setBounds(5, 30, 165, 30);
+		radEnsembleNVE.setBounds(5, 52, 165, 25);
 		add(radEnsembleNVE);
 		radEnsembleNVT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back.getKeys().putOrRemoveKeyword(radEnsembleNVT.isSelected(), "conv");
 			}
 		});
-		radEnsembleNVT.setBounds(5, 60, 187, 25);
+		radEnsembleNVT.setBounds(5, 83, 187, 25);
 		add(radEnsembleNVT);
 		radEnsembleNPT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back.getKeys().putOrRemoveKeyword(radEnsembleNPT.isSelected(), "conp");
 			}
 		});
-		radEnsembleNPT.setBounds(5, 84, 187, 25);
+		radEnsembleNPT.setBounds(5, 114, 187, 25);
 		add(radEnsembleNPT);
-		chkConserved.setBounds(5, 135, 294, 25);
+		chkConserved.setBounds(5, 182, 294, 25);
 		add(chkConserved);
-		txtQnose.setBounds(198, 60, 63, 20);
+		txtQnose.setBounds(198, 83, 63, 20);
 		add(txtQnose);
-		txtQnose2.setBounds(198, 84, 63, 20);
+		txtQnose2.setBounds(198, 114, 63, 20);
 		add(txtQnose2);
-		txtQpress.setBounds(198, 110, 63, 20);
+		txtQpress.setBounds(198, 143, 63, 20);
 		add(txtQpress);
-		lblPress.setBounds(121, 112, 71, 20);
+		lblPress.setBounds(120, 145, 71, 20);
 		add(lblPress);
 	}
 

@@ -53,7 +53,7 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		add(pnlMDmass);
 		pnlVectorTable.setBounds(618, 226, 503, 122);
 		add(pnlVectorTable);
-		pnlPressure.setBounds(317, 204, 289, 44);
+		pnlPressure.setBounds(317, 204, 289, 87);
 		add(pnlPressure);
 		pnlPotentialInterpolation.setBounds(618, 346, 503, 71);
 		add(pnlPotentialInterpolation);
@@ -62,13 +62,13 @@ public class MolecularDynamics extends JPanel implements Serializable {
 		//add(chkMD);
 		pnlMDmassless.setBounds(618, 6, 503, 106);
 		add(pnlMDmassless);
-		pnlThermodynamicEnsembles.setBounds(4, 6, 309, 165);
+		pnlThermodynamicEnsembles.setBounds(4, 6, 309, 214);
 		add(pnlThermodynamicEnsembles);
-		pnlIntegrator.setBounds(317, 254, 289, 51);
+		pnlIntegrator.setBounds(317, 297, 289, 85);
 		add(pnlIntegrator);
-		pnlTimeLengths.setBounds(4, 171, 309, 131);
+		pnlTimeLengths.setBounds(2, 226, 309, 156);
 		add(pnlTimeLengths);
-		pnlOutputFormats.setBounds(4, 302, 602, 153);
+		pnlOutputFormats.setBounds(4, 388, 602, 153);
 		add(pnlOutputFormats);
 		pnlRestartFile.setBounds(618, 423, 503, 118);
 		add(pnlRestartFile);

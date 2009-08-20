@@ -14,7 +14,7 @@ public class Pressure extends TitledPanel {
 
 	public Pressure() {
 		setTitle("pressure (GPa)");
-		txtPressure.setBounds(10, 19, 98, 19);
+		txtPressure.setBounds(10, 25, 98, 19);
 		add(txtPressure);
 	}
 
