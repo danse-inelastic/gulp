@@ -1,5 +1,7 @@
 package javagulp.model;
 
+import java.io.Serializable;
+
 import javagulp.view.Back;
 import javagulp.view.potential.IconHeaderRenderer;
 
@@ -8,8 +10,10 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
-public class ContentsTable extends CoordinateTable {
+public class ContentsTable extends CoordinateTable implements
+Serializable {
 
 	private static final long serialVersionUID = 4136087844875448131L;
 
@@ -22,8 +26,12 @@ public class ContentsTable extends CoordinateTable {
 
 	public ContentsTable() {
 		// this line is probably wrong--probably need separate table model
-		super(new FractionalCoordinatesTableModel(contentsColumns, "contents", indices));
-
+		//super(new FractionalCoordinatesTableModel(contentsColumns, "contents", indices));
+		super();
+		
+		this.ctm = new FractionalCoordinatesTableModel(contentsColumns, "contents", indices);
+		this.setModel((TableModel) this.ctm);
+		
 		final TableColumnModel tcm = this.getColumnModel();
 		final String[] noyes = {"", "no", "yes"};
 		setUpComboBoxColumn(tcm.getColumn(7), noyes);

@@ -7,7 +7,7 @@ import javagulp.view.Back;
 import javax.swing.event.TableModelEvent;
 
 public class CartesianCoordinatesTableModel extends CoordinatesTableModelBase  implements
-Serializable {
+Serializable, CoordinatesTableModel {
 
 	private static final long serialVersionUID = -1423446402094629018L;
 
@@ -15,7 +15,7 @@ Serializable {
 	public CartesianCoordinatesTableModel(String[] columnNames, String Keyword,
 			int[] Indices) {
 		super(columnNames, Keyword, Indices);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public void setCoordinates(Material mat) {

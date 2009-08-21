@@ -1,19 +1,17 @@
 package javagulp.model;
 
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
 import javagulp.view.Back;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-public abstract class CoordinateTable extends JTable {
+public abstract class CoordinateTable extends JTable implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8458210070246655604L;
-
+	
 	public CoordinatesTableModel getTableModel() {
 		return ctm;
 	}
@@ -86,12 +84,9 @@ public abstract class CoordinateTable extends JTable {
 		repaint();
 	}
 
-	public CoordinateTable(CoordinatesTableModelBase ctm) {
+	public CoordinateTable(){//CoordinatesTableModel ctm) {
 		super();
 
-		this.ctm = ctm;
-		this.setModel(ctm);
-		
 		this.setCellSelectionEnabled(true);
 		this.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		selections = new boolean[getRowCount()][getColumnCount()];

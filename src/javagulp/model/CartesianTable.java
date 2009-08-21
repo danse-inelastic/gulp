@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 public class CartesianTable extends CoordinateTable  implements
 Serializable {
@@ -27,9 +28,13 @@ Serializable {
 	static int[] indices = { 3, 4, 5, 6, 7 };
 
 	public CartesianTable() {
-		super(new CartesianCoordinatesTableModel(cols, "cartesian", indices));
-
-
+		//super(new CartesianCoordinatesTableModel(cols, "cartesian", indices));
+		super();
+		
+		this.ctm = new CartesianCoordinatesTableModel(cols, "cartesian", indices);
+		//CoordinatesTableModel cartesianCoordinatesTableModel = new CartesianCoordinatesTableModel(cols, "cartesian", indices);
+		this.setModel((TableModel) this.ctm);
+		
 		//this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		final TableColumnModel tcm = this.getColumnModel();
 		final String[] noyes = {"", "no", "yes"};

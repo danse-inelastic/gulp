@@ -1,15 +1,19 @@
 package javagulp.model;
 
+import java.io.Serializable;
+
 import javagulp.view.Back;
 
 import javax.swing.event.TableModelEvent;
 
-public class FractionalCoordinatesTableModel extends CoordinatesTableModelBase {
+public class FractionalCoordinatesTableModel extends CoordinatesTableModelBase 
+implements CoordinatesTableModel, Serializable {
+
+	private static final long serialVersionUID = 1531588341846396429L;
 
 	public FractionalCoordinatesTableModel(String[] columnNames,
 			String Keyword, int[] Indices) {
 		super(columnNames, Keyword, Indices);
-		
 	}
 
 	public void setCoordinates(Material mat) {

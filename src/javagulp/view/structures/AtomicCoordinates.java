@@ -256,7 +256,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	}
 
 	public String writeAtomicCoordinates() {
-		return getTable().getTableModel().writeTable();
+		return getTableModel().writeTable();
 	}
 
 	public String writeTranslate() throws IncompleteOptionException {

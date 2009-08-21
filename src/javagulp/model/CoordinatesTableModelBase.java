@@ -17,7 +17,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
 public class CoordinatesTableModelBase extends AbstractTableModel implements
-Serializable, CoordinatesTableModel {
+Serializable {
 
 	private static final long serialVersionUID = -4493355230672725945L;
 

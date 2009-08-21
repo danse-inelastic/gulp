@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 public class Fractional3dTable extends CoordinateTable {
 
@@ -24,8 +25,13 @@ public class Fractional3dTable extends CoordinateTable {
 	static int[] indices = { 0, 1, 2, 3, 4 };
 
 	public Fractional3dTable() {
-		super(new FractionalCoordinatesTableModel(cols, "fractional", indices));
-
+		//super(new FractionalCoordinatesTableModel(cols, "fractional", indices));
+		super();
+		
+		this.ctm = new FractionalCoordinatesTableModel(cols, "fractional", indices);
+		this.setModel((TableModel) this.ctm);
+		
+		
 		final TableColumnModel tcm = this.getColumnModel();
 		//String[] noyes = {"", "no", "yes"};
 		final String[] noyes = {"", "no reference", "fit reference", "optimise", "fix"};
