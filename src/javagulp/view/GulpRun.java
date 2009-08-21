@@ -144,8 +144,8 @@ public class GulpRun extends JPanel implements Serializable {
 		final Material mat = new Material();
 		try {
 			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
-			mat.coordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
-			mat.coordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
+			mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+			mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
 			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
 		} catch (final JSONException e) {
 
@@ -175,7 +175,7 @@ public class GulpRun extends JPanel implements Serializable {
 			rs.next();
 			///latticeArray = rs.getArray("cartesian_lattice");
 			mat.latticeVec = (Object[])rs.getArray("cartesian_lattice").getArray();
-			mat.coordinatesVec = (Object[])rs.getArray("fractional_coordinates").getArray();
+			mat.fractionalCoordinatesVec = (Object[])rs.getArray("fractional_coordinates").getArray();
 			mat.atomSymbols = (Object[])rs.getArray("atom_symbols").getArray();
 			rs.close();
 			stmt.close();

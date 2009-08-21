@@ -138,9 +138,9 @@ Serializable {
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = ""+mat.atomSymbols[i];
-			row[indices[2]] = ""+mat.coordinatesVec[i*3 + 0];
-			row[indices[3]] = ""+mat.coordinatesVec[i*3 + 1];
-			row[indices[4]] = ""+mat.coordinatesVec[i*3 + 2];
+			row[indices[2]] = ""+mat.fractionalCoordinatesVec[i*3 + 0];
+			row[indices[3]] = ""+mat.fractionalCoordinatesVec[i*3 + 1];
+			row[indices[4]] = ""+mat.fractionalCoordinatesVec[i*3 + 2];
 			data.add(row);
 		}
 		fireTableChanged(new TableModelEvent(this));
@@ -167,7 +167,7 @@ Serializable {
 	}
 
 	public void importCoordinates(String fileContents) {
-		// this method expects coordinates to be in xyz format!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// this method expects coordinates to be in xyz format!!
 		final Scanner in = new Scanner(fileContents);
 		final int numOfLines = in.nextInt();
 		in.nextLine();
