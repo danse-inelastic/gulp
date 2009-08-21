@@ -55,7 +55,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private TaskKeywords taskKeywords = null;
 
-	public GulpRun(String[] simulationParams) {
+	public GulpRun() {
 		super();
 		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
@@ -73,7 +73,7 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "electrostatics");
 		topPane.add(null, "ewald options");
 		topPane.add(null, "external force");
-		
+
 		topPane.add(null, "run type");
 
 		topPane.add(null, "output");
@@ -93,10 +93,14 @@ public class GulpRun extends JPanel implements Serializable {
 				cgiMap.put(keyVal[0],keyVal[1]);
 			}
 			// if matter is passed, retrieve it and load it
-			if(cgiMap.containsKey("matterId")){;
-			final Material mat = getMaterialFromHttp();//keyVals);
-			getStructure().atomicCoordinates.getTableModel().importCoordinates(mat);
-			getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
+			if(cgiMap.containsKey("matterId")){
+				final Material mat = getMaterialFromHttp();
+				// set fractional coordinates
+				getStructure().atomicCoordinates.getTableModel().setCoordinates(mat);
+				// then set cartesian coordinates
+				getStructure().atomicCoordinates.setTable("cartesian");
+				getStructure().atomicCoordinates.getTableModel().setCoordinates(mat);
+				getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
 			}
 		}
 		//keep the rest of the parameters and pass them to the job submission post
@@ -140,7 +144,8 @@ public class GulpRun extends JPanel implements Serializable {
 		final Material mat = new Material();
 		try {
 			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
-			mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+			mat.coordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+			mat.coordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
 			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
 		} catch (final JSONException e) {
 
@@ -170,7 +175,7 @@ public class GulpRun extends JPanel implements Serializable {
 			rs.next();
 			///latticeArray = rs.getArray("cartesian_lattice");
 			mat.latticeVec = (Object[])rs.getArray("cartesian_lattice").getArray();
-			mat.fractionalCoordinatesVec = (Object[])rs.getArray("fractional_coordinates").getArray();
+			mat.coordinatesVec = (Object[])rs.getArray("fractional_coordinates").getArray();
 			mat.atomSymbols = (Object[])rs.getArray("atom_symbols").getArray();
 			rs.close();
 			stmt.close();
@@ -230,16 +235,16 @@ public class GulpRun extends JPanel implements Serializable {
 			taskKeywords = new TaskKeywords();
 		return taskKeywords;
 	}
-	
+
 	public String getRunTypeKeyword() {
 		return (String) getRunTypePanel().cboRunType.getSelectedItem();
 	}
-	
+
 	public JPanel getSelectedRunTypePanel(String type) {
 		return getRunTypePanel().getSelectedRunTypePanel(type);
 	}
-	
-	
+
+
 
 	public Structures getStructures() {
 		return (Structures) getTopPanel(0);
@@ -268,7 +273,7 @@ public class GulpRun extends JPanel implements Serializable {
 	public ExternalForce getExternalForce() {
 		return (ExternalForce) getTopPanel(6);
 	}
-	
+
 	public RunType getRunTypePanel() {
 		return (RunType) getTopPanel(7);
 	}

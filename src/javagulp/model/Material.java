@@ -3,9 +3,10 @@ package javagulp.model;
 public class Material {
 
 	public Object[] latticeVec;
-	public Object[] fractionalCoordinatesVec;
+	public Object[] coordinatesVec;
 	public double[][] lattice = new double[][]{{1.0, 0.0, 0.0},{0.0, 1.0, 0.0},{0.0, 0.0, 1.0}};
-	public double[][] fractionalCoordinates;
+//	public double[][] fractionalCoordinates;
+//	public double[][] cartesianCoordinates;
 	public Object[] atomSymbols;
 
 	//	public Material(){
