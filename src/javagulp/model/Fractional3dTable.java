@@ -24,7 +24,7 @@ public class Fractional3dTable extends CoordinateTable {
 	static int[] indices = { 0, 1, 2, 3, 4 };
 
 	public Fractional3dTable() {
-		super(new CoordinatesTableModel(cols, "fractional", indices));
+		super(new FractionalCoordinatesTableModel(cols, "fractional", indices));
 
 		final TableColumnModel tcm = this.getColumnModel();
 		//String[] noyes = {"", "no", "yes"};

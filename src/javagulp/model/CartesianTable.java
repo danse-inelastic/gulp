@@ -1,5 +1,7 @@
 package javagulp.model;
 
+import java.io.Serializable;
+
 import javagulp.view.Back;
 import javagulp.view.potential.IconHeaderRenderer;
 
@@ -9,7 +11,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-public class CartesianTable extends CoordinateTable {
+public class CartesianTable extends CoordinateTable  implements
+Serializable {
 
 	private static final long serialVersionUID = 5454202123615799893L;
 
@@ -24,7 +27,7 @@ public class CartesianTable extends CoordinateTable {
 	static int[] indices = { 3, 4, 5, 6, 7 };
 
 	public CartesianTable() {
-		super(new CoordinatesTableModel(cols, "cartesian", indices));
+		super(new CartesianCoordinatesTableModel(cols, "cartesian", indices));
 
 
 		//this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);

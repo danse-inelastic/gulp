@@ -21,7 +21,8 @@ public class ContentsTable extends CoordinateTable {
 	static int[] indices = { 0, 1, 2, 3, 4 };
 
 	public ContentsTable() {
-		super(new CoordinatesTableModel(contentsColumns, "contents", indices));
+		// this line is probably wrong--probably need separate table model
+		super(new FractionalCoordinatesTableModel(contentsColumns, "contents", indices));
 
 		final TableColumnModel tcm = this.getColumnModel();
 		final String[] noyes = {"", "no", "yes"};

@@ -17,8 +17,9 @@ public abstract class CoordinateTable extends JTable {
 	public CoordinatesTableModel getTableModel() {
 		return ctm;
 	}
-	public abstract String getData();
 	protected CoordinatesTableModel ctm;
+	
+	public abstract String getData();
 	private boolean[][] selections;
 
 	@Override
@@ -85,11 +86,12 @@ public abstract class CoordinateTable extends JTable {
 		repaint();
 	}
 
-	public CoordinateTable(CoordinatesTableModel ctm) {
+	public CoordinateTable(CoordinatesTableModelBase ctm) {
 		super();
 
 		this.ctm = ctm;
 		this.setModel(ctm);
+		
 		this.setCellSelectionEnabled(true);
 		this.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		selections = new boolean[getRowCount()][getColumnCount()];
