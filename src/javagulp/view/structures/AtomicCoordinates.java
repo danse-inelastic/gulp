@@ -17,8 +17,10 @@ import javagulp.model.CoordinatesTableModel;
 import javagulp.model.Fractional3dTable;
 import javagulp.model.SerialListener;
 import javagulp.view.Back;
+import javagulp.view.TitledPanel;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -30,6 +32,14 @@ import javax.swing.JTextField;
 
 public class AtomicCoordinates extends JPanel implements Serializable {
 
+	private JComboBox cboRelax;
+	private JLabel allowToRelaxLabel;
+	private JButton addButton;
+	private JCheckBox chkBoxRigid;
+	private TitledPanel pnlCoordinateType;
+	private TitledPanel pnlRegion;
+	private JComboBox cboRigid;
+	private JComboBox cboRegion;
 	private static final long serialVersionUID = 7252161274170437579L;
 
 
@@ -45,7 +55,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private final JTextField txtNumberOfAtoms = new JTextField("0");
 
 	private final JLabel lblNumberOfAtoms = new JLabel("number of atoms");
-	private final JLabel lblCoordinateType = new JLabel("coordinate type");
 
 	private final JButton btnSet = new JButton("set");
 	private final JButton btnImportCoordinates = new JButton("import xyz file");
@@ -87,8 +96,11 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			pnlTranslation.lblFractionalCoordinates.setText("Use fractional coordinates.");
 			final CoordinateTable t = getTable();
 			scrollPane.setViewportView(t);
-			if (t == cartesianTable)
+			if (t == cartesianTable){
 				pnlTranslation.lblFractionalCoordinates.setText("Use cartesian coordinates.");
+				cboRegion.setEnabled(true);
+			}else
+				cboRegion.setEnabled(false);
 			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
 		}
 	};
@@ -170,35 +182,22 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	public AtomicCoordinates() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(1230, 500));
+		//this.setPreferredSize(new java.awt.Dimension(1230, 500));
 
-		scrollPane.setBounds(0, 65, 1055, 381);
+		scrollPane.setBounds(0, 85, 1055, 443);
 		add(scrollPane);
 		scrollPane.setViewportView(fractional3dTable);
-
-		lblNumberOfAtoms.setBounds(10, 37, 177, 15);
-		add(lblNumberOfAtoms);
-		txtNumberOfAtoms.setBounds(213, 35, 60, 19);
-		add(txtNumberOfAtoms);
-		btnSet.setBounds(279, 34, 98, 21);
-		btnSet.addActionListener(keySet);
-		add(btnSet);
-		lblCoordinateType.setBounds(10, 11, 136, 15);
-		add(lblCoordinateType);
-		cboCoordinateType.setBounds(168, 9, 209, 19);
-		add(cboCoordinateType);
-		cboCoordinateType.addActionListener(keyCoordinateType);
-		btnImportCoordinates.setBounds(599, 34, 225, 25);
+		btnImportCoordinates.setBounds(599, 34, 225, 21);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		//btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
 		btnImportCoordinates.addActionListener(keyImportCoordinates);
-		btnSaveCoordinates.setBounds(830, 34, 225, 25);
+		btnSaveCoordinates.setBounds(830, 34, 225, 21);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
 
-		pnlTranslation.setBounds(0, 452, 1055, 82);
+		pnlTranslation.setBounds(0, 534, 1055, 82);
 		// removed for paper
 		add(pnlTranslation);
 
@@ -210,6 +209,8 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		add(txtName);
 		txtName.setBackground(Back.grey);
 		txtName.setBounds(753, 10, 302, 19);
+		add(getPnlRegion());
+		add(getPnlCoordinateType());
 		pnlMassSelect.add(lblValue);
 		lblValue.setBounds(10, 12, 105, 28);
 		pnlMassSelect.add(txtValue);
@@ -266,4 +267,93 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	public void setValue(int row, int column, String value) {
 		txtValue.setText(value);
 	}
+	/**
+	 * @return
+	 */
+	protected JComboBox getCboRegion() {
+		if (cboRegion == null) {
+			cboRegion = new JComboBox(new String[]{"","1","2","3"});
+			cboRegion.setBounds(10, 22, 78, 19);
+			cboRegion.setEnabled(false);
+		}
+		return cboRegion;
+	}
+
+	protected TitledPanel getPnlRegion() {
+		if (pnlRegion == null) {
+			pnlRegion = new TitledPanel();
+			pnlRegion.setBounds(319, 4, 260, 75);
+			pnlRegion.setTitle("assign region");
+			pnlRegion.add(getCboRegion());
+			pnlRegion.add(getChkBoxRigid());
+			pnlRegion.add(getAddButton());
+			pnlRegion.add(getAllowToRelaxLabel());
+			pnlRegion.add(getCboRelax());
+		}
+		return pnlRegion;
+	}
+
+	protected TitledPanel getPnlCoordinateType() {
+		if (pnlCoordinateType == null) {
+			pnlCoordinateType = new TitledPanel();
+			pnlCoordinateType.setTitle("coordinate type");
+			pnlCoordinateType.setBounds(0, 4, 313, 75);
+			btnSet.addActionListener(keySet);
+			btnSet.setBounds(227, 44, 75, 21);
+			pnlCoordinateType.add(btnSet);
+			cboCoordinateType.setBounds(10, 19, 211, 19);
+			pnlCoordinateType.add(cboCoordinateType);
+			cboCoordinateType.addActionListener(keyCoordinateType);
+
+			lblNumberOfAtoms.setBounds(10, 47, 145, 15);
+			pnlCoordinateType.add(lblNumberOfAtoms);
+			txtNumberOfAtoms.setBounds(161, 45, 60, 19);
+			pnlCoordinateType.add(txtNumberOfAtoms);
+		}
+		return pnlCoordinateType;
+	}
+	/**
+	 * @return
+	 */
+	protected JCheckBox getChkBoxRigid() {
+		if (chkBoxRigid == null) {
+			chkBoxRigid = new JCheckBox();
+			chkBoxRigid.setText("rigid");
+			chkBoxRigid.setBounds(94, 20, 69, 23);
+		}
+		return chkBoxRigid;
+	}
+	/**
+	 * @return
+	 */
+	protected JButton getAddButton() {
+		if (addButton == null) {
+			addButton = new JButton();
+			addButton.setText("add");
+			addButton.setBounds(169, 19, 69, 21);
+		}
+		return addButton;
+	}
+	/**
+	 * @return
+	 */
+	protected JLabel getAllowToRelaxLabel() {
+		if (allowToRelaxLabel == null) {
+			allowToRelaxLabel = new JLabel();
+			allowToRelaxLabel.setText("allow to relax in");
+			allowToRelaxLabel.setBounds(10, 50, 138, 15);
+		}
+		return allowToRelaxLabel;
+	}
+	/**
+	 * @return
+	 */
+	protected JComboBox getCboRelax() {
+		if (cboRelax == null) {
+			cboRelax = new JComboBox(new String[]{"", "x", "y", "z", "xy", "yz", "xz", "xyz"});
+			cboRelax.setBounds(154, 49, 78, 19);
+		}
+		return cboRelax;
+	}
+
 }

@@ -38,11 +38,6 @@ Serializable {
 		//this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		final TableColumnModel tcm = this.getColumnModel();
 		final String[] noyes = {"", "no", "yes"};
-		setUpComboBoxColumn(tcm.getColumn(0),
-				new String[] { "", "1", "2", "3" });
-		setUpComboBoxColumn(tcm.getColumn(1), noyes);
-		setUpComboBoxColumn(tcm.getColumn(2),
-				new String[] { "", "x", "y", "z", "xy", "yz", "xz", "xyz" });
 		setUpComboBoxColumn(tcm.getColumn(4),
 				new String[] { "", "core", "shell" });
 		setUpComboBoxColumn(tcm.getColumn(11), noyes);
