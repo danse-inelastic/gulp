@@ -85,7 +85,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 				}
 			} catch (final NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(null,
-						"Please enter a positive integer for the number of atoms.");
+				"Please enter a positive integer for the number of atoms.");
 			}
 		}
 	};
@@ -98,27 +98,34 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			scrollPane.setViewportView(t);
 			if (t == cartesianTable){
 				pnlTranslation.lblFractionalCoordinates.setText("Use cartesian coordinates.");
-				cboRegion.setEnabled(true);
+				activateRegionPanel(true);
 			}else
-				cboRegion.setEnabled(false);
+				activateRegionPanel(false);
 			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
 		}
 	};
 	
-		private SerialListener keyImportCoordinates = new SerialListener() {
-			private static final long serialVersionUID = -8627501403384935426L;
-			@Override
-			public void actionPerformed(ActionEvent e) {
-					JFileChooser fileDialog = new JFileChooser();
-					fileDialog.setMultiSelectionEnabled(true);
-					fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
-					if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-						File[] files = fileDialog.getSelectedFiles();
-						Back.getCurrentRun().getStructures().importStructures(files);
-					}
+	private void activateRegionPanel(boolean trueFalse){
+		cboRegion.setEnabled(trueFalse);
+		chkBoxRigid.setEnabled(trueFalse);
+		addButton.setEnabled(trueFalse);
+		cboRelax.setEnabled(trueFalse);
+	}
+
+	private SerialListener keyImportCoordinates = new SerialListener() {
+		private static final long serialVersionUID = -8627501403384935426L;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser fileDialog = new JFileChooser();
+			fileDialog.setMultiSelectionEnabled(true);
+			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
+			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+				File[] files = fileDialog.getSelectedFiles();
+				Back.getCurrentRun().getStructures().importStructures(files);
 			}
-		};
-	
+		}
+	};
+
 	private final SerialListener keySaveCoordinates = new SerialListener() {
 		private static final long serialVersionUID = -2238532372348902025L;
 		@Override
