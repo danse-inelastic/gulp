@@ -52,13 +52,13 @@ Serializable {
 		return data;
 	}
 
-	private void setUpComboBoxColumn(TableColumn fixColumn, String[] comboBoxItems) {
-		// Set up the editor for the combo box cells.
-		final JComboBox comboBox = new JComboBox(comboBoxItems);
-		fixColumn.setCellEditor(new DefaultCellEditor(comboBox));
-		// Set up tool tips for the combobox cells.
-		final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-		renderer.setToolTipText("Click for combo box");
-		fixColumn.setCellRenderer(renderer);
-	}
+//	private void setUpComboBoxColumn(TableColumn fixColumn, String[] comboBoxItems) {
+//		// Set up the editor for the combo box cells.
+//		final JComboBox comboBox = new JComboBox(comboBoxItems);
+//		fixColumn.setCellEditor(new DefaultCellEditor(comboBox));
+//		// Set up tool tips for the combobox cells.
+//		final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+//		renderer.setToolTipText("Click for combo box");
+//		fixColumn.setCellRenderer(renderer);
+//	}
 }
