@@ -38,7 +38,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private JCheckBox chkBoxRigid;
 	private TitledPanel pnlCoordinateType;
 	private TitledPanel pnlRegion;
-	private JComboBox cboRigid;
 	private JComboBox cboRegion;
 	private static final long serialVersionUID = 7252161274170437579L;
 
