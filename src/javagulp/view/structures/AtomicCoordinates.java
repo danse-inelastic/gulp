@@ -14,6 +14,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.CartesianTable;
 import javagulp.model.ContentsTable;
 import javagulp.model.CoordinateTable;
+import javagulp.model.CoordinatesTableModel;
 import javagulp.model.CoordinatesTableModelInterface;
 import javagulp.model.Fractional3dTable;
 import javagulp.model.SerialListener;
@@ -37,7 +38,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private JComboBox comboBox;
 	private JComboBox cboRelax;
 	private JLabel allowToRelaxLabel;
-	private JButton btnAdd;
 	private JCheckBox chkBoxRigid;
 	private TitledPanel pnlCoordinateType;
 	private TitledPanel pnlRegion;
@@ -243,7 +243,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		btnClearSelection.addActionListener(keyClearSelection);
 	}
 
-	public CoordinatesTableModelInterface getTableModel() {
+	public CoordinatesTableModel getTableModel() {
 		return getTable().getTableModel();
 	}
 
@@ -285,6 +285,15 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected JComboBox getCboRegion() {
 		if (cboRegion == null) {
 			cboRegion = new JComboBox(new String[]{"","1","2","3"});
+			cboRegion.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					if(cboRegion.getSelectedItem().equals(""))
+						chkBoxRigid.setEnabled(false);
+					else
+						chkBoxRigid.setEnabled(true);
+					
+				}
+			});
 			cboRegion.setBounds(10, 22, 78, 19);
 			cboRegion.setEnabled(false);
 		}
@@ -298,7 +307,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			pnlRegion.setTitle("regions");
 			pnlRegion.add(getCboRegion());
 			pnlRegion.add(getChkBoxRigid());
-			pnlRegion.add(getBtnAdd());
 			pnlRegion.add(getAllowToRelaxLabel());
 			pnlRegion.add(getCboRelax());
 			pnlRegion.setEnabled(false);
@@ -336,18 +344,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			chkBoxRigid.setEnabled(false);
 		}
 		return chkBoxRigid;
-	}
-	/**
-	 * @return
-	 */
-	protected JButton getBtnAdd() {
-		if (btnAdd == null) {
-			btnAdd = new JButton();
-			btnAdd.setText("add");
-			btnAdd.setBounds(169, 21, 57, 21);
-			btnAdd.setEnabled(false);
-		}
-		return btnAdd;
 	}
 	/**
 	 * @return

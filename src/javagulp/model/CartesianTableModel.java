@@ -1,19 +1,24 @@
 package javagulp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javagulp.view.Back;
 
 import javax.swing.event.TableModelEvent;
 
-public class FractionalCoordinatesTableModel extends CoordinatesTableModel 
-implements Serializable {
+public class CartesianTableModel extends CoordinatesTableModel  implements
+Serializable {
 
-	private static final long serialVersionUID = 1531588341846396429L;
+	private static final long serialVersionUID = -1423446402094629018L;
 
-	public FractionalCoordinatesTableModel(String[] columnNames,
-			String Keyword, int[] Indices) {
+	public String region = ""; // this is the 0th region
+	public String rigidQualifier = "";
+
+	public CartesianTableModel(String[] columnNames, String Keyword,
+			int[] Indices) {
 		super(columnNames, Keyword, Indices);
+
 	}
 
 	public void setCoordinates(Material mat) {
@@ -27,15 +32,16 @@ implements Serializable {
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = ""+mat.atomSymbols[i];
-			row[indices[2]] = ""+mat.fractionalCoordinatesVec[i*3 + 0];
-			row[indices[3]] = ""+mat.fractionalCoordinatesVec[i*3 + 1];
-			row[indices[4]] = ""+mat.fractionalCoordinatesVec[i*3 + 2];
+			row[indices[2]] = ""+mat.cartesianCoordinatesVec[i*3 + 0];
+			row[indices[3]] = ""+mat.cartesianCoordinatesVec[i*3 + 1];
+			row[indices[4]] = ""+mat.cartesianCoordinatesVec[i*3 + 2];
 			data.add(row);
 		}
 		fireTableChanged(new TableModelEvent(this));
 		updateAllAtomicLists();
 	}
-
 	
+	
+
 	
 }

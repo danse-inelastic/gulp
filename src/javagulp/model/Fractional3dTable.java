@@ -20,7 +20,7 @@ public class Fractional3dTable extends CoordinateTable {
 		//super(new FractionalCoordinatesTableModel(cols, "fractional", indices));
 		super();
 		
-		this.ctm = new FractionalCoordinatesTableModel(cols, "fractional", indices);
+		this.ctm = new FractionalTableModel(cols, "fractional", indices);
 		this.setModel((TableModel) this.ctm);
 		
 		final TableColumnModel tcm = this.getColumnModel();

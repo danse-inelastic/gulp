@@ -30,7 +30,7 @@ Serializable {
 		//super(new FractionalCoordinatesTableModel(contentsColumns, "contents", indices));
 		super();
 		
-		this.ctm = new FractionalCoordinatesTableModel(contentsColumns, "contents", indices);
+		this.ctm = new FractionalTableModel(contentsColumns, "contents", indices);
 		this.setModel((TableModel) this.ctm);
 		
 		final TableColumnModel tcm = this.getColumnModel();

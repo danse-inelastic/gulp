@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import javagulp.controller.CgiCommunicate;
+import javagulp.model.CartesianTableModel;
+import javagulp.model.FractionalTableModel;
 import javagulp.model.Keywords;
 import javagulp.model.Material;
 import javagulp.model.TaskKeywords;
@@ -96,10 +98,10 @@ public class GulpRun extends JPanel implements Serializable {
 			if(cgiMap.containsKey("matterId")){
 				final Material mat = getMaterialFromHttp();
 				// set fractional coordinates
-				getStructure().atomicCoordinates.getTableModel().setCoordinates(mat);
-				// then set cartesian coordinates
+				((FractionalTableModel) getStructure().atomicCoordinates.getTableModel()).setCoordinates(mat);
+				// then set Cartesian coordinates
 				getStructure().atomicCoordinates.setTable("cartesian");
-				getStructure().atomicCoordinates.getTableModel().setCoordinates(mat);
+				((CartesianTableModel) getStructure().atomicCoordinates.getTableModel()).setCoordinates(mat);
 				getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
 			}
 		}
