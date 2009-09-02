@@ -132,4 +132,6 @@ public abstract class CoordinateTable extends JTable implements Serializable {
 		this.addMouseListener(keyMouse);
 		
 	}
+	
+	public abstract String writeTable();
 }

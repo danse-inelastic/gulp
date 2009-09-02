@@ -1,6 +1,7 @@
 package javagulp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javagulp.view.Back;
 import javagulp.view.potential.IconHeaderRenderer;
@@ -50,6 +51,42 @@ Serializable {
 			data += ctm.getValueAt(i, indices[4]) + Back.newLine;
 		}
 		return data;
+	}
+	
+	public String writeTable() {
+		//TODO: this outputs in the fractional coordinates format--it should be a special format for contents
+		final StringBuffer lines = new StringBuffer();
+		
+		CoordinatesTableModel model = (CoordinatesTableModel)getModel();
+		ArrayList<String[]> data = model.data;
+		
+		if (data.size() > 0)
+			lines.append(model.keyword + " " + data.size() + Back.newLine);
+		final boolean fit = Back.getKeys().containsKeyword("fit");
+		for (int i = 0; i < data.size(); i++) {
+			final String[] row = data.get(i);
+			for (int j = 0; j < row.length - 1; j++) {//minus 1 so we don't write out tether
+				if (!row[j].equals("")) {
+					String value = "";
+					if (row[j].equals("yes")) {
+						if (fit)
+							value = "1 ";
+					} else if (row[j].equals("no")) {
+						if (fit)
+							value = "0 ";
+					} else if (row[j].equals("reference")||row[j].equals("optimise")) {
+						value = "1 ";
+					} else if (row[j].equals("no reference")||row[j].equals("fix")) {
+						value = "0 ";
+					} else {
+						value = row[j] + " ";
+					}
+					lines.append(value);
+				}
+			}
+			lines.append(Back.newLine);
+		}
+		return lines.toString();
 	}
 
 //	private void setUpComboBoxColumn(TableColumn fixColumn, String[] comboBoxItems) {

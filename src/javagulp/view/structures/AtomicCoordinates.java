@@ -3,6 +3,7 @@ package javagulp.view.structures;
 import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +14,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.CartesianTable;
 import javagulp.model.ContentsTable;
 import javagulp.model.CoordinateTable;
-import javagulp.model.CoordinatesTableModel;
+import javagulp.model.CoordinatesTableModelInterface;
 import javagulp.model.Fractional3dTable;
 import javagulp.model.SerialListener;
 import javagulp.view.Back;
@@ -32,9 +33,11 @@ import javax.swing.JTextField;
 
 public class AtomicCoordinates extends JPanel implements Serializable {
 
+	private TitledPanel pnlViewCoords;
+	private JComboBox comboBox;
 	private JComboBox cboRelax;
 	private JLabel allowToRelaxLabel;
-	private JButton addButton;
+	private JButton btnAdd;
 	private JCheckBox chkBoxRigid;
 	private TitledPanel pnlCoordinateType;
 	private TitledPanel pnlRegion;
@@ -105,10 +108,12 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	};
 	
 	private void activateRegionPanel(boolean trueFalse){
+		pnlRegion.setEnabled(trueFalse);
 		cboRegion.setEnabled(trueFalse);
 		chkBoxRigid.setEnabled(trueFalse);
-		addButton.setEnabled(trueFalse);
+		btnAdd.setEnabled(trueFalse);
 		cboRelax.setEnabled(trueFalse);
+		allowToRelaxLabel.setEnabled(trueFalse);
 	}
 
 	private SerialListener keyImportCoordinates = new SerialListener() {
@@ -190,20 +195,20 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		setLayout(null);
 		//this.setPreferredSize(new java.awt.Dimension(1230, 500));
 
-		scrollPane.setBounds(0, 85, 1055, 443);
+		scrollPane.setBounds(0, 85, 1142, 443);
 		add(scrollPane);
 		scrollPane.setViewportView(fractional3dTable);
-		btnImportCoordinates.setBounds(599, 34, 225, 21);
+		btnImportCoordinates.setBounds(761, 34, 187, 21);
 		btnImportCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		//btnImportCoordinates.setEnabled(false);
 		add(btnImportCoordinates);
 		btnImportCoordinates.addActionListener(keyImportCoordinates);
-		btnSaveCoordinates.setBounds(830, 34, 225, 21);
+		btnSaveCoordinates.setBounds(955, 34, 187, 21);
 		btnSaveCoordinates.setMargin(new Insets(0, 0, 0, 0));
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
 
-		pnlTranslation.setBounds(0, 534, 1055, 82);
+		pnlTranslation.setBounds(0, 534, 1094, 82);
 		// removed for paper
 		add(pnlTranslation);
 
@@ -211,12 +216,13 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		pnlMassSelect.setLayout(null);
 		pnlMassSelect.setBounds(10, 452, 970, 89);
 		add(lblName);
-		lblName.setBounds(599, 4, 148, 28);
+		lblName.setBounds(761, 7, 148, 23);
 		add(txtName);
 		txtName.setBackground(Back.grey);
-		txtName.setBounds(753, 10, 302, 19);
+		txtName.setBounds(915, 9, 227, 19);
 		add(getPnlRegion());
 		add(getPnlCoordinateType());
+		//add(getPnlViewCoords());
 		pnlMassSelect.add(lblValue);
 		lblValue.setBounds(10, 12, 105, 28);
 		pnlMassSelect.add(txtValue);
@@ -237,7 +243,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		btnClearSelection.addActionListener(keyClearSelection);
 	}
 
-	public CoordinatesTableModel getTableModel() {
+	public CoordinatesTableModelInterface getTableModel() {
 		return getTable().getTableModel();
 	}
 
@@ -263,7 +269,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	}
 
 	public String writeAtomicCoordinates() {
-		return getTableModel().writeTable();
+		return getTable().writeTable();
 	}
 
 	public String writeTranslate() throws IncompleteOptionException {
@@ -288,13 +294,14 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected TitledPanel getPnlRegion() {
 		if (pnlRegion == null) {
 			pnlRegion = new TitledPanel();
-			pnlRegion.setBounds(319, 4, 260, 75);
-			pnlRegion.setTitle("assign region");
+			pnlRegion.setBounds(319, 4, 236, 75);
+			pnlRegion.setTitle("regions");
 			pnlRegion.add(getCboRegion());
 			pnlRegion.add(getChkBoxRigid());
-			pnlRegion.add(getAddButton());
+			pnlRegion.add(getBtnAdd());
 			pnlRegion.add(getAllowToRelaxLabel());
 			pnlRegion.add(getCboRelax());
+			pnlRegion.setEnabled(false);
 		}
 		return pnlRegion;
 	}
@@ -326,19 +333,21 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			chkBoxRigid = new JCheckBox();
 			chkBoxRigid.setText("rigid");
 			chkBoxRigid.setBounds(94, 20, 69, 23);
+			chkBoxRigid.setEnabled(false);
 		}
 		return chkBoxRigid;
 	}
 	/**
 	 * @return
 	 */
-	protected JButton getAddButton() {
-		if (addButton == null) {
-			addButton = new JButton();
-			addButton.setText("add");
-			addButton.setBounds(169, 19, 69, 21);
+	protected JButton getBtnAdd() {
+		if (btnAdd == null) {
+			btnAdd = new JButton();
+			btnAdd.setText("add");
+			btnAdd.setBounds(169, 21, 57, 21);
+			btnAdd.setEnabled(false);
 		}
-		return addButton;
+		return btnAdd;
 	}
 	/**
 	 * @return
@@ -348,6 +357,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			allowToRelaxLabel = new JLabel();
 			allowToRelaxLabel.setText("allow to relax in");
 			allowToRelaxLabel.setBounds(10, 50, 138, 15);
+			allowToRelaxLabel.setEnabled(false);
 		}
 		return allowToRelaxLabel;
 	}
@@ -357,9 +367,32 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected JComboBox getCboRelax() {
 		if (cboRelax == null) {
 			cboRelax = new JComboBox(new String[]{"", "x", "y", "z", "xy", "yz", "xz", "xyz"});
-			cboRelax.setBounds(154, 49, 78, 19);
+			cboRelax.setBounds(154, 49, 72, 19);
+			cboRelax.setEnabled(false);
 		}
 		return cboRelax;
+	}
+	/**
+	 * @return
+	 */
+	protected JComboBox getComboBox() {
+		if (comboBox == null) {
+			comboBox = new JComboBox();
+			comboBox.setBounds(10, 24, 174, 24);
+		}
+		return comboBox;
+	}
+	/**
+	 * @return
+	 */
+	protected TitledPanel getPnlViewCoords() {
+		if (pnlViewCoords == null) {
+			pnlViewCoords = new TitledPanel();
+			pnlViewCoords.setBounds(561, 4, 194, 75);
+			pnlViewCoords.setTitle("view region");
+			pnlViewCoords.add(getComboBox());
+		}
+		return pnlViewCoords;
 	}
 
 }

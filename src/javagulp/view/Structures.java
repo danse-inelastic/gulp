@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
-import javagulp.model.CoordinatesTableModel;
+import javagulp.model.CoordinatesTableModelInterface;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialMouseAdapter;
 import javagulp.model.Value;
@@ -124,7 +124,7 @@ public class Structures extends JPanel implements Serializable {
 				try {
 					Structure s = new Structure();
 					s.atomicCoordinates.setTable("cartesian");
-					CoordinatesTableModel model = s.atomicCoordinates.getTableModel();
+					CoordinatesTableModelInterface model = s.atomicCoordinates.getTableModel();
 					model.importCoordinates(Back.getFileContents(files[i]));
 					s.atomicCoordinates.txtName.setText(files[i].getName());//i
 // ignore charges for now
