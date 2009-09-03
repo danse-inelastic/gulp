@@ -42,7 +42,7 @@ public class Back {
 
 		//default configuration
 		// Hack--until we can rip out multiple gulp runs
-		Back.getTaskKeywords().putTaskKeywords("md");
+//		Back.getTaskKeywords().putTaskKeywords("md");
 	}
 
 	public Back(String[] simulationParams) {
@@ -50,7 +50,7 @@ public class Back {
 
 		//default configuration
 		// Hack--until we can rip out multiple gulp runs
-		Back.getTaskKeywords().putTaskKeywords("md");
+//		Back.getTaskKeywords().putTaskKeywords("md");
 	}
 
 	private void initializeFrame(String[] simulationParams){

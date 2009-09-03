@@ -8,6 +8,12 @@ import javagulp.view.potential.IconHeaderRenderer;
 
 import javax.swing.table.TableColumnModel;
 
+//TODO: disable multiple selection in table so can tab over to new space (maybe save this task
+//for after convert to RIA
+
+//TODO: fix column names so show up correctly when change to non 0th region (maybe save this task
+//for after convert to RIA
+
 public class CartesianTable extends CoordinateTable  implements
 Serializable {
 
@@ -74,44 +80,46 @@ Serializable {
 		// assume the absence of a region is the "0th" region
 
 		for(final CartesianTableModel model : cartesianTableModels){
-			final ArrayList<String[]> data = model.data;
+			if(model!=null){
+				final ArrayList<String[]> data = model.data;
 
-			// write the header if necessary
-			if (data.size() > 0 && lines.length()==0) {
-				if(model.region.equals("")){//i.e. the 0th region
-					lines.append(model.keyword + " " + data.size() + Back.newLine);
-				}else{
-					lines.append(model.keyword + " region " + model.rigidQualifier +
-							" " + model.relaxDirection+ Back.newLine);
-				}
-			}
-
-			final boolean fit = Back.getKeys().containsKeyword("fit");
-
-			for (int i = 0; i < data.size(); i++) {
-				final String[] row = data.get(i);
-				for (int j = 0; j < row.length - 1; j++) {//minus 1 so we don't write out tether
-					if (!row[j].equals("")) {
-						String value = "";
-						if (row[j].equals("yes")) {
-							if (fit)
-								value = "1 ";
-						} else if (row[j].equals("no")) {
-							if (fit)
-								value = "0 ";
-						} else if (row[j].equals("reference")||row[j].equals("optimise")) {
-							value = "1 ";
-						} else if (row[j].equals("no reference")||row[j].equals("fix")) {
-							value = "0 ";
-						} else {
-							value = row[j] + " ";
-						}
-						lines.append(value);
+				// write the header if necessary
+				if (data.size() > 0 && lines.length()==0) {
+					if(model.region.equals("")){//i.e. the 0th region
+						lines.append(model.keyword + " " + data.size() + Back.newLine);
+					}else{
+						lines.append(model.keyword + " region " + model.region + " " + 
+								model.rigidQualifier + " " + model.relaxDirection+ Back.newLine);
 					}
 				}
-				lines.append(Back.newLine);
-			}
 
+				final boolean fit = Back.getKeys().containsKeyword("fit");
+
+				for (int i = 0; i < data.size(); i++) {
+					final String[] row = data.get(i);
+					for (int j = 0; j < row.length - 1; j++) {//minus 1 so we don't write out tether
+						if (!row[j].equals("")) {
+							String value = "";
+							if (row[j].equals("yes")) {
+								if (fit)
+									value = "1 ";
+							} else if (row[j].equals("no")) {
+								if (fit)
+									value = "0 ";
+							} else if (row[j].equals("reference")||row[j].equals("optimise")) {
+								value = "1 ";
+							} else if (row[j].equals("no reference")||row[j].equals("fix")) {
+								value = "0 ";
+							} else {
+								value = row[j] + " ";
+							}
+							lines.append(value);
+						}
+					}
+					lines.append(Back.newLine);
+				}
+
+			}
 		}
 		return lines.toString();
 	}

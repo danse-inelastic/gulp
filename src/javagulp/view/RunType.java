@@ -48,8 +48,7 @@ public class RunType extends JPanel implements Serializable {
 	//instead of three maps one should actually have made a bunch of small classes...
 	//but when you do, comment out runTypeLabels and provide another map with integers for how the run
 	//types should be ordered in the combo box
-	private final Map<String, String> labelsAndClasses = new HashMap<String, String>()
-	{
+	private final Map<String, String> labelsAndClasses = new HashMap<String, String>() {
 		//Anonymous Inner class
 		{
 			put("molecular dynamics", "MolecularDynamics");
@@ -66,8 +65,7 @@ public class RunType extends JPanel implements Serializable {
 	};
 
 	private final Map<String, JPanel> runTypes =
-		new HashMap<String, JPanel>()
-		{
+		new HashMap<String, JPanel>() {
 		//Anonymous Inner class
 		{
 			put("molecular dynamics", null);
@@ -84,8 +82,7 @@ public class RunType extends JPanel implements Serializable {
 		};
 
 		private final Map<String, String> runTypeKeywords =
-			new HashMap<String, String>()
-			{
+			new HashMap<String, String>() {
 			//Anonymous Inner class
 			{
 				put("molecular dynamics", "md");
@@ -115,7 +112,6 @@ public class RunType extends JPanel implements Serializable {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					final String type = (String)cboRunType.getSelectedItem();
-					System.out.println(type);
 					scrollPane.add(getSelectedRunTypePanel(type));
 					scrollPane.setViewportView(getSelectedRunTypePanel(type));
 					Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));

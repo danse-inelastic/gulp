@@ -194,21 +194,34 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			final String itemChosen = (String)cboRegion.getSelectedItem();
-			if (itemChosen.equals(""))
+			// reset the table model
+			if (itemChosen.equals("")){
 				((CartesianTable)getTable()).assignTableModel(0);
-			else
-				((CartesianTable)getTable()).assignTableModel(Integer.valueOf(itemChosen));
-			// if it's the zeroeth region, disable the rigid and relax options
-			if(itemChosen.equals("")){
+				// if it's the zeroeth region, disable the rigid and relax options
 				chkBoxRigid.setEnabled(false);
 				cboRelax.setEnabled(false);
-			}else{
+			} else{
+				((CartesianTable)getTable()).assignTableModel(Integer.valueOf(itemChosen));
 				chkBoxRigid.setEnabled(true);
 				cboRelax.setEnabled(true);
 			}
+			// assign the correct region to the table model
 			((CartesianTableModel)getTableModel()).region =  itemChosen;
-
+			// post the current table model's rigid and relax keywords to the appropriate gui element
+			cboRelax.setSelectedItem(((CartesianTableModel)getTableModel()).relaxDirection);
+			chkBoxRigid.setSelected((((CartesianTableModel)getTableModel()).rigidQualifier.equals("")) ? false : true);
 		}
+	};
+	
+	private final SerialListener keyRigid = new SerialListener() {
+		private static final long serialVersionUID = 7531889272969288457L;
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				if(chkBoxRigid.isSelected())
+					((CartesianTableModel)getTableModel()).rigidQualifier = "rigid";
+				else
+					((CartesianTableModel)getTableModel()).rigidQualifier = "";
+			}
 	};
 
 	public AtomicCoordinates() {
@@ -352,14 +365,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected JCheckBox getChkBoxRigid() {
 		if (chkBoxRigid == null) {
 			chkBoxRigid = new JCheckBox();
-			chkBoxRigid.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent e) {
-					if(chkBoxRigid.isSelected())
-						((CartesianTableModel)getTableModel()).rigidQualifier = "rigid";
-					else
-						((CartesianTableModel)getTableModel()).rigidQualifier = "";
-				}
-			});
+			chkBoxRigid.addActionListener(keyRigid);
 			chkBoxRigid.setText("rigid");
 			chkBoxRigid.setBounds(94, 20, 69, 23);
 			chkBoxRigid.setEnabled(false);
