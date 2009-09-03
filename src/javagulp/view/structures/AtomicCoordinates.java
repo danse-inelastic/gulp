@@ -104,7 +104,9 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 				activateRegionPanel(true);
 			}else
 				activateRegionPanel(false);
-			txtNumberOfAtoms.setText(getTableModel().getRowCount() + "");
+			int numRows = getTableModel().getRowCount();
+			System.out.println(numRows);
+			txtNumberOfAtoms.setText(numRows + "");
 		}
 	};
 	
@@ -208,7 +210,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		add(btnSaveCoordinates);
 		btnSaveCoordinates.addActionListener(keySaveCoordinates);
 
-		pnlTranslation.setBounds(0, 534, 1094, 82);
+		pnlTranslation.setBounds(0, 534, 1142, 82);
 		// removed for paper
 		add(pnlTranslation);
 

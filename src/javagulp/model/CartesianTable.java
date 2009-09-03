@@ -19,12 +19,18 @@ Serializable {
 	private static final long serialVersionUID = 5454202123615799893L;
 
 	//ArrayList<String[]> data = null;
-	ArrayList<CartesianTableModel> coordinatesTableModels = null;
+	CartesianTableModel[] cartesianTableModels = new CartesianTableModel[4];
 	
 	public void createNewTableModel(int region){
-		coordinatesTableModels.set(region, new CartesianTableModel(cols, indices));
-		//CoordinatesTableModel cartesianCoordinatesTableModel = new CartesianCoordinatesTableModel(cols, "cartesian", indices);
-		setModel((TableModel) coordinatesTableModels.get(region));
+		if (cartesianTableModels[region]==null){
+			cartesianTableModels[region] = new CartesianTableModel(cols, indices);
+		if(region==0)
+			cartesianTableModels[region].region = "";
+		else
+			cartesianTableModels[region].region = String.valueOf(region);
+		}
+		ctm = cartesianTableModels[region];
+		setModel((TableModel) cartesianTableModels[region]);
 	}
 
 	public CartesianTable() {
@@ -72,7 +78,7 @@ Serializable {
 		// first go through regions and write them
 		// assume the absence of a region is the "0th" region
 
-		for(CartesianTableModel model : coordinatesTableModels){
+		for(CartesianTableModel model : cartesianTableModels){
 			ArrayList<String[]> data = model.data;
 
 			// write the header if necessary

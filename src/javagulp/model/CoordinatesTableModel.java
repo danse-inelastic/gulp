@@ -127,6 +127,7 @@ Serializable {//, CoordinatesTableModel {
 	 * @see javagulp.model.CoordinatesTableModel#getRowCount()
 	 */
 	public int getRowCount() {
+		System.out.println("got to get row count");
 		return data.size();
 	}
 
