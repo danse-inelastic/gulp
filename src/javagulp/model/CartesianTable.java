@@ -84,7 +84,7 @@ Serializable {
 				final ArrayList<String[]> data = model.data;
 
 				// write the header if necessary
-				if (data.size() > 0 && lines.length()==0) {
+				if (data.size() > 0) {
 					if(model.region.equals("")){//i.e. the 0th region
 						lines.append(model.keyword + " " + data.size() + Back.newLine);
 					}else{
