@@ -16,9 +16,8 @@ Serializable {
 	public String rigidQualifier = "";
 	public String relaxDirection = "";
 
-	public CartesianTableModel(String[] columnNames, String Keyword,
-			int[] Indices) {
-		super(columnNames, Keyword, Indices);
+	public CartesianTableModel(String[] columnNames, int[] Indices) {
+		super(columnNames, "cartesian", Indices);
 
 	}
 
@@ -41,8 +40,5 @@ Serializable {
 		fireTableChanged(new TableModelEvent(this));
 		updateAllAtomicLists();
 	}
-	
-	
-
 	
 }

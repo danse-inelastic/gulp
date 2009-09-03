@@ -20,15 +20,20 @@ Serializable {
 
 	//ArrayList<String[]> data = null;
 	ArrayList<CartesianTableModel> coordinatesTableModels = null;
+	
+	public void createNewTableModel(int region){
+		coordinatesTableModels.set(region, new CartesianTableModel(cols, indices));
+		//CoordinatesTableModel cartesianCoordinatesTableModel = new CartesianCoordinatesTableModel(cols, "cartesian", indices);
+		setModel((TableModel) coordinatesTableModels.get(region));
+	}
 
 	public CartesianTable() {
 		//super(new CartesianCoordinatesTableModel(cols, "cartesian", indices));
 		super();
 
-		coordinatesTableModels.add((CartesianTableModel) new CartesianTableModel(cols, "cartesian", indices));
-		//CoordinatesTableModel cartesianCoordinatesTableModel = new CartesianCoordinatesTableModel(cols, "cartesian", indices);
-		setModel((TableModel) coordinatesTableModels.get(coordinatesTableModels.size()));
-
+		// create the 0th region
+		createNewTableModel(0);
+		
 		final TableColumnModel tcm = this.getColumnModel();
 		//String[] noyes = {"", "no", "yes"};
 		final String[] noyes = {"", "no reference", "fit reference", "optimise", "fix"};
