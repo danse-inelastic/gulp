@@ -1,9 +1,6 @@
 package javagulp.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import javagulp.view.Back;
 
 import javax.swing.event.TableModelEvent;
 
@@ -40,5 +37,5 @@ Serializable {
 		fireTableChanged(new TableModelEvent(this));
 		updateAllAtomicLists();
 	}
-	
+
 }

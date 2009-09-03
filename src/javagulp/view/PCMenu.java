@@ -145,7 +145,7 @@ public class PCMenu extends JMenuBar implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
-					"Are you sure you want to clear the GUI?")) {
+			"Are you sure you want to clear the GUI?")) {
 				Back.clearTab();
 			}
 		}

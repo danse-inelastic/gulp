@@ -6,12 +6,7 @@ import java.util.ArrayList;
 import javagulp.view.Back;
 import javagulp.view.potential.IconHeaderRenderer;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 public class CartesianTable extends CoordinateTable  implements
 Serializable {
@@ -30,7 +25,7 @@ Serializable {
 				cartesianTableModels[region].region = String.valueOf(region);
 		}
 		ctm = cartesianTableModels[region];
-		setModel((TableModel) cartesianTableModels[region]);
+		setModel(cartesianTableModels[region]);
 	}
 
 	public CartesianTable() {
@@ -52,7 +47,7 @@ Serializable {
 		final IconHeaderRenderer ihr = new IconHeaderRenderer();
 		tcm.getColumn(6).setHeaderRenderer(ihr);
 		tcm.getColumn(7).setHeaderRenderer(ihr);
-		tcm.getColumn(11).setHeaderRenderer(ihr);	
+		tcm.getColumn(11).setHeaderRenderer(ihr);
 
 		//this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		//		final TableColumnModel tcm = this.getColumnModel();
@@ -78,8 +73,8 @@ Serializable {
 		// first go through regions and write them
 		// assume the absence of a region is the "0th" region
 
-		for(CartesianTableModel model : cartesianTableModels){
-			ArrayList<String[]> data = model.data;
+		for(final CartesianTableModel model : cartesianTableModels){
+			final ArrayList<String[]> data = model.data;
 
 			// write the header if necessary
 			if (data.size() > 0 && lines.length()==0) {

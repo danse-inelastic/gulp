@@ -2,12 +2,12 @@ package javagulp.view.structPredict;
 
 import java.io.Serializable;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Grid extends TitledPanel implements Serializable {
 
@@ -71,5 +71,5 @@ public class Grid extends TitledPanel implements Serializable {
 		return lines;
 	}
 
-	
+
 }

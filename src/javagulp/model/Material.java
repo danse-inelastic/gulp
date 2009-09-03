@@ -6,8 +6,8 @@ public class Material {
 	public Object[] fractionalCoordinatesVec;
 	public Object[] cartesianCoordinatesVec;
 	public double[][] lattice = new double[][]{{1.0, 0.0, 0.0},{0.0, 1.0, 0.0},{0.0, 0.0, 1.0}};
-//	public double[][] fractionalCoordinates;
-//	public double[][] cartesianCoordinates;
+	//	public double[][] fractionalCoordinates;
+	//	public double[][] cartesianCoordinates;
 	public Object[] atomSymbols;
 
 	//	public Material(){

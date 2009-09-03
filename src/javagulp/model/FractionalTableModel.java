@@ -2,11 +2,9 @@ package javagulp.model;
 
 import java.io.Serializable;
 
-import javagulp.view.Back;
-
 import javax.swing.event.TableModelEvent;
 
-public class FractionalTableModel extends CoordinatesTableModel 
+public class FractionalTableModel extends CoordinatesTableModel
 implements Serializable {
 
 	private static final long serialVersionUID = 1531588341846396429L;
@@ -36,6 +34,6 @@ implements Serializable {
 		updateAllAtomicLists();
 	}
 
-	
-	
+
+
 }

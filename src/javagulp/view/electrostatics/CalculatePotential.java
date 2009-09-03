@@ -2,12 +2,12 @@ package javagulp.view.electrostatics;
 
 import java.io.Serializable;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class CalculatePotential extends TitledPanel implements Serializable {
 

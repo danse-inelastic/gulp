@@ -65,8 +65,8 @@ public class Execution extends JPanel implements Serializable {
 	private JRadioButton radVnf;
 	private TitledPanel pnlRemoteExecution;
 	private TitledPanel pnlLocalExecution;
-	private TitledPanel placeOfExecution;
-	private JPanel pnlExecutionBackdrop;
+	private final TitledPanel placeOfExecution;
+	private final JPanel pnlExecutionBackdrop;
 	private static final long serialVersionUID = -907728808045994280L;
 
 	private final JLabel lblHosts = new JLabel("<html>remote hosts<br>(double click to add)</html>");
@@ -175,11 +175,11 @@ public class Execution extends JPanel implements Serializable {
 					}
 					final File f = new File(Back.getCurrentRun().getWD() + "/"
 							+ Back.getCurrentRun().getOutput().selectedInputFile);
-//					if (!f.exists() || Back.getCurrentRun().getOutput().lastViewed == Long.MAX_VALUE) {
-//						JOptionPane.showMessageDialog(null,
-//						"Please view your input file first.");
-//						return;
-//					}
+					//					if (!f.exists() || Back.getCurrentRun().getOutput().lastViewed == Long.MAX_VALUE) {
+					//						JOptionPane.showMessageDialog(null,
+					//						"Please view your input file first.");
+					//						return;
+					//					}
 					//					// if the user has viewed/edited their input file sooner than the last time it was written, use the viewed file
 					//					if (Back.getPanel().getOutput().lastViewed < f.lastModified()) {
 					//						contents = Back.getFileContents(f);
@@ -566,7 +566,7 @@ public class Execution extends JPanel implements Serializable {
 		scrollStatus.setBounds(517, 4, 640, 134);
 		btnPause.setBounds(149, 365, 80, 25);
 		btnPause.addActionListener(keyPause);
-		
+
 		placeOfExecution = new TitledPanel();
 		placeOfExecution.setBounds(7, 4, 196, 134);
 		placeOfExecution.setTitle("where to execute");
@@ -583,7 +583,7 @@ public class Execution extends JPanel implements Serializable {
 		grpExecute.add(radRemote);
 		add(placeOfExecution);
 		//add(getPlaceOfExecution());
-		
+
 		pnlExecutionBackdrop = new JPanel();
 		//pnlExecutionBackdrop.setBounds(7, 144, 724, 192);
 		pnlExecutionBackdrop.setLayout(new CardLayout());
@@ -593,11 +593,11 @@ public class Execution extends JPanel implements Serializable {
 		pnlExecutionBackdrop.add(getPnlRemoteExecution(), getPnlRemoteExecution().getName());
 		pnlExecutionBackdrop.add(getPnlVnfExecution(), getPnlVnfExecution().getName());
 		//add(getPnlExecutionBackdrop());
-		
+
 		add(getHowExecute());
 		add(getPnlHighThroughput());
-		
-		//if AtomSim has been launched with a username, make vnf the default submission cluster, else 
+
+		//if AtomSim has been launched with a username, make vnf the default submission cluster, else
 		//make localhost the default execution machine
 		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		final String cgihome = cgiMap.get("cgihome");
@@ -640,7 +640,7 @@ public class Execution extends JPanel implements Serializable {
 			rearrangePlaceOfExecutionBackdrops();
 		}
 	};
-	
+
 	private void rearrangePlaceOfExecutionBackdrops(){
 		final CardLayout cl=(CardLayout) pnlExecutionBackdrop.getLayout();
 		if (radVnf.isSelected()) {

@@ -7,7 +7,6 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.model.SerialListener;
 import javagulp.view.constraints.ExternalFieldConstraints;
-import javagulp.view.optimization.OutputFormats;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -140,7 +139,7 @@ public class Optimization extends JPanel implements Serializable {
 		add(pnlParameterTolerance);
 		txtxtolopt.setBounds(9, 18, 80, 21);
 		pnlParameterTolerance.add(txtxtolopt);
-		
+
 		pnloutputoptions.setBounds(660, 382, 468, 69);
 		add(pnloutputoptions);
 		pnloutputoptions.setTitle("output formats");
@@ -414,18 +413,18 @@ public class Optimization extends JPanel implements Serializable {
 		}
 		return line;
 	}
-	
+
 	private String writeOutputs() throws IncompleteOptionException {
 		String line = "";
 		if (chkXYZTrajectory.isSelected() && txtxyz.getText().equals(""))
 			throw new IncompleteOptionException("Please enter an output filename");
 		if (chkXYZTrajectory.isSelected()) {
 			line += "output movie xyz "
-			+ txtxyz.getText() + Back.newLine;
+				+ txtxyz.getText() + Back.newLine;
 		}
 		return line;
 	}
-	
+
 
 	public String writeOptimization() throws IncompleteOptionException {
 		return writeUpdate() + writeSlower() + writeSwitch_minimiser()
@@ -433,5 +432,5 @@ public class Optimization extends JPanel implements Serializable {
 		+ writeLine() + writeLbfgs_order() + writeTol() + writeDelf()
 		+ writeMaxcyc() + writeOutputs() + pnlRestartFile.writeOption();
 	}
-	
+
 }

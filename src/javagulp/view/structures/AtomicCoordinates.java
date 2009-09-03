@@ -1,6 +1,5 @@
 package javagulp.view.structures;
 
-import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,6 @@ import javagulp.model.CartesianTableModel;
 import javagulp.model.ContentsTable;
 import javagulp.model.CoordinateTable;
 import javagulp.model.CoordinatesTableModel;
-import javagulp.model.CoordinatesTableModelInterface;
 import javagulp.model.Fractional3dTable;
 import javagulp.model.SerialListener;
 import javagulp.view.Back;
@@ -104,7 +102,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 				activateRegionPanel(true);
 			}else
 				activateRegionPanel(false);
-			int numRows = getTableModel().getRowCount();
+			final int numRows = getTableModel().getRowCount();
 			txtNumberOfAtoms.setText(numRows + "");
 		}
 	};
@@ -117,15 +115,15 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		allowToRelaxLabel.setEnabled(trueFalse);
 	}
 
-	private SerialListener keyImportCoordinates = new SerialListener() {
+	private final SerialListener keyImportCoordinates = new SerialListener() {
 		private static final long serialVersionUID = -8627501403384935426L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fileDialog = new JFileChooser();
+			final JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setMultiSelectionEnabled(true);
 			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-				File[] files = fileDialog.getSelectedFiles();
+				final File[] files = fileDialog.getSelectedFiles();
 				Back.getCurrentRun().getStructures().importStructures(files);
 			}
 		}
@@ -195,7 +193,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		private static final long serialVersionUID = 7531889272969288457L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String itemChosen = (String)cboRegion.getSelectedItem();
+			final String itemChosen = (String)cboRegion.getSelectedItem();
 			if (itemChosen.equals(""))
 				((CartesianTable)getTable()).assignTableModel(0);
 			else

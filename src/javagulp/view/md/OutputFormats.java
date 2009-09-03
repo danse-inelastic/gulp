@@ -23,9 +23,9 @@ public class OutputFormats extends JPanel {
 			"fs", "s", "timesteps" });
 	private JTextField txtXyz;
 	private JTextField txtHis;
-	private JCheckBox chkXYZTrajectory = new JCheckBox("write xyz trajectory");
-	private JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write dlpoly history file");
-	private JCheckBox chckbxWritePressure = new JCheckBox();
+	private final JCheckBox chkXYZTrajectory = new JCheckBox("write xyz trajectory");
+	private final JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write dlpoly history file");
+	private final JCheckBox chckbxWritePressure = new JCheckBox();
 
 	public OutputFormats() {
 		setBorder(new TitledBorder(null, "output formats",
@@ -98,19 +98,19 @@ public class OutputFormats extends JPanel {
 			throw new IncompleteOptionException("Please enter an xyz output filename");
 		if (chkXYZTrajectory.isSelected()) {
 			lines += "output movie xyz "
-			+ txtXyz.getText() + Back.newLine;
+				+ txtXyz.getText() + Back.newLine;
 		}
 		if (chckbxWriteDlpolyHistory.isSelected() && txtHis.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a history file name");
 		if (chckbxWriteDlpolyHistory.isSelected()) {
 			lines += "output his "
-			+ txtHis.getText() + Back.newLine;
+				+ txtHis.getText() + Back.newLine;
 		}
 		if (chckbxWritePressure.isSelected() && txtPressure.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a pressure file name");
 		if (chckbxWritePressure.isSelected()) {
 			lines += "output pressure "
-			+ txtPressure.getText() + Back.newLine;
+				+ txtPressure.getText() + Back.newLine;
 		}
 		return lines;
 	}

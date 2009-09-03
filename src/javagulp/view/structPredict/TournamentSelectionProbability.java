@@ -2,17 +2,17 @@ package javagulp.view.structPredict;
 
 import java.io.Serializable;
 
+import javagulp.controller.IncompleteOptionException;
+import javagulp.view.Back;
+import javagulp.view.TitledPanel;
+
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import javagulp.controller.IncompleteOptionException;
-import javagulp.view.Back;
-import javagulp.view.TitledPanel;
-
 public class TournamentSelectionProbability extends TitledPanel implements
-		Serializable {
+Serializable {
 
 	private static final long serialVersionUID = -6288129306797651735L;
 
@@ -67,5 +67,5 @@ public class TournamentSelectionProbability extends TitledPanel implements
 		return lines;
 	}
 
-	
+
 }

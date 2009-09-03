@@ -53,7 +53,7 @@ public class Spline extends PotentialPanel implements Serializable {
 				energyDistanceTableModel.setRowCount(rowCount);
 			} catch (final NumberFormatException e1) {
 				JOptionPane.showMessageDialog(null,
-						"Please enter a positive integer");
+				"Please enter a positive integer");
 			}
 		}
 	};

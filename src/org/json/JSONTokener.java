@@ -139,7 +139,7 @@ public class JSONTokener {
 
 		if (c <= 0) { // End of stream
 			this.lastChar = 0;
-		return 0;
+			return 0;
 		}
 		this.index += 1;
 		this.lastChar = (char) c;

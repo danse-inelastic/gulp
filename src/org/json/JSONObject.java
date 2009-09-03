@@ -469,7 +469,7 @@ public class JSONObject {
 			put(key, ((JSONArray)o).put(value));
 		} else {
 			throw new JSONException("JSONObject[" + key +
-			                                    "] is not a JSONArray.");
+			"] is not a JSONArray.");
 		}
 		return this;
 	}
@@ -557,7 +557,7 @@ public class JSONObject {
 						Double.valueOf((String)o).doubleValue();
 		} catch (final Exception e) {
 			throw new JSONException("JSONObject[" + quote(key) +
-			                                    "] is not a number.");
+			"] is not a number.");
 		}
 	}
 
@@ -1276,12 +1276,12 @@ public class JSONObject {
 			if (o instanceof Double) {
 				if (((Double)o).isInfinite() || ((Double)o).isNaN()) {
 					throw new JSONException(
-							"JSON does not allow non-finite numbers.");
+					"JSON does not allow non-finite numbers.");
 				}
 			} else if (o instanceof Float) {
 				if (((Float)o).isInfinite() || ((Float)o).isNaN()) {
 					throw new JSONException(
-							"JSON does not allow non-finite numbers.");
+					"JSON does not allow non-finite numbers.");
 				}
 			}
 		}

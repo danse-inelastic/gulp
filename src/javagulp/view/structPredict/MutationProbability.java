@@ -2,15 +2,15 @@ package javagulp.view.structPredict;
 
 import java.io.Serializable;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 public class MutationProbability extends TitledPanel implements Serializable {
-	
+
 	private static final long serialVersionUID = -2625966816110087416L;
 
 	private final JTextField txtInitial = new JTextField();

@@ -39,7 +39,7 @@ public class Output extends JPanel implements Serializable {
 	public String selectedInputFile = "input.gin";
 	//	private transient RBSubmitReturn submit;//inherit from this class to serialize?
 
-	private OutputFormats pnlOutputFormats = new OutputFormats();
+	private final OutputFormats pnlOutputFormats = new OutputFormats();
 	private final Terse pnlTerse = new Terse();
 
 	private final JLabel lblOutputFile = new JLabel("gulp stdout file");

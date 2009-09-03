@@ -2,20 +2,20 @@ package javagulp.view.potentialOptions;
 
 import java.io.Serializable;
 
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import javagulp.model.G;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ResetPotentials extends TitledPanel implements Serializable {
 
 	private static final long serialVersionUID = 3973999468513730548L;
 
 	private final G g = new G();
-	
+
 	private final JLabel lblNewMaxCutoff = new JLabel(g.html("new max cutoff (must be less than normal cutoff) (" + g.ang + ")"));
 	private final JLabel lblTaperForm = new JLabel("taper form");
 	private final JLabel lblTaperRange = new JLabel(g.html("taper range (" + g.ang + ")"));

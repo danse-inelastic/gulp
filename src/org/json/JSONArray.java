@@ -288,7 +288,7 @@ public class JSONArray {
 						Double.valueOf((String)o).doubleValue();
 		} catch (final Exception e) {
 			throw new JSONException("JSONArray[" + index +
-			                                   "] is not a number.");
+			"] is not a number.");
 		}
 	}
 

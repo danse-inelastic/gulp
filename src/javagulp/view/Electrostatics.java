@@ -46,7 +46,7 @@ public class Electrostatics extends JPanel implements Serializable {
 	public final JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization to determine charges");
 
 
-	
+
 	private final JLabel lblConvergedFigures = new JLabel("target number of converged significant figures");
 	private final JLabel lblNumberOfPoints = new JLabel("<html>number of points</html>");
 	private final JLabel lblOrderOfSeries = new JLabel("order of series in numerical integrals");
@@ -153,12 +153,12 @@ public class Electrostatics extends JPanel implements Serializable {
 		txtOrderOfSeries.setBackground(Back.grey);
 		txtOrderOfSeries.setBounds(325, 39, 61, 20);
 		pnlOneDimensional.add(txtOrderOfSeries);
-		TitledPanel pnlOptions = new TitledPanel();
+		final TitledPanel pnlOptions = new TitledPanel();
 		pnlOptions.setBounds(527, 5, 604, 149);
 		pnlOptions.setTitle("options");
 		add(pnlOptions);
-		
-		TitledPanel pnlCalculate = new TitledPanel();
+
+		final TitledPanel pnlCalculate = new TitledPanel();
 		pnlCalculate.setBounds(0, 5, 521, 126);
 		pnlCalculate.setTitle("calculate charges");
 		add(pnlCalculate);

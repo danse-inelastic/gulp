@@ -17,7 +17,7 @@ public class Coulomb extends PotentialPanel implements Serializable {
 	private static final long serialVersionUID = -6193872858085266829L;
 
 	private final JLabel lblEquation = new JLabel(
-			"<html>E = -scale * q<sub>i</sub>q<sub>j</sub> / r<sub>ij</sub></html>");
+	"<html>E = -scale * q<sub>i</sub>q<sub>j</sub> / r<sub>ij</sub></html>");
 
 	private final PPP scale = new PPP("scale");
 

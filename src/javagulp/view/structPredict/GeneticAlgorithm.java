@@ -7,13 +7,9 @@ import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 
 public class GeneticAlgorithm extends JPanel implements Serializable {

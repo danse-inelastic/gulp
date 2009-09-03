@@ -6,7 +6,6 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
-import javagulp.view.KeywordListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;

@@ -34,7 +34,7 @@ public interface CoordinatesTableModelInterface {
 	public abstract void updateRows(final int newRowNum);
 
 	public abstract String writeTether();
-	
+
 	public abstract void setCoordinates(Material mat);
 
 }

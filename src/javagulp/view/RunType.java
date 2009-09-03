@@ -9,9 +9,9 @@ import java.util.Map;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.SerialListener;
-import javax.swing.JButton;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -27,10 +27,10 @@ public class RunType extends JPanel implements Serializable {
 
 	private final JLabel lblRunType = new JLabel("run type:");
 
-	private final String[] runTypeLabels = {"optimization", "fit", 
-			"phonons", "free energy calc/optimize", 
+	private final String[] runTypeLabels = {"optimization", "fit",
+			"phonons", "free energy calc/optimize",
 			"molecular dynamics", "monte carlo",
-			"energetics and material properties",  
+			"energetics and material properties",
 			"surface calc/optimize",
 			"transition state",
 	"structure prediction"};
@@ -121,7 +121,7 @@ public class RunType extends JPanel implements Serializable {
 					Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));
 				}
 			};
-			private DefaultListModel listModel = new DefaultListModel();
+			private final DefaultListModel listModel = new DefaultListModel();
 
 			protected JPanel getSelectedRunTypePanel(String type){
 				if (runTypes.get(type) == null) {
@@ -167,7 +167,7 @@ public class RunType extends JPanel implements Serializable {
 				String runtypeLines="";
 				//final String optionChosen = (String)cboRunType.getSelectedItem();
 				if(listModel.size()>0){
-					for (String optionChosen: (String[])listModel.toArray()){
+					for (final String optionChosen: (String[])listModel.toArray()){
 						if (optionChosen.equals("optimization"))
 							runtypeLines += ((Optimization)getSelectedRunTypePanel("optimization")).writeOptimization();
 						else if (optionChosen.equals("structure prediction"))

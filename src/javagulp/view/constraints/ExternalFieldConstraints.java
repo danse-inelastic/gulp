@@ -53,7 +53,7 @@ public class ExternalFieldConstraints extends TitledPanel implements Serializabl
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Back.getKeys().putOrRemoveKeyword(radConstantPressure.isSelected(),
-					"conp");
+			"conp");
 			Back.getKeys().putOrRemoveKeyword(radConstantVolume.isSelected(),
 			"conv");
 		}

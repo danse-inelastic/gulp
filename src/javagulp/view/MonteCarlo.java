@@ -35,7 +35,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final JTextArea txtareaSymbol = new JTextArea("symbol");
 
 	private final JCheckBox chkMonteCarlo = new JCheckBox("perform a monte carlo calculation");
-//	private final JCheckBox chkXYZTrajectory = new JCheckBox("write series of xyz configurations for moves");
+	//	private final JCheckBox chkXYZTrajectory = new JCheckBox("write series of xyz configurations for moves");
 
 	//private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
 	//		"montecarlo");
@@ -53,7 +53,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final TitledPanel pnlTrialMoves = new TitledPanel();
 	private final TitledPanel pnlInsertedMolecules = new TitledPanel();
 	private final TitledPanel pnlOutputFrequency = new TitledPanel();
-//	private final TitledPanel pnloutputoptions = new TitledPanel();
+	//	private final TitledPanel pnloutputoptions = new TitledPanel();
 
 	private final TitledPanel pnlAtomInsertion = new TitledPanel();
 
@@ -61,14 +61,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final JLabel lblAevery = new JLabel(g.html(g.ang + " every"));
 	private final JLabel lblDegEvery = new JLabel("deg every");
 	private final JLabel lblA3 = new JLabel(g.html(g.ang + "<sup>3</sup>"));
-//	private final JLabel lblFirstStepNumber = new JLabel("first step number");
+	//	private final JLabel lblFirstStepNumber = new JLabel("first step number");
 	private final JLabel lblFilename = new JLabel("filename (*.gmc)");
 	private final JLabel lblMaxDisplacementMoves = new JLabel("moves");
 	private final JLabel lblMaxRotationMoves = new JLabel("moves");
 	private final JLabel lblNumberOfAccepted = new JLabel("number of accepted operations between file writes");
-//	private final JLabel lblNumberOfAtoms = new JLabel("number of atoms");
-//	private final JLabel lblNumberOfAcceptedSteps = new JLabel("number of steps accepted so far");
-//	private final JLabel lblRunningMeanOf = new JLabel("running mean of the energy");
+	//	private final JLabel lblNumberOfAtoms = new JLabel("number of atoms");
+	//	private final JLabel lblNumberOfAcceptedSteps = new JLabel("number of steps accepted so far");
+	//	private final JLabel lblRunningMeanOf = new JLabel("running mean of the energy");
 	private final JLabel lblMaxDisplacementRatio = new JLabel("to achieve an acceptance ratio");
 	private final JLabel lblMaxRotationRatio = new JLabel("to achieve an acceptance ratio");
 	private final JLabel lblTrialOperationsBetween = new JLabel("trial operations between output");
@@ -102,11 +102,11 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final String TXT_MC_TRIAL = "0";
 	private final JTextField txtmctrial = new JTextField(TXT_MC_TRIAL);
 	private final JTextField txtmcvolume = new JTextField();
-//	private final JTextField txtxyz = new JTextField();
-	
-	private List<String> atoms = new ArrayList<String>();
-	private List<String> molecules = new ArrayList<String>();
-	private RestartFile pnlRestart = new RestartFile();
+	//	private final JTextField txtxyz = new JTextField();
+
+	private final List<String> atoms = new ArrayList<String>();
+	private final List<String> molecules = new ArrayList<String>();
+	private final RestartFile pnlRestart = new RestartFile();
 
 
 	public MonteCarlo() {
@@ -206,33 +206,33 @@ public class MonteCarlo extends JPanel implements Serializable {
 		//chkMonteCarlo.setBounds(0, 0, 618, 25);
 		//add(chkMonteCarlo);
 
-//		pnlRestart.setTitle("restart");
-//		pnlRestart.setBounds(624, 179, 414, 104);
-//		add(pnlRestart);
-//
-//		txtMcFirststep.setBounds(293, 18, 79, 20);
-//		pnlRestart.add(txtMcFirststep);
-//
-//		lblFirstStepNumber.setBounds(10, 20, 260, 15);
-//		pnlRestart.add(lblFirstStepNumber);
-//
-//		lblNumberOfAcceptedSteps.setBounds(10, 41, 260, 15);
-//		pnlRestart.add(lblNumberOfAcceptedSteps);
-//
-//		txtMcStepsofar.setBounds(293, 39, 79, 20);
-//		pnlRestart.add(txtMcStepsofar);
-//
-//		txtMcmeansEnergy.setBounds(293, 60, 79, 19);
-//		pnlRestart.add(txtMcmeansEnergy);
-//
-//		lblRunningMeanOf.setBounds(10, 62, 260, 15);
-//		pnlRestart.add(lblRunningMeanOf);
-//
-//		lblNumberOfAtoms.setBounds(10, 83, 260, 15);
-//		pnlRestart.add(lblNumberOfAtoms);
-//
-//		txtMcmeansNumAtoms.setBounds(293, 81, 79, 19);
-//		pnlRestart.add(txtMcmeansNumAtoms);
+		//		pnlRestart.setTitle("restart");
+		//		pnlRestart.setBounds(624, 179, 414, 104);
+		//		add(pnlRestart);
+		//
+		//		txtMcFirststep.setBounds(293, 18, 79, 20);
+		//		pnlRestart.add(txtMcFirststep);
+		//
+		//		lblFirstStepNumber.setBounds(10, 20, 260, 15);
+		//		pnlRestart.add(lblFirstStepNumber);
+		//
+		//		lblNumberOfAcceptedSteps.setBounds(10, 41, 260, 15);
+		//		pnlRestart.add(lblNumberOfAcceptedSteps);
+		//
+		//		txtMcStepsofar.setBounds(293, 39, 79, 20);
+		//		pnlRestart.add(txtMcStepsofar);
+		//
+		//		txtMcmeansEnergy.setBounds(293, 60, 79, 19);
+		//		pnlRestart.add(txtMcmeansEnergy);
+		//
+		//		lblRunningMeanOf.setBounds(10, 62, 260, 15);
+		//		pnlRestart.add(lblRunningMeanOf);
+		//
+		//		lblNumberOfAtoms.setBounds(10, 83, 260, 15);
+		//		pnlRestart.add(lblNumberOfAtoms);
+		//
+		//		txtMcmeansNumAtoms.setBounds(293, 81, 79, 19);
+		//		pnlRestart.add(txtMcmeansNumAtoms);
 
 		pnlOutputFrequency.setTitle("frequency of binary configuration output");
 		pnlOutputFrequency.setBounds(624, 105, 434, 68);
@@ -306,18 +306,18 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlAtomInsertion.add(txtareaSymbol);
 		pnlAtomInsertion.add(getBtnAddSpecies());
 		// TODO txtareaSymbol does not appear in the GUI
-		
+
 		pnlRestart.setBounds(624, 179, 434, 121);
 		add(pnlRestart);
-	
+
 		//don't think this works in all versions of gulp yet
-//		pnloutputoptions.setBounds(660, 382, 468, 69);
-//		add(pnloutputoptions);
-//		pnloutputoptions.setTitle("output formats");
-//		chkXYZTrajectory.setBounds(7, 21, 163, 22);
-//		pnloutputoptions.add(chkXYZTrajectory);
-//		txtxyz.setBounds(182, 22, 267, 21);
-//		pnloutputoptions.add(txtxyz);
+		//		pnloutputoptions.setBounds(660, 382, 468, 69);
+		//		add(pnloutputoptions);
+		//		pnloutputoptions.setTitle("output formats");
+		//		chkXYZTrajectory.setBounds(7, 21, 163, 22);
+		//		pnloutputoptions.add(chkXYZTrajectory);
+		//		txtxyz.setBounds(182, 22, 267, 21);
+		//		pnloutputoptions.add(txtxyz);
 	}
 
 	private String writeMCChemicalPotential() {
@@ -574,24 +574,24 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private String writeMolecules() {
 		String lines = "";
 		if (!txtMolecule.getText().equals("")) {
-			for(String groupOfAtoms : molecules){
+			for(final String groupOfAtoms : molecules){
 				lines += "gcmcmolecule " + groupOfAtoms + Back.newLine;
 			}
 		}
 		return lines;
 	}
-	
+
 	private String writeSpecies() {
 		String lines = "gcmcspecies ";
 		if (!txtSpecies.getText().equals("")) {
-			for(String symbol : atoms){
+			for(final String symbol : atoms){
 				lines += symbol+" ";
 			}
 			lines += Back.newLine;
 		}
 		return lines;
 	}
-	
+
 	public String writeMonteCarlo() throws IncompleteOptionException,
 	InvalidOptionException {
 		return writeMCChemicalPotential() + writeMCDisplace() + writeMCVolume()

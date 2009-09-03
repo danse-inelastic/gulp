@@ -35,7 +35,7 @@ public class Thermodynamics extends TitledPanel {
 	private final ButtonGroup ensemble = new ButtonGroup();
 
 	private final KeywordListener keyChkConserved = new KeywordListener(chkConserved, "conserved");
-	
+
 	public Thermodynamics() {
 		setTitle("thermodynamic ensembles");
 		ensemble.add(radNone);

@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
-import javagulp.view.KeywordListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -28,7 +27,7 @@ public class Mortiers extends JPanel implements Serializable {
 
 	private final JCheckBox chkchi = new JCheckBox("fit");
 	private final JCheckBox chkmu = new JCheckBox("fit");
-	
+
 
 	public JComboBox cboeematom = new JComboBox();
 

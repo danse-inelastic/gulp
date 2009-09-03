@@ -6,12 +6,7 @@ import java.util.ArrayList;
 import javagulp.view.Back;
 import javagulp.view.potential.IconHeaderRenderer;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 public class ContentsTable extends CoordinateTable implements
 Serializable {
@@ -29,10 +24,10 @@ Serializable {
 		// this line is probably wrong--probably need separate table model
 		//super(new FractionalCoordinatesTableModel(contentsColumns, "contents", indices));
 		super();
-		
+
 		this.ctm = new FractionalTableModel(contentsColumns, "contents", indices);
-		this.setModel((TableModel) this.ctm);
-		
+		this.setModel(this.ctm);
+
 		final TableColumnModel tcm = this.getColumnModel();
 		final String[] noyes = {"", "no", "yes"};
 		setUpComboBoxColumn(tcm.getColumn(7), noyes);
@@ -52,14 +47,14 @@ Serializable {
 		}
 		return data;
 	}
-	
+
 	public String writeTable() {
 		//TODO: this outputs in the fractional coordinates format--it should be a special format for contents
 		final StringBuffer lines = new StringBuffer();
-		
-		CoordinatesTableModel model = (CoordinatesTableModel)getModel();
-		ArrayList<String[]> data = model.data;
-		
+
+		final CoordinatesTableModel model = (CoordinatesTableModel)getModel();
+		final ArrayList<String[]> data = model.data;
+
 		if (data.size() > 0)
 			lines.append(model.keyword + " " + data.size() + Back.newLine);
 		final boolean fit = Back.getKeys().containsKeyword("fit");
@@ -89,13 +84,13 @@ Serializable {
 		return lines.toString();
 	}
 
-//	private void setUpComboBoxColumn(TableColumn fixColumn, String[] comboBoxItems) {
-//		// Set up the editor for the combo box cells.
-//		final JComboBox comboBox = new JComboBox(comboBoxItems);
-//		fixColumn.setCellEditor(new DefaultCellEditor(comboBox));
-//		// Set up tool tips for the combobox cells.
-//		final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-//		renderer.setToolTipText("Click for combo box");
-//		fixColumn.setCellRenderer(renderer);
-//	}
+	//	private void setUpComboBoxColumn(TableColumn fixColumn, String[] comboBoxItems) {
+	//		// Set up the editor for the combo box cells.
+	//		final JComboBox comboBox = new JComboBox(comboBoxItems);
+	//		fixColumn.setCellEditor(new DefaultCellEditor(comboBox));
+	//		// Set up tool tips for the combobox cells.
+	//		final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+	//		renderer.setToolTipText("Click for combo box");
+	//		fixColumn.setCellRenderer(renderer);
+	//	}
 }

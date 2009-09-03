@@ -6,7 +6,6 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
 import javagulp.model.SerialListener;
-import javagulp.view.Back;
 import javagulp.view.potential.PPP;
 import javagulp.view.potential.PotentialPanel;
 

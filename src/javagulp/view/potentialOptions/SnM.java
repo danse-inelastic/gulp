@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
-import javagulp.view.KeywordListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
@@ -20,7 +19,7 @@ public class SnM extends JPanel implements Serializable {
 
 	private final G g = new G();
 
-	
+
 	private final JCheckBox chkchi = new JCheckBox("fit");
 	private final JCheckBox chkmu = new JCheckBox("fit");
 	private final JCheckBox chkzeta = new JCheckBox("fit");

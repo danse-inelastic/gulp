@@ -213,11 +213,11 @@ public class ChargesElementsBonding extends JPanel implements Serializable {
 		chkApplyUniformNeutralizing.setBounds(10, 56, 446, 25);
 		pnlOptions.add(chkApplyUniformNeutralizing);
 
-//		chkPrintBondLengthAnalysis = new JCheckBox();
-//		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);
-//		chkPrintBondLengthAnalysis.setText("print bond length analysis at the beginning and end of a run");
-//		chkPrintBondLengthAnalysis.setBounds(5, 99, 446, 25);
-//		add(chkPrintBondLengthAnalysis);
+		//		chkPrintBondLengthAnalysis = new JCheckBox();
+		//		chkPrintBondLengthAnalysis.addActionListener(keyPrintBondLengthAnalysis);
+		//		chkPrintBondLengthAnalysis.setText("print bond length analysis at the beginning and end of a run");
+		//		chkPrintBondLengthAnalysis.setBounds(5, 99, 446, 25);
+		//		add(chkPrintBondLengthAnalysis);
 		pnlBondLengthAnalysis.setBounds(5, 135, 621, 107);
 		// TODO fix this and reinstate
 		// add(pnlBondLengthAnalysis);

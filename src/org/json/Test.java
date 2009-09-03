@@ -61,7 +61,7 @@ public class Test {
 
 			public String toJSONString() {
 				return "{" + JSONObject.quote(this.aString) + ":" +
-					JSONObject.doubleToString(this.aNumber) + "}";
+				JSONObject.doubleToString(this.aNumber) + "}";
 			}
 			public String toString() {
 				return this.getString() + " " + this.getNumber() + " " +

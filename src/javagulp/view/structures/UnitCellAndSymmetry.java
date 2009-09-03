@@ -11,8 +11,8 @@ import javagulp.model.RotationOperatorTableModel;
 import javagulp.model.TranslationOperatorTableModel;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
-import javax.swing.JButton;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,12 +24,12 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 5665294447343395650L;
 
-//	private final RotationOperatorTableModel rModel = new RotationOperatorTableModel();
-//	private final TranslationOperatorTableModel tModel = new TranslationOperatorTableModel();
+	//	private final RotationOperatorTableModel rModel = new RotationOperatorTableModel();
+	//	private final TranslationOperatorTableModel tModel = new TranslationOperatorTableModel();
 
 	private final List<RotationOperatorTableModel> rotations = new ArrayList<RotationOperatorTableModel>();
 	private final List<TranslationOperatorTableModel> translations = new ArrayList<TranslationOperatorTableModel>();
-	
+
 	public UnitCellPanel unitCellPanel = new UnitCellPanel();
 
 
@@ -43,9 +43,9 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 	private final JTextField txtSuperCellY = new JTextField("1");
 	private final JTextField txtSuperCellZ = new JTextField("1");
 
-	private JTable tableRotationOper;
+	private final JTable tableRotationOper;
 
-	private JTable tableTranslationOper;
+	private final JTable tableTranslationOper;
 
 	public UnitCellAndSymmetry() {
 		super();
@@ -77,11 +77,11 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 		tabbedPane.addTab("space group", spaceGroup);
 
 
-		
+
 		final JPanel pnlSymmetryOper = new JPanel();
 		pnlSymmetryOper.setLayout(null);
 		tabbedPane.addTab("symmetry operators", pnlSymmetryOper);
-		
+
 		final String[][] data = { { "", "", "" }, { "", "", "" },
 				{ "", "", "" } };
 		tableRotationOper = new JTable(data, new String[] { "",
@@ -92,7 +92,7 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 				{ "" }, { "" } }, new String[] { "" });
 		pnlSymmetryOper.add(tableTranslationOper);
 		resetOperators();
-		
+
 		tableTranslationOper.setBounds(285, 20, 75, 80);
 		final JLabel lblRotationOper = new JLabel("rotation operator");
 		pnlSymmetryOper.add(lblRotationOper);
@@ -121,7 +121,7 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 		pnlOptions.setBounds(322, 191, 682, 195);
 		add(pnlOptions);
 	}
-	
+
 	private void resetOperators(){
 		rotations.add(new RotationOperatorTableModel());
 		translations.add(new TranslationOperatorTableModel());
@@ -152,7 +152,7 @@ public class UnitCellAndSymmetry extends JPanel implements Serializable {
 			lines = "symmetry_cell " + cboSetSymmetry.getSelectedItem() + Back.newLine;
 		return lines;
 	}
-	
+
 	private String writeSymmetryOperators() {
 		String lines = "";
 		for(int i=0;i<rotations.size();i++){

@@ -27,10 +27,10 @@ public class Buckingham extends PotentialPanel implements Serializable {
 
 	private final G g = new G();
 
-//	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
+	//	private final JComboBox cboUnits = new JComboBox(new String[] {"kjmol", "kcal"});
 	private final JComboBox cboEnerGra = new JComboBox(new String[] {"energy", "gradient"});
 
-//	private final JLabel lblUnits = new JLabel("units");
+	//	private final JLabel lblUnits = new JLabel("units");
 	private final JLabel lblInnerCutoff = new JLabel(g.html("inner cutoff (&Aring;)"));
 	private final JLabel lblOuterCutoff = new JLabel(g.html("outer cutoff (&Aring;)"));
 	private final JLabel lblBuckinghamEq = new JLabel("<html>E = A exp(-r/&#961;) - C r<sup>-6</sup></html>");
@@ -66,10 +66,10 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		txtrmax.setBounds(370, 91, 78, 20);
 		add(txtrmax);
 		//txtrmax.getDocument().addDocumentListener(da);
-//		lblUnits.setBounds(255, 120, 70, 21);
-//		add(lblUnits);
-//		cboUnits.setBounds(370, 120, 85, 21);
-//		add(cboUnits);
+		//		lblUnits.setBounds(255, 120, 70, 21);
+		//		add(lblUnits);
+		//		cboUnits.setBounds(370, 120, 85, 21);
+		//		add(cboUnits);
 		cboEnerGra.setBounds(255, 152, 110, 21);
 		add(cboEnerGra);
 
@@ -106,8 +106,8 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "buckingham " + pot.twoAtomBondingOptions.getInterIntraBond();
-//		if (cboUnits.getSelectedIndex() != 0)
-//			lines += cboUnits.getSelectedItem() + " ";
+		//		if (cboUnits.getSelectedIndex() != 0)
+		//			lines += cboUnits.getSelectedItem() + " ";
 		if (cboEnerGra.getSelectedIndex() == 1)
 			lines += "grad";
 		else

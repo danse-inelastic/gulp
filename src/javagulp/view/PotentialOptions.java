@@ -8,7 +8,6 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.model.GenericTableModel;
 import javagulp.model.SerialListener;
-import javagulp.view.TitledPanel;
 import javagulp.view.potential.IconHeaderRenderer;
 import javagulp.view.potentialOptions.ResetPotentials;
 

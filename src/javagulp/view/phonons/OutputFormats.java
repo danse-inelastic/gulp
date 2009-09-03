@@ -4,8 +4,6 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -19,10 +17,10 @@ public class OutputFormats extends JPanel {
 
 	private JTextField txtDos;
 	private JTextField txtForceConst;
-	private JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
-	private JCheckBox chkForceConst = new JCheckBox("write energy and force constants for QM/MM");
-	private JCheckBox chkFreq = new JCheckBox();
-	private JCheckBox chkOsc = new JCheckBox();
+	private final JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
+	private final JCheckBox chkForceConst = new JCheckBox("write energy and force constants for QM/MM");
+	private final JCheckBox chkFreq = new JCheckBox();
+	private final JCheckBox chkOsc = new JCheckBox();
 
 	public OutputFormats() {
 		setBorder(new TitledBorder(null, "output formats",
@@ -76,53 +74,53 @@ public class OutputFormats extends JPanel {
 			add(txtOsc);
 		}
 	}
-	
+
 
 	public String writeOutputFormats() throws IncompleteOptionException {
 		String lines = "";
-		
+
 		if (chkDos.isSelected() && txtDos.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a Dos/Dispersion output filename");
 		if (chkDos.isSelected()) {
 			lines += "output phonon "
-			+ txtDos.getText() + Back.newLine;
+				+ txtDos.getText() + Back.newLine;
 		}
 		if (chkFreq.isSelected() && txtFreq.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a phonon frequency file name");
 		if (chkFreq.isSelected()) {
 			lines += "output frequency "
-			+ txtFreq.getText() + Back.newLine;
+				+ txtFreq.getText() + Back.newLine;
 		}
 		if (chkOsc.isSelected() && txtOsc.getText().equals(""))
 			throw new IncompleteOptionException("Please enter an oscillator strength file name");
 		if (chkOsc.isSelected()) {
 			lines += "output osc "
-			+ txtOsc.getText() + Back.newLine;
-		}		
+				+ txtOsc.getText() + Back.newLine;
+		}
 		if (chkForceConst.isSelected() && txtForceConst.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a force constant output file name");
 		if (chkForceConst.isSelected()) {
 			lines += "output frc "
-			+ txtForceConst.getText() + Back.newLine;
+				+ txtForceConst.getText() + Back.newLine;
 		}
-//		if (!txtWrite.getText().equals("")) {
-//			if (cboUnits.getSelectedItem().equals("timesteps")) {
-//				try {
-//					Integer.parseInt(txtWrite.getText());
-//				} catch (final NumberFormatException nfe) {
-//					throw new NumberFormatException("Please enter an integer for MD status write frequency.");
-//				}
-//				lines = "write " + txtWrite.getText() + Back.newLine;
-//			} else {
-//				try {
-//					Double.parseDouble(txtWrite.getText());
-//				} catch (final NumberFormatException nfe) {
-//					throw new NumberFormatException("Please enter a number for MD status write frequency.");
-//				}
-//				lines = "write " + txtWrite.getText() + " "
-//				+ cboUnits.getSelectedItem() + Back.newLine;
-//			}
-//		}
+		//		if (!txtWrite.getText().equals("")) {
+		//			if (cboUnits.getSelectedItem().equals("timesteps")) {
+		//				try {
+		//					Integer.parseInt(txtWrite.getText());
+		//				} catch (final NumberFormatException nfe) {
+		//					throw new NumberFormatException("Please enter an integer for MD status write frequency.");
+		//				}
+		//				lines = "write " + txtWrite.getText() + Back.newLine;
+		//			} else {
+		//				try {
+		//					Double.parseDouble(txtWrite.getText());
+		//				} catch (final NumberFormatException nfe) {
+		//					throw new NumberFormatException("Please enter a number for MD status write frequency.");
+		//				}
+		//				lines = "write " + txtWrite.getText() + " "
+		//				+ cboUnits.getSelectedItem() + Back.newLine;
+		//			}
+		//		}
 		return lines;
 	}
 

@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
 import javagulp.view.Back;
-import javagulp.view.potential.IconHeaderRenderer;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -12,17 +11,16 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 public abstract class CoordinateTable extends JTable implements Serializable {
 
 	private static final long serialVersionUID = -8458210070246655604L;
-	
+
 	public CoordinatesTableModel getTableModel() {
 		return ctm;
 	}
 	protected CoordinatesTableModel ctm;
-	
+
 	private static G g = new G();
 	protected static final String[] cols = new String[] { "symbol",
 		"atom type", g.html("x (" + g.ang + ")"),
@@ -32,7 +30,7 @@ public abstract class CoordinateTable extends JTable implements Serializable {
 		"fit/opt x", "fit/opt y", "fit/opt z",
 		g.html("translate/<br>growth slice"), "fix positions" };
 	static int[] indices = { 0, 1, 2, 3, 4 };
-	
+
 	//public abstract String getData();
 	private boolean[][] selections;
 
@@ -99,7 +97,7 @@ public abstract class CoordinateTable extends JTable implements Serializable {
 		}
 		repaint();
 	}
-	
+
 
 	protected void setUpComboBoxColumn(TableColumn fixColumn, String[] comboBoxItems) {
 		// Set up the editor for the combo box cells.
@@ -110,7 +108,7 @@ public abstract class CoordinateTable extends JTable implements Serializable {
 		renderer.setToolTipText("Click for combo box");
 		fixColumn.setCellRenderer(renderer);
 	}
-	
+
 	//@Override
 	public String getData() {
 		String data = ctm.getRowCount() + Back.newLine + Back.newLine;
@@ -130,8 +128,8 @@ public abstract class CoordinateTable extends JTable implements Serializable {
 		this.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		selections = new boolean[getRowCount()][getColumnCount()];
 		this.addMouseListener(keyMouse);
-		
+
 	}
-	
+
 	public abstract String writeTable();
 }

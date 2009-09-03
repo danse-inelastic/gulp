@@ -2,14 +2,14 @@ package javagulp.view.structPredict;
 
 import java.io.Serializable;
 
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Configurations extends TitledPanel implements Serializable {
 	private static final long serialVersionUID = 4730400389192705976L;

@@ -368,7 +368,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 				if (JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to remove the selected potentials?") == JOptionPane.YES_OPTION) {
+				"Are you sure you want to remove the selected potentials?") == JOptionPane.YES_OPTION) {
 					if (potentialListModel.getSize() > 0) {
 						final int[] indices = potentialList.getSelectedIndices();
 						for (int i=indices.length-1; i >= 0 ; i--) {
