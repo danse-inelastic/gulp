@@ -20,14 +20,14 @@ Serializable {
 
 	//ArrayList<String[]> data = null;
 	CartesianTableModel[] cartesianTableModels = new CartesianTableModel[4];
-	
-	public void createNewTableModel(int region){
+
+	public void assignTableModel(int region){
 		if (cartesianTableModels[region]==null){
 			cartesianTableModels[region] = new CartesianTableModel(cols, indices);
-		if(region==0)
-			cartesianTableModels[region].region = "";
-		else
-			cartesianTableModels[region].region = String.valueOf(region);
+			if(region==0)
+				cartesianTableModels[region].region = "";
+			else
+				cartesianTableModels[region].region = String.valueOf(region);
 		}
 		ctm = cartesianTableModels[region];
 		setModel((TableModel) cartesianTableModels[region]);
@@ -38,8 +38,8 @@ Serializable {
 		super();
 
 		// create the 0th region
-		createNewTableModel(0);
-		
+		assignTableModel(0);
+
 		final TableColumnModel tcm = this.getColumnModel();
 		//String[] noyes = {"", "no", "yes"};
 		final String[] noyes = {"", "no reference", "fit reference", "optimise", "fix"};
@@ -86,10 +86,11 @@ Serializable {
 				if(model.region.equals("")){//i.e. the 0th region
 					lines.append(model.keyword + " " + data.size() + Back.newLine);
 				}else{
-					lines.append(model.keyword + " region " + model.rigidQualifier + Back.newLine);
+					lines.append(model.keyword + " region " + model.rigidQualifier +
+							" " + model.relaxDirection+ Back.newLine);
 				}
 			}
-			
+
 			final boolean fit = Back.getKeys().containsKeyword("fit");
 
 			for (int i = 0; i < data.size(); i++) {

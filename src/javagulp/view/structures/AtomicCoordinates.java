@@ -105,11 +105,10 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 			}else
 				activateRegionPanel(false);
 			int numRows = getTableModel().getRowCount();
-			System.out.println(numRows);
 			txtNumberOfAtoms.setText(numRows + "");
 		}
 	};
-	
+
 	private void activateRegionPanel(boolean trueFalse){
 		pnlRegion.setEnabled(trueFalse);
 		cboRegion.setEnabled(trueFalse);
@@ -189,6 +188,28 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			getTable().clear();
+		}
+	};
+
+	private final SerialListener keyChangeRegion = new SerialListener() {
+		private static final long serialVersionUID = 7531889272969288457L;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String itemChosen = (String)cboRegion.getSelectedItem();
+			if (itemChosen.equals(""))
+				((CartesianTable)getTable()).assignTableModel(0);
+			else
+				((CartesianTable)getTable()).assignTableModel(Integer.valueOf(itemChosen));
+			// if it's the zeroeth region, disable the rigid and relax options
+			if(itemChosen.equals("")){
+				chkBoxRigid.setEnabled(false);
+				cboRelax.setEnabled(false);
+			}else{
+				chkBoxRigid.setEnabled(true);
+				cboRelax.setEnabled(true);
+			}
+			((CartesianTableModel)getTableModel()).region =  itemChosen;
+
 		}
 	};
 
@@ -287,15 +308,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected JComboBox getCboRegion() {
 		if (cboRegion == null) {
 			cboRegion = new JComboBox(new String[]{"","1","2","3"});
-			cboRegion.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent e) {
-					if(cboRegion.getSelectedItem().equals(""))
-						chkBoxRigid.setEnabled(false);
-					else
-						chkBoxRigid.setEnabled(true);
-					((CartesianTableModel)getTableModel()).region = (String) cboRegion.getSelectedItem();
-				}
-			});
+			cboRegion.addActionListener(keyChangeRegion);
 			cboRegion.setBounds(10, 22, 78, 19);
 			cboRegion.setEnabled(false);
 		}
