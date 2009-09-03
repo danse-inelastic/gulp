@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.CartesianTable;
+import javagulp.model.CartesianTableModel;
 import javagulp.model.ContentsTable;
 import javagulp.model.CoordinateTable;
 import javagulp.model.CoordinatesTableModel;
@@ -111,7 +112,6 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 		pnlRegion.setEnabled(trueFalse);
 		cboRegion.setEnabled(trueFalse);
 		chkBoxRigid.setEnabled(trueFalse);
-		btnAdd.setEnabled(trueFalse);
 		cboRelax.setEnabled(trueFalse);
 		allowToRelaxLabel.setEnabled(trueFalse);
 	}
@@ -291,7 +291,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 						chkBoxRigid.setEnabled(false);
 					else
 						chkBoxRigid.setEnabled(true);
-					
+					((CartesianTableModel)getTableModel()).region = (String) cboRegion.getSelectedItem();
 				}
 			});
 			cboRegion.setBounds(10, 22, 78, 19);
@@ -339,6 +339,14 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected JCheckBox getChkBoxRigid() {
 		if (chkBoxRigid == null) {
 			chkBoxRigid = new JCheckBox();
+			chkBoxRigid.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					if(chkBoxRigid.isSelected())
+						((CartesianTableModel)getTableModel()).rigidQualifier = "rigid";
+					else
+						((CartesianTableModel)getTableModel()).rigidQualifier = "";
+				}
+			});
 			chkBoxRigid.setText("rigid");
 			chkBoxRigid.setBounds(94, 20, 69, 23);
 			chkBoxRigid.setEnabled(false);
@@ -363,6 +371,11 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	protected JComboBox getCboRelax() {
 		if (cboRelax == null) {
 			cboRelax = new JComboBox(new String[]{"", "x", "y", "z", "xy", "yz", "xz", "xyz"});
+			cboRelax.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					((CartesianTableModel)getTableModel()).relaxDirection = (String) cboRelax.getSelectedItem();
+				}
+			});
 			cboRelax.setBounds(154, 49, 72, 19);
 			cboRelax.setEnabled(false);
 		}

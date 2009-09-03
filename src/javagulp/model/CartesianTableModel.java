@@ -14,6 +14,7 @@ Serializable {
 
 	public String region = ""; // this is the 0th region
 	public String rigidQualifier = "";
+	public String relaxDirection = "";
 
 	public CartesianTableModel(String[] columnNames, String Keyword,
 			int[] Indices) {
