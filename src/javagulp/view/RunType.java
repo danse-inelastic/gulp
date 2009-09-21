@@ -163,7 +163,8 @@ public class RunType extends JPanel implements Serializable {
 				String runtypeLines="";
 				//final String optionChosen = (String)cboRunType.getSelectedItem();
 				if(listModel.size()>0){
-					for (final String optionChosen: (String[])listModel.toArray()){
+					for (final Object objectChosen: listModel.toArray()){
+						final String optionChosen = (String)objectChosen;
 						if (optionChosen.equals("optimization"))
 							runtypeLines += ((Optimization)getSelectedRunTypePanel("optimization")).writeOptimization();
 						else if (optionChosen.equals("structure prediction"))

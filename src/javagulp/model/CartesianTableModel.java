@@ -23,6 +23,7 @@ Serializable {
 		data.clear();
 		data.ensureCapacity(mat.atomSymbols.length);
 
+		if(mat.cartesianCoordinatesVec.length>0){
 		// add rows manually for speed
 		for (int i = 0; i < mat.atomSymbols.length; i++) {
 			final String[] row = new String[COLUMN_NAMES.length];
@@ -33,6 +34,7 @@ Serializable {
 			row[indices[3]] = ""+mat.cartesianCoordinatesVec[i*3 + 1];
 			row[indices[4]] = ""+mat.cartesianCoordinatesVec[i*3 + 2];
 			data.add(row);
+		}
 		}
 		fireTableChanged(new TableModelEvent(this));
 		updateAllAtomicLists();

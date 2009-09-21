@@ -144,10 +144,18 @@ public class GulpRun extends JPanel implements Serializable {
 		cgiCom.setCgiParams(keyValsForMatter);
 		final JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();
 		final Material mat = new Material();
+//		String[] materialParameters = new String(){"cartesian_lattice", "fractional_coordinates", 
+//			"cartesian_coordinates", "atom_symbols"}
+//		for (String materialParameter : materialParameters){
+//			if(matterAsJSON.has(materialParameter))	
+//		}
+		//System.out.print(matterAsJSON.names());
 		try {
 			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
-			mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
-			mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
+			if(matterAsJSON.has("fractional_coordinates"))
+				mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+			if(matterAsJSON.has("cartesian_coordinates"))
+				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
 			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
 		} catch (final JSONException e) {
 
