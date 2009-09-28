@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -30,6 +31,7 @@ public class CgiCommunicate {
 			final URL url = new URL(cgihome);
 			conn = url.openConnection();
 			conn.setDoOutput(true);
+			conn.setConnectTimeout(1500);
 		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, appName+" is unable to connect to the vnf database.");
@@ -120,7 +122,7 @@ public class CgiCommunicate {
 		return obj;
 	}
 
-	public JSONArray postAndGetJSONArray(){
+	public JSONArray postAndGetJSONArray() throws SocketTimeoutException{
 		final StringBuffer response = new StringBuffer();
 		try {
 			OutputStreamWriter wr;
@@ -132,13 +134,27 @@ public class CgiCommunicate {
 			wr.close();
 
 			// Get the response
-
-			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = rd.readLine()) != null) {
 				response.append(line+"\n");
 			}
 			rd.close();
+
+			
+//			// Get the response
+//			BufferedReader rd = null;
+//			try {
+//				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//				String line;
+//				while ((line = rd.readLine()) != null) {
+//					response.append(line+"\n");
+//				}
+//				rd.close();
+//			} catch(final SocketTimeoutException e) {
+//				
+//			}
+			
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

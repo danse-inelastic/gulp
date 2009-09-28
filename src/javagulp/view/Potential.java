@@ -30,6 +30,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import java.net.SocketTimeoutException;
+
 import org.json.JSONArray;
 
 public class Potential extends JPanel {
@@ -87,8 +89,14 @@ public class Potential extends JPanel {
 		//remove any previous entries--start from scratch
 		this.potentialListModel.clear();
 		potentialListModel.addElement("none");
-		//get the potential names from the db
-		final Object[] potentialNames = getPotentialNamesFromDb();
+		//try to get the potential names from the db
+		Object[] potentialNames =null;
+		try {
+			potentialNames = (String[])getPotentialNamesFromDb();
+		} catch(final SocketTimeoutException e){
+			//if can't get them, just get their names from
+			potentialNames = potentialLibs.potentials;
+		}
 		for (final Object potentialName : potentialNames) {
 			// Get filename of file or directory
 			potentialListModel.addElement(potentialName);
@@ -99,7 +107,7 @@ public class Potential extends JPanel {
 		libraryList.setSelectedValue("none", true);
 	}
 
-	private Object[] getPotentialNamesFromDb(){ //ArrayList<String>
+	private Object[] getPotentialNamesFromDb() throws SocketTimeoutException{ //ArrayList<String>
 		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		final String cgihome = cgiMap.get("cgihome");
 		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
@@ -126,7 +134,12 @@ public class Potential extends JPanel {
 				potentialSelected="none";
 			}
 			//String libraryContents = getURLContentAsString(libURL);
-			libraryContents = potentialLibs.getFileContents(potentialSelected);
+			try {
+				libraryContents = potentialLibs.getFileContents(potentialSelected);
+			} catch (SocketTimeoutException e1) {
+				//if you can't get them from the database, assume their in the jar
+				//libraryContents = potentialLibs.getJarredFileContents(potentialSelected);
+			}
 			potentialLibs.potentialContents.put(potentialSelected, libraryContents);
 			libraryDisplay.setText(libraryContents);
 		}

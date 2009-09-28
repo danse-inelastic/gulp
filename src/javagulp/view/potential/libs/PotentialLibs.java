@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import org.json.JSONArray;
 
 public class PotentialLibs {
 
-	private final String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
+	public final String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
 			"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
 			"catlow.lib","finnissinclair.lib","suttonchen.lib",
 			"clerirosato.lib","garofalini.lib","tersoff.lib"};
@@ -44,7 +45,7 @@ public class PotentialLibs {
 		return potentials;
 	}
 
-	public String getFileContents(String potentialName) {
+	public String getFileContents(String potentialName) throws SocketTimeoutException {
 		//first see if the library is in the local cache
 		//libraryContents = new PotentialLibs().getFileContents(librarySelected);
 		if (potentialName=="none"){
@@ -56,8 +57,9 @@ public class PotentialLibs {
 			}else{
 				//if not, see if they're prepackaged in the jar
 				try{
-					final InputStream potentialStream = this.getClass().getResourceAsStream(potentialName+".lib");
-					return convertStreamToString(potentialStream);
+//					final InputStream potentialStream = this.getClass().getResourceAsStream(potentialName+".lib");
+//					return convertStreamToString(potentialStream);
+					return getJarredFileContents(potentialName);
 					//if not on disk, get them from the db
 				}catch(final Exception e){
 					Back.getCurrentRun().getPotential().libraryDisplay.setText("Downloading library from server...please wait...");
@@ -66,8 +68,13 @@ public class PotentialLibs {
 			}
 		}
 	}
+	
+	public String getJarredFileContents(String potentialName){
+		final InputStream potentialStream = this.getClass().getResourceAsStream(potentialName+".lib");
+		return convertStreamToString(potentialStream);
+	}
 
-	private String getPotentialContentsFromDb(String potentialName) {
+	private String getPotentialContentsFromDb(String potentialName) throws SocketTimeoutException {
 		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		final String cgihome = cgiMap.get("cgihome");
 		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
