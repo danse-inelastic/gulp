@@ -54,7 +54,7 @@ public class Back {
 	}
 
 	private void initializeFrame(String[] simulationParams){
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		//frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(pcmenu);
 
 		frame.setSize(1180, 800);

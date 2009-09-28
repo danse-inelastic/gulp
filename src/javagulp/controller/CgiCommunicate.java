@@ -27,11 +27,13 @@ public class CgiCommunicate {
 	private URLConnection conn;
 	public CgiCommunicate(String cgihome){
 		this.cgihome = cgihome;
+		int timeout = 0;
 		try {
 			final URL url = new URL(cgihome);
 			conn = url.openConnection();
 			conn.setDoOutput(true);
-			conn.setConnectTimeout(1500);
+			conn.setConnectTimeout(3);
+			timeout = conn.getConnectTimeout();
 		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, appName+" is unable to connect to the vnf database.");
@@ -41,6 +43,7 @@ public class CgiCommunicate {
 		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, appName+" is unable to connect to the vnf database.");
 		}
+		//System.out.print(timeout);
 	}
 
 	public void setCgiParams(Map<String,String> cgiMap){
