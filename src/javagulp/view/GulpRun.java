@@ -24,9 +24,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class GulpRun extends JPanel implements Serializable {
 
@@ -59,14 +56,12 @@ public class GulpRun extends JPanel implements Serializable {
 
 	public GulpRun() {
 		super();
-		//setLayout(new CardLayout());
 		setLayout(new BorderLayout());
 
 		add(topPane, BorderLayout.CENTER);
 
 		topPane.addChangeListener(keyTop);
 
-		//topPane.add(null, "constraints");
 		topPane.add(null, "structures");
 
 		topPane.add(null, "potentials");
@@ -96,7 +91,8 @@ public class GulpRun extends JPanel implements Serializable {
 			}
 			// if matter is passed, retrieve it and load it
 			if(cgiMap.containsKey("matterId")){
-				final Material mat = getMaterialFromHttp();
+				final Material mat = getMaterialFromDb();
+				//final Material mat = getMaterialFromHttp();
 				// set fractional coordinates
 				((FractionalTableModel) getStructure().atomicCoordinates.getTableModel()).setCoordinates(mat);
 				// then set Cartesian coordinates
@@ -135,43 +131,44 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 	}
 
-	Material getMaterialFromHttp(){
-		final String cgihome = cgiMap.get("cgihome");
-		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-
-		final Map<String,String> keyValsForMatter = new HashMap<String,String>();
-		putInAuthenticationInfo(keyValsForMatter);
-		keyValsForMatter.put("actor", "directdb");
-		keyValsForMatter.put("routine", "get");
-		keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
-		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
-		cgiCom.setCgiParams(keyValsForMatter);
-		final JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();
-		final Material mat = new Material();
-//		String[] materialParameters = new String(){"cartesian_lattice", "fractional_coordinates", 
-//			"cartesian_coordinates", "atom_symbols"}
-//		for (String materialParameter : materialParameters){
-//			if(matterAsJSON.has(materialParameter))	
+//	Material getMaterialFromHttp(){
+//		final String cgihome = cgiMap.get("cgihome");
+//		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+//
+//		final Map<String,String> keyValsForMatter = new HashMap<String,String>();
+//		putInAuthenticationInfo(keyValsForMatter);
+//		keyValsForMatter.put("actor", "directdb");
+//		keyValsForMatter.put("routine", "get");
+//		keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
+//		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
+//		cgiCom.setCgiParams(keyValsForMatter);
+//		final JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();
+//		final Material mat = new Material();
+////		String[] materialParameters = new String(){"cartesian_lattice", "fractional_coordinates", 
+////			"cartesian_coordinates", "atom_symbols"}
+////		for (String materialParameter : materialParameters){
+////			if(matterAsJSON.has(materialParameter))	
+////		}
+//		//System.out.print(matterAsJSON.names());
+//		try {
+//			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
+//			if(matterAsJSON.has("fractional_coordinates"))
+//				mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+//			if(matterAsJSON.has("cartesian_coordinates"))
+//				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
+//			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
+//		} catch (final JSONException e) {
+//
+//			e.printStackTrace();
 //		}
-		//System.out.print(matterAsJSON.names());
-		try {
-			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
-			if(matterAsJSON.has("fractional_coordinates"))
-				mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
-			if(matterAsJSON.has("cartesian_coordinates"))
-				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
-			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
-		} catch (final JSONException e) {
+//		return mat;
+//	}
 
-			e.printStackTrace();
-		}
-		return mat;
-	}
-
-	Material getMaterialFromDb(String id){
-		final String query = "SELECT * FROM polycrystals WHERE id = '"+id+"' UNION "+
-		"SELECT * FROM singlecrystals WHERE id = '"+id+"' UNION "+
-		"SELECT * FROM disordered WHERE id = '"+id+"'";
+	Material getMaterialFromDb(){
+		String matterId = cgiMap.get("matterId");
+		final String query = "SELECT * FROM polycrystals WHERE id = '"+matterId+"' UNION "+
+		"SELECT * FROM singlecrystals WHERE id = '"+matterId+"' UNION "+
+		"SELECT * FROM disordered WHERE id = '"+matterId+"'";
 		// get the material parameters from the db (eventually use ORM tool)
 		final Material mat = new Material();
 		try {
