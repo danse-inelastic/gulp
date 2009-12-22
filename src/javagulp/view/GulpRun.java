@@ -24,6 +24,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class GulpRun extends JPanel implements Serializable {
 
@@ -34,7 +38,6 @@ public class GulpRun extends JPanel implements Serializable {
 			"EwaldOptions", "ExternalForce", "RunType", "Output", "Execution"  };
 
 	//private String[] bottomNames = {};
-
 	private final JPanel[] top = new JPanel[tabNames.length];
 	//	private JPanel[] bottom = new JPanel[bottomNames.length];
 
@@ -46,36 +49,28 @@ public class GulpRun extends JPanel implements Serializable {
 
 	//	public JTabbedPane bottomPane = new JTabbedPane();
 	//	public JScrollPane bottomScroll = new JScrollPane(bottomPane);
-
 	//	private JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
 	//			topScroll, bottomScroll);
 
 	private Keywords keywords = null;
-
 	private TaskKeywords taskKeywords = null;
 
 	public GulpRun() {
 		super();
 		setLayout(new BorderLayout());
-
 		add(topPane, BorderLayout.CENTER);
-
 		topPane.addChangeListener(keyTop);
 
 		topPane.add(null, "structures");
-
 		topPane.add(null, "potentials");
 		topPane.add(null, "potential options");
 		topPane.add(null, "charges, elements and bonding");
 		topPane.add(null, "electrostatics");
 		topPane.add(null, "ewald options");
 		topPane.add(null, "external force");
-
 		topPane.add(null, "run type");
-
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
-
 
 	}
 
@@ -83,7 +78,7 @@ public class GulpRun extends JPanel implements Serializable {
 		cgiMap = new HashMap<String,String>();
 		if (simulationParams.length==0){
 			return;
-			//simulationParams=new String[]{"username=demo","ticket=5X","simulationId=1","matterId=9TAL9D"};
+			//simulationParams=new String[]{"username=demo","ticket=5X","simulationId=1","structureId=9TAL9D"};
 		} else{
 			for(final String param: simulationParams){
 				final String[] keyVal = param.split("=");
@@ -93,9 +88,9 @@ public class GulpRun extends JPanel implements Serializable {
 					cgiMap.put(keyVal[0],keyVal[1]);
 			}
 			// if matter is passed, retrieve it and load it
-			if(cgiMap.containsKey("matterId")){
-				final Material mat = getMaterialFromDb();
-				//final Material mat = getMaterialFromHttp();
+			if(cgiMap.containsKey("structureId")){
+				//final Material mat = getMaterialFromDb();
+				final Material mat = getMaterialFromHttp();
 				// set fractional coordinates
 				((FractionalTableModel) getStructure().atomicCoordinates.getTableModel()).setCoordinates(mat);
 				// then set Cartesian coordinates
@@ -134,44 +129,42 @@ public class GulpRun extends JPanel implements Serializable {
 		}
 	}
 
-//	Material getMaterialFromHttp(){
-//		final String cgihome = cgiMap.get("cgihome");
-//		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-//
-//		final Map<String,String> keyValsForMatter = new HashMap<String,String>();
-//		putInAuthenticationInfo(keyValsForMatter);
-//		keyValsForMatter.put("actor", "directdb");
-//		keyValsForMatter.put("routine", "get");
-//		keyValsForMatter.put("directdb.tables", "polycrystals-singlecrystals-disordered");
-//		keyValsForMatter.put("directdb.id", cgiMap.get("matterId"));
-//		cgiCom.setCgiParams(keyValsForMatter);
-//		final JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();
-//		final Material mat = new Material();
-////		String[] materialParameters = new String(){"cartesian_lattice", "fractional_coordinates", 
-////			"cartesian_coordinates", "atom_symbols"}
-////		for (String materialParameter : materialParameters){
-////			if(matterAsJSON.has(materialParameter))	
-////		}
-//		//System.out.print(matterAsJSON.names());
-//		try {
-//			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
-//			if(matterAsJSON.has("fractional_coordinates"))
-//				mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
-//			if(matterAsJSON.has("cartesian_coordinates"))
-//				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
-//			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
-//		} catch (final JSONException e) {
-//
-//			e.printStackTrace();
+	Material getMaterialFromHttp(){
+		final String cgihome = cgiMap.get("cgihome");
+		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
+
+		final Map<String,String> keyValsForMatter = new HashMap<String,String>();
+		putInAuthenticationInfo(keyValsForMatter);
+		keyValsForMatter.put("actor", "dbObjToWeb");
+		keyValsForMatter.put("routine", "getMaterial");
+		//keyValsForMatter.put("dbObjToWeb.tables", "atomicstructures");
+		keyValsForMatter.put("dbObjToWeb.id", cgiMap.get("structureId"));
+		cgiCom.setCgiParams(keyValsForMatter);
+		final JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();
+		final Material mat = new Material();
+//		String[] materialParameters = new String(){"cartesian_lattice", "fractional_coordinates", 
+//			"cartesian_coordinates", "atom_symbols"}
+//		for (String materialParameter : materialParameters){
+//			if(matterAsJSON.has(materialParameter))	
 //		}
-//		return mat;
-//	}
+		//System.out.print(matterAsJSON.names());
+		try {
+			mat.latticeVec = ((JSONArray)matterAsJSON.get("cartesian_lattice")).getArrayList();
+			if(matterAsJSON.has("fractional_coordinates"))
+				mat.fractionalCoordinatesVec = ((JSONArray)matterAsJSON.get("fractional_coordinates")).getArrayList();
+			if(matterAsJSON.has("cartesian_coordinates"))
+				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
+			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
+		} catch (final JSONException e) {
+
+			e.printStackTrace();
+		}
+		return mat;
+	}
 
 	Material getMaterialFromDb(){
-		String matterId = cgiMap.get("matterId");
-		final String query = "SELECT * FROM polycrystals WHERE id = '"+matterId+"' UNION "+
-		"SELECT * FROM singlecrystals WHERE id = '"+matterId+"' UNION "+
-		"SELECT * FROM disordered WHERE id = '"+matterId+"'";
+		String structureId = cgiMap.get("structureId");
+		final String query = "SELECT * FROM atomicstructures WHERE id = '"+structureId+"'";
 		// get the material parameters from the db (eventually use ORM tool)
 		final Material mat = new Material();
 		try {

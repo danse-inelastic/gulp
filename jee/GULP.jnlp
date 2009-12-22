@@ -22,6 +22,6 @@
     	<argument>username=demo</argument>
     	<argument>ticket=5X</argument>
     	<argument>simulationId=1</argument>
-    	<argument>matterId=9TAL9D</argument>
+    	<argument>structureId=9TAL9D</argument>
     </application-desc>
 </jnlp>

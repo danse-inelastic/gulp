@@ -116,11 +116,11 @@ public class Potential extends JPanel {
 
 		final Map<String, String> getPotentialNamesQuery = new HashMap<String, String>();
 		getPotentialNamesQuery.put("cgihome", cgihome);
-		getPotentialNamesQuery.put("actor", "directdb");
+		getPotentialNamesQuery.put("actor", "dbObjToWeb");
 		getPotentialNamesQuery.put("routine", "get");
-		getPotentialNamesQuery.put("directdb.tables", "gulppotential");
-		getPotentialNamesQuery.put("directdb.columns", "id");
-		getPotentialNamesQuery.put("directdb.creator", "everyone");
+		getPotentialNamesQuery.put("dbObjToWeb.tables", "gulppotential");
+		getPotentialNamesQuery.put("dbObjToWeb.columns", "id");
+		getPotentialNamesQuery.put("dbObjToWeb.creator", "everyone");
 		cgiCom.setCgiParams(getPotentialNamesQuery);
 		final JSONArray potentialNamesAsJSONArray = cgiCom.postAndGetJSONArray();
 		return potentialNamesAsJSONArray.getArrayList();
