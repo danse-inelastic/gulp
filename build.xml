@@ -33,12 +33,12 @@
 
 	<property name="src" location="src" />
 	<property name="build" location="bin" />
-	<property name="vnfDeploy" location="../vnf/html/java"/>
+	<property name="vnfDeploy" location="../vnfBetaLuban/vnfb/html/java"/>
 	<property name="trueblueDeploy" location="/var/www/java"/>
 	<property name="lib" value="lib" />
 	<property name="app-name" value="GULP" />
 	<property name="username" value="jbk" />
-	<property name="keystore" location="../vnf/html/java/vnfKeys" />
+	<property name="keystore" location="../vnfBetaLuban/vnfb/html/java/vnfKeys" />
 	<property name="alias" location="vnf" />
 
 	<path id="classpath" path="${classpath}">

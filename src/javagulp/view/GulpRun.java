@@ -87,7 +87,10 @@ public class GulpRun extends JPanel implements Serializable {
 		} else{
 			for(final String param: simulationParams){
 				final String[] keyVal = param.split("=");
-				cgiMap.put(keyVal[0],keyVal[1]);
+				if (keyVal.length==1){
+					cgiMap.put(keyVal[0],"");
+				} else
+					cgiMap.put(keyVal[0],keyVal[1]);
 			}
 			// if matter is passed, retrieve it and load it
 			if(cgiMap.containsKey("matterId")){
