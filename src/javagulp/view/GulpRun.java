@@ -71,7 +71,6 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "run type");
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
-
 	}
 
 	public void processArguments(String[] simulationParams) {
@@ -132,13 +131,12 @@ public class GulpRun extends JPanel implements Serializable {
 	Material getMaterialFromHttp(){
 		final String cgihome = cgiMap.get("cgihome");
 		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-
 		final Map<String,String> keyValsForMatter = new HashMap<String,String>();
 		putInAuthenticationInfo(keyValsForMatter);
 		keyValsForMatter.put("actor", "dbObjToWeb");
 		keyValsForMatter.put("routine", "getMaterial");
 		//keyValsForMatter.put("dbObjToWeb.tables", "atomicstructures");
-		keyValsForMatter.put("dbObjToWeb.id", cgiMap.get("structureId"));
+		keyValsForMatter.put("actor.id", cgiMap.get("structureId"));
 		cgiCom.setCgiParams(keyValsForMatter);
 		final JSONObject matterAsJSON = cgiCom.postAndGetJSONObject();
 		final Material mat = new Material();
@@ -156,7 +154,6 @@ public class GulpRun extends JPanel implements Serializable {
 				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
 			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
 		} catch (final JSONException e) {
-
 			e.printStackTrace();
 		}
 		return mat;
@@ -169,12 +166,9 @@ public class GulpRun extends JPanel implements Serializable {
 		final Material mat = new Material();
 		try {
 			final Properties props = new Properties();
-			//			props.setProperty("user","linjiao");
-			//			props.setProperty("password","4OdACm#");
-			//			String url = "jdbc:postgresql://localhost:54321/vnf";
 			props.setProperty("user","vnf");
-			props.setProperty("password","A4*gl8D");
-			final String url = "jdbc:postgresql://vnf-dev.caltech.edu:5432/vnf";
+			props.setProperty("password","");
+			final String url = "jdbc:postgresql://vnf.caltech.edu:5432/vnfa2b";
 			Class.forName("org.postgresql.Driver");
 			final Connection con = DriverManager.getConnection(url,props);
 			final Statement stmt = con.createStatement();

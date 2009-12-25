@@ -380,7 +380,6 @@ public class JSONObject {
 		clazz.isAssignableFrom(Boolean.class);
 	}
 
-
 	/**
 	 * Construct a JSONObject from an Object, using reflection to find the
 	 * public members. The resulting JSONObject's keys will be the strings
@@ -404,7 +403,6 @@ public class JSONObject {
 		}
 	}
 
-
 	/**
 	 * Construct a JSONObject from a source JSON text string.
 	 * This is the most commonly used JSONObject constructor.
@@ -417,7 +415,6 @@ public class JSONObject {
 	public JSONObject(String source) throws JSONException {
 		this(new JSONTokener(source));
 	}
-
 
 	/**
 	 * Accumulate values under a key. It is similar to the put method except
@@ -446,7 +443,6 @@ public class JSONObject {
 		}
 		return this;
 	}
-
 
 	/**
 	 * Append values to the array under a key. If the key does not exist in the

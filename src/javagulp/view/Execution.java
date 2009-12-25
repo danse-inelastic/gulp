@@ -140,14 +140,13 @@ public class Execution extends JPanel implements Serializable {
 
 					final Map<String, String> submitJobPost = new HashMap<String, String>();
 					Back.getCurrentRun().putInAuthenticationInfo(submitJobPost);
-					submitJobPost.put("actor.id", cgiMap.get("simulationId"));
-					submitJobPost.put("actor.type", cgiMap.get("simulationType"));
-					submitJobPost.put("actor", "gulpsimulationwizard");
-					submitJobPost.put("actor.inputFileContents", inputFileContents);
-					submitJobPost.put("actor.potential_name", potentialSelected);
-					submitJobPost.put("actor.runtype", Back.getRunTypeKeyword());
+					//submitJobPost.put("actor.id", cgiMap.get("simulationId"));
+					//submitJobPost.put("actor.type", cgiMap.get("simulationType"));
+					submitJobPost.put("actor", "forcefieldwizard");
 					submitJobPost.put("routine", "storeInputFile");
-
+					submitJobPost.put("actor.runtype", Back.getRunTypeKeyword());
+					submitJobPost.put("actor.potential_name", potentialSelected);
+					submitJobPost.put("actor.inputFileContents", inputFileContents);
 					cgiCom.setCgiParams(submitJobPost);
 					final String response = cgiCom.postAndGetString();
 					if (response.trim().equals("success")){

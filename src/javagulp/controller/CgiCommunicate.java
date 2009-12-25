@@ -92,6 +92,7 @@ public class CgiCommunicate {
 
 	public JSONObject postAndGetJSONObject(){
 		StringBuffer response = new StringBuffer();
+		//String response = new String();
 		try {
 			OutputStreamWriter wr;
 
@@ -106,7 +107,8 @@ public class CgiCommunicate {
 			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = rd.readLine()) != null) {
-				response.append(line);//+"\n";
+				response.append(line);
+				//response = response + line;//+"\n";
 			}
 			rd.close();
 		} catch (final IOException e) {
@@ -114,10 +116,12 @@ public class CgiCommunicate {
 		}
 		JSONObject obj = null;
 		try {
+			//THIS IS NO LONGER A LIST FOR getMaterial()
 			//since this is a python list (of one item), remove the outer brackets
 			response = response.deleteCharAt(response.length()-1);
 			response = response.deleteCharAt(0);
-			obj = new JSONObject(response.toString());
+			obj = new JSONObject(response.toString());//response was StringBuffer so have to convert
+			//obj = new JSONObject(response);
 		} catch (final JSONException e) {
 			JOptionPane.showMessageDialog(null, formatQuery(response.toString()));
 			e.printStackTrace();
@@ -144,7 +148,6 @@ public class CgiCommunicate {
 			}
 			rd.close();
 
-			
 //			// Get the response
 //			BufferedReader rd = null;
 //			try {
