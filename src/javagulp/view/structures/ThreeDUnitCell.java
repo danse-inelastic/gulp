@@ -67,12 +67,12 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 		cellVectors.txtAx.setText(aVec.optString(0));
 		cellVectors.txtAy.setText(aVec.optString(1));
 		cellVectors.txtAz.setText(aVec.optString(2));
-		cellVectors.txtAx.setText(bVec.optString(0));
-		cellVectors.txtAy.setText(bVec.optString(1));
-		cellVectors.txtAz.setText(bVec.optString(2));
-		cellVectors.txtAx.setText(cVec.optString(0));
-		cellVectors.txtAy.setText(cVec.optString(1));
-		cellVectors.txtAz.setText(cVec.optString(2));
+		cellVectors.txtBx.setText(bVec.optString(0));
+		cellVectors.txtBy.setText(bVec.optString(1));
+		cellVectors.txtBz.setText(bVec.optString(2));
+		cellVectors.txtCx.setText(cVec.optString(0));
+		cellVectors.txtCy.setText(cVec.optString(1));
+		cellVectors.txtCz.setText(cVec.optString(2));
 	}
 	
 //	public void setVectors(Material mat) {

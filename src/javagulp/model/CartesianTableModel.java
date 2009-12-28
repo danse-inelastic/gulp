@@ -33,7 +33,7 @@ Serializable {
 				row[j] = "";
 			row[indices[0]] = ""+mat.atomSymbols[i];
 			
-			JSONArray cartCoords = (JSONArray)mat.fractionalCoordinatesVec[i];
+			JSONArray cartCoords = (JSONArray)mat.cartesianCoordinatesVec[i];
 			row[indices[2]] = ""+cartCoords.optString(0);
 			row[indices[3]] = ""+cartCoords.optString(1);
 			row[indices[4]] = ""+cartCoords.optString(2);
