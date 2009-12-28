@@ -91,15 +91,21 @@ public class CgiCommunicate {
 		}
 		JSONObject obj = null;
 		try {
-			//For some reason an extra set of parentheses is added to the string, so 
-			// we remove them
-			response = response.deleteCharAt(response.length()-1);
-			response = response.deleteCharAt(0);
+			//This next part converts a json string into proper json form...this is necessary
+			//because we used a json string rather than a json stream.
+			String newString = response.toString().replaceAll("\"", "");
+			String fixedResponse = newString.replaceAll("\\\\", "\"");
+			
+			//response = response.deleteCharAt(response.length()-1);
+			//response = response.deleteCharAt(0);
+			
 			//String convertedResponse = response.toString();
 			//String convertedResponse = new String(response);
-			String convertedResponse = response.toString();
+			
+//			String convertedResponse = response.toString();
+//			String fixedResponse = fixEscapeCharProblem(convertedResponse);
 			//System.out.println(convertedResponse);
-			obj = new JSONObject(convertedResponse);//response was StringBuilder so have to convert
+			obj = new JSONObject(fixedResponse);//response was StringBuilder so have to convert
 			//obj = new JSONObject(response);
 		} catch (final JSONException e) {
 			JOptionPane.showMessageDialog(null, formatQuery(response.toString()));
@@ -141,7 +147,8 @@ public class CgiCommunicate {
 	}
 	
 	private String fixEscapeCharProblem(String problemString){
-		String newString = problemString.replaceAll("\\\"", "\"");
+		String newString = problemString.replaceAll("\\", "");
+		String newerString = newString.replaceAll("\\", "");
 		return newString;
 	}
 

@@ -9,6 +9,8 @@ import javagulp.model.Material;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.json.JSONArray;
+
 public class ThreeDUnitCell extends JPanel implements Serializable {
 
 
@@ -59,16 +61,32 @@ public class ThreeDUnitCell extends JPanel implements Serializable {
 	}
 
 	public void setVectors(Material mat) {
-		cellVectors.txtAx.setText(""+mat.latticeVec[0]);
-		cellVectors.txtAy.setText(""+mat.latticeVec[1]);
-		cellVectors.txtAz.setText(""+mat.latticeVec[2]);
-		cellVectors.txtBx.setText(""+mat.latticeVec[3]);
-		cellVectors.txtBy.setText(""+mat.latticeVec[4]);
-		cellVectors.txtBz.setText(""+mat.latticeVec[5]);
-		cellVectors.txtCx.setText(""+mat.latticeVec[6]);
-		cellVectors.txtCy.setText(""+mat.latticeVec[7]);
-		cellVectors.txtCz.setText(""+mat.latticeVec[8]);
+		JSONArray aVec = (JSONArray)mat.latticeVec[0];
+		JSONArray bVec = (JSONArray)mat.latticeVec[1];
+		JSONArray cVec = (JSONArray)mat.latticeVec[2];
+		cellVectors.txtAx.setText(aVec.optString(0));
+		cellVectors.txtAy.setText(aVec.optString(1));
+		cellVectors.txtAz.setText(aVec.optString(2));
+		cellVectors.txtAx.setText(bVec.optString(0));
+		cellVectors.txtAy.setText(bVec.optString(1));
+		cellVectors.txtAz.setText(bVec.optString(2));
+		cellVectors.txtAx.setText(cVec.optString(0));
+		cellVectors.txtAy.setText(cVec.optString(1));
+		cellVectors.txtAz.setText(cVec.optString(2));
 	}
+	
+//	public void setVectors(Material mat) {
+//		JSONArray aVec = (JSONArray)mat.latticeVec[0];
+//		cellVectors.txtAx.setText(aVec.optString(0));
+//		cellVectors.txtAy.setText(""+mat.latticeVec[1]);
+//		cellVectors.txtAz.setText(""+mat.latticeVec[2]);
+//		cellVectors.txtBx.setText(""+mat.latticeVec[3]);
+//		cellVectors.txtBy.setText(""+mat.latticeVec[4]);
+//		cellVectors.txtBz.setText(""+mat.latticeVec[5]);
+//		cellVectors.txtCx.setText(""+mat.latticeVec[6]);
+//		cellVectors.txtCy.setText(""+mat.latticeVec[7]);
+//		cellVectors.txtCz.setText(""+mat.latticeVec[8]);
+//	}
 
 	/**
 	 * This method will convert lattice parameters (a b c alpha beta gamma) into

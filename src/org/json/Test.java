@@ -98,6 +98,8 @@ public class Test {
 			System.out.println();
 
 			a = JSONML.toJSONArray(s);
+			System.out.println("array test");
+			System.out.println(a.put(0));
 			System.out.println(a.toString(4));
 			System.out.println(JSONML.toString(a));
 			System.out.println();

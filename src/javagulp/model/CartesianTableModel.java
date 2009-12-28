@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.swing.event.TableModelEvent;
 
+import org.json.JSONArray;
+
 public class CartesianTableModel extends CoordinatesTableModel  implements
 Serializable {
 
@@ -30,9 +32,15 @@ Serializable {
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = ""+mat.atomSymbols[i];
-			row[indices[2]] = ""+mat.cartesianCoordinatesVec[i*3 + 0];
-			row[indices[3]] = ""+mat.cartesianCoordinatesVec[i*3 + 1];
-			row[indices[4]] = ""+mat.cartesianCoordinatesVec[i*3 + 2];
+			
+			JSONArray cartCoords = (JSONArray)mat.fractionalCoordinatesVec[i];
+			row[indices[2]] = ""+cartCoords.optString(0);
+			row[indices[3]] = ""+cartCoords.optString(1);
+			row[indices[4]] = ""+cartCoords.optString(2);
+			
+//			row[indices[2]] = ""+mat.cartesianCoordinatesVec[i*3 + 0];
+//			row[indices[3]] = ""+mat.cartesianCoordinatesVec[i*3 + 1];
+//			row[indices[4]] = ""+mat.cartesianCoordinatesVec[i*3 + 2];
 			data.add(row);
 		}
 		}

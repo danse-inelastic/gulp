@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.swing.event.TableModelEvent;
 
+import org.json.JSONArray;
+
 public class FractionalTableModel extends CoordinatesTableModel
 implements Serializable {
 
@@ -26,9 +28,15 @@ implements Serializable {
 			for (int j = 0; j < row.length; j++)
 				row[j] = "";
 			row[indices[0]] = ""+mat.atomSymbols[i];
-			row[indices[2]] = ""+mat.fractionalCoordinatesVec[i*3 + 0];
-			row[indices[3]] = ""+mat.fractionalCoordinatesVec[i*3 + 1];
-			row[indices[4]] = ""+mat.fractionalCoordinatesVec[i*3 + 2];
+			
+			JSONArray fracCoords = (JSONArray)mat.fractionalCoordinatesVec[i];
+			row[indices[2]] = ""+fracCoords.optString(0);
+			row[indices[3]] = ""+fracCoords.optString(1);
+			row[indices[4]] = ""+fracCoords.optString(2);
+			
+//			row[indices[2]] = ""+mat.fractionalCoordinatesVec[i*3 + 0];
+//			row[indices[3]] = ""+mat.fractionalCoordinatesVec[i*3 + 1];
+//			row[indices[4]] = ""+mat.fractionalCoordinatesVec[i*3 + 2];
 			data.add(row);
 		}
 		}
