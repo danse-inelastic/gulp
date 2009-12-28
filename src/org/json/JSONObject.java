@@ -176,7 +176,8 @@ public class JSONObject {
 		char c;
 		String key;
 
-		if (x.nextClean() != '{') {
+		char next = x.nextClean();
+		if (next != '{') {
 			throw x.syntaxError("A JSONObject text must begin with '{'");
 		}
 		for (;;) {

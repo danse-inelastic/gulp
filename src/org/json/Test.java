@@ -76,7 +76,13 @@ public class Test {
 			j = XML.toJSONObject("<![CDATA[This is a collection of test patterns and examples for org.json.]]>  Ignore the stuff past the end.  ");
 			System.out.println(j.toString());
 
-			s = "{     \"list of lists\" : [         [1, 2, 3],         [4, 5, 6],     ] }";
+			//s = "{     \"list of lists\" : [         [1, 2, 3],         [4, 5, 6],     ] }";
+			s = "{\"cartesian_lattice\": [[3.6099999999999999, 0.0, 0.0], [0.0, 3.6099999999999999, 0.0], [0.0, 0.0, "+
+					"3.6099999999999999]], \"cartesian_coordinates\": [[0.0, 0.0, 0.0], [1.8049999999999999, 1.8049999999"+
+					"999999, 0.0], [1.8049999999999999, 0.0, 1.8049999999999999], [0.0, 1.8049999999999999, 1.80499999999"+
+					"99999]], \"atom_symbols\": [\"Cu\", \"Cu\", \"Cu\", \"Cu\"], \"fractional_coordinates\": [[0.0, 0.0,"+
+					 "0.0], [0.5, 0.5, 0.0], [0.5, 0.0, 0.5], [0.0, 0.5, 0.5]]}";
+			System.out.println(s);
 			j = new JSONObject(s);
 			System.out.println(j.toString(4));
 			System.out.println(XML.toString(j));

@@ -65,45 +65,20 @@ public class CgiCommunicate {
 		}
 	}
 
-	public String postAndGetString(){
-		String response = "";
-		try {
-			OutputStreamWriter wr;
-
-			wr = new OutputStreamWriter(conn.getOutputStream());
-
-			wr.write(data);
-			wr.flush();
-			wr.close();
-
-			// Get the response
-
-			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line;
-			while ((line = rd.readLine()) != null) {
-				response+=line+"\n";
-			}
-			rd.close();
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-		return response;
-	}
-
 	public JSONObject postAndGetJSONObject(){
-		StringBuffer response = new StringBuffer();
-		//String response = new String();
+		//NOTE: A string cannot be used for the response because the quotation escape
+		//characters get replaced by two backslashes (i.e. \" goes to \\")
+		//StringBuffer response = new StringBuffer();
+		//String response = "";
+		StringBuilder response = new StringBuilder();
 		try {
 			OutputStreamWriter wr;
-
 			wr = new OutputStreamWriter(conn.getOutputStream());
-
 			wr.write(data);
 			wr.flush();
 			wr.close();
 
-			// Get the response
-
+//			response = (String) conn.getContent();
 			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = rd.readLine()) != null) {
@@ -116,11 +91,15 @@ public class CgiCommunicate {
 		}
 		JSONObject obj = null;
 		try {
-			//THIS IS NO LONGER A LIST FOR getMaterial()
-			//since this is a python list (of one item), remove the outer brackets
+			//For some reason an extra set of parentheses is added to the string, so 
+			// we remove them
 			response = response.deleteCharAt(response.length()-1);
 			response = response.deleteCharAt(0);
-			obj = new JSONObject(response.toString());//response was StringBuffer so have to convert
+			//String convertedResponse = response.toString();
+			//String convertedResponse = new String(response);
+			String convertedResponse = response.toString();
+			//System.out.println(convertedResponse);
+			obj = new JSONObject(convertedResponse);//response was StringBuilder so have to convert
 			//obj = new JSONObject(response);
 		} catch (final JSONException e) {
 			JOptionPane.showMessageDialog(null, formatQuery(response.toString()));
@@ -133,13 +112,10 @@ public class CgiCommunicate {
 		final StringBuffer response = new StringBuffer();
 		try {
 			OutputStreamWriter wr;
-
 			wr = new OutputStreamWriter(conn.getOutputStream());
-
 			wr.write(data);
 			wr.flush();
 			wr.close();
-
 			// Get the response
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
@@ -147,20 +123,6 @@ public class CgiCommunicate {
 				response.append(line+"\n");
 			}
 			rd.close();
-
-//			// Get the response
-//			BufferedReader rd = null;
-//			try {
-//				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//				String line;
-//				while ((line = rd.readLine()) != null) {
-//					response.append(line+"\n");
-//				}
-//				rd.close();
-//			} catch(final SocketTimeoutException e) {
-//				
-//			}
-			
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -177,6 +139,11 @@ public class CgiCommunicate {
 		}
 		return obj;
 	}
+	
+	private String fixEscapeCharProblem(String problemString){
+		String newString = problemString.replaceAll("\\\"", "\"");
+		return newString;
+	}
 
 	private String formatQuery(String response){
 		System.out.print(response);
@@ -192,54 +159,27 @@ public class CgiCommunicate {
 		return base;
 	}
 
-	public static void main(String[] args){
-		//					URL                 url = null;
-		//					URLConnection   urlConn = null;
-		//					DataOutputStream    printout;
-		//					DataInputStream     input;
-		//					// URL of CGI-Bin script.
-		//
-		//					try {
-		//						url = new URL ("http://trueblue.caltech.edu/cgi-bin/vnf/main.cgi");
-		//					} catch (MalformedURLException e) {
-		//						e.printStackTrace();
-		//					}
-		//
-		//					// URL connection channel.
-		//					try {
-		//						urlConn = url.openConnection();
-		//					} catch (IOException e) {
-		//						e.printStackTrace();
-		//					}
-		//					// Let the run-time system (RTS) know that we want input.
-		//					urlConn.setDoInput (true);
-		//					// Let the RTS know that we want to do output.
-		//					urlConn.setDoOutput (true);
-		//					// No caching, we want the real thing.
-		//					urlConn.setUseCaches (false);
-		//					// Specify the content type.
-		//					urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		//					// Send POST output.
-		//					try {
-		//						printout = new DataOutputStream (urlConn.getOutputStream ());
-		//					} catch (IOException e) {
-		//						e.printStackTrace();
-		//					}
-		//					String content =
-		//						"name=" + URLEncoder.encode ("Buford Early") +
-		//						"&email=" + URLEncoder.encode ("buford@known-space.com");
-		//					printout.writeBytes (content);
-		//					printout.flush ();
-		//					printout.close ();
-		//					// Get response data.
-		//					input = new DataInputStream (urlConn.getInputStream ());
-		//					String str;
-		//					while (null != ((str = input.readLine())))
-		//					{
-		//						System.out.println (str);
-		//					}
-		//					input.close ();
+	public String postAndGetString(){
+		String response = "";
+		try {
+			OutputStreamWriter wr;
+			wr = new OutputStreamWriter(conn.getOutputStream());
+			wr.write(data);
+			wr.flush();
+			wr.close();
 
+			response = (String) conn.getContent();
+//			// Get the response
+//			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//			String line;
+//			while ((line = rd.readLine()) != null) {
+//				response+=line+"\n";
+//			}
+//			rd.close();
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+		return response;
 	}
-
+	
 }
