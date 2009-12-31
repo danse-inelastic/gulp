@@ -136,7 +136,8 @@ public class Execution extends JPanel implements Serializable {
 
 					final String cgihome = cgiMap.get("cgihome");
 					final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
-					getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
+					//getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" is being submitted to vnf....");
+					getTxtVnfStatus().setText("Computation is being submitted to vnf....");
 
 					final Map<String, String> submitJobPost = new HashMap<String, String>();
 					Back.getCurrentRun().putInAuthenticationInfo(submitJobPost);
@@ -150,7 +151,7 @@ public class Execution extends JPanel implements Serializable {
 					cgiCom.setCgiParams(submitJobPost);
 					final String response = cgiCom.postAndGetString();
 					if (response.trim().equals("success")){
-						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted.\n"+
+						getTxtVnfStatus().setText("Computation  has been successfully submitted.\n"+
 						"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
 					}else{
 						String parameters="";

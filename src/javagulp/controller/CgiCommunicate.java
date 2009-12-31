@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class CgiCommunicate {
 
 	String data = "";
-	String appName = "GulpUi";
+	String appName = "AtomSim";
 	String cgihome;
 	private URLConnection conn;
 	public CgiCommunicate(String cgihome){
@@ -144,12 +144,6 @@ public class CgiCommunicate {
 			e.printStackTrace();
 		}
 		return obj;
-	}
-	
-	private String fixEscapeCharProblem(String problemString){
-		String newString = problemString.replaceAll("\\", "");
-		String newerString = newString.replaceAll("\\", "");
-		return newString;
 	}
 
 	private String formatQuery(String response){

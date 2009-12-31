@@ -8,9 +8,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Pattern;
 
-public class LaunchGulpUIOld {
+public class LaunchAtomSimOld {
 
-	public LaunchGulpUIOld() {
+	public LaunchAtomSimOld() {
 		// assume the lattice and the atoms are
 		// located in "lattice.txt" and "atoms.txt"
 		final String base = "http://trueblue.caltech.edu/java";//System.getProperty("user.dir");
@@ -62,7 +62,7 @@ public class LaunchGulpUIOld {
 	}
 
 	public static void main(String[] args) {
-		new LaunchGulpUIOld();
+		new LaunchAtomSimOld();
 	}
 
 }

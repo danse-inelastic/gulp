@@ -83,7 +83,7 @@
 		<delete file="deployable/${app-name}.jar"/>
 		<delete file="MANIFEST.MF"/>
 		<manifest file="MANIFEST.MF">
-			<attribute name="Main-Class" value="javagulp.controller.LaunchGulpUi"/>
+			<attribute name="Main-Class" value="javagulp.controller.LaunchAtomSim"/>
 		</manifest>
 		<jar destfile="deployable/${app-name}.jar" manifest="MANIFEST.MF">
 			<fileset dir="${build}"/>

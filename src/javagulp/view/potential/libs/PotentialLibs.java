@@ -23,7 +23,7 @@ public class PotentialLibs {
 	public Map<String,String> potentialContents = new HashMap<String,String>();
 
 	public PotentialLibs(){
-		//TODO: eventually cache potentials in .gulpUi or something like that
+		//TODO: eventually cache potentials in .AtomSim or something like that
 		//for now just instantiate each time from scratch
 		//potentialContents
 	}
