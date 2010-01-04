@@ -15,10 +15,15 @@ import org.json.JSONArray;
 
 public class PotentialLibs {
 
-	public final String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
-			"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
-			"catlow.lib","finnissinclair.lib","suttonchen.lib",
-			"clerirosato.lib","garofalini.lib","tersoff.lib"};
+//	public final String[] potentials = new String[]{"none","bush.lib","dreiding.lib","lewis.lib","vashishta.lib",
+//			"carbonate.lib","dreiding_ms.lib","streitzmintmire.lib",
+//			"catlow.lib","finnissinclair.lib","suttonchen.lib",
+//			"clerirosato.lib","garofalini.lib","tersoff.lib"};
+	
+	public final String[] potentials = new String[]{"none","bush","dreiding","lewis","vashishta",
+			"carbonate","dreiding_ms","streitzmintmire",
+			"catlow","finnissinclair","suttonchen",
+			"clerirosato","garofalini","tersoff"};
 
 	public Map<String,String> potentialContents = new HashMap<String,String>();
 
