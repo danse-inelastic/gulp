@@ -169,14 +169,14 @@ public class CgiCommunicate {
 			wr.flush();
 			wr.close();
 
-			response = (String) conn.getContent();
-//			// Get the response
-//			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//			String line;
-//			while ((line = rd.readLine()) != null) {
-//				response+=line+"\n";
-//			}
-//			rd.close();
+//			response = (String) conn.getContent();
+			// Get the response
+			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = rd.readLine()) != null) {
+				response+=line+"\n";
+			}
+			rd.close();
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
