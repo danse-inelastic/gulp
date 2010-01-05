@@ -149,10 +149,12 @@ public class Execution extends JPanel implements Serializable {
 					submitJobPost.put("actor.potential_name", potentialSelected);
 					submitJobPost.put("actor.inputFileContents", inputFileContents);
 					submitJobPost.put("actor.structureId", cgiMap.get("structureId"));
+					submitJobPost.put("actor.simulationId", cgiMap.get("simulationId"));
 					cgiCom.setCgiParams(submitJobPost);
-					final String response = cgiCom.postAndGetString();
+					final String rawResponse = cgiCom.postAndGetString().trim();
+					final String response = rawResponse.trim();
 					if (response.trim().equals("success")){
-						getTxtVnfStatus().setText("Computation  has been successfully submitted.\n"+
+						getTxtVnfStatus().setText("Computation has been successfully submitted.\n"+
 						"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
 					}else{
 						String parameters="";

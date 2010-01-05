@@ -180,7 +180,8 @@ public class CgiCommunicate {
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-		return response;
+		String newString = response.toString().replaceAll("\"", "");
+		return newString;
 	}
 	
 }
