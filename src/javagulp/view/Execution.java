@@ -154,8 +154,14 @@ public class Execution extends JPanel implements Serializable {
 					final String rawResponse = cgiCom.postAndGetString().trim();
 					final String response = rawResponse.trim();
 					if (response.trim().equals("success")){
-						getTxtVnfStatus().setText("Computation has been successfully submitted.\n"+
-						"You can alter the settings and submit another computation or clear the gui by clicking File->Clear Gui");
+						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted. "+
+						"AtomSim will close in 3 seconds.");
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+						System.exit(0);
 					}else{
 						String parameters="";
 						for (final String s : submitJobPost.keySet()) {
