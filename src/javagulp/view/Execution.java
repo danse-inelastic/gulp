@@ -148,20 +148,21 @@ public class Execution extends JPanel implements Serializable {
 					submitJobPost.put("actor.runtype", Back.getRunTypeKeyword());
 					submitJobPost.put("actor.potential_name", potentialSelected);
 					submitJobPost.put("actor.inputFileContents", inputFileContents);
+					//submitJobPost.put("actor.structureId", cgiMap.get("structureId"));
 					submitJobPost.put("actor.structureId", cgiMap.get("structureId"));
 					submitJobPost.put("actor.simulationId", cgiMap.get("simulationId"));
 					cgiCom.setCgiParams(submitJobPost);
 					final String rawResponse = cgiCom.postAndGetString().trim();
 					final String response = rawResponse.trim();
 					if (response.trim().equals("success")){
-						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted. "+
-						"AtomSim will close in 30 seconds.");
-						try {
-							Thread.sleep(30000);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-						System.exit(0);
+						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted. ");//+
+						//"AtomSim will close in 30 seconds.");
+//						try {
+//							Thread.sleep(30000);
+//						} catch (InterruptedException e1) {
+//							e1.printStackTrace();
+//						}
+						//System.exit(0);
 					}else{
 						String parameters="";
 						for (final String s : submitJobPost.keySet()) {
