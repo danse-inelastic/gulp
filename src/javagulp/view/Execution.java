@@ -155,7 +155,7 @@ public class Execution extends JPanel implements Serializable {
 					final String rawResponse = cgiCom.postAndGetString().trim();
 					final String response = rawResponse.trim();
 					if (response.trim().equals("success")){
-						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully submitted. ");//+
+						getTxtVnfStatus().setText("Computation "+cgiMap.get("simulationId")+" has been successfully stored at VNF. ");//+
 						//"AtomSim will close in 30 seconds.");
 //						try {
 //							Thread.sleep(30000);
