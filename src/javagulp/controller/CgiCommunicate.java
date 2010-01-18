@@ -3,6 +3,7 @@ package javagulp.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
@@ -32,7 +33,7 @@ public class CgiCommunicate {
 			final URL url = new URL(cgihome);
 			conn = url.openConnection();
 			conn.setDoOutput(true);
-			conn.setConnectTimeout(3);
+			conn.setConnectTimeout(0);
 			timeout = conn.getConnectTimeout();
 		} catch (final MalformedURLException e) {
 			e.printStackTrace();
@@ -72,8 +73,8 @@ public class CgiCommunicate {
 		//String response = "";
 		StringBuilder response = new StringBuilder();
 		try {
-			OutputStreamWriter wr;
-			wr = new OutputStreamWriter(conn.getOutputStream());
+			OutputStream connection = conn.getOutputStream();
+			OutputStreamWriter wr = new OutputStreamWriter(connection);
 			wr.write(data);
 			wr.flush();
 			wr.close();
