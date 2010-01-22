@@ -1,5 +1,7 @@
 package javagulp.view.phonons;
 
+import java.util.Map;
+
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 
@@ -14,25 +16,34 @@ public class OutputFormats extends JPanel {
 	private JTextField txtFreq;
 	private static final long serialVersionUID = -8425306576850279775L;
 
-
 	private JTextField txtDos;
 	private JTextField txtForceConst;
 	private final JCheckBox chkDos = new JCheckBox("write phonon DOS / dispersions (if any)");
 	private final JCheckBox chkForceConst = new JCheckBox("write energy and force constants for QM/MM");
 	private final JCheckBox chkFreq = new JCheckBox();
 	private final JCheckBox chkOsc = new JCheckBox();
+	final boolean vnfMode = Back.getVnfmode();
 
 	public OutputFormats() {
 		setBorder(new TitledBorder(null, "output formats",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		setLayout(null);
+				
 		{
 			chkDos.setBounds(10, 23, 352, 22);
+			if(vnfMode){
+				chkDos.setSelected(true);
+				chkDos.setEnabled(false);
+			}
 			add(chkDos);
 		}
 		{
 			txtDos = new JTextField();
+			if(vnfMode){
+				txtDos.setText("dos.dens");
+				txtDos.setEnabled(false);
+			}
 			txtDos.setBounds(368, 24, 260, 21);
 			add(txtDos);
 			txtDos.setColumns(10);

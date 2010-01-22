@@ -54,6 +54,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private Keywords keywords = null;
 	private TaskKeywords taskKeywords = null;
+	boolean vnfMode = false;
 
 	public GulpRun() {
 		super();
@@ -101,8 +102,12 @@ public class GulpRun extends JPanel implements Serializable {
 					getStructure().atomicCoordinates.setTable("3d fractional");	
 				}
 			}
+			//if (cgiMap.containsKey("sentry.username") && cgiMap.get("launchmode").equals("vnf")){
+			if (cgiMap.containsKey("sentry.username")){
+				vnfMode = true;
+			}
 		}
-		//keep the rest of the parameters and pass them to the job submission post
+		//keep the rest of the parameters and pass them to the job submission post and other widgets
 	}
 
 	public HashMap<String,String> putInAuthenticationInfo2(HashMap<String,String> map){

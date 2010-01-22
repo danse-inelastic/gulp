@@ -140,6 +140,10 @@ public class Back {
 	public static Structure getStructure() {
 		return (Structure) getCurrentRun().getStructures().tabs.getSelectedComponent();
 	}
+	
+	public static boolean getVnfmode() {
+		return getCurrentRun().vnfMode;
+	}
 
 	/**
 	 * This method returns the Keywords object of the tab that is currently visible.

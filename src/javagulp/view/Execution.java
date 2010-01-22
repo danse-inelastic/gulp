@@ -62,7 +62,6 @@ public class Execution extends JPanel implements Serializable {
 	private TitledPanel pnlVnfExecution;
 	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
-	private JRadioButton radVnf;
 	private TitledPanel pnlRemoteExecution;
 	private TitledPanel pnlLocalExecution;
 	private final TitledPanel placeOfExecution;
@@ -90,6 +89,7 @@ public class Execution extends JPanel implements Serializable {
 
 	public JRadioButton radLocal = new JRadioButton("local machine");
 	public JRadioButton radRemote = new JRadioButton("remote machine(s)");
+	public JRadioButton radVnf = new JRadioButton("vnf");
 	private final ButtonGroup grpExecute = new ButtonGroup();
 
 	public JRadioButton radPBS = new JRadioButton("use PBS");
@@ -108,6 +108,8 @@ public class Execution extends JPanel implements Serializable {
 	//private JLabel lblStatus = new JLabel();
 	public String contents = "";
 	Process gulpProcess;
+	final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+	final boolean vnfMode = Back.getVnfmode();
 
 	public ArrayList<String> usernames = new ArrayList<String>();
 	public ArrayList<String> passwords = new ArrayList<String>();
@@ -132,7 +134,6 @@ public class Execution extends JPanel implements Serializable {
 					final String inputFileContents = Back.getCurrentRun().getOutput().inputFileMap.get(currentInputFile);
 					//String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
 					final String potentialSelected = Back.getCurrentRun().getPotential().potentialSelected;//post the files
-					final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 
 					final String cgihome = cgiMap.get("cgihome");
 					final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
@@ -567,9 +568,10 @@ public class Execution extends JPanel implements Serializable {
 		super();
 		setBorder(new LineBorder(Color.black, 1, false));
 		setLayout(null);
+		
 		add(scrollStatus);
 		add(btnPause);
-
+		
 		btnSubmit.addActionListener(keySubmit);
 		btnSubmit.setBounds(7, 365, 136, 25);
 		add(btnSubmit);
@@ -582,15 +584,16 @@ public class Execution extends JPanel implements Serializable {
 		placeOfExecution.setTitle("where to execute");
 		radLocal.addActionListener(keyPlaceOfExecution);
 		radLocal.setBounds(10, 24, 161, 21);
-		placeOfExecution.add(getRadVnf());
-		grpExecute.add(getRadVnf());
-		getRadVnf().addActionListener(keyPlaceOfExecution);
 		placeOfExecution.add(radLocal);
 		grpExecute.add(radLocal);
 		radRemote.addActionListener(keyPlaceOfExecution);
 		radRemote.setBounds(10, 51, 161, 21);
 		placeOfExecution.add(radRemote);
 		grpExecute.add(radRemote);
+		radVnf.setBounds(10, 78, 138, 23);
+		//radLocal.addActionListener(keyPlaceOfExecution);
+		placeOfExecution.add(radVnf);
+		grpExecute.add(radVnf);
 		add(placeOfExecution);
 		//add(getPlaceOfExecution());
 
@@ -607,17 +610,24 @@ public class Execution extends JPanel implements Serializable {
 		add(getHowExecute());
 		add(getPnlHighThroughput());
 
+		
 		//if AtomSim has been launched with a username, make vnf the default submission cluster, else
 		//make localhost the default execution machine
-		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
-		final String cgihome = cgiMap.get("cgihome");
-		if(cgiMap.containsKey("sentry.username")){
+		if(vnfMode){
 			radLocal.setSelected(false);
 			radVnf.setSelected(true);
+			radLocal.setEnabled(false);
+			radRemote.setEnabled(false);
+			radVnf.setEnabled(false);
+			radDirect.setEnabled(false);
+			chkCustom.setEnabled(false);
+			radPBS.setEnabled(false);
+			btnPause.setEnabled(false);
 			rearrangePlaceOfExecutionBackdrops();
 		} else{
 			radLocal.setSelected(true);
 			radVnf.setSelected(false);
+			radVnf.setEnabled(false);
 			rearrangePlaceOfExecutionBackdrops();
 		}
 	}
@@ -833,18 +843,7 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return pnlRemoteExecution;
 	}
-	/**
-	 * @return
-	 */
-	protected JRadioButton getRadVnf() {
-		if (radVnf == null) {
-			radVnf = new JRadioButton();
-			radVnf.setSelected(true);
-			radVnf.setText("vnf");
-			radVnf.setBounds(10, 78, 138, 23);
-		}
-		return radVnf;
-	}
+
 	/**
 	 * @return
 	 */

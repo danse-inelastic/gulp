@@ -13,7 +13,6 @@ public class LaunchAtomSim {
 			b.addTab(simulationParams);
 	}
 
-
 	public static void main(String[] args){
 		//try simple iron as 9TAL9D
 		if (args.length==0){

@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 public class Phonons extends TitledPanel implements Serializable {
 
-
 	private TitledPanel pnlOptions;
 	private static final long serialVersionUID = 820917949787670204L;
 	private final String TXT_BROADEN_PEAKS = "2.0";
@@ -168,6 +167,7 @@ public class Phonons extends TitledPanel implements Serializable {
 			chkDoNotPrintFreqs.addActionListener(keyDoNotPrintFreqs);
 			pnlOptions.add(chkDoNotPrintFreqs);
 			chkPrintEigenvectors.addActionListener(keyPrintEigenvectors);
+			chkPrintEigenvectors.setSelected(true);
 			chkPrintEigenvectors.setBounds(10, 80, 462, 25);
 			pnlOptions.add(chkPrintEigenvectors);
 			chkDoNotOutput.addActionListener(keyDoNotOutput);
