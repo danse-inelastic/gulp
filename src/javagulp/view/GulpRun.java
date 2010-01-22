@@ -87,6 +87,10 @@ public class GulpRun extends JPanel implements Serializable {
 				} else
 					cgiMap.put(keyVal[0],keyVal[1]);
 			}
+			// declare launchmode
+			//if (cgiMap.containsKey("sentry.username") && cgiMap.get("launchmode").equals("vnf")){
+			if (cgiMap.containsKey("sentry.username"))
+				vnfMode = true;
 			// if matter is passed, retrieve it and load it
 			if(cgiMap.containsKey("structureId")){
 				//final Material mat = getMaterialFromDb();
@@ -101,10 +105,6 @@ public class GulpRun extends JPanel implements Serializable {
 				if(mat.fractionalCoordinatesVec.length>0){
 					getStructure().atomicCoordinates.setTable("3d fractional");	
 				}
-			}
-			//if (cgiMap.containsKey("sentry.username") && cgiMap.get("launchmode").equals("vnf")){
-			if (cgiMap.containsKey("sentry.username")){
-				vnfMode = true;
 			}
 		}
 		//keep the rest of the parameters and pass them to the job submission post and other widgets
