@@ -28,14 +28,14 @@ public class OutputFormats extends JPanel {
 	private final JCheckBox chkXYZTrajectory = new JCheckBox("write xyz trajectory");
 	private final JCheckBox chckbxWriteDlpolyHistory = new JCheckBox("write dlpoly history file");
 	private final JCheckBox chckbxWritePressure = new JCheckBox();
-	final boolean vnfMode = Back.getVnfmode();
+	boolean vnfMode = Back.getVnfmode();
 
 	public OutputFormats() {
 		setBorder(new TitledBorder(null, "output formats",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		setLayout(null);
-		
+
 		lblWriteFrequencyps.setBounds(7, 21, 183, 14);
 		add(lblWriteFrequencyps);
 		txtWrite.setBounds(202, 18, 111, 21);
@@ -52,24 +52,20 @@ public class OutputFormats extends JPanel {
 			add(txtXyz);
 			txtXyz.setColumns(10);
 		}
-		{
-			chckbxWriteDlpolyHistory.setBounds(7, 81, 198, 22);
-			if(vnfMode){
-				chckbxWriteDlpolyHistory.setSelected(true);
-				chckbxWriteDlpolyHistory.setEnabled(false);
-			}
-			add(chckbxWriteDlpolyHistory);
+		chckbxWriteDlpolyHistory.setBounds(7, 81, 198, 22);
+		if(vnfMode){
+			chckbxWriteDlpolyHistory.setSelected(true);
+			chckbxWriteDlpolyHistory.setEnabled(false);
 		}
-		{
-			txtHis = new JTextField();
-			if(vnfMode){
-				txtHis.setText("gulp.his");
-				txtHis.setEnabled(false);
-			}
-			txtHis.setColumns(10);
-			txtHis.setBounds(217, 82, 260, 21);
-			add(txtHis);
+		add(chckbxWriteDlpolyHistory);
+		txtHis = new JTextField();
+		if(vnfMode){
+			txtHis.setText("gulp.his");
+			txtHis.setEnabled(false);
 		}
+		txtHis.setColumns(10);
+		txtHis.setBounds(217, 82, 260, 21);
+		add(txtHis);
 
 		{
 			chckbxWritePressure.setText("write pressure file");

@@ -16,12 +16,11 @@ public class GulpFileWriter {
 	public boolean incomplete = false;
 
 	public String gulpInputFileToString() {
-		final StringBuffer o = new StringBuffer();
+		StringBuffer completeFile = null;
+		StringBuffer o = new StringBuffer();
 		incomplete = false;
 		try {
 			final GulpRun gr = Back.getCurrentRun();
-			o.append(Back.getTaskKeywords().writeTaskKeywords());
-			o.append(Back.getKeys().writeKeywords());
 			o.append(gr.getOutput().writeTitleAndTimeLimit());
 			//			String energy = gr.getXyzfit().writeEnergy();
 			//			if (!energy.equals(""))
@@ -44,6 +43,8 @@ public class GulpFileWriter {
 			o.append(gr.getRunTypePanel().writeRuntype());
 			o.append(gr.getExternalForce().writeExternalForce());
 			o.append(gr.getOutput().writeExecute());
+			//write keywords last after checking all the other components and storing keywords
+			completeFile = new StringBuffer(Back.getTaskKeywords().writeTaskKeywords()+Back.getKeys().writeKeywords()).append(o);
 		} catch (final IncompleteOptionException e) {
 			e.displayErrorAsPopup();
 			incomplete = true;
@@ -57,7 +58,7 @@ public class GulpFileWriter {
 			incomplete = true;
 		}
 
-		final Scanner sc = new Scanner(o.toString());
+		final Scanner sc = new Scanner(completeFile.toString());
 		final StringBuffer sb = new StringBuffer();
 		while (sc.hasNext()) {
 			String line = sc.nextLine();

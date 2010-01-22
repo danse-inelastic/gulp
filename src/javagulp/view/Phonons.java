@@ -58,6 +58,7 @@ public class Phonons extends TitledPanel implements Serializable {
 	private final RestartFile pnlRestartFile = new RestartFile();
 	private final OutputFormats pnlOutputFormats = new OutputFormats();
 	//private GammaPointCorrection pnlGammaCorrection = new GammaPointCorrection();
+	final boolean vnfMode = Back.getVnfmode();
 
 	//	/**
 	//	 * @return
@@ -141,6 +142,7 @@ public class Phonons extends TitledPanel implements Serializable {
 
 	public String writeDosOptions() throws IncompleteOptionException,
 	InvalidOptionException {
+		Back.getKeys().putOrRemoveKeyword(chkPrintEigenvectors.isSelected(), "eigenvectors");
 		return writeDosBox() + writeBroaden();
 	}
 
@@ -167,7 +169,9 @@ public class Phonons extends TitledPanel implements Serializable {
 			chkDoNotPrintFreqs.addActionListener(keyDoNotPrintFreqs);
 			pnlOptions.add(chkDoNotPrintFreqs);
 			chkPrintEigenvectors.addActionListener(keyPrintEigenvectors);
-			chkPrintEigenvectors.setSelected(true);
+			if(vnfMode){
+				chkPrintEigenvectors.setSelected(true);
+			}
 			chkPrintEigenvectors.setBounds(10, 80, 462, 25);
 			pnlOptions.add(chkPrintEigenvectors);
 			chkDoNotOutput.addActionListener(keyDoNotOutput);

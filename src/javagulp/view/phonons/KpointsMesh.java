@@ -55,6 +55,8 @@ class KpointsMesh extends TitledPanel {
 
 	String writeShrink() throws IncompleteOptionException,
 	InvalidOptionException {
+		boolean state = chkDoNotUse.isSelected();
+		Back.getKeys().putOrRemoveKeyword(state, "noksymmetry");
 		String lines = "";
 		if (!txtshrinkix.getText().equals("")
 				|| !txtshrinkiy.getText().equals("")
