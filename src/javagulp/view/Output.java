@@ -42,7 +42,7 @@ public class Output extends JPanel implements Serializable {
 	private final OutputFormats pnlOutputFormats = new OutputFormats();
 	private final Terse pnlTerse = new Terse();
 
-	private final JLabel lblOutputFile = new JLabel("gulp stdout file");
+	private final JLabel lblOutputFile = new JLabel("stdout file");
 	private final JLabel lblTimeLimit = new JLabel("calculation time limit");
 	private JLabel savedInputFilesLabel;
 
@@ -215,7 +215,7 @@ public class Output extends JPanel implements Serializable {
 	protected JLabel getSavedInputFilesLabel() {
 		if (savedInputFilesLabel == null) {
 			savedInputFilesLabel = new JLabel();
-			savedInputFilesLabel.setText("gulp input files");
+			savedInputFilesLabel.setText("input files");
 			savedInputFilesLabel.setBounds(9, 8, 121, 15);
 		}
 		return savedInputFilesLabel;
