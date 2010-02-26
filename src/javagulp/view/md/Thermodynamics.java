@@ -47,6 +47,11 @@ public class Thermodynamics extends TitledPanel {
 		add(radNone);
 		radNone.setSelected(true);
 		radEnsembleNVE.setBounds(5, 52, 165, 25);
+		radEnsembleNVE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Back.getKeys().putOrRemoveKeyword(radEnsembleNVE.isSelected(), "conv");
+			}
+		});
 		add(radEnsembleNVE);
 		radEnsembleNVT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
