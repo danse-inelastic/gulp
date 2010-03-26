@@ -100,7 +100,7 @@ public class SpaceGroup extends JPanel implements Serializable {
 	private final Number number = new Number();
 	private final FracFloat fracFloat = new FracFloat();
 	private final FracInt fracInt = new FracInt();
-	private final JTextField txtSpaceGroup = new JTextField();
+	public final JTextField txtSpaceGroup = new JTextField();
 
 	final String[] originChoices = { "number", "fractional",
 	"fractional integers" };

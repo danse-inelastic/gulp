@@ -9,6 +9,7 @@ public class Material {
 	//	public double[][] fractionalCoordinates;
 	//	public double[][] cartesianCoordinates;
 	public Object[] atomSymbols;
+	public Object spaceGroup;
 
 	//	public Material(){
 	//	}
