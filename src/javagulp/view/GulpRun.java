@@ -101,7 +101,7 @@ public class GulpRun extends JPanel implements Serializable {
 				getStructure().atomicCoordinates.setTable("cartesian");
 				((CartesianTableModel) getStructure().atomicCoordinates.getTableModel()).setCoordinates(mat);
 				getStructure().unitCellAndSymmetry.unitCellPanel.threeDUnitCell.setVectors(mat);
-				getStructure().unitCellAndSymmetry.spaceGroup.txtSpaceGroup.setText((String)mat.spaceGroup);
+				getStructure().unitCellAndSymmetry.spaceGroup.txtSpaceGroup.setText(Integer.toString((Integer)mat.spaceGroup));
 				//if fractional coordinates is nonzero (i.e. the primary one), put that back in view
 				if(mat.fractionalCoordinatesVec.length>0){
 					getStructure().atomicCoordinates.setTable("3d fractional");	

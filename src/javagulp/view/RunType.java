@@ -114,7 +114,6 @@ public class RunType extends JPanel implements Serializable {
 					final String type = (String)cboRunType.getSelectedItem();
 					scrollPane.add(getSelectedRunTypePanel(type));
 					scrollPane.setViewportView(getSelectedRunTypePanel(type));
-					Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(type));
 				}
 			};
 			private final DefaultListModel listModel = new DefaultListModel();
@@ -195,6 +194,7 @@ public class RunType extends JPanel implements Serializable {
 						public void actionPerformed(final ActionEvent e) {
 							final String optionChosen = (String)cboRunType.getSelectedItem();
 							listModel.addElement(optionChosen);
+							Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(optionChosen));
 							//getList().repaint();
 						}
 					});
