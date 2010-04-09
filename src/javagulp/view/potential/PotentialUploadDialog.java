@@ -151,12 +151,12 @@ public class PotentialUploadDialog extends JDialog {
 		final Map<String, String> uploadPotentialPost = new HashMap<String, String>();
 		uploadPotentialPost.put("routine", "storePotential");
 
-		uploadPotentialPost.put("actor", "gulpsimulationwizard");
-		uploadPotentialPost.put("actor.librarycontent", contents);
+		uploadPotentialPost.put("actor", "material_simulations/forcefieldwizard");
+		uploadPotentialPost.put("actor.potentialContents", contents);
 		uploadPotentialPost.put("actor.potential_name", txtPotentialName.getText());
 		uploadPotentialPost.put("actor.potential_filename", potentialFile.getName());
-		uploadPotentialPost.put("actor.description", txtDescription.getText());
-		uploadPotentialPost.put("actor.creator", txtCreator.getText());
+		uploadPotentialPost.put("actor.potentialDescription", txtDescription.getText());
+		uploadPotentialPost.put("actor.potentialCreator", txtCreator.getText());
 		//uploadPotentialPost.put("actor.runtype", Back.getRunTypeKeyword());
 		uploadPotentialPost.put("routine", "storePotential");
 		Back.getCurrentRun().putInAuthenticationInfo(uploadPotentialPost);
@@ -173,7 +173,9 @@ public class PotentialUploadDialog extends JDialog {
 		if (response.trim().equals("success")){
 			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" has been successfully uploaded.");
 		}else{
-			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" was not successfully uploaded.  Please report this to jbrkeith@gmail.com with the file attached.");
+			JOptionPane.showMessageDialog(Back.frame, "Library "+potentialFile.getName()+" was not successfully uploaded.  " +
+					"Please report this to jbrkeith@gmail.com with the file attached.  The server returned the following response: " +
+					response.trim());
 		}
 		Back.getCurrentRun().getPotential().populatePotentialList();
 	}
