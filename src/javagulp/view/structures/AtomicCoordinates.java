@@ -43,10 +43,7 @@ public class AtomicCoordinates extends JPanel implements Serializable {
 	private JComboBox cboRegion;
 	private static final long serialVersionUID = 7252161274170437579L;
 
-
-
-	private final String coordinateTypes[] =
-	{"3d fractional", "cartesian", "contents", "2d fractional", "1d fractional"};
+	private final String coordinateTypes[] = {"3d fractional", "cartesian"};//, "contents"};//, "2d fractional", "1d fractional"};
 	private final JComboBox cboCoordinateType = new JComboBox(coordinateTypes);
 
 	private final Fractional3dTable fractional3dTable = new Fractional3dTable();

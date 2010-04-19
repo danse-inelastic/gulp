@@ -12,8 +12,6 @@ public class UnitCellPanel extends TitledPanel implements Serializable {
 
 	private static final long serialVersionUID = -6630264256468105811L;
 
-
-
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	public ThreeDUnitCell threeDUnitCell = new ThreeDUnitCell();
 	private final TwoDUnitCell twoDUnitCell = new TwoDUnitCell();
@@ -25,13 +23,9 @@ public class UnitCellPanel extends TitledPanel implements Serializable {
 
 		add(tabbedPane);
 		tabbedPane.add(threeDUnitCell, "3d");
-		tabbedPane.add(twoDUnitCell, "2d");
-		//twoDUnitCell.setLayout(new BorderLayout());
-		tabbedPane.add(oneDUnitCell, "1d");
-		//oneDUnitCell.setLayout(new BorderLayout());
+//		tabbedPane.add(twoDUnitCell, "2d");
+//		tabbedPane.add(oneDUnitCell, "1d");
 	}
-
-
 
 	public String writeUnitCell() throws IncompleteOptionException {
 		return threeDUnitCell.write3DUnitCell()
