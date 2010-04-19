@@ -21,32 +21,37 @@ public class Optimization extends JPanel implements Serializable {
 
 	private final G g = new G();
 
-	private final String[] optimizationChoicesDefault = { "bfgs (broyden)",
-			"limited memory bfgs", "Davidon-Fletcher-Powell",
-	"conjugate gradient" };
+	private final String[] primaryOptimizerLabels = { "bfgs (broyden)",
+			"limited memory bfgs", "Davidon-Fletcher-Powell", "conjugate gradient" };
+	private final String[] primaryOptimizerKeywords = { "", "lfbgs", "dfp", "conjugate" };
 	private final String[] stoppingCriterion = { "cycles", "gradient norm" };
 	private final String[] stoppingCriterionChoices = { "cycle", "gnorm" };
-	private final String[] optimizationChoices = { "bfgs (broyden)",
+	private final String[] secondaryOptimizerLabels = { "none", "bfgs (broyden)",
 			"rational function optimization", "bfgs start w/unit Hessian",
 			"bfgs start w/numerical diagonal Hessian", "conjugate gradient" };
-	private final String[] optimizationChoiceValues = { "bfgs", "rfo", "unit",
+	private final String[] secondaryOptimizerKeywords = { "", "bfgs", "rfo", "unit",
 			"nume", "conj" };
 
-	private final JComboBox cboOptimization = new JComboBox(optimizationChoicesDefault);
+	private final JComboBox cboOptimization = new JComboBox(primaryOptimizerLabels);
 	private final JComboBox cboSwitch_minimiserStoppingCriterion = new JComboBox(stoppingCriterion);
-	private final JComboBox cboSwitchOptimization = new JComboBox(optimizationChoices);
+	private final JComboBox cboSwitchOptimization = new JComboBox(secondaryOptimizerLabels);
 
 	private final SerialListener keyOptimization = new SerialListener() {
-
 		private static final long serialVersionUID = -6450781303665298416L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			// set all to false
 			Back.getKeys().putOrRemoveKeyword(false, "dfp");
 			Back.getKeys().putOrRemoveKeyword(false, "conjugate");
 			Back.getKeys().putOrRemoveKeyword(false, "lfbgs");
-			if (cboOptimization.getSelectedIndex() != 0)
-				Back.getKeys().putOrRemoveKeyword(true,
-						(String) cboOptimization.getSelectedItem());
+			// set the one selected to true
+			Back.getKeys().putOrRemoveKeyword(true, primaryOptimizerKeywords[cboOptimization.getSelectedIndex()]);
+//			Back.getKeys().putOrRemoveKeyword(false, "dfp");
+//			Back.getKeys().putOrRemoveKeyword(false, "conjugate");
+//			Back.getKeys().putOrRemoveKeyword(false, "lfbgs");
+//			if (cboOptimization.getSelectedIndex() != 0)
+//				Back.getKeys().putOrRemoveKeyword(true,
+//						(String) cboOptimization.getSelectedItem());
 		}
 	};
 
@@ -385,10 +390,10 @@ public class Optimization extends JPanel implements Serializable {
 	private String writeSwitch_minimiser() {
 		String lines = "";
 		final String s = txtSwitch_minimiserStoppingCriterionNum.getText();
-		if (!s.equals("")) {
+		if (!s.equals("") && cboSwitchOptimization.getSelectedIndex()!=0) {
 			Double.parseDouble(s);
 			lines = "switch_minimiser "
-				+ optimizationChoiceValues[cboSwitchOptimization.getSelectedIndex()] + " "
+				+ secondaryOptimizerKeywords[cboSwitchOptimization.getSelectedIndex()] + " "
 				+ stoppingCriterionChoices[cboSwitch_minimiserStoppingCriterion.getSelectedIndex()] + " "
 				+ s + Back.newLine;
 		}
