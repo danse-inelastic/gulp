@@ -36,6 +36,7 @@ public class Back {
 	public static final PCMenu pcmenu = new PCMenu(frame);
 	public static final Color grey = new Color(229, 229, 229);
 	public static final String newLine = System.getProperty("line.separator");
+	public static final String fileSeparator = System.getProperty("file.separator");
 
 	public Back() {
 		initializeFrame(null);

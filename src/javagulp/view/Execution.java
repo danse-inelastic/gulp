@@ -117,7 +117,6 @@ public class Execution extends JPanel implements Serializable {
 	public ArrayList<Thread> threads = new ArrayList<Thread>();
 	private final ArrayList<String[]> jobs = new ArrayList<String[]>();
 
-
 	public SerialListener keySubmit = new SerialListener() {
 		private static final long serialVersionUID = 5864600160182158595L;
 
@@ -184,8 +183,8 @@ public class Execution extends JPanel implements Serializable {
 						"Please locate the gulp executable under the file menu.");
 						return;
 					}
-					final File f = new File(Back.getCurrentRun().getWD() + "/"
-							+ Back.getCurrentRun().getOutput().selectedInputFile);
+//					final File f = new File(Back.getCurrentRun().getWD() + "/"
+//							+ Back.getCurrentRun().getOutput().selectedInputFile);
 					//					if (!f.exists() || Back.getCurrentRun().getOutput().lastViewed == Long.MAX_VALUE) {
 					//						JOptionPane.showMessageDialog(null,
 					//						"Please view your input file first.");
@@ -197,7 +196,7 @@ public class Execution extends JPanel implements Serializable {
 					//					} else {
 					//						contents = Back.writer.gulpInputFileToString();
 					//					}
-					contents = Back.getCurrentRun().getOutput().inputFileMap.get(Back.getCurrentRun().getOutput().selectedInputFile);
+					//contents = Back.getCurrentRun().getOutput().inputFileMap.get(Back.getCurrentRun().getOutput().selectedInputFile);
 					if (e == null)
 						executeLocal(true);
 					else
@@ -207,7 +206,6 @@ public class Execution extends JPanel implements Serializable {
 					executeRemote();
 				}
 			}
-
 		}
 
 		void logJob(){
@@ -225,7 +223,6 @@ public class Execution extends JPanel implements Serializable {
 				jobs.add(new String[]{"", Back.writer.gulpInputFileToString()});
 			}
 		}
-
 	};
 
 	//	public void runLocally(final String output) {
@@ -375,7 +372,6 @@ public class Execution extends JPanel implements Serializable {
 		}
 	}
 
-
 	public synchronized String[] getJob() {
 		if (jobs.size() == 0)
 			return null;
@@ -390,14 +386,13 @@ public class Execution extends JPanel implements Serializable {
 		} catch (final NumberFormatException nfe) {
 
 		}
-
 		for (int j=0; j < parallel; j++) {
 			final Runnable r = new Runnable() {
 				public void run() {
 					String[] job = null;
 					while ((job = getJob()) != null) {
 						//create directory
-						final String path = Back.getCurrentRun().getWD() + Back.newLine + job[0];
+						final String path = Back.getCurrentRun().getWD() + Back.fileSeparator + job[0];
 						final File directory = new File(path);
 						directory.mkdir();
 
@@ -513,7 +508,6 @@ public class Execution extends JPanel implements Serializable {
 		return(result);
 	}
 
-
 	public String formatTimeHMS(int secondsLeft) {
 		int timeRemainingSecs = secondsLeft;
 		int timeRemainingMins = (timeRemainingSecs/60);
@@ -570,7 +564,7 @@ public class Execution extends JPanel implements Serializable {
 		setLayout(null);
 		
 		add(scrollStatus);
-		add(btnPause);
+		//add(btnPause);
 		
 		btnSubmit.addActionListener(keySubmit);
 		btnSubmit.setBounds(7, 365, 136, 25);
@@ -774,8 +768,6 @@ public class Execution extends JPanel implements Serializable {
 		}
 	};
 
-
-
 	protected TitledPanel getPnlVnfExecution() {
 		if (pnlVnfExecution == null) {
 			pnlVnfExecution = new TitledPanel();
@@ -787,9 +779,6 @@ public class Execution extends JPanel implements Serializable {
 		return pnlVnfExecution;
 	}
 
-	/**
-	 * @return
-	 */
 	protected TitledPanel getPnlLocalExecution() {
 		if (pnlLocalExecution == null) {
 			pnlLocalExecution = new TitledPanel();
@@ -812,9 +801,7 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return pnlLocalExecution;
 	}
-	/**
-	 * @return
-	 */
+
 	protected TitledPanel getPnlRemoteExecution() {
 		if (pnlRemoteExecution == null) {
 			pnlRemoteExecution = new TitledPanel();
@@ -844,9 +831,6 @@ public class Execution extends JPanel implements Serializable {
 		return pnlRemoteExecution;
 	}
 
-	/**
-	 * @return
-	 */
 	protected TitledPanel getHowExecute() {
 		if (howExecute == null) {
 			howExecute = new TitledPanel();
@@ -865,9 +849,7 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return howExecute;
 	}
-	/**
-	 * @return
-	 */
+
 	protected TitledPanel getPnlHighThroughput() {
 		if (pnlHighThroughput == null) {
 			pnlHighThroughput = new TitledPanel();
@@ -885,10 +867,6 @@ public class Execution extends JPanel implements Serializable {
 		return pnlHighThroughput;
 	}
 
-
-	/**
-	 * @return
-	 */
 	protected JLabel getNLabel() {
 		if (lblN == null) {
 			lblN = new JLabel();
@@ -897,18 +875,14 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return lblN;
 	}
-	/**
-	 * @return
-	 */
+
 	protected JTextArea getTxtVnfStatus() {
 		if (txtVnfStatus == null) {
 			txtVnfStatus = new JTextArea();
 		}
 		return txtVnfStatus;
 	}
-	/**
-	 * @return
-	 */
+
 	protected JLabel getStatusLabel() {
 		if (lblStatus == null) {
 			lblStatus = new JLabel();
@@ -917,9 +891,7 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return lblStatus;
 	}
-	/**
-	 * @return
-	 */
+
 	protected JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -928,7 +900,4 @@ public class Execution extends JPanel implements Serializable {
 		}
 		return scrollPane;
 	}
-	/**
-	 * @return
-	 */
 }
