@@ -32,81 +32,62 @@ public class OutputFormats extends JPanel {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		setLayout(null);
-		{
-			chkSiesta.setBounds(10, 24, 278, 22);
-			add(chkSiesta);
-		}
-		{
-			txtSiesta = new JTextField();
-			txtSiesta.setBounds(364, 25, 206, 21);
-			add(txtSiesta);
-			txtSiesta.setColumns(10);
-		}
-		{
-			chckbxCrystal98.setBounds(10, 52, 278, 22);
-			add(chckbxCrystal98);
-		}
-		{
-			txtCrystal98 = new JTextField();
-			txtCrystal98.setColumns(10);
-			txtCrystal98.setBounds(364, 53, 206, 21);
-			add(txtCrystal98);
-		}
 
-		{
-			chckbxMarvin.setText("write Marvin input file");
-			chckbxMarvin.setBounds(10, 108, 278, 22);
-			add(chckbxMarvin);
-		}
+		chkSiesta.setBounds(10, 24, 278, 22);
+		add(chkSiesta);
 
-		{
-			txtMarvin = new JTextField();
-			txtMarvin.setColumns(10);
-			txtMarvin.setBounds(364, 109, 206, 21);
-			add(txtMarvin);
-		}
+		txtSiesta = new JTextField();
+		txtSiesta.setBounds(364, 25, 206, 21);
+		add(txtSiesta);
+		txtSiesta.setColumns(10);
 
-		{
-			chckbxCif = new JCheckBox();
-			chckbxCif.setText("write cif file");
-			chckbxCif.setBounds(10, 80, 278, 22);
-			add(chckbxCif);
-		}
+		chckbxCrystal98.setBounds(10, 52, 278, 22);
+		add(chckbxCrystal98);
 
-		{
-			txtCif = new JTextField();
-			txtCif.setColumns(10);
-			txtCif.setBounds(364, 80, 206, 21);
-			add(txtCif);
-		}
+		txtCrystal98 = new JTextField();
+		txtCrystal98.setColumns(10);
+		txtCrystal98.setBounds(364, 53, 206, 21);
+		add(txtCrystal98);
 
-		{
-			txtDerivatives = new JTextField();
-			txtDerivatives.setColumns(10);
-			txtDerivatives.setBounds(364, 136, 206, 21);
-			add(txtDerivatives);
-		}
+		chckbxMarvin.setText("write Marvin input file");
+		chckbxMarvin.setBounds(10, 108, 278, 22);
+		add(chckbxMarvin);
 
-		{
-			chckbxDerivatives = new JCheckBox();
-			chckbxDerivatives.setText("write energy and derivatives for QM/MM");
-			chckbxDerivatives.setBounds(10, 136, 348, 22);
-			add(chckbxDerivatives);
-		}
+		txtMarvin = new JTextField();
+		txtMarvin.setColumns(10);
+		txtMarvin.setBounds(364, 109, 206, 21);
+		add(txtMarvin);
 
-		{
-			chckbxXyzFile = new JCheckBox();
-			chckbxXyzFile.setText("write final configuration file in xyz format");
-			chckbxXyzFile.setBounds(10, 164, 348, 22);
-			add(chckbxXyzFile);
-		}
+		chckbxCif = new JCheckBox();
+		chckbxCif.setText("write cif file");
+		chckbxCif.setBounds(10, 80, 278, 22);
+		add(chckbxCif);
 
-		{
-			txtXyzFile = new JTextField();
-			txtXyzFile.setColumns(10);
-			txtXyzFile.setBounds(364, 163, 206, 21);
-			add(txtXyzFile);
-		}
+		txtCif = new JTextField();
+		txtCif.setColumns(10);
+		txtCif.setBounds(364, 80, 206, 21);
+		add(txtCif);
+
+		txtDerivatives = new JTextField();
+		txtDerivatives.setColumns(10);
+		txtDerivatives.setBounds(364, 136, 206, 21);
+		add(txtDerivatives);
+
+		chckbxDerivatives = new JCheckBox();
+		chckbxDerivatives.setText("write energy and derivatives for QM/MM");
+		chckbxDerivatives.setBounds(10, 136, 348, 22);
+		add(chckbxDerivatives);
+
+		chckbxXyzFile = new JCheckBox();
+		chckbxXyzFile.setText("write final configuration file in xyz format");
+		chckbxXyzFile.setBounds(10, 164, 348, 22);
+		add(chckbxXyzFile);
+
+		txtXyzFile = new JTextField();
+		txtXyzFile.setColumns(10);
+		txtXyzFile.setBounds(364, 163, 206, 21);
+		add(txtXyzFile);
+
 	}
 
 	public String writeOutputFormats() throws IncompleteOptionException {

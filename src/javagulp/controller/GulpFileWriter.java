@@ -42,7 +42,7 @@ public class GulpFileWriter {
 			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
 			o.append(gr.getRunTypePanel().writeRuntype());
 			o.append(gr.getExternalForce().writeExternalForce());
-			o.append(gr.getOutput().writeExecute());
+			o.append(gr.getOutput().writeOutput());
 			//write keywords last after checking all the other components and storing keywords
 			completeFile = new StringBuffer(Back.getTaskKeywords().writeTaskKeywords()+Back.getKeys().writeKeywords()).append(o);
 		} catch (final IncompleteOptionException e) {

@@ -181,10 +181,9 @@ public class Output extends JPanel implements Serializable {
 	//		}
 	//	}
 
-	public String writeExecute() throws IncompleteOptionException {
-		//		return pnlOutputFormats.writeOutputFormats() + writeDump()
-		//				+ pnlTerse.writeTerse();// written twice
-		return pnlTerse.writeTerse();// written twice
+	public String writeOutput() throws IncompleteOptionException {
+		return pnlOutputFormats.writeOutputFormats() + pnlTerse.writeTerse();// written twice
+		//return pnlTerse.writeTerse();// written twice
 	}
 
 	public String writeTitleAndTimeLimit() {
