@@ -23,6 +23,7 @@ import javagulp.controller.CgiCommunicate;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
+import javagulp.view.execution.MultipleStructures;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -60,10 +61,11 @@ public class Execution extends JPanel implements Serializable {
 	private JTextArea txtVnfStatus;
 	private JLabel lblN;
 	private TitledPanel pnlVnfExecution;
-	private TitledPanel pnlHighThroughput;
+//	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
 	private TitledPanel pnlRemoteExecution;
 	private TitledPanel pnlLocalExecution;
+	private MultipleStructures multipleStructures = new MultipleStructures();
 	private final TitledPanel placeOfExecution;
 	private final JPanel pnlExecutionBackdrop;
 	private static final long serialVersionUID = -907728808045994280L;
@@ -71,11 +73,8 @@ public class Execution extends JPanel implements Serializable {
 	private final JLabel lblHosts = new JLabel("<html>remote hosts<br>(double click to add)</html>");
 	private final JLabel lblUsername = new JLabel("Username");
 	private final JLabel lblPassword = new JLabel("Password");
-	private final JLabel lblParallel = new JLabel("<html>when running multiple jobs sequentially, run n<br>jobs simultaneously</html>");
-	public JCheckBox chkSeparate = new JCheckBox("put each structure in a separate input file");
-
+	
 	public JTextField txtUsername = new JTextField();
-	public JTextField txtMultiple = new JTextField(Integer.toString(Runtime.getRuntime().availableProcessors()));
 	public JTextField txtGulpBinary = new JTextField();
 	public JTextField txtWorkingDirectory = new JTextField(System.getProperty("user.home"));
 
@@ -211,7 +210,7 @@ public class Execution extends JPanel implements Serializable {
 		void logJob(){
 			//queue jobs
 			jobs.clear();
-			if (chkSeparate.isSelected()) {
+			if (multipleStructures.chkSeparate.isSelected()) {
 				final int temp = Back.getCurrentRun().getStructures().tabs.getSelectedIndex();
 				for (int i=0; i < Back.getCurrentRun().getStructures().tabs.getTabCount(); i++) {
 					Back.getCurrentRun().getStructures().tabs.setSelectedIndex(i);
@@ -602,7 +601,8 @@ public class Execution extends JPanel implements Serializable {
 		//add(getPnlExecutionBackdrop());
 
 		add(getHowExecute());
-		add(getPnlHighThroughput());
+		multipleStructures.setBounds(736, 144, 421, 215);
+		add(multipleStructures);
 
 		
 		//if AtomSim has been launched with a username, make vnf the default submission cluster, else
@@ -850,31 +850,6 @@ public class Execution extends JPanel implements Serializable {
 		return howExecute;
 	}
 
-	protected TitledPanel getPnlHighThroughput() {
-		if (pnlHighThroughput == null) {
-			pnlHighThroughput = new TitledPanel();
-			pnlHighThroughput.setBounds(736, 144, 421, 215);
-			pnlHighThroughput.setTitle("high throughput execution (experimental)");
-			lblParallel.setBounds(10, 62, 401, 37);
-			pnlHighThroughput.add(lblParallel);
-			txtMultiple.setBounds(54, 105, 49, 21);
-			pnlHighThroughput.add(txtMultiple);
-			chkSeparate.setBounds(10, 26, 401, 30);
-			pnlHighThroughput.add(chkSeparate);
-			chkSeparate.setSelected(true);
-			pnlHighThroughput.add(getNLabel());
-		}
-		return pnlHighThroughput;
-	}
-
-	protected JLabel getNLabel() {
-		if (lblN == null) {
-			lblN = new JLabel();
-			lblN.setText("n");
-			lblN.setBounds(20, 105, 25, 21);
-		}
-		return lblN;
-	}
 
 	protected JTextArea getTxtVnfStatus() {
 		if (txtVnfStatus == null) {
