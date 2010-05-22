@@ -387,9 +387,11 @@ public class Optimization extends JPanel implements Serializable {
 		return line;
 	}
 
-	private String writeSwitch_minimiser() {
+	private String writeSwitch_minimiser() throws IncompleteOptionException {
 		String lines = "";
 		final String s = txtSwitch_minimiserStoppingCriterionNum.getText();
+		if (s.equals(""))
+			throw new IncompleteOptionException("Please enter optimizer switching criteria.");
 		if (!s.equals("") && cboSwitchOptimization.getSelectedIndex()!=0) {
 			Double.parseDouble(s);
 			lines = "switch_minimiser "
@@ -424,8 +426,7 @@ public class Optimization extends JPanel implements Serializable {
 		if (chkXYZTrajectory.isSelected() && txtxyz.getText().equals(""))
 			throw new IncompleteOptionException("Please enter an output filename");
 		if (chkXYZTrajectory.isSelected()) {
-			line += "output movie xyz "
-				+ txtxyz.getText() + Back.newLine;
+			line += "output movie xyz " + txtxyz.getText() + Back.newLine;
 		}
 		return line;
 	}

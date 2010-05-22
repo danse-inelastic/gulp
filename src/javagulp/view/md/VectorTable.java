@@ -25,7 +25,7 @@ public class VectorTable extends TitledPanel {
 	private final JTextField txtExtraCutoff = new JTextField(TXT_EXTRA_CUTOFF);
 
 	public VectorTable() {
-		setTitle("vector table");
+		setTitle("store neighbor distances");
 		chkStoreVectors.setBounds(8, 18, 458, 25);
 		add(chkStoreVectors);
 		chkStoreVectors.addActionListener(keyStoreVectors);
