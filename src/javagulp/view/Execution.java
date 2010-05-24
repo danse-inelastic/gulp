@@ -283,7 +283,7 @@ public class Execution extends JPanel implements Serializable {
 	private void executeRemote() {
 		int numSimultaneous = 1;
 		try {
-			numSimultaneous = Integer.parseInt(Back.getCurrentRun().getExecution().txtMultiple.getText());
+			numSimultaneous = Integer.parseInt(Back.getCurrentRun().getExecution().multipleStructures.txtMultiple.getText());
 		} catch (final NumberFormatException nfe) {
 		}
 		for (int j=0; j < numSimultaneous; j++) {
@@ -380,10 +380,10 @@ public class Execution extends JPanel implements Serializable {
 
 	private void executeLocal(boolean synchronous) {
 		int parallel = 1;
-		try {
-			parallel = Integer.parseInt(Back.getCurrentRun().getExecution().txtMultiple.getText());
-		} catch (final NumberFormatException nfe) {
-
+		if (Back.getCurrentRun().getExecution().multipleStructures.chkSeparate.isSelected())
+			try {
+				parallel = Integer.parseInt(Back.getCurrentRun().getExecution().multipleStructures.txtMultiple.getText());
+			} catch (final NumberFormatException nfe) {
 		}
 		for (int j=0; j < parallel; j++) {
 			final Runnable r = new Runnable() {
@@ -408,7 +408,7 @@ public class Execution extends JPanel implements Serializable {
 
 							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 							final BufferedWriter writer = new BufferedWriter(
-									new FileWriter(path + Back.newLine + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
+									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
 							String line = "";
 							while ((line = br.readLine()) != null) {
 								writer.write(line + System.getProperty("line.separator"));
