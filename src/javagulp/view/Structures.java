@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.controller.InvalidFileException;
 import javagulp.model.CoordinatesTableModel;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialMouseAdapter;
@@ -146,6 +147,8 @@ public class Structures extends JPanel implements Serializable {
 			} catch (final RuntimeException e) {
 				System.out.println(files[i].getPath());
 				e.printStackTrace();
+			} catch (final InvalidFileException e) {
+				e.displayErrorAsPopup(files[i].getName());
 			}
 		}
 	}

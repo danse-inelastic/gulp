@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.Vector;
 
+import javagulp.controller.InvalidFileException;
 import javagulp.view.Back;
 import javagulp.view.GulpRun;
 import javagulp.view.MolecularDynamics;
@@ -185,32 +186,32 @@ Serializable {//, CoordinatesTableModel {
 	/* (non-Javadoc)
 	 * @see javagulp.model.CoordinatesTableModel#importCoordinates(java.lang.String)
 	 */
-	public void importCoordinates(String fileContents) throws Exception {
+	public void importCoordinates(String fileContents) throws InvalidFileException {
 		// this method expects coordinates to be in xyz format!!
 		try {
-			final Scanner in = new Scanner(fileContents);
-			final int numOfLines = in.nextInt();
-			in.nextLine();
-			in.nextLine();
-			data.clear();
-			data.ensureCapacity(numOfLines);
+		final Scanner in = new Scanner(fileContents);
+		final int numOfLines = in.nextInt();
+		in.nextLine();
+		in.nextLine();
+		data.clear();
+		data.ensureCapacity(numOfLines);
 
-			// add rows manually for speed
-			for (int i = 0; i < numOfLines; i++) {
-				final String[] row = new String[COLUMN_NAMES.length];
-				for (int j = 0; j < row.length; j++)
-					row[j] = "";
-				row[indices[0]] = in.next();
-				row[indices[2]] = in.next();
-				row[indices[3]] = in.next();
-				row[indices[4]] = in.next();
-				data.add(row);
-			}
-			fireTableChanged(new TableModelEvent(this));
-			updateAllAtomicLists();
-			in.close();
-		} catch (final Exception ioe) {
-			throw new InvalidFileException("File contents");
+		// add rows manually for speed
+		for (int i = 0; i < numOfLines; i++) {
+			final String[] row = new String[COLUMN_NAMES.length];
+			for (int j = 0; j < row.length; j++)
+				row[j] = "";
+			row[indices[0]] = in.next();
+			row[indices[2]] = in.next();
+			row[indices[3]] = in.next();
+			row[indices[4]] = in.next();
+			data.add(row);
+		}
+		fireTableChanged(new TableModelEvent(this));
+		updateAllAtomicLists();
+		in.close();
+		} catch (final Exception e) {
+			throw new InvalidFileException();
 		}
 	}
 

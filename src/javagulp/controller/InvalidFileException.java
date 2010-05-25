@@ -15,10 +15,17 @@ Serializable {
 	public InvalidFileException(final String message) {
 		super(message);
 		this.message = message;
-		this.message += Back.newLine + Back.getCurrentRun().getOutput().selectedInputFile
-		+ " was not written.";
+	}
+	
+	public InvalidFileException() {
+		this.message = "File contents could not be read.";
 	}
 
+	public void displayErrorAsPopup(final String filename) {
+		this.message += " File was "+filename+".";
+		JOptionPane.showMessageDialog(null, message);
+	}
+	
 	public void displayErrorAsPopup() {
 		JOptionPane.showMessageDialog(null, message);
 	}
