@@ -1,5 +1,6 @@
 package javagulp.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -184,29 +185,33 @@ Serializable {//, CoordinatesTableModel {
 	/* (non-Javadoc)
 	 * @see javagulp.model.CoordinatesTableModel#importCoordinates(java.lang.String)
 	 */
-	public void importCoordinates(String fileContents) {
+	public void importCoordinates(String fileContents) throws Exception {
 		// this method expects coordinates to be in xyz format!!
-		final Scanner in = new Scanner(fileContents);
-		final int numOfLines = in.nextInt();
-		in.nextLine();
-		in.nextLine();
-		data.clear();
-		data.ensureCapacity(numOfLines);
+		try {
+			final Scanner in = new Scanner(fileContents);
+			final int numOfLines = in.nextInt();
+			in.nextLine();
+			in.nextLine();
+			data.clear();
+			data.ensureCapacity(numOfLines);
 
-		// add rows manually for speed
-		for (int i = 0; i < numOfLines; i++) {
-			final String[] row = new String[COLUMN_NAMES.length];
-			for (int j = 0; j < row.length; j++)
-				row[j] = "";
-			row[indices[0]] = in.next();
-			row[indices[2]] = in.next();
-			row[indices[3]] = in.next();
-			row[indices[4]] = in.next();
-			data.add(row);
+			// add rows manually for speed
+			for (int i = 0; i < numOfLines; i++) {
+				final String[] row = new String[COLUMN_NAMES.length];
+				for (int j = 0; j < row.length; j++)
+					row[j] = "";
+				row[indices[0]] = in.next();
+				row[indices[2]] = in.next();
+				row[indices[3]] = in.next();
+				row[indices[4]] = in.next();
+				data.add(row);
+			}
+			fireTableChanged(new TableModelEvent(this));
+			updateAllAtomicLists();
+			in.close();
+		} catch (final Exception ioe) {
+			throw new InvalidFileException("File contents");
 		}
-		fireTableChanged(new TableModelEvent(this));
-		updateAllAtomicLists();
-		in.close();
 	}
 
 	protected void updateAllAtomicLists() {
