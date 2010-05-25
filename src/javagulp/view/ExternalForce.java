@@ -2,14 +2,11 @@ package javagulp.view;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.ExForceTableModel;
 import javagulp.model.G;
-import javagulp.model.SerialKeyListener;
 import javagulp.model.SerialListener;
 import javagulp.model.TdExForceTableModel;
 import javagulp.view.potential.IconHeaderRenderer;
@@ -60,35 +57,35 @@ public class ExternalForce extends JPanel implements Serializable {
 	private final JTextField txtDelayExternalForce = new JTextField();
 	private final JTextField txtendforce = new JTextField();
 
-//	private final SerialListener keyexforce = new SerialListener() {
-//		private static final long serialVersionUID = 484346962122055547L;
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			((CardLayout) backdrop.getLayout()).show(backdrop, "exforce");
-//		}
-//	};
-//	private final SerialListener keytdexforce = new SerialListener() {
-//		private static final long serialVersionUID = -1157345058515543026L;
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			((CardLayout) backdrop.getLayout()).show(backdrop, "tdexforce");
-//		}
-//	};
-	
-	private final SerialKeyListener keyexforce = new SerialKeyListener() {
+	private final SerialListener keyexforce = new SerialListener() {
 		private static final long serialVersionUID = 484346962122055547L;
 		@Override
-		public void keyTyped(final KeyEvent e) {
+		public void actionPerformed(ActionEvent e) {
 			((CardLayout) backdrop.getLayout()).show(backdrop, "exforce");
 		}
 	};
-	private final SerialKeyListener keytdexforce = new SerialKeyListener() {
+	private final SerialListener keytdexforce = new SerialListener() {
 		private static final long serialVersionUID = -1157345058515543026L;
 		@Override
-		public void keyTyped(final KeyEvent e) {
+		public void actionPerformed(ActionEvent e) {
 			((CardLayout) backdrop.getLayout()).show(backdrop, "tdexforce");
 		}
 	};
+	
+//	private final SerialKeyListener keyexforce = new SerialKeyListener() {
+//		private static final long serialVersionUID = 484346962122055547L;
+//		@Override
+//		public void keyTyped(final KeyEvent e) {
+//			((CardLayout) backdrop.getLayout()).show(backdrop, "exforce");
+//		}
+//	};
+//	private final SerialKeyListener keytdexforce = new SerialKeyListener() {
+//		private static final long serialVersionUID = -1157345058515543026L;
+//		@Override
+//		public void keyTyped(final KeyEvent e) {
+//			((CardLayout) backdrop.getLayout()).show(backdrop, "tdexforce");
+//		}
+//	};
 
 	public ExternalForce() {
 		super();
@@ -118,13 +115,13 @@ public class ExternalForce extends JPanel implements Serializable {
 		pnltdexforce.add(lblfA);
 		radexforce.setSelected(true);
 		buttonGroup.add(radexforce);
-		//radexforce.addActionListener(keyexforce);
-		radexforce.addKeyListener(keyexforce);
+		radexforce.addActionListener(keyexforce);
+		//radexforce.addKeyListener(keyexforce);
 		radexforce.setBounds(6, 0, 320, 30);
 		add(radexforce);
 		buttonGroup.add(radtdexforce);
-		//radtdexforce.addActionListener(keytdexforce);
-		radtdexforce.addKeyListener(keytdexforce);
+		radtdexforce.addActionListener(keytdexforce);
+		//radtdexforce.addKeyListener(keytdexforce);
 		radtdexforce.setBounds(6, 28, 320, 25);
 		add(radtdexforce);
 		lblRemoveExternalForce.setBounds(337, 8, 244, 15);

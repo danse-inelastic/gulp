@@ -96,7 +96,7 @@ Serializable {
 		String lines = "";
 		for (int i = 0; i < data.size(); i++) {
 			final String[] values = data.elementAt(i);
-			if (!values[1].equals(""))
+			if ((!values[1].equals("")) || (!values[2].equals("")) || (!values[3].equals("")))
 				lines += "td_external_force " + (i + 1) + " " + values[1] + " "
 				+ values[2] + " " + values[3] + " " + values[4] + Back.newLine;
 		}
