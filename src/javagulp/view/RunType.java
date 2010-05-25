@@ -31,7 +31,7 @@ public class RunType extends JPanel implements Serializable {
 			"phonons", "free energy calc/optimize",
 			"molecular dynamics", "monte carlo",
 			"energetics and material properties",
-			"surface calc/optimize",
+			//"surface calc/optimize",
 			"transition state",
 	"structure prediction"};
 
