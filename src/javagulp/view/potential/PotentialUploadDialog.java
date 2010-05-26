@@ -109,10 +109,10 @@ public class PotentialUploadDialog extends JDialog {
 		btnBrowse.setText("Browse");
 
 		final JButton okButton = new JButton();
-		okButton.setBounds(25, 167, 54, 25);
+		okButton.setBounds(25, 167, 105, 25);
 		panel.add(okButton);
 		okButton.addActionListener(keyOk);
-		okButton.setText("OK");
+		okButton.setText("upload");
 		//pack();
 		setLocationRelativeTo(frame);
 		setVisible(true);

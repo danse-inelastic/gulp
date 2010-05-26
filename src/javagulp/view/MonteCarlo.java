@@ -10,6 +10,7 @@ import java.util.List;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
+import javagulp.view.constraints.ExternalFieldConstraints;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -53,6 +54,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	private final TitledPanel pnlTrialMoves = new TitledPanel();
 	private final TitledPanel pnlInsertedMolecules = new TitledPanel();
 	private final TitledPanel pnlOutputFrequency = new TitledPanel();
+	private final ExternalFieldConstraints pnlExternalField = new ExternalFieldConstraints();
 	//	private final TitledPanel pnloutputoptions = new TitledPanel();
 
 	private final TitledPanel pnlAtomInsertion = new TitledPanel();
@@ -187,7 +189,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlTrialMoves.add(txtmctrial);
 
 		pnlInsertedMolecules.setTitle("molecules to be inserted/deleted");
-		pnlInsertedMolecules.setBounds(0, 190, 304, 158);
+		pnlInsertedMolecules.setBounds(0, 190, 304, 156);
 		add(pnlInsertedMolecules);
 
 		//button.setBounds(258, 20, 36, 19);
@@ -292,7 +294,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlMaximumRotation.add(lblMaxRotationRatio);
 
 		pnlAtomInsertion.setTitle("species to be inserted/deleted");
-		pnlAtomInsertion.setBounds(310, 191, 308, 62);
+		pnlAtomInsertion.setBounds(624, 306, 434, 51);
 		add(pnlAtomInsertion);
 
 		txtSpecies.setBounds(72, 19, 84, 20);
@@ -309,6 +311,14 @@ public class MonteCarlo extends JPanel implements Serializable {
 
 		pnlRestart.setBounds(624, 179, 434, 121);
 		add(pnlRestart);
+		
+		pnlExternalField.radConstantVolume.setBounds(10, 53, 174, 23);
+		pnlExternalField.radConstantPressure.setBounds(10, 82, 174, 23);
+		pnlExternalField.radNone.setBounds(10, 24, 174, 23);
+
+
+		pnlExternalField.setBounds(310, 190, 304, 121);
+		add(pnlExternalField);
 
 		//don't think this works in all versions of gulp yet
 		//		pnloutputoptions.setBounds(660, 382, 468, 69);

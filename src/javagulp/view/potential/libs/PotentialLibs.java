@@ -20,10 +20,10 @@ public class PotentialLibs {
 //			"catlow.lib","finnissinclair.lib","suttonchen.lib",
 //			"clerirosato.lib","garofalini.lib","tersoff.lib"};
 	
-	public final String[] potentials = new String[]{"none","bush","dreiding","lewis","vashishta",
-			"carbonate","dreiding_ms","streitzmintmire",
-			"catlow","finnissinclair","suttonchen",
-			"clerirosato","garofalini","tersoff"};
+	public final String[] potentials = new String[]{"none","bks","bush","carbonate",
+			"catlow","clerirosato","dreiding","dreiding_ms","ffsioh","finnissinclair","garofalini",
+			"glue","johnson","lewis","meidavenport","streitzmintmire","suttonchen",
+			"tersoff","uff","vashishta"};
 
 	public Map<String,String> potentialContents = new HashMap<String,String>();
 
