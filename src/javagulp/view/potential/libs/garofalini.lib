@@ -17,6 +17,11 @@
 #  H  =   S. Blonski and S.H. Garofalini,
 #         J. Phys. Chem., 100, 2201-2205 (1995)
 #
+#  NOTE: The silica parameters differ between publications
+#  and the values from D.A. Litton and S.H. Garofalini,
+#  J. Appl. Phys., 89, 6013 (2001) are taken to be the 
+#  definitive ones.
+#
 # Turn off Ewald sum and charged interactions
 keyword noelectrostatics
 # Charges on species
@@ -59,7 +64,7 @@ Al core O  core 1554.1210 0.29 0.0 0.0 5.5
 Al core H  core   31.2070 0.29 0.0 0.0 5.5
 Si core Si core 1171.5201 0.29 0.0 0.0 5.5
 Si core O  core 1848.7174 0.29 0.0 0.0 5.5
-Si core H  core  430.6566 0.29 0.0 0.0 5.5
+Si core H  core   43.0664 0.29 0.0 0.0 5.5
 O  core O  core  452.5051 0.29 0.0 0.0 5.5
 O  core H  core  248.6324 0.29 0.0 0.0 5.5
 H  core H  core   21.2208 0.35 0.0 0.0 5.5
@@ -69,7 +74,7 @@ Na core Si core 1248.9041 0.29 0.0 0.0 5.5
 Na core O  core 1994.1273 0.29 0.0 0.0 5.5
 # Fermi-Dirac / complementary sigmoidal function
 fermi
-Si core H  core -29.04872  6.0 2.20 5.5
+Si core H  core  -2.90492  6.0 2.20 5.5
 H  core H  core  -3.29502  6.0 1.51 5.5
 H  core H  core   0.21676  2.0 2.42 5.5
 O  core H  core  -1.30071 15.0 1.05 5.5
@@ -81,10 +86,10 @@ O  core Al core Al core   6.241 109.5 2.00 2.60 2.60 5.20
 O  core Al core Si core   6.241 109.5 2.00 2.60 2.60 5.20
 O  core Al core H  core   6.241 109.5 2.00 2.60 2.60 5.20
 O  core Al core H  core 156.035 109.5 1.20 1.50 1.50 3.00
-O  core Si core Si core   6.241 109.5 2.00 2.60 2.60 5.20
-O  core Si core H  core   6.241 109.5 2.00 2.60 2.60 5.20
+O  core Si core Si core   1.872 109.5 2.00 2.60 2.60 5.20
+O  core Si core H  core  31.208 109.5 2.00 2.60 2.60 5.20
 O  core Si core H  core 156.035 109.5 1.20 1.50 1.50 3.00
 O  core H  core H  core 218.450 104.5 1.30 1.60 1.60 3.20
-Si core O  core O  core 149.794 109.5 2.80 3.00 3.00 6.00
+Si core O  core O  core 118.589 109.5 2.80 3.00 3.00 6.00
 sw3 modified
 Al core O  core O  core 149.794 109.5 2.80 3.00 3.00 6.00
