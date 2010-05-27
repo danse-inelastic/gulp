@@ -594,7 +594,6 @@ public class MonteCarlo extends JPanel implements Serializable {
 			for(final String groupOfAtoms : molecules){
 				lines += groupOfAtoms + Back.newLine;
 			}
-			lines += Back.newLine;
 		}
 		return lines;
 	}
@@ -606,7 +605,6 @@ public class MonteCarlo extends JPanel implements Serializable {
 			for(final String symbol : atoms){
 				lines += symbol+ Back.newLine;
 			}
-			lines += Back.newLine;
 		}
 		return lines;
 	}
