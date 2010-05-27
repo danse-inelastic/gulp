@@ -59,7 +59,6 @@ public class Execution extends JPanel implements Serializable {
 	private JScrollPane scrollPane;
 	private JLabel lblStatus;
 	private JTextArea txtVnfStatus;
-	private JLabel lblN;
 	private TitledPanel pnlVnfExecution;
 //	private TitledPanel pnlHighThroughput;
 	private TitledPanel howExecute;
@@ -75,8 +74,8 @@ public class Execution extends JPanel implements Serializable {
 	private final JLabel lblPassword = new JLabel("Password");
 	
 	public JTextField txtUsername = new JTextField();
-	public JTextField txtGulpBinary = new JTextField();
-	public JTextField txtWorkingDirectory = new JTextField(System.getProperty("user.home"));
+	public JTextField txtGulpBinary = new JTextField(Back.properties.get("executablePath"));
+	public JTextField txtWorkingDirectory = new JTextField(Back.properties.get("workingDirectory"));
 
 	private final JButton btnPause = new JButton("pause");
 	private final JButton btnGulpBinary = new JButton("gulp binary");
@@ -579,6 +578,7 @@ public class Execution extends JPanel implements Serializable {
 		radLocal.setBounds(10, 24, 161, 21);
 		placeOfExecution.add(radLocal);
 		grpExecute.add(radLocal);
+		radRemote.setEnabled(false);
 		radRemote.addActionListener(keyPlaceOfExecution);
 		radRemote.setBounds(10, 51, 161, 21);
 		placeOfExecution.add(radRemote);
@@ -682,6 +682,7 @@ public class Execution extends JPanel implements Serializable {
 			fileDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+				Back.properties.put("workingDirectory", fileDialog.getSelectedFile().getPath());
 				txtWorkingDirectory.setText(fileDialog.getSelectedFile().getPath());
 			}
 		}
@@ -698,6 +699,7 @@ public class Execution extends JPanel implements Serializable {
 					JOptionPane.showMessageDialog(Back.frame, "The gulp executable must start with the letters \"gulp\"");
 					this.actionPerformed(e);//call again
 				} else
+					Back.properties.put("executablePath", fileDialog.getSelectedFile().getPath());
 					txtGulpBinary.setText(fileDialog.getSelectedFile().getPath());
 			}
 		}

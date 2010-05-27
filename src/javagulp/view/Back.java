@@ -3,12 +3,24 @@ package javagulp.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Map;
 
 import javagulp.controller.GulpFileWriter;
 import javagulp.controller.IncompleteOptionException;
@@ -37,21 +49,56 @@ public class Back {
 	public static final Color grey = new Color(229, 229, 229);
 	public static final String newLine = System.getProperty("line.separator");
 	public static final String fileSeparator = System.getProperty("file.separator");
+	public static Map<String, String> properties = new HashMap<String,String>();
 
 	public Back() {
+		getUserSettings();
 		initializeFrame(null);
-
 		//default configuration
 		// Hack--until we can rip out multiple gulp runs
-//		Back.getTaskKeywords().putTaskKeywords("md");
+		//		Back.getTaskKeywords().putTaskKeywords("md");
 	}
 
 	public Back(String[] simulationParams) {
+		getUserSettings();
 		initializeFrame(simulationParams);
+	}
 
-		//default configuration
-		// Hack--until we can rip out multiple gulp runs
-//		Back.getTaskKeywords().putTaskKeywords("md");
+	private void getUserSettings(){
+		try{
+			// Open the file that is the first 
+			// command line parameter
+			FileInputStream fstream = new FileInputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+			//Read File Line By Line
+			while ((strLine = br.readLine()) != null)   {
+				String[] props = strLine.split(" ");
+				properties.put(props[0],props[1]);
+				//	    	    	if (props[0]=="executablePath")
+				//	    	    		properties.put("executablePath")
+			}
+			//Close the input stream
+			in.close();
+		}catch (Exception e){//Catch exception if any
+		}
+	}
+
+	private void writeUserSettings(){
+		try{
+			// Create file 
+			FileWriter fstream = new FileWriter(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
+			BufferedWriter out = new BufferedWriter(fstream);
+			for (final String key : properties.keySet()) {
+				out.write(key+" "+properties.get(key));
+			}
+			//Close the output stream
+			out.close();
+		}catch (Exception e){//Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
 	}
 
 	private void initializeFrame(String[] simulationParams){
@@ -71,7 +118,53 @@ public class Back {
 				(screenSize.height - frameSize.height) / 2);
 
 		frame.add(tabs);
-		addTab(simulationParams);
+		addTab(simulationParams);		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowListener(){
+			public void windowClosing(WindowEvent e) {
+				writeUserSettings();
+				frame.dispose();
+				//        ActionListener task = new ActionListener() {
+				//            boolean alreadyDisposed = false;
+				//            public void actionPerformed(ActionEvent e) {
+				//                if (frame.isDisplayable()) {
+				//                    alreadyDisposed = true;
+				//                    frame.dispose();
+				//                }
+				//            }
+				//        };
+			}
+
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		tabs.addKeyListener(new KeyAdapter() {
 			@Override
@@ -93,6 +186,20 @@ public class Back {
 			}
 		});
 		frame.setVisible(true);
+	}
+
+	public void windowClosing(WindowEvent e) {
+		writeUserSettings();
+		frame.dispose();
+		//        ActionListener task = new ActionListener() {
+		//            boolean alreadyDisposed = false;
+		//            public void actionPerformed(ActionEvent e) {
+		//                if (frame.isDisplayable()) {
+		//                    alreadyDisposed = true;
+		//                    frame.dispose();
+		//                }
+		//            }
+		//        };
 	}
 
 	public void addTab(String[] simulationParams) {
@@ -141,7 +248,7 @@ public class Back {
 	public static Structure getStructure() {
 		return (Structure) getCurrentRun().getStructures().tabs.getSelectedComponent();
 	}
-	
+
 	public static boolean getVnfmode() {
 		return getCurrentRun().vnfMode;
 	}

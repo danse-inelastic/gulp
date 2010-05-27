@@ -91,14 +91,14 @@ public class Potential extends JPanel {
 		//potentialListModel.addElement("none");
 		//try to get the potential names from the db
 		Object[] potentialNames =null;
-		try {
-			potentialNames = (Object[])getPotentialNamesFromDb();
-		} catch(final SocketTimeoutException e){
-			//if can't get them, just get their names from
-			potentialNames = (Object[])potentialLibs.potentials;
-		}
+//		try {
+//			potentialNames = (Object[])getPotentialNamesFromDb();
+//		} catch(final SocketTimeoutException e){
+//			//if can't get them, just get their names from
+//			potentialNames = (Object[])potentialLibs.potentials;
+//		}
 		//for now just get the potential names from the list
-		//potentialNames = (Object[])potentialLibs.potentials;
+		potentialNames = (Object[])potentialLibs.potentials;
 		for (final Object potentialName : potentialNames) {
 			// Get filename of file or directory
 			potentialListModel.addElement(potentialName);

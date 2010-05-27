@@ -62,6 +62,7 @@ public class AtomCombos extends JPanel implements Serializable {
 
 		for (int i=0; i < cboAtom.length; i++) {
 			cboAtom[i] = new JComboBox();
+			cboAtom[i].setEditable(true);
 		}
 
 		//cboAtom[0].addActionListener(keyAtom1);

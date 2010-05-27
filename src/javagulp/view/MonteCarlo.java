@@ -11,6 +11,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
 import javagulp.view.constraints.ExternalFieldConstraints;
+import javagulp.view.md.Temperature;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -41,6 +42,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 	//private TaskKeywordListener keyMonteCarlo = new TaskKeywordListener(chkMonteCarlo,
 	//		"montecarlo");
 
+	private final Temperature pnlTemperature = new Temperature(0);
 	private final TitledPanel pnlChemicalPotential = new TitledPanel();
 	private final TitledPanel pnlMaximumDisplacement = new TitledPanel();
 	private final TitledPanel pnlMaximumRotation = new TitledPanel();
@@ -114,6 +116,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 	public MonteCarlo() {
 		super();
 		setLayout(null);
+		
+		pnlTemperature.setBounds(310, 188, 308, 197);
+		add(pnlTemperature);
+		pnlTemperature.txtFirstStep.setEnabled(true);
 
 		pnlChemicalPotential.setTitle("chemical potential");
 		pnlChemicalPotential.setBounds(624, 0, 223, 51);
@@ -189,7 +195,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlTrialMoves.add(txtmctrial);
 
 		pnlInsertedMolecules.setTitle("molecules to be inserted/deleted");
-		pnlInsertedMolecules.setBounds(0, 190, 304, 156);
+		pnlInsertedMolecules.setBounds(0, 247, 304, 156);
 		add(pnlInsertedMolecules);
 
 		//button.setBounds(258, 20, 36, 19);
@@ -237,7 +243,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		//		pnlRestart.add(txtMcmeansNumAtoms);
 
 		pnlOutputFrequency.setTitle("frequency of binary configuration output");
-		pnlOutputFrequency.setBounds(624, 105, 434, 68);
+		pnlOutputFrequency.setBounds(624, 105, 434, 79);
 		add(pnlOutputFrequency);
 
 		txtMcsampleFrequency.setBounds(351, 20, 53, 19);
@@ -294,7 +300,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlMaximumRotation.add(lblMaxRotationRatio);
 
 		pnlAtomInsertion.setTitle("species to be inserted/deleted");
-		pnlAtomInsertion.setBounds(624, 306, 434, 51);
+		pnlAtomInsertion.setBounds(0, 190, 304, 51);
 		add(pnlAtomInsertion);
 
 		txtSpecies.setBounds(72, 19, 84, 20);
@@ -309,7 +315,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlAtomInsertion.add(getBtnAddSpecies());
 		// TODO txtareaSymbol does not appear in the GUI
 
-		pnlRestart.setBounds(624, 179, 434, 121);
+		pnlRestart.setBounds(624, 188, 434, 121);
 		add(pnlRestart);
 		
 		pnlExternalField.radConstantVolume.setBounds(10, 53, 174, 23);
@@ -317,8 +323,9 @@ public class MonteCarlo extends JPanel implements Serializable {
 		pnlExternalField.radNone.setBounds(10, 24, 174, 23);
 
 
-		pnlExternalField.setBounds(310, 190, 304, 121);
-		add(pnlExternalField);
+		pnlExternalField.setBounds(624, 179, 434, 121);
+		// conv is added automatically so don't need to worry abt. this panel
+		//add(pnlExternalField);
 
 		//don't think this works in all versions of gulp yet
 		//		pnloutputoptions.setBounds(660, 382, 468, 69);
@@ -580,27 +587,51 @@ public class MonteCarlo extends JPanel implements Serializable {
 		}
 		return lines;
 	}
-
 	private String writeMolecules() {
 		String lines = "";
-		if (!txtMolecule.getText().equals("")) {
+		if (molecules.size()>0) {
+			lines = "gcmcmolecule " + String.valueOf(molecules.size()) + Back.newLine;
 			for(final String groupOfAtoms : molecules){
-				lines += "gcmcmolecule " + groupOfAtoms + Back.newLine;
-			}
-		}
-		return lines;
-	}
-
-	private String writeSpecies() {
-		String lines = "gcmcspecies ";
-		if (!txtSpecies.getText().equals("")) {
-			for(final String symbol : atoms){
-				lines += symbol+" ";
+				lines += groupOfAtoms + Back.newLine;
 			}
 			lines += Back.newLine;
 		}
 		return lines;
 	}
+
+	private String writeSpecies() {
+		String lines = "";
+		if (atoms.size()>0) {
+			lines = "gcmcspecies " + String.valueOf(atoms.size()) + Back.newLine;
+			for(final String symbol : atoms){
+				lines += symbol+ Back.newLine;
+			}
+			lines += Back.newLine;
+		}
+		return lines;
+	}
+	
+//	private String writeMolecules() {
+//		String lines = "";
+//		if (!txtMolecule.getText().equals("")) {
+//			for(final String groupOfAtoms : molecules){
+//				lines += "gcmcmolecule " + groupOfAtoms + Back.newLine;
+//			}
+//		}
+//		return lines;
+//	}
+//
+//	private String writeSpecies() {
+//		String lines = "";
+//		if (!txtSpecies.getText().equals("")) {
+//			lines = "gcmcspecies ";
+//			for(final String symbol : atoms){
+//				lines += symbol+" ";
+//			}
+//			lines += Back.newLine;
+//		}
+//		return lines;
+//	}
 
 	public String writeMonteCarlo() throws IncompleteOptionException,
 	InvalidOptionException {
@@ -609,6 +640,7 @@ public class MonteCarlo extends JPanel implements Serializable {
 		+ writeMCTrial() + writeMCStep() + writeMCSample()
 		+ writeMCRotate() + writeMCOutfreq() + writeMCMeans()
 		+ writeMCMaxRotation() + writeMolecules() + writeSpecies()
+		+ pnlTemperature.writeTemperature()
 		+ pnlRestart.writeOption();
 	}
 
@@ -621,8 +653,10 @@ public class MonteCarlo extends JPanel implements Serializable {
 			btnAddMolecules = new JButton();
 			btnAddMolecules.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					molecules.add(txtareaMoleculeFile.getText());
-					txtareaMoleculeFile.setText("");
+//					molecules.add(txtareaMoleculeFile.getText());
+//					txtareaMoleculeFile.setText("");
+					molecules.add(txtMolecule.getText());
+					txtMolecule.setText("");
 				}
 			});
 			btnAddMolecules.setText("add");
