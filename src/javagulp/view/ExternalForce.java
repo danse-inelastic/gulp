@@ -110,7 +110,7 @@ public class ExternalForce extends JPanel implements Serializable {
 		pnltdexforce.add(scrpaneTdexForce);
 		tableTdexforce.setModel(tdExForceTableModel);
 		scrpaneTdexForce.setViewportView(tableTdexforce);
-		setUpForceColumn(tableTdexforce, tableTdexforce.getColumnModel().getColumn(2));
+		setUpForceColumn(tableTdexforce, tableTdexforce.getColumnModel().getColumn(1));
 		lblfA.setBounds(10, 10, 150, 15);
 		pnltdexforce.add(lblfA);
 		radexforce.setSelected(true);
@@ -138,6 +138,7 @@ public class ExternalForce extends JPanel implements Serializable {
 
 		// Set up the editor for the force cells.
 		final JComboBox comboBox = new JComboBox();
+		comboBox.addItem("");
 		comboBox.addItem("x");
 		comboBox.addItem("y");
 		comboBox.addItem("z");
