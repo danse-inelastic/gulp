@@ -49,6 +49,8 @@ public class Potential extends JPanel {
 	final JScrollPane scrollPane = new JScrollPane();
 	public JTextPane libraryDisplay = new JTextPane();
 	private final PotentialLibs potentialLibs = new PotentialLibs();
+	
+	final JButton uploadButton = new JButton();
 
 	public Potential() {
 		super();
@@ -72,11 +74,10 @@ public class Potential extends JPanel {
 		splitPane.setLeftComponent(panel);
 		panel.setPreferredSize(new Dimension(0, 40));
 
-		final JButton importButton = new JButton();
-		importButton.setText("upload");
+		uploadButton.setText("upload");
 		//importButton.setEnabled(false);
-		panel.add(importButton, BorderLayout.SOUTH);
-		importButton.addActionListener(new ActionListener() {
+		panel.add(uploadButton, BorderLayout.SOUTH);
+		uploadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				new PotentialUploadDialog(Back.frame);
 			}
@@ -112,6 +113,10 @@ public class Potential extends JPanel {
 		listSelectionModel = libraryList.getSelectionModel();
 		listSelectionModel.addListSelectionListener(new LibraryListener());
 		libraryList.setSelectedValue("none", true);
+		boolean vnfmode = Back.getVnfmode();
+		if(!vnfmode){
+			uploadButton.setEnabled(false);
+		}
 	}
 
 	private Object[] getPotentialNamesFromDb() throws Exception{ //ArrayList<String>
