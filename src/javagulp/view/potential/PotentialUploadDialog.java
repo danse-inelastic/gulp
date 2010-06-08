@@ -142,7 +142,7 @@ public class PotentialUploadDialog extends JDialog {
 
 	private void sendPotentialToServer(File potentialFile){
 		//read the file
-		final String contents = getContents(potentialFile);
+		final String content = getContents(potentialFile);
 
 		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 
@@ -152,7 +152,7 @@ public class PotentialUploadDialog extends JDialog {
 		uploadPotentialPost.put("routine", "storePotential");
 
 		uploadPotentialPost.put("actor", "material_simulations/forcefieldwizard");
-		uploadPotentialPost.put("actor.potentialContents", contents);
+		uploadPotentialPost.put("actor.potentialContent", content);
 		uploadPotentialPost.put("actor.potential_name", txtPotentialName.getText());
 		uploadPotentialPost.put("actor.potential_filename", potentialFile.getName());
 		uploadPotentialPost.put("actor.potentialDescription", txtDescription.getText());

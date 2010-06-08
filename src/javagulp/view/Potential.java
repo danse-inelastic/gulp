@@ -88,17 +88,22 @@ public class Potential extends JPanel {
 	public void populatePotentialList(){
 		//remove any previous entries--start from scratch
 		this.potentialListModel.clear();
-		potentialListModel.addElement("none");
-		//try to get the potential names from the db
-		Object[] potentialNames =null;
-		try {
-			potentialNames = (Object[])getPotentialNamesFromDb();
-		} catch(final SocketTimeoutException e){
-			//if can't get them, just get their names from
+		Object[] potentialNames= null;
+		//check to see if we're launching webstart
+		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
+		if (cgiMap.containsKey("cgihome")){
+			potentialListModel.addElement("none");
+			//try to get the potential names from the db
+			try {
+				potentialNames = (Object[])getPotentialNamesFromDb();
+			} catch(final Exception e){
+				//if can't get them, just get their names from list
+				potentialNames = (Object[])potentialLibs.potentials;
+			}
+		}else{
+			//otherwise just get the potential names from the list
 			potentialNames = (Object[])potentialLibs.potentials;
 		}
-		//for now just get the potential names from the list
-//		potentialNames = (Object[])potentialLibs.potentials;
 		for (final Object potentialName : potentialNames) {
 			// Get filename of file or directory
 			potentialListModel.addElement(potentialName);
@@ -109,7 +114,7 @@ public class Potential extends JPanel {
 		libraryList.setSelectedValue("none", true);
 	}
 
-	private Object[] getPotentialNamesFromDb() throws SocketTimeoutException{ //ArrayList<String>
+	private Object[] getPotentialNamesFromDb() throws Exception{ //ArrayList<String>
 		final Map<String,String> cgiMap = Back.getCurrentRun().cgiMap;
 		final String cgihome = cgiMap.get("cgihome");
 		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
