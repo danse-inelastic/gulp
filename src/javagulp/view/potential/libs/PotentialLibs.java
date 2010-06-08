@@ -85,11 +85,11 @@ public class PotentialLibs {
 		final CgiCommunicate cgiCom = new CgiCommunicate(cgihome);
 		final Map<String, String> getPotentialContentsQuery = new HashMap<String, String>();
 		getPotentialContentsQuery.put("actor", "dbObjToWeb");
-		getPotentialContentsQuery.put("routine", "getAssociatedData");
-		getPotentialContentsQuery.put("dbObjToWeb.tables", "gulppotential");
+		getPotentialContentsQuery.put("routine", "getPotentialContent");
+		//getPotentialContentsQuery.put("dbObjToWeb.tables", "gulppotential");
 		//getPotentialContentsQuery.put("dbObjToWeb.columns", "id");
-		getPotentialContentsQuery.put("dbObjToWeb.creator", "everyone");
-		getPotentialContentsQuery.put("dbObjToWeb.where", "id='"+potentialName+"'");
+		//getPotentialContentsQuery.put("dbObjToWeb.creator", "everyone");
+		getPotentialContentsQuery.put("actor.potential_name",potentialName);
 		//getPotentialContentsQuery.put("dbObjToWeb.filename_variable", "id='"+potentialName+"'");
 		//Back.getCurrentRun().putInAuthenticationInfo(getPotentialContentsQuery);
 		cgiCom.setCgiParams(getPotentialContentsQuery);
