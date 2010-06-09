@@ -390,7 +390,7 @@ public class Optimization extends JPanel implements Serializable {
 	private String writeSwitch_minimiser() throws IncompleteOptionException {
 		String lines = "";
 		final String s = txtSwitch_minimiserStoppingCriterionNum.getText();
-		if (s.equals(""))
+		if (s.equals("")&& cboSwitchOptimization.getSelectedIndex()!=0)
 			throw new IncompleteOptionException("Please enter optimizer switching criteria.");
 		if (!s.equals("") && cboSwitchOptimization.getSelectedIndex()!=0) {
 			Double.parseDouble(s);

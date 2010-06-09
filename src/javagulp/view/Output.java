@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -48,7 +49,7 @@ public class Output extends JPanel implements Serializable {
 
 	private final JPanel pnlCalculationTitle = new JPanel();
 
-	private final JTextField txtCalculationTitle = new JTextField();
+	private final JTextArea txtCalculationTitle = new JTextArea();
 	private final JTextField txtInfinity = new JTextField("infinity");
 	//public JTextField txtInputFile = new JTextField("input.gin");
 	public JTextField txtOutputFile = new JTextField("output.gout");
@@ -153,6 +154,7 @@ public class Output extends JPanel implements Serializable {
 				"calculation description", TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		txtCalculationTitle.setBounds(9, 20, 216, 166);
+		txtCalculationTitle.setLineWrap(true);
 		pnlCalculationTitle.add(txtCalculationTitle);
 
 		//add(pnlRestart);
