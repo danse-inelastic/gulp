@@ -1,5 +1,7 @@
 package javagulp.view.energetics;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
@@ -17,6 +19,7 @@ import javax.swing.JTextField;
 
 public class FreeEnergy extends TitledPanel implements Serializable {
 
+	private JCheckBox chkCalculateFreeEnergy;
 	private static final long serialVersionUID = 780810858009015977L;
 
 	private final G g = new G();
@@ -54,11 +57,11 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 		//		//panel.add(chkFreeEnergy);
 		//		add(chkFreeEnergy);
 		//		chkFreeEnergy.addActionListener(keyFreeEnergy);
-		chkUseTheZero.setBounds(7, 27, 419, 30);
+		chkUseTheZero.setBounds(10, 55, 419, 30);
 		//panel.add(chkUseTheZero);
 		add(chkUseTheZero);
 		chkUseTheZero.addActionListener(keyUseTheZero);
-		chkRunStaticOptimisation.setBounds(7, 63, 451, 25);
+		chkRunStaticOptimisation.setBounds(10, 91, 451, 25);
 		add(chkRunStaticOptimisation);
 		//panel.add(chkRunStaticOptimisation);
 		chkRunStaticOptimisation.addActionListener(keyRunStaticOptimisation);
@@ -70,7 +73,7 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 		//panel.add(pnlMaxRange);
 		add(pnlMaxRange);
 		pnlMaxRange.setTitle("maximum search range");
-		pnlMaxRange.setBounds(7, 108, 448, 134);
+		pnlMaxRange.setBounds(10, 122, 440, 134);
 		pnlMaxRange.setToolTipText("<html>For free energy minimisation, parameter sets the maximum<br>"
 				+ "search range for pairs of atoms interacting via the same many<br>"
 				+ "body term that gives a contribution to the third derivatives.<br>"
@@ -103,6 +106,7 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 		txtlowest_modehigh.setBackground(Back.grey);
 		txtlowest_modehigh.setBounds(260, 41, 63, 19);
 		pnlFreeEnergy.add(txtlowest_modehigh);
+		add(getChkUseTheZero_1());
 	}
 
 	private String writeLowestMode() throws IncompleteOptionException {
@@ -134,6 +138,22 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 
 	public String writeFreeEnergy() throws IncompleteOptionException, InvalidOptionException {
 		return pnlTemperature.writeTemperature() + writeLowestMode() + writeScMaxSearch();
+	}
+	/**
+	 * @return
+	 */
+	protected JCheckBox getChkUseTheZero_1() {
+		if (chkCalculateFreeEnergy == null) {
+			chkCalculateFreeEnergy = new JCheckBox();
+			chkCalculateFreeEnergy.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					Back.getKeys().putOrRemoveKeyword(chkCalculateFreeEnergy.isSelected(), "free_energy");
+				}
+			});
+			chkCalculateFreeEnergy.setText("calculate free energy instead of energy");
+			chkCalculateFreeEnergy.setBounds(10, 19, 419, 30);
+		}
+		return chkCalculateFreeEnergy;
 	}
 	/**
 	 * @return

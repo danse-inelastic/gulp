@@ -59,7 +59,7 @@ public class RunType extends JPanel implements Serializable {
 			put("optimization", "Optimization");
 			put("fit", "Fit");
 			put("phonons", "Phonons");
-			put("surface calc/optimize", "SurfaceOptions");
+			//put("surface calc/optimize", "SurfaceOptions");
 			put("transition state", "TransitionState");
 			put("structure prediction", "StructurePrediction");
 		}
@@ -75,7 +75,7 @@ public class RunType extends JPanel implements Serializable {
 			put("optimization", null);
 			put("fit", null);
 			put("phonons", null);
-			put("surface calc/optimize", null);
+			//put("surface calc/optimize", null);
 			put("transition state", null);
 			put("structure prediction", null);
 		}
@@ -85,14 +85,15 @@ public class RunType extends JPanel implements Serializable {
 			new HashMap<String, String>() {
 			//Anonymous Inner class
 			{
+				put("(free) energy", "");
 				put("molecular dynamics", "md");
 				put("monte carlo", "montecarlo conv");
-				put("energetics and material properties", "energy");
+				//put("energetics and material properties", "energy");
 				put("optimization", "optimise");
 				put("fit", "fit");
 				put("phonons", "phonon");
-				put("free energy calc/optimize", "free_energy");
-				put("surface calc/optimize", "");
+				//put("free energy calc/optimize", "free_energy");
+				//put("surface calc/optimize", "");
 				put("transition state", "transition_state");
 				put("structure prediction", "predict");
 			}
