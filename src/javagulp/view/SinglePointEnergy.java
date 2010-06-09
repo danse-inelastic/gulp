@@ -24,7 +24,10 @@ public class SinglePointEnergy extends JPanel implements Serializable {
 
 
 	}
-
+	
+	public String write(){
+		return "";
+	}
 //	public String writeMaximise() throws IncompleteOptionException {
 //		String lines = "";
 //		if (radFindTransitionState.isSelected()) {

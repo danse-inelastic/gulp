@@ -32,7 +32,7 @@ public class GulpFileWriter {
 			//					o.append(Back.getPanel().getStructures().writeStructures());
 			//			}
 			o.append(Back.getStructure().writeStructure());
-			o.append(((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).writeSurface());
+			//o.append(((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).writeSurface());
 			o.append(gr.getPotential().writeLibrary());
 			o.append(gr.getPotential().createLibrary.writePotentials());
 			//o.append(gr.getConstraints().writeUnfreeze());
@@ -40,8 +40,9 @@ public class GulpFileWriter {
 			o.append(gr.getPotentialOptions().writePotentialOptions());
 			o.append(gr.getElectrostatics().writeElectrostatics());
 			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
-			o.append(gr.getRunTypePanel().writeRuntype());
 			o.append(gr.getExternalForce().writeExternalForce());
+			o.append(gr.getEnergeticsPanel().write());
+			o.append(gr.getRunTypePanel().writeRuntype());
 			o.append(gr.getOutput().writeOutput());
 			//write keywords last after checking all the other components and storing keywords
 			completeFile = new StringBuffer(Back.getTaskKeywords().writeTaskKeywords()+Back.getKeys().writeKeywords()).append(o);

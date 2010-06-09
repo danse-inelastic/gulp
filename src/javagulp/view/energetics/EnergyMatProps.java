@@ -53,4 +53,8 @@ public class EnergyMatProps extends TitledPanel implements Serializable {
 		add(chkCalculateMaterial);
 		chkCalculateMaterial.addActionListener(keyCalculateMaterial);
 	}
+	
+	public String write(){
+		return "";
+	}
 }

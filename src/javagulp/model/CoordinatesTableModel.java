@@ -219,7 +219,7 @@ Serializable {//, CoordinatesTableModel {
 		final GulpRun gr = Back.getCurrentRun();
 		gr.getExternalForce().tdExForceTableModel.updateRows(getAtomsAndPositions());
 		gr.getExternalForce().exForceTableModel.updateRows(getAtomsAndPositions());
-		((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).coordList.update(getAtomsAndPositions());
+		//((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).coordList.update(getAtomsAndPositions());
 		refreshRows(gr.getPotentialOptions().polarisabilityTableModel, getCores());
 		refreshRows(gr.getChargesElementsBonding().speciesTableModel, getAtoms());
 		final Vector<String> v = new Vector<String>(getAtomsAndSpace());

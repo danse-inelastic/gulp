@@ -2,6 +2,8 @@ package javagulp.view;
 
 import java.io.Serializable;
 
+import javagulp.controller.IncompleteOptionException;
+import javagulp.controller.InvalidOptionException;
 import javagulp.view.energetics.EnergyMatProps;
 import javagulp.view.energetics.FreeEnergy;
 
@@ -22,4 +24,10 @@ public class Energetics extends JPanel implements Serializable {
 		freeEnergy.setBounds(10, 237, 936, 445);
 		add(freeEnergy);
 	}
+	
+	public String write() throws IncompleteOptionException, InvalidOptionException {
+		return energyMatProps.write() 
+		+ freeEnergy.write();
+	}
+	
 }

@@ -147,9 +147,9 @@ public class RunType extends JPanel implements Serializable {
 
 				scrollPane.setBounds(0, 56, 1154, 629);
 				add(scrollPane);
-				runTypes.put("optimization", new Optimization());
-				scrollPane.add(runTypes.get("optimization"));
-				scrollPane.setViewportView(runTypes.get("optimization"));
+				runTypes.put("(free) energy", new SinglePointEnergy());
+				scrollPane.add(runTypes.get("(free) energy"));
+				scrollPane.setViewportView(runTypes.get("(free) energy"));
 
 				cboRunType.setMaximumRowCount(30);
 				cboRunType.addActionListener(keyRunType);
@@ -172,7 +172,7 @@ public class RunType extends JPanel implements Serializable {
 						else if (optionChosen.equals("phonons"))
 							runtypeLines += ((Phonons)getSelectedRunTypePanel("phonons")).writePhonon();
 						else if (optionChosen.equals("free energy calc/optimize"))
-							runtypeLines += ((FreeEnergy)getSelectedRunTypePanel("free energy calc/optimize")).writeFreeEnergy();
+							runtypeLines += ((SinglePointEnergy)getSelectedRunTypePanel("(free) energy")).write();
 						else if (optionChosen.equals("fit")) {
 							runtypeLines += ((Fit)getSelectedRunTypePanel("fit")).writeFitOptions() +
 							((Fit)getSelectedRunTypePanel("fit")).fitPanelHolder.writeFitPanels();

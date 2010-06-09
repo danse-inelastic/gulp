@@ -141,7 +141,7 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 		return lines;
 	}
 
-	public String writeFreeEnergy() throws IncompleteOptionException, InvalidOptionException {
+	public String write() throws IncompleteOptionException, InvalidOptionException {
 		return pnlTemperature.writeTemperature() 
 		+ writeLowestMode() 
 		+ writeScMaxSearch()
