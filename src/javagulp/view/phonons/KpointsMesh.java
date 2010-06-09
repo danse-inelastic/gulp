@@ -24,7 +24,7 @@ class KpointsMesh extends TitledPanel {
 	private final JLabel lblZ = new JLabel("z");
 
 	//private final G g = new G();
-	private final JCheckBox chkDoNotUse = new JCheckBox("<html>do not use symmetry when reducing the number of kpoints</html>");
+	private final JCheckBox chkDoNotUse = new JCheckBox("<html>do not use symmetry when reducing kpoints</html>");
 
 	private final KeywordListener keyDoNotUse = new KeywordListener(chkDoNotUse, "noksymmetry");
 	final boolean vnfMode = Back.getVnfmode();
@@ -49,7 +49,7 @@ class KpointsMesh extends TitledPanel {
 			chkDoNotUse.setSelected(true);
 			chkDoNotUse.setEnabled(false);
 		}
-		chkDoNotUse.setBounds(7, 36, 462, 56);
+		chkDoNotUse.setBounds(7, 36, 372, 60);
 		add(chkDoNotUse);
 	}
 

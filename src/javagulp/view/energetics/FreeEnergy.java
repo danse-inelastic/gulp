@@ -11,6 +11,7 @@ import javagulp.view.Back;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
 import javagulp.view.md.Temperature;
+import javagulp.view.phonons.BrillouinIntegration;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -40,6 +41,7 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 	private final TitledPanel pnlFreeEnergy = new TitledPanel();
 	private final TitledPanel pnlMaxRange = new TitledPanel();
 	private final Temperature pnlTemperature = new Temperature(0);
+	private final BrillouinIntegration pnlBrillouinIntegration = new BrillouinIntegration();
 
 	private final JTextField txtlowest_modehigh = new JTextField();
 	private final JTextField txtlowest_modelow = new JTextField();
@@ -66,14 +68,17 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 		//panel.add(chkRunStaticOptimisation);
 		chkRunStaticOptimisation.addActionListener(keyRunStaticOptimisation);
 
-		pnlTemperature.setBounds(461, 101, 398, 193);
+		pnlTemperature.setBounds(464, 19, 440, 193);
 		//panel.add(pnlTemperature);
 		add(pnlTemperature);
+		pnlBrillouinIntegration.setBounds(10, 122, 440, 312);
+		//panel.add(pnlTemperature);
+		add(pnlBrillouinIntegration);
 
 		//panel.add(pnlMaxRange);
 		add(pnlMaxRange);
 		pnlMaxRange.setTitle("maximum search range");
-		pnlMaxRange.setBounds(10, 122, 440, 134);
+		pnlMaxRange.setBounds(464, 218, 440, 134);
 		pnlMaxRange.setToolTipText("<html>For free energy minimisation, parameter sets the maximum<br>"
 				+ "search range for pairs of atoms interacting via the same many<br>"
 				+ "body term that gives a contribution to the third derivatives.<br>"
@@ -96,7 +101,7 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 		//panel.add(pnlFreeEnergy);
 		add(pnlFreeEnergy);
 		pnlFreeEnergy.setTitle("free energy from band of frequencies");
-		pnlFreeEnergy.setBounds(464, 16, 398, 72);
+		pnlFreeEnergy.setBounds(464, 358, 440, 72);
 		lblLowestBand.setBounds(10, 22, 244, 15);
 		pnlFreeEnergy.add(lblLowestBand);
 		lblHighestBand.setBounds(10, 43, 244, 15);
@@ -137,7 +142,10 @@ public class FreeEnergy extends TitledPanel implements Serializable {
 	}
 
 	public String writeFreeEnergy() throws IncompleteOptionException, InvalidOptionException {
-		return pnlTemperature.writeTemperature() + writeLowestMode() + writeScMaxSearch();
+		return pnlTemperature.writeTemperature() 
+		+ writeLowestMode() 
+		+ writeScMaxSearch()
+		+ pnlBrillouinIntegration.write();
 	}
 	/**
 	 * @return

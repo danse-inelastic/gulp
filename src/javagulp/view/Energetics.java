@@ -17,9 +17,9 @@ public class Energetics extends JPanel implements Serializable {
 	public Energetics() {
 		super();
 		setLayout(null);
-		energyMatProps.setBounds(10, 10, 874, 221);
+		energyMatProps.setBounds(10, 10, 936, 221);
 		add(energyMatProps);
-		freeEnergy.setBounds(10, 237, 874, 311);
+		freeEnergy.setBounds(10, 237, 936, 445);
 		add(freeEnergy);
 	}
 }

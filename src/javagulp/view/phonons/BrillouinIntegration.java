@@ -46,7 +46,7 @@ public class BrillouinIntegration extends TitledPanel implements Serializable {
 		if (pnlBackdrop == null) {
 			pnlBackdrop = new JPanel();
 			pnlBackdrop.setLayout(new CardLayout());
-			pnlBackdrop.setBounds(10, 139, 487, 182);
+			pnlBackdrop.setBounds(10, 139, 421, 161);
 			pnlBackdrop.add(getPnlNone(), getPnlNone().getName());
 			pnlKpointsMesh.setName("pnlKpointsMesh");
 			pnlBackdrop.add(pnlKpointsMesh, pnlKpointsMesh.getName());
