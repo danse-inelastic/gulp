@@ -1,10 +1,13 @@
-package javagulp.view;
+package javagulp.view.energetics;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
+import javagulp.view.TitledPanel;
 import javagulp.view.md.Temperature;
 
 import javax.swing.JCheckBox;
@@ -12,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class FreeEnergy extends JPanel implements Serializable {
+public class FreeEnergy extends TitledPanel implements Serializable {
 
 	private static final long serialVersionUID = 780810858009015977L;
 
@@ -41,7 +44,7 @@ public class FreeEnergy extends JPanel implements Serializable {
 
 	public FreeEnergy() {
 		super();
-		setLayout(null);
+		setTitle("free energy options");
 
 		//final TitledPanel panel = new TitledPanel();
 		//panel.setBounds(0, 0, 1070, 425);
@@ -51,23 +54,23 @@ public class FreeEnergy extends JPanel implements Serializable {
 		//		//panel.add(chkFreeEnergy);
 		//		add(chkFreeEnergy);
 		//		chkFreeEnergy.addActionListener(keyFreeEnergy);
-		chkUseTheZero.setBounds(7, 10, 419, 30);
+		chkUseTheZero.setBounds(7, 27, 419, 30);
 		//panel.add(chkUseTheZero);
 		add(chkUseTheZero);
 		chkUseTheZero.addActionListener(keyUseTheZero);
-		chkRunStaticOptimisation.setBounds(7, 46, 451, 25);
+		chkRunStaticOptimisation.setBounds(7, 63, 451, 25);
 		add(chkRunStaticOptimisation);
 		//panel.add(chkRunStaticOptimisation);
 		chkRunStaticOptimisation.addActionListener(keyRunStaticOptimisation);
 
-		pnlTemperature.setBounds(461, 88, 398, 193);
+		pnlTemperature.setBounds(461, 101, 398, 193);
 		//panel.add(pnlTemperature);
 		add(pnlTemperature);
 
 		//panel.add(pnlMaxRange);
 		add(pnlMaxRange);
 		pnlMaxRange.setTitle("maximum search range");
-		pnlMaxRange.setBounds(7, 77, 448, 134);
+		pnlMaxRange.setBounds(7, 108, 448, 134);
 		pnlMaxRange.setToolTipText("<html>For free energy minimisation, parameter sets the maximum<br>"
 				+ "search range for pairs of atoms interacting via the same many<br>"
 				+ "body term that gives a contribution to the third derivatives.<br>"
@@ -90,7 +93,7 @@ public class FreeEnergy extends JPanel implements Serializable {
 		//panel.add(pnlFreeEnergy);
 		add(pnlFreeEnergy);
 		pnlFreeEnergy.setTitle("free energy from band of frequencies");
-		pnlFreeEnergy.setBounds(464, 10, 398, 72);
+		pnlFreeEnergy.setBounds(464, 16, 398, 72);
 		lblLowestBand.setBounds(10, 22, 244, 15);
 		pnlFreeEnergy.add(lblLowestBand);
 		lblHighestBand.setBounds(10, 43, 244, 15);
@@ -132,4 +135,7 @@ public class FreeEnergy extends JPanel implements Serializable {
 	public String writeFreeEnergy() throws IncompleteOptionException, InvalidOptionException {
 		return pnlTemperature.writeTemperature() + writeLowestMode() + writeScMaxSearch();
 	}
+	/**
+	 * @return
+	 */
 }

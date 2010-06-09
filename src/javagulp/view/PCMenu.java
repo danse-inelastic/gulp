@@ -36,7 +36,7 @@ public class PCMenu extends JMenuBar implements Serializable {
 	//	private JMenu TypeOfRun = new JMenu("Type of Run");
 	//	private JMenuItem MolecularDynamics = new JMenuItem("MolecularDynamics");
 	//	private JMenuItem MonteCarlo = new JMenuItem("Monte Carlo");
-	//	private JMenuItem EnergeticsMatProp = new JMenuItem("Energetics and Material Properties");
+	//	private JMenuItem EnergyMatProps = new JMenuItem("Energetics and Material Properties");
 	//	private JMenuItem Optimization = new JMenuItem("Optimization");
 	//	private JMenuItem Constraints = new JMenuItem("Constraints");
 	//	private JMenuItem Fit = new JMenuItem("Fit");

@@ -35,7 +35,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private final String[] tabNames = { "Structures", "Potential",
 			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
-			"EwaldOptions", "ExternalForce", "RunType", "Output", "Execution"  };
+			"EwaldOptions", "ExternalForce", "Energetics", "RunType", "Output", "Execution"  };
 
 	//private String[] bottomNames = {};
 	private final JPanel[] top = new JPanel[tabNames.length];
@@ -69,7 +69,7 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "electrostatics");
 		topPane.add(null, "ewald options");
 		topPane.add(null, "external force");
-		//topPane.add(null, "energy / mat. props options");
+		topPane.add(null, "energetics");
 		topPane.add(null, "run type");
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
@@ -284,16 +284,20 @@ public class GulpRun extends JPanel implements Serializable {
 		return (ExternalForce) getTopPanel(6);
 	}
 
+	public Energetics getEnergeticsPanel() {
+		return (Energetics) getTopPanel(7);
+	}
+	
 	public RunType getRunTypePanel() {
-		return (RunType) getTopPanel(7);
+		return (RunType) getTopPanel(8);
 	}
 
 	public Output getOutput() {
-		return (Output) getTopPanel(8);
+		return (Output) getTopPanel(9);
 	}
 
 	public Execution getExecution() {
-		return (Execution) getTopPanel(9);
+		return (Execution) getTopPanel(10);
 	}
 
 }

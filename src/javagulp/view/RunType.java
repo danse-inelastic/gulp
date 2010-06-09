@@ -9,6 +9,7 @@ import java.util.Map;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.SerialListener;
+import javagulp.view.energetics.FreeEnergy;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -27,16 +28,17 @@ public class RunType extends JPanel implements Serializable {
 
 	private final JLabel lblRunType = new JLabel("run type:");
 
-	private final String[] runTypeLabels = {"optimization", "fit",
-			"phonons", "free energy calc/optimize",
+	private final String[] runTypeLabels = {"(free) energy", 
+			"optimization", "fit",
+			"phonons", //"free energy calc/optimize",
 			"molecular dynamics", "monte carlo",
-			"energetics and material properties",
+			//"energetics and material properties",
 			//"surface calc/optimize",
 			"transition state",
-	"structure prediction"};
+			"structure prediction"};
 
 	//	private String[] runTypeClassNames = { "MolecularDynamics", "MonteCarlo",
-	//			"EnergeticsMatProp", "Optimization", "Fit", "Phonons", "FreeEnergy",
+	//			"EnergyMatProps", "Optimization", "Fit", "Phonons", "FreeEnergy",
 	//			"TransitionState", "StructurePrediction", "Surface"};
 
 	//TODO probably should combine free energy with optimize and energy tabs with option panel and/or checkbox in each which, if checked,
@@ -53,11 +55,10 @@ public class RunType extends JPanel implements Serializable {
 		{
 			put("molecular dynamics", "MolecularDynamics");
 			put("monte carlo", "MonteCarlo");
-			put("energetics and material properties", "EnergeticsMatProp");
+			put("(free) energy", "SinglePointEnergy");
 			put("optimization", "Optimization");
 			put("fit", "Fit");
 			put("phonons", "Phonons");
-			put("free energy calc/optimize", "FreeEnergy");
 			put("surface calc/optimize", "SurfaceOptions");
 			put("transition state", "TransitionState");
 			put("structure prediction", "StructurePrediction");
@@ -70,11 +71,10 @@ public class RunType extends JPanel implements Serializable {
 		{
 			put("molecular dynamics", null);
 			put("monte carlo", null);
-			put("energetics and material properties", null);
+			put("(free) energy", null);
 			put("optimization", null);
 			put("fit", null);
 			put("phonons", null);
-			put("free energy calc/optimize", null);
 			put("surface calc/optimize", null);
 			put("transition state", null);
 			put("structure prediction", null);
@@ -242,8 +242,8 @@ public class RunType extends JPanel implements Serializable {
 			//		return (MonteCarlo) getRunType(1);
 			//	}
 			//
-			//	private EnergeticsMatProp getEnergeticsMatProp() {
-			//		return (EnergeticsMatProp) getRunType(2);
+			//	private EnergyMatProps getEnergeticsMatProp() {
+			//		return (EnergyMatProps) getRunType(2);
 			//	}
 			//
 			//	public Optimization getOptimization() {
