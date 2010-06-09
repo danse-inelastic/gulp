@@ -168,7 +168,7 @@ public class RunType extends JPanel implements Serializable {
 						if (optionChosen.equals("optimization"))
 							runtypeLines += ((Optimization)getSelectedRunTypePanel("optimization")).writeOptimization();
 						else if (optionChosen.equals("structure prediction"))
-							runtypeLines += ((StructurePrediction)getSelectedRunTypePanel("structure prediction")).writeStructurePrediction();
+							runtypeLines += ((StructurePrediction)getSelectedRunTypePanel("structure prediction")).write();
 						else if (optionChosen.equals("phonons"))
 							runtypeLines += ((Phonons)getSelectedRunTypePanel("phonons")).writePhonon();
 						else if (optionChosen.equals("free energy calc/optimize"))

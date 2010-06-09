@@ -57,7 +57,10 @@ Serializable {
 		final String step = txtStepSize.getText();
 		final double init = sldInitial.getValue(), finl = sldFinal.getValue();
 		if (init != 80 || finl != 80 || !step.equals("0.0")) {
-			lines = "tournament " + (init/100) + " " + (finl/100);
+			lines = "tournament " + (init/100);
+			if (finl != 80) {
+				lines += " " + (finl/100);
+			}
 			if (!step.equals("0.0")) {
 				Double.parseDouble(step);
 				lines += " " + step;

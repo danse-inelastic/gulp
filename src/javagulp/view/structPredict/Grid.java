@@ -63,7 +63,7 @@ public class Grid extends TitledPanel implements Serializable {
 			} else {
 				if (!max.equals("")) {
 					Integer.parseInt(max);
-					lines += " " + max;
+					lines += " " + max + " " + n;
 				}
 			}
 			lines += Back.newLine;

@@ -41,19 +41,24 @@ public class CrossoverProbability extends TitledPanel {
 	String writeCrossover() throws IncompleteOptionException {
 		String lines = "";
 		final String min = txtMin.getText(), max = txtMax.getText(), inc = txtIncrease.getText();
-		if (!min.equals("0.4") && !max.equals("0.4") && inc.equals("0.0")) {
-			if (min.equals("") || max.equals("") || inc.equals(""))
-				throw new IncompleteOptionException("Please enter a values for crossover probability.");
-			Double.parseDouble(min);
-			Double.parseDouble(max);
-			Double.parseDouble(inc);
-			lines = "crossover " + txtMin.getText();
-			if (!inc.equals("0.0")) {
+		if (!min.equals("0.4")){
+			lines = "crossover " + min;
+			if (!max.equals("0.4"))
 				lines += " " + max + " " + inc;
-			} else {
-				if (!max.equals("0.4"))
-					lines += " " + max;
-			}
+//					&& inc.equals("0.0")) {
+//		}
+//			if (min.equals("") || max.equals("") || inc.equals(""))
+//				throw new IncompleteOptionException("Please enter a values for crossover probability.");
+//			Double.parseDouble(min);
+//			Double.parseDouble(max);
+//			Double.parseDouble(inc);
+//			
+//			if (!inc.equals("0.0")) {
+//				
+//			} else {
+//				if (!max.equals("0.4"))
+//					lines += " " + max;
+//			}
 			lines += Back.newLine;
 		}
 		return lines;

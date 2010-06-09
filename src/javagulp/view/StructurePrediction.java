@@ -97,11 +97,16 @@ public class StructurePrediction extends JPanel implements Serializable {
 			add(cboTypeOfPrediction);
 		}
 
-		public String writeStructurePrediction() throws IncompleteOptionException, InvalidOptionException {
+		public String write() throws IncompleteOptionException, InvalidOptionException {
 			String lines = "";
-			if (cboTypeOfPrediction.getSelectedItem().equals("genetic algorithms"))
-				lines = pnlGeneticAlgorithm.writeGeneticAlgorithm();
-			else
+			String algType = (String)cboTypeOfPrediction.getSelectedItem();
+			Back.getKeys().putOrRemoveKeyword(algType.equals("genetic algorithms"), "genetic");
+			Back.getKeys().putOrRemoveKeyword(algType.equals("simulated annealing"), "anneal");
+			if (algType.equals("genetic algorithms")){
+				lines+="predict"+Back.newLine;
+				lines+= pnlGeneticAlgorithm.writeGeneticAlgorithm();
+				lines+="end"+Back.newLine;
+			}else
 				lines = pnlSimulatedAnnealing.writeSimulatedAnnealing();
 			return lines;
 		}
