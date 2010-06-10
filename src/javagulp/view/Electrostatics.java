@@ -213,10 +213,11 @@ public class Electrostatics extends JPanel implements Serializable {
 
 	public String writeElectrostatics() throws IncompleteOptionException,
 	InvalidOptionException {
-		return pnlqeq.writeQeq() + writeElectrostaticCalculationPoints()
-		+ pnlCalculatePotential.writePotgrid()
-		+ pnlMortiers.writeElectronegativity()
-		+ pnlSnm.writeSmelectronegativity();
+		return writeElectrostaticCalculationPoints()
+		+ pnlCalculatePotential.writePotgrid();
+//		+ pnlqeq.writeQeq()
+//		+ pnlMortiers.writeElectronegativity()
+//		+ pnlSnm.writeSmelectronegativity();
 	}
 
 }

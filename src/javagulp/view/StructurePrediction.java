@@ -98,8 +98,6 @@ public class StructurePrediction extends JPanel implements Serializable {
 			cboTypeOfPrediction.addActionListener(keyTypeOfPrediction);
 			cboTypeOfPrediction.setBounds(271, 14, 169, 24);
 			add(cboTypeOfPrediction);
-			String alg = (String)cboTypeOfPrediction.getSelectedItem();
-			Back.getKeys().putOrRemoveKeyword(alg=="genetic algorithms", "genetic");
 		}
 
 		public String write() throws IncompleteOptionException, InvalidOptionException {

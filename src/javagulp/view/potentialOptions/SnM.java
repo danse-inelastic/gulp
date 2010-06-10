@@ -42,9 +42,6 @@ public class SnM extends JPanel implements Serializable {
 	public SnM() {
 		super();
 		setLayout(null);
-
-
-
 		cbosmatom.setBounds(56, 49, 78, 26);
 		add(cbosmatom);
 		lblzeta.setBounds(5, 126, 60, 15);
@@ -79,7 +76,7 @@ public class SnM extends JPanel implements Serializable {
 		String lines = "";
 		if (Back.getCurrentRun().getElectrostatics().chkStreitzAndMintmire.isSelected()) {
 			if (cbosmatom.getSelectedItem() == null || cbosmatom.getSelectedItem() == "")
-				throw new IncompleteOptionException("Please enter an atom for mortiers electrostatics.");
+				throw new IncompleteOptionException("Please enter an atom for streitz and mintmire electrostatics.");
 			final JTextField[] fields = {txtchi, txtmu, txtzeta, txtZnuc};
 			final String[] descriptions = {"Streitz and Mintmire chi", "Streitz and Mintmire mu", "Streitz and Mintmire zeta", "Streitz and Mintmire Znuc"};
 			Back.checkAllNonEmpty(fields, descriptions);
