@@ -195,7 +195,7 @@ public class RunType extends JPanel implements Serializable {
 						public void actionPerformed(final ActionEvent e) {
 							final String optionChosen = (String)cboRunType.getSelectedItem();
 							listModel.addElement(optionChosen);
-							Back.getTaskKeywords().putTaskKeywords(runTypeKeywords.get(optionChosen));
+							Back.getTaskKeywords().putOrRemoveTaskKeyword(true, runTypeKeywords.get(optionChosen));
 							//getList().repaint();
 						}
 					});

@@ -266,11 +266,7 @@ public class Fit extends JPanel implements Serializable {
 		private static final long serialVersionUID = -4174465371049719236L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(rboFit.isSelected()){
-				Back.getTaskKeywords().putTaskKeywords("fit");
-			}else{
-				Back.getTaskKeywords().putTaskKeywords("fbfgs");
-			}
+			Back.getTaskKeywords().putOrRemoveTaskKeyword(rboFullHessian.isSelected(), "fbfgs");
 		}
 	};
 }

@@ -27,11 +27,14 @@ public class StructurePrediction extends JPanel implements Serializable {
 		private static final long serialVersionUID = 6109026665099623842L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Back.getTaskKeywords().putTaskKeywords(structurePredTypes.get(cboTypeOfPrediction.getSelectedItem()));
-			if (cboTypeOfPrediction.getSelectedItem().equals("genetic algorithms"))
-				scrollPane.setViewportView(pnlGeneticAlgorithm);
-			else
-				scrollPane.setViewportView(pnlSimulatedAnnealing);
+			String alg = (String)cboTypeOfPrediction.getSelectedItem();
+			Back.getKeys().putOrRemoveKeyword(alg=="genetic algorithms", "genetic");
+			Back.getKeys().putOrRemoveKeyword(alg=="simulated annealing", "anneal");
+//			Back.getKeys().putTaskKeyword(structurePredTypes.get(cboTypeOfPrediction.getSelectedItem()));
+//			if (cboTypeOfPrediction.getSelectedItem().equals("genetic algorithms"))
+//				scrollPane.setViewportView(pnlGeneticAlgorithm);
+//			else
+//				scrollPane.setViewportView(pnlSimulatedAnnealing);
 		}
 	};
 	private final JComboBox cboTypeOfPrediction = new JComboBox(new String[] {
@@ -52,15 +55,15 @@ public class StructurePrediction extends JPanel implements Serializable {
 	//		}
 	//	};
 
-	private final Map<String, String> structurePredTypes =
-		new HashMap<String, String>()
-		{
-		//Anonymous Inner class
-		{
-			put("genetic algorithms", "predict genetic");
-			put("simulated annealing", "predict anneal");
-		}
-		};
+//	private final Map<String, String> structurePredTypes =
+//		new HashMap<String, String>()
+//		{
+//		//Anonymous Inner class
+//		{
+//			put("genetic algorithms", "predict genetic");
+//			put("simulated annealing", "predict anneal");
+//		}
+//		};
 
 		//	private void updateKeywords() {
 		//		Back.getTaskKeywords().putTaskKeywords(structurePredTypes.get(cboCrystalStructure.getSelectedItem()));
@@ -95,11 +98,14 @@ public class StructurePrediction extends JPanel implements Serializable {
 			cboTypeOfPrediction.addActionListener(keyTypeOfPrediction);
 			cboTypeOfPrediction.setBounds(271, 14, 169, 24);
 			add(cboTypeOfPrediction);
+			String alg = (String)cboTypeOfPrediction.getSelectedItem();
+			Back.getKeys().putOrRemoveKeyword(alg=="genetic algorithms", "genetic");
 		}
 
 		public String write() throws IncompleteOptionException, InvalidOptionException {
 			String lines = "";
 			String algType = (String)cboTypeOfPrediction.getSelectedItem();
+			//Back.getTaskKeywords().putOrRemoveTaskKeyword(algType.equals("genetic algorithms"), "genetic");
 			Back.getKeys().putOrRemoveKeyword(algType.equals("genetic algorithms"), "genetic");
 			Back.getKeys().putOrRemoveKeyword(algType.equals("simulated annealing"), "anneal");
 			if (algType.equals("genetic algorithms")){

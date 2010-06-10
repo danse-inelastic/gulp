@@ -8,6 +8,7 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.SerialListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -24,54 +25,37 @@ public class TransitionState extends JPanel implements Serializable {
 	private final JTextField txtModeNumber = new JTextField();
 	private final JTextField txtOrderOfTransitionState = new JTextField("1");
 
-	private final JRadioButton radInvokeRational = new JRadioButton();
-	private final JRadioButton radInvokeRFO = new JRadioButton();
-	private final JRadioButton radNone1 = new JRadioButton();
-	private final JRadioButton radNone2 = new JRadioButton();
+	private final JRadioButton radAnyOrder = new JRadioButton();
+	private final JRadioButton radFirstOrder = new JRadioButton();
+	private final JRadioButton radNone = new JRadioButton();
 	private final JRadioButton radFindTransitionState = new JRadioButton("find transition state along mode number");
 	private final JRadioButton radTransitionStateOfOrder = new JRadioButton("or find transition state of order");
 
-	private final SerialListener keyInvokeRational = new SerialListener() {
+	private final SerialListener keyTransitionAlgType = new SerialListener() {
 		private static final long serialVersionUID = 5665428119022612136L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Back.getTaskKeywords().putTaskKeywords("transition_state");
-			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radInvokeRational.isSelected(), "rfo");
+			Back.getTaskKeywords().putOrRemoveTaskKeyword(radAnyOrder.isSelected(), "transition_state");
+			Back.getTaskKeywords().putOrRemoveTaskKeyword(radFirstOrder.isSelected(), "rfo");
+			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radAnyOrder.isSelected(), "rfo");
 		}
 	};
-	private final SerialListener keyInvokeRFO = new SerialListener() {
-		private static final long serialVersionUID = -8125830214860897746L;
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Back.getTaskKeywords().putTaskKeywords("rfo");
-			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radInvokeRFO.isSelected(), "transition_state");
-		}
-	};
+//	private final SerialListener keyInvokeRFO = new SerialListener() {
+//		private static final long serialVersionUID = -8125830214860897746L;
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			Back.getTaskKeywords().putTaskKeyword("rfo");
+//			//Back.getTaskKeywords().putOrRemoveTaskKeyword(radFirstOrder.isSelected(), "transition_state");
+//		}
+//	};
 
 	public TransitionState() {
 		super();
 		setLayout(null);
-		//this.setPreferredSize(new java.awt.Dimension(483, 287));
-
-		final TitledPanel pnlRFOOptions = new TitledPanel();
-		pnlRFOOptions.setTitle("RFO options");
-		pnlRFOOptions.setBounds(0, 196, 476, 84);
-		add(pnlRFOOptions);
-		btnGroupRFOOptions.add(radFindTransitionState);
-		radFindTransitionState.setBounds(7, 35, 390, 21);
-		pnlRFOOptions.add(radFindTransitionState);
-		txtModeNumber.setBounds(403, 35, 63, 21);
-		pnlRFOOptions.add(txtModeNumber);
-		btnGroupRFOOptions.add(radTransitionStateOfOrder);
-		radTransitionStateOfOrder.setBounds(7, 56, 390, 21);
-		pnlRFOOptions.add(radTransitionStateOfOrder);
-		txtOrderOfTransitionState.setBounds(403, 56, 63, 21);
-		pnlRFOOptions.add(txtOrderOfTransitionState);
-		pnlRFOOptions.add(radNone2);
-		radNone2.setText("none");
-		radNone2.setBounds(7, 14, 120, 21);
-		btnGroupRFOOptions.add(radNone2);
-		radNone2.setSelected(true);
+		radNone.setText("none");
+		radNone.setBounds(7, 23, 120, 21);
+		btnGroupRFOOptions.add(radNone);
+		radNone.setSelected(true);
 
 		final JPanel pnlTransitionState = new JPanel();
 		pnlTransitionState.setBorder(new TitledBorder(null,
@@ -79,39 +63,53 @@ public class TransitionState extends JPanel implements Serializable {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 		pnlTransitionState.setLayout(null);
-		pnlTransitionState.setBounds(0, 0, 478, 192);
+		pnlTransitionState.setBounds(0, 0, 835, 97);
 		add(pnlTransitionState);
 
-		radInvokeRational.setBounds(14, 63, 21, 28);
-		pnlTransitionState.add(radInvokeRational);
-		btnGroupTransitionState.add(radInvokeRational);
-		radInvokeRational.addActionListener(keyInvokeRational);
+		radAnyOrder.setBounds(14, 60, 810, 28);
+		radAnyOrder.setText("search for stationary points of any order");
+		pnlTransitionState.add(radAnyOrder);
+		btnGroupTransitionState.add(radAnyOrder);
+		radAnyOrder.addActionListener(keyTransitionAlgType);
+		
+//		final JTextArea txtareaInvokeRFO = new JTextArea("invoke RFO to find the nearest stationary point with one negative hessian eigenvalue (first order transition state)");
+//		txtareaInvokeRFO.setBounds(35, 105, 427, 77);
+//		pnlTransitionState.add(txtareaInvokeRFO);
+//		txtareaInvokeRFO.setFont(new Font("Sans", Font.BOLD, 12));
+//		txtareaInvokeRFO.setOpaque(false);
+//		txtareaInvokeRFO.setWrapStyleWord(true);
+//		txtareaInvokeRFO.setLineWrap(true);
+//		pnlTransitionState.add(txtareaInvokeTheRational);
+//		txtareaInvokeTheRational.setFont(new Font("Sans", Font.BOLD, 12));
+//		txtareaInvokeTheRational.setOpaque(false);
+//		txtareaInvokeTheRational.setWrapStyleWord(true);
+//		txtareaInvokeTheRational.setLineWrap(true);
 
-		final JTextArea txtareaInvokeTheRational = new JTextArea("invoke Rational Function Optimisation (RFO) to search for stationary points of any order. By default the optimizer searches for the minimum and may prove advantageous over the standard optimizer if the hessian is ill-conditioned.");
-		txtareaInvokeTheRational.setBounds(35, 42, 427, 63);
-		pnlTransitionState.add(txtareaInvokeTheRational);
-		txtareaInvokeTheRational.setFont(new Font("Sans", Font.BOLD, 12));
-		txtareaInvokeTheRational.setOpaque(false);
-		txtareaInvokeTheRational.setWrapStyleWord(true);
-		txtareaInvokeTheRational.setLineWrap(true);
 
-		final JTextArea txtareaInvokeRFO = new JTextArea("invoke RFO to find the nearest stationary point with one negative hessian eigenvalue (first order transition state). A transition state optimization will only lead to one negative phonon frequency if the calculation is run without any crystal symmetry.");
-		txtareaInvokeRFO.setBounds(35, 105, 427, 77);
-		pnlTransitionState.add(txtareaInvokeRFO);
-		txtareaInvokeRFO.setFont(new Font("Sans", Font.BOLD, 12));
-		txtareaInvokeRFO.setOpaque(false);
-		txtareaInvokeRFO.setWrapStyleWord(true);
-		txtareaInvokeRFO.setLineWrap(true);
 
-		radInvokeRFO.setBounds(14, 119, 21, 28);
-		pnlTransitionState.add(radInvokeRFO);
-		btnGroupTransitionState.add(radInvokeRFO);
-		pnlTransitionState.add(radNone1);
-		radNone1.setText("none");
-		radNone1.setBounds(14, 21, 93, 21);
-		radInvokeRFO.addActionListener(keyInvokeRFO);
-		btnGroupTransitionState.add(radNone1);
-		radNone1.setSelected(true);
+		radFirstOrder.setBounds(14, 26, 811, 28);
+		radFirstOrder.setText("find the nearest stationary point with one negative hessian eigenvalue (first order transition state)");
+		pnlTransitionState.add(radFirstOrder);
+		btnGroupTransitionState.add(radFirstOrder);
+		radFirstOrder.addActionListener(keyTransitionAlgType);
+		//this.setPreferredSize(new java.awt.Dimension(483, 287));
+
+		final TitledPanel pnlRFOOptions = new TitledPanel();
+		pnlRFOOptions.setBounds(0, 103, 835, 120);
+		add(pnlRFOOptions);
+		pnlRFOOptions.setTitle("rational function optimization options");
+		btnGroupRFOOptions.add(radFindTransitionState);
+		radFindTransitionState.setBounds(7, 56, 390, 21);
+		pnlRFOOptions.add(radFindTransitionState);
+		txtModeNumber.setBounds(403, 56, 63, 21);
+		pnlRFOOptions.add(txtModeNumber);
+		btnGroupRFOOptions.add(radTransitionStateOfOrder);
+		radTransitionStateOfOrder.setBounds(7, 89, 390, 21);
+		radTransitionStateOfOrder.setSelected(true);
+		pnlRFOOptions.add(radTransitionStateOfOrder);
+		txtOrderOfTransitionState.setBounds(403, 89, 63, 21);
+		pnlRFOOptions.add(txtOrderOfTransitionState);
+		pnlRFOOptions.add(radNone);
 
 	}
 
