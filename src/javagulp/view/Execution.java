@@ -74,8 +74,8 @@ public class Execution extends JPanel implements Serializable {
 	private final JLabel lblPassword = new JLabel("Password");
 	
 	public JTextField txtUsername = new JTextField();
-	public JTextField txtGulpBinary = new JTextField(Back.properties.get("executablePath"));
-	public JTextField txtWorkingDirectory = new JTextField(Back.properties.get("workingDirectory"));
+	public JTextField txtGulpBinary = new JTextField(Back.atomSimProps.getProperty("executablePath"));
+	public JTextField txtWorkingDirectory = new JTextField(Back.atomSimProps.getProperty("workingDirectory"));
 
 	private final JButton btnPause = new JButton("pause");
 	private final JButton btnGulpBinary = new JButton("gulp binary");
@@ -208,6 +208,7 @@ public class Execution extends JPanel implements Serializable {
 
 		void logJob(){
 			//queue jobs
+			// each job consists of a directory in which the job will be run and the contents of the input file
 			jobs.clear();
 			if (multipleStructures.chkSeparate.isSelected()) {
 				final int temp = Back.getCurrentRun().getStructures().tabs.getSelectedIndex();
@@ -218,7 +219,7 @@ public class Execution extends JPanel implements Serializable {
 				}
 				Back.getCurrentRun().getStructures().tabs.setSelectedIndex(temp);
 			} else {
-				jobs.add(new String[]{"", Back.writer.gulpInputFileToString()});
+				jobs.add(new String[]{"", Back.writer.gulpInputFileToString()}); // run it directly in the working directory w/o a subdirectory
 			}
 		}
 	};
@@ -391,29 +392,42 @@ public class Execution extends JPanel implements Serializable {
 					while ((job = getJob()) != null) {
 						//create directory
 						final String path = Back.getCurrentRun().getWD() + Back.fileSeparator + job[0];
-						final File directory = new File(path);
-						directory.mkdir();
+						final File jobDir = new File(path);
+						jobDir.mkdir();
+						//write the file
+						FileWriter fw;
+						try {
+							fw = new FileWriter(jobDir + Back.fileSeparator + Back.getCurrentRun().getOutput().selectedInputFile);
+							fw.write(job[1]);
+							fw.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
 
 						try {
 							Back.getCurrentRun().getExecution().addStatus(job[0], "localhost");
 							Back.getCurrentRun().getExecution().updateStatus(job[0], "running");
+//							final String[] commands = new String[] {
+//									Back.getCurrentRun().getBinary(), Back.getCurrentRun().getOutput().selectedInputFile,
+//									Back.getCurrentRun().getOutput().txtOutputFile.getText() };
 							final String[] commands = new String[] {
-									Back.getCurrentRun().getBinary(), Back.getCurrentRun().getOutput().selectedInputFile,
-									Back.getCurrentRun().getOutput().txtOutputFile.getText() };
-							final Process p = Runtime.getRuntime().exec(commands, null, directory);
-							final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-							bw.write(job[1]);
-							bw.close();
-
-							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-							final BufferedWriter writer = new BufferedWriter(
-									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
-							String line = "";
-							while ((line = br.readLine()) != null) {
-								writer.write(line + System.getProperty("line.separator"));
-							}
-							br.close();
-							writer.close();
+									Back.getCurrentRun().getBinary()+"<"+Back.getCurrentRun().getOutput().selectedInputFile+
+									">"+Back.getCurrentRun().getOutput().txtOutputFile.getText() };
+							final Process p = Runtime.getRuntime().exec(commands, null, jobDir);
+//							final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+//							bw.write(job[1]);
+//							bw.close();
+//
+//							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//							final BufferedWriter writer = new BufferedWriter(
+//									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
+//							String line = "";
+//							while ((line = br.readLine()) != null) {
+//								writer.write(line + System.getProperty("line.separator"));
+//							}
+//							br.close();
+//							writer.close();
 							p.waitFor();
 							Back.getCurrentRun().getExecution().updateStatus(job[0], "done");
 						} catch (final IOException e1) {
@@ -682,7 +696,7 @@ public class Execution extends JPanel implements Serializable {
 			fileDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fileDialog.setCurrentDirectory(new File(txtWorkingDirectory.getText()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-				Back.properties.put("workingDirectory", fileDialog.getSelectedFile().getPath());
+				Back.atomSimProps.put("workingDirectory", fileDialog.getSelectedFile().getPath());
 				txtWorkingDirectory.setText(fileDialog.getSelectedFile().getPath());
 			}
 		}
@@ -699,7 +713,7 @@ public class Execution extends JPanel implements Serializable {
 					JOptionPane.showMessageDialog(Back.frame, "The gulp executable must start with the letters \"gulp\"");
 					this.actionPerformed(e);//call again
 				} else
-					Back.properties.put("executablePath", fileDialog.getSelectedFile().getPath());
+					Back.atomSimProps.put("executablePath", fileDialog.getSelectedFile().getPath());
 					txtGulpBinary.setText(fileDialog.getSelectedFile().getPath());
 			}
 		}

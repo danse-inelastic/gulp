@@ -16,9 +16,11 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.Map;
 
@@ -40,7 +42,7 @@ import javax.swing.WindowConstants;
 
 public class Back {
 
-	public static final String version = "AtomSim 0.5";
+	public static final String version = "AtomSim 1.0";
 	public static final JFrame frame = new JFrame(version);
 	public static final GulpFileWriter writer = new GulpFileWriter();
 	//No access modifier (default access), so access is limited to the same package.
@@ -49,7 +51,8 @@ public class Back {
 	public static final Color grey = new Color(229, 229, 229);
 	public static final String newLine = System.getProperty("line.separator");
 	public static final String fileSeparator = System.getProperty("file.separator");
-	public static Map<String, String> properties = new HashMap<String,String>();
+	//public static Map<String, String> properties = new HashMap<String,String>();
+	static Properties atomSimProps = new Properties();
 
 	public Back() {
 		getUserSettings();
@@ -66,34 +69,43 @@ public class Back {
 
 	private void getUserSettings(){
 		try{
-			// Open the file that is the first 
-			// command line parameter
-			FileInputStream fstream = new FileInputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			//Read File Line By Line
-			while ((strLine = br.readLine()) != null)   {
-				String[] props = strLine.split(" ");
-				properties.put(props[0],props[1]);
-				//	    	    	if (props[0]=="executablePath")
-				//	    	    		properties.put("executablePath")
-			}
-			//Close the input stream
+			// create and load default properties
+			FileInputStream in = new FileInputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
+			atomSimProps.load(in);
 			in.close();
 		}catch (Exception e){//Catch exception if any
 		}
+		//		try{
+		//			// Open the file that is the first 
+		//			// command line parameter
+		//			FileInputStream fstream = new FileInputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
+		//			// Get the object of DataInputStream
+		//			DataInputStream in = new DataInputStream(fstream);
+		//			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		//			String strLine;
+		//			//Read File Line By Line
+		//			while ((strLine = br.readLine()) != null)   {
+		//				String[] props = strLine.split(" ");
+		//				properties.put(props[0],props[1]);
+		//				//	    	    	if (props[0]=="executablePath")
+		//				//	    	    		properties.put("executablePath")
+		//			}
+		//			//Close the input stream
+		//			in.close();
+		//		}catch (Exception e){//Catch exception if any
+		//		}
 	}
 
 	private void writeUserSettings(){
 		try{
-			// Create file 
-			FileWriter fstream = new FileWriter(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
-			BufferedWriter out = new BufferedWriter(fstream);
-			for (final String key : properties.keySet()) {
-				out.write(key+" "+properties.get(key));
-			}
+			FileOutputStream out = new FileOutputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
+			atomSimProps.store(out, "---No Comment---");
+//			// Create file 
+//			FileWriter fstream = new FileWriter(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
+//			BufferedWriter out = new BufferedWriter(fstream);
+//			for (final String key : properties.keySet()) {
+//				out.write(key+" "+properties.get(key));
+//			}
 			//Close the output stream
 			out.close();
 		}catch (Exception e){//Catch exception if any
@@ -137,32 +149,32 @@ public class Back {
 
 			public void windowActivated(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			public void windowClosed(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			public void windowDeactivated(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			public void windowDeiconified(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			public void windowIconified(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			public void windowOpened(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
