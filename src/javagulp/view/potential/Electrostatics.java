@@ -44,9 +44,9 @@ public class Electrostatics extends JPanel implements Serializable {
 
 	private final JCheckBox chkElectrostaticSitePotentials = new JCheckBox("print electrostatic site potentials and their first derivatives");
 	private final JCheckBox chkFirstDerivative = new JCheckBox("<html>calculate first derivatives of atomic charges with respect to atomic coordinates and strain as calculated by  EEM or QEq</html>");
-	public final JCheckBox chkMortiers = new JCheckBox("use Mortiers electronegativity equalization to determine charges");
-	public final JCheckBox chkqeq = new JCheckBox("use QEQ electronegativity equalization to determine charges");
-	public final JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization to determine charges");
+	public final JCheckBox chkMortiers = new JCheckBox("Mortiers electronegativity equalization");
+	public final JCheckBox chkqeq = new JCheckBox("QEQ electronegativity equalization");
+	public final JCheckBox chkStreitzAndMintmire = new JCheckBox("Streitz and Mintmire electronegativity equalization");
 
 
 
@@ -166,13 +166,13 @@ public class Electrostatics extends JPanel implements Serializable {
 		pnlCalculate.setTitle("calculate charges");
 		add(pnlCalculate);
 		chkMortiers.addActionListener(keyMortiers);
-		chkMortiers.setBounds(10, 22, 430, 25);
+		chkMortiers.setBounds(10, 22, 501, 25);
 		pnlCalculate.add(chkMortiers);
 		chkqeq.addActionListener(keyqeq);
 		chkqeq.setBounds(10, 53, 462, 25);
 		pnlCalculate.add(chkqeq);
 		chkStreitzAndMintmire.addActionListener(keyStreitzAndMintmire);
-		chkStreitzAndMintmire.setBounds(10, 84, 562, 25);
+		chkStreitzAndMintmire.setBounds(10, 84, 501, 25);
 		pnlCalculate.add(chkStreitzAndMintmire);
 
 		chkElectrostaticSitePotentials.addActionListener(keyElectrostaticSitePotentials);

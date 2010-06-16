@@ -11,6 +11,7 @@ import javagulp.controller.InvalidFileException;
 import javagulp.view.Back;
 import javagulp.view.GulpRun;
 import javagulp.view.MolecularDynamics;
+import javagulp.view.Potential;
 import javagulp.view.SurfaceOptions;
 
 import javax.swing.DefaultComboBoxModel;
@@ -217,30 +218,31 @@ Serializable {//, CoordinatesTableModel {
 
 	protected void updateAllAtomicLists() {
 		final GulpRun gr = Back.getCurrentRun();
+		final Potential pot = gr.getPotential();
 		gr.getExternalForce().tdExForceTableModel.updateRows(getAtomsAndPositions());
 		gr.getExternalForce().exForceTableModel.updateRows(getAtomsAndPositions());
 		//((SurfaceOptions)gr.getSelectedRunTypePanel("surface calc/optimize")).coordList.update(getAtomsAndPositions());
-		refreshRows(gr.getPotentialOptions().polarisabilityTableModel, getCores());
-		refreshRows(gr.getChargesElementsBonding().speciesTableModel, getAtoms());
+		refreshRows(pot.potentialOptions.polarisabilityTableModel, getCores());
+		refreshRows(pot.chargesElementsBonding.speciesTableModel, getAtoms());
 		final Vector<String> v = new Vector<String>(getAtomsAndSpace());
-		gr.getPotentialOptions().cboSpecies.setModel(new DefaultComboBoxModel(v));
-		for (final JComboBox element : gr.getPotential().createLibrary.pnlAtom.cboAtom)
+		pot.potentialOptions.cboSpecies.setModel(new DefaultComboBoxModel(v));
+		for (final JComboBox element : pot.createLibrary.pnlAtom.cboAtom)
 			element.setModel(new DefaultComboBoxModel(v));
 		((MolecularDynamics)gr.getSelectedRunTypePanel("molecular dynamics")).pnlMDmass.cboShellmassSpecies.setModel(new DefaultComboBoxModel(v));
-		gr.getElectrostatics().pnlMortiers.cboeematom.setModel(new DefaultComboBoxModel(v));
-		gr.getElectrostatics().pnlqeq.cboatom.setModel(new DefaultComboBoxModel(v));
-		gr.getElectrostatics().pnlSnm.cbosmatom.setModel(new DefaultComboBoxModel(v));
+		pot.electrostatics.pnlMortiers.cboeematom.setModel(new DefaultComboBoxModel(v));
+		pot.electrostatics.pnlqeq.cboatom.setModel(new DefaultComboBoxModel(v));
+		pot.electrostatics.pnlSnm.cbosmatom.setModel(new DefaultComboBoxModel(v));
 
 		// fire the selection changed
 		final int number = gr.getPotential().createLibrary.getCurrentPotential().potentialNumber;
 		if (number == 1) {
-			gr.getPotential().createLibrary.cboOneBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboOneBodyPotential.getSelectedIndex());
+			pot.createLibrary.cboOneBodyPotential.setSelectedIndex(pot.createLibrary.cboOneBodyPotential.getSelectedIndex());
 		} else if (number == 2) {
-			gr.getPotential().createLibrary.cboTwoBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboTwoBodyPotential.getSelectedIndex());
+			pot.createLibrary.cboTwoBodyPotential.setSelectedIndex(pot.createLibrary.cboTwoBodyPotential.getSelectedIndex());
 		} else if (number == 3) {
-			gr.getPotential().createLibrary.cboThreeBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboThreeBodyPotential.getSelectedIndex());
+			pot.createLibrary.cboThreeBodyPotential.setSelectedIndex(pot.createLibrary.cboThreeBodyPotential.getSelectedIndex());
 		} else if (number == 4) {
-			gr.getPotential().createLibrary.cboFourBodyPotential.setSelectedIndex(gr.getPotential().createLibrary.cboFourBodyPotential.getSelectedIndex());
+			pot.createLibrary.cboFourBodyPotential.setSelectedIndex(pot.createLibrary.cboFourBodyPotential.getSelectedIndex());
 		} else
 			;// error
 	}
