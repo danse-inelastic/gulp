@@ -13,7 +13,11 @@ import javagulp.controller.CgiCommunicate;
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.JCopy;
 import javagulp.model.SerialListener;
+import javagulp.view.potential.ChargesElementsBonding;
 import javagulp.view.potential.CreateLibrary;
+import javagulp.view.potential.Electrostatics;
+import javagulp.view.potential.EwaldOptions;
+import javagulp.view.potential.PotentialOptions;
 import javagulp.view.potential.PotentialUploadDialog;
 import javagulp.view.potential.libs.PotentialLibs;
 
@@ -46,6 +50,10 @@ public class Potential extends JPanel {
 	public String libraryContents = "";
 	public CreateLibrary createLibrary = new CreateLibrary();
 	public JPanel useLibrary = new JPanel();
+	public PotentialOptions potentialOptions = new PotentialOptions();
+	public ChargesElementsBonding chargesElementsBonding = new ChargesElementsBonding();
+	public Electrostatics electrostatics = new Electrostatics();
+	public EwaldOptions ewaldOptions = new EwaldOptions();
 	final JScrollPane scrollPane = new JScrollPane();
 	public JTextPane libraryDisplay = new JTextPane();
 	private final PotentialLibs potentialLibs = new PotentialLibs();
@@ -62,7 +70,11 @@ public class Potential extends JPanel {
 		useLibrary.setLayout(new BorderLayout());
 		tabbedPane.addTab("use library", null, useLibrary, null);
 		tabbedPane.addTab("create library (experimental)", null, createLibrary, null);
-
+		tabbedPane.addTab("potential options", null, potentialOptions, null);
+		tabbedPane.addTab("charges, elements and bonding", null, potentialOptions, null);
+		tabbedPane.addTab("electrostatics", null, potentialOptions, null);
+		tabbedPane.addTab("ewald options", null, potentialOptions, null);
+		
 		final JSplitPane splitPane = new JSplitPane();
 		useLibrary.add(splitPane);
 

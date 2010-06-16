@@ -1,4 +1,4 @@
-package javagulp.view;
+package javagulp.view.potential;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,9 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.model.GenericTableModel;
 import javagulp.model.SerialListener;
-import javagulp.view.potential.IconHeaderRenderer;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
+import javagulp.view.TitledPanel;
 import javagulp.view.potentialOptions.ResetPotentials;
 
 import javax.swing.ButtonGroup;

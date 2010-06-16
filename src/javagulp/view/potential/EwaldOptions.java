@@ -1,9 +1,12 @@
-package javagulp.view;
+package javagulp.view.potential;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
+import javagulp.view.Back;
+import javagulp.view.KeywordListener;
+import javagulp.view.TitledPanel;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;

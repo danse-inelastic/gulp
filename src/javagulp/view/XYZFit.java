@@ -29,11 +29,12 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
-import utility.function.Atom;
+//import utility.function.Atom;
+import javagulp.model.Atom;
 import javagulp.model.Value;
 import javagulp.model.G;
 import javagulp.model.SerialListener;
-import utility.parsers.WorkspaceParser;
+//import utility.parsers.WorkspaceParser;
 
 public class XYZFit extends JPanel implements Serializable {
 	private static final long serialVersionUID = 936292957400705240L;
@@ -116,7 +117,7 @@ public class XYZFit extends JPanel implements Serializable {
 	private File addFile(JTextField box, Object o) {
 		JFileChooser fileDialog = new JFileChooser();
 		fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+		fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 		File f = null;
 		if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 			f = fileDialog.getSelectedFile();
@@ -138,7 +139,7 @@ public class XYZFit extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileDialog = new JFileChooser();
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileDialog.setCurrentDirectory(new File(Back.getPanel().getWD()));
+			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 				File file = fileDialog.getSelectedFile();
 				WorkspaceParser wp = new WorkspaceParser(file.getParentFile());
@@ -163,8 +164,8 @@ public class XYZFit extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			ArrayList<PPP> current = new ArrayList<PPP>();
-			Potential pot = Back.getPanel().getPotential();
-			for (PotentialPanel p: pot.potentialPanels) {
+			Potential pot = Back.getCurrentRun().getPotential();
+			for (PotentialPanel p: pot.createLibrary.potentialPanels) {
 				for (PPP ppp: p.params) {
 					if (ppp.chk.isSelected())
 						current.add(ppp);
@@ -206,17 +207,17 @@ public class XYZFit extends JPanel implements Serializable {
 
 					//get desired PotentialPanels/PPPs
 					int[] indices1 = null;
-					Potential pot = Back.getPanel().getPotential();
-					if (chkPotentials.isSelected() && pot.potentialList.getSelectedIndex() != -1)
-						indices1 = pot.potentialList.getSelectedIndices();
+					Potential pot = Back.getCurrentRun().getPotential();
+					if (chkPotentials.isSelected() && pot.createLibrary.potentialList.getSelectedIndex() != -1)
+						indices1 = pot.createLibrary.potentialList.getSelectedIndices();
 					else {
-						indices1 = new int[pot.potentialPanels.size()];
+						indices1 = new int[pot.createLibrary.potentialPanels.size()];
 						for (int i=0; i < indices1.length; i++)
 							indices1[i] = i;
 					}
 
 					for (int i=0; i < indices1.length; i++) {
-						PotentialPanel p = pot.potentialPanels.get(indices1[i]);
+						PotentialPanel p = pot.createLibrary.potentialPanels.get(indices1[i]);
 						for (int j=0; j < p.params.length; j++) {
 							PPP ppp = p.params[j];
 							// DO NOT REMOVE BRACKETS. For whatever reason,
@@ -269,7 +270,7 @@ public class XYZFit extends JPanel implements Serializable {
 								if (chkInitialize.isSelected()) {
 									ppp.txt.setText("" + (r.nextFloat() * (ppp.max - ppp.min) + ppp.min));
 								}
-								Back.getPanel().getOutput().keyRun.actionPerformed(null);
+								Back.getCurrentRun().getExecution().keySubmit.actionPerformed(null);
 								ArrayList<PPP> current = new ArrayList<PPP>();
 								current.add(ppp);
 								FitParams fp;
@@ -406,8 +407,8 @@ public class XYZFit extends JPanel implements Serializable {
 	private FitParams parse(ArrayList<PPP> ppps) {
 		FitParams fp = null;
 		try {
-			String outputFile = Back.getPanel().getWD()
-			+ "/" + Back.getPanel().getOutput().txtOutputFile.getText();
+			String outputFile = Back.getCurrentRun().getWD()
+			+ "/" + Back.getCurrentRun().getOutput().txtOutputFile.getText();
 			Scanner sc = new Scanner(new File(outputFile));
 			String p = "     Parameter No.       Parameter Value          Parameter Type  Species";
 			String e = "   Observable no.  Type            Observable   Calculated    Residual  Error(%)";
@@ -445,7 +446,7 @@ public class XYZFit extends JPanel implements Serializable {
 		this.setPreferredSize(new java.awt.Dimension(804, 360));
 
 		add(lblMessage);
-		lblMessage.setBounds(7, 7, 301, 70);
+		lblMessage.setBounds(7, 7, 732, 70);
 
 		add(btnXYZ);
 		btnXYZ.setBounds(7, 77, 91, 28);
@@ -489,18 +490,18 @@ public class XYZFit extends JPanel implements Serializable {
 		add(lblGULP);
 		lblGULP.setBounds(105, 285, 301, 28);
 		add(chkFractional);
-		chkFractional.setBounds(413, 77, 210, 28);
+		chkFractional.setBounds(413, 77, 326, 28);
 		add(chkRandom);
 		chkRandom.setSelected(true);
 		chkRandom.setMargin(new Insets(0, 0, 0, 0));
-		chkRandom.setBounds(413, 180, 217, 28);
+		chkRandom.setBounds(413, 180, 326, 28);
 		add(lblIterations);
 		lblIterations.setBounds(413, 250, 168, 28);
 		add(txtIterations);
 		txtIterations.setBounds(581, 250, 49, 28);
 		add(chkInitialize);
 		chkInitialize.setSelected(true);
-		chkInitialize.setBounds(413, 215, 217, 28);
+		chkInitialize.setBounds(413, 215, 326, 28);
 		add(progress);
 		progress.setBounds(7, 318, 650, 25);
 		progress.setMinimum(0);
@@ -514,9 +515,9 @@ public class XYZFit extends JPanel implements Serializable {
 		add(lblTimeElapsed);
 		lblTimeElapsed.setBounds(601, 285, 200, 28);
 		add(chkPotentials);
-		chkPotentials.setBounds(413, 112, 217, 28);
+		chkPotentials.setBounds(413, 112, 326, 28);
 		add(chkParameters);
-		chkParameters.setBounds(413, 147, 217, 28);
+		chkParameters.setBounds(413, 147, 326, 28);
 
 	}
 
@@ -540,7 +541,7 @@ public class XYZFit extends JPanel implements Serializable {
 					double[][] vector = three.getVector();
 					for (int i = 0; i < lines; i++) {
 						Atom a = atoms.get(index).get(i);
-						double[] point = three.convertToCartesian(a.p.toArray(), vector, false);
+						double[] point = three.convertToCartesian(a.p, vector, false);
 						String charge = "";
 						if (netCharges != null)
 							charge = " " + netCharges.get(index).y[i];

@@ -17,6 +17,10 @@ import javagulp.model.Keywords;
 import javagulp.model.Material;
 import javagulp.model.TaskKeywords;
 import javagulp.view.Structures.Structure;
+import javagulp.view.potential.ChargesElementsBonding;
+import javagulp.view.potential.Electrostatics;
+import javagulp.view.potential.EwaldOptions;
+import javagulp.view.potential.PotentialOptions;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,8 +38,8 @@ public class GulpRun extends JPanel implements Serializable {
 	private static final long serialVersionUID = -4350272075095363083L;
 
 	private final String[] tabNames = { "Structures", "Potential",
-			"PotentialOptions", "ChargesElementsBonding", "Electrostatics",
-			"EwaldOptions", "ExternalForce", "Energetics", "RunType", "Output", "Execution"  };
+			//"PotentialOptions", "ChargesElementsBonding", "Electrostatics", "EwaldOptions", 
+			"ExternalForce", "Energetics", "RunType", "Output", "Execution"  };
 
 	//private String[] bottomNames = {};
 	private final JPanel[] top = new JPanel[tabNames.length];
@@ -64,7 +68,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 		topPane.add(null, "structures");
 		topPane.add(null, "potentials");
-		topPane.add(null, "potential options");
+		//topPane.add(null, "potential options");
 		topPane.add(null, "charges, elements and bonding");
 		topPane.add(null, "electrostatics");
 		topPane.add(null, "ewald options");
