@@ -11,7 +11,6 @@ import javagulp.model.SerialListener;
 import javagulp.view.Back;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
-import javagulp.view.potentialOptions.ResetPotentials;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
