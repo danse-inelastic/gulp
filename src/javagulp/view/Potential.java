@@ -71,9 +71,9 @@ public class Potential extends JPanel {
 		tabbedPane.addTab("use library", null, useLibrary, null);
 		tabbedPane.addTab("create library (experimental)", null, createLibrary, null);
 		tabbedPane.addTab("potential options", null, potentialOptions, null);
-		tabbedPane.addTab("charges, elements and bonding", null, potentialOptions, null);
-		tabbedPane.addTab("electrostatics", null, potentialOptions, null);
-		tabbedPane.addTab("ewald options", null, potentialOptions, null);
+		tabbedPane.addTab("charges, elements and bonding", null, chargesElementsBonding, null);
+		tabbedPane.addTab("electrostatics", null, electrostatics, null);
+		tabbedPane.addTab("ewald options", null, ewaldOptions, null);
 		
 		final JSplitPane splitPane = new JSplitPane();
 		useLibrary.add(splitPane);
@@ -196,12 +196,28 @@ public class Potential extends JPanel {
 		final String[] newName = name.split("\\.");
 		return newName[0];
 	}
+	
+//	public PotentialOptions getPotentialOptions() {
+//	return (PotentialOptions) getTopPanel(2);
+//}
+//
+//public ChargesElementsBonding getChargesElementsBonding() {
+//	return (ChargesElementsBonding) getTopPanel(3);
+//}
+//
+//public Electrostatics getElectrostatics() {
+//	return (Electrostatics) getTopPanel(4);
+//}
+//
+//public EwaldOptions getEwaldOptions() {
+//	return (EwaldOptions) getTopPanel(5);
+//}
 
 	public String writeLibrary() throws IncompleteOptionException {
 		String lines = "";
 		if (potentialSelected!="none")
 			lines = "library " + potentialSelected;
-		if (Back.getCurrentRun().getPotentialOptions().chkDoNotInclude.isSelected())
+		if (potentialOptions.chkDoNotInclude.isSelected())
 			lines += " nodump";
 		if (lines!="")
 			lines += Back.newLine;

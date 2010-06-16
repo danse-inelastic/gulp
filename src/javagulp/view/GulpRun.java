@@ -69,9 +69,9 @@ public class GulpRun extends JPanel implements Serializable {
 		topPane.add(null, "structures");
 		topPane.add(null, "potentials");
 		//topPane.add(null, "potential options");
-		topPane.add(null, "charges, elements and bonding");
-		topPane.add(null, "electrostatics");
-		topPane.add(null, "ewald options");
+		//topPane.add(null, "charges, elements and bonding");
+		//topPane.add(null, "electrostatics");
+		//topPane.add(null, "ewald options");
 		topPane.add(null, "external force");
 		topPane.add(null, "energetics");
 		topPane.add(null, "run type");
@@ -258,8 +258,6 @@ public class GulpRun extends JPanel implements Serializable {
 		return getRunTypePanel().getSelectedRunTypePanel(type);
 	}
 
-
-
 	public Structures getStructures() {
 		return (Structures) getTopPanel(0);
 	}
@@ -268,40 +266,40 @@ public class GulpRun extends JPanel implements Serializable {
 		return (Potential) getTopPanel(1);
 	}
 
-	public PotentialOptions getPotentialOptions() {
-		return (PotentialOptions) getTopPanel(2);
-	}
-
-	public ChargesElementsBonding getChargesElementsBonding() {
-		return (ChargesElementsBonding) getTopPanel(3);
-	}
-
-	public Electrostatics getElectrostatics() {
-		return (Electrostatics) getTopPanel(4);
-	}
-
-	public EwaldOptions getEwaldOptions() {
-		return (EwaldOptions) getTopPanel(5);
-	}
+//	public PotentialOptions getPotentialOptions() {
+//		return (PotentialOptions) getTopPanel(2);
+//	}
+//
+//	public ChargesElementsBonding getChargesElementsBonding() {
+//		return (ChargesElementsBonding) getTopPanel(3);
+//	}
+//
+//	public Electrostatics getElectrostatics() {
+//		return (Electrostatics) getTopPanel(4);
+//	}
+//
+//	public EwaldOptions getEwaldOptions() {
+//		return (EwaldOptions) getTopPanel(5);
+//	}
 
 	public ExternalForce getExternalForce() {
-		return (ExternalForce) getTopPanel(6);
+		return (ExternalForce) getTopPanel(2);
 	}
 
 	public Energetics getEnergeticsPanel() {
-		return (Energetics) getTopPanel(7);
+		return (Energetics) getTopPanel(3);
 	}
 	
 	public RunType getRunTypePanel() {
-		return (RunType) getTopPanel(8);
+		return (RunType) getTopPanel(4);
 	}
 
 	public Output getOutput() {
-		return (Output) getTopPanel(9);
+		return (Output) getTopPanel(5);
 	}
 
 	public Execution getExecution() {
-		return (Execution) getTopPanel(10);
+		return (Execution) getTopPanel(6);
 	}
 
 }

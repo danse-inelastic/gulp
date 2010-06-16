@@ -36,10 +36,10 @@ public class GulpFileWriter {
 			o.append(gr.getPotential().writeLibrary());
 			o.append(gr.getPotential().createLibrary.writePotentials());
 			//o.append(gr.getConstraints().writeUnfreeze());
-			o.append(gr.getEwaldOptions().writeEwald());
-			o.append(gr.getPotentialOptions().writePotentialOptions());
-			o.append(gr.getElectrostatics().writeElectrostatics());
-			o.append(gr.getChargesElementsBonding().writeChargesElementsBonding());
+			o.append(gr.getPotential().ewaldOptions.writeEwald());
+			o.append(gr.getPotential().potentialOptions.writePotentialOptions());
+			o.append(gr.getPotential().electrostatics.writeElectrostatics());
+			o.append(gr.getPotential().chargesElementsBonding.writeChargesElementsBonding());
 			o.append(gr.getExternalForce().writeExternalForce());
 			o.append(gr.getEnergeticsPanel().write());
 			o.append(gr.getRunTypePanel().writeRuntype());
