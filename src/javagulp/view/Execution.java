@@ -408,26 +408,27 @@ public class Execution extends JPanel implements Serializable {
 						try {
 							Back.getCurrentRun().getExecution().addStatus(job[0], "localhost");
 							Back.getCurrentRun().getExecution().updateStatus(job[0], "running");
+							final String commands = Back.getCurrentRun().getBinary();
 //							final String[] commands = new String[] {
 //									Back.getCurrentRun().getBinary(), Back.getCurrentRun().getOutput().selectedInputFile,
 //									Back.getCurrentRun().getOutput().txtOutputFile.getText() };
-							final String[] commands = new String[] {
-									Back.getCurrentRun().getBinary()+"<"+Back.getCurrentRun().getOutput().selectedInputFile+
-									">"+Back.getCurrentRun().getOutput().txtOutputFile.getText() };
+//							final String[] commands = new String[] {
+//									Back.getCurrentRun().getBinary()+"<"+Back.getCurrentRun().getOutput().selectedInputFile+
+//									">"+Back.getCurrentRun().getOutput().txtOutputFile.getText() };
 							final Process p = Runtime.getRuntime().exec(commands, null, jobDir);
-//							final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-//							bw.write(job[1]);
-//							bw.close();
-//
-//							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//							final BufferedWriter writer = new BufferedWriter(
-//									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
-//							String line = "";
-//							while ((line = br.readLine()) != null) {
-//								writer.write(line + System.getProperty("line.separator"));
-//							}
-//							br.close();
-//							writer.close();
+							final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+							bw.write(job[1]);
+							bw.close();
+
+							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+							final BufferedWriter writer = new BufferedWriter(
+									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
+							String line = "";
+							while ((line = br.readLine()) != null) {
+								writer.write(line + System.getProperty("line.separator"));
+							}
+							br.close();
+							writer.close();
 							p.waitFor();
 							Back.getCurrentRun().getExecution().updateStatus(job[0], "done");
 						} catch (final IOException e1) {

@@ -9,6 +9,7 @@ import javagulp.model.G;
 import javagulp.model.SerialKeyAdapter;
 import javagulp.model.SerialListener;
 import javagulp.model.SerialMouseAdapter;
+import javagulp.view.constraints.ExternalFieldConstraints;
 import javagulp.view.fit.FitPanelHolder;
 
 import javax.swing.ButtonGroup;
@@ -49,6 +50,7 @@ public class Fit extends JPanel implements Serializable {
 	public FitPanelHolder fitPanelHolder = new FitPanelHolder();
 	private final JList fitList = new JList(fitPanelHolder.fitListModel);
 	private final JScrollPane listScroll = new JScrollPane(fitList);
+	private final ExternalFieldConstraints pnlExternalField = new ExternalFieldConstraints();
 
 	private final KeywordListener keySimultaneous = new KeywordListener(chkSimultaneous, "simultaneous");
 	private final KeywordListener keyRelax = new KeywordListener(chkRelax, "relax");
@@ -207,6 +209,14 @@ public class Fit extends JPanel implements Serializable {
 		chkSimultaneous.addActionListener(keySimultaneous);
 		chkSimultaneous.setBounds(10, 178, 647, 30);
 		panel.add(chkSimultaneous);
+		
+		pnlExternalField.radConstantVolume.setBounds(10, 53, 174, 23);
+		pnlExternalField.radConstantPressure.setBounds(10, 82, 174, 23);
+		pnlExternalField.radNone.setBounds(10, 24, 174, 23);
+
+
+		pnlExternalField.setBounds(716, 447, 246, 117);
+		add(pnlExternalField);
 	}
 
 	public String writeFitOptions() {
