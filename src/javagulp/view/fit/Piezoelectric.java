@@ -63,7 +63,7 @@ public class Piezoelectric extends AbstractFit implements Serializable {
 		}
 	};
 
-	public String gulpFileLines = "";
+	//public String gulpFileLines = "";
 
 	public Piezoelectric() {
 		super();

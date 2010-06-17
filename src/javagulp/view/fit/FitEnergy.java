@@ -22,7 +22,7 @@ public class FitEnergy extends AbstractFit implements Serializable {
 	private final JComboBox cboUnits = new JComboBox(new String[] { "eV", "kcal",
 			"au", "kjmol-1" });
 
-	public String gulpFileLines = "";
+	//public String gulpFileLines = "";
 
 	public FitEnergy() {
 		super();

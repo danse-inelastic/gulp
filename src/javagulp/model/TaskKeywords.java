@@ -2,9 +2,6 @@ package javagulp.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.TreeSet;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class TaskKeywords implements Serializable {
 	private static final long serialVersionUID = -7544313514620261471L;

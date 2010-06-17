@@ -25,8 +25,6 @@ public class FitCv extends AbstractFit implements Serializable {
 	private final JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
 	"J/(Kmol)" });
 
-	public String gulpFileLines = "Cv " + txtConstant.getText();
-
 	public FitCv() {
 		super();
 
@@ -53,7 +51,7 @@ public class FitCv extends AbstractFit implements Serializable {
 		if (txtConstant.getText().equals(""))
 			throw new IncompleteOptionException("Please enter the heat capacity constant");
 		Double.parseDouble(txtConstant.getText());
-
+                gulpFileLines = "Cv " + txtConstant.getText();
 		if (!txtWeight.getText().equals("")) {
 			Double.parseDouble(txtWeight.getText());
 			gulpFileLines += " " + txtWeight.getText();

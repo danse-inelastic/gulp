@@ -22,7 +22,7 @@ public class FitEntropy extends AbstractFit implements Serializable {
 	private final JComboBox cboUnits = new JComboBox(new String[] { "eV/(Kmol)",
 	"J/(Kmol)" });
 
-	public String gulpFileLines = "";
+	//public String gulpFileLines = "";
 
 	public FitEntropy() {
 		super();

@@ -31,7 +31,7 @@ public class Born extends AbstractFit implements Serializable {
 			+ g.part + g.mu + "<sub>" + g.alpha + "</sub>/" + g.part + g.beta
 			+ " &nbsp&nbsp " + g.alpha + ", " + g.beta + g.in + " x, y, z"));
 
-	public String gulpFileLines = "";
+	//public String gulpFileLines = "";
 
 	public Born() {
 		super();

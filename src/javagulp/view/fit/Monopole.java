@@ -20,7 +20,7 @@ public class Monopole extends AbstractFit implements Serializable {
 	private final JLabel lblAtomNumber = new JLabel("atom number");
 	private final JLabel lblWeight = new JLabel("weight");
 
-	public String gulpFileLines;
+	//public String gulpFileLines;
 
 	public Monopole() {
 		super();

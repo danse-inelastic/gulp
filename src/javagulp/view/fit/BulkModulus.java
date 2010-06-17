@@ -14,7 +14,7 @@ public class BulkModulus extends AbstractFit implements Serializable {
 	private final JTextField txtWeight = new JTextField();
 	private final JLabel lblWeight = new JLabel("weight");
 
-	public String gulpFileLines = "";
+	//public String gulpFileLines = "";
 
 	private final JTextField txtBulkModulus;
 

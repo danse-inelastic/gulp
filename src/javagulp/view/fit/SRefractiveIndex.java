@@ -20,7 +20,7 @@ public class SRefractiveIndex extends AbstractFit implements Serializable {
 	private final JLabel lbli = new JLabel("i");
 	private final JLabel lblWeight = new JLabel("weight");
 
-	public String gulpFileLines;
+	//public String gulpFileLines;
 
 	public SRefractiveIndex() {
 		super();

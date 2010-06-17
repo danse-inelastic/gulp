@@ -89,7 +89,8 @@ public class FitPanelHolder extends TitledPanel implements Serializable {
 			final int selectedIndex = cmboBoxOfDataTypes.getSelectedIndex();
 			try {
 				final AbstractFit panel = getPanel(selectedIndex);
-				panel.writeFitPanel();// I think this is done not to actually write something, but to catch any errors
+				String actualResult = panel.writeFitPanel();// I think this is done not to actually write something, but to catch any errors
+				//System.out.println(actualResult);
 
 				fitListModel.addElement(expDataTypes[selectedIndex]);//add a description of data to the visual list
 				fitPanelsForGulpInputFile.add(panel); //add the panel (with its data) to the file writing list
@@ -138,8 +139,11 @@ public class FitPanelHolder extends TitledPanel implements Serializable {
 
 	public String writeFitPanels() {
 		String lines = "";
-		for (int i = 0; i < fitPanelsForGulpInputFile.size(); i++)
-			lines += fitPanelsForGulpInputFile.get(i).gulpFileLines;
+		//System.out.println("size is "+String.valueOf(fitPanelsForGulpInputFile.size()));
+		for (AbstractFit fitPanel : fitPanelsForGulpInputFile){
+			lines = lines + fitPanel.gulpFileLines;
+			//System.out.println("val is "+lines);
+		}
 		if (!lines.equals(""))
 			lines = "observables" + Back.newLine + lines + "end" + Back.newLine;
 		return lines;

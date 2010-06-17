@@ -25,7 +25,7 @@ public class FitFrequency extends AbstractFit implements Serializable {
 	private final JLabel lblCstFrequency = new JLabel(g.html("frequency (cm<sup>-1</sup>)"));
 	private final JLabel lblKPoint = new JLabel("k point number");
 
-	public String gulpFileLines = "";
+	//public String gulpFileLines = "";
 
 	public FitFrequency() {
 		super();
