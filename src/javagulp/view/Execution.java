@@ -277,6 +277,85 @@ public class Execution extends JPanel implements Serializable {
 	//		t.setPriority(Thread.MIN_PRIORITY);
 	//		t.start();
 	//	}
+	
+	private void executeLocal(boolean synchronous) {
+		int parallel = 1;
+		if (Back.getCurrentRun().getExecution().multipleStructures.chkSeparate.isSelected())
+			try {
+				parallel = Integer.parseInt(Back.getCurrentRun().getExecution().multipleStructures.txtMultiple.getText());
+			} catch (final NumberFormatException nfe) {
+		}
+		for (int j=0; j < parallel; j++) {
+			final Runnable r = new Runnable() {
+				public void run() {
+					String[] job = null;
+					while ((job = getJob()) != null) {
+						//create directory
+						final String path = Back.getCurrentRun().getWD() + Back.fileSeparator + job[0];
+						final File jobDir = new File(path);
+						jobDir.mkdir();
+						//write the file---this is just for reference since file is actually fed into process
+						FileWriter fw;
+						try {
+							fw = new FileWriter(jobDir + Back.fileSeparator + Back.getCurrentRun().getOutput().selectedInputFile);
+							fw.write(job[1]);
+							fw.close();
+							//write potential
+							final String gulpLibrary = Back.getCurrentRun().getPotential().libraryContents;
+							final String potentialSelected = Back.getCurrentRun().getPotential().potentialSelected;//post the files
+							fw = new FileWriter(jobDir + Back.fileSeparator + potentialSelected+".lib");
+							fw.write(gulpLibrary);
+							fw.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+
+						try {
+							Back.getCurrentRun().getExecution().addStatus(job[0], "localhost");
+							Back.getCurrentRun().getExecution().updateStatus(job[0], "running");
+							final String commands = Back.getCurrentRun().getBinary();
+//							final String[] commands = new String[] {
+//									Back.getCurrentRun().getBinary(), Back.getCurrentRun().getOutput().selectedInputFile,
+//									Back.getCurrentRun().getOutput().txtOutputFile.getText() };
+//							final String[] commands = new String[] {
+//									Back.getCurrentRun().getBinary()+"<"+Back.getCurrentRun().getOutput().selectedInputFile+
+//									">"+Back.getCurrentRun().getOutput().txtOutputFile.getText() };
+							final Process p = Runtime.getRuntime().exec(commands, null, jobDir);
+							final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+							bw.write(job[1]);
+							bw.close();
+
+							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+							final BufferedWriter writer = new BufferedWriter(
+									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
+							String line = "";
+							while ((line = br.readLine()) != null) {
+								writer.write(line + System.getProperty("line.separator"));
+							}
+							br.close();
+							writer.close();
+							p.waitFor();
+							Back.getCurrentRun().getExecution().updateStatus(job[0], "done");
+						} catch (final IOException e1) {
+							e1.printStackTrace();
+						} catch (final InterruptedException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			};
+			if (synchronous) {
+				r.run();
+			} else {
+				final Thread t = new Thread(r);
+				t.setPriority(Thread.MIN_PRIORITY);
+				t.start();
+				threads.add(t);
+			}
+		}
+	}
+
 
 	public File qsubScript = null;
 
@@ -378,77 +457,6 @@ public class Execution extends JPanel implements Serializable {
 			return jobs.remove(0);
 	}
 
-	private void executeLocal(boolean synchronous) {
-		int parallel = 1;
-		if (Back.getCurrentRun().getExecution().multipleStructures.chkSeparate.isSelected())
-			try {
-				parallel = Integer.parseInt(Back.getCurrentRun().getExecution().multipleStructures.txtMultiple.getText());
-			} catch (final NumberFormatException nfe) {
-		}
-		for (int j=0; j < parallel; j++) {
-			final Runnable r = new Runnable() {
-				public void run() {
-					String[] job = null;
-					while ((job = getJob()) != null) {
-						//create directory
-						final String path = Back.getCurrentRun().getWD() + Back.fileSeparator + job[0];
-						final File jobDir = new File(path);
-						jobDir.mkdir();
-						//write the file
-						FileWriter fw;
-						try {
-							fw = new FileWriter(jobDir + Back.fileSeparator + Back.getCurrentRun().getOutput().selectedInputFile);
-							fw.write(job[1]);
-							fw.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-
-						try {
-							Back.getCurrentRun().getExecution().addStatus(job[0], "localhost");
-							Back.getCurrentRun().getExecution().updateStatus(job[0], "running");
-							final String commands = Back.getCurrentRun().getBinary();
-//							final String[] commands = new String[] {
-//									Back.getCurrentRun().getBinary(), Back.getCurrentRun().getOutput().selectedInputFile,
-//									Back.getCurrentRun().getOutput().txtOutputFile.getText() };
-//							final String[] commands = new String[] {
-//									Back.getCurrentRun().getBinary()+"<"+Back.getCurrentRun().getOutput().selectedInputFile+
-//									">"+Back.getCurrentRun().getOutput().txtOutputFile.getText() };
-							final Process p = Runtime.getRuntime().exec(commands, null, jobDir);
-							final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-							bw.write(job[1]);
-							bw.close();
-
-							final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-							final BufferedWriter writer = new BufferedWriter(
-									new FileWriter(path + Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText()));
-							String line = "";
-							while ((line = br.readLine()) != null) {
-								writer.write(line + System.getProperty("line.separator"));
-							}
-							br.close();
-							writer.close();
-							p.waitFor();
-							Back.getCurrentRun().getExecution().updateStatus(job[0], "done");
-						} catch (final IOException e1) {
-							e1.printStackTrace();
-						} catch (final InterruptedException e1) {
-							e1.printStackTrace();
-						}
-					}
-				}
-			};
-			if (synchronous) {
-				r.run();
-			} else {
-				final Thread t = new Thread(r);
-				t.setPriority(Thread.MIN_PRIORITY);
-				t.start();
-				threads.add(t);
-			}
-		}
-	}
 
 	private boolean sendFiles(final String remoteHost, final String remoteDirectory,
 			final String[] localFileNames, final String localDirectory,
