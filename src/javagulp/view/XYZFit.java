@@ -41,19 +41,18 @@ public class XYZFit extends JPanel implements Serializable {
 
 	G g = new G();
 
-	private JCheckBox chkPotentials = new JCheckBox("Only fit selected potentials");
-	private JCheckBox chkParameters = new JCheckBox("Only fit selected parameters");
-	public JCheckBox chkInitialize = new JCheckBox("Initialize with random values");
-	private JCheckBox chkRandom = new JCheckBox("Fit parameters in random order");
+	private JCheckBox chkPotentials = new JCheckBox("only fit selected potentials");
+	private JCheckBox chkParameters = new JCheckBox("only fit selected parameters");
+	public JCheckBox chkInitialize = new JCheckBox("initialize with random values");
+	private JCheckBox chkRandom = new JCheckBox("fit parameters in random order");
 
 	private JLabel lblMessage = new JLabel(g.html("GULP can fit to the results of a higher quality simulation.  Simply enter an XYZ file of the simulation and a text file that contains the energy of each timestep (on separate lines)."));
-	private JLabel lblIterations = new JLabel("Perform n iterations");
-	private JLabel lblMaxSteps = new JLabel("Maximum number of timesteps");
+	private JLabel lblIterations = new JLabel("perform n iterations");
+	private JLabel lblMaxSteps = new JLabel("last timestep");
 	private JLabel lblFireball = new JLabel("Parse Fireball log file for energies");
-	private JLabel lblGULP = new JLabel("Parse GULP output file for fit parameters");
-	private JLabel lblStart = new JLabel("Start at timestep");
-	private JLabel lblEvery = new JLabel("and sample every");
-	private JLabel lblTimesteps = new JLabel("timesteps");
+	private JLabel lblGULP = new JLabel("parse output file for fit parameters");
+	private JLabel lblStart = new JLabel("starting timestep");
+	private JLabel lblEvery = new JLabel("skip");
 	private JLabel lblIterNber = new JLabel("");
 	private JLabel lblPercentage = new JLabel("");
 	private JLabel lblTimeElapsed = new JLabel("");
@@ -66,17 +65,17 @@ public class XYZFit extends JPanel implements Serializable {
 	private JTextField txtEvery = new JTextField("1");
 	private JTextField txtIterations = new JTextField("1");
 
-	private JButton btnEnergy = new JButton("Energy file");
-	private JButton btnCharge = new JButton("Charge file");
+	private JButton btnEnergy = new JButton("energy file");
+	private JButton btnCharge = new JButton("charge file");
 	private JButton btnXYZ = new JButton("XYZ file");
 	private JButton btnFireball = new JButton("f.log");
 	private JButton btnGULP = new JButton("GULP");
-	private JButton btnAutoFit = new JButton("Auto Fit");
+	private JButton btnAutoFit = new JButton("auto fit");
 
 	private JProgressBar progress = new JProgressBar();
 	private Execution execution = new Execution();
 
-	private JCheckBox chkFractional = new JCheckBox("Fractional Coordinates");
+	private JCheckBox chkFractional = new JCheckBox("fractional coordinates");
 
 	private SerialListener keyEnergy = new SerialListener() {
 		private static final long serialVersionUID = -436428610873861478L;
@@ -84,8 +83,9 @@ public class XYZFit extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			File f = addFile(txtEnergy, cohesiveEnergy);
 			if (f != null) {
-				WorkspaceParser wp = new WorkspaceParser(f.getParentFile());
-				cohesiveEnergy = wp.parseDataFile(f);
+				//WorkspaceParser wp = new WorkspaceParser(f.getParentFile());
+				//cohesiveEnergy = wp.parseDataFile(f);
+				cohesiveEnergy = new ArrayList<Value>[]{new Value(1.0,new double[]{1.0})};
 			} else
 				cohesiveEnergy = null;
 		}
@@ -443,7 +443,7 @@ public class XYZFit extends JPanel implements Serializable {
 	public XYZFit() {
 		super();
 		setLayout(null);
-		this.setPreferredSize(new java.awt.Dimension(804, 360));
+		//this.setPreferredSize(new java.awt.Dimension(804, 360));
 
 		add(lblMessage);
 		lblMessage.setBounds(7, 7, 732, 70);
@@ -470,25 +470,23 @@ public class XYZFit extends JPanel implements Serializable {
 		txtCharge.setBounds(105, 147, 301, 28);
 		add(lblFireball);
 		lblFireball.setBounds(105, 180, 301, 28);
-		lblStart.setBounds(7, 215, 112, 28);
+		lblStart.setBounds(7, 215, 163, 28);
 		add(lblStart);
-		txtStart.setBounds(119, 215, 42, 28);
+		txtStart.setBounds(235, 216, 42, 28);
 		add(txtStart);
-		lblEvery.setBounds(168, 215, 119, 28);
+		lblEvery.setBounds(7, 286, 163, 28);
 		add(lblEvery);
-		txtEvery.setBounds(287, 215, 42, 28);
+		txtEvery.setBounds(235, 287, 42, 28);
 		add(txtEvery);
-		lblTimesteps.setBounds(336, 215, 70, 28);
-		add(lblTimesteps);
 		add(txtMaxSteps);
-		txtMaxSteps.setBounds(7, 250, 91, 28);
+		txtMaxSteps.setBounds(235, 251, 42, 28);
 		add(lblMaxSteps);
-		lblMaxSteps.setBounds(105, 250, 301, 28);
+		lblMaxSteps.setBounds(7, 250, 183, 28);
 		add(btnGULP);
-		btnGULP.setBounds(7, 285, 91, 28);
+		btnGULP.setBounds(7, 332, 91, 28);
 		btnGULP.addActionListener(keyGULP);
 		add(lblGULP);
-		lblGULP.setBounds(105, 285, 301, 28);
+		lblGULP.setBounds(121, 332, 426, 28);
 		add(chkFractional);
 		chkFractional.setBounds(413, 77, 326, 28);
 		add(chkRandom);
@@ -503,12 +501,12 @@ public class XYZFit extends JPanel implements Serializable {
 		chkInitialize.setSelected(true);
 		chkInitialize.setBounds(413, 215, 326, 28);
 		add(progress);
-		progress.setBounds(7, 318, 650, 25);
+		progress.setBounds(5, 405, 650, 25);
 		progress.setMinimum(0);
 		add(lblIterNber);
 		lblIterNber.setBounds(680, 285, 100, 25);
 		add(btnAutoFit);
-		btnAutoFit.setBounds(413, 285, 98, 28);
+		btnAutoFit.setBounds(7, 366, 91, 28);
 		btnAutoFit.addActionListener(keyAuto);
 		add(lblPercentage);
 		lblPercentage.setBounds(531, 285, 50, 28);

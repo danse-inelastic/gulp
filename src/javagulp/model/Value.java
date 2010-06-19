@@ -13,6 +13,11 @@ public class Value implements Comparable<Value>, Serializable, Cloneable {
 		//store one value by default
 	}
 
+	public Value(double x, double[] y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	public Value(int length) {
 		y = new double[length];
 	}
