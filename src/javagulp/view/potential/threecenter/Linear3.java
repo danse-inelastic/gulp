@@ -68,7 +68,7 @@ public class Linear3 extends PotentialPanel implements Serializable {
 		String lines = "lin3 " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + k.txt.getText() + " ";
+		lines += Back.newLine + getAtoms() + k.txt.getText() + " ";
 		if (cboISign.getSelectedIndex() == 1)
 			lines += "- ";
 		lines += n.txt.getText();

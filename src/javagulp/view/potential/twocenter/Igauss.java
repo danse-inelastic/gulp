@@ -65,7 +65,7 @@ public class Igauss extends PotentialPanel implements Serializable {
 		String lines = "igauss " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
 		+ Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();

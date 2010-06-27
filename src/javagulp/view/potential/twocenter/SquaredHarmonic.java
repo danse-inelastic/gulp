@@ -73,7 +73,7 @@ public class SquaredHarmonic extends PotentialPanel implements Serializable {
 			lines += cboUnits.getSelectedItem() + " ";
 		if (cboEnerGra.getSelectedIndex() == 1)
 			lines += "grad ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
 		+ Back.concatFields(params);
 		if (!txtC.getText().equals("") && !txtC.getText().equals("1.0")) {
 			Double.parseDouble(txtC.getText());

@@ -73,7 +73,7 @@ public class Exponential extends PotentialPanel implements Serializable {
 		String lines = "exponential " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		lines += Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}

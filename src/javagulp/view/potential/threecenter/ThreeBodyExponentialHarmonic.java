@@ -63,7 +63,7 @@ Serializable {
 
 		String lines = "three exponential "
 			+ pot.threeAtomBondingOptions.getAll() + Back.newLine
-			+ pot.getAtomCombos() + Back.concatFields(params);
+			+ getAtoms() + Back.concatFields(params);
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}

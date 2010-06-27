@@ -87,7 +87,7 @@ public class TortaperEsff extends PotentialPanel implements Serializable {
 		String lines = "tortaper " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += "esff " + Back.newLine	+ pot.getAtomCombos() + Back.concatFields(params) + " "
+		lines += "esff " + Back.newLine	+ getAtoms() + Back.concatFields(params) + " "
 		+ Back.concatFields(fields) + " " + radii.writeRadii() + Back.writeFits(params) + Back.newLine;
 		return lines;
 	}

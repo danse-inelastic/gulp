@@ -57,14 +57,13 @@ public class BOCharge extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException {
 		final JTextField[] fields = { txtDelta };
 		final String[] descriptions = { "delta" };
-		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
 		String lines = "bocharge";
 		if (cboFunction.getSelectedIndex() == 1)
 			lines += " staper";
-		return lines + Back.newLine + pot.getAtomCombos()
+		return lines + Back.newLine + getAtoms()
 		+ Back.concatFields(fields) + " " + radii.writeRadii() + Back.newLine;
 	}
 

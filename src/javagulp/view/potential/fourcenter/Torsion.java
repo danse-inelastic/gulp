@@ -249,7 +249,7 @@ public class Torsion extends PotentialPanel implements Serializable {
 		else
 			if (r.cboUnits.getSelectedIndex() != 0)
 				lines += r.cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos();
+		lines += Back.newLine + getAtoms();
 		if (chkEsff.isSelected())
 			lines += esff.writeEsff();
 		else

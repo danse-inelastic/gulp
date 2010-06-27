@@ -103,7 +103,7 @@ public class Polynomial extends PotentialPanel implements Serializable {
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14() + (index + 1) + Back.newLine
-		+ pot.getAtomCombos() + Back.concatFields(coefs);
+		+ getAtoms() + Back.concatFields(coefs);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}

@@ -64,7 +64,7 @@ public class OutofPlane extends PotentialPanel implements Serializable {
 		String lines = "outofplane " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + K.txt.getText() + " ";
+		lines += Back.newLine + getAtoms() + K.txt.getText() + " ";
 		if (!K4.txt.getText().equals("") && !K4.txt.getText().equals("0.0")) {
 			Double.parseDouble(K4.txt.getText());
 			lines += K4.txt.getText() + " ";

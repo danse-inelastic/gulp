@@ -20,7 +20,7 @@ import javax.swing.event.ChangeListener;
 
 public class Lennard extends PotentialPanel implements Serializable {
 
-	private final G g = new G();
+//	private final G g = new G();
 
 	private static final long serialVersionUID = 8231505124234995372L;
 
@@ -31,7 +31,7 @@ public class Lennard extends PotentialPanel implements Serializable {
 
 	private final JLabel lblM = new JLabel("m");
 	private final JLabel lblN = new JLabel("n");
-	private final JLabel lblUnits = new JLabel("units");
+//	private final JLabel lblUnits = new JLabel("units");
 
 	private final LennardEpsilonSigma pnlEpsilonSigma = new LennardEpsilonSigma();
 	public JTextField txtM = new JTextField("12");
@@ -150,7 +150,7 @@ public class Lennard extends PotentialPanel implements Serializable {
 			lines += " all";
 		// TODO The GUI has no option for <all>, and <zero> applies to
 		// both AB and Epsilon Sigma.
-		lines += " " + pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos();
+		lines += " " + pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms();
 		if (!all)
 			lines += values;
 		if (!pot.twoAtomBondingOptions.Bond()) {

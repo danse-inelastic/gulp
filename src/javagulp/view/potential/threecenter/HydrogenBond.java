@@ -132,7 +132,7 @@ public class HydrogenBond extends PotentialPanel implements Serializable {
 			Double.parseDouble(max);
 			lines += "taper";
 		}
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params) + " ";
+		lines += Back.newLine + getAtoms() + Back.concatFields(params) + " ";
 		if (!min.equals("") && !max.equals("")) {
 			lines += min + " " + max + " ";
 		}

@@ -107,7 +107,7 @@ public class Tersoff extends PotentialPanel implements Serializable {
 		Back.parseFieldsD(fields, descriptions);
 
 		final JCheckBox[] boxes = { chkA, chkB, chkZa, chkZb };
-		final String lines = "botwobody" + Back.newLine + pot.getAtomCombos()
+		final String lines = "botwobody" + Back.newLine + getAtoms()
 		+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
 		return lines + "boattractive" + BOa.writeBondOrder()
 		+ "borepulsive" + BOr.writeBondOrder();

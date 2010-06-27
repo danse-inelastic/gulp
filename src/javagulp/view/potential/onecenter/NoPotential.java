@@ -1,8 +1,9 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.view.potential.PotentialPanel;
 
 public class NoPotential extends PotentialPanel implements Serializable {
 	/**

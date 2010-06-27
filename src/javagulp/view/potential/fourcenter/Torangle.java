@@ -70,7 +70,7 @@ public class Torangle extends PotentialPanel implements Serializable {
 		String lines = "torangle " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params) + " "
+		lines += Back.newLine + getAtoms() + Back.concatFields(params) + " "
 		+ radii.writeRadii() + Back.writeFits(params) + Back.newLine;
 		return lines;
 	}

@@ -88,7 +88,7 @@ public class DampedDispersion extends PotentialPanel implements Serializable {
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine
-		+ pot.getAtomCombos() + Back.concatFields(fields);
+		+ getAtoms() + Back.concatFields(fields);
 		if (!b6.txt.getText().equals("") && !b6.txt.getText().equals("0")){
 			Double.parseDouble(b6.txt.getText());
 			lines += " " + b6.txt.getText();

@@ -88,7 +88,7 @@ public class Tortaper extends PotentialPanel implements Serializable {
 		String lines = "tortaper " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + txtK.getText() + " "
+		lines += Back.newLine + getAtoms() + txtK.getText() + " "
 		+ txtN.getText() + " ";
 		if (!txtPhi0.getText().equals("")) {
 			Double.parseDouble(txtPhi0.getText());

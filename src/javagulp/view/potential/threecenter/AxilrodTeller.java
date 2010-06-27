@@ -58,7 +58,7 @@ public class AxilrodTeller extends PotentialPanel implements Serializable {
 		String lines = "axilrod-teller "+ pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		lines += Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!pot.threeAtomBondingOptions.Bond())
 			lines += " " + radii.writeRadii();
 		return lines + Back.writeFits(params) + Back.newLine;

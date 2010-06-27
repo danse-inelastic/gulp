@@ -73,7 +73,7 @@ public class SWJB2 extends PotentialPanel implements Serializable {
 		String lines = "sw2jb " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
 		+ Back.concatFields(params) + " " + radii.writeRadii()
 		+ Back.writeFits(params) + Back.newLine;
 		return lines;

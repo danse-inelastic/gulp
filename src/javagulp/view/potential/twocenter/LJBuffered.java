@@ -84,7 +84,7 @@ public class LJBuffered extends PotentialPanel implements Serializable {
 		lines += pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
 		+ Back.concatFields(fields);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();

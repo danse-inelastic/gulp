@@ -122,7 +122,7 @@ public class TersoffCombine extends PotentialPanel implements Serializable {
 		Back.parseFieldsD(fields, descriptions);
 
 		final JCheckBox[] boxes = { chkChir, chkChia };
-		final String lines = "botwobody combine" + Back.newLine + pot.getAtomCombos()
+		final String lines = "botwobody combine" + Back.newLine + getAtoms()
 		+ Back.concatFields(fields) + Back.writeFits(boxes) + Back.newLine;
 		return lines + "boattractive" + pnlBOa.writeBondOrder()
 		+ "borepulsive" + pnlBOr.writeBondOrder();

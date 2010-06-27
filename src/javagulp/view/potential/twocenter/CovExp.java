@@ -74,7 +74,7 @@ public class CovExp extends PotentialPanel implements Serializable {
 			lines += "grad ";
 		else
 			lines += "ener ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
 		+ Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += radii.writeRadii();

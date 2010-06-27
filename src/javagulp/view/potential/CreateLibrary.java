@@ -520,6 +520,8 @@ public class CreateLibrary extends JPanel implements Serializable {
 
 	public PotentialPanel getCurrentPotential() {
 		String pkg = "javagulp.view.potential.";
+		if (potentialNumber == 1)
+			pkg += "onecenter.";
 		if (potentialNumber == 2)
 			pkg += "twocenter.";
 		else if (potentialNumber == 3)

@@ -56,7 +56,7 @@ public class Qtaper extends PotentialPanel implements Serializable {
 		if (cboUnits.getSelectedIndex() != 0)
 			line += cboUnits.getSelectedItem() + " ";
 		line += pot.twoAtomBondingOptions.getScale14() + Back.newLine
-		+ pot.getAtomCombos() + Back.concatFields(params);
+		+ getAtoms() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			line += " " + radii.writeRadii();
 		}

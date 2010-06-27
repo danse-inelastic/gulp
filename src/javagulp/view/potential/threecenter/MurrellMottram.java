@@ -123,7 +123,7 @@ public class MurrellMottram extends PotentialPanel implements Serializable {
 		String lines = "murrell-mottram " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(p);
+		lines += Back.newLine + getAtoms() + Back.concatFields(p);
 		if (!pot.threeAtomBondingOptions.Bond())
 			lines += " " + radii.writeRadii();
 		return lines + Back.writeFits(p) + " " + Back.concatFields(c)

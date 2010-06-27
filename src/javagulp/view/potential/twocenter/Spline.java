@@ -103,7 +103,7 @@ public class Spline extends PotentialPanel implements Serializable {
 		lines += pot.twoAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		lines += Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += radii.writeRadii();
 		}

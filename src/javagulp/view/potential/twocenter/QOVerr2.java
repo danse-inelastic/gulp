@@ -62,7 +62,7 @@ public class QOVerr2 extends PotentialPanel implements Serializable {
 			lines += "grad ";
 		else
 			lines += "ener ";
-		lines += Back.newLine + pot.getAtomCombos();
+		lines += Back.newLine + getAtoms();
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += radii.writeRadii();
 		}

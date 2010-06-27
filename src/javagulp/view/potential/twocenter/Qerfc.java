@@ -69,7 +69,7 @@ public class Qerfc extends PotentialPanel implements Serializable {
 			line += "grad";
 		else
 			line += "ener";
-		line += Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		line += Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			line += radii.writeRadii();
 		}

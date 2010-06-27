@@ -61,7 +61,7 @@ public class Vessal extends PotentialPanel implements Serializable {
 		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
 		String lines = "three vessal " + pot.threeAtomBondingOptions.getAll()
-		+ Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		+ Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!pot.threeAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}

@@ -69,7 +69,7 @@ public class EAMPotentialShift extends PotentialPanel implements Serializable {
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14()
-		+ Back.newLine + pot.getAtomCombos() + Back.concatFields(params) + " ";
+		+ Back.newLine + getAtoms() + Back.concatFields(params) + " ";
 		return lines + radii.writeRadii() + Back.writeFits(params) + Back.newLine;
 	}
 

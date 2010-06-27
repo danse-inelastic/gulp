@@ -48,7 +48,7 @@ public class Coulomb extends PotentialPanel implements Serializable {
 	public String writePotential() throws IncompleteOptionException,InvalidOptionException {
 		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 
-		String lines = "coulomb " + pot.twoAtomBondingOptions.getAll() + Back.newLine + pot.getAtomCombos();
+		String lines = "coulomb " + pot.twoAtomBondingOptions.getAll() + Back.newLine + getAtoms();
 		if (!scale.txt.getText().equals("") && !scale.txt.getText().equals("1.0"))
 			lines += " " + scale.txt.getText();
 		if (!pot.twoAtomBondingOptions.Bond()) {

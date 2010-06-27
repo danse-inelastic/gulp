@@ -78,7 +78,7 @@ public class Morse extends PotentialPanel implements Serializable {
 			lines += "grad";
 		else
 			lines += "ener";
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		lines += Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!txtC.getText().equals("") && !txtC.getText().equals("1.0")) {
 			Double.parseDouble(txtC.getText());
 			lines += " " + txtC.getText();

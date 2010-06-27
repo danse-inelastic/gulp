@@ -74,7 +74,7 @@ public class FermiDirac extends PotentialPanel implements Serializable {
 			lines += "grad";
 		else
 			lines += "ener";
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(params);
+		lines += Back.newLine + getAtoms() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}

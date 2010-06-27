@@ -76,7 +76,7 @@ public class Tsuneyuki extends PotentialPanel implements Serializable {
 		String lines = "tsuneyuki";
 		if (cboGForm.getSelectedIndex() == 1)
 			lines += " form2";
-		lines += Back.newLine + pot.getAtomCombos() + Back.concatFields(fields)
+		lines += Back.newLine + getAtoms() + Back.concatFields(fields)
 		+ " " + radii.writeRadii();
 		if (chkZeta.isSelected())
 			lines += " 1";

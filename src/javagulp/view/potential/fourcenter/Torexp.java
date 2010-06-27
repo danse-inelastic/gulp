@@ -142,7 +142,7 @@ public class Torexp extends PotentialPanel implements Serializable {
 		String lines = "torexp " + pot.threeAtomBondingOptions.getAll();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += esffDreiding + Back.newLine + pot.getAtomCombos();
+		lines += esffDreiding + Back.newLine + getAtoms();
 		if (chkEsff.isSelected()) {
 			lines += writeEsff();
 		} else {

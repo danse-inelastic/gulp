@@ -61,7 +61,7 @@ public class Rydberg extends PotentialPanel implements Serializable {
 		String lines = "rydberg " + pot.twoAtomBondingOptions.getInterIntraBond();
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
+		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
 		+ Back.concatFields(params) + " " + radii.writeRadii() + Back.writeFits(params);
 		return lines + Back.newLine;
 	}

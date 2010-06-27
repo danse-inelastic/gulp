@@ -112,7 +112,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 			String lines = "eam_density voter ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem();
-			lines += Back.newLine + pot.getAtomCombos() + Back.fieldsAndFits(boxes) + Back.newLine;
+			lines += Back.newLine + getAtoms() + Back.fieldsAndFits(boxes) + Back.newLine;
 			return lines;
 		}
 	}
@@ -159,7 +159,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 			final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			if (!N.txt.getText().equals(""))
 				lines += N.txt.getText();
-			lines += Back.newLine + pot.getAtomCombos() + Back.fieldsAndFits(boxes) + Back.newLine;
+			lines += Back.newLine + getAtoms() + Back.fieldsAndFits(boxes) + Back.newLine;
 			return lines;
 		}
 	}
@@ -217,7 +217,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 			String lines = "eam_density " + pow;
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += " " + cboUnits.getSelectedItem();
-			lines += Back.newLine + pot.getAtomCombos() + Back.fieldsAndFits(boxes) + Back.newLine;
+			lines += Back.newLine + getAtoms() + Back.fieldsAndFits(boxes) + Back.newLine;
 			return lines;
 		}
 	}
@@ -269,7 +269,7 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 				lines += cboUnits.getSelectedItem() + " ";
 			if (!n.txt.getText().equals(""))
 				lines += n.txt.getText();
-			lines += Back.newLine + pot.getAtomCombos()
+			lines += Back.newLine + getAtoms()
 			+ Back.fieldsAndFits(boxes) + Back.newLine;
 			return lines;
 		}

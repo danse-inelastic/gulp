@@ -95,7 +95,7 @@ public class Ryckaert extends PotentialPanel implements Serializable {
 
 		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		final String lines = "ryckaert " + (index + 1) + Back.newLine
-		+ pot.getAtomCombos() + Back.concatFields(c0) + " "
+		+ getAtoms() + Back.concatFields(c0) + " "
 		+ radii.writeRadii() + Back.writeFits(c0)
 		+ Back.writeFits(coefs) + Back.concatFields(coefs) + Back.newLine;
 		return lines;

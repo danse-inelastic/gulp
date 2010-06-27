@@ -36,26 +36,26 @@ public class Brenner extends PotentialPanel implements Serializable {
 
 	@Override
 	public String writePotential() throws InvalidOptionException {
-		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
-		String one = (String) pot.pnlAtom.cboAtom[0].getSelectedItem();
-		String two = (String) pot.pnlAtom.cboAtom[1].getSelectedItem();
-		if (one.endsWith(" core"))
-			one = one.substring(0, one.length() - 6);
-		if (two.endsWith(" core"))
-			two = two.substring(0, two.length() - 6);
-		one = one.toUpperCase();
-		two = two.toUpperCase();
-		String[] s = null;
+		//final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+//		String one = (String) pot.pnlAtom.cboAtom[0].getSelectedItem();
+//		String two = (String) pot.pnlAtom.cboAtom[1].getSelectedItem();
+//		if (one.endsWith(" core"))
+//			one = one.substring(0, one.length() - 6);
+//		if (two.endsWith(" core"))
+//			two = two.substring(0, two.length() - 6);
+//		one = one.toUpperCase();
+//		two = two.toUpperCase();
+//		String[] s = null;
 		String brenner = "brenner";
 		if (chkOne.isSelected()) {
 			brenner += " 1";
-			s = new String[] {"C", "H", "Si"};
-		} else
-			s = new String[] {"C", "H", "O"};
-		if ((!one.equals(s[0]) && !one.equals(s[1]) && !one.equals(s[2]))
-				|| (!two.equals(s[0]) && !two.equals(s[1]) && !two.equals(s[2])))
-			throw new InvalidOptionException("Atoms must be of the species "
-					+ s[0] + ", " + s[1] + ", or " + s[2]);
+//			s = new String[] {"C", "H", "Si"};
+		} //else
+//			s = new String[] {"C", "H", "O"};
+//		if ((!one.equals(s[0]) && !one.equals(s[1]) && !one.equals(s[2]))
+//				|| (!two.equals(s[0]) && !two.equals(s[1]) && !two.equals(s[2])))
+//			throw new InvalidOptionException("Atoms must be of the species "
+//					+ s[0] + ", " + s[1] + ", or " + s[2]);
 		return brenner + Back.newLine;
 	}
 

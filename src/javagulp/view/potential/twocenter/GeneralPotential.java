@@ -104,7 +104,7 @@ public class GeneralPotential extends PotentialPanel implements Serializable {
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
 		lines += pot.twoAtomBondingOptions.getScale14() + Back.newLine;
-		lines += pot.getAtomCombos() + Back.concatFields(params);
+		lines += getAtoms() + Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			lines += " " + radii.writeRadii();
 		}
