@@ -1,10 +1,12 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.view.Back;
+import javagulp.view.potential.PPP;
+import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -51,7 +53,7 @@ public class CoshSpring extends PotentialPanel implements Serializable {
 		String lines = "cosh-spring";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += " " + cboUnits.getSelectedItem();
-		lines += Back.newLine + Back.getCurrentRun().getPotential().createLibrary.getAtomCombos() + Back.fieldsAndFits(params);
+		lines += Back.newLine + getAtoms() + Back.fieldsAndFits(params);
 		return lines + Back.newLine;
 	}
 }

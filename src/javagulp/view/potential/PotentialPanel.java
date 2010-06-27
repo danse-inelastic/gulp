@@ -2,18 +2,17 @@ package javagulp.view.potential;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
+import javagulp.view.Back;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public abstract class PotentialPanel extends JPanel implements Cloneable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9099139495758177415L;
 	public int potentialNumber;
 	public String[] atom;
+	public String atomString;
 	public boolean[] selected;
 	public boolean[] enabled;
 	public boolean enableScale14 = false;
@@ -30,6 +29,7 @@ public abstract class PotentialPanel extends JPanel implements Cloneable {
 		setLayout(null);
 		potentialNumber = number;
 		atom = new String[number];
+		atomString = null;
 		if (number == 2) {
 			selected = new boolean[] { false, false, false, false, false, false };
 			enabled = new boolean[] { false, false, false, false, false, false };
@@ -39,6 +39,15 @@ public abstract class PotentialPanel extends JPanel implements Cloneable {
 		}
 	}
 
+	public String getAtoms(){
+		if (atomString==null){
+			final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
+			atomString = pot.getAtomCombos();
+		}
+		return atomString;
+	}
+	
+	
 	public void setTitle(final String title) {
 		border.setTitle(title);
 	}
@@ -105,4 +114,6 @@ public abstract class PotentialPanel extends JPanel implements Cloneable {
 		if (radii != null)
 			radii.setRadiiEnabled(flag);
 	}
+	
+	
 }

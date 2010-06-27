@@ -400,7 +400,7 @@ public class CreateLibrary extends JPanel implements Serializable {
 		setLayout(null);
 		//this.setPreferredSize(new java.awt.Dimension(1255, 500));
 
-		pnlAtom.setBounds(10, 7, 476, 42);
+		pnlAtom.setBounds(10, 7, 513, 42);
 		add(pnlAtom);
 		potentialBackdrop.setBounds(195, 127, 743, 315);
 		scrollBonding.setBounds(10, 447, 928, 192);

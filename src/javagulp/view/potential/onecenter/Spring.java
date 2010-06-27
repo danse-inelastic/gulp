@@ -1,10 +1,13 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.view.Back;
 import javagulp.view.TitledPanel;
+import javagulp.view.potential.CreateLibrary;
+import javagulp.view.potential.PPP;
+import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -63,12 +66,10 @@ public class Spring extends PotentialPanel implements Serializable {
 		if (k2.txt.getText().equals(""))
 			throw new IncompleteOptionException("Please enter a value for k2");
 		Double.parseDouble(k2.txt.getText());
-
-		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		String lines = "spring ";
 		//		if (cboUnits.getSelectedIndex() != 0)
 		//			lines += cboUnits.getSelectedItem();
-		lines += Back.newLine + pot.getAtomCombos() + k2.txt.getText();
+		lines += Back.newLine + getAtoms() + k2.txt.getText();
 		if (!k4.txt.getText().equals("") && !k4.txt.getText().equals("0.0")) {
 			Double.parseDouble(k4.txt.getText());
 			lines += " " + k4.txt.getText();

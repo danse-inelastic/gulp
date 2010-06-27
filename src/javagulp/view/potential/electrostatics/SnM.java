@@ -1,4 +1,4 @@
-package javagulp.view.potential;
+package javagulp.view.potential.electrostatics;
 
 import java.io.Serializable;
 

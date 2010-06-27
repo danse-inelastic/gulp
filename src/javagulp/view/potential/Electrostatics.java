@@ -13,6 +13,9 @@ import javagulp.view.Back;
 import javagulp.view.KeywordListener;
 import javagulp.view.TitledPanel;
 import javagulp.view.potential.electrostatics.CalculatePotential;
+import javagulp.view.potential.electrostatics.Mortiers;
+import javagulp.view.potential.electrostatics.Qeq;
+import javagulp.view.potential.electrostatics.SnM;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

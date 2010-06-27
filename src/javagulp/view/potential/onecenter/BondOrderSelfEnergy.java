@@ -1,10 +1,11 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
+import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -56,8 +57,7 @@ public class BondOrderSelfEnergy extends PotentialPanel implements Serializable 
 		Back.checkAllNonEmpty(fields, descriptions);
 		Back.parseFieldsD(fields, descriptions);
 
-		String lines = "boselfenergy" + Back.newLine
-		+ Back.getCurrentRun().getPotential().createLibrary.getAtomCombos() + txtK.getText() + " ";
+		String lines = "boselfenergy" + Back.newLine + getAtoms() + txtK.getText() + " ";
 		if (!txtRho.getText().equals("") && !txtRho.getText().equals("1.0")) {
 			Double.parseDouble(txtRho.getText());
 			lines += txtRho.getText() + " ";

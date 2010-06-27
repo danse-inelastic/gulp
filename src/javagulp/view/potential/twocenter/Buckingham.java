@@ -112,8 +112,8 @@ public class Buckingham extends PotentialPanel implements Serializable {
 			lines += "grad";
 		else
 			lines += "ener";
-		lines += " " + pot.twoAtomBondingOptions.getScale14() + Back.newLine + pot.getAtomCombos()
-		+ Back.concatFields(params);
+		lines += " " + pot.twoAtomBondingOptions.getScale14() + Back.newLine + getAtoms()
+			+ Back.concatFields(params);
 		if (!pot.twoAtomBondingOptions.Bond()) {
 			if (txtrmax.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for outer cutoff");

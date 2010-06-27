@@ -1,10 +1,12 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
+import javagulp.view.potential.CreateLibrary;
+import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -119,7 +121,6 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 	@Override
 	public String writePotential() throws IncompleteOptionException {
 		String lines = "eam_functional ";
-		final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 		// TODO Documentation allows for multiple atoms / values where we only
 		// allow for one. As a workaround, the user may simply enter this
 		// potential any number of times.
@@ -127,7 +128,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 			if (txtSqA.getText().equals(""))
 				throw new IncompleteOptionException("Please enter a value for A");
 			Double.parseDouble(txtSqA.getText());
-			lines += "square_root" + Back.newLine + pot.getAtomCombos()
+			lines += "square_root" + Back.newLine + getAtoms()
 			+ txtSqA.getText();
 			if (chkFitSqA.isSelected())
 				lines += " 1";
@@ -139,7 +140,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 			Double.parseDouble(txtPowerN.getText());
 			Double.parseDouble(txtPowerA.getText());
 			lines += "power " + txtPowerN.getText() + Back.newLine
-			+ pot.getAtomCombos() + txtPowerA.getText();
+			+ getAtoms() + txtPowerA.getText();
 			if (chkFitPowerA.isSelected() || chkFitPowerN.isSelected())
 				lines += " " + chkSelected(chkFitPowerA) + " " + chkSelected(chkFitPowerN);
 		} else if (pane.getSelectedIndex() == 2) {
@@ -151,7 +152,7 @@ public class EAMFunctional extends PotentialPanel implements Serializable {
 			Back.checkAllNonEmpty(fields3, descriptions3);
 			Back.parseFieldsD(fields3, descriptions3);
 			lines += "banerjea_smith " + txtBSmithN.getText() + Back.newLine
-			+ pot.getAtomCombos() + Back.concatFields(fields3);
+			+ getAtoms() + Back.concatFields(fields3);
 			if (chkFitBSmithF0.isSelected() || chkFitBSmithF1.isSelected() || chkFitBSmithN.isSelected()
 					|| chkFitRHo.isSelected())
 				lines += " " + chkSelected(chkFitBSmithF0) + " " + chkSelected(chkFitBSmithF1) + " " +

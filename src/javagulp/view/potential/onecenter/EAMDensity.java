@@ -1,10 +1,13 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
+import javagulp.view.potential.CreateLibrary;
+import javagulp.view.potential.PPP;
+import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -60,13 +63,12 @@ public class EAMDensity extends PotentialPanel implements Serializable {
 		public String writePotential() throws IncompleteOptionException {
 			final PPP[] boxes = { A, B, R0 };
 			Back.checkAndParseD(boxes);
-			final CreateLibrary pot = Back.getCurrentRun().getPotential().createLibrary;
 			String lines = "eam_density gaussian ";
 			if (cboUnits.getSelectedIndex() != 0)
 				lines += cboUnits.getSelectedItem() + " ";
 			if (!N.txt.getText().equals(""))
 				lines += N.txt.getText();
-			return lines + Back.newLine + pot.getAtomCombos()
+			return lines + Back.newLine + getAtoms()
 			+ Back.fieldsAndFits(boxes) + Back.newLine;
 		}
 	}

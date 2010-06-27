@@ -1,4 +1,4 @@
-package javagulp.view.potential;
+package javagulp.view.potential.onecenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +8,8 @@ import javagulp.controller.IncompleteOptionException;
 import javagulp.controller.InvalidOptionException;
 import javagulp.model.G;
 import javagulp.view.Back;
+import javagulp.view.potential.PPP;
+import javagulp.view.potential.PotentialPanel;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -89,8 +91,7 @@ public class BSM extends PotentialPanel implements Serializable {
 			lines += cboExponential.getSelectedItem() + " ";
 		if (cboUnits.getSelectedIndex() != 0)
 			lines += cboUnits.getSelectedItem() + " ";
-		lines += Back.getCurrentRun().getPotential().createLibrary.getAtomCombos() + " "
-		+ cboCoreShell.getSelectedItem() + " " + Back.fieldsAndFits(params);
+		lines += getAtoms()	+ cboCoreShell.getSelectedItem() + " " + Back.fieldsAndFits(params);
 		return lines + Back.newLine;
 	}
 
