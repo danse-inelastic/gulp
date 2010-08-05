@@ -39,7 +39,7 @@ public class GulpRun extends JPanel implements Serializable {
 
 	private final String[] tabNames = { "Structures", "Potential",
 			//"PotentialOptions", "ChargesElementsBonding", "Electrostatics", "EwaldOptions", 
-			"ExternalForce", "Energetics", "RunType", "Output", "Execution"  };
+			"ExternalForce", "Energetics", "RunType", "Output", "Execution", "XYZFit"};
 
 	//private String[] bottomNames = {};
 	private final JPanel[] top = new JPanel[tabNames.length];
@@ -72,11 +72,13 @@ public class GulpRun extends JPanel implements Serializable {
 		//topPane.add(null, "charges, elements and bonding");
 		//topPane.add(null, "electrostatics");
 		//topPane.add(null, "ewald options");
+		
 		topPane.add(null, "external force");
 		topPane.add(null, "energetics");
 		topPane.add(null, "run type");
 		topPane.add(null, "output");
 		topPane.add(null, "execution");
+		topPane.add(null, "xyz fit");
 	}
 
 	public void processArguments(String[] simulationParams) {
@@ -300,6 +302,10 @@ public class GulpRun extends JPanel implements Serializable {
 
 	public Execution getExecution() {
 		return (Execution) getTopPanel(6);
+	}
+	
+	public XYZFit getXYZFit() {
+		return (XYZFit) getTopPanel(7);
 	}
 
 }
