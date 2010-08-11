@@ -83,28 +83,19 @@ public class XYZFit extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			File f = addFile(txtEnergy, cohesiveEnergy);
-			if (f != null) {
-				//WorkspaceParser wp = new WorkspaceParser(f.getParentFile());
-				//cohesiveEnergy = wp.parseDataFile(f);
-				//Value 
-				//cohesiveEnergy = new ArrayList<Value>[]{new Value(1.0, new double[]{1.0})};
-				
+			Scanner scanner = null;
+			try {
+				scanner = new Scanner(f);
 				//assume this is a column of energies for each time step
-				StringBuffer text = new StringBuffer();
-				Scanner scanner = new Scanner(f);
-			    try {
-			    	while (scanner.hasNextLine()){
-			    		//String val = scanner.nextLine().trim();
-			    		//if(val.length()<=0) break;
-			    		double energy = Double.valueOf(scanner.nextLine()).doubleValue();
-			    		cohesiveEnergy.add(energy);
-			      }
-			    }
-			    finally{
-			      scanner.close();
-			    }
-			} else
+				while (scanner.hasNextLine()){
+					//String val = scanner.nextLine().trim();
+					double energy = Double.valueOf(scanner.nextLine()).doubleValue();
+					cohesiveEnergy.add(energy);
+				}
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
 				cohesiveEnergy = null;
+			}
 		}
 	};
 	private SerialListener keyCharge = new SerialListener() {
@@ -124,24 +115,25 @@ public class XYZFit extends JPanel implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			File f = addFile(txtXYZ, atoms);
-			if (f != null) {
-				//WorkspaceParser wp = new WorkspaceParser(f.getParentFile());
-				StringBuffer text = new StringBuffer();
-				Scanner scanner = new Scanner(f);
-			    try {
-			    	while (scanner.hasNextLine()){
-			    		//String val = scanner.nextLine().trim();
-			    		//if(val.length()<=0) break;
-			    		double energy = Double.valueOf(scanner.nextLine()).doubleValue();
-			    		cohesiveEnergy.add(energy);
-			      }
-			    }
-			    finally{
-			      scanner.close();
-			    }
-				atoms = wp.readPositions();
-			} else
+			Scanner scanner = null;
+			try {
+				scanner = new Scanner(f);
+				while (scanner.hasNextLine()){
+					//read the number of atoms and the comment line
+					int numAtoms = Integer.parseInt(scanner.nextLine());
+					scanner.nextLine();
+					List<Atom> snapshot = new ArrayList<Atom>();
+					for (int i=0;i<numAtoms;i++){
+						String[] vals = scanner.nextLine().trim().split("\\W");
+						Atom atom = new Atom(vals);
+						snapshot.add(atom);
+					}
+					atoms.add(snapshot);
+				}
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
 				atoms = null;
+			}
 		}
 	};
 	private File addFile(JTextField box, Object o) {
@@ -163,31 +155,31 @@ public class XYZFit extends JPanel implements Serializable {
 	private List<List<Double>> netCharges = null;
 	private List<List<Atom>> atoms = null;
 
-//	private SerialListener keyFireball = new SerialListener() {
-//		private static final long serialVersionUID = 2414651371471318659L;
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			JFileChooser fileDialog = new JFileChooser();
-//			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
-//			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
-//				File file = fileDialog.getSelectedFile();
-//				WorkspaceParser wp = new WorkspaceParser(file.getParentFile());
-//				cohesiveEnergy = wp.parseCohesiveEnergy();
-//				netCharges = wp.parseNetCharges();
-//				if (cohesiveEnergy.size() != netCharges.size())
-//					JOptionPane.showMessageDialog(Back.frame, "Parsing error.");
-//
-//				File f1 = new File(wp.workspace + "/energy.txt");
-//				wp.writeDataFile(cohesiveEnergy, f1);
-//				File f2 = new File(wp.workspace + "/allCharges.txt");
-//				wp.writeDataFile(netCharges, f2);
-//
-//				txtEnergy.setText(f1.getPath());
-//				txtCharge.setText(f2.getPath());
-//			}
-//		}
-//	};
+	//	private SerialListener keyFireball = new SerialListener() {
+	//		private static final long serialVersionUID = 2414651371471318659L;
+	//		@Override
+	//		public void actionPerformed(ActionEvent e) {
+	//			JFileChooser fileDialog = new JFileChooser();
+	//			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	//			fileDialog.setCurrentDirectory(new File(Back.getCurrentRun().getWD()));
+	//			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
+	//				File file = fileDialog.getSelectedFile();
+	//				WorkspaceParser wp = new WorkspaceParser(file.getParentFile());
+	//				cohesiveEnergy = wp.parseCohesiveEnergy();
+	//				netCharges = wp.parseNetCharges();
+	//				if (cohesiveEnergy.size() != netCharges.size())
+	//					JOptionPane.showMessageDialog(Back.frame, "Parsing error.");
+	//
+	//				File f1 = new File(wp.workspace + "/energy.txt");
+	//				wp.writeDataFile(cohesiveEnergy, f1);
+	//				File f2 = new File(wp.workspace + "/allCharges.txt");
+	//				wp.writeDataFile(netCharges, f2);
+	//
+	//				txtEnergy.setText(f1.getPath());
+	//				txtCharge.setText(f2.getPath());
+	//			}
+	//		}
+	//	};
 	private SerialListener keyGULP = new SerialListener() {
 		private static final long serialVersionUID = -5140319728280092725L;
 
@@ -488,9 +480,9 @@ public class XYZFit extends JPanel implements Serializable {
 		btnCharge.setMargin(new Insets(0, 0, 0, 0));
 		btnCharge.setBounds(7, 147, 91, 28);
 		btnCharge.addActionListener(keyCharge);
-//		add(btnFireball);
-//		btnFireball.setBounds(7, 180, 91, 28);
-//		btnFireball.addActionListener(keyFireball);
+		//		add(btnFireball);
+		//		btnFireball.setBounds(7, 180, 91, 28);
+		//		btnFireball.addActionListener(keyFireball);
 		add(txtXYZ);
 		txtXYZ.setBounds(105, 77, 301, 28);
 		add(txtEnergy);
@@ -570,8 +562,8 @@ public class XYZFit extends JPanel implements Serializable {
 						Atom a = atoms.get(index).get(i);
 						double[] point = three.convertToCartesian(a.p, vector, false);
 						String charge = "";
-						if (netCharges != null)
-							charge = " " + netCharges.get(index).y[i];
+//						if (netCharges != null)
+//							charge = " " + netCharges.get(index).y[i];
 						sb.append(a.symbol + " " + point[0] + " " + point[1] + " " + point[2] + charge + Back.newLine);
 					}
 				} else {
@@ -579,12 +571,12 @@ public class XYZFit extends JPanel implements Serializable {
 					for (int i = 0; i < lines; i++) {
 						Atom a = atoms.get(index).get(i);
 						String charge = "";
-						if (netCharges != null)
-							charge = " " + netCharges.get(index).y[i];
+//						if (netCharges != null)
+//							charge = " " + netCharges.get(index).y[i];
 						sb.append(a.symbol + " " + a.p + charge + Back.newLine);
 					}
 				}
-				sb.append("observable" + Back.newLine + "energy" + Back.newLine + cohesiveEnergy.get(index).y[0] + Back.newLine + "end" + Back.newLine);
+				sb.append("observable" + Back.newLine + "energy" + Back.newLine + cohesiveEnergy.get(index) + Back.newLine + "end" + Back.newLine);
 				count++;
 				index += every;
 			} while (count < max);
