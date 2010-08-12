@@ -73,40 +73,15 @@ public class Back {
 			FileInputStream in = new FileInputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
 			atomSimProps.load(in);
 			in.close();
-		}catch (Exception e){//Catch exception if any
+		}catch (Exception e){
+			System.err.println("Error: " + e.getMessage());
 		}
-		//		try{
-		//			// Open the file that is the first 
-		//			// command line parameter
-		//			FileInputStream fstream = new FileInputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
-		//			// Get the object of DataInputStream
-		//			DataInputStream in = new DataInputStream(fstream);
-		//			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-		//			String strLine;
-		//			//Read File Line By Line
-		//			while ((strLine = br.readLine()) != null)   {
-		//				String[] props = strLine.split(" ");
-		//				properties.put(props[0],props[1]);
-		//				//	    	    	if (props[0]=="executablePath")
-		//				//	    	    		properties.put("executablePath")
-		//			}
-		//			//Close the input stream
-		//			in.close();
-		//		}catch (Exception e){//Catch exception if any
-		//		}
 	}
 
 	private void writeUserSettings(){
 		try{
 			FileOutputStream out = new FileOutputStream(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
 			atomSimProps.store(out, "---No Comment---");
-//			// Create file 
-//			FileWriter fstream = new FileWriter(System.getProperty("user.home") + Back.fileSeparator+".atomsim");
-//			BufferedWriter out = new BufferedWriter(fstream);
-//			for (final String key : properties.keySet()) {
-//				out.write(key+" "+properties.get(key));
-//			}
-			//Close the output stream
 			out.close();
 		}catch (Exception e){//Catch exception if any
 			System.err.println("Error: " + e.getMessage());

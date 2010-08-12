@@ -229,11 +229,13 @@ public class GulpRun extends JPanel implements Serializable {
 	}
 
 	public String getWD() {
-		return getExecution().txtWorkingDirectory.getText();
+		return Back.atomSimProps.getProperty("workingDirectory");
+		//return getExecution().txtWorkingDirectory.getText();
 	}
 
 	public String getBinary() {
-		return getExecution().txtGulpBinary.getText();
+		return Back.atomSimProps.getProperty("executablePath");
+		//return getExecution().txtGulpBinary.getText();
 	}
 
 	public Structure getStructure() {
