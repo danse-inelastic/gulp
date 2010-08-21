@@ -204,6 +204,7 @@ public class XYZFit extends JPanel implements Serializable {
 					//get desired PotentialPanels/PPPs
 					int[] indices1 = null;
 					Potential pot = Back.getCurrentRun().getPotential();
+					//this part enables the user to select only certain potentials to fit
 					if (chkPotentials.isSelected() && pot.createLibrary.potentialList.getSelectedIndex() != -1)
 						indices1 = pot.createLibrary.potentialList.getSelectedIndices();
 					else {
@@ -216,7 +217,7 @@ public class XYZFit extends JPanel implements Serializable {
 						PotentialPanel p = pot.createLibrary.potentialPanels.get(indices1[i]);
 						for (int j=0; j < p.params.length; j++) {
 							PPP ppp = p.params[j];
-							// DO NOT REMOVE BRACKETS. For whatever reason,
+							// DO NOT REMOVE BRACKETS (i.e. the inner if statement below). For whatever reason,
 							// it completely skips the add statements if the
 							// scope is not explicitly stated with brackets.
 							// It may be a bug in Java.  Try running with client VM.
@@ -403,8 +404,8 @@ public class XYZFit extends JPanel implements Serializable {
 	private FitParams parse(ArrayList<PPP> ppps) {
 		FitParams fp = null;
 		try {
-			String outputFile = Back.getCurrentRun().getWD()
-			+ "/" + Back.getCurrentRun().getOutput().txtOutputFile.getText();
+			String outputFile = Back.getCurrentRun().getWD() 
+			+ Back.fileSeparator + Back.getCurrentRun().getOutput().txtOutputFile.getText();
 			Scanner sc = new Scanner(new File(outputFile));
 			String p = "     Parameter No.       Parameter Value          Parameter Type  Species";
 			String e = "   Observable no.  Type            Observable   Calculated    Residual  Error(%)";
@@ -492,22 +493,23 @@ public class XYZFit extends JPanel implements Serializable {
 		add(txtIterations);
 		txtIterations.setBounds(581, 250, 49, 28);
 		add(chkInitialize);
-		chkInitialize.setSelected(true);
 		chkInitialize.setBounds(413, 215, 326, 28);
 		add(progress);
 		progress.setBounds(5, 405, 650, 25);
 		progress.setMinimum(0);
 		add(lblIterNber);
-		lblIterNber.setBounds(680, 285, 100, 25);
+		lblIterNber.setBounds(675, 286, 100, 28);
 		add(btnAutoFit);
 		btnAutoFit.setBounds(7, 366, 91, 28);
 		btnAutoFit.addActionListener(keyAuto);
 		add(lblPercentage);
-		lblPercentage.setBounds(531, 285, 50, 28);
+		lblPercentage.setBounds(413, 286, 50, 28);
 		add(lblTimeElapsed);
-		lblTimeElapsed.setBounds(601, 285, 200, 28);
+		lblTimeElapsed.setBounds(469, 286, 200, 28);
+		chkPotentials.setSelected(true);
 		add(chkPotentials);
 		chkPotentials.setBounds(413, 112, 326, 28);
+		chkParameters.setSelected(true);
 		add(chkParameters);
 		chkParameters.setBounds(413, 147, 326, 28);
 

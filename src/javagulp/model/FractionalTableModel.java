@@ -2,6 +2,8 @@ package javagulp.model;
 
 import java.io.Serializable;
 
+import javagulp.view.Back;
+
 import javax.swing.event.TableModelEvent;
 
 import org.json.JSONArray;
@@ -14,6 +16,16 @@ implements Serializable {
 	public FractionalTableModel(String[] columnNames,
 			String Keyword, int[] Indices) {
 		super(columnNames, Keyword, Indices);
+		
+		// put material info into table if it exists
+		final Material mat = new Material();
+		String atomPositionsRaw = Back.atomSimProps.getProperty("atomPositions", "");
+		String[] atomPositions = atomPositionsRaw.split(" +"); //this splits just on white space
+		mat.fractionalCoordinatesVec = (Object[])atomPositions;
+		String atomSymbolsRaw = Back.atomSimProps.getProperty("atomSymbols", "");
+		String[] atomSymbols = atomSymbolsRaw.split(" +"); //this splits just on white space
+		mat.atomSymbols = (Object[])atomSymbols;
+		this.setCoordinates(mat);
 	}
 
 	public void setCoordinates(Material mat) {

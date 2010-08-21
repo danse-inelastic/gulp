@@ -52,7 +52,7 @@ public class Back {
 	public static final String newLine = System.getProperty("line.separator");
 	public static final String fileSeparator = System.getProperty("file.separator");
 	//public static Map<String, String> properties = new HashMap<String,String>();
-	static Properties atomSimProps = new Properties();
+	public static Properties atomSimProps = new Properties();
 
 	public Back() {
 		getUserSettings();
@@ -124,32 +124,26 @@ public class Back {
 
 			public void windowActivated(WindowEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 
 			public void windowClosed(WindowEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 
 			public void windowDeactivated(WindowEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 
 			public void windowDeiconified(WindowEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 
 			public void windowIconified(WindowEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 
 			public void windowOpened(WindowEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 		});
 

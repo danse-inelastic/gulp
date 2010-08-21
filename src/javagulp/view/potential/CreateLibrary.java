@@ -4,6 +4,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -91,8 +92,8 @@ public class CreateLibrary extends JPanel implements Serializable {
 	public JComboBox cboFourBodyPotential = new JComboBox(fourAtomPotentialList);
 
 	private final JButton btnCombinations = new JButton("generate combinations");
-	private final JButton btnSavePotentials = new JButton("export potentials");
-	private final JButton btnRestorePotentials = new JButton("import potentials");
+	private final JButton btnSavePotentials = new JButton("serialize potentials");
+	private final JButton btnRestorePotentials = new JButton("deserialize potentials");
 	private final JButton btnAddPotential = new JButton("add potential");
 	private final DefaultListModel potentialListModel = new DefaultListModel();
 	public JList potentialList = new JList(potentialListModel);
@@ -202,9 +203,12 @@ public class CreateLibrary extends JPanel implements Serializable {
 		private static final long serialVersionUID = 222500108052711638L;
 		public void actionPerformed(ActionEvent e) {
 			final JFileChooser fileDialog = new JFileChooser();
+			fileDialog.setCurrentDirectory(new File(Back.atomSimProps.getProperty("serializedPotentialsPath",
+					Back.getCurrentRun().getWD())));
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showSaveDialog(Back.frame)) {
 				try {
+					Back.atomSimProps.put("serializedPotentialsPath", fileDialog.getSelectedFile().getPath());
 					final ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(fileDialog.getSelectedFile()));
 					final int index = potentialPanels.size();
 					oo.writeInt(index);
@@ -225,9 +229,12 @@ public class CreateLibrary extends JPanel implements Serializable {
 		private static final long serialVersionUID = 222500108052711638L;
 		public void actionPerformed(ActionEvent e) {
 			final JFileChooser fileDialog = new JFileChooser();
+			fileDialog.setCurrentDirectory(new File(Back.atomSimProps.getProperty("serializedPotentialsPath",
+					Back.getCurrentRun().getWD())));
 			fileDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			if (JFileChooser.APPROVE_OPTION == fileDialog.showOpenDialog(Back.frame)) {
 				try {
+					Back.atomSimProps.put("serializedPotentialsPath", fileDialog.getSelectedFile().getPath());
 					final ObjectInput oi = new ObjectInputStream(new FileInputStream(fileDialog.getSelectedFile()));
 					final int index = oi.readInt();
 					for (int i = 0; i < index; i++) {

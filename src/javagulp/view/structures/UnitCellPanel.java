@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.io.Serializable;
 
 import javagulp.controller.IncompleteOptionException;
+import javagulp.model.Material;
+import javagulp.view.Back;
 import javagulp.view.TitledPanel;
 
 import javax.swing.JTabbedPane;
@@ -25,6 +27,12 @@ public class UnitCellPanel extends TitledPanel implements Serializable {
 		tabbedPane.add(threeDUnitCell, "3d");
 //		tabbedPane.add(twoDUnitCell, "2d");
 //		tabbedPane.add(oneDUnitCell, "1d");
+		//set the 
+		String latticeRaw = Back.atomSimProps.getProperty("lattice","");
+		String[] lattice = latticeRaw.split(" +");
+		final Material mat = new Material();
+		mat.
+		for(String )
 	}
 
 	public String writeUnitCell() throws IncompleteOptionException {
