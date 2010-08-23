@@ -27,12 +27,12 @@ public class UnitCellPanel extends TitledPanel implements Serializable {
 		tabbedPane.add(threeDUnitCell, "3d");
 //		tabbedPane.add(twoDUnitCell, "2d");
 //		tabbedPane.add(oneDUnitCell, "1d");
-		//set the 
-		String latticeRaw = Back.atomSimProps.getProperty("lattice","");
-		String[] lattice = latticeRaw.split(" +");
-		final Material mat = new Material();
-		mat.
-		for(String )
+		//set the lattice property if it exists
+		try{
+			String latticeRaw = Back.atomSimProps.getProperty("lattice");
+			threeDUnitCell.setParameters(latticeRaw.split(" +"));
+		}catch(Exception e){
+		}
 	}
 
 	public String writeUnitCell() throws IncompleteOptionException {

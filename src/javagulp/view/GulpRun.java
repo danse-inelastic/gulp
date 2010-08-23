@@ -168,6 +168,7 @@ public class GulpRun extends JPanel implements Serializable {
 				mat.cartesianCoordinatesVec = ((JSONArray)matterAsJSON.get("cartesian_coordinates")).getArrayList();
 			mat.atomSymbols = ((JSONArray)matterAsJSON.get("atom_symbols")).getArrayList();//.getArrayList().toArray();
 			mat.spaceGroup = matterAsJSON.get("space_group");
+			mat.charges = ((JSONArray)matterAsJSON.get("charges")).getArrayList();
 		} catch (final JSONException e) {
 			e.printStackTrace();
 		}

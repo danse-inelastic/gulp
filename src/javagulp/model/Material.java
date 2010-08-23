@@ -10,6 +10,7 @@ public class Material {
 	//	public double[][] cartesianCoordinates;
 	public Object[] atomSymbols;
 	public Object spaceGroup;
+	public Object[] charges;
 
 	//	public Material(){
 	//	}
