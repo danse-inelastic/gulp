@@ -29,7 +29,7 @@ public abstract class CoordinateTable extends JTable implements Serializable {
 		g.html("shell-core<br>radius"),
 		"fit/opt x", "fit/opt y", "fit/opt z",
 		g.html("translate/<br>growth slice"), "fix positions" };
-	static int[] indices = { 0, 1, 2, 3, 4 };
+	static int[] indices = { 0, 1, 2, 3, 4, 5 };
 
 	//public abstract String getData();
 	private boolean[][] selections;

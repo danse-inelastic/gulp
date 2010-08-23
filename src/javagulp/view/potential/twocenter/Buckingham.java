@@ -78,9 +78,7 @@ public class Buckingham extends PotentialPanel implements Serializable {
 		//pane.addTab("" + (pane.getTabCount()+1), graph);
 		//graph.addFunction(new BuckinghamFunction());
 		//graph.setWindow(0.5, 4, 0, 10);
-
 		params = new PPP[]{A, Rho, C};
-
 		Rho.min = 0;
 		Rho.max = 1;
 		A.min = 100;

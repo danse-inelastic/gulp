@@ -26,6 +26,7 @@ implements Serializable {
 			String atomSymbolsRaw = Back.atomSimProps.getProperty("atomSymbols");
 			String[] atomSymbols = atomSymbolsRaw.split(" +"); //this splits just on white space
 			mat.atomSymbols = (Object[])atomSymbols;
+			
 			this.setCoordinates(mat);
 		} catch(Exception e){
 		}
@@ -36,7 +37,7 @@ implements Serializable {
 		data.clear();
 		data.ensureCapacity(mat.atomSymbols.length);
 
-		if(mat.fractionalCoordinatesVec.length>0 && mat.fractionalCoordinatesVec[0]==""){
+		if(mat.fractionalCoordinatesVec.length>0 && !(mat.fractionalCoordinatesVec[0]=="")){
 			// add rows manually for speed
 			for (int i = 0; i < mat.atomSymbols.length; i++) {
 				final String[] row = new String[COLUMN_NAMES.length];
@@ -48,7 +49,7 @@ implements Serializable {
 				row[indices[2]] = ""+fracCoords.optString(0);
 				row[indices[3]] = ""+fracCoords.optString(1);
 				row[indices[4]] = ""+fracCoords.optString(2);
-				row[indices[5]] = ""+mat.charges[i];
+				row[indices[5]] = ""+String.valueOf(mat.charges[i]);
 
 				//			row[indices[2]] = ""+mat.fractionalCoordinatesVec[i*3 + 0];
 				//			row[indices[3]] = ""+mat.fractionalCoordinatesVec[i*3 + 1];
